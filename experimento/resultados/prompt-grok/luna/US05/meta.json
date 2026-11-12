@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 13.64,
+ "tokens": {
+  "total": 3007
+ },
+ "n_casos_extraidos": 7,
+ "tem_codigo": true,
+ "stderr_tail": "e_url(BASE_URL)\n\n    page.goto(ROOMS_URL)\n    expect(page.get_by_role(\"textbox\", name=\"Username\")).to_be_visible()\n    expect(page.get_by_label(\"Password\")).to_be_visible()\n\n\ndef test_TC06_valid_username_empty_password_shows_error(page):\n    open_login(page)\n    submit_login(page, \"admin\", \"\")\n    expect_login_error(page)\n\n\ndef test_TC07_empty_username_valid_password_shows_error(page):\n    open_login(page)\n    submit_login(page, \"\", \"password\")\n    expect_login_error(page)\n```\ntokens used\n3,007\n"
+}

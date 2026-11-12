@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Login com usuário e senha vazios exibe erro e mantém a tela de login",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; URL continua em /admin; campo de senha visível"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login com usuário admin e senha incorreta exibe erro",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir /admin; informar admin e senha incorreta; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; campo de senha continua visível"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Login com admin e password leva à lista de quartos com o quarto 101 Single",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Abrir /admin; informar admin e password; clicar em Login",
+  "esperado": "Linha com quarto 101 e tipo Single visível na lista de quartos"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Menu autenticado exibe Rooms, Report, Branding e Messages",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Login com admin e password; verificar itens do menu",
+  "esperado": "Itens Rooms, Report, Branding e Messages visíveis"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Login com admin e password; clicar em Logout",
+  "esperado": "URL é a página inicial da pousada; item Logout não visível"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Acesso direto à lista de quartos após logout exibe a tela de login",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Login; Logout; acessar /admin diretamente",
+  "esperado": "Campo de senha visível; linha do quarto 101 não visível"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Senha com caixa diferente de \"password\" não autentica",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Abrir /admin; informar admin e PASSWORD; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Usuário preenchido com senha vazia exibe erro e mantém a tela de login",
+  "tipo": "borda",
+  "criterio": "CA01",
+  "passos": "Abrir /admin; informar admin e senha vazia; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; URL continua em /admin"
+ }
+]

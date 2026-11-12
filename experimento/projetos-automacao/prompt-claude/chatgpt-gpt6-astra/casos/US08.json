@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar autenticação com admin e password123",
+  "esperado": "Status 200 e token do tipo texto, não vazio"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticar com senha inválida",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar autenticação com admin e senha incorreta",
+  "esperado": "Resposta JSON sem a chave token e com reason igual a Bad credentials"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Autenticar com credenciais vazias",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Enviar autenticação com usuário e senha vazios",
+  "esperado": "Resposta JSON sem a chave token e com reason igual a Bad credentials"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Atualizar completamente uma reserva",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva exclusiva; obter token válido; enviar PUT completo com novo nome e novo preço",
+  "esperado": "Status 200 e resposta com todos os campos enviados, incluindo novo nome e novo preço"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Atualizar somente o sobrenome",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva exclusiva; obter token válido; enviar PATCH contendo apenas lastname",
+  "esperado": "Status 200; sobrenome atualizado; todos os demais campos permanecem iguais"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualizar sem autenticação",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva exclusiva; enviar PUT completo sem token; enviar PATCH sem token",
+  "esperado": "Status 403 em ambas as tentativas"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Omitir campos obrigatórios individualmente",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva exclusiva; obter token válido; enviar PUTs omitindo um campo obrigatório por vez, incluindo as datas internas",
+  "esperado": "Status 400 em cada tentativa"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Atualizar completamente com objeto vazio",
+  "tipo": "Borda",
+  "criterio": "CA6",
+  "passos": "Criar reserva exclusiva; obter token válido; enviar PUT com objeto JSON vazio",
+  "esperado": "Status 400"
+ }
+]

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 48.37,
+ "tokens": {
+  "total": 3795
+ },
+ "n_casos_extraidos": 7,
+ "tem_codigo": true,
+ "stderr_tail": "(page: Page) -> None:\n    autenticar(page)\n    contador_inicial = registrar_contador(page)\n\n    for incremento in (1, 2):\n        sair(page)\n\n        mensagem = nova_mensagem()\n        enviar_mensagem(page, mensagem)\n        verificar_confirmacao(page, mensagem)\n\n        autenticar(page)\n        verificar_contador(page, contador_inicial + incremento)\n\n\nif __name__ == \"__main__\":\n    import sys\n\n    import pytest\n\n    raise SystemExit(pytest.main([__file__, *sys.argv[1:]]))\n```\ntokens used\n3,795\n"
+}

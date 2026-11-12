@@ -1,0 +1,152 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Adicionar 3 unidades de produto disponível | positivo | 1 | Abrir Claw Hammer; definir quantidade 3; adicionar ao carrinho. | Exibe “Product added to shopping cart.” e indicador do carrinho igual a 3. |
+| TC02 | Calcular os totais para 3 unidades | positivo | 2 | Adicionar 3 Claw Hammer; abrir carrinho; verificar quantidade, preço unitário e totais. | Total da linha igual ao preço unitário × 3; total do carrinho igual ao total da linha. |
+| TC03 | Reduzir quantidade de 3 para 1 | borda | 3 | Adicionar 3 Claw Hammer; abrir carrinho; alterar quantidade para 1. | Quantidade permanece 1 e total do carrinho passa a ser igual ao preço unitário. |
+| TC04 | Rejeitar 3 unidades de Thor Hammer | negativo | 4 | Abrir Thor Hammer; definir quantidade 3; tentar adicionar ao carrinho. | Exibe “You can only have one Thor Hammer in the cart.”. |
+| TC05 | Aceitar 1 unidade de Thor Hammer | borda | 4 — limite inferido | Abrir Thor Hammer; definir quantidade 1; adicionar; abrir carrinho. | Carrinho contém 1 unidade de Thor Hammer, conforme suposição de que o limite permitido é inclusivo. |
+
+SUPOSIÇÕES
+
+- Nenhum acesso ao sistema ou a fontes externas foi realizado. O código é uma proposta executável, mas os seletores e comportamentos presumidos precisam ser validados no sistema real.
+- A aplicação é web. São necessários `pytest`, `playwright`, o plugin oficial `pytest-playwright` e o navegador Chromium instalado pelo Playwright. O plugin é uma dependência adicional expressamente exigida pelos requisitos técnicos.
+- O arquivo pode ser salvo como `test_cart.py` e executado com `pytest test_cart.py`. A URL base é definida na constante `BASE_URL`.
+- A página inicial `/` lista produtos disponíveis como links com nomes acessíveis exatamente iguais a `Claw Hammer` e `Thor Hammer`. Não se presume uma URL relativa para páginas de produto ou carrinho: a navegação ocorre por links.
+- Ambos os produtos estão disponíveis, Claw Hammer possui estoque suficiente para 3 unidades e não é necessário autenticar, aceitar cookies ou executar outra preparação.
+- Cada teste recebe a fixture `page` do plugin, com contexto isolado e carrinho inicialmente vazio. Presume-se que o carrinho de visitante não compartilha estado entre esses contextos.
+- Na página de produto, existe um título com o nome exato do produto, um campo com rótulo acessível `Quantity` e um botão com nome acessível `Add to cart`. O campo permite preencher `3` inclusive para Thor Hammer, cuja restrição é validada na tentativa de adição.
+- O link do carrinho tem nome acessível exatamente `Cart`. Os atributos `data-testid="cart-quantity"` e `data-testid="cart-total"` identificam, respectivamente, o indicador de unidades e o total do carrinho.
+- O carrinho possui linhas com papel acessível `row`, cada uma contendo o nome do produto, um campo rotulado `Quantity` e elementos identificados por `data-testid="unit-price"` e `data-testid="line-total"`. Cada locator utilizado identifica um único elemento.
+- Os valores monetários são exibidos como `$12.34`, sem espaços ou separadores de milhar, com ponto decimal e duas casas. O preço é lido da interface, sem presumir um valor fixo, e os cálculos usam `Decimal` da biblioteca padrão.
+- O carrinho desses cenários contém apenas o produto adicionado. Não há frete, impostos adicionais ou descontos que alterem a igualdade de totais exigida pelo critério 2.
+- Alterar a quantidade no carrinho e retirar o foco com `Tab` atualiza os totais automaticamente, sem botão de confirmação. As atualizações ocorrem em até 10 segundos.
+- As mensagens aparecem como texto visível exatamente conforme a User Story.
+- TC03 verifica a borda de quantidade 1 explicitamente prevista no critério 3. TC05 acrescenta a suposição de que Thor Hammer aceita exatamente 1 unidade; isso é inferido da mensagem de restrição, não explicitamente garantido pela história.
+- Não se presume se a tentativa rejeitada de Thor Hammer mantém o carrinho vazio ou adiciona parcialmente uma unidade; TC04 verifica somente a mensagem exigida.
+- Quantidades zero, negativas, fracionárias, vazias, limites de estoque e múltiplos produtos não possuem resultados definidos na história e não recebem testes com regras inventadas.
+
+```python
+import re
+from decimal import Decimal
+
+from playwright.sync_api import Page, Locator, expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+TIMEOUT_MS = 10_000
+MONEY_PATTERN = re.compile(r"^\$\d+\.\d{2}$")
+
+expect.set_options(timeout=TIMEOUT_MS)
+
+
+def open_product(page: Page, product_name: str) -> None:
+    page.goto(BASE_URL, wait_until="domcontentloaded")
+    page.get_by_role("link", name=product_name, exact=True).click()
+    expect(
+        page.get_by_role("heading", name=product_name, exact=True)
+    ).to_be_visible()
+
+
+def add_quantity(page: Page, quantity: int) -> None:
+    quantity_input = page.get_by_label("Quantity", exact=True)
+    quantity_input.fill(str(quantity))
+    expect(quantity_input).to_have_value(str(quantity))
+    page.get_by_role("button", name="Add to cart", exact=True).click()
+
+
+def expect_added(page: Page, quantity: int) -> None:
+    expect(
+        page.get_by_text("Product added to shopping cart.", exact=True)
+    ).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text(str(quantity))
+
+
+def open_cart_row(page: Page, product_name: str) -> Locator:
+    page.get_by_role("link", name="Cart", exact=True).click()
+    row = page.get_by_role("row").filter(
+        has=page.get_by_text(product_name, exact=True)
+    )
+    expect(row).to_have_count(1)
+    expect(row).to_be_visible()
+    return row
+
+
+def read_money(locator: Locator) -> Decimal:
+    expect(locator).to_be_visible()
+    expect(locator).to_have_text(MONEY_PATTERN)
+    return Decimal(locator.inner_text().strip().removeprefix("$"))
+
+
+def money_text(amount: Decimal) -> str:
+    return f"${amount:.2f}"
+
+
+def prepare_claw_hammer_cart(page: Page) -> Locator:
+    open_product(page, "Claw Hammer")
+    add_quantity(page, 3)
+    expect_added(page, 3)
+    row = open_cart_row(page, "Claw Hammer")
+    expect(row.get_by_label("Quantity", exact=True)).to_have_value("3")
+    return row
+
+
+def test_TC01_adicionar_tres_unidades(page: Page) -> None:
+    open_product(page, "Claw Hammer")
+    add_quantity(page, 3)
+    expect_added(page, 3)
+
+
+def test_TC02_calcular_totais_para_tres_unidades(page: Page) -> None:
+    row = prepare_claw_hammer_cart(page)
+    unit_price = read_money(row.get_by_test_id("unit-price"))
+    expected_total = unit_price * Decimal("3")
+
+    expect(row.get_by_test_id("line-total")).to_have_text(
+        money_text(expected_total)
+    )
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        money_text(expected_total)
+    )
+
+
+def test_TC03_reduzir_quantidade_para_uma_unidade(page: Page) -> None:
+    row = prepare_claw_hammer_cart(page)
+    unit_price = read_money(row.get_by_test_id("unit-price"))
+
+    # Confirma o estado inicial antes de verificar a transição.
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        money_text(unit_price * Decimal("3"))
+    )
+
+    quantity_input = row.get_by_label("Quantity", exact=True)
+    quantity_input.fill("1")
+    quantity_input.press("Tab")
+
+    expect(quantity_input).to_have_value("1")
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        money_text(unit_price)
+    )
+
+
+def test_TC04_rejeitar_tres_unidades_de_thor_hammer(page: Page) -> None:
+    open_product(page, "Thor Hammer")
+    add_quantity(page, 3)
+
+    expect(
+        page.get_by_text(
+            "You can only have one Thor Hammer in the cart.",
+            exact=True,
+        )
+    ).to_be_visible()
+
+
+def test_TC05_aceitar_uma_unidade_de_thor_hammer(page: Page) -> None:
+    # Expectativa inferida: o limite de uma unidade é inclusivo.
+    open_product(page, "Thor Hammer")
+    add_quantity(page, 1)
+
+    row = open_cart_row(page, "Thor Hammer")
+    expect(row.get_by_label("Quantity", exact=True)).to_have_value("1")
+```

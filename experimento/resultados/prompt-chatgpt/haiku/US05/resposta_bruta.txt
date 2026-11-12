@@ -1,0 +1,139 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Login com usuário e senha vazios exibe erro e mantém a tela de login | negativo | CA01 | Abrir /admin; deixar usuário e senha vazios; clicar em Login | Mensagem "Invalid credentials" visível; URL continua em /admin; campo de senha visível |
+| CT002 | Login com usuário admin e senha incorreta exibe erro | negativo | CA02 | Abrir /admin; informar admin e senha incorreta; clicar em Login | Mensagem "Invalid credentials" visível; campo de senha continua visível |
+| CT003 | Login com admin e password leva à lista de quartos com o quarto 101 Single | positivo | CA03 | Abrir /admin; informar admin e password; clicar em Login | Linha com quarto 101 e tipo Single visível na lista de quartos |
+| CT004 | Menu autenticado exibe Rooms, Report, Branding e Messages | positivo | CA03 | Login com admin e password; verificar itens do menu | Itens Rooms, Report, Branding e Messages visíveis |
+| CT005 | Logout retorna à página inicial pública | positivo | CA04 | Login com admin e password; clicar em Logout | URL é a página inicial da pousada; item Logout não visível |
+| CT006 | Acesso direto à lista de quartos após logout exibe a tela de login | negativo | CA05 | Login; Logout; acessar /admin diretamente | Campo de senha visível; linha do quarto 101 não visível |
+| CT007 | Senha com caixa diferente de "password" não autentica | borda | CA02 | Abrir /admin; informar admin e PASSWORD; clicar em Login | Mensagem "Invalid credentials" visível |
+| CT008 | Usuário preenchido com senha vazia exibe erro e mantém a tela de login | borda | CA01 | Abrir /admin; informar admin e senha vazia; clicar em Login | Mensagem "Invalid credentials" visível; URL continua em /admin |
+
+SUPOSIÇÕES
+
+1. Os critérios não possuem identificadores no texto. Foram atribuídos na ordem de apresentação: CA01 (login vazio), CA02 (senha incorreta), CA03 (login válido, lista de quartos e menu), CA04 (logout) e CA05 (acesso direto após logout).
+2. Explícito na User Story: URL base https://automationintesting.online/; painel em /admin; conta admin/password; mensagem "Invalid credentials"; quarto 101 do tipo Single; menu com Rooms, Report, Branding e Messages; item Logout; retorno à página inicial pública após logout; exibição da tela de login ao acessar o painel sem sessão.
+3. Inferido: os campos são rotulados como "Username" e "Password" e são localizáveis por `get_by_label`. O botão de envio é um button com nome "Login".
+4. Inferido: a lista de quartos é uma tabela, e número e tipo do quarto aparecem na mesma linha (role `row`).
+5. Inferido: os itens do menu e o Logout são links ou botões com nome exato igual ao texto da User Story. A busca usa `exact=True`.
+6. Inferido: a mensagem de erro é exibida como texto visível contendo "Invalid credentials" e permanece na tela de login.
+7. Inferido: a tela de login e a lista de quartos compartilham a rota /admin. Nenhum teste depende da URL após o login, exceto CT005 e CT006, que dependem da rota /admin para acesso direto.
+8. Inferido: o formulário não possui validação nativa `required` que impeça o envio com campos vazios. CT001 e CT008 dependem dessa suposição. Se houver validação nativa, esses casos exigirão ajuste.
+9. Inferido: a página inicial pública corresponde à URL base, com ou sem barra final ou fragmento de hash. O retorno é verificado pela URL e pela ausência do item Logout. CT005 depende dessa suposição.
+10. Inferido: CT007 (senha em caixa alta) e CT008 (senha vazia com usuário preenchido) são casos de borda derivados dos critérios CA02 e CA01. Dependem de a autenticação diferenciar maiúsculas de minúsculas e de a senha vazia ser rejeitada com "Invalid credentials".
+11. Não incluí casos de limite de tamanho de campo, bloqueio após tentativas, expiração de sessão ou caracteres especiais, porque a User Story não especifica esses comportamentos.
+12. Cada teste abre uma página nova, fornecida pelo plugin pytest-playwright, com contexto isolado. Os testes fazem login e logout por conta própria e não criam dados. Não é necessária limpeza.
+13. Pré-condições externas: o site estar acessível e a conta admin/password estar ativa e com o quarto 101 do tipo Single cadastrado.
+14. A base URL é a constante BASE_URL no topo do arquivo. Os testes de interface usam o plugin pytest-playwright, conforme os requisitos técnicos obrigatórios, sem criar navegador próprio.
+15. O código é executável em termos de sintaxe e estrutura, mas a compatibilidade com o sistema real não foi verificada. Os seletores e textos foram inferidos e podem exigir ajuste.
+
+```python
+import re
+
+from playwright.sync_api import Locator, Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_URL = BASE_URL + "admin"
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+WRONG_PASSWORD = "senha-incorreta-123"
+UPPERCASE_PASSWORD = "PASSWORD"
+INVALID_CREDENTIALS_MESSAGE = "Invalid credentials"
+USERNAME_LABEL = "Username"
+PASSWORD_LABEL = "Password"
+LOGIN_BUTTON_NAME = "Login"
+LOGOUT_NAME = "Logout"
+MENU_ITEMS = ["Rooms", "Report", "Branding", "Messages"]
+ROOM_NUMBER = "101"
+ROOM_TYPE = "Single"
+HOME_URL_PATTERN = re.compile(r"^" + re.escape(BASE_URL.rstrip("/")) + r"/?(#/?)?$")
+ADMIN_URL_PATTERN = re.compile(r"/admin/?$")
+
+
+def nav_item(page: Page, name: str) -> Locator:
+    return page.get_by_role("link", name=name, exact=True).or_(
+        page.get_by_role("button", name=name, exact=True)
+    )
+
+
+def room_row(page: Page) -> Locator:
+    return page.get_by_role("row").filter(has_text=ROOM_NUMBER).filter(has_text=ROOM_TYPE)
+
+
+def open_login_page(page: Page) -> None:
+    page.goto(ADMIN_URL)
+    expect(page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+
+
+def submit_credentials(page: Page, username: str, password: str) -> None:
+    page.get_by_label(USERNAME_LABEL).fill(username)
+    page.get_by_label(PASSWORD_LABEL).fill(password)
+    page.get_by_role("button", name=LOGIN_BUTTON_NAME, exact=True).click()
+
+
+def login_as_admin(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, ADMIN_USER, ADMIN_PASSWORD)
+    expect(room_row(page)).to_be_visible()
+
+
+def logout(page: Page) -> None:
+    nav_item(page, LOGOUT_NAME).click()
+
+
+def test_CT001_login_campos_vazios_exibe_erro_e_permanece_na_tela_de_login(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, "", "")
+    expect(page.get_by_text(INVALID_CREDENTIALS_MESSAGE)).to_be_visible()
+    expect(page).to_have_url(ADMIN_URL_PATTERN)
+    expect(page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+
+
+def test_CT002_login_senha_incorreta_exibe_invalid_credentials(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, ADMIN_USER, WRONG_PASSWORD)
+    expect(page.get_by_text(INVALID_CREDENTIALS_MESSAGE)).to_be_visible()
+    expect(page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+
+
+def test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, ADMIN_USER, ADMIN_PASSWORD)
+    expect(room_row(page)).to_be_visible()
+
+
+def test_CT004_menu_autenticado_exibe_rooms_report_branding_messages(page: Page) -> None:
+    login_as_admin(page)
+    for item in MENU_ITEMS:
+        expect(nav_item(page, item)).to_be_visible()
+
+
+def test_CT005_logout_retorna_a_pagina_inicial_publica(page: Page) -> None:
+    login_as_admin(page)
+    logout(page)
+    expect(page).to_have_url(HOME_URL_PATTERN)
+    expect(nav_item(page, LOGOUT_NAME)).to_be_hidden()
+
+
+def test_CT006_acesso_direto_apos_logout_exibe_tela_de_login(page: Page) -> None:
+    login_as_admin(page)
+    logout(page)
+    page.goto(ADMIN_URL)
+    expect(page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+    expect(room_row(page)).to_be_hidden()
+
+
+def test_CT007_senha_em_caixa_alta_exibe_invalid_credentials(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, ADMIN_USER, UPPERCASE_PASSWORD)
+    expect(page.get_by_text(INVALID_CREDENTIALS_MESSAGE)).to_be_visible()
+
+
+def test_CT008_usuario_com_senha_vazia_exibe_erro_e_permanece_na_tela_de_login(page: Page) -> None:
+    open_login_page(page)
+    submit_credentials(page, ADMIN_USER, "")
+    expect(page.get_by_text(INVALID_CREDENTIALS_MESSAGE)).to_be_visible()
+    expect(page).to_have_url(ADMIN_URL_PATTERN)
+```

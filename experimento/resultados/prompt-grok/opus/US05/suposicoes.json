@@ -1,0 +1,17 @@
+[
+ "A URL base é `https://automationintesting.online/`, definida na constante `BASE_URL`; se `--base-url` for informado ao pytest, ele prevalece.",
+ "A tela de login do painel fica em `/admin` e a lista de quartos do painel em `/admin/rooms`.",
+ "Após login válido, o sistema redireciona para uma URL que contém `/admin/rooms`.",
+ "O campo de usuário é localizável pelo rótulo \"Username\" ou, alternativamente, pelo id `#username`; o campo de senha pelo rótulo \"Password\" ou pelo id `#password`.",
+ "O botão de envio do login é um botão com nome acessível \"Login\".",
+ "A mensagem de erro contém exatamente o texto \"Invalid credentials\" e fica visível na própria tela de login.",
+ "Os campos vazios não são bloqueados por validação nativa do navegador, permitindo o envio do formulário (conforme CA1).",
+ "O menu administrativo é composto por links com nomes acessíveis \"Rooms\", \"Report\", \"Branding\" e \"Messages\".",
+ "O controle de Logout é um botão ou link com nome acessível \"Logout\".",
+ "Na lista de quartos, o número \"101\" e o tipo \"Single\" aparecem como textos exatos e visíveis.",
+ "A página inicial pública corresponde à URL base (com ou sem barra final ou fragmento `#`).",
+ "A senha é sensível a maiúsculas/minúsculas, portanto \"PASSWORD\" é tratada como senha incorreta.",
+ "A senha incorreta usada nos testes negativos é \"wrongpass\".",
+ "Cada teste recebe um contexto de navegador novo (comportamento padrão do pytest-playwright), sem sessão autenticada prévia.",
+ "Os dados de demonstração (conta admin/password e quarto 101 Single) existem e não foram alterados no ambiente."
+]

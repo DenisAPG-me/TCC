@@ -1,0 +1,15 @@
+[
+ "**URL base:** `https://automationintesting.online` (constante `BASE_URL`).",
+ "**Tela de login:** acessível em `/admin`.",
+ "**Lista de quartos:** rota `/admin/rooms`, para onde o login válido redireciona.",
+ "**Campos de login:** acessíveis por `get_by_label(\"Username\")` e `get_by_label(\"Password\")` (via `<label>` ou `aria-label`).",
+ "**Botão de envio:** `get_by_role(\"button\", name=\"Login\")`.",
+ "**Mensagem de erro:** texto visível \"Invalid credentials\", sem variação de texto para credenciais vazias, usuário inexistente ou senha incorreta.",
+ "**Validação de credenciais:** usuário e senha são comparados de forma sensível a maiúsculas/minúsculas, e espaços finais na senha não são removidos (CT06 e CT07 esperam rejeição).",
+ "**Lista de quartos:** exibida como tabela; cada quarto é uma linha (`role=\"row\"`) contendo o número e o tipo (ex.: \"101\" e \"Single\").",
+ "**Menu administrativo:** itens são links com nomes exatos \"Rooms\", \"Report\", \"Branding\" e \"Messages\".",
+ "**Logout:** elemento com texto exato \"Logout\" (`get_by_text(..., exact=True)`), visível após login.",
+ "**Página inicial pública:** corresponde à raiz do site (`BASE_URL` com ou sem barra final).",
+ "**Dependências:** `pytest` e `pytest-playwright` instalados; execução com `pytest <arquivo>.py --browser chromium`.",
+ "**Estado:** cada teste usa a fixture `page` do plugin, que fornece uma sessão isolada; nenhum teste depende de estado de outro."
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros, helpers",
+  "estrutura": "helpers parametrizados, uuid para dados",
+  "assercoes": "asserts de negocio mas contador >=0 fraco",
+  "espera": "auto-wait, dados unicos, sem sleep",
+  "manutenibilidade": "constantes e role/label, links Logout e label Message inexistentes"
+ }
+}

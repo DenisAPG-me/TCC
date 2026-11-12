@@ -1,0 +1,539 @@
+{
+ "created": 1793380977.7560167,
+ "duration": 191.95475602149963,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06",
+ "environment": {},
+ "summary": {
+  "passed": 2,
+  "failed": 6,
+  "total": 8,
+  "collected": 8
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_contador_messages_exibe_numero_apos_login[chromium]",
+     "type": "Function",
+     "lineno": 69
+    },
+    {
+     "nodeid": "script.py::test_ct02_formulario_valido_exibe_confirmacao[chromium]",
+     "type": "Function",
+     "lineno": 75
+    },
+    {
+     "nodeid": "script.py::test_ct03_contador_aumenta_uma_unidade_apos_envio[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_ct04_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+     "type": "Function",
+     "lineno": 91
+    },
+    {
+     "nodeid": "script.py::test_ct05_apos_logout_caixa_exige_login[chromium]",
+     "type": "Function",
+     "lineno": 101
+    },
+    {
+     "nodeid": "script.py::test_ct06_formulario_vazio_nao_exibe_confirmacao[chromium]",
+     "type": "Function",
+     "lineno": 108
+    },
+    {
+     "nodeid": "script.py::test_ct07_nome_com_acentos_aparece_na_confirmacao[chromium]",
+     "type": "Function",
+     "lineno": 115
+    },
+    {
+     "nodeid": "script.py::test_ct08_email_invalido_nao_incrementa_contador[chromium]",
+     "type": "Function",
+     "lineno": 122
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_contador_messages_exibe_numero_apos_login[chromium]",
+   "lineno": 69,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_contador_messages_exibe_numero_apos_login[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.484264999977313,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1494849000591785,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012535499990917742,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_formulario_valido_exibe_confirmacao[chromium]",
+   "lineno": 75,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_formulario_valido_exibe_confirmacao[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09732830000575632,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.120014000101946,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Message\", exact=True)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 78,
+      "message": "in test_ct02_formulario_valido_exibe_confirmacao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 33,
+      "message": "in preencher_contato"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:78: in test_ct02_formulario_valido_exibe_confirmacao\n    preencher_contato(page, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:33: in preencher_contato\n    page.get_by_label(\"Message\", exact=True).fill(mensagem)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+   },
+   "teardown": {
+    "duration": 0.015106200007721782,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_contador_aumenta_uma_unidade_apos_envio[chromium]",
+   "lineno": 81,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_contador_aumenta_uma_unidade_apos_envio[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11462769994977862,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 33.36949159996584,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Message\", exact=True)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 87,
+      "message": "in test_ct03_contador_aumenta_uma_unidade_apos_envio"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 40,
+      "message": "in enviar_contato_visitante"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 33,
+      "message": "in preencher_contato"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:87: in test_ct03_contador_aumenta_uma_unidade_apos_envio\n    enviar_contato_visitante(browser, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:40: in enviar_contato_visitante\n    preencher_contato(visitante, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:33: in preencher_contato\n    page.get_by_label(\"Message\", exact=True).fill(mensagem)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+   },
+   "teardown": {
+    "duration": 0.013726499979384243,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+   "lineno": 91,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11706850002519786,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.263854099903256,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Message\", exact=True)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 94,
+      "message": "in test_ct04_mensagem_recem_enviada_aparece_na_caixa"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 40,
+      "message": "in enviar_contato_visitante"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 33,
+      "message": "in preencher_contato"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:94: in test_ct04_mensagem_recem_enviada_aparece_na_caixa\n    enviar_contato_visitante(browser, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:40: in enviar_contato_visitante\n    preencher_contato(visitante, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:33: in preencher_contato\n    page.get_by_label(\"Message\", exact=True).fill(mensagem)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+   },
+   "teardown": {
+    "duration": 0.015959499985910952,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_apos_logout_caixa_exige_login[chromium]",
+   "lineno": 101,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_apos_logout_caixa_exige_login[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1355687000323087,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 36.954609300009906,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Logout\")\n    - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 104,
+      "message": "in test_ct05_apos_logout_caixa_exige_login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:104: in test_ct05_apos_logout_caixa_exige_login\n    page.get_by_role(\"link\", name=\"Logout\").click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Logout\")\nE       - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\""
+   },
+   "teardown": {
+    "duration": 0.015952999936416745,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_formulario_vazio_nao_exibe_confirmacao[chromium]",
+   "lineno": 108,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_formulario_vazio_nao_exibe_confirmacao[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11546510003972799,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 8.733618300058879,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013350400025956333,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_nome_com_acentos_aparece_na_confirmacao[chromium]",
+   "lineno": 115,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct07_nome_com_acentos_aparece_na_confirmacao[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10290579998400062,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 37.1684447999578,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Message\", exact=True)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 119,
+      "message": "in test_ct07_nome_com_acentos_aparece_na_confirmacao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 33,
+      "message": "in preencher_contato"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:119: in test_ct07_nome_com_acentos_aparece_na_confirmacao\n    preencher_contato(page, nome, assunto)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:33: in preencher_contato\n    page.get_by_label(\"Message\", exact=True).fill(mensagem)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+   },
+   "teardown": {
+    "duration": 0.01645180000923574,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_email_invalido_nao_incrementa_contador[chromium]",
+   "lineno": 122,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct08_email_invalido_nao_incrementa_contador[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11746939993463457,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 8.733250500052236,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+     "lineno": 54,
+     "message": "AttributeError: 'NoneType' object has no attribute 'group'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 125,
+      "message": "in test_ct08_email_invalido_nao_incrementa_contador"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py",
+      "lineno": 54,
+      "message": "in ler_contador_mensagens"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:125: in test_ct08_email_invalido_nao_incrementa_contador\n    contador_antes = ler_contador_mensagens(page)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US06\\script.py:54: in ler_contador_mensagens\n    return int(re.search(r\"\\d+\", texto).group())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'group'"
+   },
+   "teardown": {
+    "duration": 0.2933347000507638,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

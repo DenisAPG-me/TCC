@@ -1,0 +1,258 @@
+{
+ "created": 1793384430.2869596,
+ "duration": 5.148016691207886,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05",
+ "environment": {},
+ "summary": {
+  "failed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_login_empty_credentials[chromium]",
+     "type": "Function",
+     "lineno": 5
+    },
+    {
+     "nodeid": "script.py::test_ct02_login_incorrect_password[chromium]",
+     "type": "Function",
+     "lineno": 19
+    },
+    {
+     "nodeid": "script.py::test_ct03_login_success[chromium]",
+     "type": "Function",
+     "lineno": 33
+    },
+    {
+     "nodeid": "script.py::test_ct04_logout[chromium]",
+     "type": "Function",
+     "lineno": 52
+    },
+    {
+     "nodeid": "script.py::test_ct05_direct_access_after_logout[chromium]",
+     "type": "Function",
+     "lineno": 72
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_empty_credentials[chromium]",
+   "lineno": 5,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_login_empty_credentials[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4555831999750808,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.8927360000088811,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+     "lineno": 17,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+      "lineno": 17,
+      "message": "in test_ct01_login_empty_credentials"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py:17: in test_ct01_login_empty_credentials\n    expect(page.get_by_text(\"Invalid credentials\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.01392549998126924,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_incorrect_password[chromium]",
+   "lineno": 19,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_login_incorrect_password[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09314979996997863,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6831892000045627,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+     "lineno": 31,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+      "lineno": 31,
+      "message": "in test_ct02_login_incorrect_password"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py:31: in test_ct02_login_incorrect_password\n    expect(page.get_by_text(\"Invalid credentials\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.010115299955941737,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_success[chromium]",
+   "lineno": 33,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_login_success[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09588779998011887,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7298305000877008,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+     "lineno": 45,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+      "lineno": 45,
+      "message": "in test_ct03_login_success"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py:45: in test_ct03_login_success\n    expect(page.get_by_text(\"Rooms\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.01133900007698685,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_logout[chromium]",
+   "lineno": 52,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_logout[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09980970004107803,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.8758186999475583,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+     "lineno": 64,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+      "lineno": 64,
+      "message": "in test_ct04_logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py:64: in test_ct04_logout\n    expect(page.get_by_text(\"Rooms\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.013703999924473464,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_direct_access_after_logout[chromium]",
+   "lineno": 72,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_direct_access_after_logout[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11729480000212789,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7062706999713555,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+     "lineno": 84,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py",
+      "lineno": 84,
+      "message": "in test_ct05_direct_access_after_logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US05\\script.py:84: in test_ct05_direct_access_after_logout\n    expect(page.get_by_text(\"Rooms\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.24155300005804747,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

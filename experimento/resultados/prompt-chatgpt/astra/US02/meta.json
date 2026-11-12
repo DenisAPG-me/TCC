@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 354.59,
+ "tokens": {
+  "total": 3041
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "* Decimal(\"3\"))\n\n    quantity.fill(\"1\")\n    quantity.press(\"Tab\")\n\n    expect(quantity).to_have_value(\"1\", timeout=ACTION_TIMEOUT_MS)\n    expect_money(cart_total, unit_price)\n    assert read_money(cart_total) == unit_price\n\n\ndef test_CT004_restringir_tres_unidades_de_thor_hammer(page):\n    open_product(page, PRODUCT_RESTRICTED)\n\n    submit_quantity(page, 3)\n\n    expect(\n        page.get_by_text(RESTRICTION_MESSAGE, exact=True)\n    ).to_be_visible(timeout=ACTION_TIMEOUT_MS)\n```\ntokens used\n3,041\n"
+}

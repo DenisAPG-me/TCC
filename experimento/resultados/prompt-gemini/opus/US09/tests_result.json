@@ -1,0 +1,58 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_excluir_reserva_sem_token_retorna_403",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct02_excluir_reserva_com_token_invalido_retorna_403",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct03_excluir_reserva_com_token_vazio_retorna_403",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct04_autenticacao_com_credenciais_invalidas_nao_gera_token",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct05_excluir_reserva_com_token_valido_retorna_201",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct06_consultar_reserva_excluida_retorna_404",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct07_excluir_reserva_ja_excluida_retorna_4xx_sem_afetar_outras",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct08_listar_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "........                                                                 [100%]\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n8 passed, 1 warning in 25.30s\n",
+ "returncode": 0,
+ "duracao_s": 25.93
+}

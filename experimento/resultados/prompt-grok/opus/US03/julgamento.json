@@ -1,0 +1,135 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so e-mail, sem senha"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login no passo de checkout"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so CEP"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "cartao sem dados nao confirma"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC07_endereco_campos_obrigatorios_vazios",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "payment-method existe no DOM mesmo com endereco invalido; esperado count 0 incorreto"
+  },
+  {
+   "teste": "test_TC08_endereco_sem_cep",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de pais 'Netherlands' inexistente no select"
+  },
+  {
+   "teste": "test_TC09_endereco_completo_avanca_para_pagamento",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de pais 'Netherlands' inexistente no select"
+  },
+  {
+   "teste": "test_TC10_pagamento_cartao_credito_e_confirmacao",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de pais 'Netherlands' inexistente no select"
+  },
+  {
+   "teste": "test_TC11_cartao_credito_sem_dados_nao_confirma",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de pais 'Netherlands' inexistente no select"
+  }
+ ]
+}

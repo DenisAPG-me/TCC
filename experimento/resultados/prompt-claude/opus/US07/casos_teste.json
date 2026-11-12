@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com corpo JSON válido",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Montar payload válido com firstname, lastname, totalprice, depositpaid, bookingdates e additionalneeds; enviar POST /booking",
+  "esperado": "Status 200; resposta contém bookingid inteiro positivo; objeto booking igual ao payload enviado"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva via POST /booking; obter bookingid; enviar GET /booking/{bookingid}",
+  "esperado": "Status 200; todos os campos retornados iguais aos enviados"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar reserva com identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Enviar GET /booking/99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Consultar reserva com identificador não numérico",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Enviar GET /booking/abc",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Listar reservas filtrando por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva com nome e sobrenome únicos; enviar GET /booking?firstname={nome}&lastname={sobrenome}",
+  "esperado": "Status 200; lista contém objeto com o bookingid criado"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Listar reservas com nome e sobrenome inexistentes",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Gerar nome e sobrenome únicos sem criar reserva; enviar GET /booking?firstname={nome}&lastname={sobrenome}",
+  "esperado": "Status 200; lista vazia"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Criar e consultar reserva com valores limite",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Montar payload com totalprice 0, depositpaid false e check-in igual ao check-out; enviar POST /booking; enviar GET /booking/{bookingid}",
+  "esperado": "Status 200 em ambas as chamadas; dados retornados iguais aos enviados"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Criar e consultar reserva com caracteres acentuados",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Montar payload com nome, sobrenome e necessidades adicionais com acentos e cedilha; enviar POST /booking; enviar GET /booking/{bookingid}",
+  "esperado": "Status 200 em ambas as chamadas; dados retornados iguais aos enviados, preservando os caracteres especiais"
+ }
+]

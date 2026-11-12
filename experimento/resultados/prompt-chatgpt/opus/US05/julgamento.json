@@ -1,0 +1,90 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha vazia com admin (novo)"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05",
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT002_login_com_admin_e_senha_incorreta[chromium]",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "Logout existe tambem na tela de login; count 0 incorreto"
+  },
+  {
+   "teste": "test_CT004_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "test id roomlisting inexistente"
+  },
+  {
+   "teste": "test_CT006_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "Logout existe tambem na tela de login; count 0 incorreto"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_criar_reserva_com_dados_validos",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT002_consultar_reserva_criada",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT003_consultar_identificador_inexistente",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT004_filtrar_reservas_por_nome_e_sobrenome",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "....                                                                     [100%]\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n4 passed, 1 warning in 3.71s\n",
+ "returncode": 0,
+ "duracao_s": 4.33
+}

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes descritivos e curtos",
+  "estrutura": "build_payload e fixture",
+  "assercoes": "comparacao de corpo completo",
+  "espera": "timeout e dados unicos",
+  "manutenibilidade": "constantes e helpers"
+ }
+}

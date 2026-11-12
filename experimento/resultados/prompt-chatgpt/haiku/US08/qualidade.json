@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos e helpers",
+  "estrutura": "Fixtures e helpers de requisição",
+  "assercoes": "Verifica campos e preservação via GET prévio",
+  "espera": "Timeout; dados fixos mas limpeza",
+  "manutenibilidade": "Constantes e cleanup na fixture"
+ }
+}

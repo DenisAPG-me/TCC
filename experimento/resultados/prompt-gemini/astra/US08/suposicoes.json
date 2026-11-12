@@ -1,0 +1,16 @@
+[
+ "A análise é exclusivamente dedutiva: não houve acesso à internet nem execução contra o sistema.",
+ "Trata-se de API REST; seletores de interface não se aplicam.",
+ "A URL base é `https://restful-booker.herokuapp.com`, definida em constante.",
+ "Autenticação: `POST /auth`, com JSON contendo `username` e `password`. A resposta válida contém `token`, assumido como string; a inválida contém `reason: \"Bad credentials\"` e não contém a chave `token`. O critério 2 não define status HTTP, portanto ele não é verificado.",
+ "Atualização completa: `PUT /booking/{id}`. Atualização parcial: `PATCH /booking/{id}`. O token é enviado pelo cabeçalho `Cookie: token=<token>`.",
+ "O corpo da reserva contém `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates.checkin`, `bookingdates.checkout` e `additionalneeds`. Os campos obrigatórios são todos os anteriores, exceto `additionalneeds`. Essa obrigatoriedade é presumida, pois não foi especificada.",
+ "“Novo nome” corresponde a `firstname`; “sobrenome”, a `lastname`; “preço”, a `totalprice`.",
+ "As respostas bem-sucedidas de atualização contêm diretamente o objeto completo da reserva. Para a atualização parcial, a comparação integral verifica a preservação dos demais campos.",
+ "Credenciais vazias são consideradas inválidas. O critério 5 aplica-se tanto a `PUT` quanto a `PATCH`.",
+ "Cada teste que usa reserva cria seu próprio registro por `POST /booking`, sem autenticação, presumindo status 200 e resposta com `bookingid` inteiro e `booking` contendo os dados criados.",
+ "A limpeza usa `DELETE /booking/{id}` com token válido. Presume-se sucesso com 200, 201 ou 204; falhas de limpeza geram aviso.",
+ "Os dados são sintéticos; as datas usam o formato `YYYY-MM-DD`, com saída posterior à entrada. Não são inferidas regras de preço mínimo, tamanho de texto, tipos inválidos, token expirado ou reserva inexistente, pois não constam dos critérios.",
+ "As omissões obrigatórias são verificadas individualmente e também com objeto vazio. Não são enumeradas todas as combinações de omissões, pois não há regras de interação especificadas.",
+ "Instalação: `pip install pytest requests`. Salve como `test_reservas.py` e execute `python test_reservas.py` ou `pytest -v test_reservas.py`. Há exatamente uma função de teste por ID; os auxiliares e fixtures apenas dão suporte à execução."
+]

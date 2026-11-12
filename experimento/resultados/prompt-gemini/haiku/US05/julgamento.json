@@ -1,0 +1,120 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C03",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08",
+  "US05-C11"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario preenchido, senha vazia"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario vazio, senha preenchida"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C03"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha em caixa diferente"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C11"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05",
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT08",
+   "categoria": "seletor inexistente",
+   "nota": "role row inexistente na lista de quartos"
+  },
+  {
+   "teste": "test_CT09",
+   "categoria": "seletor inexistente",
+   "nota": "logout nao efetivado pelo seletor usado"
+  },
+  {
+   "teste": "test_CT10",
+   "categoria": "seletor inexistente",
+   "nota": "mesma causa do CT09"
+  }
+ ]
+}

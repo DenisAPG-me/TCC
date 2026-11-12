@@ -1,0 +1,70 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_buscar_produto_por_palavra_chave_existente",
+   "categoria": "seletor inexistente",
+   "nota": "product-card via get_by_test_id nao encontrado (atributo e data-test)"
+  },
+  {
+   "teste": "test_ct03_ordenar_produtos_por_preco_crescente",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('sort') inexistente"
+  },
+  {
+   "teste": "test_ct04_ordenar_produtos_por_nome_z_a",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('sort') inexistente"
+  }
+ ]
+}

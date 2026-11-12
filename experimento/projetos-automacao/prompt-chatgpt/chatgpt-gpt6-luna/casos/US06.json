@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Enviar mensagem válida pelo formulário",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial, preencher nome, assunto e dados de contato válidos e enviar",
+  "esperado": "A confirmação exibida é `Thanks for getting in touch <nome>!`"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Contador aumenta após envio de mensagem",
+  "tipo": "positivo",
+  "criterio": "CA01, CA03",
+  "passos": "Fazer login, anotar contador; enviar uma mensagem válida; fazer login novamente e consultar o contador",
+  "esperado": "O contador é exatamente uma unidade maior que o valor anotado"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Mensagem enviada aparece na caixa de mensagens",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Enviar mensagem com nome e assunto únicos; abrir o painel e a caixa de mensagens",
+  "esperado": "A lista contém o nome e o assunto enviados"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Acesso direto à caixa de mensagens após logout",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Fazer login, sair e abrir diretamente a rota da caixa de mensagens",
+  "esperado": "O painel solicita login, exibindo formulário de autenticação"
+ }
+]

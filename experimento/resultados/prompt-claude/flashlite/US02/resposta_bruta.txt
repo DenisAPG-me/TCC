@@ -1,0 +1,106 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Adicionar Claw Hammer com quantidade 3 ao carrinho | Positivo | CA1 | Acessar página inicial; Clicar no produto Claw Hammer; Definir quantidade como 3; Clicar em adicionar ao carrinho | Ver a mensagem de confirmação Product added to shopping cart. e o indicador do carrinho mostra 3 |
+| CT02 | Validar total da linha e total do carrinho com 3 unidades | Positivo | CA2 | Adicionar 3 unidades de Claw Hammer ao carrinho; Abrir a página do carrinho | O total da linha é igual ao preço unitário multiplicado por 3 e o total do carrinho é igual ao total da linha |
+| CT03 | Alterar quantidade no carrinho de 3 para 1 | Positivo | CA3 | Adicionar 3 unidades de Claw Hammer ao carrinho; Abrir o carrinho; Alterar a quantidade para 1 | O total do carrinho passa a ser igual ao preço unitário |
+| CT04 | Tentar adicionar 3 unidades de Thor Hammer ao carrinho | Negativo | CA4 | Acessar página do produto Thor Hammer; Definir quantidade como 3; Clicar em adicionar ao carrinho | Ver a mensagem You can only have one Thor Hammer in the cart. |
+
+## SUPOSIÇÕES
+
+- Tecnologia escolhida: Python + pytest + pytest-playwright para automação de interface web.
+- URL base: https://practicesoftwaretesting.com/
+- Seletores e elementos da UI inferidos com base em aplicações de e-commerce padrão em Playwright:
+  - Listagem/detalhes de produtos acessados por texto do produto ou seletores de card.
+  - Input de quantidade identificado por `get_by_label("Quantity")` ou campo de input numérico na página de detalhes.
+  - Botão de adicionar ao carrinho identificado por `get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE))` ou `get_by_text("Add to cart")`.
+  - Indicador de quantidade no carrinho na barra de navegação/cabeçalho identificado por test-id ou texto contendo o número de itens.
+  - Mensagem de sucesso de adição ao carrinho tratada via `expect(page.get_by_text("Product added to shopping cart.")).toBeVisible()`.
+  - Página do carrinho acessada pelo link/botão "Cart" ou indicador do carrinho.
+  - Tabela ou itens do carrinho exibindo preço unitário, quantidade e preço total por linha.
+  - Mensagem de restrição do Thor Hammer tratada via `expect(page.get_by_text("You can only have one Thor Hammer in the cart.")).toBeVisible()`.
+
+## SCRIPT
+
+```python
+import re
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+def test_ct01_adicionar_claw_hammer_com_quantidade_3_ao_carrinho(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer", exact=True).click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    
+    expect(page.get_by_text("Product added to shopping cart.")).toBeVisible()
+    expect(page.locator("[data-test='nav-cart']")).to_contain_text("3")
+
+
+def test_ct02_validar_total_da_linha_e_total_do_carrinho_com_3_unidades(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer", exact=True).click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    expect(page.get_by_text("Product added to shopping cart.")).toBeVisible()
+    
+    page.locator("[data-test='nav-cart']").click()
+    
+    unit_price_text = page.locator("[data-test='product-price']").inner_text()
+    unit_price = float(unit_price_text.replace("$", "").strip())
+    
+    line_total_text = page.locator("[data-test='line-price']").inner_text()
+    line_total = float(line_total_text.replace("$", "").strip())
+    
+    cart_total_text = page.locator("[data-test='cart-total']").inner_text()
+    cart_total = float(cart_total_text.replace("$", "").strip())
+    
+    assert line_total == unit_price * 3
+    assert cart_total == line_total
+
+
+def test_ct03_alterar_quantidade_no_carrinho_de_3_para_1(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer", exact=True).click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    expect(page.get_by_text("Product added to shopping cart.")).toBeVisible()
+    
+    page.locator("[data-test='nav-cart']").click()
+    
+    unit_price_text = page.locator("[data-test='product-price']").inner_text()
+    unit_price = float(unit_price_text.replace("$", "").strip())
+    
+    cart_quantity_input = page.locator("[data-test='product-quantity']")
+    cart_quantity_input.fill("1")
+    cart_quantity_input.press("Enter")
+    
+    cart_total_text = page.locator("[data-test='cart-total']").inner_text()
+    cart_total = float(cart_total_text.replace("$", "").strip())
+    
+    assert cart_total == unit_price
+
+
+def test_ct04_tentar_adicionar_3_unidades_de_thor_hammer_ao_carrinho(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Thor Hammer", exact=True).click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    
+    expect(page.get_by_text("You can only have one Thor Hammer in the cart.")).toBeVisible()
+```

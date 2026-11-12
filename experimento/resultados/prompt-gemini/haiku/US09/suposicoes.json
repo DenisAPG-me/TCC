@@ -1,0 +1,17 @@
+[
+ "**Base URL:** `https://restful-booker.herokuapp.com`, definida como constante `BASE_URL`.",
+ "**Autenticação:** `POST /auth` com JSON `{\"username\": \"admin\", \"password\": \"password123\"}` retorna `{\"token\": \"<valor>\"}`.",
+ "**Criação de reserva:** `POST /booking` com JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`. A resposta contém `bookingid` (inteiro).",
+ "**Nome único:** `firstname` recebe o prefixo `Nome` seguido de `uuid4().hex`. O `lastname` é fixo em `Teste`.",
+ "**Consulta:** `GET /booking/{id}` retorna 200 com JSON para reservas existentes e 404 para reservas inexistentes ou excluídas.",
+ "**Exclusão:** `DELETE /booking/{id}` autenticado pelo header `Cookie: token=<valor>`.",
+ "Sem header de token: 403.",
+ "Token inválido ou vazio: 403.",
+ "Token válido: 201.",
+ "**Exclusão repetida ou de ID inexistente:** retorna status 4xx. O código exato (por exemplo, 404 ou 405) não é verificado.",
+ "**ID inexistente:** `999999999` assumido como não existente.",
+ "**Listagem:** `GET /booking?firstname=<nome>` retorna 200 com lista JSON. Lista vazia é `[]`.",
+ "**Dados compartilhados:** a API de demonstração é pública. As reservas criadas pelos testes são removidas no teardown por melhor esforço, sem asserção.",
+ "**Timeout:** 30 segundos por requisição, para tolerar cold start do Heroku.",
+ "**Nomenclatura dos testes:** o ID `CT-XX` aparece no nome da função como `test_ct_XX_...`, por ser um identificador Python válido."
+]

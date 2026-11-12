@@ -1,0 +1,18 @@
+[
+ "Nenhum acesso ao sistema ou à internet foi realizado. Os seletores e contratos abaixo são hipóteses e precisam ser confirmados antes de executar a suíte contra o sistema real.",
+ "O foco é interface web. Foram escolhidos Python, pytest, Playwright síncrono e o plugin oficial pytest-playwright. Os requisitos técnicos finais prevalecem sobre a proibição anterior de plugins e sobre a solicitação de fixtures próprias.",
+ "O ambiente possui pytest, playwright, pytest-playwright e o Chromium do Playwright instalados. A execução é feita com `pytest test_busca_produtos.py`; o plugin utiliza Chromium headless por padrão e gerencia a criação e o encerramento dos recursos.",
+ "A loja permite busca e ordenação sem autenticação; por isso, as constantes de credenciais são `None`.",
+ "O campo de busca possui rótulo acessível Search; o botão possui nome acessível Search; a seleção de ordenação possui rótulo acessível Sort.",
+ "As opções de ordenação têm valores `price,asc` e `name,desc`.",
+ "Os atributos `data-testid` são: `product-card` para cada cartão, `product-name` para seu nome, `product-price` para seu preço e `search-caption` para a indicação da busca.",
+ "A indicação da busca contém o termo utilizado. A mensagem de ausência é exatamente a fornecida no CA2 e desaparece quando uma busca posterior encontra produtos.",
+ "A página inicial e cada busca ou ordenação solicitam `GET /products`, em qualquer origem. A busca utiliza o parâmetro `search`; a ordenação utiliza `sort`. Não há payload de requisição.",
+ "As respostas de listagem retornam HTTP 200 e um objeto JSON com `data`, uma lista de produtos da página atual. Cada produto contém `name`, uma string não vazia. Essa resposta é utilizada para sincronizar a renderização; os critérios são verificados na interface.",
+ "Existe pelo menos um produto com hammer no nome, zzzzxx não encontra produtos e a página inicial contém pelo menos dois produtos. Não são inventados nomes ou preços específicos.",
+ "A correspondência de hammer ignora diferenças entre letras maiúsculas e minúsculas. Os nomes do catálogo permitem comparação alfabética usando `casefold()`, sem regras especiais de ordenação por idioma.",
+ "Os preços aparecem em dólares, com ponto decimal e duas casas decimais, podendo conter vírgulas como separadores de milhares. A comparação usa `Decimal` e admite preços iguais.",
+ "A ordenação é validada somente na página atual, conforme os critérios; não é pressuposto que os mesmos produtos permaneçam nessa página após ordenar.",
+ "CT05 e CT06 exercitam transições entre zero e algum resultado. Pressupõe-se que uma nova busca substitua integralmente a anterior.",
+ "Cada teste recebe uma página e um contexto isolados do plugin. As respostas e a interface devem atualizar em até 15 segundos."
+]

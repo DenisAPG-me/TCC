@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível; menu administrativo ausente"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com usuário \"admin\" e senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar \"admin\" / \"wrongpass\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Acessar /admin; informar \"admin\" / \"password\"; clicar em Login",
+  "esperado": "Redirecionado para /admin/rooms; quarto 101 do tipo Single listado; menu exibe Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Fazer login válido; clicar em Logout",
+  "esperado": "URL é a página inicial pública (/); formulário de login e menu administrativo ausentes"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Acesso direto à lista de quartos após logout",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Fazer login válido; clicar em Logout; acessar /admin/rooms diretamente",
+  "esperado": "Tela de login exibida; lista de quartos e menu administrativo ausentes"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Login com usuário \"admin\" e senha vazia",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "Acessar /admin; informar \"admin\" e senha vazia; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Login com senha correta em maiúsculas (sensibilidade a caixa)",
+  "tipo": "borda",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar \"admin\" / \"PASSWORD\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Login com usuário vazio e senha correta",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "Acessar /admin; deixar usuário vazio e informar \"password\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Acesso direto à lista de quartos sem nunca ter autenticado",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Em sessão nova, acessar /admin/rooms diretamente",
+  "esperado": "Tela de login exibida; lista de quartos e menu administrativo ausentes"
+ }
+]

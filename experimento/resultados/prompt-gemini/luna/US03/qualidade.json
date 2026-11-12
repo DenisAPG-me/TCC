@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "legivel, nomes em portugues",
+  "estrutura": "helpers para login/endereco/pagamento",
+  "assercoes": "asserts fracos (campos visiveis, e-mail no menu)",
+  "espera": "auto-wait mas sem sincronizacao entre passos",
+  "manutenibilidade": "labels genericos e ambiguos, dados inline"
+ }
+}

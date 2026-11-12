@@ -1,0 +1,8 @@
+[
+ "A URL base da API é `https://restful-booker.herokuapp.com`.",
+ "A autenticação é feita enviando um JSON com `{\"username\": \"admin\", \"password\": \"password123\"}` para o endpoint `/auth`, retornando um token no formato `{\"token\": \"...\"}`.",
+ "A exclusão de uma reserva é feita via método `DELETE` no endpoint `/booking/{id}`, enviando o token no cabeçalho `Cookie: token=...` ou `Authorization` conforme o padrão da API Restful-booker (neste script, utiliza-se `Cookie: token={token}`).",
+ "Os dados padrão para criação de uma reserva utilizam uma estrutura válida para a API (ex: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates`, `additionalneeds`).",
+ "A listagem com filtro por nome utiliza o endpoint `/booking?firstname=X&lastname=Y`.",
+ "Um status 4xx retornado na segunda exclusão (TC05) pode ser 405 (Method Not Allowed) ou 403/404 dependendo da implementação específica da API, sendo tratado como qualquer código de erro 4xx."
+]

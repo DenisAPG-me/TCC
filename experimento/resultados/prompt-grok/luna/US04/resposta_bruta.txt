@@ -1,0 +1,143 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Envio vazio exibe validações obrigatórias | negativo | 1 | Abrir a página inicial e enviar o formulário sem preencher campos. | São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco. |
+| TC02 | Telefone abaixo do mínimo | negativo | 2 | Preencher os campos com dados válidos, exceto telefone com 10 caracteres; enviar. | É exibida a mensagem "Phone must be between 11 and 21 characters.". |
+| TC03 | Assunto e mensagem abaixo do mínimo | negativo | 3 | Preencher os campos com dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar. | São exibidas as mensagens "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters.". |
+| TC04 | E-mail malformado | negativo | 4 | Preencher os campos com dados válidos, exceto e-mail "bad"; enviar. | É exibida a mensagem "must be a well-formed email address". |
+| TC05 | Envio com dados válidos | positivo | 5 | Preencher todos os campos com dados válidos e enviar. | São exibidos "Thanks for getting in touch Ana Silva!" e o assunto informado na confirmação. |
+| TC06 | Telefone nos limites de tamanho | borda | 2 | Enviar uma vez com telefone de 11 caracteres e outra com 21, mantendo os demais campos válidos. | Os envios são aceitos sem a mensagem de telefone fora do intervalo. |
+| TC07 | Assunto e mensagem nos limites de tamanho | borda | 3 | Enviar com assunto de 5 caracteres e mensagem de 20; depois com assunto de 100 e mensagem de 2000. | Os envios são aceitos sem mensagens de tamanho inválido para assunto ou mensagem. |
+
+SUPOSIÇÕES
+
+- A URL base é `https://automationintesting.online/`; o formulário está disponível na página inicial, sem autenticação ou navegação adicional.
+- Os campos podem ser localizados por rótulos acessíveis “Name”, “Email”, “Phone”, “Subject” e “Message”, e o botão de envio por papel de botão e nome “Submit”.
+- A aplicação exibe as mensagens de validação como texto visível na página após o envio.
+- A confirmação de sucesso mostra o texto de agradecimento e o assunto informado em elementos visíveis na página.
+- Para os critérios de tamanho, os limites são inclusivos. Para as verificações de borda, cada envio inicia com uma página recarregada e dados válidos nos demais campos.
+- Os testes usam valores fictícios: nome “Ana Silva”, e-mail “ana@example.com”, telefone numérico e assunto/mensagem com conteúdo de teste.
+- A disponibilidade da página e o comportamento real dos seletores não podem ser confirmados apenas com a User Story; os seletores propostos são hipóteses a ajustar caso a interface use nomes acessíveis diferentes.
+- Execução: instalar `pytest`, `playwright` e o plugin `pytest-playwright`; instalar os navegadores Playwright conforme necessário. A URL pode ser alterada com `--base-url`.
+
+```python
+import pytest
+from playwright.sync_api import expect
+
+BASE_URL = "https://automationintesting.online/"
+
+
+def _open_form(page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill("Ana Silva")
+    page.get_by_label("Email").fill("ana@example.com")
+    page.get_by_label("Phone").fill("11987654321")
+    page.get_by_label("Subject").fill("Dúvida sobre reserva")
+    page.get_by_label("Message").fill(
+        "Olá, gostaria de saber mais sobre a disponibilidade."
+    )
+
+
+def _submit(page):
+    page.get_by_role("button", name="Submit").click()
+
+
+def _reset(page):
+    page.goto(BASE_URL)
+
+
+def test_TC01_empty_form_shows_required_field_messages(page):
+    page.goto(BASE_URL)
+    _submit(page)
+
+    for field in ("Name", "Email", "Phone", "Subject", "Message"):
+        expect(page.get_by_text(field, exact=False)).to_be_visible()
+
+
+def test_TC02_phone_below_minimum_shows_validation(page):
+    _open_form(page)
+    page.get_by_label("Phone").fill("1234567890")
+    _submit(page)
+
+    expect(
+        page.get_by_text("Phone must be between 11 and 21 characters.", exact=True)
+    ).to_be_visible()
+
+
+def test_TC03_subject_and_message_below_minimum_show_validation(page):
+    _open_form(page)
+    page.get_by_label("Subject").fill("abcd")
+    page.get_by_label("Message").fill("1234567890123456789")
+    _submit(page)
+
+    expect(
+        page.get_by_text("Subject must be between 5 and 100 characters.", exact=True)
+    ).to_be_visible()
+    expect(
+        page.get_by_text("Message must be between 20 and 2000 characters.", exact=True)
+    ).to_be_visible()
+
+
+def test_TC04_malformed_email_shows_validation(page):
+    _open_form(page)
+    page.get_by_label("Email").fill("bad")
+    _submit(page)
+
+    expect(
+        page.get_by_text("must be a well-formed email address", exact=False)
+    ).to_be_visible()
+
+
+def test_TC05_valid_submission_shows_confirmation_and_subject(page):
+    subject = "Dúvida sobre reserva"
+    _open_form(page)
+    page.get_by_label("Subject").fill(subject)
+    _submit(page)
+
+    expect(page.get_by_text("Thanks for getting in touch Ana Silva!", exact=True)).to_be_visible()
+    expect(page.get_by_text(subject, exact=True)).to_be_visible()
+
+
+@pytest.mark.parametrize(
+    "phone",
+    ["12345678901", "123456789012345678901"],
+    ids=["minimum-11", "maximum-21"],
+)
+def test_TC06_phone_length_boundaries_are_accepted(page, phone):
+    # Cada valor parametrizado representa uma execução de caso de teste nas bordas.
+    _open_form(page)
+    page.get_by_label("Phone").fill(phone)
+    _submit(page)
+
+    expect(
+        page.get_by_text("Phone must be between 11 and 21 characters.", exact=True)
+    ).to_have_count(0)
+    expect(page.get_by_text("Thanks for getting in touch Ana Silva!", exact=True)).to_be_visible()
+
+
+@pytest.mark.parametrize(
+    ("subject", "message"),
+    [
+        ("12345", "x" * 20),
+        ("s" * 100, "m" * 2000),
+    ],
+    ids=["minimum-lengths", "maximum-lengths"],
+)
+def test_TC07_subject_and_message_length_boundaries_are_accepted(
+    page, subject, message
+):
+    # Cada valor parametrizado representa uma execução de caso de teste nas bordas.
+    _open_form(page)
+    page.get_by_label("Subject").fill(subject)
+    page.get_by_label("Message").fill(message)
+    _submit(page)
+
+    expect(
+        page.get_by_text("Subject must be between 5 and 100 characters.", exact=True)
+    ).to_have_count(0)
+    expect(
+        page.get_by_text("Message must be between 20 and 2000 characters.", exact=True)
+    ).to_have_count(0)
+    expect(page.get_by_text("Thanks for getting in touch Ana Silva!", exact=True)).to_be_visible()
+```

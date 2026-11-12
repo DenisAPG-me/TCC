@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 38.14,
+ "tokens": {
+  "total": 5749
+ },
+ "n_casos_extraidos": 8,
+ "tem_codigo": true,
+ "stderr_tail": "    f\"recebido {resposta.status_code}; \"\n                f\"corpo={resposta.text[:300]}\"\n            )\n\n    assert not erros, \"CA6:\\n\" + \"\\n\".join(erros)\n\n\ndef test_ct08_atualizacao_com_objeto_vazio(api, reserva, token_valido):\n    booking_id, _ = reserva\n\n    resposta = requisitar(\n        api,\n        \"PUT\",\n        f\"/booking/{booking_id}\",\n        payload=deepcopy(PAYLOAD_VAZIO),\n        token=token_valido,\n    )\n\n    verificar_status(resposta, 400, \"CA6: objeto vazio\")\n```\ntokens used\n5,749\n"
+}

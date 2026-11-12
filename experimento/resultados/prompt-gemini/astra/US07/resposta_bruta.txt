@@ -1,0 +1,184 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Criar reserva com todos os campos válidos | Positivo | 1 | Enviar um JSON completo com depósito pago. | Status 200, identificador numérico e dados iguais aos enviados. |
+| CT02 | Consultar reserva criada | Positivo | 2 | Criar reserva; consultar pelo identificador retornado. | Status 200 e todos os campos iguais aos enviados. |
+| CT03 | Consultar identificador inexistente | Negativo | 3 | Consultar o identificador `99999999`. | Status 404. |
+| CT04 | Filtrar reservas por nome e sobrenome únicos | Positivo | 4 | Criar reserva com nomes únicos; listar usando ambos os filtros. | A lista contém o identificador criado. |
+| CT05 | Preservar depósito não pago | Borda | 1 e 2 | Criar reserva com `depositpaid=false`; consultar pelo identificador. | Ambas as respostas têm status 200 e preservam todos os dados, incluindo o booleano `false`. |
+| CT06 | Preservar datas na virada do ano | Borda | 1 e 2 | Criar reserva de `2028-12-31` a `2029-01-01`; consultar pelo identificador. | Ambas as respostas têm status 200 e preservam todos os dados, incluindo as datas. |
+
+## SUPOSIÇÕES
+
+- A análise é exclusivamente dedutiva; não houve acesso ao sistema, à documentação ou à internet.
+- A URL base é `https://restful-booker.herokuapp.com`, definida em uma constante.
+- As rotas presumidas são `POST /booking`, `GET /booking/{id}` e `GET /booking?firstname=...&lastname=...`. Não existem seletores de interface neste escopo.
+- O JSON enviado contém `firstname` e `lastname` como strings, `totalprice` como número inteiro, `depositpaid` como booleano, `bookingdates` como objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`, e `additionalneeds` como string.
+- A criação retorna `{"bookingid": inteiro, "booking": {...}}`. Embora o critério mencione identificador numérico, assume-se um inteiro, excluindo booleanos.
+- A consulta retorna diretamente o objeto da reserva. A listagem retorna status 200 e um array de objetos com a chave `bookingid`.
+- As operações não exigem autenticação. O conteúdo criado está imediatamente disponível para consulta e filtragem.
+- O identificador `99999999` não existe no ambiente. Uma resposta diferente de 404 representa falha do teste, sem tentar excluir eventual reserva existente.
+- Os dados escolhidos são válidos. Os dois valores booleanos de depósito são aceitos, assim como uma estadia de uma noite atravessando o ano. CT05 cobre o extremo alternativo do domínio booleano; CT06 cobre a transição do calendário.
+- Nomes com sufixos UUID são aceitos e considerados suficientemente únicos. O filtro combina nome e sobrenome; não se exige que a lista contenha exclusivamente a reserva criada.
+- A igualdade exige presença, valor e tipo dos campos enviados, inclusive campos aninhados. Campos extras na resposta são tolerados.
+- Não se deduzem regras para campos ausentes, JSON inválido, preços negativos ou zero, tamanhos máximos, datas invertidas ou outras entradas sem resultado definido nos critérios.
+- Cada teste cria seus próprios dados quando necessário. Não há limpeza automática, pois exclusão e suas condições não foram especificadas.
+- Salve como `test_reservas.py`. Com `pytest` e `requests` instalados, execute `pytest -v test_reservas.py` ou `python test_reservas.py`.
+
+```python
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT_SECONDS = 30
+
+import uuid
+
+import pytest
+import requests
+
+
+@pytest.fixture
+def api():
+    with requests.Session() as session:
+        session.headers.update({"Accept": "application/json"})
+        yield session
+
+
+def montar_payload(
+    depositpaid=True,
+    checkin="2028-06-15",
+    checkout="2028-06-18",
+):
+    return {
+        "firstname": f"Nome{uuid.uuid4().hex}",
+        "lastname": f"Sobrenome{uuid.uuid4().hex}",
+        "totalprice": 350,
+        "depositpaid": depositpaid,
+        "bookingdates": {
+            "checkin": checkin,
+            "checkout": checkout,
+        },
+        "additionalneeds": "Breakfast",
+    }
+
+
+def verificar_status(response, esperado):
+    assert response.status_code == esperado, (
+        f"{response.request.method} {response.url}: "
+        f"esperado status {esperado}, recebido {response.status_code}. "
+        f"Corpo: {response.text[:1000]}"
+    )
+
+
+def verificar_campos(recebido, esperado, caminho="booking"):
+    assert type(recebido) is type(esperado), (
+        f"{caminho}: tipo esperado {type(esperado).__name__}, "
+        f"recebido {type(recebido).__name__}"
+    )
+
+    if isinstance(esperado, dict):
+        for chave, valor in esperado.items():
+            assert chave in recebido, f"Campo ausente: {caminho}.{chave}"
+            verificar_campos(recebido[chave], valor, f"{caminho}.{chave}")
+    else:
+        assert recebido == esperado, (
+            f"{caminho}: esperado {esperado!r}, recebido {recebido!r}"
+        )
+
+
+def criar_reserva(api, payload):
+    response = api.post(
+        f"{BASE_URL}/booking",
+        json=payload,
+        timeout=TIMEOUT_SECONDS,
+    )
+    verificar_status(response, 200)
+
+    resultado = response.json()
+    assert isinstance(resultado, dict), "Criação deve retornar um objeto JSON"
+    assert "bookingid" in resultado, "Identificador ausente"
+    assert type(resultado["bookingid"]) is int, (
+        "bookingid deve ser inteiro e não booleano"
+    )
+    assert "booking" in resultado, "Objeto booking ausente"
+    verificar_campos(resultado["booking"], payload)
+
+    return resultado["bookingid"]
+
+
+def consultar_e_verificar(api, booking_id, payload):
+    response = api.get(
+        f"{BASE_URL}/booking/{booking_id}",
+        timeout=TIMEOUT_SECONDS,
+    )
+    verificar_status(response, 200)
+    verificar_campos(response.json(), payload)
+
+
+def test_CT01_criar_reserva_completa(api):
+    payload = montar_payload()
+    criar_reserva(api, payload)
+
+
+def test_CT02_consultar_reserva_criada(api):
+    payload = montar_payload()
+    booking_id = criar_reserva(api, payload)
+    consultar_e_verificar(api, booking_id, payload)
+
+
+def test_CT03_consultar_identificador_inexistente(api):
+    response = api.get(
+        f"{BASE_URL}/booking/99999999",
+        timeout=TIMEOUT_SECONDS,
+    )
+    verificar_status(response, 404)
+
+
+def test_CT04_filtrar_por_nome_e_sobrenome_unicos(api):
+    payload = montar_payload()
+    booking_id = criar_reserva(api, payload)
+
+    response = api.get(
+        f"{BASE_URL}/booking",
+        params={
+            "firstname": payload["firstname"],
+            "lastname": payload["lastname"],
+        },
+        timeout=TIMEOUT_SECONDS,
+    )
+    verificar_status(response, 200)
+
+    reservas = response.json()
+    assert isinstance(reservas, list), "Listagem deve retornar um array JSON"
+
+    identificadores = []
+    for reserva in reservas:
+        assert isinstance(reserva, dict), "Cada item deve ser um objeto JSON"
+        assert "bookingid" in reserva, "Item sem bookingid"
+        assert type(reserva["bookingid"]) is int, (
+            "bookingid listado deve ser inteiro e não booleano"
+        )
+        identificadores.append(reserva["bookingid"])
+
+    assert booking_id in identificadores, (
+        f"Reserva {booking_id} ausente no resultado dos filtros"
+    )
+
+
+def test_CT05_preservar_deposito_nao_pago(api):
+    payload = montar_payload(depositpaid=False)
+    booking_id = criar_reserva(api, payload)
+    consultar_e_verificar(api, booking_id, payload)
+
+
+def test_CT06_preservar_datas_na_virada_do_ano(api):
+    payload = montar_payload(
+        checkin="2028-12-31",
+        checkout="2029-01-01",
+    )
+    booking_id = criar_reserva(api, payload)
+    consultar_e_verificar(api, booking_id, payload)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__, "-v"]))
+```

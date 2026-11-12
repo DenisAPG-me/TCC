@@ -1,0 +1,262 @@
+{
+ "created": 1793431527.168461,
+ "duration": 10.937340259552002,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 2,
+  "error": 4,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_excluir_sem_token",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_CT002_excluir_com_token_invalido",
+     "type": "Function",
+     "lineno": 116
+    },
+    {
+     "nodeid": "script.py::test_CT003_excluir_com_token_valido",
+     "type": "Function",
+     "lineno": 134
+    },
+    {
+     "nodeid": "script.py::test_CT004_consultar_reserva_excluida",
+     "type": "Function",
+     "lineno": 142
+    },
+    {
+     "nodeid": "script.py::test_CT005_repetir_exclusao_sem_afetar_outra_reserva",
+     "type": "Function",
+     "lineno": 156
+    },
+    {
+     "nodeid": "script.py::test_CT006_listar_vazia_pelo_nome_da_reserva_excluida",
+     "type": "Function",
+     "lineno": 178
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_excluir_sem_token",
+   "lineno": 102,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_excluir_sem_token",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00042319996282458305,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.331724499934353,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.3112358000362292,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_excluir_com_token_invalido",
+   "lineno": 116,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_excluir_com_token_invalido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00036940001882612705,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3521495000459254,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.30537329998333007,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_excluir_com_token_valido",
+   "lineno": 134,
+   "outcome": "error",
+   "keywords": [
+    "test_CT003_excluir_com_token_valido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0004091000882908702,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3564670999767259,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.31110239995177835,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+     "lineno": 89,
+     "message": "AssertionError: Limpeza da reserva 2307 retornou 405: Method Not Allowed\nassert 405 in (201, 404)\n +  where 405 = <Response [405]>.status_code"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+      "lineno": 89,
+      "message": "in booking_factory"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py:89: in booking_factory\n    assert response.status_code in (201, 404), (\nE   AssertionError: Limpeza da reserva 2307 retornou 405: Method Not Allowed\nE   assert 405 in (201, 404)\nE    +  where 405 = <Response [405]>.status_code"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_consultar_reserva_excluida",
+   "lineno": 142,
+   "outcome": "error",
+   "keywords": [
+    "test_CT004_consultar_reserva_excluida",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003423000453040004,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.524573600036092,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.31729739997535944,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+     "lineno": 89,
+     "message": "AssertionError: Limpeza da reserva 2320 retornou 405: Method Not Allowed\nassert 405 in (201, 404)\n +  where 405 = <Response [405]>.status_code"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+      "lineno": 89,
+      "message": "in booking_factory"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py:89: in booking_factory\n    assert response.status_code in (201, 404), (\nE   AssertionError: Limpeza da reserva 2320 retornou 405: Method Not Allowed\nE   assert 405 in (201, 404)\nE    +  where 405 = <Response [405]>.status_code"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_repetir_exclusao_sem_afetar_outra_reserva",
+   "lineno": 156,
+   "outcome": "error",
+   "keywords": [
+    "test_CT005_repetir_exclusao_sem_afetar_outra_reserva",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00036990002263337374,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.803858199971728,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.2998690999811515,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+     "lineno": 89,
+     "message": "AssertionError: Limpeza da reserva 2336 retornou 405: Method Not Allowed\nassert 405 in (201, 404)\n +  where 405 = <Response [405]>.status_code"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+      "lineno": 89,
+      "message": "in booking_factory"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py:89: in booking_factory\n    assert response.status_code in (201, 404), (\nE   AssertionError: Limpeza da reserva 2336 retornou 405: Method Not Allowed\nE   assert 405 in (201, 404)\nE    +  where 405 = <Response [405]>.status_code"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_listar_vazia_pelo_nome_da_reserva_excluida",
+   "lineno": 178,
+   "outcome": "error",
+   "keywords": [
+    "test_CT006_listar_vazia_pelo_nome_da_reserva_excluida",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00038350000977516174,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.5517123999306932,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.30266420007683337,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+     "lineno": 89,
+     "message": "AssertionError: Limpeza da reserva 2357 retornou 405: Method Not Allowed\nassert 405 in (201, 404)\n +  where 405 = <Response [405]>.status_code"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py",
+      "lineno": 89,
+      "message": "in booking_factory"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US09\\script.py:89: in booking_factory\n    assert response.status_code in (201, 404), (\nE   AssertionError: Limpeza da reserva 2357 retornou 405: Method Not Allowed\nE   assert 405 in (201, 404)\nE    +  where 405 = <Response [405]>.status_code"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

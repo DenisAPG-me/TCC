@@ -1,0 +1,197 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Envio vazio exibe mensagens de campo em branco | negativo | CA01 | Abrir a página inicial, deixar os cinco campos vazios e clicar em Submit | Mensagens com "blank" visíveis para Name, Email, Phone, Subject e Message |
+| CT002 | Campos preenchidos só com espaços exibem mensagens de campo em branco | borda | CA01 | Preencher os cinco campos apenas com espaços e clicar em Submit | Mensagens de campo em branco visíveis para os cinco campos |
+| CT003 | Telefone com 10 caracteres exibe erro de tamanho | negativo | CA02 | Preencher telefone com 10 dígitos, demais campos válidos, clicar em Submit | "Phone must be between 11 and 21 characters." visível e confirmação ausente |
+| CT004 | Telefone com 11 caracteres é aceito | borda | CA02 | Preencher telefone com 11 dígitos, demais campos válidos, clicar em Submit | Sem mensagem de telefone e confirmação "Thanks for getting in touch Maria Teste!" visível |
+| CT005 | Telefone com 21 caracteres é aceito | borda | CA02 | Preencher telefone com 21 dígitos, demais campos válidos, clicar em Submit | Sem mensagem de telefone e confirmação visível |
+| CT006 | Telefone com 22 caracteres exibe erro de tamanho | borda | CA02 | Preencher telefone com 22 dígitos, demais campos válidos, clicar em Submit | "Phone must be between 11 and 21 characters." visível |
+| CT007 | Assunto com 4 e mensagem com 19 caracteres exibem erros de tamanho | negativo | CA03 | Preencher assunto com 4 caracteres e mensagem com 19, demais campos válidos, clicar em Submit | "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." visíveis e confirmação ausente |
+| CT008 | Assunto com 5 caracteres é aceito | borda | CA03 | Preencher assunto com 5 caracteres, demais campos válidos, clicar em Submit | Sem mensagem de assunto e confirmação visível |
+| CT009 | Assunto com 100 caracteres é aceito | borda | CA03 | Preencher assunto com 100 caracteres, demais campos válidos, clicar em Submit | Sem mensagem de assunto e confirmação visível |
+| CT010 | Assunto com 101 caracteres exibe erro de tamanho | borda | CA03 | Preencher assunto com 101 caracteres, demais campos válidos, clicar em Submit | "Subject must be between 5 and 100 characters." visível |
+| CT011 | Mensagem com 20 caracteres é aceita | borda | CA03 | Preencher mensagem com 20 caracteres, demais campos válidos, clicar em Submit | Sem mensagem de mensagem e confirmação visível |
+| CT012 | Mensagem com 2000 caracteres é aceita | borda | CA03 | Preencher mensagem com 2000 caracteres, demais campos válidos, clicar em Submit | Sem mensagem de mensagem e confirmação visível |
+| CT013 | Mensagem com 2001 caracteres exibe erro de tamanho | borda | CA03 | Preencher mensagem com 2001 caracteres, demais campos válidos, clicar em Submit | "Message must be between 20 and 2000 characters." visível |
+| CT014 | E-mail malformado exibe erro de formato | negativo | CA04 | Preencher e-mail "bad", demais campos válidos, clicar em Submit | "must be a well-formed email address" visível e confirmação ausente |
+| CT015 | Dados válidos exibem confirmação com nome e assunto | positivo | CA05 | Preencher todos os campos com dados válidos e clicar em Submit | "Thanks for getting in touch Maria Teste!" visível e assunto "Dúvida sobre reserva" visível na confirmação |
+| CT016 | Nome com acentuação aparece na confirmação | borda | CA05 | Preencher nome "João Ação", demais campos válidos, clicar em Submit | "Thanks for getting in touch João Ação!" visível |
+
+SUPOSIÇÕES
+
+1. Mapeamento dos critérios: a User Story não traz identificadores, então os critérios foram numerados na ordem de apresentação como CA01 (campos em branco), CA02 (telefone), CA03 (assunto e mensagem), CA04 (e-mail) e CA05 (confirmação de envio).
+2. Explícito na User Story: URL base `https://automationintesting.online/`, o formulário de contato é usado a partir da página inicial, os limites de 11 a 21 caracteres para telefone, 5 a 100 para assunto e 20 a 2000 para mensagem, as mensagens textuais citadas e o texto de confirmação "Thanks for getting in touch <nome>!".
+3. Inferido: o formulário fica visível na página inicial, sem login, CAPTCHA ou etapas extras.
+4. Inferido: os campos têm rótulos acessíveis exatamente "Name", "Email", "Phone", "Subject" e "Message", sem sufixos como asterisco, e o botão de envio se chama "Submit". Todos os casos dependem disso.
+5. Inferido: a mensagem de campo em branco aparece uma vez por campo, em inglês, começa com o nome do campo e contém "blank" (ex.: "Name may not be blank"). CT001 e CT002 dependem disso.
+6. Inferido: espaços em branco são tratados como campo em branco. Somente CT002 depende disso.
+7. Inferido: os tamanhos são contados em caracteres da string enviada e o telefone aceita dígitos. CT003 a CT013 dependem disso.
+8. Inferido: nenhuma regra adicional é aplicada aos dados válidos usados (ex.: domínio do e-mail ou formato do telefone). O e-mail "maria.teste@example.com" é considerado válido. CT014 e CT015 dependem disso.
+9. Inferido: a confirmação aparece na mesma página, sem navegação, e contém o texto de agradecimento e o assunto como trechos de texto. Os casos de sucesso e os casos negativos que verificam ausência de confirmação dependem disso. Nos negativos, a ausência só é verificada após a mensagem de erro aparecer, para reduzir falso positivo por tempo.
+10. Inferido: ao testar um limite, os demais campos recebem valores válidos padrão: nome "Maria Teste", e-mail "maria.teste@example.com", telefone "11987654321", assunto "Dúvida sobre reserva" e mensagem "Gostaria de saber sobre a disponibilidade de quartos.".
+11. Pré-condição externa: o site público precisa estar disponível, aceitar envios sem autenticação e não exigir CAPTCHA. Cada teste envia seus próprios dados e não depende de outro. As mensagens criadas não são removidas, pois a User Story não define mecanismo de limpeza.
+12. Categorias: o tipo positivo aparece só em CT015, porque a User Story define um único cenário de sucesso. CA01 não tem caso positivo separado, pois CT015 já verifica o envio sem mensagens de erro. CA04 não tem caso de borda próprio, porque a User Story não define limites de formato de e-mail além do malformado. CA05 não tem caso negativo próprio, porque falhas de envio já são cobertas por CA02 a CA04.
+13. Não especificado e não verificado: a User Story não define se o envio é persistido, se há e-mail de notificação ou área administrativa. Esses pontos não são testados.
+14. Ferramentas: testes de interface usam o plugin pytest-playwright com a fixture `page` e `expect` da API síncrona, sem pausas fixas. Os testes usam o navegador padrão do plugin (Chromium) e a constante `BASE_URL` no topo do arquivo.
+15. Ressalva: o código foi escrito a partir das suposições acima e não foi executado contra o sistema real. Rótulos, textos de erro, botão e comportamento de confirmação podem exigir ajuste antes de os testes passarem.
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+ROTULO_NOME = "Name"
+ROTULO_EMAIL = "Email"
+ROTULO_TELEFONE = "Phone"
+ROTULO_ASSUNTO = "Subject"
+ROTULO_MENSAGEM = "Message"
+BOTAO_ENVIAR = "Submit"
+
+NOME_VALIDO = "Maria Teste"
+NOME_ACENTUADO = "João Ação"
+EMAIL_VALIDO = "maria.teste@example.com"
+EMAIL_MALFORMADO = "bad"
+TELEFONE_VALIDO = "11987654321"
+ASSUNTO_VALIDO = "Dúvida sobre reserva"
+MENSAGEM_VALIDA = "Gostaria de saber sobre a disponibilidade de quartos."
+
+MSG_TELEFONE = "Phone must be between 11 and 21 characters."
+MSG_ASSUNTO = "Subject must be between 5 and 100 characters."
+MSG_MENSAGEM = "Message must be between 20 and 2000 characters."
+MSG_EMAIL = "must be a well-formed email address"
+
+
+def _confirmacao(nome: str) -> str:
+    return f"Thanks for getting in touch {nome}!"
+
+
+def _submeter(page: Page, **campos: str) -> None:
+    dados = {
+        "nome": NOME_VALIDO,
+        "email": EMAIL_VALIDO,
+        "telefone": TELEFONE_VALIDO,
+        "assunto": ASSUNTO_VALIDO,
+        "mensagem": MENSAGEM_VALIDA,
+    }
+    dados.update(campos)
+    page.goto(BASE_URL)
+    page.get_by_label(ROTULO_NOME, exact=True).fill(dados["nome"])
+    page.get_by_label(ROTULO_EMAIL, exact=True).fill(dados["email"])
+    page.get_by_label(ROTULO_TELEFONE, exact=True).fill(dados["telefone"])
+    page.get_by_label(ROTULO_ASSUNTO, exact=True).fill(dados["assunto"])
+    page.get_by_label(ROTULO_MENSAGEM, exact=True).fill(dados["mensagem"])
+    page.get_by_role("button", name=BOTAO_ENVIAR, exact=True).click()
+
+
+def _erro_em_branco(page: Page, campo: str):
+    return page.get_by_text(re.compile(rf"{campo}.*blank", re.IGNORECASE))
+
+
+def _espera_confirmacao(page: Page, nome: str = NOME_VALIDO) -> None:
+    expect(page.get_by_text(_confirmacao(nome))).to_be_visible()
+
+
+def test_CT001_envio_vazio_exibe_mensagens_de_campo_em_branco(page: Page):
+    _submeter(page, nome="", email="", telefone="", assunto="", mensagem="")
+    for campo in ("Name", "Email", "Phone", "Subject", "Message"):
+        expect(_erro_em_branco(page, campo)).to_be_visible()
+
+
+def test_CT002_campos_somente_com_espacos_exibem_mensagens_de_campo_em_branco(page: Page):
+    espacos = "   "
+    _submeter(
+        page,
+        nome=espacos,
+        email=espacos,
+        telefone=espacos,
+        assunto=espacos,
+        mensagem=espacos,
+    )
+    for campo in ("Name", "Email", "Phone", "Subject", "Message"):
+        expect(_erro_em_branco(page, campo)).to_be_visible()
+
+
+def test_CT003_telefone_com_10_caracteres_exibe_erro_de_tamanho(page: Page):
+    _submeter(page, telefone="1" * 10)
+    expect(page.get_by_text(MSG_TELEFONE)).to_be_visible()
+    expect(page.get_by_text(_confirmacao(NOME_VALIDO))).not_to_be_visible()
+
+
+def test_CT004_telefone_com_11_caracteres_e_aceito(page: Page):
+    _submeter(page, telefone="1" * 11)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_TELEFONE)).not_to_be_visible()
+
+
+def test_CT005_telefone_com_21_caracteres_e_aceito(page: Page):
+    _submeter(page, telefone="1" * 21)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_TELEFONE)).not_to_be_visible()
+
+
+def test_CT006_telefone_com_22_caracteres_exibe_erro_de_tamanho(page: Page):
+    _submeter(page, telefone="1" * 22)
+    expect(page.get_by_text(MSG_TELEFONE)).to_be_visible()
+
+
+def test_CT007_assunto_com_4_e_mensagem_com_19_caracteres_exibem_erros(page: Page):
+    _submeter(page, assunto="a" * 4, mensagem="m" * 19)
+    expect(page.get_by_text(MSG_ASSUNTO)).to_be_visible()
+    expect(page.get_by_text(MSG_MENSAGEM)).to_be_visible()
+    expect(page.get_by_text(_confirmacao(NOME_VALIDO))).not_to_be_visible()
+
+
+def test_CT008_assunto_com_5_caracteres_e_aceito(page: Page):
+    _submeter(page, assunto="a" * 5)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_ASSUNTO)).not_to_be_visible()
+
+
+def test_CT009_assunto_com_100_caracteres_e_aceito(page: Page):
+    _submeter(page, assunto="a" * 100)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_ASSUNTO)).not_to_be_visible()
+
+
+def test_CT010_assunto_com_101_caracteres_exibe_erro_de_tamanho(page: Page):
+    _submeter(page, assunto="a" * 101)
+    expect(page.get_by_text(MSG_ASSUNTO)).to_be_visible()
+
+
+def test_CT011_mensagem_com_20_caracteres_e_aceita(page: Page):
+    _submeter(page, mensagem="m" * 20)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_MENSAGEM)).not_to_be_visible()
+
+
+def test_CT012_mensagem_com_2000_caracteres_e_aceita(page: Page):
+    _submeter(page, mensagem="m" * 2000)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(MSG_MENSAGEM)).not_to_be_visible()
+
+
+def test_CT013_mensagem_com_2001_caracteres_exibe_erro_de_tamanho(page: Page):
+    _submeter(page, mensagem="m" * 2001)
+    expect(page.get_by_text(MSG_MENSAGEM)).to_be_visible()
+
+
+def test_CT014_email_malformado_exibe_erro_de_formato(page: Page):
+    _submeter(page, email=EMAIL_MALFORMADO)
+    expect(page.get_by_text(MSG_EMAIL)).to_be_visible()
+    expect(page.get_by_text(_confirmacao(NOME_VALIDO))).not_to_be_visible()
+
+
+def test_CT015_dados_validos_exibem_confirmacao_com_nome_e_assunto(page: Page):
+    _submeter(page)
+    _espera_confirmacao(page)
+    expect(page.get_by_text(ASSUNTO_VALIDO)).to_be_visible()
+
+
+def test_CT016_nome_com_acentuacao_aparece_na_confirmacao(page: Page):
+    _submeter(page, nome=NOME_ACENTUADO)
+    _espera_confirmacao(page, NOME_ACENTUADO)
+```

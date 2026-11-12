@@ -1,0 +1,141 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Envio do formulário totalmente vazio | Negativo | CA1 | Acessar a página inicial; deixar todos os campos do formulário de contato vazios; clicar em Submit | São exibidas as mensagens "Name may not be blank", "Email may not be blank", "Phone may not be blank", "Subject may not be blank" e "Message may not be blank" |
+| CT02 | Telefone com 10 caracteres (abaixo do mínimo) | Borda | CA2 | Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 10 caracteres; clicar em Submit | É exibida a mensagem "Phone must be between 11 and 21 characters." e não há confirmação de envio |
+| CT03 | Telefone com 11 caracteres (limite mínimo válido) | Borda | CA2, CA5 | Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 11 caracteres; clicar em Submit | É exibida a confirmação "Thanks for getting in touch <nome>!" e a mensagem de erro de telefone não aparece |
+| CT04 | Telefone com 22 caracteres (acima do máximo) | Borda | CA2 | Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 22 caracteres; clicar em Submit | É exibida a mensagem "Phone must be between 11 and 21 characters." e não há confirmação de envio |
+| CT05 | Assunto com 4 e mensagem com 19 caracteres | Borda | CA3 | Acessar a página inicial; preencher nome, e-mail e telefone válidos; preencher assunto com 4 caracteres e mensagem com 19 caracteres; clicar em Submit | São exibidas as mensagens "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." |
+| CT06 | Assunto com 5 e mensagem com 20 caracteres (limites mínimos válidos) | Borda | CA3, CA5 | Acessar a página inicial; preencher nome, e-mail e telefone válidos; preencher assunto com 5 caracteres e mensagem com 20 caracteres; clicar em Submit | É exibida a confirmação "Thanks for getting in touch <nome>!" com o assunto informado e sem mensagens de tamanho inválido |
+| CT07 | E-mail malformado | Negativo | CA4 | Acessar a página inicial; preencher nome, telefone, assunto e mensagem válidos; preencher e-mail com "bad"; clicar em Submit | É exibida a mensagem "must be a well-formed email address" e não há confirmação de envio |
+| CT08 | Envio com todos os dados válidos | Positivo | CA5 | Acessar a página inicial; preencher nome, e-mail, telefone, assunto e mensagem válidos; clicar em Submit | É exibida a confirmação "Thanks for getting in touch <nome>!" e o assunto informado aparece na confirmação |
+
+## SUPOSIÇÕES
+
+- Tecnologia: User Story de interface web, portanto Python + pytest + Playwright (API síncrona). Conforme os requisitos técnicos obrigatórios (que prevalecem), o script usa o plugin oficial pytest-playwright e sua fixture `page`, sem `sync_playwright()` e sem fixtures próprias de browser/page; Chromium headless é o padrão do plugin (`pytest arquivo.py`).
+- A URL base vem da constante `BASE_URL` no topo do arquivo (`https://automationintesting.online/`).
+- O formulário de contato está na própria página inicial e seus campos possuem os atributos `data-testid`: `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject` e `ContactDescription`, acessados via `get_by_test_id`.
+- O botão de envio é acessível por `get_by_role("button", name="Submit")`.
+- As mensagens de campo vazio são "Name may not be blank", "Email may not be blank", "Phone may not be blank", "Subject may not be blank" e "Message may not be blank".
+- Mensagens de validação são exibidas como texto visível na página após o envio e localizadas com `get_by_text`.
+- A confirmação de sucesso exibe "Thanks for getting in touch <nome>!" e o assunto enviado como texto próprio (elemento separado), localizável com `get_by_text(..., exact=True)`.
+- Após envio bem-sucedido, o formulário é substituído pela confirmação; em envios inválidos, o texto "Thanks for getting in touch" não aparece.
+- Limites de tamanho: telefone 11 a 21 caracteres, assunto 5 a 100, mensagem 20 a 2000 (inclusivos), conforme as mensagens dos critérios.
+- Dados de teste fictícios: nome "Maria Silva", e-mail "maria.silva@example.com", telefone "01234567890" (11 caracteres); o assunto recebe sufixo aleatório para tornar cada envio identificável e os testes independentes.
+- Não há autenticação nem credenciais para o formulário de contato.
+- Cada teste abre a página inicial em uma página nova fornecida pelo plugin, garantindo independência.
+
+## SCRIPT
+
+```python
+import uuid
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+VALID_NAME = "Maria Silva"
+VALID_EMAIL = "maria.silva@example.com"
+VALID_PHONE = "01234567890"
+VALID_SUBJECT = "Duvida sobre reserva"
+VALID_MESSAGE = "Gostaria de saber se aceitam animais de estimacao."
+INVALID_EMAIL = "bad"
+
+PHONE_TOO_SHORT = "0123456789"
+PHONE_TOO_LONG = "0123456789012345678901"
+SUBJECT_TOO_SHORT = "Abcd"
+SUBJECT_MIN = "Abcde"
+MESSAGE_TOO_SHORT = "a" * 19
+MESSAGE_MIN = "a" * 20
+
+MSG_NAME_BLANK = "Name may not be blank"
+MSG_EMAIL_BLANK = "Email may not be blank"
+MSG_PHONE_BLANK = "Phone may not be blank"
+MSG_SUBJECT_BLANK = "Subject may not be blank"
+MSG_MESSAGE_BLANK = "Message may not be blank"
+MSG_PHONE_SIZE = "Phone must be between 11 and 21 characters."
+MSG_SUBJECT_SIZE = "Subject must be between 5 and 100 characters."
+MSG_MESSAGE_SIZE = "Message must be between 20 and 2000 characters."
+MSG_EMAIL_FORMAT = "must be a well-formed email address"
+MSG_THANKS_PREFIX = "Thanks for getting in touch"
+
+
+@pytest.fixture
+def home(page: Page) -> Page:
+    page.goto(BASE_URL)
+    expect(page.get_by_test_id("ContactName")).to_be_visible()
+    return page
+
+
+def unique_subject(base: str = VALID_SUBJECT) -> str:
+    return f"{base} {uuid.uuid4().hex[:6]}"
+
+
+def submit_contact(page: Page, name="", email="", phone="", subject="", message=""):
+    page.get_by_test_id("ContactName").fill(name)
+    page.get_by_test_id("ContactEmail").fill(email)
+    page.get_by_test_id("ContactPhone").fill(phone)
+    page.get_by_test_id("ContactSubject").fill(subject)
+    page.get_by_test_id("ContactDescription").fill(message)
+    page.get_by_role("button", name="Submit").click()
+
+
+def expect_success(page: Page, name: str, subject: str):
+    expect(page.get_by_text(f"{MSG_THANKS_PREFIX} {name}!")).to_be_visible()
+    expect(page.get_by_text(subject, exact=True)).to_be_visible()
+
+
+def test_ct01_envio_formulario_vazio(home: Page):
+    submit_contact(home)
+    for msg in (MSG_NAME_BLANK, MSG_EMAIL_BLANK, MSG_PHONE_BLANK, MSG_SUBJECT_BLANK, MSG_MESSAGE_BLANK):
+        expect(home.get_by_text(msg)).to_be_visible()
+    expect(home.get_by_text(MSG_THANKS_PREFIX)).to_have_count(0)
+
+
+def test_ct02_telefone_com_10_caracteres(home: Page):
+    submit_contact(home, VALID_NAME, VALID_EMAIL, PHONE_TOO_SHORT, unique_subject(), VALID_MESSAGE)
+    expect(home.get_by_text(MSG_PHONE_SIZE)).to_be_visible()
+    expect(home.get_by_text(MSG_THANKS_PREFIX)).to_have_count(0)
+
+
+def test_ct03_telefone_com_11_caracteres(home: Page):
+    subject = unique_subject()
+    submit_contact(home, VALID_NAME, VALID_EMAIL, VALID_PHONE, subject, VALID_MESSAGE)
+    expect_success(home, VALID_NAME, subject)
+    expect(home.get_by_text(MSG_PHONE_SIZE)).to_have_count(0)
+
+
+def test_ct04_telefone_com_22_caracteres(home: Page):
+    submit_contact(home, VALID_NAME, VALID_EMAIL, PHONE_TOO_LONG, unique_subject(), VALID_MESSAGE)
+    expect(home.get_by_text(MSG_PHONE_SIZE)).to_be_visible()
+    expect(home.get_by_text(MSG_THANKS_PREFIX)).to_have_count(0)
+
+
+def test_ct05_assunto_e_mensagem_abaixo_do_minimo(home: Page):
+    submit_contact(home, VALID_NAME, VALID_EMAIL, VALID_PHONE, SUBJECT_TOO_SHORT, MESSAGE_TOO_SHORT)
+    expect(home.get_by_text(MSG_SUBJECT_SIZE)).to_be_visible()
+    expect(home.get_by_text(MSG_MESSAGE_SIZE)).to_be_visible()
+    expect(home.get_by_text(MSG_THANKS_PREFIX)).to_have_count(0)
+
+
+def test_ct06_assunto_e_mensagem_no_limite_minimo(home: Page):
+    subject = f"{SUBJECT_MIN}{uuid.uuid4().hex[:4]}"
+    submit_contact(home, VALID_NAME, VALID_EMAIL, VALID_PHONE, subject[:5], MESSAGE_MIN)
+    expect_success(home, VALID_NAME, subject[:5])
+    expect(home.get_by_text(MSG_SUBJECT_SIZE)).to_have_count(0)
+    expect(home.get_by_text(MSG_MESSAGE_SIZE)).to_have_count(0)
+
+
+def test_ct07_email_malformado(home: Page):
+    submit_contact(home, VALID_NAME, INVALID_EMAIL, VALID_PHONE, unique_subject(), VALID_MESSAGE)
+    expect(home.get_by_text(MSG_EMAIL_FORMAT)).to_be_visible()
+    expect(home.get_by_text(MSG_THANKS_PREFIX)).to_have_count(0)
+
+
+def test_ct08_envio_com_dados_validos(home: Page):
+    subject = unique_subject()
+    submit_contact(home, VALID_NAME, VALID_EMAIL, VALID_PHONE, subject, VALID_MESSAGE)
+    expect_success(home, VALID_NAME, subject)
+```

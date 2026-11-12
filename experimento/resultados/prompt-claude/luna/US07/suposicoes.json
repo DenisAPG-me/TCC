@@ -1,0 +1,11 @@
+[
+ "A história descreve uma API REST; portanto, o script usa Python, pytest e requests.",
+ "O endpoint de criação é `POST /booking`, o de consulta é `GET /booking/{id}` e o de listagem filtrada é `GET /booking?firstname=...&lastname=...`.",
+ "O payload de criação usa os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, e `additionalneeds`.",
+ "A resposta de criação contém `bookingid` e `booking`; o identificador é um inteiro positivo.",
+ "O comportamento de listar sem correspondências é status 200 com uma lista JSON vazia.",
+ "Os dados de teste são valores sintéticos; CT04 usa nome e sobrenome únicos gerados para reduzir colisões.",
+ "Cada teste cria seus próprios dados, sem depender de outros testes; as reservas criadas ficam no serviço remoto.",
+ "As requisições usam timeout de 10 segundos; não foram especificadas credenciais, então nenhuma autenticação é usada.",
+ "CT05 é uma verificação de borda relacionada a CA4; a história não define explicitamente o comportamento para filtros sem resultados."
+]

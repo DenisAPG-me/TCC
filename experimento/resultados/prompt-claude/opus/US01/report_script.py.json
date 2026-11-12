@@ -1,0 +1,410 @@
+{
+ "created": 1793381243.9640472,
+ "duration": 106.06884670257568,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01",
+ "environment": {},
+ "summary": {
+  "failed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_buscar_produtos_por_hammer[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_ct02_buscar_produtos_por_hammer_em_maiusculas[chromium]",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_ct03_buscar_termo_inexistente[chromium]",
+     "type": "Function",
+     "lineno": 91
+    },
+    {
+     "nodeid": "script.py::test_ct04_buscar_termo_com_caracteres_especiais[chromium]",
+     "type": "Function",
+     "lineno": 96
+    },
+    {
+     "nodeid": "script.py::test_ct05_ordenar_por_preco_crescente[chromium]",
+     "type": "Function",
+     "lineno": 101
+    },
+    {
+     "nodeid": "script.py::test_ct06_ordenar_por_nome_z_a[chromium]",
+     "type": "Function",
+     "lineno": 114
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_buscar_produtos_por_hammer[chromium]",
+   "lineno": 81,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_buscar_produtos_por_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4705093000084162,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.489324799971655,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 84,
+      "message": "in test_ct01_buscar_produtos_por_hammer"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 63,
+      "message": "in validar_busca_com_resultados"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 39,
+      "message": "in buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:84: in test_ct01_buscar_produtos_por_hammer\n    validar_busca_com_resultados(page, TERMO_EXISTENTE)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:63: in validar_busca_com_resultados\n    nomes_api = buscar(page, termo)\n                ^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.017636700067669153,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_buscar_produtos_por_hammer_em_maiusculas[chromium]",
+   "lineno": 86,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_buscar_produtos_por_hammer_em_maiusculas[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11470190004911274,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.438681000028737,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 89,
+      "message": "in test_ct02_buscar_produtos_por_hammer_em_maiusculas"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 63,
+      "message": "in validar_busca_com_resultados"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 39,
+      "message": "in buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:89: in test_ct02_buscar_produtos_por_hammer_em_maiusculas\n    validar_busca_com_resultados(page, TERMO_EXISTENTE_MAIUSCULO)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:63: in validar_busca_com_resultados\n    nomes_api = buscar(page, termo)\n                ^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.016047999961301684,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_buscar_termo_inexistente[chromium]",
+   "lineno": 91,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_buscar_termo_inexistente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11127340001985431,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.361786799971014,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 94,
+      "message": "in test_ct03_buscar_termo_inexistente"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 77,
+      "message": "in validar_busca_sem_resultados"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 39,
+      "message": "in buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:94: in test_ct03_buscar_termo_inexistente\n    validar_busca_sem_resultados(page, TERMO_INEXISTENTE)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:77: in validar_busca_sem_resultados\n    buscar(page, termo)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.01525900000706315,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_buscar_termo_com_caracteres_especiais[chromium]",
+   "lineno": 96,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_buscar_termo_com_caracteres_especiais[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12662100000306964,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.423508399981074,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 99,
+      "message": "in test_ct04_buscar_termo_com_caracteres_especiais"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 77,
+      "message": "in validar_busca_sem_resultados"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 39,
+      "message": "in buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:99: in test_ct04_buscar_termo_com_caracteres_especiais\n    validar_busca_sem_resultados(page, TERMO_CARACTERES_ESPECIAIS)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:77: in validar_busca_sem_resultados\n    buscar(page, termo)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.01501309999730438,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_ordenar_por_preco_crescente[chromium]",
+   "lineno": 101,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_ordenar_por_preco_crescente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10818980005569756,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.442619399982505,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 104,
+      "message": "in test_ct05_ordenar_por_preco_crescente"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 48,
+      "message": "in ordenar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:104: in test_ct05_ordenar_por_preco_crescente\n    nomes_api = ordenar(page, ORDEM_PRECO_CRESCENTE)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:48: in ordenar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.01556430000346154,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_ordenar_por_nome_z_a[chromium]",
+   "lineno": 114,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct06_ordenar_por_nome_z_a[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12254200002644211,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 17.429769100039266,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 117,
+      "message": "in test_ct06_ordenar_por_nome_z_a"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py",
+      "lineno": 48,
+      "message": "in ordenar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:117: in test_ct06_ordenar_por_nome_z_a\n    nomes_api = ordenar(page, ORDEM_NOME_DECRESCENTE)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:48: in ordenar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.21163609996438026,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

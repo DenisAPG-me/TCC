@@ -1,0 +1,75 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_busca_hammer_lista_apenas_produtos_com_hammer",
+   "categoria": "URL/endpoint errado",
+   "nota": "expect_response nunca casa: URL/parametros da API assumidos nao conferem"
+  },
+  {
+   "teste": "test_CT002_busca_termo_inexistente_exibe_mensagem_sem_produtos",
+   "categoria": "URL/endpoint errado",
+   "nota": "expect_response nunca casa"
+  },
+  {
+   "teste": "test_CT003_ordenacao_preco_crescente",
+   "categoria": "URL/endpoint errado",
+   "nota": "expect_response nunca casa na ordenacao"
+  },
+  {
+   "teste": "test_CT004_ordenacao_nome_z_a",
+   "categoria": "URL/endpoint errado",
+   "nota": "expect_response nunca casa na ordenacao"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 36.98,
+ "tokens": {
+  "total": 5979
+ },
+ "n_casos_extraidos": 9,
+ "tem_codigo": true,
+ "stderr_tail": "009_assunto_mensagem_acima_dos_maximos(\n    contact_page: Page,\n) -> None:\n    data = data_with(\n        subject=\"A\" * (SUBJECT_MAX + 1),\n        message=\"M\" * (MESSAGE_MAX + 1),\n    )\n    assert len(data[\"subject\"]) == 101\n    assert len(data[\"message\"]) == 2001\n\n    fill_contact(contact_page, data)\n    submit_contact(contact_page)\n\n    assert_error(contact_page, SUBJECT_ERROR)\n    assert_error(contact_page, MESSAGE_ERROR)\n    assert_no_success(contact_page, data[\"name\"])\n```\ntokens used\n5,979\n"
+}

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Helpers e nomes claros",
+  "estrutura": "Fixture app_url, helpers de locator e constantes",
+  "assercoes": "Asserts de mensagem, URL e ausencia de menu",
+  "espera": "expect auto-wait",
+  "manutenibilidade": "Constantes e locators centralizados"
+ }
+}

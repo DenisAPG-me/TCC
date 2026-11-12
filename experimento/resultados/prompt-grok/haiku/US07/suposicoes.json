@@ -1,0 +1,13 @@
+[
+ "Endpoints: `POST /booking`, `GET /booking/{id}` e `GET /booking?firstname=&lastname=` sob a URL base `https://restful-booker.herokuapp.com`.",
+ "A resposta de criação tem o formato `{\"bookingid\": <int>, \"booking\": {...}}`, e o objeto `booking` contém exatamente as chaves enviadas: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.",
+ "Datas no formato `YYYY-MM-DD`; `totalprice` inteiro; `depositpaid` booleano.",
+ "Criar e consultar reservas não exige autenticação. Não há teardown, pois a remoção exigiria token; as reservas de teste são isoladas por nomes únicos gerados com UUID.",
+ "Consulta a um identificador inexistente retorna 404, independentemente do corpo da resposta.",
+ "Identificador `0` não existe na base, portanto retorna 404 (assumido).",
+ "Check-in igual ao check-out é aceito pela API (assumido) em TC06.",
+ "Corpo JSON malformado é rejeitado com erro 4xx ou 5xx; o teste exige apenas `status >= 400` por não se conhecer o código exato.",
+ "Listagem por nome sem correspondência retorna 200 com lista vazia (não 404).",
+ "A API pública pode estar indisponível ou com dados alterados por outros usuários; o teste de listagem depende de nomes gerados com UUID para evitar colisões.",
+ "Timeout de requisição: 15 segundos."
+]

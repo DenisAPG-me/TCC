@@ -1,0 +1,75 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT01",
+   "categoria": "seletor inexistente",
+   "nota": "[data-test=product]/role article inexistentes"
+  },
+  {
+   "teste": "test_CT02",
+   "categoria": "seletor inexistente",
+   "nota": "cards localizados por seletor inexistente; busca possivelmente nao disparada"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_text casa varias options (strict mode)"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label sort nao achado; fallback clica option nao visivel"
+  }
+ ]
+}

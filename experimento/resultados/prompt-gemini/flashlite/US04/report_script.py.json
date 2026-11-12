@@ -1,0 +1,258 @@
+{
+ "created": 1793384424.3935263,
+ "duration": 8.80293083190918,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04",
+ "environment": {},
+ "summary": {
+  "failed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_envio_formulario_vazio[chromium]",
+     "type": "Function",
+     "lineno": 9
+    },
+    {
+     "nodeid": "script.py::test_ct02_telefone_menos_11_caracteres[chromium]",
+     "type": "Function",
+     "lineno": 21
+    },
+    {
+     "nodeid": "script.py::test_ct03_assunto_mensagem_abaixo_limite[chromium]",
+     "type": "Function",
+     "lineno": 32
+    },
+    {
+     "nodeid": "script.py::test_ct04_email_malformado[chromium]",
+     "type": "Function",
+     "lineno": 44
+    },
+    {
+     "nodeid": "script.py::test_ct05_dados_validos[chromium]",
+     "type": "Function",
+     "lineno": 55
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_envio_formulario_vazio[chromium]",
+   "lineno": 9,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_envio_formulario_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.6981069999746978,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.3350717999273911,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+     "lineno": 16,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+      "lineno": 16,
+      "message": "in test_ct01_envio_formulario_vazio"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py:16: in test_ct01_envio_formulario_vazio\n    expect(page.get_by_text(\"Name may not be blank\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.05650710000190884,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_telefone_menos_11_caracteres[chromium]",
+   "lineno": 21,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_telefone_menos_11_caracteres[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.9778962000273168,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.6844046999467537,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+     "lineno": 31,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+      "lineno": 31,
+      "message": "in test_ct02_telefone_menos_11_caracteres"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py:31: in test_ct02_telefone_menos_11_caracteres\n    expect(page.get_by_text(\"Phone must be between 11 and 21 characters.\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.013097900082357228,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_assunto_mensagem_abaixo_limite[chromium]",
+   "lineno": 32,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_assunto_mensagem_abaixo_limite[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.897048799903132,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.36951470002532005,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+     "lineno": 42,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+      "lineno": 42,
+      "message": "in test_ct03_assunto_mensagem_abaixo_limite"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py:42: in test_ct03_assunto_mensagem_abaixo_limite\n    expect(page.get_by_text(\"Subject must be between 5 and 100 characters.\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.013899799901992083,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_email_malformado[chromium]",
+   "lineno": 44,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_email_malformado[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.8387985000154004,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.3646778999827802,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+     "lineno": 54,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+      "lineno": 54,
+      "message": "in test_ct04_email_malformado"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py:54: in test_ct04_email_malformado\n    expect(page.get_by_text(\"must be a well-formed email address\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.057556699961423874,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_dados_validos[chromium]",
+   "lineno": 55,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_dados_validos[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.7746253999648616,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.3669701999751851,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+     "lineno": 68,
+     "message": "AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py",
+      "lineno": 68,
+      "message": "in test_ct05_dados_validos"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\flashlite\\US04\\script.py:68: in test_ct05_dados_validos\n    expect(page.get_by_text(f\"Thanks for getting in touch {nome}!\")).toBeVisible()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'LocatorAssertions' object has no attribute 'toBeVisible'. Did you mean: 'to_be_visible'?"
+   },
+   "teardown": {
+    "duration": 0.2591454000212252,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

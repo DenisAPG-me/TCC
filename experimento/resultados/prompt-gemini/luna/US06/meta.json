@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 20.14,
+ "tokens": {
+  "total": 11661
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "to(f\"{BASE_URL.rstrip('/')}/admin/messages\")\n\n    login_prompt = page.get_by_label(\"Username\")\n    expect(login_prompt).to_be_visible()\n    expect(page.get_by_label(\"Password\")).to_be_visible()\n\n\ndef test_CT06_incomplete_contact_form_does_not_show_success(page: Page):\n    page.goto(BASE_URL)\n    page.get_by_role(\"button\", name=re.compile(r\"submit\", re.I)).click()\n\n    expect(\n        page.get_by_text(re.compile(r\"Thanks for getting in touch\", re.I))\n    ).to_have_count(0)\n```\ntokens used\n11,661\n"
+}

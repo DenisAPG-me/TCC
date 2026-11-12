@@ -1,0 +1,70 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_com_usuario_e_senha_vazios[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "script.py:69: in test_ct01_login_com_usuario_e_senha_vazios\n    assert_invalid_credentials(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:64: in assert_invalid_credentials\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_com_senha_incorreta[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "s\\US05\\script.py:75: in test_ct02_login_com_senha_incorreta\n    assert_invalid_credentials(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:64: in assert_invalid_credentials\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_com_senha_vazia[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "\\opus\\US05\\script.py:80: in test_ct03_login_com_senha_vazia\n    assert_invalid_credentials(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:64: in assert_invalid_credentials\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct04_login_com_senha_em_caixa_alta[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "05\\script.py:85: in test_ct04_login_com_senha_em_caixa_alta\n    assert_invalid_credentials(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:64: in assert_invalid_credentials\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct05_login_com_senha_com_espaco_final[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "script.py:91: in test_ct05_login_com_senha_com_espaco_final\n    assert_invalid_credentials(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:64: in assert_invalid_credentials\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct06_login_valido_exibe_quarto_101_single[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct07_login_valido_exibe_menu_do_painel[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct08_logout_retorna_para_pagina_inicial[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct09_acesso_direto_aos_quartos_apos_logout_exige_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:128: in test_ct09_acesso_direto_aos_quartos_apos_logout_exige_login\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  },
+  {
+   "nodeid": "script.py::test_ct10_acesso_direto_aos_quartos_sem_login_exige_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py:135: in test_ct10_acesso_direto_aos_quartos_sem_login_exige_login\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       14 × locator resolved to 1 element\nE          - unexpected value \"1\""
+  }
+ ],
+ "stdout_tail": "#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct01_login_com_usuario_e_senha_vazios[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct02_login_com_senha_incorreta[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct03_login_com_senha_vazia[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct04_login_com_senha_em_caixa_alta[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct05_login_com_senha_com_espaco_final[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct09_acesso_direto_aos_quartos_apos_logout_exige_login[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US05\\script.py::test_ct10_acesso_direto_aos_quartos_sem_login_exige_login[chromium]\n7 failed, 3 passed, 2 warnings in 53.30s\n",
+ "returncode": 1,
+ "duracao_s": 53.99
+}

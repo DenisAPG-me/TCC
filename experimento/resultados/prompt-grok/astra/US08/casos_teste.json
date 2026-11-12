@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Enviar autenticação com `admin / password123`.",
+  "esperado": "Status 200 e token textual não vazio."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Autenticar com credenciais incorretas",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Enviar usuário e senha incorretos.",
+  "esperado": "Resposta sem a chave `token` e com motivo `Bad credentials`."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Autenticar com credenciais vazias",
+  "tipo": "borda",
+  "criterio": "2",
+  "passos": "Enviar usuário e senha como strings vazias.",
+  "esperado": "Resposta sem a chave `token` e com motivo `Bad credentials`."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Atualizar completamente uma reserva",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Criar reserva; autenticar; enviar atualização completa com novo nome e preço; consultar reserva.",
+  "esperado": "Status 200, novos valores na resposta e alteração persistida."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Atualizar somente o sobrenome",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Criar reserva; guardar estado inicial; enviar atualização parcial apenas do sobrenome; consultar reserva.",
+  "esperado": "Status 200, sobrenome alterado e todos os demais campos preservados na resposta e na consulta."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Atualizar completamente sem token",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Criar reserva; enviar atualização completa sem credencial de autenticação.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Atualizar parcialmente sem token",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Criar reserva; enviar atualização parcial sem credencial de autenticação.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "TC08",
+  "titulo": "Omitir individualmente cada campo obrigatório",
+  "tipo": "negativo",
+  "criterio": "6",
+  "passos": "Para cada campo obrigatório presumido, criar uma reserva e enviar atualização completa com token, omitindo somente esse campo. Incluir campos internos de datas.",
+  "esperado": "Status 400 em cada variação."
+ },
+ {
+  "id": "TC09",
+  "titulo": "Enviar atualização completa com objeto vazio",
+  "tipo": "borda",
+  "criterio": "6",
+  "passos": "Criar reserva; enviar atualização completa com token e corpo `{}`.",
+  "esperado": "Status 400."
+ }
+]

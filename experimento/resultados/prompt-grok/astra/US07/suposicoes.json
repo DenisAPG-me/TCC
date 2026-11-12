@@ -1,0 +1,20 @@
+[
+ "A User Story descreve uma API REST; são utilizados Python, pytest e requests. A biblioteca padrão do Python também é utilizada.",
+ "Os contratos abaixo são deduzidos, não verificados no sistema real. O script não foi executado.",
+ "A criação utiliza `POST /booking`; a consulta utiliza `GET /booking/{id}`; a listagem filtrada utiliza `GET /booking` com os parâmetros de consulta `firstname` e `lastname`.",
+ "O corpo da criação utiliza os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`. `bookingdates` contém `checkin` e `checkout`.",
+ "A criação retorna um objeto JSON com `bookingid` e `booking`. A consulta retorna diretamente o objeto da reserva. A listagem retorna uma lista de objetos que contêm `bookingid`.",
+ "O identificador numérico é interpretado como um inteiro JSON, excluindo booleanos. Não se presume valor inicial, sequência ou limite.",
+ "Nomes, sobrenomes e necessidades adicionais são strings; preço total é um inteiro; depósito pago é booleano; datas são strings no formato `YYYY-MM-DD`. “Mesmos dados” inclui preservação desses tipos.",
+ "O objeto da reserva retornado deve conter exatamente os campos enviados. Campos extras no envelope da criação e nos itens da listagem são permitidos.",
+ "As operações não exigem autenticação. Os endpoints aceitam respostas JSON e a criação aceita `Content-Type: application/json`.",
+ "A listagem filtrada retorna status 200 e inclui a reserva criada na resposta, sem necessidade de percorrer páginas. Não se exige que o resultado contenha somente essa reserva.",
+ "Os dados válidos adotados usam preço 150, necessidade adicional `Breakfast` e datas futuras. Nomes e sobrenomes recebem sufixos UUID para reduzir colisões entre execuções.",
+ "Ambos os valores booleanos de depósito pago são válidos. TC05 exercita o limite do domínio booleano; TC06 exercita uma fronteira de calendário com estadia de uma noite. Não são presumidos limites de preço, comprimento de nomes ou duração máxima.",
+ "O identificador 99999999 é considerado inexistente, conforme o exemplo fornecido. Se ele existir no ambiente, essa premissa deixa de ser válida.",
+ "Reservas ficam disponíveis para consulta e filtragem imediatamente após a criação, sem espera ou repetição automática.",
+ "Cada teste cria seus próprios dados quando necessário. Não há limpeza porque a User Story não define operação de exclusão.",
+ "As chamadas usam timeout de 15 segundos e não seguem redirecionamentos, para verificar o status do endpoint solicitado. Falhas de conexão ou timeout fazem o teste falhar.",
+ "Não são incluídos testes de JSON inválido, campos ausentes ou datas invertidas porque seus resultados esperados não foram definidos.",
+ "Salve o arquivo como `test_reservas.py` e execute `pytest -v test_reservas.py` em um ambiente com pytest e requests instalados."
+]

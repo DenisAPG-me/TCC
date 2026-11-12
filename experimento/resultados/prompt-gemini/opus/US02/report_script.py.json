@@ -1,0 +1,193 @@
+{
+ "created": 1793386694.223681,
+ "duration": 27.886265516281128,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US02",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_add_three_claw_hammers_shows_confirmation_and_badge[chromium]",
+     "type": "Function",
+     "lineno": 60
+    },
+    {
+     "nodeid": "script.py::test_ct02_cart_line_total_and_cart_total_for_three_units[chromium]",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_ct03_change_quantity_from_three_to_one_updates_total[chromium]",
+     "type": "Function",
+     "lineno": 75
+    },
+    {
+     "nodeid": "script.py::test_ct04_thor_hammer_three_units_is_rejected[chromium]",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_ct05_thor_hammer_single_unit_is_added[chromium]",
+     "type": "Function",
+     "lineno": 92
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_add_three_claw_hammers_shows_confirmation_and_badge[chromium]",
+   "lineno": 60,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_add_three_claw_hammers_shows_confirmation_and_badge[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.47612050001043826,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.52203760005068,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.017351599992252886,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_cart_line_total_and_cart_total_for_three_units[chromium]",
+   "lineno": 67,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_cart_line_total_and_cart_total_for_three_units[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12885079998522997,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.965116700041108,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.018631799961440265,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_change_quantity_from_three_to_one_updates_total[chromium]",
+   "lineno": 75,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_change_quantity_from_three_to_one_updates_total[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11031429993454367,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.277375699952245,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.019057399942539632,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_thor_hammer_three_units_is_rejected[chromium]",
+   "lineno": 86,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_thor_hammer_three_units_is_rejected[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11518550000619143,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.501421499997377,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.019432400004006922,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_thor_hammer_single_unit_is_added[chromium]",
+   "lineno": 92,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_thor_hammer_single_unit_is_added[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11374269996304065,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.329983599949628,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.2496638000011444,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

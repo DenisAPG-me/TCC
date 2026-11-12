@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "1. Criar reserva.<br>2. Tentar excluir a reserva enviando o ID e sem cabeçalho de autorização ou token.",
+  "esperado": "Retorna status 403 e a reserva continua consultável com status 200."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "1. Criar reserva.<br>2. Tentar excluir a reserva enviando um token inválido no cabeçalho de autorização.",
+  "esperado": "Retorna status 403 e a reserva continua existindo (status 200 ao consultar)."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "1. Obter token de autenticação com credenciais válidas (admin / password123).<br>2. Criar reserva.<br>3. Excluir a reserva utilizando o token válido e o ID da reserva criada.",
+  "esperado": "Retorna status 201 (conforme critério de aceitação)."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Consultar reserva após exclusão",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Criar e excluir uma reserva com sucesso utilizando token válido.<br>2. Tentar consultar a reserva excluída pelo ID.",
+  "esperado": "Retorna status 404 (Not Found)."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Excluir reserva já excluída",
+  "tipo": "Borda",
+  "criterio": "Critério 5",
+  "passos": "1. Criar e excluir uma reserva com sucesso.<br>2. Tentar excluir a mesma reserva novamente utilizando token válido.",
+  "esperado": "Retorna status de erro 4xx e nenhuma outra reserva é afetada."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Listar reservas filtrando por nome após exclusão",
+  "tipo": "Positivo",
+  "criterio": "Critério 6",
+  "passos": "1. Criar reserva com nome único (primeiro e último nome específicos).<br>2. Excluir a reserva.<br>3. Listar reservas filtrando pelo nome único criado.",
+  "esperado": "A lista retornada está vazia."
+ }
+]

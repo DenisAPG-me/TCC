@@ -1,0 +1,17 @@
+[
+ "Tecnologia de UI: Python + pytest + pytest-playwright (plugin oficial), usando as fixtures `page` e `browser` do plugin e `expect` de `playwright.sync_api`. Navegador headless é o padrão do plugin, então não há fixture própria de browser.",
+ "URL base: `https://automationintesting.online/` em constante `BASE_URL`. Painel em `{BASE_URL}admin` e caixa de mensagens em `{BASE_URL}admin/messages`.",
+ "Credenciais: `admin` / `password` (fornecidas na User Story).",
+ "Formulário de contato na página inicial com labels exatos `Name`, `Email`, `Phone`, `Subject` e `Message`, e botão `Submit`.",
+ "Dados válidos: e-mail `visitante.teste@example.com`, telefone `01234567890` (11 dígitos), mensagem com mais de 20 caracteres. Nome e assunto são gerados com sufixo UUID para garantir unicidade e rastreabilidade na caixa.",
+ "E-mail inválido de teste: `email-invalido`. Assume-se que o sistema rejeita esse valor pela validação do formulário.",
+ "Confirmação exibida após envio válido: texto exato `Thanks for getting in touch <nome>!`.",
+ "Tela de login do painel: campos com labels `Username` e `Password` e botão `Login`.",
+ "Após login, o link `Messages` contém o número do contador (ex.: \"Messages 3\" ou \"Messages (3)\"). O número é extraído pela primeira sequência de dígitos do texto.",
+ "Logout: link com nome `Logout` na barra de navegação do painel.",
+ "Caixa de mensagens: lista em formato de linhas (`role=row`), cada uma contendo nome e assunto do remetente. Acessível pelo link Messages.",
+ "Acesso direto a `/admin/messages` sem sessão exibe o formulário de login.",
+ "Visitante e administrador usam contextos de navegador separados (`browser.new_context()`), para que a sessão do admin não interfira no envio do visitante e para que o login do admin seja realmente novo.",
+ "Os testes compartilham o mesmo banco do sistema, por isso cada teste gera seus próprios dados e lê o contador antes e depois de suas ações.",
+ "Sem `time.sleep`, `skip` ou `xfail`. Sincronização feita por `expect` e `wait_for_load_state(\"networkidle\")`."
+]

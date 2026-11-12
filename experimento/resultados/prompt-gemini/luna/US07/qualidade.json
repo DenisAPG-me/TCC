@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "claro, mensagens nas asserts",
+  "estrutura": "helpers mas sem fixtures nem parametrizacao",
+  "assercoes": "igualdade de corpo e status",
+  "espera": "timeout e dados unicos",
+  "manutenibilidade": "constantes; payload com campos fixos"
+ }
+}

@@ -1,0 +1,82 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; URL continua em /admin; formulário de login continua visível"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com usuário admin e senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"senhaErrada123\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com usuário admin e senha vazia",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; deixar senha vazia; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com senha correta em caixa diferente",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"PASSWORD\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; menu do painel não é exibido"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Login com senha correta seguida de espaço",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"password \" (com espaço ao final); clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; menu do painel não é exibido"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login válido exibe lista de quartos com o quarto 101 Single",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"password\"; clicar em Login",
+  "esperado": "Usuário é levado para /admin/rooms; lista de quartos exibe o quarto 101 do tipo Single"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Login válido exibe menu do painel",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"password\"; clicar em Login",
+  "esperado": "Menu exibe os itens Rooms, Report, Branding e Messages e o botão Logout"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Fazer login com admin/password; clicar em Logout",
+  "esperado": "Usuário é redirecionado para a página inicial pública (URL base); botão Logout e menu do painel não são exibidos"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Acesso direto à lista de quartos após logout exige login",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Fazer login com admin/password; clicar em Logout; acessar diretamente /admin/rooms",
+  "esperado": "Tela de login é exibida; lista de quartos e menu do painel não são exibidos"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Acesso direto à lista de quartos sem autenticação prévia exige login",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Abrir nova sessão sem login; acessar diretamente /admin/rooms",
+  "esperado": "Tela de login é exibida; lista de quartos não é exibida"
+ }
+]

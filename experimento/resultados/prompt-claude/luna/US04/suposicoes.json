@@ -1,0 +1,12 @@
+[
+ "A história descreve uma interface web; portanto, o script usa Python, pytest e Playwright com API síncrona.",
+ "O requisito técnico final exige a fixture `page` do plugin oficial pytest-playwright, apesar do requisito anterior pedir fixture própria. O script não cria navegador nem fixture própria.",
+ "Os campos do formulário são identificáveis por rótulos acessíveis: \"Name\", \"Email\", \"Phone\", \"Subject\" e \"Message\"; o botão de envio tem o nome acessível \"Submit\".",
+ "A página inicial é acessada pela URL base acrescida de `/`.",
+ "Os erros de validação aparecem como texto visível na página após o envio. Para o caso vazio, presume-se que cada campo tenha uma mensagem de obrigatoriedade identificável pelo nome do campo e pelo texto \"required\".",
+ "As mensagens de validação dos campos de telefone, assunto, mensagem e e-mail correspondem literalmente aos textos dos critérios de aceitação.",
+ "Um envio válido exibe na página a confirmação \"Thanks for getting in touch <nome>!\" e o assunto informado.",
+ "Os dados válidos são sintéticos; nome usado: \"Ana Silva\"; e-mail: \"ana.silva@example.com\"; telefone: \"11987654321\"; assunto: \"Dúvida sobre reservas\"; mensagem: texto com pelo menos 20 caracteres.",
+ "O navegador e a página são fornecidos e encerrados pelo plugin pytest-playwright; a execução requer pytest-playwright instalado e Chromium disponível.",
+ "A constante `BASE_URL` contém a URL informada. Os casos exercitam somente validação e confirmação na interface; não se presume endpoint nem payload de API."
+]

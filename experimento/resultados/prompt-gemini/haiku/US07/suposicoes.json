@@ -1,0 +1,13 @@
+[
+ "URL base: `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL`.",
+ "Criação: `POST /booking`, corpo JSON, resposta `200` com `{\"bookingid\": <int>, \"booking\": {...}}`.",
+ "Consulta: `GET /booking/{id}`, resposta `200` com o objeto da reserva ou `404` quando inexistente.",
+ "Listagem: `GET /booking?firstname=<nome>&lastname=<sobrenome>`, resposta `200` com lista de objetos `{\"bookingid\": <int>}`.",
+ "Chaves do payload: `firstname` (string), `lastname` (string), `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` em formato `YYYY-MM-DD`), `additionalneeds` (string).",
+ "O objeto `booking` retornado na criação e na consulta tem as mesmas chaves e valores enviados.",
+ "Criação, consulta e listagem não exigem autenticação. A exclusão exige autenticação e não é usada aqui, portanto as reservas criadas não são removidas ao final dos testes.",
+ "Nomes e sobrenomes únicos são gerados com `uuid4` para evitar colisão entre execuções.",
+ "Para o CT-05, assume-se que o identificador `0` não existe e retorna `404`.",
+ "Para o CT-09, assume-se que a API rejeita corpo incompleto com código de erro (>= 400); o código exato não é garantido.",
+ "Para o CT-08, assume-se que a API armazena caracteres Unicode sem transformação."
+]

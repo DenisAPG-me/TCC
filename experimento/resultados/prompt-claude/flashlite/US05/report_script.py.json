@@ -1,0 +1,39 @@
+{
+ "created": 1793379589.4750433,
+ "duration": 0.11874508857727051,
+ "exitcode": 2,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\flashlite\\US05",
+ "environment": {},
+ "summary": {
+  "total": 0,
+  "collected": 0
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "failed",
+   "result": [],
+   "longrepr": "ImportError while importing test module '<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\flashlite\\US05\\script.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nPython314\\Lib\\importlib\\__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\flashlite\\US05\\script.py:2: in <module>\n    from playwright.sync_api import page as _page, expect\nE   ImportError: cannot import name 'page' from 'playwright.sync_api' (<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\__init__.py)"
+  }
+ ],
+ "tests": [],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

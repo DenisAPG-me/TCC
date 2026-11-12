@@ -1,0 +1,108 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Login com usuário e senha vazios | negativo | 1 | Abrir `/admin`, enviar o formulário sem preencher os campos. | A mensagem `Invalid credentials` aparece e a tela de login continua visível. |
+| TC02 | Login com senha incorreta | negativo | 2 | Abrir `/admin`, informar `admin` e uma senha incorreta, enviar. | A mensagem `Invalid credentials` aparece e a tela de login continua visível. |
+| TC03 | Login válido exibe a lista de quartos e menu | positivo | 3 | Abrir `/admin`, entrar com `admin` / `password`. | A lista inclui o quarto 101 do tipo Single e o menu mostra Rooms, Report, Branding e Messages. |
+| TC04 | Logout retorna à página inicial pública | positivo | 4 | Entrar com as credenciais válidas e clicar em Logout. | A página inicial pública da pousada é exibida. |
+| TC05 | Acesso direto à lista de quartos após logout | negativo | 5 | Entrar, fazer logout e acessar diretamente a lista de quartos do painel. | A tela de login é exibida novamente. |
+| TC06 | Login com usuário válido e senha vazia | borda | 1, 2 | Abrir `/admin`, informar `admin`, deixar a senha vazia e enviar. | A mensagem `Invalid credentials` aparece e a tela de login continua visível. |
+| TC07 | Login com usuário vazio e senha válida | borda | 1, 2 | Abrir `/admin`, deixar o usuário vazio, informar `password` e enviar. | A mensagem `Invalid credentials` aparece e a tela de login continua visível. |
+
+SUPOSIÇÕES
+
+- A URL base é `https://automationintesting.online/`; o login está em `/admin` e a lista de quartos autenticada em `/admin/rooms`.
+- O formulário de login tem campos acessíveis com os nomes `Username` e `Password`, além de um botão `Login`.
+- O formulário permite enviar campos vazios e não bloqueia o envio por validação HTML do navegador.
+- `Invalid credentials`, `Rooms`, `Report`, `Branding`, `Messages` e `Logout` são textos visíveis na interface e podem ser localizados por papel ou texto.
+- O quarto 101 e o tipo Single aparecem juntos em um mesmo texto ou contêiner visível.
+- Após logout, a página pública corresponde à URL base; o acesso direto a `/admin/rooms` sem autenticação redireciona para `/admin`.
+- Cada teste é independente e usa um contexto de navegador limpo fornecido pelo plugin `pytest-playwright`. A configuração do plugin é responsável por disponibilizar a fixture `page` e a asserção `expect`.
+
+```python
+import os
+
+import pytest
+from playwright.sync_api import expect
+
+BASE_URL = os.getenv("BASE_URL", "https://automationintesting.online/")
+LOGIN_URL = f"{BASE_URL.rstrip('/')}/admin"
+ROOMS_URL = f"{BASE_URL.rstrip('/')}/admin/rooms"
+
+
+def open_login(page):
+    page.goto(LOGIN_URL)
+    expect(page.get_by_role("textbox", name="Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def submit_login(page, username, password):
+    page.get_by_role("textbox", name="Username").fill(username)
+    page.get_by_label("Password").fill(password)
+    page.get_by_role("button", name="Login").click()
+
+
+def expect_login_error(page):
+    expect(page.get_by_text("Invalid credentials", exact=True)).to_be_visible()
+    expect(page.get_by_role("textbox", name="Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def login_as_admin(page):
+    open_login(page)
+    submit_login(page, "admin", "password")
+
+
+def test_TC01_empty_credentials_show_error(page):
+    open_login(page)
+    submit_login(page, "", "")
+    expect_login_error(page)
+
+
+def test_TC02_wrong_password_shows_error(page):
+    open_login(page)
+    submit_login(page, "admin", "incorrect-password")
+    expect_login_error(page)
+
+
+def test_TC03_valid_login_shows_rooms_and_menu(page):
+    login_as_admin(page)
+
+    expect(page.get_by_text("101", exact=True)).to_be_visible()
+    expect(page.get_by_text("Single", exact=True)).to_be_visible()
+
+    for menu_item in ("Rooms", "Report", "Branding", "Messages"):
+        expect(page.get_by_text(menu_item, exact=True)).to_be_visible()
+
+
+def test_TC04_logout_returns_to_public_home(page):
+    login_as_admin(page)
+    expect(page.get_by_text("Logout", exact=True)).to_be_visible()
+    page.get_by_text("Logout", exact=True).click()
+
+    expect(page).to_have_url(BASE_URL)
+    expect(page).not_to_have_url(ROOMS_URL)
+
+
+def test_TC05_direct_room_list_after_logout_requires_login(page):
+    login_as_admin(page)
+    page.get_by_text("Logout", exact=True).click()
+    expect(page).to_have_url(BASE_URL)
+
+    page.goto(ROOMS_URL)
+    expect(page.get_by_role("textbox", name="Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def test_TC06_valid_username_empty_password_shows_error(page):
+    open_login(page)
+    submit_login(page, "admin", "")
+    expect_login_error(page)
+
+
+def test_TC07_empty_username_valid_password_shows_error(page):
+    open_login(page)
+    submit_login(page, "", "password")
+    expect_login_error(page)
+```

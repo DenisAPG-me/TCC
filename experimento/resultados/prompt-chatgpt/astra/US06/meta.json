@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 40.41,
+ "tokens": {
+  "total": 5585
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "_visible(timeout=UI_TIMEOUT_MS)\n    expect(\n        matching_row.get_by_role(\n            \"cell\", name=contact[\"subject\"], exact=True\n        )\n    ).to_be_visible(timeout=UI_TIMEOUT_MS)\n\n\ndef test_CT005_exigir_login_apos_logout(admin_page):\n    login(admin_page)\n    open_messages(admin_page)\n    logout(admin_page)\n\n    # Preserva o contexto para verificar o efeito do logout na sessão.\n    admin_page.goto(absolute_url(MESSAGES_PATH))\n\n    assert_login_requested(admin_page)\n```\ntokens used\n5,585\n"
+}

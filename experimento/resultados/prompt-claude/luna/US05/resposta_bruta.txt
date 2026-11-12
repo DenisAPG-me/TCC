@@ -1,0 +1,91 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Login com campos vazios | Negativo | CA1 | Abrir `/admin`; enviar o formulário sem preencher usuário nem senha | Exibe “Invalid credentials” e permanece na tela de login |
+| CT02 | Login com senha incorreta | Negativo | CA2 | Abrir `/admin`; preencher usuário `admin` e senha incorreta; enviar o formulário | Exibe “Invalid credentials” e permanece na tela de login |
+| CT03 | Login com credenciais válidas | Positivo | CA3 | Abrir `/admin`; preencher `admin` e `password`; enviar o formulário | A lista de quartos inclui o quarto 101 do tipo Single; o menu exibe Rooms, Report, Branding e Messages |
+| CT04 | Logout | Positivo | CA4 | Fazer login com credenciais válidas; clicar em Logout | Retorna à página inicial pública da pousada |
+| CT05 | Acesso direto à lista após logout | Borda | CA5 | Fazer login com credenciais válidas; clicar em Logout; acessar diretamente a lista de quartos do painel | A tela de login é exibida |
+
+## SUPOSIÇÕES
+
+- A tecnologia escolhida é Python, pytest, Playwright e a fixture `page` do plugin oficial `pytest-playwright`, conforme os requisitos técnicos finais.
+- O plugin `pytest-playwright` e o navegador Chromium já estão instalados; o script usa o navegador headless padrão do plugin.
+- A URL de login é `https://automationintesting.online/admin`; a lista de quartos do painel fica em `/admin/rooms`.
+- A página de login tem campos acessíveis pelos rótulos ou nomes `Username` e `Password`, e um botão `Login`.
+- O formulário apresenta a mensagem literal `Invalid credentials` em caso de falha e mantém a rota de login.
+- O login de demonstração usa `admin` / `password`.
+- Após login, os itens do menu e os dados do quarto são localizáveis por texto visível; o quarto pode ser identificado por `101` e `Single`.
+- Há um botão ou link acessível com o nome `Logout`; ao sair, a URL pública base é exibida.
+- Os testes são independentes e cada caso da tabela corresponde a exatamente uma função de teste. CT04 e CT05 executam o login como pré-condição.
+
+## SCRIPT
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+LOGIN_URL = f"{BASE_URL}admin"
+ROOMS_URL = f"{BASE_URL}admin/rooms"
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+INVALID_PASSWORD = "incorrect"
+
+
+def _login(page: Page) -> None:
+    page.goto(LOGIN_URL)
+    page.get_by_label("Username").fill(ADMIN_USERNAME)
+    page.get_by_label("Password").fill(ADMIN_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+
+
+def test_ct01_login_com_campos_vazios(page: Page) -> None:
+    page.goto(LOGIN_URL)
+    page.get_by_role("button", name="Login").click()
+
+    expect(page.get_by_text("Invalid credentials", exact=True)).to_be_visible()
+    expect(page).to_have_url(LOGIN_URL)
+
+
+def test_ct02_login_com_senha_incorreta(page: Page) -> None:
+    page.goto(LOGIN_URL)
+    page.get_by_label("Username").fill(ADMIN_USERNAME)
+    page.get_by_label("Password").fill(INVALID_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+
+    expect(page.get_by_text("Invalid credentials", exact=True)).to_be_visible()
+    expect(page).to_have_url(LOGIN_URL)
+
+
+def test_ct03_login_com_credenciais_validas(page: Page) -> None:
+    _login(page)
+
+    expect(page).to_have_url(ROOMS_URL)
+    expect(page.get_by_text("101", exact=True)).to_be_visible()
+    expect(page.get_by_text("Single", exact=True)).to_be_visible()
+
+    for menu_item in ("Rooms", "Report", "Branding", "Messages"):
+        expect(page.get_by_text(menu_item, exact=True)).to_be_visible()
+
+
+def test_ct04_logout_retorna_a_pagina_publica(page: Page) -> None:
+    _login(page)
+    page.get_by_role("link", name="Logout").click()
+
+    expect(page).to_have_url(BASE_URL)
+
+
+def test_ct05_acesso_direto_apos_logout_exige_login(page: Page) -> None:
+    _login(page)
+    page.get_by_role("link", name="Logout").click()
+    expect(page).to_have_url(BASE_URL)
+
+    page.goto(ROOMS_URL)
+
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+```

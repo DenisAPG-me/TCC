@@ -1,0 +1,57 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US07-C01",
+  "US07-C02",
+  "US07-C03",
+  "US07-C05",
+  "US07-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C01",
+    "US07-C03"
+   ],
+   "nota": "cria e checa tipos"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C02",
+    "US07-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C08"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C05"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": []
+}

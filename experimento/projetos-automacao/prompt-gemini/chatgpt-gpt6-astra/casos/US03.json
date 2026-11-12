@@ -1,0 +1,114 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Abrir login; enviar sem preencher.",
+  "esperado": "Exibe “Email is required” e “Password is required”."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Informar e-mail da demonstração e senha incorreta; enviar.",
+  "esperado": "Exibe “Invalid email or password”; permanece no login, sem acesso autenticado."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Checkout sem autenticação",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Adicionar um produto sem autenticar; abrir carrinho; avançar.",
+  "esperado": "Checkout solicita e-mail e senha."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login válido",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Entrar com a conta de demonstração.",
+  "esperado": "Exibe “My account” e nome do usuário no menu."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Endereço com todos os obrigatórios vazios",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Autenticar; adicionar produto; chegar ao endereço; limpar os seis campos; avançar.",
+  "esperado": "Permanece no endereço, sem acesso ao pagamento."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Endereço sem país",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente país vazio; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Endereço sem CEP",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente CEP vazio; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Endereço sem número",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente número vazio; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Endereço sem rua",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente rua vazia; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT10",
+  "titulo": "Endereço sem cidade",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente cidade vazia; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT11",
+  "titulo": "Endereço sem estado",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Preencher endereço, deixando somente estado vazio; avançar.",
+  "esperado": "Não avança ao pagamento."
+ },
+ {
+  "id": "CT12",
+  "titulo": "Correção dos campos obrigatórios do endereço",
+  "tipo": "Positivo",
+  "criterio": "5",
+  "passos": "Tentar avançar com endereço vazio; preencher os seis campos; avançar novamente.",
+  "esperado": "Inicialmente bloqueia; após preenchimento, exibe pagamento."
+ },
+ {
+  "id": "CT13",
+  "titulo": "Pagamento com cartão fictício válido",
+  "tipo": "Positivo",
+  "criterio": "6",
+  "passos": "Chegar ao pagamento; selecionar cartão de crédito; preencher dados fictícios; confirmar pagamento.",
+  "esperado": "Exibe “Payment was successful”."
+ },
+ {
+  "id": "CT14",
+  "titulo": "Confirmação do pedido após pagamento",
+  "tipo": "Positivo",
+  "criterio": "6",
+  "passos": "Efetuar pagamento válido; confirmar pedido.",
+  "esperado": "Exibe “Thanks for your order! Your invoice number is INV-...” com sufixo não vazio."
+ }
+]

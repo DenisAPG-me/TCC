@@ -1,0 +1,293 @@
+{
+ "created": 1793378589.662125,
+ "duration": 34.826632022857666,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02",
+ "environment": {},
+ "summary": {
+  "failed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_adicionar_tres_unidades_de_claw_hammer[chromium]",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_TC02_totais_com_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 111
+    },
+    {
+     "nodeid": "script.py::test_TC03_alterar_quantidade_para_uma_unidade[chromium]",
+     "type": "Function",
+     "lineno": 119
+    },
+    {
+     "nodeid": "script.py::test_TC04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 129
+    },
+    {
+     "nodeid": "script.py::test_TC05_adicionar_uma_unidade_de_claw_hammer[chromium]",
+     "type": "Function",
+     "lineno": 141
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_adicionar_tres_unidades_de_claw_hammer[chromium]",
+   "lineno": 102,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC01_adicionar_tres_unidades_de_claw_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4462532999459654,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.8036398000549525,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+     "lineno": 22,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\n  - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- separator\n- heading \"Related products\" [level=2]\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 104,
+      "message": "in test_TC01_adicionar_tres_unidades_de_claw_hammer"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 22,
+      "message": "in _open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:104: in test_TC01_adicionar_tres_unidades_de_claw_hammer\n    _open_product(page, _base_url(request), \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:22: in _open_product\n    expect(page.get_by_text(re.compile(re.escape(name), re.I)).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\nE     - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.016931500053033233,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_totais_com_tres_unidades[chromium]",
+   "lineno": 111,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC02_totais_com_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.14673759997822344,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.397703499998897,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+     "lineno": 22,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\n  - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- separator\n- heading \"Related products\" [level=2]\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 113,
+      "message": "in test_TC02_totais_com_tres_unidades"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 95,
+      "message": "in _prepare_three_units"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 22,
+      "message": "in _open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:113: in test_TC02_totais_com_tres_unidades\n    _prepare_three_units(page, _base_url(request), \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:95: in _prepare_three_units\n    _open_product(page, base_url, name)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:22: in _open_product\n    expect(page.get_by_text(re.compile(re.escape(name), re.I)).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\nE     - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.01698960002977401,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_alterar_quantidade_para_uma_unidade[chromium]",
+   "lineno": 119,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_alterar_quantidade_para_uma_unidade[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10370129998773336,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.621671499917284,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+     "lineno": 22,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\n  - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- separator\n- heading \"Related products\" [level=2]\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 121,
+      "message": "in test_TC03_alterar_quantidade_para_uma_unidade"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 95,
+      "message": "in _prepare_three_units"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 22,
+      "message": "in _open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:121: in test_TC03_alterar_quantidade_para_uma_unidade\n    _prepare_three_units(page, _base_url(request), \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:95: in _prepare_three_units\n    _open_product(page, base_url, name)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:22: in _open_product\n    expect(page.get_by_text(re.compile(re.escape(name), re.I)).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\nE     - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.01795880007557571,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+   "lineno": 129,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11364789993967861,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.4064730000682175,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+     "lineno": 22,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_text(re.compile(r\"Thor\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\n  - waiting for get_by_text(re.compile(r\"Thor\\ Hammer\", re.IGNORECASE)).first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- separator\n- heading \"Related products\" [level=2]\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 131,
+      "message": "in test_TC04_bloquear_tres_unidades_de_thor_hammer"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 22,
+      "message": "in _open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:131: in test_TC04_bloquear_tres_unidades_de_thor_hammer\n    _open_product(page, _base_url(request), \"Thor Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:22: in _open_product\n    expect(page.get_by_text(re.compile(re.escape(name), re.I)).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(re.compile(r\"Thor\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\nE     - waiting for get_by_text(re.compile(r\"Thor\\ Hammer\", re.IGNORECASE)).first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.0813831000123173,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_adicionar_uma_unidade_de_claw_hammer[chromium]",
+   "lineno": 141,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_adicionar_uma_unidade_de_claw_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.5976582000730559,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.649910399923101,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+     "lineno": 22,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\n  - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- separator\n- heading \"Related products\" [level=2]\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 143,
+      "message": "in test_TC05_adicionar_uma_unidade_de_claw_hammer"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py",
+      "lineno": 22,
+      "message": "in _open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:143: in test_TC05_adicionar_uma_unidade_de_claw_hammer\n    _open_product(page, _base_url(request), \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US02\\script.py:22: in _open_product\n    expect(page.get_by_text(re.compile(re.escape(name), re.I)).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first with timeout 5000ms\nE     - waiting for get_by_text(re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)).first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.31017949990928173,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

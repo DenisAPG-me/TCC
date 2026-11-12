@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes claros e dicionarios de rotulos",
+  "estrutura": "Helpers e funcao parametrizada para campo omitido",
+  "assercoes": "Mensagens exatas, aria-invalid, invoice regex",
+  "espera": "Timeouts explicitos e expect, sem sleep",
+  "manutenibilidade": "Constantes centralizadas, mas test-ids e rotulos inventados"
+ }
+}

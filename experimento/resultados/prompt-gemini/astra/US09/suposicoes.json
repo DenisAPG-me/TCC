@@ -1,0 +1,19 @@
+[
+ "A solução é exclusivamente de API REST, usando `pytest` e `requests`. Não existem seletores de interface.",
+ "As rotas e os contratos abaixo foram deduzidos, sem consultar documentação ou executar chamadas:",
+ "`POST /auth`: recebe `username` e `password`; retorna 200 e JSON com `token`.",
+ "`POST /booking`: recebe os dados da reserva; retorna 200 e JSON com `bookingid`.",
+ "`GET /booking/{bookingid}`: retorna 200 com os dados da reserva existente ou 404 quando ausente.",
+ "`DELETE /booking/{bookingid}`: recebe autenticação no cookie `token`; seus resultados são os definidos nos critérios de aceitação.",
+ "`GET /booking?firstname=...&lastname=...`: retorna 200 e uma lista de objetos com `bookingid`, aplicando os dois filtros conjuntamente.",
+ "O payload de criação contém `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates.checkin`, `bookingdates.checkout` e `additionalneeds`.",
+ "As credenciais `admin` / `password123` são válidas. O token permanece válido durante cada teste.",
+ "Um token com prefixo `invalid-` seguido de UUID é considerado inválido.",
+ "Nomes com UUID são aceitos e evitam colisões entre execuções. Datas futuras e valores positivos constituem dados válidos de preparação.",
+ "As operações têm efeito imediatamente observável, sem necessidade de espera ou repetição.",
+ "Cada teste cria suas próprias reservas. A limpeza exclui apenas os identificadores criados pelo próprio teste.",
+ "A ausência de autenticação significa não enviar cookie de token nem cabeçalho `Authorization`. As chamadas não compartilham cookies.",
+ "No CT05, a preservação de outra reserva é verificada por uma reserva de controle independente, comparando integralmente seu JSON antes e depois. Essa amostra não comprova a integridade de todas as reservas do ambiente.",
+ "Não são adicionados cenários de token expirado, identificador malformado ou concorrência, pois seus comportamentos não estão definidos na User Story.",
+ "O arquivo pode ser salvo como `test_exclusao_reservas.py` e executado com `python test_exclusao_reservas.py` ou `pytest -v test_exclusao_reservas.py`. Requer `pytest` e `requests` instalados."
+]

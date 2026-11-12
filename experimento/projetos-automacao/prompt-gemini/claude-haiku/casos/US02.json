@@ -1,0 +1,58 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Adicionar 3 unidades de Claw Hammer ao carrinho",
+  "tipo": "Positivo",
+  "criterio": "AC1",
+  "passos": "Abrir Claw Hammer; definir quantidade 3; clicar em \"Add to cart\"",
+  "esperado": "Exibe \"Product added to shopping cart.\" e o indicador do carrinho mostra 3"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Total da linha e total do carrinho com 3 unidades",
+  "tipo": "Positivo",
+  "criterio": "AC2",
+  "passos": "Ler preço unitário; adicionar 3 unidades; abrir o carrinho",
+  "esperado": "Total da linha = preço unitário × 3; total do carrinho = total da linha"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Alterar quantidade no carrinho de 3 para 1",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "Adicionar 3 unidades; abrir carrinho; alterar quantidade para 1; clicar em \"Update\"",
+  "esperado": "Total do carrinho = preço unitário"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Thor Hammer com 3 unidades é recusado",
+  "tipo": "Negativo",
+  "criterio": "AC4",
+  "passos": "Abrir Thor Hammer; definir quantidade 3; clicar em \"Add to cart\"",
+  "esperado": "Exibe \"You can only have one Thor Hammer in the cart.\""
+ },
+ {
+  "id": "TC05",
+  "titulo": "Quantidade padrão é 1 ao adicionar sem alterar",
+  "tipo": "Borda",
+  "criterio": "AC1 (derivado)",
+  "passos": "Abrir Claw Hammer; verificar quantidade padrão; clicar em \"Add to cart\"",
+  "esperado": "Campo de quantidade inicia com 1; confirmação exibida; indicador do carrinho mostra 1"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Quantidade 0 não adiciona produto ao carrinho",
+  "tipo": "Negativo",
+  "criterio": "AC1 (derivado)",
+  "passos": "Abrir Claw Hammer; definir quantidade 0; clicar em \"Add to cart\"",
+  "esperado": "Confirmação \"Product added to shopping cart.\" não é exibida"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Thor Hammer com 1 unidade é aceito (limite)",
+  "tipo": "Borda",
+  "criterio": "AC4 (limite)",
+  "passos": "Abrir Thor Hammer; definir quantidade 1; clicar em \"Add to cart\"",
+  "esperado": "Exibe confirmação; indicador do carrinho mostra 1"
+ }
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "razoavel, helpers com prefixo _",
+  "estrutura": "helpers, mas ramificacao de fallback pesada",
+  "assercoes": "parsing de celulas por heuristica, assercoes de negocio",
+  "espera": "count() imediato e ramos sem espera",
+  "manutenibilidade": "input[type=number].first e heuristicas de celula frageis"
+ }
+}

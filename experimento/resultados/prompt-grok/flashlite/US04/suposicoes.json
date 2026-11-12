@@ -1,0 +1,7 @@
+[
+ "A URL base padrão é https://automationintesting.online/, podendo ser sobrescrita pelo argumento `--base-url` do pytest.",
+ "Os campos do formulário de contato são identificados por seletores baseados em rótulos (`get_by_label`) ou placeholders (`get_by_placeholder`), tais como Nome, Email, Phone, Subject e Message.",
+ "O botão de envio do formulário de contato possui o rótulo \"Submit\" ou pode ser localizado por papel de botão dentro da seção de contato.",
+ "As mensagens de erro e sucesso aparecem na página após o envio do formulário, sendo validadas através da API `expect` do Playwright.",
+ "Dados de entrada válidos utilizados: Nome (\"João Silva\"), E-mail (\"joao@example.com\"), Telefone (\"11987654321\"), Assunto (\"Dúvida sobre reserva\"), Mensagem (\"Gostaria de saber se aceitam pets durante o período de estadia.\")."
+]

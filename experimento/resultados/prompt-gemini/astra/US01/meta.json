@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 85.01,
+ "tokens": {
+  "total": 5241
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "s, \"name\")\n\n    expected_names = sorted(\n        (product[\"name\"] for product in products),\n        key=str.casefold,\n        reverse=True,\n    )\n\n    expect(cards(page)).to_have_count(len(products), timeout=TIMEOUT_MS)\n    expect(names(page)).to_have_text(expected_names, timeout=TIMEOUT_MS)\n\n    for index in range(len(products)):\n        expect(names(page).nth(index)).to_be_visible()\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, *sys.argv[1:]]))\n```\ntokens used\n5,241\n"
+}

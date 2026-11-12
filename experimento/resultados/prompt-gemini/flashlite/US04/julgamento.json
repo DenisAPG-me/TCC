@@ -1,0 +1,90 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C08",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C08"
+   ],
+   "nota": "script usa 'Ajuda' (5 chars) no assunto; caso descrito e valido"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_envio_formulario_vazio",
+   "categoria": "outro",
+   "nota": "toBeVisible inexistente na API Python (to_be_visible)"
+  },
+  {
+   "teste": "test_ct02_telefone_menos_11_caracteres",
+   "categoria": "outro",
+   "nota": "toBeVisible inexistente na API Python"
+  },
+  {
+   "teste": "test_ct03_assunto_mensagem_abaixo_limite",
+   "categoria": "outro",
+   "nota": "toBeVisible inexistente na API Python"
+  },
+  {
+   "teste": "test_ct04_email_malformado",
+   "categoria": "outro",
+   "nota": "toBeVisible inexistente na API Python"
+  },
+  {
+   "teste": "test_ct05_dados_validos",
+   "categoria": "outro",
+   "nota": "toBeVisible inexistente na API Python"
+  }
+ ]
+}

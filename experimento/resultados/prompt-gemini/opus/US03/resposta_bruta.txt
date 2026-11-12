@@ -1,0 +1,227 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Login com formulário totalmente vazio | Negativo | CA1 | 1. Acessar `/auth/login` 2. Clicar em "Login" sem preencher campos | Exibe "Email is required" e "Password is required"; usuário continua na tela de login |
+| CT02 | Login com e-mail preenchido e senha vazia | Borda | CA1 | 1. Acessar `/auth/login` 2. Informar e-mail da conta demo 3. Deixar senha vazia 4. Clicar em "Login" | Exibe "Password is required"; não exibe "Email is required" |
+| CT03 | Login com senha incorreta | Negativo | CA2 | 1. Acessar `/auth/login` 2. Informar e-mail da conta demo e senha incorreta 3. Clicar em "Login" | Exibe "Invalid email or password"; permanece em `/auth/login`; menu do usuário não aparece e "Sign in" continua visível |
+| CT04 | Checkout sem autenticação solicita credenciais | Positivo | CA3 | 1. Adicionar produto ao carrinho sem login 2. Abrir carrinho 3. Clicar em "Proceed to checkout" | Passo de login do checkout exibe campos de e-mail e senha |
+| CT05 | Autenticação dentro do checkout permite avançar | Positivo | CA3, CA4 | 1. Executar CT04 2. Informar credenciais válidas 3. Clicar em "Login" | Checkout reconhece o usuário e o botão para avançar ao endereço fica disponível |
+| CT06 | Login válido exibe "My account" e nome no menu | Positivo | CA4 | 1. Acessar `/auth/login` 2. Informar credenciais válidas 3. Clicar em "Login" | Redireciona para `/account`; título "My account"; menu exibe o nome do usuário em vez de "Sign in" |
+| CT07 | Endereço com todos os campos obrigatórios vazios | Negativo | CA5 | 1. Login 2. Adicionar produto 3. Avançar até o passo de endereço 4. Limpar rua, número, cidade, estado e CEP | Botão de avançar para pagamento fica desabilitado |
+| CT08 | Endereço com apenas o CEP vazio | Borda | CA5 | 1. Login 2. Adicionar produto 3. Avançar até endereço 4. Preencher todos os campos exceto CEP | Botão de avançar para pagamento continua desabilitado |
+| CT09 | Endereço completo permite avançar ao pagamento | Positivo | CA5 | 1. Login 2. Adicionar produto 3. Avançar até endereço 4. Preencher país, CEP, número, rua, cidade e estado 5. Avançar | Botão habilitado; passo de pagamento é exibido |
+| CT10 | Confirmação desabilitada sem método de pagamento | Borda | CA6 | 1. Chegar ao passo de pagamento 2. Não escolher método de pagamento | Botão "Confirm" desabilitado |
+| CT11 | Compra com cartão de crédito fictício válido | Positivo | CA6 | 1. Chegar ao passo de pagamento 2. Escolher "Credit Card" 3. Informar número, validade futura, CVV e titular 4. Confirmar 5. Confirmar o pedido | Exibe "Payment was successful" e depois "Thanks for your order! Your invoice number is INV-..." |
+
+## SUPOSIÇÕES
+
+- A aplicação é web (Angular) e expõe atributos `data-test`; o script configura `data-test` como atributo de `get_by_test_id` via `playwright.selectors.set_test_id_attribute`.
+- Base URL padrão: `https://practicesoftwaretesting.com`; pode ser sobrescrita com `--base-url`.
+- Rotas: login em `/auth/login`, conta em `/account`, carrinho/checkout em `/checkout`, página inicial `/` lista produtos.
+- Seletores do login: `data-test="email"`, `"password"`, `"login-submit"`; título da conta `data-test="page-title"` com texto "My account".
+- Menu: usuário autenticado exibe `data-test="nav-menu"` com o nome do usuário; não autenticado exibe `data-test="nav-sign-in"`. O nome exato da conta demo não é informado, então a validação verifica que o menu contém um nome não vazio.
+- Produtos na home possuem `data-test="product-<id>"`; na página do produto o botão é `data-test="add-to-cart"`; o contador do carrinho é `data-test="cart-quantity"`; o link do carrinho é `data-test="nav-cart"`.
+- Botões do checkout: `proceed-1` (carrinho), `proceed-2` (login/conta), `proceed-3` (endereço) e `finish` (confirmação do pagamento e do pedido).
+- No passo de login do checkout são reutilizados os mesmos `data-test` da tela de login.
+- Campos de endereço: `data-test` `country`, `postal_code`, `house_number`, `street`, `city`, `state`. O país pode ser `<select>` (selecionado por rótulo) ou `<input>` (preenchido); o script trata ambos. O formulário pode vir pré-preenchido com o endereço do cliente, por isso os testes negativos limpam os campos explicitamente.
+- `proceed-3` fica desabilitado enquanto o formulário de endereço é inválido; `finish` fica desabilitado sem método de pagamento.
+- Pagamento: `data-test="payment-method"` é um `<select>` com a opção "Credit Card"; campos `credit_card_number` (formato `0000-0000-0000-0000`), `expiration_date` (`MM/AAAA`, data futura), `cvv` (3 dígitos) e `card_holder_name`.
+- Mensagens são localizadas por texto exato conforme os critérios de aceitação; a confirmação do pedido segue o padrão `Thanks for your order! Your invoice number is INV-<dígitos>`.
+- A conta de demonstração está ativa e não é bloqueada por uma única tentativa com senha incorreta.
+- Execução: `pip install pytest pytest-playwright && playwright install` e `pytest test_checkout.py`.
+
+```python
+import re
+from datetime import date
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com"
+EMAIL = "customer@practicesoftwaretesting.com"
+PASSWORD = "welcome01"
+WRONG_PASSWORD = "wrong-password-123"
+
+ADDRESS = {
+    "country": "Austria",
+    "postal_code": "1010",
+    "house_number": "12",
+    "street": "Stephansplatz",
+    "city": "Vienna",
+    "state": "Vienna",
+}
+ADDRESS_TEXT_FIELDS = ["postal_code", "house_number", "street", "city", "state"]
+
+CARD = {
+    "credit_card_number": "4111-1111-1111-1111",
+    "expiration_date": f"12/{date.today().year + 1}",
+    "cvv": "123",
+    "card_holder_name": "Jane Doe",
+}
+
+
+@pytest.fixture(scope="session", autouse=True)
+def test_id_attribute(playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+@pytest.fixture
+def app_url(pytestconfig):
+    return (pytestconfig.getoption("base_url", default=None) or BASE_URL).rstrip("/")
+
+
+def submit_credentials(page: Page, email: str, password: str):
+    page.get_by_test_id("email").fill(email)
+    page.get_by_test_id("password").fill(password)
+    page.get_by_test_id("login-submit").click()
+
+
+def login(page: Page, app_url: str):
+    page.goto(f"{app_url}/auth/login")
+    submit_credentials(page, EMAIL, PASSWORD)
+    expect(page).to_have_url(re.compile(r"/account"))
+
+
+def add_product_to_cart(page: Page, app_url: str):
+    page.goto(f"{app_url}/")
+    page.get_by_test_id(re.compile(r"^product-")).first.click()
+    page.get_by_test_id("add-to-cart").click()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("1")
+
+
+def open_checkout(page: Page):
+    page.get_by_test_id("nav-cart").click()
+    page.get_by_test_id("proceed-1").click()
+
+
+def go_to_address_step(page: Page, app_url: str):
+    login(page, app_url)
+    add_product_to_cart(page, app_url)
+    open_checkout(page)
+    page.get_by_test_id("proceed-2").click()
+    expect(page.get_by_test_id("street")).to_be_visible()
+
+
+def fill_field(page: Page, test_id: str, value: str):
+    field = page.get_by_test_id(test_id)
+    if field.evaluate("el => el.tagName") == "SELECT":
+        field.select_option(label=value)
+    else:
+        field.fill(value)
+
+
+def fill_address(page: Page, address: dict):
+    for test_id, value in address.items():
+        fill_field(page, test_id, value)
+
+
+def go_to_payment_step(page: Page, app_url: str):
+    go_to_address_step(page, app_url)
+    fill_address(page, ADDRESS)
+    page.get_by_test_id("proceed-3").click()
+    expect(page.get_by_test_id("payment-method")).to_be_visible()
+
+
+def test_ct01_login_formulario_vazio(page: Page, app_url):
+    page.goto(f"{app_url}/auth/login")
+    page.get_by_test_id("login-submit").click()
+
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+
+
+def test_ct02_login_senha_vazia(page: Page, app_url):
+    page.goto(f"{app_url}/auth/login")
+    page.get_by_test_id("email").fill(EMAIL)
+    page.get_by_test_id("login-submit").click()
+
+    expect(page.get_by_text("Password is required")).to_be_visible()
+    expect(page.get_by_text("Email is required")).to_be_hidden()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+
+
+def test_ct03_login_senha_incorreta(page: Page, app_url):
+    page.goto(f"{app_url}/auth/login")
+    submit_credentials(page, EMAIL, WRONG_PASSWORD)
+
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+    expect(page.get_by_test_id("nav-menu")).to_be_hidden()
+    expect(page.get_by_test_id("nav-sign-in")).to_be_visible()
+
+
+def test_ct04_checkout_sem_autenticacao_solicita_credenciais(page: Page, app_url):
+    add_product_to_cart(page, app_url)
+    open_checkout(page)
+
+    expect(page.get_by_test_id("email")).to_be_visible()
+    expect(page.get_by_test_id("password")).to_be_visible()
+    expect(page.get_by_test_id("login-submit")).to_be_visible()
+
+
+def test_ct05_autenticacao_no_checkout_permite_avancar(page: Page, app_url):
+    add_product_to_cart(page, app_url)
+    open_checkout(page)
+    submit_credentials(page, EMAIL, PASSWORD)
+
+    expect(page.get_by_test_id("proceed-2")).to_be_enabled()
+    page.get_by_test_id("proceed-2").click()
+    expect(page.get_by_test_id("street")).to_be_visible()
+
+
+def test_ct06_login_valido_exibe_my_account_e_nome(page: Page, app_url):
+    login(page, app_url)
+
+    expect(page.get_by_test_id("page-title")).to_have_text("My account")
+    expect(page.get_by_test_id("nav-menu")).to_have_text(re.compile(r"\w+"))
+    expect(page.get_by_test_id("nav-menu")).not_to_have_text(re.compile(r"Sign in"))
+    expect(page.get_by_test_id("nav-sign-in")).to_be_hidden()
+
+
+def test_ct07_endereco_campos_obrigatorios_vazios(page: Page, app_url):
+    go_to_address_step(page, app_url)
+    for test_id in ADDRESS_TEXT_FIELDS:
+        page.get_by_test_id(test_id).fill("")
+
+    expect(page.get_by_test_id("proceed-3")).to_be_disabled()
+
+
+def test_ct08_endereco_sem_cep(page: Page, app_url):
+    go_to_address_step(page, app_url)
+    fill_address(page, ADDRESS)
+    page.get_by_test_id("postal_code").fill("")
+
+    expect(page.get_by_test_id("proceed-3")).to_be_disabled()
+
+
+def test_ct09_endereco_completo_avanca_para_pagamento(page: Page, app_url):
+    go_to_address_step(page, app_url)
+    fill_address(page, ADDRESS)
+
+    expect(page.get_by_test_id("proceed-3")).to_be_enabled()
+    page.get_by_test_id("proceed-3").click()
+    expect(page.get_by_test_id("payment-method")).to_be_visible()
+
+
+def test_ct10_confirmacao_desabilitada_sem_metodo_pagamento(page: Page, app_url):
+    go_to_payment_step(page, app_url)
+
+    expect(page.get_by_test_id("finish")).to_be_disabled()
+
+
+def test_ct11_compra_com_cartao_de_credito(page: Page, app_url):
+    go_to_payment_step(page, app_url)
+    page.get_by_test_id("payment-method").select_option(label="Credit Card")
+    for test_id, value in CARD.items():
+        page.get_by_test_id(test_id).fill(value)
+
+    page.get_by_test_id("finish").click()
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+
+    page.get_by_test_id("finish").click()
+    expect(
+        page.get_by_text(re.compile(r"Thanks for your order! Your invoice number is INV-\d+"))
+    ).to_be_visible()
+```

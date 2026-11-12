@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 2,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Claro e enxuto",
+  "estrutura": "Factory fixture, sessoes e helpers",
+  "assercoes": "Status e conteudo, mas pouca checagem de corpo",
+  "espera": "Limpeza assume 404 para reserva ja excluida, causando errors",
+  "manutenibilidade": "Constantes e UUID, limpeza fragil"
+ }
+}

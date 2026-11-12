@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "legivel",
+  "estrutura": "duplicacao, poucas helpers",
+  "assercoes": "aceita 200/201; nao verifica outras reservas",
+  "espera": "sem timeout; nome fixo",
+  "manutenibilidade": "sem cleanup"
+ }
+}

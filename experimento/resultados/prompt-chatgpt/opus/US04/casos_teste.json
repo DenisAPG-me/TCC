@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Envio do formulário de contato vazio",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial; não preencher nenhum campo; clicar em Submit",
+  "esperado": "São exibidas as mensagens \"Name may not be blank\", \"Email may not be blank\", \"Phone may not be blank\", \"Subject may not be blank\" e \"Message may not be blank\""
+ },
+ {
+  "id": "CT002",
+  "titulo": "Telefone com 10 caracteres",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; preencher nome, e-mail, assunto e mensagem válidos e telefone com 10 caracteres; clicar em Submit",
+  "esperado": "É exibida \"Phone must be between 11 and 21 characters.\" e a confirmação de envio não aparece"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Telefone com exatamente 11 caracteres",
+  "tipo": "borda",
+  "criterio": "CA02, CA05",
+  "passos": "Abrir a página inicial; preencher todos os campos válidos com telefone de 11 caracteres; clicar em Submit",
+  "esperado": "A mensagem de telefone inválido não aparece e é exibida \"Thanks for getting in touch <nome>!\""
+ },
+ {
+  "id": "CT004",
+  "titulo": "Assunto com 4 caracteres e mensagem com 19 caracteres",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Abrir a página inicial; preencher nome, e-mail e telefone válidos, assunto com 4 e mensagem com 19 caracteres; clicar em Submit",
+  "esperado": "São exibidas \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT005",
+  "titulo": "Assunto com 5 caracteres e mensagem com 20 caracteres",
+  "tipo": "borda",
+  "criterio": "CA03, CA05",
+  "passos": "Abrir a página inicial; preencher todos os campos válidos com assunto de 5 e mensagem de 20 caracteres; clicar em Submit",
+  "esperado": "As mensagens de tamanho de assunto e de mensagem não aparecem e é exibida a confirmação com nome e assunto"
+ },
+ {
+  "id": "CT006",
+  "titulo": "E-mail malformado \"bad\"",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Abrir a página inicial; preencher campos válidos e e-mail \"bad\"; clicar em Submit",
+  "esperado": "É exibida \"must be a well-formed email address\" e a confirmação de envio não aparece"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Envio com todos os dados válidos",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Abrir a página inicial; preencher todos os campos com dados válidos; clicar em Submit",
+  "esperado": "É exibida \"Thanks for getting in touch <nome>!\" e o assunto informado aparece na confirmação"
+ }
+]

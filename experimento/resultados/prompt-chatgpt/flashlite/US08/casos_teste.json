@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Autenticação com credenciais válidas admin",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar requisição POST para /auth com JSON contendo username admin e password password123",
+  "esperado": "Retorna status 200 e um token não vazio"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Autenticação com credenciais inválidas",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Enviar requisição POST para /auth com JSON contendo username inválido e password inválido",
+  "esperado": "Retorna resposta informando Bad credentials e sem token"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Atualização completa de reserva com token válido",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Obter ID de reserva existente, autenticar, enviar PUT para /booking/{id} com token no header Cookie e payload completo com novo nome e preço",
+  "esperado": "Retorna status 200 e os novos valores atualizados"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Atualização parcial de reserva com token válido",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Obter ID de reserva existente, autenticar, enviar PATCH para /booking/{id} com token no header Cookie e payload parcial apenas com o sobrenome",
+  "esperado": "Retorna status 200, o sobrenome é alterado e os demais campos permanecem inalterados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Atualização de reserva sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Obter ID de reserva existente, enviar PUT para /booking/{id} sem o header de autenticação",
+  "esperado": "Retorna status 403 Forbidden"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Atualização completa com campos obrigatórios ausentes",
+  "tipo": "negativo",
+  "criterio": "CA06",
+  "passos": "Obter ID de reserva existente, autenticar, enviar PUT para /booking/{id} com token e payload incompleto faltando campos obrigatórios",
+  "esperado": "Retorna status 400 Bad Request"
+ }
+]

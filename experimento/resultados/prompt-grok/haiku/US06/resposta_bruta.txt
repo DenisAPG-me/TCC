@@ -1,0 +1,183 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Login válido no painel exibe o contador de Messages | positivo | CA1 | Acessar /admin; logar com admin/password; ler o número ao lado de Messages | Painel exibido com link Messages contendo um número inteiro |
+| TC02 | Envio válido do formulário exibe confirmação com o nome | positivo | CA2 | Na home, preencher nome, e-mail, telefone, assunto e mensagem válidos; clicar em Submit | Texto "Thanks for getting in touch <nome>!" visível |
+| TC03 | Contador de Messages aumenta em 1 após o envio | positivo | CA1, CA3 | Logar e anotar contador; fazer logout; visitante envia mensagem; logar de novo e ler contador | Contador = anterior + 1 |
+| TC04 | Mensagem recém-enviada aparece na caixa com nome e assunto | positivo | CA4 | Visitante envia mensagem com assunto único; admin loga; abre Messages; localiza a linha pelo assunto | Linha existe uma única vez e contém o nome do remetente |
+| TC05 | Acesso direto à caixa de mensagens após logout exige login | negativo | CA5 | Logar; fazer logout; acessar /admin/messages diretamente | Formulário de login exibido; link Messages ausente |
+| TC06 | Login com senha inválida não acessa o painel | negativo | CA1 (pré-requisito) | Acessar /admin; logar com admin/senha-invalida | Permanece na tela de login; link Messages ausente |
+| TC07 | Envio sem nome não exibe confirmação e não altera o contador | negativo | CA2, CA3 | Anotar contador; visitante envia com nome vazio; admin loga e lê contador | Nenhuma confirmação "Thanks for getting in touch"; contador igual ao anterior |
+| TC08 | Envio sem assunto não exibe confirmação | negativo | CA2 | Visitante preenche todos os campos exceto assunto; clicar em Submit | Nenhuma confirmação "Thanks for getting in touch" |
+| TC09 | Nome com acentos e assunto com caracteres especiais aparecem corretamente na caixa | borda | CA4 | Enviar nome "José Álvaro Ñandú" e assunto "Reserva – ação & cia <id>"; admin abre Messages | Nome e assunto exibidos na lista sem alteração de caracteres |
+
+SUPOSIÇÕES
+
+- Rotas: home em `BASE_URL`, painel em `/admin` e caixa de mensagens em `/admin/messages`. Acesso direto a `/admin/messages` sem sessão redireciona para a tela de login.
+- Credenciais: `admin` / `password`, conforme a User Story.
+- Login: campos rotulados `Username` e `Password` (`get_by_label`, `exact=True`) e botão `Login`.
+- Logout: botão `Logout` visível no painel autenticado.
+- Formulário de contato da home: campos rotulados `Name`, `Email`, `Phone`, `Subject` e `Message`, e botão `Submit`. Campos ausentes são preenchidos com string vazia.
+- Confirmação: texto exato "Thanks for getting in touch <nome>!" exibido após envio válido.
+- Contador: link `Messages` no painel contém um número inteiro no próprio texto (ex.: "Messages 5"). O valor é lido com regex `\d+`.
+- Caixa de mensagens: cada mensagem é uma linha de tabela (`role=row`) contendo nome e assunto. O assunto usa um identificador único (uuid) para localizar a linha sem ambiguidade.
+- Dados válidos: telefone de 11 dígitos e e-mail em formato válido. Dados de cada teste são gerados com uuid, para evitar colisão entre execuções.
+- Visitante: cada envio usa um novo `browser_context` (fixture `browser` do pytest-playwright), sem sessão de admin.
+- Testes negativos (TC07, TC08) verificam a ausência de confirmação logo após o clique em Submit. Como não há feedback de erro conhecido, a ausência é validada pelo `expect` com `to_have_count(0)`. Esse método pode aceitar resultado falso se a resposta do servidor demorar mais do que o esperado.
+- Nenhum teste depende da ordem de execução; cada um cria seus próprios dados e sessões.
+- Base URL definida pela constante `BASE_URL` no topo do arquivo; a opção `--base-url` do pytest-playwright não é usada.
+
+```python
+import re
+import uuid
+from urllib.parse import urljoin
+
+from playwright.sync_api import expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+CONFIRMATION_PREFIX = "Thanks for getting in touch"
+
+
+def _url(path=""):
+    return urljoin(BASE_URL, path)
+
+
+def _make_data(**overrides):
+    uid = uuid.uuid4().hex[:8]
+    data = {
+        "name": f"Visitante {uid}",
+        "email": f"visitante.{uid}@example.com",
+        "phone": "11999999999",
+        "subject": f"Assunto {uid}",
+        "message": "Mensagem automatizada de teste.",
+    }
+    data.update(overrides)
+    return data
+
+
+def _send_as_visitor(browser, data):
+    context = browser.new_context()
+    visitor = context.new_page()
+    visitor.goto(_url())
+    visitor.get_by_label("Name", exact=True).fill(data["name"])
+    visitor.get_by_label("Email", exact=True).fill(data["email"])
+    visitor.get_by_label("Phone", exact=True).fill(data["phone"])
+    visitor.get_by_label("Subject", exact=True).fill(data["subject"])
+    visitor.get_by_label("Message", exact=True).fill(data["message"])
+    visitor.get_by_role("button", name="Submit").click()
+    return visitor, context
+
+
+def _login_admin(page, user=ADMIN_USER, password=ADMIN_PASSWORD):
+    page.goto(_url("admin"))
+    page.get_by_label("Username", exact=True).fill(user)
+    page.get_by_label("Password", exact=True).fill(password)
+    page.get_by_role("button", name="Login").click()
+
+
+def _logout_admin(page):
+    page.get_by_role("button", name="Logout").click()
+    expect(page.get_by_label("Username", exact=True)).to_be_visible()
+
+
+def _messages_link(page):
+    return page.get_by_role("link", name=re.compile("Messages"))
+
+
+def _read_messages_count(page):
+    link = _messages_link(page)
+    expect(link).to_contain_text(re.compile(r"\d+"))
+    return int(re.search(r"\d+", link.inner_text()).group())
+
+
+def _admin_messages_count(page):
+    _login_admin(page)
+    count = _read_messages_count(page)
+    _logout_admin(page)
+    return count
+
+
+def _open_messages(page):
+    _messages_link(page).click()
+    expect(page).to_have_url(re.compile(r"/admin/messages"))
+
+
+def test_TC01_login_valido_exibe_contador_de_messages(page):
+    _login_admin(page)
+    count = _read_messages_count(page)
+    assert count >= 0
+
+
+def test_TC02_envio_valido_exibe_confirmacao_com_nome(browser):
+    data = _make_data()
+    visitor, context = _send_as_visitor(browser, data)
+    expect(visitor.get_by_text(f"{CONFIRMATION_PREFIX} {data['name']}!")).to_be_visible()
+    context.close()
+
+
+def test_TC03_contador_aumenta_uma_unidade_apos_envio(page, browser):
+    before = _admin_messages_count(page)
+    data = _make_data()
+    visitor, context = _send_as_visitor(browser, data)
+    expect(visitor.get_by_text(f"{CONFIRMATION_PREFIX} {data['name']}!")).to_be_visible()
+    context.close()
+    after = _admin_messages_count(page)
+    assert after == before + 1
+
+
+def test_TC04_mensagem_aparece_na_caixa_com_nome_e_assunto(page, browser):
+    data = _make_data()
+    visitor, context = _send_as_visitor(browser, data)
+    expect(visitor.get_by_text(f"{CONFIRMATION_PREFIX} {data['name']}!")).to_be_visible()
+    context.close()
+    _login_admin(page)
+    _open_messages(page)
+    row = page.get_by_role("row").filter(has_text=data["subject"])
+    expect(row).to_have_count(1)
+    expect(row).to_contain_text(data["name"])
+
+
+def test_TC05_apos_logout_acesso_direto_a_messages_exige_login(page):
+    _login_admin(page)
+    _logout_admin(page)
+    page.goto(_url("admin/messages"))
+    expect(page.get_by_label("Username", exact=True)).to_be_visible()
+    expect(_messages_link(page)).to_have_count(0)
+
+
+def test_TC06_login_com_senha_invalida_nao_acessa_painel(page):
+    _login_admin(page, password="senha-invalida")
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+    expect(_messages_link(page)).to_have_count(0)
+
+
+def test_TC07_envio_sem_nome_nao_confirma_e_nao_altera_contador(page, browser):
+    before = _admin_messages_count(page)
+    visitor, context = _send_as_visitor(browser, _make_data(name=""))
+    expect(visitor.get_by_text(CONFIRMATION_PREFIX)).to_have_count(0)
+    context.close()
+    after = _admin_messages_count(page)
+    assert after == before
+
+
+def test_TC08_envio_sem_assunto_nao_exibe_confirmacao(browser):
+    visitor, context = _send_as_visitor(browser, _make_data(subject=""))
+    expect(visitor.get_by_text(CONFIRMATION_PREFIX)).to_have_count(0)
+    context.close()
+
+
+def test_TC09_nome_e_assunto_com_acentos_aparecem_corretamente(page, browser):
+    uid = uuid.uuid4().hex[:8]
+    data = _make_data(name="José Álvaro Ñandú", subject=f"Reserva – ação & cia {uid}")
+    visitor, context = _send_as_visitor(browser, data)
+    expect(visitor.get_by_text(f"{CONFIRMATION_PREFIX} {data['name']}!")).to_be_visible()
+    context.close()
+    _login_admin(page)
+    _open_messages(page)
+    row = page.get_by_role("row").filter(has_text=data["subject"])
+    expect(row).to_have_count(1)
+    expect(row).to_contain_text(data["name"])
+```

@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir login e enviar sem preencher campos.",
+  "esperado": "Exibe “Email is required” e “Password is required”."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Abrir login, informar o e-mail de demonstração e uma senha incorreta, enviar.",
+  "esperado": "Exibe “Invalid email or password” e permanece sem sessão."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Checkout sem autenticação",
+  "tipo": "negativo",
+  "criterio": "3",
+  "passos": "Adicionar produto ao carrinho e avançar ao checkout sem autenticação.",
+  "esperado": "É direcionado a uma etapa que solicita e-mail e senha."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Login válido e página da conta",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Entrar com as credenciais de demonstração.",
+  "esperado": "Exibe “My account” e o nome do usuário no menu."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Endereço obrigatório impede avanço",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Autenticar, manter um produto no carrinho, deixar endereço vazio e tentar avançar.",
+  "esperado": "Não avança para pagamento."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Endereço preenchido permite avanço",
+  "tipo": "positivo",
+  "criterio": "5",
+  "passos": "Preencher país, CEP, número, rua, cidade e estado e avançar.",
+  "esperado": "Avança para o passo de pagamento."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Pagamento com cartão de crédito e pedido confirmado",
+  "tipo": "positivo",
+  "criterio": "6",
+  "passos": "No pagamento, escolher cartão, informar dados fictícios válidos e confirmar pagamento e pedido.",
+  "esperado": "Exibe “Payment was successful” e “Thanks for your order! Your invoice number is INV-...”."
+ },
+ {
+  "id": "TC08",
+  "titulo": "CEP obrigatório ausente",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher os demais campos do endereço e deixar o CEP vazio; tentar avançar.",
+  "esperado": "Não avança para pagamento."
+ },
+ {
+  "id": "TC09",
+  "titulo": "País obrigatório ausente",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher os demais campos do endereço e deixar o país vazio; tentar avançar.",
+  "esperado": "Não avança para pagamento."
+ }
+]

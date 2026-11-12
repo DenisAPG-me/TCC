@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes claros, funcoes curtas",
+  "estrutura": "helpers e fixture de sessao, payload parametrizavel",
+  "assercoes": "verifica tipos e valores recursivamente",
+  "espera": "timeout e dados unicos uuid",
+  "manutenibilidade": "constantes e helpers; sem cleanup"
+ }
+}

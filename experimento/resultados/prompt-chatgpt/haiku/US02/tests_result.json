@@ -1,0 +1,40 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_adicionar_3_unidades_exibe_confirmacao_e_contador",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_CT002_total_da_linha_e_do_carrinho_com_3_unidades",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_CT003_alterar_quantidade_para_1_faz_total_igual_ao_preco_unitario",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_CT004_thor_hammer_com_3_unidades_exibe_mensagem_de_limite",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_CT005_thor_hammer_com_1_unidade_e_aceito",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  }
+ ],
+ "stdout_tail": "ckages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US02\\script.py::test_CT001_adicionar_3_unidades_exibe_confirmacao_e_contador\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US02\\script.py::test_CT002_total_da_linha_e_do_carrinho_com_3_unidades\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US02\\script.py::test_CT003_alterar_quantidade_para_1_faz_total_igual_ao_preco_unitario\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US02\\script.py::test_CT004_thor_hammer_com_3_unidades_exibe_mensagem_de_limite\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US02\\script.py::test_CT005_thor_hammer_com_1_unidade_e_aceito\n5 failed, 1 warning in 18.39s\n",
+ "returncode": 1,
+ "duracao_s": 19.11
+}

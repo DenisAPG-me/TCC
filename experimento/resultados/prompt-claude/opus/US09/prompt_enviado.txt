@@ -1,0 +1,73 @@
+Você é um engenheiro de qualidade de software especialista em automação de testes. Sua tarefa é analisar a User Story abaixo e produzir: (1) os casos de teste necessários para validá-la e (2) um script de automação em Python que implemente esses casos.
+
+## USER STORY
+
+Como administrador consumindo a API de reservas, quero excluir reservas com autorização e ter garantias de segurança e consistência, para manter a base correta. Credenciais de demonstração: admin / password123.
+URL base: https://restful-booker.herokuapp.com
+
+Critérios de aceitação:
+1. Dado uma reserva criada, quando tento excluí-la sem token, então recebo status 403 e a reserva continua consultável com status 200.
+2. Dado uma reserva criada, quando tento excluí-la com um token inválido, então recebo status 403 e a reserva continua existindo.
+3. Dado uma reserva criada e um token válido obtido por autenticação, quando a excluo, então recebo status 201.
+4. Dado que excluí uma reserva, quando a consulto pelo mesmo identificador, então recebo status 404.
+5. Dado que excluí uma reserva, quando tento excluí-la novamente com token válido, então recebo um status de erro 4xx e nenhuma outra reserva é afetada.
+6. Dado que excluí uma reserva, quando listo reservas filtrando pelo nome único dela, então a lista retornada está vazia.
+
+## CONTEXTO E LIMITAÇÕES
+
+- Use APENAS as informações da User Story acima. Ela traz a URL base do sistema e os critérios de aceitação, mas não traz seletores, contratos detalhados nem dados reais.
+- Você NÃO tem acesso ao sistema nem à internet. Não peça esclarecimentos e não recuse a tarefa: deduza seletores, campos, endpoints, payloads, mensagens e dados de teste de forma razoável e registre essas deduções na seção SUPOSIÇÕES.
+- Se os critérios de aceitação não estiverem numerados, numere-os na ordem em que aparecem como CA1, CA2, CA3 etc. e use essa numeração.
+
+## TAREFA 1 — CASOS DE TESTE
+
+- Identifique os casos de teste que você julgar necessários para cobrir os critérios de aceitação, incluindo cenários positivos, negativos e de borda. A quantidade fica a seu critério.
+- Identifique os casos sequencialmente como CT01, CT02, CT03 etc.
+- Cada caso deve estar relacionado a pelo menos um critério de aceitação.
+
+## TAREFA 2 — SCRIPT DE AUTOMAÇÃO
+
+Escolha da tecnologia:
+- User Story de interface web: Python + pytest + Playwright (API síncrona, `playwright.sync_api`).
+- User Story de API REST: Python + pytest + requests.
+- Se a User Story envolver ambos, use a tecnologia correspondente ao foco principal dos critérios de aceitação e registre a escolha em SUPOSIÇÕES.
+
+Requisitos do script:
+- Um único arquivo, completo, autocontido e executável diretamente com `pytest <arquivo>.py`.
+- Sem dependências além das citadas (pytest e Playwright, ou pytest e requests) e da biblioteca padrão do Python. Não use plugins do pytest (por exemplo, pytest-playwright), conftest.py, arquivos externos ou bibliotecas adicionais.
+- Para Playwright: crie no próprio arquivo as fixtures necessárias usando `sync_playwright`, com navegador Chromium em modo headless, e garanta o encerramento do navegador ao final.
+- Para requests: informe `timeout` em todas as requisições.
+- Defina a URL base informada na User Story, as credenciais e os dados de teste em constantes no topo do arquivo.
+- Exatamente uma função de teste para cada caso de teste da tabela, e nenhuma função de teste além delas. O nome de cada função deve começar com `test_` seguido do ID do caso em minúsculas e de uma descrição curta em snake_case, por exemplo: `test_ct01_login_com_credenciais_validas`.
+- Os testes devem ser independentes entre si e conter asserções explícitas que verifiquem o resultado esperado descrito na tabela.
+- Não use `pytest.skip`, `pytest.mark.skip`, `pytest.mark.xfail` nem `time.sleep`.
+
+## FORMATO DE SAÍDA OBRIGATÓRIO
+
+Sua resposta deve conter exatamente as três partes abaixo, nesta ordem, sem nenhum texto antes, entre ou depois delas (sem introdução, explicação ou conclusão):
+
+1. A linha `## CASOS DE TESTE`, seguida de uma única tabela Markdown com exatamente estas colunas, nesta ordem:
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+
+   - ID: CT01, CT02, ...
+   - Tipo: exatamente um destes valores: `Positivo`, `Negativo` ou `Borda`.
+   - Critério de Aceitação: o(s) identificador(es) relacionado(s), separados por vírgula (ex.: `CA1, CA3`).
+   - Passos: resumo em uma única linha, com passos separados por `; `.
+   - Não use o caractere `|` nem quebras de linha dentro das células.
+
+2. A linha `## SUPOSIÇÕES`, seguida de uma lista com marcadores (`- `) contendo todas as suposições feitas (tecnologia escolhida, seletores, endpoints, payloads, mensagens, dados de teste, comportamento esperado do sistema etc.).
+
+3. A linha `## SCRIPT`, seguida de um ÚNICO bloco de código iniciado por ```python e terminado por ```, contendo o arquivo de teste completo.
+
+Não inclua nenhum outro bloco de código na resposta.
+
+REQUISITOS TÉCNICOS OBRIGATÓRIOS (em caso de conflito com instruções anteriores, estes requisitos prevalecem):
+- Testes de UI usam o plugin oficial pytest-playwright e recebem a fixture `page` (e, se precisarem, `context`/`browser`) do próprio plugin.
+- É proibido criar navegador com `sync_playwright()` e é proibido criar fixture própria de browser/page.
+- As asserções de UI usam `expect` de `playwright.sync_api`.
+- Dê preferência a locators recomendados: `get_by_role`, `get_by_label`, `get_by_text`, `get_by_test_id`.
+- Nada de `time.sleep`.
+- A base URL vem de uma constante no topo do arquivo ou da opção `--base-url`.
+- Testes de API usam pytest + requests, sem mudança.

@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Administrador visualiza o contador de Messages após login",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "1. Fazer login no painel com admin/password. 2. Ler o número exibido ao lado de Messages.",
+  "esperado": "O contador é exibido como número inteiro não negativo."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Visitante recebe confirmação ao enviar contato válido",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Preencher nome, e-mail, telefone, assunto e mensagem válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe \"Thanks for getting in touch {nome}!\"."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Contador de Messages aumenta exatamente em uma unidade após novo envio",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA3",
+  "passos": "1. Logar e anotar o contador. 2. Fazer logout. 3. Visitante envia contato válido. 4. Logar novamente e ler o contador.",
+  "esperado": "Contador posterior é igual ao anotado + 1."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Mensagem recém-enviada aparece na caixa do administrador",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. Visitante envia contato válido. 2. Logar no painel. 3. Abrir Messages.",
+  "esperado": "A lista contém linha com o nome do remetente e o assunto enviados."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Acesso direto à caixa de mensagens após logout exige login",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "1. Logar no painel. 2. Fazer logout. 3. Acessar /admin/messages diretamente.",
+  "esperado": "Tela de login é exibida (campos Username/Password e botão Login visíveis)."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login com senha incorreta não libera o painel",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "1. Acessar /admin. 2. Informar admin com senha inválida. 3. Clicar em Login.",
+  "esperado": "Permanece na tela de login; link Messages não aparece."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Envio de contato sem nome é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Deixar Name vazio e preencher os demais campos válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe erro de validação do nome; confirmação \"Thanks for getting in touch\" não aparece."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Envio de contato com e-mail em formato inválido é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Informar e-mail \"email-invalido\" e demais campos válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe erro de formato de e-mail; confirmação não aparece."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Assunto com 4 caracteres (abaixo do mínimo) é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Preencher assunto \"Abcd\" e demais campos válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe erro de tamanho do assunto; confirmação não aparece."
+ },
+ {
+  "id": "CT10",
+  "titulo": "Assunto com 5 caracteres (mínimo) é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Preencher assunto \"Preco\" e demais campos válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe \"Thanks for getting in touch {nome}!\"."
+ },
+ {
+  "id": "CT11",
+  "titulo": "Mensagem com 19 caracteres (abaixo do mínimo) é rejeitada",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Abrir a home. 2. Preencher mensagem com 19 caracteres e demais campos válidos. 3. Clicar em Submit.",
+  "esperado": "Exibe erro de tamanho da mensagem; confirmação não aparece."
+ }
+]

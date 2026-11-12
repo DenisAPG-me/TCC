@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US09",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 41.8,
+ "tokens": {
+  "total": 21573
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "ng()\n    params = {NAME_FILTER_PARAMETER: original[\"firstname\"]}\n\n    assert list_booking_ids(params) == [booking_id], (\n        \"Filtro inicial deve encontrar somente a reserva de nome único\"\n    )\n\n    delete_successfully(booking_id, valid_token)\n\n    response = api_request(\"GET\", BOOKING_PATH, params=params)\n    assert_status(response, READ_SUCCESS_STATUS)\n    assert response.json() == [], (\n        \"Filtro pelo nome da reserva excluída deve retornar lista vazia\"\n    )\n```\ntokens used\n21,573\n"
+}

@@ -1,0 +1,15 @@
+[
+ "Rotas: home em `BASE_URL`, painel em `/admin` e caixa de mensagens em `/admin/messages`. Acesso direto a `/admin/messages` sem sessão redireciona para a tela de login.",
+ "Credenciais: `admin` / `password`, conforme a User Story.",
+ "Login: campos rotulados `Username` e `Password` (`get_by_label`, `exact=True`) e botão `Login`.",
+ "Logout: botão `Logout` visível no painel autenticado.",
+ "Formulário de contato da home: campos rotulados `Name`, `Email`, `Phone`, `Subject` e `Message`, e botão `Submit`. Campos ausentes são preenchidos com string vazia.",
+ "Confirmação: texto exato \"Thanks for getting in touch <nome>!\" exibido após envio válido.",
+ "Contador: link `Messages` no painel contém um número inteiro no próprio texto (ex.: \"Messages 5\"). O valor é lido com regex `\\d+`.",
+ "Caixa de mensagens: cada mensagem é uma linha de tabela (`role=row`) contendo nome e assunto. O assunto usa um identificador único (uuid) para localizar a linha sem ambiguidade.",
+ "Dados válidos: telefone de 11 dígitos e e-mail em formato válido. Dados de cada teste são gerados com uuid, para evitar colisão entre execuções.",
+ "Visitante: cada envio usa um novo `browser_context` (fixture `browser` do pytest-playwright), sem sessão de admin.",
+ "Testes negativos (TC07, TC08) verificam a ausência de confirmação logo após o clique em Submit. Como não há feedback de erro conhecido, a ausência é validada pelo `expect` com `to_have_count(0)`. Esse método pode aceitar resultado falso se a resposta do servidor demorar mais do que o esperado.",
+ "Nenhum teste depende da ordem de execução; cada um cria seus próprios dados e sessões.",
+ "Base URL definida pela constante `BASE_URL` no topo do arquivo; a opção `--base-url` do pytest-playwright não é usada."
+]

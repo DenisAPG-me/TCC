@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "fixtures e helpers reutilizados",
+  "assercoes": "asserts de URL, texto e menu",
+  "espera": "expect com timeout, sem sleep",
+  "manutenibilidade": "constantes centralizadas, mas roles row/cell/main inexistentes e browser proprio"
+ }
+}

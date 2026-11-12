@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário totalmente vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "1. Acessar `/auth/login` 2. Clicar em \"Login\" sem preencher campos",
+  "esperado": "Exibe \"Email is required\" e \"Password is required\"; usuário continua na tela de login"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com e-mail preenchido e senha vazia",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "1. Acessar `/auth/login` 2. Informar e-mail da conta demo 3. Deixar senha vazia 4. Clicar em \"Login\"",
+  "esperado": "Exibe \"Password is required\"; não exibe \"Email is required\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Acessar `/auth/login` 2. Informar e-mail da conta demo e senha incorreta 3. Clicar em \"Login\"",
+  "esperado": "Exibe \"Invalid email or password\"; permanece em `/auth/login`; menu do usuário não aparece e \"Sign in\" continua visível"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Checkout sem autenticação solicita credenciais",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "1. Adicionar produto ao carrinho sem login 2. Abrir carrinho 3. Clicar em \"Proceed to checkout\"",
+  "esperado": "Passo de login do checkout exibe campos de e-mail e senha"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Autenticação dentro do checkout permite avançar",
+  "tipo": "Positivo",
+  "criterio": "CA3, CA4",
+  "passos": "1. Executar CT04 2. Informar credenciais válidas 3. Clicar em \"Login\"",
+  "esperado": "Checkout reconhece o usuário e o botão para avançar ao endereço fica disponível"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login válido exibe \"My account\" e nome no menu",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. Acessar `/auth/login` 2. Informar credenciais válidas 3. Clicar em \"Login\"",
+  "esperado": "Redireciona para `/account`; título \"My account\"; menu exibe o nome do usuário em vez de \"Sign in\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Endereço com todos os campos obrigatórios vazios",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "1. Login 2. Adicionar produto 3. Avançar até o passo de endereço 4. Limpar rua, número, cidade, estado e CEP",
+  "esperado": "Botão de avançar para pagamento fica desabilitado"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Endereço com apenas o CEP vazio",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "1. Login 2. Adicionar produto 3. Avançar até endereço 4. Preencher todos os campos exceto CEP",
+  "esperado": "Botão de avançar para pagamento continua desabilitado"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Endereço completo permite avançar ao pagamento",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "1. Login 2. Adicionar produto 3. Avançar até endereço 4. Preencher país, CEP, número, rua, cidade e estado 5. Avançar",
+  "esperado": "Botão habilitado; passo de pagamento é exibido"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Confirmação desabilitada sem método de pagamento",
+  "tipo": "Borda",
+  "criterio": "CA6",
+  "passos": "1. Chegar ao passo de pagamento 2. Não escolher método de pagamento",
+  "esperado": "Botão \"Confirm\" desabilitado"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Compra com cartão de crédito fictício válido",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "1. Chegar ao passo de pagamento 2. Escolher \"Credit Card\" 3. Informar número, validade futura, CVV e titular 4. Confirmar 5. Confirmar o pedido",
+  "esperado": "Exibe \"Payment was successful\" e depois \"Thanks for your order! Your invoice number is INV-...\""
+ }
+]

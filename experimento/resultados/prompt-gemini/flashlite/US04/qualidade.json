@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes ok, comentarios redundantes",
+  "estrutura": "fixture autouse trivial, preenchimento duplicado em cada teste, sem helpers",
+  "assercoes": "mensagens de negocio verificadas, mas API invalida impede execucao",
+  "espera": "auto-wait do expect, sem sleep",
+  "manutenibilidade": "test-id estaveis, mas valores hardcoded sem constantes"
+ }
+}

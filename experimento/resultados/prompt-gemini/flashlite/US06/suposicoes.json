@@ -1,0 +1,14 @@
+[
+ "**URL Base:** `https://automationintesting.online/`",
+ "**Credenciais Administrativas:** Usuário `admin`, Senha `password`",
+ "**Rotas:**",
+ "Painel administrativo / Login: `https://automationintesting.online/#/admin` ou `/admin`",
+ "Página inicial: `https://automationintesting.online/`",
+ "**Seletores e Elementos da Interface:**",
+ "Campos de login admin: Input de usuário com `get_by_label(\"Username\")` ou `data-testid=\"username\"`; input de senha com `get_by_label(\"Password\")` ou `data-testid=\"password\"`; botão de login `get_by_role(\"button\", { name: \"Login\" })` ou equivalente.",
+ "Contador de mensagens: Elemento contendo o texto \"Messages\" ou badge/contador próximo com seletor robusto (ex: `id=\"messagesCount\"` ou `get_by_text(\"Messages\")`).",
+ "Formulário de contato da página inicial: Inputs `name`, `email`, `phone`, `subject`, `description`/`message` e botão de envio `get_by_role(\"button\", { name: \"Submit\" })`.",
+ "Mensagem de confirmação: Texto contendo \"Thanks for getting in touch\".",
+ "Seção de mensagens no admin: Aba ou link \"Messages\" no painel administrativo.",
+ "Botão de logout: Botão com texto \"Logout\" ou \"Log out\"."
+]

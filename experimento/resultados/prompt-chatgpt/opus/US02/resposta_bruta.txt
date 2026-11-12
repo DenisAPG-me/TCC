@@ -1,0 +1,162 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Adicionar 3 unidades de Claw Hammer ao carrinho | positivo | CA01 | Abrir a home, buscar "Claw Hammer", abrir o produto, definir quantidade 3 e clicar em adicionar ao carrinho | Exibe a mensagem "Product added to shopping cart." e o indicador do carrinho mostra 3 |
+| CT002 | Totais do carrinho com 3 unidades | positivo | CA02 | Abrir Claw Hammer, registrar o preço unitário, adicionar 3 unidades e abrir o carrinho | A quantidade da linha é 3, o total da linha é igual ao preço unitário x 3 e o total do carrinho é igual ao total da linha |
+| CT003 | Alterar a quantidade no carrinho de 3 para 1 | positivo | CA03 | Abrir Claw Hammer, registrar o preço unitário, adicionar 3 unidades, abrir o carrinho, alterar a quantidade para 1 e confirmar o campo | O total do carrinho passa a ser igual ao preço unitário |
+| CT004 | Bloquear a adição de 3 unidades de Thor Hammer | negativo | CA04 | Abrir a home, buscar "Thor Hammer", abrir o produto, definir quantidade 3 e clicar em adicionar ao carrinho | Exibe a mensagem "You can only have one Thor Hammer in the cart." |
+| CT005 | Bloquear a adição de 2 unidades de Thor Hammer | borda | CA04 | Abrir Thor Hammer, definir quantidade 2, o menor valor acima de um, e clicar em adicionar ao carrinho | Exibe a mensagem "You can only have one Thor Hammer in the cart." |
+
+SUPOSIÇÕES
+
+1. **Explícito:** a User Story traz quatro critérios numerados de 1 a 4, sem identificadores próprios. **Inferido:** atribuí os IDs CA01 a CA04 na mesma ordem (1→CA01, 2→CA02, 3→CA03, 4→CA04).
+2. **Conflito de regras:** a mensagem traz "REQUISITOS TÉCNICOS OBRIGATÓRIOS", declarados prevalentes sobre as regras anteriores. Por isso, o código usa o plugin oficial pytest-playwright e a fixture `page`. Não usa `sync_playwright()` nem fixture própria de browser ou page. Suponho que o plugin esteja instalado. Assim, `pytest nome_do_arquivo.py` executa os testes no Chromium headless, o padrão do plugin.
+3. **Inferido:** a User Story pede apenas comportamento de interface web. Por isso, não há testes de API REST.
+4. **Inferido:** não é necessário login para adicionar itens ao carrinho, pois a User Story não menciona autenticação. Todos os casos dependem dessa suposição.
+5. **Inferido:** o carrinho fica no armazenamento do navegador. Como o pytest-playwright cria um contexto novo por teste, cada teste começa com o carrinho vazio, sem limpeza adicional. Os casos CT002 e CT003 preparam o próprio carrinho pela interface.
+6. **Pré-condição externa:** os produtos "Claw Hammer" e "Thor Hammer" existem, estão disponíveis e aparecem na busca da página inicial com esses nomes exatos.
+7. **Inferido (seletores):** o site expõe o atributo `data-test`, configurado como atributo de test id. Os valores usados são:
+   - `search-query` e `search-submit` para a busca;
+   - `product-name`, `unit-price`, `quantity` e `add-to-cart` na página do produto;
+   - `cart-quantity` e `nav-cart` no cabeçalho;
+   - `product-quantity`, `line-price` e `cart-total` no carrinho.
+
+   Todos estão centralizados no dicionário `TEST_IDS`.
+8. **Inferido:** as mensagens de CA01 e CA04 aparecem como texto visível na página, por exemplo em uma notificação. Elas são localizadas pelo texto exato informado na User Story.
+9. **Inferido:** os preços aparecem como número decimal com ponto, com ou sem o símbolo "$". As comparações extraem o valor numérico com duas casas decimais. O preço unitário de referência é o exibido na página do produto.
+10. **Inferido:** alterar a quantidade no carrinho exige preencher o campo e tirar o foco dele (tecla Tab) para o total ser recalculado (CT003).
+11. **Inferido (CT005):** a regra "You can only have one Thor Hammer in the cart." vale para qualquer quantidade maior que um, não apenas para 3. A User Story só exemplifica o valor 3, então CT005 depende dessa interpretação.
+12. **Ausência de outros casos:** não incluí cenários sem fundamento no texto, como quantidade zero, negativa, acima de estoque ou adicionar 1 Thor Hammer. A User Story não define esses comportamentos.
+13. **Ajustes possíveis:** o código é sintaticamente completo, mas seletores, textos e formatos inferidos podem precisar de ajuste no sistema real. Os valores ajustáveis estão concentrados nas constantes do topo do arquivo.
+
+```python
+import re
+from decimal import Decimal
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+PRODUCT_AVAILABLE = "Claw Hammer"
+PRODUCT_LIMITED = "Thor Hammer"
+
+MSG_ADDED = "Product added to shopping cart."
+MSG_THOR_LIMIT = "You can only have one Thor Hammer in the cart."
+
+TEST_ID_ATTRIBUTE = "data-test"
+TEST_IDS = {
+    "search_input": "search-query",
+    "search_submit": "search-submit",
+    "product_name": "product-name",
+    "unit_price": "unit-price",
+    "quantity": "quantity",
+    "add_to_cart": "add-to-cart",
+    "cart_badge": "cart-quantity",
+    "nav_cart": "nav-cart",
+    "cart_line_quantity": "product-quantity",
+    "cart_line_total": "line-price",
+    "cart_total": "cart-total",
+}
+
+DEFAULT_TIMEOUT_MS = 10_000
+
+expect.set_options(timeout=DEFAULT_TIMEOUT_MS)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id_attribute(playwright):
+    playwright.selectors.set_test_id_attribute(TEST_ID_ATTRIBUTE)
+
+
+def parse_amount(text: str) -> Decimal:
+    match = re.search(r"\d+(?:\.\d+)?", text.replace(",", ""))
+    assert match, f"Valor monetário não encontrado em: {text!r}"
+    return Decimal(match.group(0)).quantize(Decimal("0.01"))
+
+
+def amount_pattern(value: Decimal) -> re.Pattern:
+    return re.compile(rf"^\s*\$?\s*{re.escape(f'{value:.2f}')}\s*$")
+
+
+def open_product(page: Page, name: str) -> None:
+    page.goto(BASE_URL)
+    page.get_by_test_id(TEST_IDS["search_input"]).fill(name)
+    page.get_by_test_id(TEST_IDS["search_submit"]).click()
+    card = page.get_by_test_id(TEST_IDS["product_name"]).filter(
+        has_text=re.compile(rf"^\s*{re.escape(name)}\s*$")
+    )
+    expect(card).to_have_count(1)
+    card.click()
+    expect(page.get_by_test_id(TEST_IDS["product_name"])).to_have_text(name)
+
+
+def read_unit_price(page: Page) -> Decimal:
+    unit_price = page.get_by_test_id(TEST_IDS["unit_price"])
+    expect(unit_price).to_have_text(re.compile(r"\d"))
+    return parse_amount(unit_price.inner_text())
+
+
+def add_to_cart(page: Page, quantity: int) -> None:
+    quantity_input = page.get_by_test_id(TEST_IDS["quantity"])
+    quantity_input.fill(str(quantity))
+    expect(quantity_input).to_have_value(str(quantity))
+    page.get_by_test_id(TEST_IDS["add_to_cart"]).click()
+
+
+def prepare_cart_with_three_units(page: Page) -> Decimal:
+    open_product(page, PRODUCT_AVAILABLE)
+    unit_price = read_unit_price(page)
+    add_to_cart(page, 3)
+    expect(page.get_by_test_id(TEST_IDS["cart_badge"])).to_have_text("3")
+    page.get_by_test_id(TEST_IDS["nav_cart"]).click()
+    expect(page.get_by_test_id(TEST_IDS["cart_line_quantity"])).to_have_count(1)
+    expect(page.get_by_test_id(TEST_IDS["cart_line_quantity"])).to_have_value("3")
+    return unit_price
+
+
+def test_CT001_adicionar_tres_unidades_claw_hammer(page: Page):
+    open_product(page, PRODUCT_AVAILABLE)
+    add_to_cart(page, 3)
+
+    expect(page.get_by_text(MSG_ADDED, exact=True)).to_be_visible()
+    expect(page.get_by_test_id(TEST_IDS["cart_badge"])).to_have_text("3")
+
+
+def test_CT002_totais_carrinho_com_tres_unidades(page: Page):
+    unit_price = prepare_cart_with_three_units(page)
+    expected_line_total = unit_price * 3
+
+    line_total = page.get_by_test_id(TEST_IDS["cart_line_total"])
+    cart_total = page.get_by_test_id(TEST_IDS["cart_total"])
+
+    expect(line_total).to_have_text(amount_pattern(expected_line_total))
+    expect(cart_total).to_have_text(amount_pattern(expected_line_total))
+    assert parse_amount(cart_total.inner_text()) == parse_amount(line_total.inner_text())
+
+
+def test_CT003_alterar_quantidade_carrinho_para_um(page: Page):
+    unit_price = prepare_cart_with_three_units(page)
+
+    quantity_input = page.get_by_test_id(TEST_IDS["cart_line_quantity"])
+    quantity_input.fill("1")
+    quantity_input.press("Tab")
+
+    expect(quantity_input).to_have_value("1")
+    expect(page.get_by_test_id(TEST_IDS["cart_total"])).to_have_text(amount_pattern(unit_price))
+
+
+def test_CT004_bloquear_tres_unidades_thor_hammer(page: Page):
+    open_product(page, PRODUCT_LIMITED)
+    add_to_cart(page, 3)
+
+    expect(page.get_by_text(MSG_THOR_LIMIT, exact=True)).to_be_visible()
+
+
+def test_CT005_bloquear_duas_unidades_thor_hammer(page: Page):
+    open_product(page, PRODUCT_LIMITED)
+    add_to_cart(page, 2)
+
+    expect(page.get_by_text(MSG_THOR_LIMIT, exact=True)).to_be_visible()
+```

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros, docstring minima",
+  "estrutura": "helpers open/submit/expect; sem parametrizacao dos 16 testes",
+  "assercoes": "verifica mensagens exatas, confirmacao e valor preenchido",
+  "espera": "expect.set_options com timeout, sem sleep",
+  "manutenibilidade": "get_by_label falha no alvo; constantes boas"
+ }
+}

@@ -1,0 +1,92 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C05",
+  "US04-C08",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_enviar_formulario_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_text ambiguo/texto 'required' inexistente"
+  },
+  {
+   "teste": "test_ct02_telefone_abaixo_do_minimo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct03_assunto_e_mensagem_abaixo_do_minimo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct04_email_malformado",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct05_enviar_mensagem_valida",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  }
+ ]
+}

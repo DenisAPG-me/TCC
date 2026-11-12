@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 3,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "Claro, mensagens de erro úteis",
+  "estrutura": "Fixtures factory, limpeza, helpers",
+  "assercoes": "Mensagens e comparação completa, tipos",
+  "espera": "Timeout 30; dados únicos",
+  "manutenibilidade": "Constantes, UUID, limpeza de dados"
+ }
+}

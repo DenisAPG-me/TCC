@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 5,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes e comentarios claros",
+  "estrutura": "helpers e factory, algum envio duplicado inline",
+  "assercoes": "asserts de negocio, contagem exata, ausencia",
+  "espera": "expect.set_options e auto-wait",
+  "manutenibilidade": "test ids e constantes, mas regex message\\d+ inexistente"
+ }
+}

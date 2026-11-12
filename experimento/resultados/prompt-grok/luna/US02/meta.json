@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 18.75,
+ "tokens": {
+  "total": 3347
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "e_de_claw_hammer(page: Page, request):\n    _open_product(page, _base_url(request), \"Claw Hammer\")\n    _set_quantity(page, 1)\n    _add_to_cart(page)\n    expect(page.get_by_text(\"Product added to shopping cart.\", exact=True)).to_be_visible()\n    assert _cart_count(page) == 1\n    _open_cart(page)\n    _, _, unit_price, line_total, quantity = _line_values(page, \"Claw Hammer\")\n    assert quantity == 1\n    assert line_total == unit_price\n    assert _cart_total(page) == unit_price\n```\ntokens used\n3,347\n"
+}

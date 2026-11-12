@@ -1,0 +1,174 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Envio do login vazio | negativo | CA01 | Abrir login e enviar o formulário sem preencher campos. | São exibidas as mensagens “Email is required” e “Password is required”. |
+| CT002 | Login com senha incorreta | negativo | CA02 | Abrir login, informar o e-mail de demonstração e uma senha incorreta, e enviar. | É exibida “Invalid email or password” e o usuário permanece sem sessão. |
+| CT003 | Checkout sem autenticação | negativo | CA03 | Adicionar um produto ao carrinho sem autenticar e avançar para o checkout. | A tela solicita e-mail e senha. |
+| CT004 | Login bem-sucedido | positivo | CA04 | Autenticar com a conta de demonstração. | A página “My account” é exibida e o nome do usuário aparece no menu. |
+| CT005 | Validação e preenchimento do endereço | negativo e positivo | CA05 | Autenticar, adicionar um produto, avançar ao checkout e tentar prosseguir com o endereço vazio; depois preencher os campos obrigatórios e prosseguir. | Com campos vazios, não avança; com país, CEP, número, rua, cidade e estado preenchidos, avança ao pagamento. |
+| CT006 | Pagamento e confirmação do pedido | positivo | CA06 | Autenticar, adicionar um produto, preencher o endereço, selecionar cartão, informar dados fictícios e confirmar o pagamento e o pedido. | São exibidas “Payment was successful” e “Thanks for your order!”, com número de nota no formato `INV-...`. |
+
+SUPOSIÇÕES
+
+1. Os critérios não têm identificadores próprios. A correspondência é: CA01 = critério 1, CA02 = critério 2, CA03 = critério 3, CA04 = critério 4, CA05 = critério 5 e CA06 = critério 6.
+2. A User Story especifica fluxos de interface web, sem exigir testes de API. O código usa Python, pytest e a API síncrona do Playwright. Seguindo o requisito técnico específico da User Story, os testes recebem a fixture `page` do plugin oficial `pytest-playwright`; portanto, essa dependência precisa estar instalada para executar o arquivo.
+3. A URL base é `https://practicesoftwaretesting.com/`. Deduzo a rota `/auth/login` para login e a página inicial como catálogo. Rotas, textos acessíveis, seletores, organização das páginas e disponibilidade dos controles precisam ser ajustados se diferirem no sistema real.
+4. O catálogo contém ao menos um produto com botão acessível “Add to cart”, e o carrinho oferece um botão “Proceed to checkout”. Esses controles são necessários para preparar os fluxos de checkout sem depender de dados criados por outro teste.
+5. A tela de login usa campos acessíveis “Email” e “Password”, botão “Login” e exibe literalmente as mensagens indicadas nos critérios. O nome exibido após autenticação é deduzido como “Jane Doe”, pois a User Story não informa o nome cadastrado.
+6. No checkout, deduzo campos acessíveis “Country”, “Postal code”, “Number”, “Street”, “City” e “State”, além de um controle para avançar ao pagamento. Para o país, assumo um campo selecionável com opção “United States”; endereço e país são dados fictícios de teste.
+7. Para pagamento, deduzo opção “Credit Card”, campos acessíveis “Card number”, “Expiration date”, “CVV” e “Card holder”, e controles para confirmar pagamento e pedido. Uso dados fictícios plausíveis; a User Story não define formato, credenciais de pagamento ou dados de cartão aceitos pelo ambiente.
+8. O passo de endereço vazio deve apresentar validação observável ou impedir o avanço, e o pedido confirmado deve apresentar um identificador que comece com `INV-`. A User Story não especifica o texto da validação nem o formato completo do identificador.
+9. Os casos negativos são pertinentes porque os critérios definem validação do login, rejeição de credenciais inválidas e bloqueio de avanço com endereço incompleto. Os casos de borda ficam cobertos pelo envio vazio do formulário e do endereço. O código é uma implementação executável baseada nas suposições acima, sem comprovação de compatibilidade com o sistema real.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+
+# Valores inferidos a partir da User Story; ajuste se o ambiente real diferir.
+BASE_URL = "https://practicesoftwaretesting.com/"
+LOGIN_PATH = "/auth/login"
+DEMO_EMAIL = "customer@practicesoftwaretesting.com"
+DEMO_PASSWORD = "welcome01"
+INVALID_PASSWORD = "incorrect-password"
+
+ADDRESS = {
+    "country": "United States",
+    "postal_code": "94105",
+    "number": "123",
+    "street": "Market Street",
+    "city": "San Francisco",
+    "state": "California",
+}
+
+CARD = {
+    "number": "4111111111111111",
+    "expiration": "12/30",
+    "cvv": "123",
+    "holder": "Test Customer",
+}
+
+
+def open_login(page):
+    page.goto(f"{BASE_URL.rstrip('/')}{LOGIN_PATH}")
+    expect(page.get_by_label("Email")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def login_as_demo_user(page):
+    open_login(page)
+    page.get_by_label("Email").fill(DEMO_EMAIL)
+    page.get_by_label("Password").fill(DEMO_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+
+
+def add_product_to_cart(page):
+    page.goto(BASE_URL)
+    page.get_by_role("button", name="Add to cart").first.click()
+    expect(page.get_by_role("link", name=re.compile("Cart", re.IGNORECASE))).to_be_visible()
+
+
+def open_cart(page):
+    page.get_by_role("link", name=re.compile("Cart", re.IGNORECASE)).click()
+    expect(page.get_by_role("button", name=re.compile("Proceed to checkout", re.IGNORECASE))).to_be_visible()
+
+
+def proceed_from_cart(page):
+    open_cart(page)
+    page.get_by_role("button", name=re.compile("Proceed to checkout", re.IGNORECASE)).click()
+
+
+def fill_address(page):
+    page.get_by_label("Country").select_option(label=ADDRESS["country"])
+    page.get_by_label("Postal code").fill(ADDRESS["postal_code"])
+    page.get_by_label("Number").fill(ADDRESS["number"])
+    page.get_by_label("Street").fill(ADDRESS["street"])
+    page.get_by_label("City").fill(ADDRESS["city"])
+    page.get_by_label("State").fill(ADDRESS["state"])
+
+
+def advance_to_payment(page):
+    page.get_by_role("button", name=re.compile("Continue|Next|Payment", re.IGNORECASE)).click()
+    expect(page.get_by_text(re.compile("Payment", re.IGNORECASE)).first).to_be_visible()
+
+
+def fill_credit_card(page):
+    page.get_by_label("Credit Card").check()
+    page.get_by_label("Card number").fill(CARD["number"])
+    page.get_by_label("Expiration date").fill(CARD["expiration"])
+    page.get_by_label("CVV").fill(CARD["cvv"])
+    page.get_by_label("Card holder").fill(CARD["holder"])
+
+
+def test_CT001_envio_do_login_vazio(page):
+    open_login(page)
+
+    page.get_by_role("button", name="Login").click()
+
+    expect(page.get_by_text("Email is required", exact=True)).to_be_visible()
+    expect(page.get_by_text("Password is required", exact=True)).to_be_visible()
+
+
+def test_CT002_login_com_senha_incorreta(page):
+    open_login(page)
+    page.get_by_label("Email").fill(DEMO_EMAIL)
+    page.get_by_label("Password").fill(INVALID_PASSWORD)
+
+    page.get_by_role("button", name="Login").click()
+
+    expect(page.get_by_text("Invalid email or password", exact=True)).to_be_visible()
+    expect(page.get_by_label("Email")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+    expect(page.get_by_text("My account", exact=True)).to_have_count(0)
+
+
+def test_CT003_checkout_sem_autenticacao(page):
+    add_product_to_cart(page)
+    proceed_from_cart(page)
+
+    expect(page.get_by_label("Email")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def test_CT004_login_bem_sucedido(page):
+    login_as_demo_user(page)
+
+    expect(page.get_by_text("My account", exact=True)).to_be_visible()
+    expect(page.get_by_role("navigation").get_by_text("Jane Doe", exact=True)).to_be_visible()
+
+
+def test_CT005_validacao_e_preenchimento_do_endereco(page):
+    login_as_demo_user(page)
+    add_product_to_cart(page)
+    proceed_from_cart(page)
+
+    expect(page.get_by_label("Country")).to_be_visible()
+    page.get_by_role("button", name=re.compile("Continue|Next|Payment", re.IGNORECASE)).click()
+
+    expect(page.get_by_label("Country")).to_be_visible()
+    expect(page.get_by_label("Postal code")).to_be_visible()
+    expect(page.get_by_label("Number")).to_be_visible()
+
+    fill_address(page)
+    advance_to_payment(page)
+
+
+def test_CT006_pagamento_e_confirmacao_do_pedido(page):
+    login_as_demo_user(page)
+    add_product_to_cart(page)
+    proceed_from_cart(page)
+
+    fill_address(page)
+    advance_to_payment(page)
+    fill_credit_card(page)
+
+    page.get_by_role("button", name=re.compile("Confirm|Pay", re.IGNORECASE)).click()
+    expect(page.get_by_text("Payment was successful", exact=True)).to_be_visible()
+
+    page.get_by_role("button", name=re.compile("Confirm order|Place order", re.IGNORECASE)).click()
+    expect(page.get_by_text("Thanks for your order!", exact=True)).to_be_visible()
+    expect(page.get_by_text(re.compile(r"INV-[A-Za-z0-9-]+"))).to_be_visible()
+```

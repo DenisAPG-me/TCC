@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Contador de Messages exibe número após login",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; informar usuário admin e senha password; clicar em Login; localizar o link Messages",
+  "esperado": "Link Messages visível com número inteiro não negativo ao lado"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Formulário de contato válido exibe confirmação com nome",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Acessar página inicial; preencher nome, email, telefone, assunto e mensagem válidos; clicar em Submit",
+  "esperado": "Texto \"Thanks for getting in touch <nome>!\" visível"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Contador aumenta em uma unidade após envio de visitante",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA3",
+  "passos": "Logar como admin e anotar contador; enviar contato válido como visitante em outro contexto; logar como admin em nova sessão e ler contador",
+  "esperado": "Contador posterior igual ao anotado + 1"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Mensagem recém-enviada aparece na caixa com nome e assunto",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Enviar contato válido como visitante com nome e assunto únicos; logar como admin; clicar em Messages; localizar linha com nome e assunto",
+  "esperado": "Linha da mensagem visível contendo nome e assunto informados"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Caixa de mensagens exige login após logout",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Logar como admin; clicar em Logout; acessar diretamente /admin/messages",
+  "esperado": "Formulário de login (campo Username) visível e caixa não exibida"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Formulário vazio não exibe confirmação",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar página inicial; clicar em Submit sem preencher campos",
+  "esperado": "Formulário permanece visível e texto de confirmação ausente"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Nome com acentos aparece corretamente na confirmação",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar página inicial; preencher nome \"José Conceição\" e demais campos válidos; clicar em Submit",
+  "esperado": "Texto \"Thanks for getting in touch José Conceição!\" visível"
+ },
+ {
+  "id": "CT08",
+  "titulo": "E-mail inválido não incrementa o contador",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Logar como admin e anotar contador; enviar contato com e-mail inválido como visitante; aguardar carregamento; logar como admin em nova sessão e ler contador",
+  "esperado": "Confirmação ausente e contador igual ao anotado antes"
+ }
+]

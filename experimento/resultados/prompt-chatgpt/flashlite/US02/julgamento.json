@@ -1,0 +1,77 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_adicionar_produto_com_quantidade_especifica",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode: 2+ elementos)"
+  },
+  {
+   "teste": "test_CT002_verificar_total_da_linha_e_do_carrinho",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode: 2+ elementos)"
+  },
+  {
+   "teste": "test_CT003_alterar_quantidade_no_carrinho_para_um",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode: 2+ elementos)"
+  },
+  {
+   "teste": "test_CT004_tentar_adicionar_mais_de_uma_unidade_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode: 2+ elementos)"
+  }
+ ]
+}

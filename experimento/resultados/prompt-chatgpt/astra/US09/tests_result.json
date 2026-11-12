@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_negar_exclusao_sem_token",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT002_negar_exclusao_com_token_invalido",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT003_excluir_com_token_valido",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT004_consultar_reserva_excluida",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT005_repetir_exclusao_preservando_demais",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "ng_id)\n                ^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:81: in get_booking\n    assert_status(response, READ_SUCCESS_STATUS)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:68: in assert_status\n    assert response.status_code == expected, (\nE   AssertionError: GET https://restful-booker.herokuapp.com/booking/677: esperado HTTP 200, recebido 404; corpo='Not Found'\nE   assert 404 == 200\nE    +  where 404 = <Response [404]>.status_code"
+  },
+  {
+   "nodeid": "script.py::test_CT006_filtrar_nome_da_reserva_excluida",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:81: in get_booking\n    assert_status(response, READ_SUCCESS_STATUS)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:68: in assert_status\n    assert response.status_code == expected, (\nE   AssertionError: GET https://restful-booker.herokuapp.com/booking/677: esperado HTTP 200, recebido 404; corpo='Not Found'\nE   assert 404 == 200\nE    +  where 404 = <Response [404]>.status_code\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py::test_CT005_repetir_exclusao_preservando_demais\n1 failed, 5 passed, 1 warning in 341.06s (0:05:41)\n",
+ "returncode": 1,
+ "duracao_s": 341.63
+}

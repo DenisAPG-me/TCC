@@ -1,0 +1,19 @@
+[
+ "**Base URL:** `https://automationintesting.online/`, definida na constante `BASE_URL`.",
+ "**Login do administrador:** rota `/admin`; campos com labels `Username` e `Password`; botão com nome acessível `Login`; credenciais `admin` / `password`.",
+ "**Logout:** link com nome acessível `Logout` no painel.",
+ "**Contador de Messages:** link com nome acessível contendo \"Messages\". O número aparece no texto do link e é sempre exibido, inclusive `0`.",
+ "**Caixa de mensagens:** rota `/admin/messages`, acessada pelo link Messages. A lista é uma tabela em que cada mensagem é uma `row` contendo nome do remetente e assunto.",
+ "**Acesso sem login:** acessar `/admin/messages` sem sessão exibe a tela de login (campos Username e botão Login).",
+ "**Formulário de contato (home):** campos com labels `Name`, `Email`, `Phone`, `Subject` e `Message`; botão `Submit`.",
+ "**Confirmação:** texto exato \"Thanks for getting in touch {nome}!\", exibido após envio válido.",
+ "**Regras de validação assumidas:**",
+ "Name: obrigatório, entre 3 e 18 caracteres. Mensagem de vazio: \"Name may not be blank\".",
+ "Email: obrigatório, formato válido. Mensagem contendo \"well-formed email\".",
+ "Phone: obrigatório, 11 a 21 caracteres. Os testes usam `01234567890` (11 caracteres).",
+ "Subject: entre 5 e 100 caracteres. Mensagem contendo \"Subject ... between 5 and 100 characters\".",
+ "Message: entre 20 e 2000 caracteres. Mensagem contendo \"Message ... between 20 and 2000 characters\".",
+ "**Dados únicos:** nomes, assuntos e e-mails recebem sufixo hexadecimal de 6 caracteres gerado com `uuid`, para isolar as mensagens entre execuções.",
+ "**Sessões:** cada teste recebe um `page` novo do plugin pytest-playwright. Em CT03 e CT04 o visitante e o administrador usam o mesmo `page`, em momentos distintos.",
+ "**Mensagens de erro:** o texto exato das mensagens de validação é uma suposição. Se o sistema usar outros textos, os `re.compile` de CT07, CT08, CT09 e CT11 precisam ser ajustados."
+]

@@ -1,0 +1,367 @@
+{
+ "created": 1793386915.1240482,
+ "duration": 48.78381299972534,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US04",
+ "environment": {},
+ "summary": {
+  "passed": 11,
+  "total": 11,
+  "collected": 11
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_formulario_vazio_exibe_campos_obrigatorios[chromium]",
+     "type": "Function",
+     "lineno": 54
+    },
+    {
+     "nodeid": "script.py::test_ct02_telefone_com_10_caracteres_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_ct03_telefone_com_11_caracteres_e_aceito[chromium]",
+     "type": "Function",
+     "lineno": 74
+    },
+    {
+     "nodeid": "script.py::test_ct04_telefone_com_21_caracteres_e_aceito[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_ct05_telefone_com_22_caracteres_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 88
+    },
+    {
+     "nodeid": "script.py::test_ct06_assunto_4_e_mensagem_19_caracteres_exibem_erros[chromium]",
+     "type": "Function",
+     "lineno": 95
+    },
+    {
+     "nodeid": "script.py::test_ct07_assunto_5_e_mensagem_20_caracteres_sao_aceitos[chromium]",
+     "type": "Function",
+     "lineno": 103
+    },
+    {
+     "nodeid": "script.py::test_ct08_assunto_100_e_mensagem_2000_caracteres_sao_aceitos[chromium]",
+     "type": "Function",
+     "lineno": 111
+    },
+    {
+     "nodeid": "script.py::test_ct09_assunto_101_e_mensagem_2001_caracteres_exibem_erros[chromium]",
+     "type": "Function",
+     "lineno": 119
+    },
+    {
+     "nodeid": "script.py::test_ct10_email_malformado_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 127
+    },
+    {
+     "nodeid": "script.py::test_ct11_dados_validos_exibem_confirmacao[chromium]",
+     "type": "Function",
+     "lineno": 134
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_formulario_vazio_exibe_campos_obrigatorios[chromium]",
+   "lineno": 54,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_formulario_vazio_exibe_campos_obrigatorios[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4555602000327781,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1542493000160903,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012625299976207316,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_telefone_com_10_caracteres_exibe_erro[chromium]",
+   "lineno": 67,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_telefone_com_10_caracteres_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10304749989882112,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.6890348999295384,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.018424500012770295,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_telefone_com_11_caracteres_e_aceito[chromium]",
+   "lineno": 74,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_telefone_com_11_caracteres_e_aceito[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12543800007551908,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.817255900008604,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012581299990415573,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_telefone_com_21_caracteres_e_aceito[chromium]",
+   "lineno": 81,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_telefone_com_21_caracteres_e_aceito[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11880199995357543,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.604404600104317,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01365559990517795,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_telefone_com_22_caracteres_exibe_erro[chromium]",
+   "lineno": 88,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_telefone_com_22_caracteres_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12592180003412068,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.758455300005153,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013787899981252849,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_assunto_4_e_mensagem_19_caracteres_exibem_erros[chromium]",
+   "lineno": 95,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_assunto_4_e_mensagem_19_caracteres_exibem_erros[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11570770002435893,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.6786230000434443,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014313100022263825,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_assunto_5_e_mensagem_20_caracteres_sao_aceitos[chromium]",
+   "lineno": 103,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_assunto_5_e_mensagem_20_caracteres_sao_aceitos[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12653880007565022,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3463434999575838,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012942199944518507,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_assunto_100_e_mensagem_2000_caracteres_sao_aceitos[chromium]",
+   "lineno": 111,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_assunto_100_e_mensagem_2000_caracteres_sao_aceitos[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11695830000098795,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.7057497000787407,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.015147499972954392,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_assunto_101_e_mensagem_2001_caracteres_exibem_erros[chromium]",
+   "lineno": 119,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct09_assunto_101_e_mensagem_2001_caracteres_exibem_erros[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12669810000807047,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 8.717396999942139,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014203500002622604,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct10_email_malformado_exibe_erro[chromium]",
+   "lineno": 127,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct10_email_malformado_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12130270001944155,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.409726599929854,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013660999946296215,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct11_dados_validos_exibem_confirmacao[chromium]",
+   "lineno": 134,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct11_dados_validos_exibem_confirmacao[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12240110000129789,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 14.838080700021237,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.23917850002180785,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

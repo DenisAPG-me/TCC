@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT-01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Criar reserva; tentar excluí-la sem cabeçalho de autenticação; consultar a reserva.",
+  "esperado": "Exclusão retorna 403; consulta retorna 200."
+ },
+ {
+  "id": "CT-02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Criar reserva; tentar excluí-la com token inválido; consultar a reserva.",
+  "esperado": "Exclusão retorna 403; a reserva continua existindo."
+ },
+ {
+  "id": "CT-03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Criar reserva; autenticar; excluir a reserva com o token obtido.",
+  "esperado": "Exclusão retorna 201."
+ },
+ {
+  "id": "CT-04",
+  "titulo": "Consultar reserva excluída",
+  "tipo": "Positivo",
+  "criterio": "3, 4",
+  "passos": "Criar reserva; autenticar e excluí-la; consultar pelo mesmo identificador.",
+  "esperado": "Exclusão retorna 201; consulta retorna 404."
+ },
+ {
+  "id": "CT-05",
+  "titulo": "Repetir exclusão sem afetar outra reserva",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Criar duas reservas; excluir a primeira; tentar excluí-la novamente; consultar a segunda.",
+  "esperado": "Segunda exclusão retorna erro 4xx; a outra reserva continua consultável com 200."
+ },
+ {
+  "id": "CT-06",
+  "titulo": "Filtrar reservas pelo nome da reserva excluída",
+  "tipo": "Positivo",
+  "criterio": "6",
+  "passos": "Criar reserva com nome exclusivo; autenticar e excluí-la; listar reservas filtrando pelo primeiro nome.",
+  "esperado": "A exclusão retorna 201; a lista filtrada está vazia."
+ }
+]

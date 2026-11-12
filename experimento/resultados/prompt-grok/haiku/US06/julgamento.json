@@ -1,0 +1,130 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C05",
+  "US06-C06",
+  "US06-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login invalido"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C05"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio sem assunto"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC02_envio_valido_exibe_confirmacao_com_nome",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC03_contador_aumenta_uma_unidade_apos_envio",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "espera login apos Logout, mas Logout leva a home"
+  },
+  {
+   "teste": "test_TC04_mensagem_aparece_na_caixa_com_nome_e_assunto",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC05_apos_logout_acesso_direto_a_messages_exige_login",
+   "categoria": "espera/timing",
+   "nota": "Logout clicado antes do login concluir; goto aborta"
+  },
+  {
+   "teste": "test_TC07_envio_sem_nome_nao_confirma_e_nao_altera_contador",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "espera login apos Logout, mas Logout leva a home"
+  },
+  {
+   "teste": "test_TC08_envio_sem_assunto_nao_exibe_confirmacao",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC09_nome_e_assunto_com_acentos_aparecem_corretamente",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  }
+ ]
+}

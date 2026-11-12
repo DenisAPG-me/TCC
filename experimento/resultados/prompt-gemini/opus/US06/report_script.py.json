@@ -1,0 +1,550 @@
+{
+ "created": 1793387128.5763028,
+ "duration": 195.37482571601868,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06",
+ "environment": {},
+ "summary": {
+  "failed": 5,
+  "passed": 4,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_admin_autenticado_visualiza_contador_messages[chromium]",
+     "type": "Function",
+     "lineno": 68
+    },
+    {
+     "nodeid": "script.py::test_ct02_visitante_envia_formulario_valido[chromium]",
+     "type": "Function",
+     "lineno": 75
+    },
+    {
+     "nodeid": "script.py::test_ct03_envio_com_nome_em_branco_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_ct04_envio_com_assunto_no_tamanho_minimo[chromium]",
+     "type": "Function",
+     "lineno": 87
+    },
+    {
+     "nodeid": "script.py::test_ct05_envio_com_assunto_abaixo_do_minimo_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 93
+    },
+    {
+     "nodeid": "script.py::test_ct06_contador_incrementa_apos_envio_do_visitante[chromium]",
+     "type": "Function",
+     "lineno": 99
+    },
+    {
+     "nodeid": "script.py::test_ct07_envio_invalido_nao_altera_contador[chromium]",
+     "type": "Function",
+     "lineno": 114
+    },
+    {
+     "nodeid": "script.py::test_ct08_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+     "type": "Function",
+     "lineno": 128
+    },
+    {
+     "nodeid": "script.py::test_ct09_acesso_direto_apos_logout_exige_login[chromium]",
+     "type": "Function",
+     "lineno": 149
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_admin_autenticado_visualiza_contador_messages[chromium]",
+   "lineno": 68,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_admin_autenticado_visualiza_contador_messages[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4557722000172362,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 30.89100469998084,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"username\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 70,
+      "message": "in test_ct01_admin_autenticado_visualiza_contador_messages"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 34,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:70: in test_ct01_admin_autenticado_visualiza_contador_messages\n    login(page, base_url)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:34: in login\n    page.get_by_test_id(\"username\").fill(ADMIN_USER)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_test_id(\"username\")"
+   },
+   "teardown": {
+    "duration": 0.014484799932688475,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_visitante_envia_formulario_valido[chromium]",
+   "lineno": 75,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_visitante_envia_formulario_valido[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10872999997809529,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.8024404000025243,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014097800012677908,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_envio_com_nome_em_branco_exibe_erro[chromium]",
+   "lineno": 81,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_envio_com_nome_em_branco_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12113030010368675,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.643523099948652,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013346599997021258,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_envio_com_assunto_no_tamanho_minimo[chromium]",
+   "lineno": 87,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_envio_com_assunto_no_tamanho_minimo[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11980400001630187,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3988574999384582,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0136749999364838,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_envio_com_assunto_abaixo_do_minimo_exibe_erro[chromium]",
+   "lineno": 93,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_envio_com_assunto_abaixo_do_minimo_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1260440000332892,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8617217000573874,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013191499980166554,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_contador_incrementa_apos_envio_do_visitante[chromium]",
+   "lineno": 99,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct06_contador_incrementa_apos_envio_do_visitante[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11980560002848506,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 32.75157299998682,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"username\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 101,
+      "message": "in test_ct06_contador_incrementa_apos_envio_do_visitante"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 34,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:101: in test_ct06_contador_incrementa_apos_envio_do_visitante\n    login(page, base_url)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:34: in login\n    page.get_by_test_id(\"username\").fill(ADMIN_USER)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_test_id(\"username\")"
+   },
+   "teardown": {
+    "duration": 0.014366899966262281,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_envio_invalido_nao_altera_contador[chromium]",
+   "lineno": 114,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct07_envio_invalido_nao_altera_contador[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12872220005374402,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 36.28279339999426,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"username\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 116,
+      "message": "in test_ct07_envio_invalido_nao_altera_contador"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 34,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:116: in test_ct07_envio_invalido_nao_altera_contador\n    login(page, base_url)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:34: in login\n    page.get_by_test_id(\"username\").fill(ADMIN_USER)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_test_id(\"username\")"
+   },
+   "teardown": {
+    "duration": 0.014348000055179,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+   "lineno": 128,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct08_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11576970003079623,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 46.325302099925466,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"username\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 138,
+      "message": "in test_ct08_mensagem_recem_enviada_aparece_na_caixa"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 34,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:138: in test_ct08_mensagem_recem_enviada_aparece_na_caixa\n    login(page, base_url)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:34: in login\n    page.get_by_test_id(\"username\").fill(ADMIN_USER)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_test_id(\"username\")"
+   },
+   "teardown": {
+    "duration": 0.015079700038768351,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_acesso_direto_apos_logout_exige_login[chromium]",
+   "lineno": 149,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct09_acesso_direto_apos_logout_exige_login[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11953400005586445,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 37.89987820002716,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"username\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 151,
+      "message": "in test_ct09_acesso_direto_apos_logout_exige_login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py",
+      "lineno": 34,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:151: in test_ct09_acesso_direto_apos_logout_exige_login\n    login(page, base_url)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US06\\script.py:34: in login\n    page.get_by_test_id(\"username\").fill(ADMIN_USER)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_test_id(\"username\")"
+   },
+   "teardown": {
+    "duration": 0.24094070005230606,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

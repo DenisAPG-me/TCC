@@ -1,0 +1,229 @@
+{
+ "created": 1793382250.6755817,
+ "duration": 23.82029366493225,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "failed": 1,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+     "type": "Function",
+     "lineno": 83
+    },
+    {
+     "nodeid": "script.py::test_CT002_busca_com_termo_em_maiusculas_retorna_mesmos_produtos[chromium]",
+     "type": "Function",
+     "lineno": 95
+    },
+    {
+     "nodeid": "script.py::test_CT003_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+     "type": "Function",
+     "lineno": 110
+    },
+    {
+     "nodeid": "script.py::test_CT004_ordenar_por_preco_crescente_ordena_precos_da_pagina[chromium]",
+     "type": "Function",
+     "lineno": 118
+    },
+    {
+     "nodeid": "script.py::test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca[chromium]",
+     "type": "Function",
+     "lineno": 128
+    },
+    {
+     "nodeid": "script.py::test_CT006_ordenar_por_nome_z_a_ordena_nomes_em_ordem_decrescente[chromium]",
+     "type": "Function",
+     "lineno": 143
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+   "lineno": 83,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.33130640001036227,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.267977499985136,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0053536000195890665,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_busca_com_termo_em_maiusculas_retorna_mesmos_produtos[chromium]",
+   "lineno": 95,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_busca_com_termo_em_maiusculas_retorna_mesmos_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.04489659995306283,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.4790661999722943,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0031856000423431396,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+   "lineno": 110,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.03970419999677688,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.3265489999903366,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.004340199986472726,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_ordenar_por_preco_crescente_ordena_precos_da_pagina[chromium]",
+   "lineno": 118,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_ordenar_por_preco_crescente_ordena_precos_da_pagina[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.04384519997984171,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.485884000081569,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.004056299920193851,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca[chromium]",
+   "lineno": 128,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.044893300044350326,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.4425379999447614,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py",
+     "lineno": 141,
+     "message": "AssertionError: Pre\u00e7os fora de ordem crescente: [13.41, 12.58, 11.48, 11.14, 20.14, 18.63]\nassert [13.41, 12.58... 20.14, 18.63] == [11.14, 11.48... 18.63, 20.14]\n  \n  At index 0 diff: 13.41 != 11.14\n  Use -v to get more diff"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py",
+      "lineno": 141,
+      "message": "in test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py:141: in test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca\n    assert prices == sorted(prices), f\"Pre\u00e7os fora de ordem crescente: {prices}\"\nE   AssertionError: Pre\u00e7os fora de ordem crescente: [13.41, 12.58, 11.48, 11.14, 20.14, 18.63]\nE   assert [13.41, 12.58... 20.14, 18.63] == [11.14, 11.48... 18.63, 20.14]\nE     \nE     At index 0 diff: 13.41 != 11.14\nE     Use -v to get more diff"
+   },
+   "teardown": {
+    "duration": 0.0033307999838143587,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_ordenar_por_nome_z_a_ordena_nomes_em_ordem_decrescente[chromium]",
+   "lineno": 143,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT006_ordenar_por_nome_z_a_ordena_nomes_em_ordem_decrescente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.041490099974907935,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.119142899988219,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.055335600045509636,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

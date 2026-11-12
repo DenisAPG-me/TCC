@@ -1,0 +1,11 @@
+[
+ "Tecnologia escolhida: Python + pytest + pytest-playwright, utilizando a fixture `page` integrada conforme os REQUISITOS TÉCNICOS OBRIGATÓRIOS.",
+ "URL base: `https://practicesoftwaretesting.com/` definida em constante no topo do arquivo.",
+ "Seletores e locators baseados nas boas práticas do Playwright e convencionais para aplicações web modernas (test IDs e roles):",
+ "Campo de busca: `page.get_by_placeholder(\"Search\")` ou `page.get_by_test_id(\"search-query\")`.",
+ "Botão de busca: `page.get_by_role(\"button\", name=\"Search\")` ou `page.get_by_test_id(\"search-submit\")`.",
+ "Indicador de busca / Mensagem de nenhum produto: `page.get_by_text(\"There are no products found.\")` e elementos de indicação da query de busca.",
+ "Seletor de ordenação (Sort): `page.get_by_test_id(\"sort\")` ou elemento `select` de ordenação.",
+ "Cards de produtos: `page.get_by_test_id(\"product-card\")` ou seletores de título e preço dos produtos na listagem.",
+ "Dados de teste: \"hammer\" para busca positiva, \"zzzzxx\" para busca negativa, opções de ordenação por preço crescente e nome decrescente (Z a A)."
+]

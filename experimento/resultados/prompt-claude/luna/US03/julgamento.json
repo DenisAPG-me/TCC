@@ -1,0 +1,137 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C03",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12",
+  "US03-C15"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09",
+    "US03-C11"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C12",
+    "US03-C15"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C03"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_login_com_formulario_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: botao login|sign in resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct02_login_com_senha_incorreta",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct03_checkout_sem_autenticacao",
+   "categoria": "seletor inexistente",
+   "nota": "botao 'add to cart' nao encontrado"
+  },
+  {
+   "teste": "test_ct04_login_com_conta_de_demonstracao",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct05_endereco_obrigatorio_incompleto",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct06_endereco_completo_e_pagamento_com_cartao",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct07_confirmacao_do_pedido_e_fatura",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct08_login_com_email_malformado",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: label password resolve 2 elementos"
+  }
+ ]
+}

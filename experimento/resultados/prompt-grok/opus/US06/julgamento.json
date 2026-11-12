@@ -1,0 +1,123 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C05",
+  "US06-C06",
+  "US06-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "sem nunca logar"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "formulario vazio"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C05"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login invalido"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_admin_sees_numeric_messages_counter",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s"
+  },
+  {
+   "teste": "test_TC03_messages_counter_increments_by_one_after_visitor_submission",
+   "categoria": "espera/timing",
+   "nota": "networkidle estoura 30s"
+  },
+  {
+   "teste": "test_TC08_invalid_email_submission_does_not_increment_counter",
+   "categoria": "espera/timing",
+   "nota": "networkidle estoura 30s"
+  },
+  {
+   "teste": "test_TC09_invalid_password_does_not_grant_panel_access",
+   "categoria": "espera/timing",
+   "nota": "networkidle estoura 30s"
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C01",
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C01"
+   ],
+   "nota": "quantidade padrao 1"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Thor Hammer com 1 unidade e aceito"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_adicionar_3_unidades_claw_hammer_ao_carrinho",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_label('Quantity') resolve 3 elementos"
+  },
+  {
+   "teste": "test_ct02_total_da_linha_e_do_carrinho_com_3_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_label('Quantity') resolve 3 elementos"
+  },
+  {
+   "teste": "test_ct03_alterar_quantidade_no_carrinho_de_3_para_1",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_label('Quantity') resolve 3 elementos"
+  },
+  {
+   "teste": "test_ct04_adicionar_com_quantidade_padrao",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Cart' nao encontrado"
+  },
+  {
+   "teste": "test_ct05_adicionar_3_unidades_thor_hammer_exibe_limite",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_label('Quantity') resolve 3 elementos"
+  },
+  {
+   "teste": "test_ct06_adicionar_1_unidade_thor_hammer_no_limite_permitido",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_label('Quantity') resolve 3 elementos"
+  }
+ ]
+}

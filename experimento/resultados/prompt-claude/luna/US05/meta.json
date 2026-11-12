@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 13.22,
+ "tokens": {
+  "total": 10026
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "et_by_role(\"link\", name=\"Logout\").click()\n\n    expect(page).to_have_url(BASE_URL)\n\n\ndef test_ct05_acesso_direto_apos_logout_exige_login(page: Page) -> None:\n    _login(page)\n    page.get_by_role(\"link\", name=\"Logout\").click()\n    expect(page).to_have_url(BASE_URL)\n\n    page.goto(ROOMS_URL)\n\n    expect(page.get_by_label(\"Username\")).to_be_visible()\n    expect(page.get_by_label(\"Password\")).to_be_visible()\n    expect(page.get_by_role(\"button\", name=\"Login\")).to_be_visible()\n```\ntokens used\n10,026\n"
+}

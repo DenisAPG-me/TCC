@@ -1,0 +1,148 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Validação de campos obrigatórios no login vazios | Negativo | CA1 | Acessar a tela de login; Clicar no botão de envio sem preencher os campos | Exibir as mensagens de erro Email is required e Password is required |
+| CT02 | Tentativa de login com senha incorreta | Negativo | CA2 | Acessar a tela de login; Preencher e-mail válido e senha incorreta; Enviar o formulário | Exibir a mensagem Invalid email or password e permanecer na tela de login sem criar sessão |
+| CT03 | Redirecionamento para login ao avançar para checkout sem autenticação | Negativo | CA3 | Adicionar um produto ao carrinho sem estar logado; Clicar em avançar para o checkout | Ser redirecionado para a tela de autenticação informando e-mail e senha |
+| CT04 | Visualização da página My account após login bem-sucedido | Positivo | CA4 | Acessar a tela de login; Preencher credenciais da conta de demonstração; Enviar o formulário | Visualizar a página My account exibindo o nome do usuário no menu |
+| CT05 | Validação de campos obrigatórios do endereço no checkout | Borda | CA5 | Estar autenticado com produto no carrinho; Avançar até o passo de endereço; Deixar os campos obrigatórios vazios e tentar avançar; Preencher todos os campos obrigatórios | Impedir o avanço com campos vazios e permitir avançar após o preenchimento de país CEP número rua cidade e estado |
+| CT06 | Finalização bem-sucedida de compra com cartão de crédito | Positivo | CA6 | Estar no passo de pagamento do checkout; Selecionar cartão de crédito; Informar dados fictícios válidos; Confirmar pagamento e pedido | Exibir a mensagem Payment was successful e posteriormente a confirmação com o número da fatura Thanks for your order Your invoice number is INV-... |
+
+## SUPOSIÇÕES
+
+- **Tecnologia Escolhida:** Python + pytest + plugin `pytest-playwright` com asserções `expect` da API síncrona do Playwright, conforme os requisitos técnicos obrigatórios de interface web.
+- **URL Base:** `https://practicesoftwaretesting.com/` definida em constante no topo do arquivo.
+- **Credenciais de Demonstração:** E-mail `customer@practicesoftwaretesting.com` e senha `welcome01` definidos em constantes.
+- **Seletores e Interações (UI):**
+  - O link/botão para acessar a tela de login é encontrado por texto (`Sign in`) ou seletor de navegação.
+  - O formulário de login possui campos de e-mail e senha identificados por rótulos (`Email` / `Password`) ou atributos de teste (`data-test="email"`, `data-test="password"`), com botão de submissão `Login` ou `Submit`.
+  - As mensagens de erro no login aparecem associadas aos campos ou na página com os textos exatos `"Email is required"`, `"Password is required"` e `"Invalid email or password"`.
+  - Produtos podem ser adicionados à partir da página inicial ou de listagem clicando em um produto e em `"Add to cart"`.
+  - O fluxo de checkout possui etapas navegáveis: carrinho -> login/autenticação (se não logado) -> endereço (com campos obrigatórios: país, CEP, número, rua, cidade, estado) -> pagamento (seleção de cartão de crédito e preenchimento de dados fictícios válidos) -> confirmação.
+  - Mensagem de sucesso de pagamento: `"Payment was successful"`.
+  - Mensagem final do pedido: texto contendo `"Thanks for your order! Your invoice number is INV-"`.
+
+## SCRIPT
+
+```python
+import re
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+DEMO_EMAIL = "customer@practicesoftwaretesting.com"
+DEMO_PASSWORD = "welcome01"
+
+
+def test_ct01_login_com_campos_vazios(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE)).click()
+    page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+
+
+def test_ct02_login_senha_incorreta(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE)).click()
+    page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+    page.get_by_label(re.compile("Password", re.IGNORECASE)).fill("senhaerrada")
+    page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE))).to_be_visible()
+
+
+def test_ct03_checkout_sem_autenticacao(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    page.get_by_role("link", name=re.compile("Cart", re.IGNORECASE)).click()
+    page.get_by_role("button", name=re.compile("Proceed to checkout", re.IGNORECASE)).click()
+    expect(page.get_by_label(re.compile("Email", re.IGNORECASE))).to_be_visible()
+    expect(page.get_by_label(re.compile("Password", re.IGNORECASE))).to_be_visible()
+
+
+def test_ct04_visualizacao_my_account(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE)).click()
+    page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+    page.get_by_label(re.compile("Password", re.IGNORECASE)).fill(DEMO_PASSWORD)
+    page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+    expect(page.get_by_role("link", name=re.compile("My account", re.IGNORECASE))).to_be_visible()
+
+
+def test_ct05_validacao_campos_endereco_checkout(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE)).click()
+    page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+    page.get_by_label(re.compile("Password", re.IGNORECASE)).fill(DEMO_PASSWORD)
+    page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    page.get_by_role("link", name=re.compile("Cart", re.IGNORECASE)).click()
+    page.get_by_role("button", name=re.compile("Proceed to checkout", re.IGNORECASE)).click()
+
+    # Passo de login no checkout se necessário
+    if page.get_by_label(re.compile("Email", re.IGNORECASE)).is_visible():
+        page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+        page.get_by_label(re.compile("Password", re.IGNORECASE)).fill(DEMO_PASSWORD)
+        page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+
+    page.get_by_role("button", name=re.compile("Proceed", re.IGNORECASE)).click()
+
+    # Tenta avançar com campos vazios no endereço
+    page.get_by_role("button", name=re.compile("Proceed", re.IGNORECASE)).click()
+    expect(page.get_by_text(re.compile("required", re.IGNORECASE)).first).to_be_visible()
+
+    # Preenche os campos obrigatórios: país, CEP, número, rua, cidade, estado
+    page.get_by_label(re.compile("Address", re.IGNORECASE)).fill("Rua Teste")
+    page.get_by_label(re.compile("City", re.IGNORECASE)).fill("Cidade Exemplo")
+    page.get_by_label(re.compile("State", re.IGNORECASE)).fill("Estado Exemplo")
+    page.get_by_label(re.compile("Country", re.IGNORECASE)).fill("Brasil")
+    page.get_by_label(re.compile("Postal code", re.IGNORECASE)).fill("01000000")
+    page.get_by_role("button", name=re.compile("Proceed", re.IGNORECASE)).click()
+
+
+def test_ct06_pagamento_com_cartao_de_credito(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=re.compile("Sign in", re.IGNORECASE)).click()
+    page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+    page.get_by_label(re.compile("Password", re.IGNORECASE)).fill(DEMO_PASSWORD)
+    page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name=re.compile("Add to cart", re.IGNORECASE)).click()
+    page.get_by_role("link", name=re.compile("Cart", re.IGNORECASE)).click()
+    page.get_by_role("button", name=re.compile("Proceed to checkout", re.IGNORECASE)).click()
+
+    if page.get_by_label(re.compile("Email", re.IGNORECASE)).is_visible():
+        page.get_by_label(re.compile("Email", re.IGNORECASE)).fill(DEMO_EMAIL)
+        page.get_by_label(re.compile("Password", re.IGNORECASE)).fill(DEMO_PASSWORD)
+        page.get_by_role("button", name=re.compile("Login", re.IGNORECASE)).click()
+
+    # Avançar endereço
+    page.get_by_role("button", name=re.compile("Proceed", re.IGNORECASE)).click()
+    if page.get_by_label(re.compile("Address", re.IGNORECASE)).is_visible():
+        page.get_by_label(re.compile("Address", re.IGNORECASE)).fill("Rua Teste")
+        page.get_by_label(re.compile("City", re.IGNORECASE)).fill("Cidade Exemplo")
+        page.get_by_label(re.compile("State", re.IGNORECASE)).fill("Estado Exemplo")
+        page.get_by_label(re.compile("Country", re.IGNORECASE)).fill("Brasil")
+        page.get_by_label(re.compile("Postal code", re.IGNORECASE)).fill("01000000")
+        page.get_by_role("button", name=re.compile("Proceed", re.IGNORECASE)).click()
+
+    # Selecionar pagamento com cartão de crédito e preencher dados fictícios válidos
+    page.select_option("select[id*='payment'], select[name*='payment'], select", label=re.compile("Credit Card", re.IGNORECASE))
+    page.get_by_label(re.compile("Card number", re.IGNORECASE)).fill("4242424242424242")
+    page.get_by_label(re.compile("Expiration date", re.IGNORECASE)).fill("12/28")
+    page.get_by_label(re.compile("CVV", re.IGNORECASE)).fill("123")
+    page.get_by_label(re.compile("Card holder name", re.IGNORECASE)).fill("Cliente Teste")
+
+    page.get_by_role("button", name=re.compile("Confirm", re.IGNORECASE)).click()
+
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+    page.get_by_role("button", name=re.compile("Confirm", re.IGNORECASE)).click()
+    expect(page.get_by_text(re.compile("Thanks for your order! Your invoice number is INV-"))).to_be_visible()
+```

@@ -1,0 +1,348 @@
+{
+ "created": 1793382984.1037898,
+ "duration": 31.10640597343445,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 4,
+  "total": 8,
+  "collected": 8
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_login_campos_vazios_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+     "type": "Function",
+     "lineno": 53
+    },
+    {
+     "nodeid": "script.py::test_CT002_login_senha_incorreta_exibe_invalid_credentials[chromium]",
+     "type": "Function",
+     "lineno": 61
+    },
+    {
+     "nodeid": "script.py::test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single[chromium]",
+     "type": "Function",
+     "lineno": 68
+    },
+    {
+     "nodeid": "script.py::test_CT004_menu_autenticado_exibe_rooms_report_branding_messages[chromium]",
+     "type": "Function",
+     "lineno": 74
+    },
+    {
+     "nodeid": "script.py::test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+     "type": "Function",
+     "lineno": 80
+    },
+    {
+     "nodeid": "script.py::test_CT006_acesso_direto_apos_logout_exibe_tela_de_login[chromium]",
+     "type": "Function",
+     "lineno": 87
+    },
+    {
+     "nodeid": "script.py::test_CT007_senha_em_caixa_alta_exibe_invalid_credentials[chromium]",
+     "type": "Function",
+     "lineno": 95
+    },
+    {
+     "nodeid": "script.py::test_CT008_usuario_com_senha_vazia_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+     "type": "Function",
+     "lineno": 101
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_login_campos_vazios_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+   "lineno": 53,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_login_campos_vazios_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.47146019991487265,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.7207678999984637,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011621200013905764,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_login_senha_incorreta_exibe_invalid_credentials[chromium]",
+   "lineno": 61,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_login_senha_incorreta_exibe_invalid_credentials[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11047680000774562,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.641986500006169,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012659200001507998,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single[chromium]",
+   "lineno": 68,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12032400001771748,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.723383400007151,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+     "lineno": 72,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\n  - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 72,
+      "message": "in test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:72: in test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single\n    expect(room_row(page)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\nE     - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.014584100106731057,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_menu_autenticado_exibe_rooms_report_branding_messages[chromium]",
+   "lineno": 74,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT004_menu_autenticado_exibe_rooms_report_branding_messages[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.13111179997213185,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.734238400007598,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+     "lineno": 47,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\n  - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 76,
+      "message": "in test_CT004_menu_autenticado_exibe_rooms_report_branding_messages"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 47,
+      "message": "in login_as_admin"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:76: in test_CT004_menu_autenticado_exibe_rooms_report_branding_messages\n    login_as_admin(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:47: in login_as_admin\n    expect(room_row(page)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\nE     - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.013380600023083389,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+   "lineno": 80,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.13923800003249198,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.720864599919878,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+     "lineno": 47,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\n  - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 82,
+      "message": "in test_CT005_logout_retorna_a_pagina_inicial_publica"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 47,
+      "message": "in login_as_admin"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:82: in test_CT005_logout_retorna_a_pagina_inicial_publica\n    login_as_admin(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:47: in login_as_admin\n    expect(room_row(page)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\nE     - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.013897299999371171,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_acesso_direto_apos_logout_exibe_tela_de_login[chromium]",
+   "lineno": 87,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT006_acesso_direto_apos_logout_exibe_tela_de_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12440529989544302,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.9045398000162095,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+     "lineno": 47,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\n  - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 89,
+      "message": "in test_CT006_acesso_direto_apos_logout_exibe_tela_de_login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py",
+      "lineno": 47,
+      "message": "in login_as_admin"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:89: in test_CT006_acesso_direto_apos_logout_exibe_tela_de_login\n    login_as_admin(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US05\\script.py:47: in login_as_admin\n    expect(room_row(page)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\nE     - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.01387530006468296,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT007_senha_em_caixa_alta_exibe_invalid_credentials[chromium]",
+   "lineno": 95,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT007_senha_em_caixa_alta_exibe_invalid_credentials[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11942609993275255,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.6619136999361217,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.016593399923294783,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT008_usuario_com_senha_vazia_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+   "lineno": 101,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT008_usuario_com_senha_vazia_exibe_erro_e_permanece_na_tela_de_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11638649995438755,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1875356000382453,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.25987690000329167,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Thor Hammer com 1 unidade e aceito"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_adicionar_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer' resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct02_conferir_totais_de_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer' resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct03_reduzir_quantidade_para_uma_unidade",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer' resolve 2 elementos"
+  },
+  {
+   "teste": "test_ct05_aceitar_uma_unidade_de_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('cart-quantity') nao encontrado (atributo data-test nao configurado)"
+  }
+ ]
+}

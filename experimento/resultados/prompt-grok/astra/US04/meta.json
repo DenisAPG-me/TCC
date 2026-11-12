@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 42.68,
+ "tokens": {
+  "total": 4222
+ },
+ "n_casos_extraidos": 10,
+ "tem_codigo": true,
+ "stderr_tail": "ss(page, data)\n\n\ndef test_TC08_telefone_com_22_caracteres(page: Page) -> None:\n    _submit_valid_variant(page, phone=\"1\" * 22)\n\n    _expect_error(page, PHONE_ERROR)\n\n\ndef test_TC09_assunto_com_101_caracteres(page: Page) -> None:\n    _submit_valid_variant(page, subject=\"A\" * 101)\n\n    _expect_error(page, SUBJECT_ERROR)\n\n\ndef test_TC10_mensagem_com_2001_caracteres(page: Page) -> None:\n    _submit_valid_variant(page, message=\"M\" * 2001)\n\n    _expect_error(page, MESSAGE_ERROR)\n```\ntokens used\n4,222\n"
+}

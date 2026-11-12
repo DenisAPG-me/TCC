@@ -1,0 +1,14 @@
+[
+ "Tecnologia: User Story de interface web, portanto Python + pytest + Playwright (API síncrona). Conforme os requisitos técnicos obrigatórios (que prevalecem), o script usa o plugin oficial pytest-playwright e sua fixture `page`, sem `sync_playwright()` e sem fixtures próprias de browser/page; Chromium headless é o padrão do plugin (`pytest arquivo.py`).",
+ "A URL base vem da constante `BASE_URL` no topo do arquivo (`https://automationintesting.online/`).",
+ "O formulário de contato está na própria página inicial e seus campos possuem os atributos `data-testid`: `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject` e `ContactDescription`, acessados via `get_by_test_id`.",
+ "O botão de envio é acessível por `get_by_role(\"button\", name=\"Submit\")`.",
+ "As mensagens de campo vazio são \"Name may not be blank\", \"Email may not be blank\", \"Phone may not be blank\", \"Subject may not be blank\" e \"Message may not be blank\".",
+ "Mensagens de validação são exibidas como texto visível na página após o envio e localizadas com `get_by_text`.",
+ "A confirmação de sucesso exibe \"Thanks for getting in touch <nome>!\" e o assunto enviado como texto próprio (elemento separado), localizável com `get_by_text(..., exact=True)`.",
+ "Após envio bem-sucedido, o formulário é substituído pela confirmação; em envios inválidos, o texto \"Thanks for getting in touch\" não aparece.",
+ "Limites de tamanho: telefone 11 a 21 caracteres, assunto 5 a 100, mensagem 20 a 2000 (inclusivos), conforme as mensagens dos critérios.",
+ "Dados de teste fictícios: nome \"Maria Silva\", e-mail \"maria.silva@example.com\", telefone \"01234567890\" (11 caracteres); o assunto recebe sufixo aleatório para tornar cada envio identificável e os testes independentes.",
+ "Não há autenticação nem credenciais para o formulário de contato.",
+ "Cada teste abre a página inicial em uma página nova fornecida pelo plugin, garantindo independência."
+]

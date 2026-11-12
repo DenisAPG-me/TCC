@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 1,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 1,
+ "justificativas": {
+  "legibilidade": "Comentarios uteis, nomes coerentes",
+  "estrutura": "Sem helpers: login e checkout copiados em cada teste, ifs condicionais",
+  "assercoes": "Verifica mensagens e URLs de negocio",
+  "espera": "Usa is_visible() em ifs sem espera; sem sync entre passos",
+  "manutenibilidade": "Regex IGNORECASE em tudo, credenciais e dados hard-coded em cada teste"
+ }
+}

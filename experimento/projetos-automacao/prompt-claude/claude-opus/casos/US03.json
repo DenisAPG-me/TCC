@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar /auth/login; não preencher e-mail nem senha; clicar em \"Login\"",
+  "esperado": "Mensagens \"Email is required\" e \"Password is required\" exibidas; usuário permanece na tela de login"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login apenas com senha preenchida",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar /auth/login; deixar e-mail vazio; preencher senha \"welcome01\"; clicar em \"Login\"",
+  "esperado": "Mensagem \"Email is required\" exibida; mensagem \"Password is required\" não exibida; usuário permanece na tela de login"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com e-mail válido e senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar /auth/login; preencher customer@practicesoftwaretesting.com; preencher senha incorreta; clicar em \"Login\"",
+  "esperado": "Mensagem \"Invalid email or password\" exibida; URL permanece em /auth/login; link \"Sign in\" continua visível (sem sessão)"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Checkout sem autenticação solicita credenciais",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Sem login, abrir produto; adicionar ao carrinho; acessar o carrinho (/checkout); clicar em \"Proceed to checkout\"",
+  "esperado": "Passo de login exibido com campos de e-mail, senha e botão \"Login\""
+ },
+ {
+  "id": "CT05",
+  "titulo": "Autenticação durante o checkout permite prosseguir",
+  "tipo": "Positivo",
+  "criterio": "CA3, CA4",
+  "passos": "Sem login, adicionar produto ao carrinho; avançar no carrinho; informar credenciais de demonstração no passo de login; confirmar; clicar em \"Proceed to checkout\"",
+  "esperado": "Mensagem de usuário já autenticado exibida; ao prosseguir o passo de endereço é exibido"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login com conta de demonstração",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar /auth/login; preencher credenciais de demonstração; clicar em \"Login\"",
+  "esperado": "Redirecionado para /account; título \"My account\" exibido; menu exibe \"Jane Doe\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Endereço com todos os campos obrigatórios vazios",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; limpar país, CEP, número, rua, cidade e estado",
+  "esperado": "Botão \"Proceed to checkout\" do passo de endereço desabilitado; passo de pagamento não exibido"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Endereço com apenas o CEP vazio",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; preencher todos os campos exceto CEP",
+  "esperado": "Botão \"Proceed to checkout\" do passo de endereço desabilitado"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Endereço completo permite avançar para pagamento",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; preencher país, CEP, número, rua, cidade e estado; clicar em \"Proceed to checkout\"",
+  "esperado": "Botão habilitado; passo de pagamento exibido com seletor de forma de pagamento"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Pagamento com cartão de crédito válido e confirmação do pedido",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Autenticar; adicionar produto; preencher endereço; escolher \"Credit Card\"; informar número, validade futura, CVV e titular fictícios; clicar em \"Confirm\"; clicar em \"Confirm\" novamente",
+  "esperado": "Mensagem \"Payment was successful\" exibida; depois \"Thanks for your order! Your invoice number is INV-\" seguido de número"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Pagamento com número de cartão em formato inválido",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Autenticar; adicionar produto; preencher endereço; escolher \"Credit Card\"; informar número \"1234\" e demais dados válidos",
+  "esperado": "Botão \"Confirm\" desabilitado; mensagem \"Payment was successful\" não exibida"
+ }
+]

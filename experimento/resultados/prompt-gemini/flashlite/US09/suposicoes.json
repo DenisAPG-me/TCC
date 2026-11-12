@@ -1,0 +1,8 @@
+[
+ "Endpoint de Autenticação: `POST /auth` com JSON `{\"username\": \"admin\", \"password\": \"password123\"}` retornando um token no formato `{\"token\": \"<string>\"}`.",
+ "Endpoint de Criação de Reserva: `POST /booking` aceitando payload JSON com dados de reserva (firstname, lastname, totalprice, depositpaid, bookingdates, additionalneeds) e retornando o ID da reserva criada (`bookingid`).",
+ "Endpoint de Consulta/Exclusão de Reserva: `GET /booking/{id}` e `DELETE /booking/{id}`.",
+ "Autenticação via `DELETE`: A API Restful Booker espera o token de autorização no cabeçalho `Cookie` no formato `token=<token_value>`.",
+ "Endpoint de Listagem por Nome: `GET /booking?firstname=<firstname>&lastname=<lastname>`.",
+ "Comportamento de exclusão duplicada: A API Restful Booker retorna status 405 (Method Not Allowed) ou 404 ao tentar deletar uma reserva inexistente ou já deletada."
+]

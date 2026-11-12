@@ -1,0 +1,209 @@
+{
+ "created": 1793432198.5722203,
+ "duration": 28.948445081710815,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_impedir_exclusao_sem_token",
+     "type": "Function",
+     "lineno": 158
+    },
+    {
+     "nodeid": "script.py::test_TC02_impedir_exclusao_com_token_invalido",
+     "type": "Function",
+     "lineno": 172
+    },
+    {
+     "nodeid": "script.py::test_TC03_excluir_com_token_valido",
+     "type": "Function",
+     "lineno": 185
+    },
+    {
+     "nodeid": "script.py::test_TC04_consultar_reserva_excluida",
+     "type": "Function",
+     "lineno": 195
+    },
+    {
+     "nodeid": "script.py::test_TC05_repetir_exclusao_preservando_controle",
+     "type": "Function",
+     "lineno": 205
+    },
+    {
+     "nodeid": "script.py::test_TC06_listar_por_nome_apos_exclusao",
+     "type": "Function",
+     "lineno": 232
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_impedir_exclusao_sem_token",
+   "lineno": 158,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_impedir_exclusao_sem_token",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00033980002626776695,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.5104533000849187,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 2.5035247000632808,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_impedir_exclusao_com_token_invalido",
+   "lineno": 172,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_impedir_exclusao_com_token_invalido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00034250004682689905,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.532913399976678,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 2.479629599954933,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_excluir_com_token_valido",
+   "lineno": 185,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC03_excluir_com_token_valido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024090008810162544,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.49764860002324,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6417192000662908,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_consultar_reserva_excluida",
+   "lineno": 195,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC04_consultar_reserva_excluida",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003643999807536602,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4757486000889912,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.7261743999551982,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_repetir_exclusao_preservando_controle",
+   "lineno": 205,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC05_repetir_exclusao_preservando_controle",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002452000044286251,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.265992200002074,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 2.4739545000484213,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_listar_por_nome_apos_exclusao",
+   "lineno": 232,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_listar_por_nome_apos_exclusao",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00033870001789182425,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.1006772000109777,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.675266099977307,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

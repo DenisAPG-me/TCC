@@ -1,0 +1,17 @@
+[
+ "A URL base é `https://automationintesting.online/` (constante `BASE_URL`). O `--base-url` do pytest-playwright, quando informado, tem prioridade.",
+ "O formulário de contato está na página inicial e é aberto diretamente após `goto`, sem clique para expandir.",
+ "Os campos são localizados por label com `get_by_label`, com correspondência parcial: \"Name\", \"Email\", \"Phone\", \"Subject\", \"Message\".",
+ "O botão de envio é localizado por `get_by_role(\"button\", name=\"Submit\")`.",
+ "As mensagens de erro são textos visíveis na página após o submit, sem necessidade de interação adicional.",
+ "Para o CA1, a mensagem de campo vazio é identificada pela regex `empty|blank|branco|vazio` (case-insensitive). Assume-se uma mensagem por campo, totalizando 5 em TC01 e 1 em TC02. O texto exato não consta na User Story.",
+ "As mensagens de tamanho, formato e e-mail são as literais informadas na User Story.",
+ "Sucesso é identificado pelo texto \"Thanks for getting in touch <nome>!\" visível. O assunto informado aparece na confirmação como substring.",
+ "Os limites são inclusivos: telefone 11–21, assunto 5–100, mensagem 20–2000 caracteres.",
+ "Os inputs não possuem `maxlength` que impeça digitar valores acima do limite. Se houver, TC06, TC09 e TC11 precisarão de ajuste.",
+ "Os dados de teste são fictícios. Nome e assunto válidos são \"Maria Silva\" e \"Dúvida reserva\". E-mail válido é \"maria@example.com\".",
+ "Telefone e mensagem válidos de referência contêm apenas caracteres aceitos pelo formulário (dígitos e texto simples).",
+ "Cada teste inicia com página recarregada (`goto`), portanto os testes são independentes entre si.",
+ "Não há limite de envios, captcha ou autenticação no site.",
+ "Requisitos de execução: `pip install pytest pytest-playwright` e `playwright install chromium`. Execução: `pytest arquivo.py --base-url <url>`."
+]

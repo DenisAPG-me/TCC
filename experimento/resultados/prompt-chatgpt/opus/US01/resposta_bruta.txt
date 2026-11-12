@@ -1,0 +1,202 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Busca por "hammer" lista apenas produtos com "hammer" no nome e indica o termo buscado | positivo | CA01 | Abrir a página inicial; digitar "hammer" no campo de busca; acionar o botão de busca; aguardar a listagem ser atualizada | Pelo menos um produto é listado; todos os nomes exibidos contêm "hammer" (sem diferenciar maiúsculas e minúsculas); a legenda "Searched for: hammer" é exibida |
+| CT002 | Busca por termo inexistente exibe mensagem de ausência de produtos | negativo | CA02 | Abrir a página inicial; digitar "zzzzxx" no campo de busca; acionar o botão de busca; aguardar a resposta da busca | A mensagem "There are no products found." é exibida e nenhum card de produto é listado |
+| CT003 | Ordenação por preço do menor para o maior exibe preços em ordem crescente | positivo | CA03 | Abrir a página inicial com produtos listados; selecionar a ordenação "Price (Low - High)"; aguardar a listagem ser atualizada; ler os preços exibidos | Os preços exibidos na página estão em ordem crescente (não decrescente) |
+| CT004 | Ordenação por nome de Z a A exibe nomes em ordem alfabética decrescente | positivo | CA04 | Abrir a página inicial com produtos listados; selecionar a ordenação "Name (Z - A)"; aguardar a listagem ser atualizada; ler os nomes exibidos | Os nomes exibidos na página estão em ordem alfabética decrescente |
+
+SUPOSIÇÕES
+
+1. **Origem dos critérios:** os critérios estão numerados de 1 a 4 na User Story e não têm identificadores próprios. Foi adotada a correspondência 1 → CA01, 2 → CA02, 3 → CA03 e 4 → CA04.
+2. **O que é explícito:** a User Story define os seguintes elementos:
+   - a URL base;
+   - os termos "hammer" e "zzzzxx";
+   - a mensagem "There are no products found.";
+   - as ordenações "preço do menor para o maior" e "nome de Z a A";
+   - a regra de que a página indica o termo buscado.
+
+   Todo o restante descrito abaixo é inferido.
+3. **Conflito de tecnologias:** as instruções gerais proíbem o plugin pytest-playwright, mas os requisitos técnicos finais o exigem e declaram que prevalecem. Por isso:
+   - os testes de UI usam a fixture `page` do pytest-playwright;
+   - não usam `sync_playwright()` nem criam navegador próprio;
+   - a única outra fixture do plugin utilizada é `playwright`, para configurar o atributo de test id.
+
+   A execução esperada é `pytest arquivo.py`, com Chromium headless, que é o padrão do plugin. A User Story não pede testes de API REST, então não há testes com `requests`.
+4. **URL base:** a URL vem da constante `BASE_URL`. Se a opção `--base-url` for informada, ela tem precedência.
+5. **Seletores (inferidos):** os elementos usam o atributo `data-test`, configurado como atributo de test id para `get_by_test_id`. Os valores assumidos são:
+   - `search-query`: campo de busca;
+   - `search-submit`: botão de busca;
+   - `search-caption`: legenda da busca;
+   - `sort`: seletor de ordenação;
+   - `product-name`: nome do produto em cada card;
+   - `product-price`: preço do produto em cada card.
+
+   A mensagem de ausência de resultados é localizada pelo texto explícito da User Story. Todos esses valores estão centralizados em constantes no topo do arquivo.
+6. **Texto da indicação de busca (CA01, CT001):** a User Story só diz que a página indica a busca por "hammer". Assumiu-se o formato "Searched for: hammer", definido em `LEGENDA_BUSCA`.
+7. **Rótulos das opções de ordenação (CA03 e CA04; CT003 e CT004):** assumiu-se "Price (Low - High)" e "Name (Z - A)", definidos em `OPCAO_PRECO_CRESCENTE` e `OPCAO_NOME_DECRESCENTE`.
+8. **Sincronização sem `sleep` (CT001 a CT004):** assumiu-se que a interface obtém os produtos por requisições GET de API:
+   - a busca usa uma URL contendo `/products/search` e `q=<termo>`;
+   - a ordenação usa uma URL contendo `/products` e `sort=`;
+   - a resposta é um JSON com a lista de produtos em `data`, e cada item tem o campo `name`.
+
+   Os testes aguardam essa resposta com `page.expect_response`. Em seguida, aguardam via `expect(...).to_have_text` que os cards exibam exatamente os nomes retornados. Assim, as verificações são feitas sobre a listagem já atualizada no DOM. Se o padrão da URL ou do JSON for diferente, os predicados e o helper `_nomes_da_resposta` precisam de ajuste.
+9. **"Nome contém hammer" (CT001):** como nomes de produtos costumam ser capitalizados (ex.: "Claw Hammer"), a comparação ignora maiúsculas e minúsculas, usando `casefold`. A verificação considera apenas os produtos exibidos na página de resultados carregada.
+10. **Formato de preço (CT003):** assumiu-se um texto como "$14.15", convertido para `Decimal` após remover "$", espaços e separador de milhar. Preços iguais em sequência são aceitos como ordem crescente (ordem não decrescente).
+11. **Ordem alfabética decrescente (CT004):** a comparação usa `str.casefold` sobre os nomes exibidos, sem regras de collation específicas de idioma. Nomes iguais em sequência são aceitos.
+12. **Escopo da ordenação (CT003 e CT004):** "os preços/nomes da página" foi interpretado como os produtos exibidos na página atual da listagem, sem navegar para outras páginas. Exige-se pelo menos dois produtos para que a verificação de ordem seja significativa.
+13. **Pré-condições externas:** o site precisa estar acessível e a base de dados de demonstração deve conter produtos com "hammer" no nome e nenhum produto correspondente a "zzzzxx". Os testes apenas leem dados, então não há preparação nem limpeza de dados. Cada teste usa a própria `page` (contexto isolado do plugin) e parte da página inicial, sem depender de outros testes.
+14. **Ausência de casos de borda:** a User Story não define limites, como tamanho do termo, caracteres especiais, paginação ou diferenciação entre maiúsculas e minúsculas. Criar casos de borda exigiria inventar regras não especificadas. O cenário negativo exigido está coberto pelo CT002 (CA02). Os critérios CA03 e CA04 descrevem apenas comportamentos positivos.
+15. **Ajustes no sistema real:** o código é sintaticamente completo e executável, mas os seletores, os rótulos, os padrões de URL e o formato de resposta são inferidos. Eles podem exigir ajuste antes de funcionar no sistema real. Nenhum teste foi executado.
+
+```python
+from decimal import Decimal
+
+import pytest
+from playwright.sync_api import Page, Playwright, Response, expect
+
+# ---------------------------------------------------------------------------
+# Configuração central (valores inferidos que podem exigir ajuste)
+# ---------------------------------------------------------------------------
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+TERMO_EXISTENTE = "hammer"
+TERMO_INEXISTENTE = "zzzzxx"
+MSG_SEM_RESULTADOS = "There are no products found."
+LEGENDA_BUSCA = "Searched for: {termo}"
+
+TEST_ID_ATTR = "data-test"
+TID_CAMPO_BUSCA = "search-query"
+TID_BOTAO_BUSCA = "search-submit"
+TID_LEGENDA_BUSCA = "search-caption"
+TID_ORDENACAO = "sort"
+TID_NOME_PRODUTO = "product-name"
+TID_PRECO_PRODUTO = "product-price"
+
+OPCAO_PRECO_CRESCENTE = "Price (Low - High)"
+OPCAO_NOME_DECRESCENTE = "Name (Z - A)"
+
+URL_API_BUSCA = "/products/search"
+URL_API_PRODUTOS = "/products"
+PARAM_ORDENACAO = "sort="
+
+TIMEOUT_MS = 15000
+
+
+# ---------------------------------------------------------------------------
+# Fixtures
+# ---------------------------------------------------------------------------
+@pytest.fixture(scope="session", autouse=True)
+def _configurar_test_id(playwright: Playwright) -> None:
+    playwright.selectors.set_test_id_attribute(TEST_ID_ATTR)
+
+
+@pytest.fixture
+def url_loja(pytestconfig: pytest.Config) -> str:
+    return pytestconfig.getoption("base_url", default=None) or BASE_URL
+
+
+@pytest.fixture
+def pagina_inicial(page: Page, url_loja: str) -> Page:
+    page.set_default_timeout(TIMEOUT_MS)
+    expect.set_options(timeout=TIMEOUT_MS)
+    page.goto(url_loja)
+    expect(page.get_by_test_id(TID_NOME_PRODUTO).first).to_be_visible()
+    return page
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def _nomes_da_resposta(resposta: Response) -> list[str]:
+    assert resposta.ok, f"Requisição {resposta.url} retornou HTTP {resposta.status}"
+    corpo = resposta.json()
+    assert "data" in corpo, f"Resposta sem campo 'data': {corpo}"
+    return [produto["name"].strip() for produto in corpo["data"]]
+
+
+def _buscar(page: Page, termo: str) -> list[str]:
+    page.get_by_test_id(TID_CAMPO_BUSCA).fill(termo)
+    with page.expect_response(
+        lambda r: URL_API_BUSCA in r.url
+        and f"q={termo}" in r.url
+        and r.request.method == "GET"
+    ) as info:
+        page.get_by_test_id(TID_BOTAO_BUSCA).click()
+    return _nomes_da_resposta(info.value)
+
+
+def _ordenar(page: Page, rotulo_opcao: str) -> list[str]:
+    with page.expect_response(
+        lambda r: URL_API_PRODUTOS in r.url
+        and PARAM_ORDENACAO in r.url
+        and r.request.method == "GET"
+    ) as info:
+        page.get_by_test_id(TID_ORDENACAO).select_option(label=rotulo_opcao)
+    return _nomes_da_resposta(info.value)
+
+
+def _aguardar_listagem(page: Page, nomes_esperados: list[str]) -> list[str]:
+    nomes = page.get_by_test_id(TID_NOME_PRODUTO)
+    expect(nomes).to_have_text(nomes_esperados)
+    return [texto.strip() for texto in nomes.all_inner_texts()]
+
+
+def _converter_preco(texto: str) -> Decimal:
+    return Decimal(texto.replace("$", "").replace(",", "").strip())
+
+
+# ---------------------------------------------------------------------------
+# Testes
+# ---------------------------------------------------------------------------
+def test_CT001_busca_hammer_lista_apenas_produtos_com_hammer(pagina_inicial: Page) -> None:
+    nomes_api = _buscar(pagina_inicial, TERMO_EXISTENTE)
+    assert nomes_api, f"A busca por '{TERMO_EXISTENTE}' não retornou produtos"
+
+    nomes_exibidos = _aguardar_listagem(pagina_inicial, nomes_api)
+
+    expect(pagina_inicial.get_by_test_id(TID_LEGENDA_BUSCA)).to_have_text(
+        LEGENDA_BUSCA.format(termo=TERMO_EXISTENTE)
+    )
+    assert len(nomes_exibidos) > 0
+    nomes_invalidos = [
+        nome for nome in nomes_exibidos if TERMO_EXISTENTE.casefold() not in nome.casefold()
+    ]
+    assert not nomes_invalidos, (
+        f"Produtos sem '{TERMO_EXISTENTE}' no nome: {nomes_invalidos}"
+    )
+
+
+def test_CT002_busca_termo_inexistente_exibe_mensagem_sem_produtos(pagina_inicial: Page) -> None:
+    nomes_api = _buscar(pagina_inicial, TERMO_INEXISTENTE)
+    assert nomes_api == [], f"A busca por '{TERMO_INEXISTENTE}' retornou produtos: {nomes_api}"
+
+    expect(pagina_inicial.get_by_text(MSG_SEM_RESULTADOS)).to_be_visible()
+    expect(pagina_inicial.get_by_test_id(TID_NOME_PRODUTO)).to_have_count(0)
+
+
+def test_CT003_ordenacao_preco_crescente(pagina_inicial: Page) -> None:
+    nomes_api = _ordenar(pagina_inicial, OPCAO_PRECO_CRESCENTE)
+    _aguardar_listagem(pagina_inicial, nomes_api)
+
+    textos_precos = pagina_inicial.get_by_test_id(TID_PRECO_PRODUTO).all_inner_texts()
+    precos = [_converter_preco(texto) for texto in textos_precos]
+
+    assert len(precos) >= 2, f"Produtos insuficientes para verificar ordenação: {precos}"
+    assert len(precos) == len(nomes_api)
+    assert precos == sorted(precos), f"Preços fora de ordem crescente: {precos}"
+
+
+def test_CT004_ordenacao_nome_z_a(pagina_inicial: Page) -> None:
+    nomes_api = _ordenar(pagina_inicial, OPCAO_NOME_DECRESCENTE)
+    nomes_exibidos = _aguardar_listagem(pagina_inicial, nomes_api)
+
+    assert len(nomes_exibidos) >= 2, (
+        f"Produtos insuficientes para verificar ordenação: {nomes_exibidos}"
+    )
+    esperado = sorted(nomes_exibidos, key=str.casefold, reverse=True)
+    assert nomes_exibidos == esperado, (
+        f"Nomes fora de ordem alfabética decrescente: {nomes_exibidos}"
+    )
+```

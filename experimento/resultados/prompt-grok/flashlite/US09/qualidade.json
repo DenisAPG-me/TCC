@@ -1,0 +1,14 @@
+{
+ "legibilidade": 2,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "fraco (nota 2)",
+  "estrutura": "fraco (nota 2)",
+  "assercoes": "aceitavel (nota 3)",
+  "espera": "fraco (nota 2)",
+  "manutenibilidade": "fraco (nota 2)"
+ }
+}

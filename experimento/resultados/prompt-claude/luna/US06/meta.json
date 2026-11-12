@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 14.65,
+ "tokens": {
+  "total": 10495
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "ge, subject=\"\")\n    submit_contact_form(page)\n\n    expect(\n        page.get_by_text(f\"Thanks for getting in touch {VISITOR_NAME}!\", exact=True)\n    ).to_have_count(0)\n\n\ndef test_ct05_solicitar_login_apos_logout(page):\n    login(page)\n    page.get_by_role(\"link\", name=\"Logout\").click()\n    page.goto(MESSAGES_URL)\n\n    expect(page).to_have_url(f\"{ADMIN_URL}/\")\n    expect(page.get_by_label(\"Username\")).to_be_visible()\n    expect(page.get_by_label(\"Password\")).to_be_visible()\n```\ntokens used\n10,495\n"
+}

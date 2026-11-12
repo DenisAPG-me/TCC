@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_exclusao_sem_token",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct02_exclusao_com_token_invalido",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct03_exclusao_com_token_valido",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct04_consulta_apos_exclusao",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct05_exclusao_repetida_preserva_controles",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct06_listagem_filtrada_apos_exclusao",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "......                                                                   [100%]\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n6 passed, 1 warning in 34.54s\n",
+ "returncode": 0,
+ "duracao_s": 35.13
+}

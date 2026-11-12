@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com corpo JSON válido",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "1. Montar payload válido com todos os campos. 2. Enviar `POST /booking`.",
+  "esperado": "Status 200; `bookingid` numérico inteiro; `booking` igual ao payload enviado."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "1. Criar reserva via `POST /booking`. 2. Enviar `GET /booking/{bookingid}`.",
+  "esperado": "Status 200; todos os campos retornados iguais aos enviados."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar reserva com identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "1. Enviar `GET /booking/99999999`.",
+  "esperado": "Status 404."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Listar reservas filtrando por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. Criar reserva com nome e sobrenome únicos. 2. Enviar `GET /booking?firstname={nome}&lastname={sobrenome}`.",
+  "esperado": "Status 200; a lista contém o `bookingid` criado."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Filtrar por nome e sobrenome sem reservas correspondentes",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "1. Gerar nome e sobrenome únicos sem criar reserva. 2. Enviar `GET /booking?firstname={nome}&lastname={sobrenome}`.",
+  "esperado": "Status 200; lista vazia."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Criar e consultar reserva com depósito não pago (`depositpaid=false`)",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "1. Criar reserva com `depositpaid=false`. 2. Consultar pelo `bookingid`.",
+  "esperado": "Status 200 na criação e na consulta; `depositpaid` permanece `false` e demais campos iguais aos enviados."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Criar e consultar reserva com check-in igual ao check-out",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "1. Criar reserva com `checkin` = `checkout`. 2. Consultar pelo `bookingid`.",
+  "esperado": "Status 200 na criação e na consulta; datas e demais campos iguais aos enviados."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Criar e consultar reserva com preço total zero",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "1. Criar reserva com `totalprice=0`. 2. Consultar pelo `bookingid`.",
+  "esperado": "Status 200 na criação e na consulta; `totalprice` igual a 0 e demais campos iguais aos enviados."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Criar e consultar reserva com acentos e caracteres especiais em texto",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "1. Criar reserva com nome, sobrenome e `additionalneeds` contendo acentos/símbolos. 2. Consultar pelo `bookingid`.",
+  "esperado": "Status 200 na criação e na consulta; textos preservados exatamente como enviados."
+ }
+]

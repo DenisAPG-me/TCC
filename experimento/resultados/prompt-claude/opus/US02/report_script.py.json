@@ -1,0 +1,222 @@
+{
+ "created": 1793381279.0051525,
+ "duration": 34.235817432403564,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US02",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_adicionar_tres_unidades_ao_carrinho[chromium]",
+     "type": "Function",
+     "lineno": 54
+    },
+    {
+     "nodeid": "script.py::test_ct02_validar_total_da_linha_e_do_carrinho[chromium]",
+     "type": "Function",
+     "lineno": 62
+    },
+    {
+     "nodeid": "script.py::test_ct03_alterar_quantidade_no_carrinho_para_um[chromium]",
+     "type": "Function",
+     "lineno": 77
+    },
+    {
+     "nodeid": "script.py::test_ct04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 94
+    },
+    {
+     "nodeid": "script.py::test_ct05_adicionar_quantidade_minima[chromium]",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_ct06_adicionar_uma_unidade_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 114
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_adicionar_tres_unidades_ao_carrinho[chromium]",
+   "lineno": 54,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_adicionar_tres_unidades_ao_carrinho[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.46773269993718714,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.540532400016673,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.020009299973025918,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_validar_total_da_linha_e_do_carrinho[chromium]",
+   "lineno": 62,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_validar_total_da_linha_e_do_carrinho[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10883200005628169,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.88780200004112,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.021439500036649406,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_alterar_quantidade_no_carrinho_para_um[chromium]",
+   "lineno": 77,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_alterar_quantidade_no_carrinho_para_um[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11562820000108331,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.354055000003427,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.020819400087930262,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+   "lineno": 94,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_bloquear_tres_unidades_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10642480000387877,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.371419899980538,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.022018299903720617,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_adicionar_quantidade_minima[chromium]",
+   "lineno": 102,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_adicionar_quantidade_minima[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12150499993003905,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.326684399973601,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.02228749997448176,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_adicionar_uma_unidade_de_thor_hammer[chromium]",
+   "lineno": 114,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_adicionar_uma_unidade_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1130933000240475,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.340761599945836,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.25317629997152835,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

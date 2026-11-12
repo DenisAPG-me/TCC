@@ -1,0 +1,117 @@
+{
+ "validos": [],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "1": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "2": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "3": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "4": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "5": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "6": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "7": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "8": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "9": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "10": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "11": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "12": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "13": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  },
+  "14": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Entrada de casos_teste.json e texto de suposicoes, nao um caso de teste"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_adicionar_3_unidades_exibe_confirmacao_e_contador",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT002_total_da_linha_e_do_carrinho_com_3_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT003_alterar_quantidade_para_1_faz_total_igual_ao_preco_unitario",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT004_thor_hammer_com_3_unidades_exibe_mensagem_de_limite",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT005_thor_hammer_com_1_unidade_e_aceito",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Quantity\") ambiguo (strict mode)"
+  }
+ ]
+}

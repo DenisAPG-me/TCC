@@ -1,0 +1,108 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha com caixa diferente (novo)"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha vazia com usuario valido (novo)"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT003_login_valido_exibe_lista_de_quartos_com_quarto_101_single[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT004_menu_autenticado_exibe_rooms_report_branding_messages[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT006_acesso_direto_apos_logout_exibe_tela_de_login[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  }
+ ]
+}

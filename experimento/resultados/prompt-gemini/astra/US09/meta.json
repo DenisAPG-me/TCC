@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US09",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 33.18,
+ "tokens": {
+  "total": 4677
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "  )\n    assert isinstance(matches[0], dict)\n    assert matches[0].get(\"bookingid\") == booking[\"id\"]\n\n    response = delete_booking(booking[\"id\"], valid_token)\n    assert_status(response, 201)\n\n    after = api_request(\"GET\", \"/booking\", params=filters)\n\n    assert_status(after, 200)\n    assert after.json() == [], (\n        \"O filtro ainda retornou reservas após a exclusão.\"\n    )\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, \"-v\", *sys.argv[1:]]))\n```\ntokens used\n4,677\n"
+}

@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "Critério 1",
+  "passos": "Enviar POST para `/auth` com usuário `admin` e senha `password123`.",
+  "esperado": "Status 200 e token não vazio retornado."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticação com credenciais inválidas",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "Enviar POST para `/auth` com usuário e senha inválidos.",
+  "esperado": "Status 200 ou 4xx (conforme API), sem token e mensagem \"Bad credentials\"."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Atualização completa de reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "Criar/obter reserva, enviar PUT para `/booking/{id}` com token válido e novos dados completos (nome e preço).",
+  "esperado": "Status 200 e novos valores refletidos na resposta."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Atualização parcial de reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "Criar/obter reserva, enviar PATCH para `/booking/{id}` com token válido atualizando apenas o sobrenome.",
+  "esperado": "Status 200, sobrenome atualizado e demais campos intactos."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Tentativa de atualização sem token de autenticação",
+  "tipo": "Negativo",
+  "criterio": "Critério 5",
+  "passos": "Enviar PUT/PATCH para `/booking/{id}` sem cabeçalho de autorização.",
+  "esperado": "Status 403 Forbidden (ou 401/403)."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualização completa com campos obrigatórios ausentes",
+  "tipo": "Borda",
+  "criterio": "Critério 6",
+  "passos": "Enviar PUT para `/booking/{id}` com token válido omitindo campos obrigatórios no payload.",
+  "esperado": "Status 400 Bad Request."
+ }
+]

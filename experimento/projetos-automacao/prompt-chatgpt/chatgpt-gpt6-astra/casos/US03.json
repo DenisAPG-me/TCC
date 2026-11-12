@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Enviar login vazio",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir login; deixar e-mail e senha vazios; enviar",
+  "esperado": "Exibe “Email is required” e “Password is required”"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Rejeitar senha incorreta",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Abrir login; informar e-mail da demonstração e senha incorreta; enviar",
+  "esperado": "Exibe “Invalid email or password”; permanece no login, com opção de entrar e sem menu de usuário"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Exigir autenticação no checkout",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Em contexto sem sessão, adicionar um produto; abrir carrinho; avançar",
+  "esperado": "Exibe campos de e-mail e senha e botão de login"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Entrar com a conta de demonstração",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Abrir login; informar credenciais fornecidas; enviar",
+  "esperado": "Exibe página “My account” e nome do usuário no menu"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Validar obrigatoriedade dos campos de endereço",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Autenticar; adicionar produto; chegar ao endereço; tentar avançar com todos os campos vazios; repetir deixando apenas um dos seis campos vazio por vez; preencher todos; avançar",
+  "esperado": "Cada tentativa incompleta mantém o endereço e impede acesso ao pagamento; endereço completo permite avançar"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Pagar com cartão e confirmar pedido",
+  "tipo": "positivo",
+  "criterio": "6",
+  "passos": "Autenticar; adicionar produto; preencher endereço; selecionar cartão de crédito; informar dados fictícios válidos; confirmar pagamento; confirmar pedido",
+  "esperado": "Exibe “Payment was successful” e confirmação de pedido com número iniciado por “INV-”"
+ }
+]

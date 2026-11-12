@@ -1,0 +1,169 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Adicionar três unidades de produto disponível | Positivo | 1 | Abrir “Claw Hammer”; definir quantidade 3; adicionar ao carrinho. | Exibir “Product added to shopping cart.” e indicador do carrinho igual a 3. |
+| CT02 | Calcular os totais para três unidades | Positivo | 2 | Adicionar três unidades de “Claw Hammer”; abrir o carrinho; consultar o preço unitário e os totais. | Total da linha igual ao preço unitário × 3; total do carrinho igual ao total da linha. |
+| CT03 | Recalcular o total ao reduzir para uma unidade | Borda | 3 | Adicionar três unidades de “Claw Hammer”; abrir o carrinho; alterar a quantidade para 1. | Quantidade exibida igual a 1 e total do carrinho igual ao preço unitário. |
+| CT04 | Rejeitar tentativa de adicionar três unidades de Thor Hammer | Negativo | 4 | Abrir “Thor Hammer”; definir quantidade 3; tentar adicionar ao carrinho. | Exibir “You can only have one Thor Hammer in the cart.”. |
+
+## SUPOSIÇÕES
+
+- Nenhum acesso ao sistema ou à internet foi realizado. Seletores, navegação e apresentação monetária abaixo são deduções que precisam ser confirmadas no sistema real.
+- A interface está em inglês. “Claw Hammer” e “Thor Hammer” estão disponíveis na página inicial, sem necessidade de autenticação, busca ou paginação.
+- A URL base é `https://practicesoftwaretesting.com/`, definida em uma constante no início do arquivo.
+- Os produtos são acessíveis por links com nomes acessíveis exatamente iguais aos seus nomes. As rotas de produto e carrinho não são conhecidas; a navegação utiliza os links da interface.
+- O atributo de identificação dos elementos é `data-test`, configurado para uso com `get_by_test_id`.
+- Na página do produto, `quantity` identifica o campo editável da quantidade e `add-to-cart` identifica o botão de adicionar.
+- `cart-quantity` identifica o indicador numérico do carrinho; `nav-cart` identifica o acesso ao carrinho.
+- No carrinho, cada produto ocupa uma linha com papel acessível `row`, contendo seu nome. Dentro dessa linha, `product-price` identifica o preço unitário, `product-total` identifica o total da linha e `product-quantity` identifica o campo editável da quantidade.
+- `cart-total` identifica exclusivamente o total monetário do carrinho.
+- Os preços são exibidos em dólares, com símbolo `$`, ponto decimal, duas casas decimais e sem separador de milhares. Não há frete, taxas ou descontos nos totais especificados.
+- Alterar a quantidade no carrinho e retirar o foco com `Tab` dispara o recálculo automaticamente.
+- As mensagens exigidas são elementos visíveis, com os textos exatos dos critérios.
+- Cada teste usa a fixture `page` e um contexto isolado fornecidos pelo plugin oficial `pytest-playwright`, começando com carrinho vazio. Não existe carrinho compartilhado entre sessões.
+- CT03 cobre a borda de uma unidade explicitamente mencionada. Isso não estabelece um mínimo permitido. Quantidades zero, negativas, fracionárias, vazias, limites de estoque e outros valores para “Thor Hammer” não possuem resultados definidos na história e, portanto, não geram casos adicionais.
+- CT04 verifica somente a mensagem exigida; o critério não define o estado final do carrinho após a tentativa.
+- O ambiente deve conter `pytest`, `playwright`, o plugin obrigatório `pytest-playwright` e o navegador Chromium instalado. Execução: `python -m pytest test_carrinho.py --browser chromium`.
+
+```python
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+import re
+from decimal import Decimal
+
+import pytest
+from playwright.sync_api import Page, Playwright, expect
+
+
+PRODUTO_COMUM = "Claw Hammer"
+PRODUTO_RESTRITO = "Thor Hammer"
+
+MENSAGEM_SUCESSO = "Product added to shopping cart."
+MENSAGEM_THOR = "You can only have one Thor Hammer in the cart."
+
+TIMEOUT_MS = 15_000
+PADRAO_PRECO = re.compile(r"^\s*\$\s*(\d+\.\d{2})\s*$")
+
+
+@pytest.fixture(autouse=True)
+def configurar_identificadores(playwright: Playwright):
+    """Configura o atributo dos locators sem criar browser, context ou page."""
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+def abrir_produto(page: Page, nome: str) -> None:
+    page.goto(BASE_URL, wait_until="domcontentloaded")
+    page.get_by_role("link", name=nome, exact=True).click()
+    expect(
+        page.get_by_role("heading", name=nome, exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    expect(page.get_by_test_id("quantity")).to_be_editable()
+
+
+def adicionar_quantidade(page: Page, quantidade: int) -> None:
+    campo = page.get_by_test_id("quantity")
+    campo.fill(str(quantidade))
+    expect(campo).to_have_value(str(quantidade))
+    page.get_by_test_id("add-to-cart").click()
+
+
+def preparar_carrinho_com_tres_unidades(page: Page) -> None:
+    abrir_produto(page, PRODUTO_COMUM)
+    adicionar_quantidade(page, 3)
+    expect(
+        page.get_by_text(MENSAGEM_SUCESSO, exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    expect(page.get_by_test_id("cart-quantity")).to_have_text(
+        "3", timeout=TIMEOUT_MS
+    )
+
+
+def abrir_linha_do_produto(page: Page):
+    page.get_by_test_id("nav-cart").click()
+    linha = page.get_by_role("row").filter(
+        has=page.get_by_text(PRODUTO_COMUM, exact=True)
+    )
+    expect(linha).to_have_count(1, timeout=TIMEOUT_MS)
+    expect(linha).to_be_visible()
+    expect(linha.get_by_test_id("product-quantity")).to_have_value(
+        "3", timeout=TIMEOUT_MS
+    )
+    return linha
+
+
+def ler_preco_unitario(linha) -> Decimal:
+    campo_preco = linha.get_by_test_id("product-price")
+    expect(campo_preco).to_have_text(PADRAO_PRECO, timeout=TIMEOUT_MS)
+    texto = campo_preco.inner_text()
+    correspondencia = PADRAO_PRECO.fullmatch(texto)
+    if correspondencia is None:
+        raise ValueError(f"Formato monetário inesperado: {texto!r}")
+    return Decimal(correspondencia.group(1))
+
+
+def padrao_monetario(valor: Decimal):
+    valor_formatado = format(valor.quantize(Decimal("0.01")), ".2f")
+    return re.compile(r"^\s*\$\s*" + re.escape(valor_formatado) + r"\s*$")
+
+
+def test_CT01_adicionar_tres_unidades(page: Page) -> None:
+    abrir_produto(page, PRODUTO_COMUM)
+
+    adicionar_quantidade(page, 3)
+
+    expect(
+        page.get_by_text(MENSAGEM_SUCESSO, exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    expect(page.get_by_test_id("cart-quantity")).to_have_text(
+        "3", timeout=TIMEOUT_MS
+    )
+
+
+def test_CT02_calcular_totais_para_tres_unidades(page: Page) -> None:
+    preparar_carrinho_com_tres_unidades(page)
+    linha = abrir_linha_do_produto(page)
+    preco_unitario = ler_preco_unitario(linha)
+    total_esperado = preco_unitario * Decimal("3")
+
+    expect(linha.get_by_test_id("product-total")).to_have_text(
+        padrao_monetario(total_esperado), timeout=TIMEOUT_MS
+    )
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        padrao_monetario(total_esperado), timeout=TIMEOUT_MS
+    )
+
+
+def test_CT03_recalcular_total_para_uma_unidade(page: Page) -> None:
+    preparar_carrinho_com_tres_unidades(page)
+    linha = abrir_linha_do_produto(page)
+    preco_unitario = ler_preco_unitario(linha)
+
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        padrao_monetario(preco_unitario * Decimal("3")),
+        timeout=TIMEOUT_MS,
+    )
+
+    quantidade = linha.get_by_test_id("product-quantity")
+    quantidade.fill("1")
+    quantidade.press("Tab")
+
+    expect(quantidade).to_have_value("1", timeout=TIMEOUT_MS)
+    expect(page.get_by_test_id("cart-total")).to_have_text(
+        padrao_monetario(preco_unitario), timeout=TIMEOUT_MS
+    )
+
+
+def test_CT04_rejeitar_tres_unidades_de_thor_hammer(page: Page) -> None:
+    abrir_produto(page, PRODUTO_RESTRITO)
+
+    adicionar_quantidade(page, 3)
+
+    expect(
+        page.get_by_text(MENSAGEM_THOR, exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))
+```

@@ -1,0 +1,148 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Login com usuário e senha vazios | Negativo | AC1 | 1. Acessar `/admin`. 2. Deixar usuário e senha vazios. 3. Clicar em "Login". | Mensagem "Invalid credentials" exibida; formulário de login continua visível em `/admin`. |
+| CT02 | Login com usuário "admin" e senha incorreta | Negativo | AC2 | 1. Acessar `/admin`. 2. Informar "admin" / "senhaErrada123". 3. Clicar em "Login". | Mensagem "Invalid credentials" exibida; usuário não autenticado. |
+| CT03 | Login com senha correta em caixa diferente ("Password") | Borda | AC2 | 1. Acessar `/admin`. 2. Informar "admin" / "Password". 3. Clicar em "Login". | Mensagem "Invalid credentials" exibida (senha sensível a maiúsculas/minúsculas). |
+| CT04 | Login com usuário "admin" e senha vazia | Borda | AC1, AC2 | 1. Acessar `/admin`. 2. Informar "admin" e deixar a senha vazia. 3. Clicar em "Login". | Mensagem "Invalid credentials" exibida; formulário de login continua visível. |
+| CT05 | Login válido exibe lista de quartos com o quarto 101 Single | Positivo | AC3 | 1. Acessar `/admin`. 2. Informar "admin" / "password". 3. Clicar em "Login". | Redirecionado para `/admin/rooms`; lista contém o quarto "101" do tipo "Single". |
+| CT06 | Login válido exibe menu com Rooms, Report, Branding e Messages | Positivo | AC3 | 1. Fazer login válido. 2. Verificar o menu de navegação. | Menu exibe os itens "Rooms", "Report", "Branding" e "Messages". |
+| CT07 | Logout retorna à página inicial pública | Positivo | AC4 | 1. Fazer login válido. 2. Clicar em "Logout". | Usuário é levado à página inicial pública (`/`). |
+| CT08 | Acesso direto à lista de quartos após logout exige login | Negativo | AC5 | 1. Fazer login válido. 2. Clicar em "Logout". 3. Acessar diretamente `/admin/rooms`. | Tela de login exibida; lista de quartos não acessível. |
+| CT09 | Acesso direto à lista de quartos sem nunca ter autenticado | Borda | AC5 | 1. Em sessão nova, acessar diretamente `/admin/rooms`. | Tela de login exibida; lista de quartos não acessível. |
+
+## SUPOSIÇÕES
+
+- URL base: `https://automationintesting.online` (constante `BASE_URL`), sobrescrevível via `--base-url` (fixture `base_url` do pytest-base-url, instalado junto com pytest-playwright).
+- Rota da tela de login: `/admin`; rota da lista de quartos: `/admin/rooms`; página inicial pública: `/`.
+- Campos de login possuem rótulos acessíveis "Username" e "Password" (`get_by_label("Username")`, `get_by_label("Password", exact=True)`); internamente `#username` e `#password`.
+- Botão de envio: `get_by_role("button", name="Login")` (internamente `#doLogin`).
+- Mensagem de erro exibida exatamente com o texto "Invalid credentials" (`get_by_text("Invalid credentials")`).
+- O menu do painel está dentro de um elemento com papel `navigation`; "Rooms", "Report", "Branding" e "Messages" são links; "Logout" é acessível pelo texto exato "Logout" dentro da navegação (botão ou link).
+- Cada quarto da lista é renderizado em um contêiner com `data-testid="roomlisting"`, contendo o número ("101") e o tipo ("Single", comparado sem diferenciar maiúsculas/minúsculas).
+- O quarto 101 do tipo Single existe nos dados de demonstração (o ambiente é reiniciado periodicamente).
+- Após o logout, a sessão (cookie de token) é invalidada; ao acessar `/admin/rooms` sem autenticação, a aplicação exibe o formulário de login (com ou sem redirecionamento de URL, por isso a URL não é validada nesse caso).
+- Cada teste usa a fixture `page` do pytest-playwright, que fornece um contexto novo e isolado (sem cookies de testes anteriores).
+- Senha incorreta usada nos testes: "senhaErrada123"; variação de caixa: "Password".
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online"
+
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+INVALID_CREDENTIALS_MSG = "Invalid credentials"
+
+
+@pytest.fixture
+def app_url(base_url):
+    return (base_url or BASE_URL).rstrip("/")
+
+
+def open_login(page: Page, app_url: str) -> None:
+    page.goto(f"{app_url}/admin")
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+
+
+def submit_login(page: Page, username: str, password: str) -> None:
+    page.get_by_label("Username").fill(username)
+    page.get_by_label("Password", exact=True).fill(password)
+    page.get_by_role("button", name="Login").click()
+
+
+def login_as_admin(page: Page, app_url: str) -> None:
+    open_login(page, app_url)
+    submit_login(page, ADMIN_USER, ADMIN_PASSWORD)
+    expect(page).to_have_url(re.compile(r"/admin/rooms/?$"))
+
+
+def logout(page: Page) -> None:
+    page.get_by_role("navigation").get_by_text("Logout", exact=True).click()
+
+
+def expect_login_screen(page: Page) -> None:
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password", exact=True)).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+
+
+def test_ct01_login_com_usuario_e_senha_vazios(page: Page, app_url: str):
+    open_login(page, app_url)
+    submit_login(page, "", "")
+
+    expect(page.get_by_text(INVALID_CREDENTIALS_MSG)).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/admin/?$"))
+    expect_login_screen(page)
+
+
+def test_ct02_login_com_senha_incorreta(page: Page, app_url: str):
+    open_login(page, app_url)
+    submit_login(page, ADMIN_USER, "senhaErrada123")
+
+    expect(page.get_by_text(INVALID_CREDENTIALS_MSG)).to_be_visible()
+    expect_login_screen(page)
+
+
+def test_ct03_login_com_senha_em_caixa_diferente(page: Page, app_url: str):
+    open_login(page, app_url)
+    submit_login(page, ADMIN_USER, "Password")
+
+    expect(page.get_by_text(INVALID_CREDENTIALS_MSG)).to_be_visible()
+    expect_login_screen(page)
+
+
+def test_ct04_login_com_usuario_admin_e_senha_vazia(page: Page, app_url: str):
+    open_login(page, app_url)
+    submit_login(page, ADMIN_USER, "")
+
+    expect(page.get_by_text(INVALID_CREDENTIALS_MSG)).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/admin/?$"))
+    expect_login_screen(page)
+
+
+def test_ct05_login_valido_exibe_quarto_101_single(page: Page, app_url: str):
+    login_as_admin(page, app_url)
+
+    room_101 = page.get_by_test_id("roomlisting").filter(has_text="101")
+    expect(room_101).to_have_count(1)
+    expect(room_101).to_contain_text(re.compile(r"single", re.IGNORECASE))
+
+
+def test_ct06_login_valido_exibe_menu_do_painel(page: Page, app_url: str):
+    login_as_admin(page, app_url)
+
+    nav = page.get_by_role("navigation")
+    for item in ("Rooms", "Report", "Branding", "Messages"):
+        expect(nav.get_by_role("link", name=item, exact=True)).to_be_visible()
+
+
+def test_ct07_logout_retorna_a_pagina_inicial(page: Page, app_url: str):
+    login_as_admin(page, app_url)
+    logout(page)
+
+    expect(page).to_have_url(re.compile(rf"^{re.escape(app_url)}/?$"))
+    expect(page.get_by_role("button", name="Login")).to_have_count(0)
+
+
+def test_ct08_acesso_direto_a_quartos_apos_logout_exige_login(page: Page, app_url: str):
+    login_as_admin(page, app_url)
+    logout(page)
+    expect(page).to_have_url(re.compile(rf"^{re.escape(app_url)}/?$"))
+
+    page.goto(f"{app_url}/admin/rooms")
+
+    expect_login_screen(page)
+    expect(page.get_by_test_id("roomlisting")).to_have_count(0)
+
+
+def test_ct09_acesso_direto_a_quartos_sem_autenticacao_exige_login(page: Page, app_url: str):
+    page.goto(f"{app_url}/admin/rooms")
+
+    expect_login_screen(page)
+    expect(page.get_by_test_id("roomlisting")).to_have_count(0)
+```

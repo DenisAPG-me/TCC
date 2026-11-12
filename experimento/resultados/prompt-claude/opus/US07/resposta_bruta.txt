@@ -1,0 +1,195 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Criar reserva com corpo JSON válido | Positivo | CA1 | Montar payload válido com firstname, lastname, totalprice, depositpaid, bookingdates e additionalneeds; enviar POST /booking | Status 200; resposta contém bookingid inteiro positivo; objeto booking igual ao payload enviado |
+| CT02 | Consultar reserva criada pelo identificador | Positivo | CA1, CA2 | Criar reserva via POST /booking; obter bookingid; enviar GET /booking/{bookingid} | Status 200; todos os campos retornados iguais aos enviados |
+| CT03 | Consultar reserva com identificador inexistente | Negativo | CA3 | Enviar GET /booking/99999999 | Status 404 |
+| CT04 | Consultar reserva com identificador não numérico | Borda | CA3 | Enviar GET /booking/abc | Status 404 |
+| CT05 | Listar reservas filtrando por nome e sobrenome únicos | Positivo | CA4 | Criar reserva com nome e sobrenome únicos; enviar GET /booking?firstname={nome}&lastname={sobrenome} | Status 200; lista contém objeto com o bookingid criado |
+| CT06 | Listar reservas com nome e sobrenome inexistentes | Negativo | CA4 | Gerar nome e sobrenome únicos sem criar reserva; enviar GET /booking?firstname={nome}&lastname={sobrenome} | Status 200; lista vazia |
+| CT07 | Criar e consultar reserva com valores limite | Borda | CA1, CA2 | Montar payload com totalprice 0, depositpaid false e check-in igual ao check-out; enviar POST /booking; enviar GET /booking/{bookingid} | Status 200 em ambas as chamadas; dados retornados iguais aos enviados |
+| CT08 | Criar e consultar reserva com caracteres acentuados | Borda | CA1, CA2 | Montar payload com nome, sobrenome e necessidades adicionais com acentos e cedilha; enviar POST /booking; enviar GET /booking/{bookingid} | Status 200 em ambas as chamadas; dados retornados iguais aos enviados, preservando os caracteres especiais |
+
+## SUPOSIÇÕES
+
+- User Story de API REST: tecnologia escolhida Python + pytest + requests; os requisitos técnicos de UI (pytest-playwright, `expect`, locators) não se aplicam.
+- Endpoints: `POST /booking` para criação, `GET /booking/{id}` para consulta e `GET /booking?firstname=...&lastname=...` para listagem filtrada; nenhum deles exige autenticação, portanto não há credenciais.
+- Payload em JSON com os campos `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`) e `additionalneeds` (texto).
+- A resposta de criação tem o formato `{"bookingid": <int>, "booking": {<dados enviados>}}`.
+- A consulta por id retorna diretamente o objeto da reserva, com os mesmos campos do payload.
+- A listagem retorna uma lista de objetos no formato `{"bookingid": <int>}`, e a filtragem por nome e sobrenome é exata.
+- Os cabeçalhos `Content-Type: application/json` e `Accept: application/json` são enviados em todas as requisições, pois a API pode responder em outro formato ou com erro sem o `Accept`.
+- Um identificador não numérico (`abc`) é tratado como inexistente e retorna 404.
+- Uma listagem filtrada sem correspondência retorna status 200 com lista vazia.
+- `totalprice` 0, `depositpaid` false, check-in igual ao check-out e caracteres acentuados são aceitos e persistidos sem alteração.
+- Nomes únicos são gerados com `uuid4` para garantir isolamento entre execuções, já que o ambiente é público e compartilhado.
+- Cada teste cria seus próprios dados, para que os testes sejam independentes entre si.
+- Timeout de 30 segundos por requisição, considerando possível latência de inicialização do servidor.
+
+## SCRIPT
+
+```python
+import uuid
+
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+BOOKING_URL = f"{BASE_URL}/booking"
+TIMEOUT = 30
+HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+
+NONEXISTENT_ID = 99999999
+NON_NUMERIC_ID = "abc"
+
+DEFAULT_BOOKING = {
+    "firstname": "Joao",
+    "lastname": "Silva",
+    "totalprice": 150,
+    "depositpaid": True,
+    "bookingdates": {"checkin": "2026-11-10", "checkout": "2026-11-15"},
+    "additionalneeds": "Breakfast",
+}
+
+BOUNDARY_BOOKING = {
+    "firstname": "Maria",
+    "lastname": "Souza",
+    "totalprice": 0,
+    "depositpaid": False,
+    "bookingdates": {"checkin": "2026-12-01", "checkout": "2026-12-01"},
+    "additionalneeds": "Late checkout",
+}
+
+ACCENTED_BOOKING = {
+    "firstname": "José",
+    "lastname": "Conceição",
+    "totalprice": 320,
+    "depositpaid": True,
+    "bookingdates": {"checkin": "2026-11-20", "checkout": "2026-11-22"},
+    "additionalneeds": "Café da manhã e berço",
+}
+
+
+def unique_name(prefix):
+    return f"{prefix}{uuid.uuid4().hex[:12]}"
+
+
+def build_booking(base=DEFAULT_BOOKING, **overrides):
+    payload = {**base, "bookingdates": dict(base["bookingdates"])}
+    payload.update(overrides)
+    return payload
+
+
+def create_booking(payload):
+    return requests.post(BOOKING_URL, json=payload, headers=HEADERS, timeout=TIMEOUT)
+
+
+def get_booking(booking_id):
+    return requests.get(f"{BOOKING_URL}/{booking_id}", headers=HEADERS, timeout=TIMEOUT)
+
+
+def list_bookings(firstname, lastname):
+    return requests.get(
+        BOOKING_URL,
+        params={"firstname": firstname, "lastname": lastname},
+        headers=HEADERS,
+        timeout=TIMEOUT,
+    )
+
+
+def create_booking_id(payload):
+    response = create_booking(payload)
+    assert response.status_code == 200, response.text
+    booking_id = response.json()["bookingid"]
+    assert isinstance(booking_id, int)
+    return booking_id
+
+
+def test_ct01_criar_reserva_com_corpo_valido():
+    payload = build_booking()
+
+    response = create_booking(payload)
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert isinstance(body["bookingid"], int)
+    assert not isinstance(body["bookingid"], bool)
+    assert body["bookingid"] > 0
+    assert body["booking"] == payload
+
+
+def test_ct02_consultar_reserva_criada_pelo_id():
+    payload = build_booking()
+    booking_id = create_booking_id(payload)
+
+    response = get_booking(booking_id)
+
+    assert response.status_code == 200, response.text
+    assert response.json() == payload
+
+
+def test_ct03_consultar_reserva_id_inexistente():
+    response = get_booking(NONEXISTENT_ID)
+
+    assert response.status_code == 404
+
+
+def test_ct04_consultar_reserva_id_nao_numerico():
+    response = get_booking(NON_NUMERIC_ID)
+
+    assert response.status_code == 404
+
+
+def test_ct05_listar_reservas_por_nome_e_sobrenome_unicos():
+    firstname = unique_name("Nome")
+    lastname = unique_name("Sobrenome")
+    booking_id = create_booking_id(build_booking(firstname=firstname, lastname=lastname))
+
+    response = list_bookings(firstname, lastname)
+
+    assert response.status_code == 200, response.text
+    ids = [item["bookingid"] for item in response.json()]
+    assert booking_id in ids
+
+
+def test_ct06_listar_reservas_nome_e_sobrenome_inexistentes():
+    firstname = unique_name("Inexistente")
+    lastname = unique_name("Inexistente")
+
+    response = list_bookings(firstname, lastname)
+
+    assert response.status_code == 200, response.text
+    assert response.json() == []
+
+
+def test_ct07_criar_e_consultar_reserva_com_valores_limite():
+    payload = build_booking(BOUNDARY_BOOKING)
+
+    create_response = create_booking(payload)
+
+    assert create_response.status_code == 200, create_response.text
+    body = create_response.json()
+    assert isinstance(body["bookingid"], int)
+    assert body["booking"] == payload
+
+    get_response = get_booking(body["bookingid"])
+
+    assert get_response.status_code == 200, get_response.text
+    assert get_response.json() == payload
+
+
+def test_ct08_criar_e_consultar_reserva_com_caracteres_acentuados():
+    payload = build_booking(ACCENTED_BOOKING)
+
+    create_response = create_booking(payload)
+
+    assert create_response.status_code == 200, create_response.text
+    body = create_response.json()
+    assert isinstance(body["bookingid"], int)
+    assert body["booking"] == payload
+
+    get_response = get_booking(body["bookingid"])
+
+    assert get_response.status_code == 200, get_response.text
+    assert get_response.json() == payload
+```

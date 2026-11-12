@@ -1,0 +1,70 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_busca_hammer_exibe_apenas_nomes_correspondentes",
+   "categoria": "seletor inexistente",
+   "nota": "role article inexistente na listagem"
+  },
+  {
+   "teste": "test_TC03_ordena_precos_do_menor_para_o_maior",
+   "categoria": "seletor inexistente",
+   "nota": "opcao/select de ordenacao nao localizado por heuristica"
+  },
+  {
+   "teste": "test_TC04_ordena_nomes_de_z_a",
+   "categoria": "seletor inexistente",
+   "nota": "opcao/select de ordenacao nao localizado por heuristica"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_contador_messages_visivel_apos_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py:85: in test_CT001_contador_messages_visivel_apos_login\n    assert read_messages_count(page) >= 0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py:68: in read_messages_count\n    assert match is not None, \"Contador ao lado de Messages não encontrado\"\nE   AssertionError: Contador ao lado de Messages não encontrado\nE   assert None is not None"
+  },
+  {
+   "nodeid": "script.py::test_CT002_login_com_senha_invalida_nao_exibe_contador[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_CT003_envio_valido_exibe_confirmacao[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT004_envio_sem_assunto_nao_exibe_confirmacao[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT005_confirmacao_preserva_nome_com_acentos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT006_contador_aumenta_uma_unidade_apos_envio[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT007_envio_com_email_invalido_nao_altera_contador[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT008_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT009_mensagem_com_acentos_aparece_corretamente[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT010_mensagem_nao_enviada_nao_aparece_na_caixa[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT011_logout_exige_login_ao_abrir_caixa[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT012_acesso_direto_sem_login_exige_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py:181: in test_CT012_acesso_direto_sem_login_exige_login\n    expect(page.get_by_label(\"Username\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Username\") with timeout 5000ms\nE     - waiting for get_by_label(\"Username\")\nE   \nE   Aria snapshot:\nE   - heading \"404\" [level=1]\nE   - heading \"This page could not be found.\" [level=2]\nE   - alert"
+  }
+ ],
+ "stdout_tail": "nfirmacao[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT005_confirmacao_preserva_nome_com_acentos[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT006_contador_aumenta_uma_unidade_apos_envio[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT007_envio_com_email_invalido_nao_altera_contador[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT008_mensagem_recem_enviada_aparece_na_caixa[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT009_mensagem_com_acentos_aparece_corretamente[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT010_mensagem_nao_enviada_nao_aparece_na_caixa[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT011_logout_exige_login_ao_abrir_caixa[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US06\\script.py::test_CT012_acesso_direto_sem_login_exige_login[chromium]\n12 failed, 2 warnings in 284.01s (0:04:44)\n",
+ "returncode": 1,
+ "duracao_s": 284.71
+}

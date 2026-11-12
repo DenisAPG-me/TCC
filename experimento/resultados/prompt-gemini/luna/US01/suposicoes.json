@@ -1,0 +1,11 @@
+[
+ "A aplicação é acessada pela URL base `https://practicesoftwaretesting.com/`; os testes navegam diretamente para ela.",
+ "A página inicial exibe um campo de busca acessível com rótulo ou placeholder contendo “search” e um botão acessível chamado “Search”. O teste também tenta submeter com Enter se o botão não estiver disponível.",
+ "A busca atualiza a página sem navegar para outra rota ou, caso navegue, o resultado continua na página exibida após a submissão.",
+ "A indicação do termo buscado contém o texto `hammer`.",
+ "Os cartões de produto podem ser localizados pelo papel `article` ou pelo seletor deduzido `[data-test=\"product\"]`; nomes e preços estão dentro desses cartões.",
+ "Os nomes são encontrados como headings nos cartões, com fallback para `[data-test=\"product-name\"]`; os preços usam `[data-test=\"product-price\"]`.",
+ "O seletor de ordenação tem rótulo ou placeholder contendo “sort”. As opções incluem texto equivalente a preço crescente e nome decrescente (por exemplo, “Price (Low to High)” e “Name (Z to A)”).",
+ "As opções de ordenação e os seletores de produto são deduções razoáveis, pois não há acesso ao sistema para inspecionar o DOM.",
+ "Casos de borda cobertos: a busca não diferencia maiúsculas de minúsculas para validar os nomes, a ordenação permite preços ou nomes iguais, e a comparação de nomes ignora diferenças de maiúsculas/minúsculas."
+]

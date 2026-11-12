@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes descritivos",
+  "estrutura": "factory fixture e helpers",
+  "assercoes": "so status",
+  "espera": "timeout e uuid",
+  "manutenibilidade": "cleanup e constantes"
+ }
+}

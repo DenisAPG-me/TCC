@@ -1,0 +1,213 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Contador de Messages exibido após login | positivo | CA01 | Abrir /admin; autenticar com admin/password; localizar o link Messages e ler o número ao lado | O link Messages está visível com um número inteiro não negativo ao lado, que pode ser anotado |
+| CT002 | Envio válido do formulário de contato exibe confirmação com o nome | positivo | CA02 | Abrir a página inicial; preencher nome, e-mail, telefone, assunto e mensagem válidos e únicos; clicar em Submit | Aparece o texto "Thanks for getting in touch <nome>!" com o nome informado |
+| CT003 | Envio do formulário vazio não exibe confirmação | negativo | CA02 | Abrir a página inicial; clicar em Submit sem preencher campos | Mensagens de validação de nome e assunto obrigatórios aparecem e nenhuma confirmação "Thanks for getting in touch" é exibida |
+| CT004 | Confirmação preserva nome com acentos, apóstrofo e hífen | borda | CA02 | Abrir a página inicial; preencher o formulário com nome contendo acentos, apóstrofo e hífen e demais dados válidos; clicar em Submit | A confirmação exibe exatamente "Thanks for getting in touch <nome>!" com o nome sem alterações |
+| CT005 | Contador de Messages aumenta em uma unidade após envio de visitante | positivo | CA01, CA03 | Autenticar; anotar o número de Messages; fazer logout; enviar mensagem válida como visitante; autenticar novamente; ler o número | O número ao lado de Messages é exatamente o anotado mais um |
+| CT006 | Mensagem recém-enviada aparece na caixa com nome e assunto | positivo | CA04 | Enviar mensagem válida com nome e assunto únicos; autenticar; clicar em Messages | A lista contém exatamente uma linha com o assunto enviado e essa linha contém o nome do remetente |
+| CT007 | Acesso direto à caixa de mensagens após logout solicita login | positivo | CA05 | Autenticar; fazer logout; navegar diretamente para /admin/message | Campos Username e Password e botão Login são exibidos e nenhuma linha de mensagem é listada |
+
+SUPOSIÇÕES
+
+1. Mapeamento de critérios (inferido): os critérios numerados 1 a 5 da User Story foram identificados como CA01 a CA05, na ordem de apresentação.
+2. Tecnologia (decisão): o prompt contém duas instruções conflitantes; a seção "REQUISITOS TÉCNICOS OBRIGATÓRIOS" declara explicitamente prevalecer e foi seguida. Por isso o arquivo usa o plugin pytest-playwright e suas fixtures `page`, sem `sync_playwright()` e sem fixtures próprias de navegador ou página. Pré-condição externa: pytest-playwright instalado, além do Chromium. A execução continua sendo `pytest nome_do_arquivo.py`.
+3. Explícito na User Story: URL base https://automationintesting.online/, painel em /admin, credenciais admin / password, texto de confirmação "Thanks for getting in touch <nome>!", existência de contador ao lado de "Messages", lista de mensagens com nome e assunto, e exigência de login após logout.
+4. Rotas (inferido): a caixa de mensagens está em /admin/message (CT006, CT007). A constante `MESSAGES_PATH` centraliza essa rota.
+5. Login (inferido): campos com rótulos acessíveis "Username" e "Password", botão "Login"; após login aparece um botão "Logout" e, após o logout, esse botão deixa de existir (CT001, CT005, CT006, CT007).
+6. Contador (inferido): o link de navegação "Messages" contém o número no próprio texto, de forma que o texto do link corresponde a `Messages <número>`. Também se supõe que o número é exibido mesmo quando vale zero (CT001, CT005).
+7. Formulário de contato (inferido): campos identificados por `data-testid` ContactName, ContactEmail, ContactPhone, ContactSubject e ContactDescription, e botão "Submit" (CT002 a CT006). A User Story cita apenas nome, assunto e "dados válidos". Os valores de e-mail, telefone com 11 dígitos, assunto com 5 a 100 caracteres e mensagem com pelo menos 20 caracteres foram escolhidos para serem plausivelmente válidos. Esses valores não são limites especificados, e por isso nenhum caso testa esses limites.
+8. Validação (inferido, CT003): ao enviar o formulário vazio, aparecem os textos "Name may not be blank" e "Subject may not be blank" e a confirmação não é exibida. A User Story só define o resultado do envio válido; o comportamento negativo é dedução.
+9. Lista de mensagens (inferido, CT006, CT007): cada mensagem é uma linha com `data-testid` no formato `message<n>`, contendo nome e assunto. Supõe-se também que a mensagem recém-enviada aparece na lista sem paginação.
+10. Ambiente compartilhado (risco declarado): o site de demonstração é público. Envios de terceiros entre a leitura inicial e a final do contador podem fazer o CT005 falhar sem defeito real. Resets periódicos do ambiente podem afetar o CT005 e o CT006. Dados únicos (sufixo UUID) reduzem colisões no CT006, mas não eliminam o risco do contador.
+11. Independência: cada teste recebe uma `page` nova do plugin, com contexto isolado, e gera seus próprios dados. Não há limpeza das mensagens criadas, porque a User Story não define exclusão de mensagens.
+12. Ausência de testes de API: a User Story descreve apenas interações de interface (formulário, painel, contador, logout). Por isso não foram criados testes REST nem usado `requests`.
+13. Casos de borda e negativos: CA01, CA03 e CA04 não especificam comportamento alternativo além do fluxo principal, então não foram criados casos negativos para eles, para evitar requisitos sem fundamento. CA05 já descreve, por si, um cenário de restrição de acesso (CT007).
+14. Tempo de espera: as asserções `expect` usam timeout de 15 s (constante `UI_TIMEOUT_MS`), considerando a latência de um ambiente público. Os seletores e textos inferidos podem exigir ajuste nas constantes antes de funcionar no sistema real.
+
+```python
+import re
+import uuid
+from urllib.parse import urljoin
+
+from playwright.sync_api import Page, expect
+
+# ---------------------------------------------------------------------------
+# Configuração e valores inferidos (ajustar se o sistema real divergir)
+# ---------------------------------------------------------------------------
+BASE_URL = "https://automationintesting.online/"
+ADMIN_PATH = "admin"
+MESSAGES_PATH = "admin/message"
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+
+UI_TIMEOUT_MS = 15_000
+
+LOGIN_USERNAME_LABEL = "Username"
+LOGIN_PASSWORD_LABEL = "Password"
+LOGIN_BUTTON_NAME = "Login"
+LOGOUT_BUTTON_NAME = "Logout"
+
+MESSAGES_LINK_NAME = re.compile(r"^\s*Messages\b")
+MESSAGES_LINK_TEXT = re.compile(r"^\s*Messages\s*\d+\s*$")
+MESSAGES_COUNT_PATTERN = re.compile(r"Messages\s*(\d+)")
+MESSAGE_ROW_TEST_ID = re.compile(r"^message\d+$")
+
+CONTACT_TEST_IDS = {
+    "name": "ContactName",
+    "email": "ContactEmail",
+    "phone": "ContactPhone",
+    "subject": "ContactSubject",
+    "message": "ContactDescription",
+}
+CONTACT_SUBMIT_NAME = "Submit"
+
+CONFIRMATION_TEMPLATE = "Thanks for getting in touch {name}!"
+CONFIRMATION_PREFIX = "Thanks for getting in touch"
+BLANK_FIELD_ERRORS = ("Name may not be blank", "Subject may not be blank")
+
+SPECIAL_NAME = "José D'Ávila-Núñez"
+
+expect.set_options(timeout=UI_TIMEOUT_MS)
+
+
+# ---------------------------------------------------------------------------
+# Funções auxiliares
+# ---------------------------------------------------------------------------
+def url(path: str = "") -> str:
+    return urljoin(BASE_URL, path)
+
+
+def build_contact(name: str | None = None) -> dict:
+    suffix = uuid.uuid4().hex[:8]
+    return {
+        "name": name if name is not None else f"Visitante {suffix}",
+        "email": f"visitante.{suffix}@example.com",
+        "phone": "01234567890",
+        "subject": f"Reserva teste {suffix}",
+        "message": f"Gostaria de informações sobre disponibilidade. Ref {suffix}.",
+    }
+
+
+def submit_contact(page: Page, contact: dict) -> None:
+    page.goto(url())
+    for field, test_id in CONTACT_TEST_IDS.items():
+        page.get_by_test_id(test_id).fill(contact[field])
+    page.get_by_role("button", name=CONTACT_SUBMIT_NAME).click()
+    expect(
+        page.get_by_text(CONFIRMATION_TEMPLATE.format(name=contact["name"]), exact=True)
+    ).to_be_visible()
+
+
+def login(page: Page) -> None:
+    page.goto(url(ADMIN_PATH))
+    page.get_by_label(LOGIN_USERNAME_LABEL).fill(ADMIN_USERNAME)
+    page.get_by_label(LOGIN_PASSWORD_LABEL).fill(ADMIN_PASSWORD)
+    page.get_by_role("button", name=LOGIN_BUTTON_NAME).click()
+    expect(page.get_by_role("button", name=LOGOUT_BUTTON_NAME)).to_be_visible()
+
+
+def logout(page: Page) -> None:
+    page.get_by_role("button", name=LOGOUT_BUTTON_NAME).click()
+    expect(page.get_by_role("button", name=LOGOUT_BUTTON_NAME)).to_have_count(0)
+
+
+def read_messages_count(page: Page) -> int:
+    link = page.get_by_role("link", name=MESSAGES_LINK_NAME)
+    expect(link).to_have_text(MESSAGES_LINK_TEXT)
+    match = MESSAGES_COUNT_PATTERN.search(link.inner_text())
+    assert match is not None, f"Número não encontrado no link Messages: {link.inner_text()!r}"
+    return int(match.group(1))
+
+
+# ---------------------------------------------------------------------------
+# Testes
+# ---------------------------------------------------------------------------
+def test_CT001_contador_messages_exibido_apos_login(page: Page) -> None:
+    login(page)
+
+    count = read_messages_count(page)
+
+    assert count >= 0
+
+
+def test_CT002_envio_valido_exibe_confirmacao_com_nome(page: Page) -> None:
+    contact = build_contact()
+    page.goto(url())
+    for field, test_id in CONTACT_TEST_IDS.items():
+        page.get_by_test_id(test_id).fill(contact[field])
+    page.get_by_role("button", name=CONTACT_SUBMIT_NAME).click()
+
+    expect(
+        page.get_by_text(CONFIRMATION_TEMPLATE.format(name=contact["name"]), exact=True)
+    ).to_be_visible()
+
+
+def test_CT003_envio_vazio_nao_exibe_confirmacao(page: Page) -> None:
+    page.goto(url())
+    expect(page.get_by_test_id(CONTACT_TEST_IDS["name"])).to_be_visible()
+
+    page.get_by_role("button", name=CONTACT_SUBMIT_NAME).click()
+
+    for error_text in BLANK_FIELD_ERRORS:
+        expect(page.get_by_text(error_text)).to_be_visible()
+    expect(page.get_by_text(CONFIRMATION_PREFIX)).to_have_count(0)
+    expect(page.get_by_test_id(CONTACT_TEST_IDS["name"])).to_be_visible()
+
+
+def test_CT004_confirmacao_preserva_nome_com_caracteres_especiais(page: Page) -> None:
+    contact = build_contact(name=SPECIAL_NAME)
+    page.goto(url())
+    for field, test_id in CONTACT_TEST_IDS.items():
+        page.get_by_test_id(test_id).fill(contact[field])
+    page.get_by_role("button", name=CONTACT_SUBMIT_NAME).click()
+
+    expect(
+        page.get_by_text(CONFIRMATION_TEMPLATE.format(name=SPECIAL_NAME), exact=True)
+    ).to_be_visible()
+
+
+def test_CT005_contador_messages_aumenta_uma_unidade_apos_envio(page: Page) -> None:
+    login(page)
+    count_before = read_messages_count(page)
+    logout(page)
+
+    submit_contact(page, build_contact())
+
+    login(page)
+    count_after = read_messages_count(page)
+
+    assert count_after == count_before + 1, (
+        f"Esperado {count_before + 1}, obtido {count_after}"
+    )
+
+
+def test_CT006_mensagem_recem_enviada_aparece_na_lista(page: Page) -> None:
+    contact = build_contact()
+    submit_contact(page, contact)
+
+    login(page)
+    page.get_by_role("link", name=MESSAGES_LINK_NAME).click()
+    expect(page).to_have_url(re.compile(re.escape(url(MESSAGES_PATH))))
+
+    row = page.get_by_test_id(MESSAGE_ROW_TEST_ID).filter(has_text=contact["subject"])
+    expect(row).to_have_count(1)
+    expect(row).to_contain_text(contact["name"])
+    expect(row).to_contain_text(contact["subject"])
+
+
+def test_CT007_acesso_direto_apos_logout_solicita_login(page: Page) -> None:
+    login(page)
+    logout(page)
+
+    page.goto(url(MESSAGES_PATH))
+
+    expect(page.get_by_label(LOGIN_USERNAME_LABEL)).to_be_visible()
+    expect(page.get_by_label(LOGIN_PASSWORD_LABEL)).to_be_visible()
+    expect(page.get_by_role("button", name=LOGIN_BUTTON_NAME)).to_be_visible()
+    expect(page.get_by_test_id(MESSAGE_ROW_TEST_ID)).to_have_count(0)
+    expect(page.get_by_role("button", name=LOGOUT_BUTTON_NAME)).to_have_count(0)
+```

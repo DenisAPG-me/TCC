@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "conforme rubrica C",
+  "estrutura": "conforme rubrica C",
+  "assercoes": "conforme rubrica C",
+  "espera": "conforme rubrica C",
+  "manutenibilidade": "conforme rubrica C"
+ }
+}

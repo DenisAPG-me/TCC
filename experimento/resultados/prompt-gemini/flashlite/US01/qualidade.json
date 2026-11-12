@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "curto e legivel, mas usa toBe_visible (API inexistente em Python)",
+  "estrutura": "sem fixtures/helpers, duplicacao entre testes",
+  "assercoes": "verifica ordem e termo, mas ordenacao de nomes case-sensitive",
+  "espera": "sem esperas apos acao, count() lido de imediato",
+  "manutenibilidade": "test-id sem configurar atributo, labels fixos de opcao, sem helpers"
+ }
+}

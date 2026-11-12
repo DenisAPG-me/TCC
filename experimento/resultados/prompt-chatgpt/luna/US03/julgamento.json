@@ -1,0 +1,109 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_envio_do_login_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Password\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT002_login_com_senha_incorreta",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Password\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT003_checkout_sem_autenticacao",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" inexistente na home"
+  },
+  {
+   "teste": "test_CT004_login_bem_sucedido",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Password\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT005_validacao_e_preenchimento_do_endereco",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Password\") ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT006_pagamento_e_confirmacao_do_pedido",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(\"Password\") ambiguo (strict mode)"
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "fixture app_url, helpers e expect_login_screen",
+  "assercoes": "URL, mensagem, menu, 101 Single, ausencia de listagem",
+  "espera": "espera URL antes de navegar, sem sleep",
+  "manutenibilidade": "test-id/role/label e constantes"
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 2,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Legivel, mas comentarios redundantes",
+  "estrutura": "Fixture autouse mas preenchimento duplicado em cada teste",
+  "assercoes": "Mensagens exatas verificadas",
+  "espera": "expect com auto-wait",
+  "manutenibilidade": "Valores hardcoded e label inexistente"
+ }
+}

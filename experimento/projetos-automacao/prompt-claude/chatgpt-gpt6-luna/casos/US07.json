@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar POST com todos os campos válidos; verificar status e corpo da resposta",
+  "esperado": "Status 200; resposta contém `bookingid` numérico e `booking` igual aos dados enviados"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva; consultar pelo identificador retornado; comparar todos os campos",
+  "esperado": "Status 200; todos os campos retornados são iguais aos enviados"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Enviar GET para o identificador `99999999`",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Filtrar reservas por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA4",
+  "passos": "Criar reserva com nome e sobrenome únicos; listar reservas com os dois filtros; verificar os identificadores",
+  "esperado": "A lista contém o identificador da reserva criada"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Filtrar por nome e sobrenome que não correspondem a reserva",
+  "tipo": "Borda",
+  "criterio": "CA4",
+  "passos": "Enviar GET da lista com nome e sobrenome inexistentes",
+  "esperado": "Status 200 e lista vazia"
+ }
+]

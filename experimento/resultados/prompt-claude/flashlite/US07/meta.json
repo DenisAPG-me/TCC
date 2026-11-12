@@ -1,0 +1,15 @@
+{
+ "model": "flashlite",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "gemini --skip-trust -m gemini-flash-lite-latest -p -"
+ ],
+ "returncode": 0,
+ "tempo_s": 9.09,
+ "tokens": null,
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "Warning: 256-color support not detected. Using a terminal with at least 256-color support is recommended for a better visual experience.\nRipgrep is not available. Falling back to GrepTool.\n"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 44.98,
+ "tokens": {
+  "total": 5611
+ },
+ "n_casos_extraidos": 12,
+ "tem_codigo": true,
+ "stderr_tail": "e(\n        timeout=ASSERT_TIMEOUT_MS\n    )\n\n\ndef test_ct12_enviar_dados_validos(page: Page) -> None:\n    data = VALID_DATA.copy()\n    submit_contact(page, data)\n\n    expect(\n        page.get_by_role(\n            \"heading\",\n            name=SUCCESS_TEMPLATE.format(name=data[\"name\"]),\n            exact=True,\n        )\n    ).to_be_visible(timeout=ASSERT_TIMEOUT_MS)\n    expect(page.get_by_text(data[\"subject\"], exact=True)).to_be_visible(\n        timeout=ASSERT_TIMEOUT_MS\n    )\n```\ntokens used\n5,611\n"
+}

@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_busca_hammer_exibe_somente_produtos_com_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_TC02_busca_nao_diferencia_maiusculas_de_minusculas[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  },
+  {
+   "nodeid": "script.py::test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "oad_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+  }
+ ],
+ "stdout_tail": " cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC01_busca_hammer_exibe_somente_produtos_com_hammer[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC02_busca_nao_diferencia_maiusculas_de_minusculas[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py::test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes[chromium]\n6 failed, 2 warnings in 192.78s (0:03:12)\n",
+ "returncode": 1,
+ "duracao_s": 193.41
+}

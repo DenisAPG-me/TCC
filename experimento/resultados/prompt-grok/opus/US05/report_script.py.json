@@ -1,0 +1,349 @@
+{
+ "created": 1793379042.4106946,
+ "duration": 59.1157021522522,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "failed": 3,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_login_com_usuario_e_senha_vazios[chromium]",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_TC02_login_admin_com_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 73
+    },
+    {
+     "nodeid": "script.py::test_TC03_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+     "type": "Function",
+     "lineno": 79
+    },
+    {
+     "nodeid": "script.py::test_TC04_logout_retorna_para_pagina_inicial_publica[chromium]",
+     "type": "Function",
+     "lineno": 89
+    },
+    {
+     "nodeid": "script.py::test_TC05_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+     "type": "Function",
+     "lineno": 97
+    },
+    {
+     "nodeid": "script.py::test_TC06_login_admin_com_senha_vazia[chromium]",
+     "type": "Function",
+     "lineno": 107
+    },
+    {
+     "nodeid": "script.py::test_TC07_login_com_senha_em_maiusculas[chromium]",
+     "type": "Function",
+     "lineno": 113
+    },
+    {
+     "nodeid": "script.py::test_TC08_login_com_usuario_vazio_e_senha_correta[chromium]",
+     "type": "Function",
+     "lineno": 119
+    },
+    {
+     "nodeid": "script.py::test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao[chromium]",
+     "type": "Function",
+     "lineno": 125
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_login_com_usuario_e_senha_vazios[chromium]",
+   "lineno": 67,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_login_com_usuario_e_senha_vazios[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.48478349996730685,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1482922999421135,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013191599980928004,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_login_admin_com_senha_incorreta[chromium]",
+   "lineno": 73,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_login_admin_com_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10076579998712987,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0166722000576556,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013968400075100362,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+   "lineno": 79,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11077749996911734,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.79160250001587,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+     "lineno": 87,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Messages\", exact=True).first with timeout 5000ms\n  - waiting for get_by_role(\"link\", name=\"Messages\", exact=True).first\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 9\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- paragraph: QA-verify-1793378811\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi\n- text: \uf00d\n- paragraph: QA-verify2-1793378828\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi\n- text: \uf00d\n- paragraph: QA-verify3-1793378876\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi\n- text: \uf00d\n- paragraph: QA-verify3-1793378887\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi\n- text: \uf00d\n- paragraph: QA-1793378914670-185504\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi, TV\n- text: \uf00d\n- paragraph: QA-1793378914684-723121\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi, TV\n- text: \uf00d\n- paragraph: QA-1793378916867-245121\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"120\"\n- paragraph: WiFi, TV\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+      "lineno": 87,
+      "message": "in test_TC03_login_valido_exibe_lista_de_quartos_e_menu"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py:87: in test_TC03_login_valido_exibe_lista_de_quartos_e_menu\n    expect(page.get_by_role(\"link\", name=item, exact=True).first).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Messages\", exact=True).first with timeout 5000ms\nE     - waiting for get_by_role(\"link\", name=\"Messages\", exact=True).first\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 9\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: QA-verify-1793378811\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi\nE   - text: \uf00d\nE   - paragraph: QA-verify2-1793378828\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi\nE   - text: \uf00d\nE   - paragraph: QA-verify3-1793378876\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi\nE   - text: \uf00d\nE   - paragraph: QA-verify3-1793378887\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi\nE   - text: \uf00d\nE   - paragraph: QA-1793378914670-185504\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi, TV\nE   - text: \uf00d\nE   - paragraph: QA-1793378914684-723121\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi, TV\nE   - text: \uf00d\nE   - paragraph: QA-1793378916867-245121\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"120\"\nE   - paragraph: WiFi, TV\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.026666400022804737,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_logout_retorna_para_pagina_inicial_publica[chromium]",
+   "lineno": 89,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC04_logout_retorna_para_pagina_inicial_publica[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.156829500105232,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.9362749999854714,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01584559993352741,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+   "lineno": 97,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1340638999827206,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 9.386263299966231,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+     "lineno": 105,
+     "message": "AssertionError: Locator expected to have count '0'\nActual value: 1 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\")) with timeout 5000ms\n  - waiting for get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\"))\n    14 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+      "lineno": 105,
+      "message": "in test_TC05_acesso_direto_a_lista_de_quartos_apos_logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py:105: in test_TC05_acesso_direto_a_lista_de_quartos_apos_logout\n    expect(logout_control(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\")) with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\"))\nE       14 \u00d7 locator resolved to 1 element\nE          - unexpected value \"1\""
+   },
+   "teardown": {
+    "duration": 0.014609199948608875,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_login_admin_com_senha_vazia[chromium]",
+   "lineno": 107,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_login_admin_com_senha_vazia[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11708460003137589,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 8.165071499999613,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012340000015683472,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC07_login_com_senha_em_maiusculas[chromium]",
+   "lineno": 113,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC07_login_com_senha_em_maiusculas[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1221470000455156,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.668794599943794,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013066000072285533,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC08_login_com_usuario_vazio_e_senha_correta[chromium]",
+   "lineno": 119,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC08_login_com_usuario_vazio_e_senha_correta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11311390006449074,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.842846499988809,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013328799977898598,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao[chromium]",
+   "lineno": 125,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11996779998298734,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 14.21498829999473,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+     "lineno": 130,
+     "message": "AssertionError: Locator expected to have count '0'\nActual value: 1 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\")) with timeout 5000ms\n  - waiting for get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\"))\n    14 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py",
+      "lineno": 130,
+      "message": "in test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US05\\script.py:130: in test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao\n    expect(logout_control(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\")) with timeout 5000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\").or_(get_by_role(\"link\", name=\"Logout\"))\nE       14 \u00d7 locator resolved to 1 element\nE          - unexpected value \"1\""
+   },
+   "teardown": {
+    "duration": 0.23389909998513758,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

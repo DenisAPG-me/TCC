@@ -1,0 +1,96 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Criar reserva com dados válidos | positivo | CA01 | Enviar requisição POST para /booking com JSON válido contendo firstname lastname totalprice depositpaid bookingdates additionalneeds | Retorna status 200 contendo bookingid numérico e os dados enviados |
+| CT002 | Consultar reserva por ID existente | positivo | CA02 | Criar uma reserva e enviar requisição GET para /booking/{bookingid} com o ID retornado | Retorna status 200 com todos os campos idênticos aos enviados |
+| CT003 | Consultar reserva com ID inexistente | negativo | CA03 | Enviar requisição GET para /booking/99999999 | Retorna status 404 |
+| CT004 | Listar e filtrar reservas por nome e sobrenome | positivo | CA04 | Criar reserva com firstname e lastname únicos e enviar requisição GET para /booking?firstname={fn}&lastname={ln} | Retorna status 200 contendo uma lista com o bookingid criado |
+
+SUPOSIÇÕES
+
+1. Base URL: Utiliza-se `https://restful-booker.herokuapp.com` conforme informado na User Story.
+2. Endpoint de criação e consulta: O endpoint POST para criação é `/booking` e o GET para consulta por ID é `/booking/{id}`, seguindo a documentação padrão da API Restful Booker.
+3. Formato do corpo JSON de criação: Espera-se um objeto JSON com a seguinte estrutura: `{"firstname": "Jim", "lastname": "Brown", "totalprice": 111, "depositpaid": true, "bookingdates": {"checkin": "2018-01-01", "checkout": "2019-01-01"}, "additionalneeds": "Breakfast"}`.
+4. Resposta da criação (CA01): A API retorna um objeto JSON contendo `bookingid` (numérico) e um objeto `booking` com os dados enviados.
+5. Filtro por nome e sobrenome (CA04): O endpoint `/booking` aceita parâmetros de consulta `firstname` e `lastname` (ex.: `/booking?firstname=Nome&lastname=Sobrenome`), retornando uma lista de objetos contendo `bookingid`.
+6. Justificativa para ausência de categorias de borda: Os critérios de aceitação fornecidos cobrem fluxos de criação, consulta bem-sucedida, consulta de ID inexistente (negativo) e filtro (positivo). Cenários de borda específicos (como campos vazios ou tipos incorretos) não foram especificados nos Critérios de Aceitação da User Story, portanto optou-se por focar estritamente nos critérios definidos para garantir rastreabilidade exata.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 10
+
+@pytest.fixture
+def unique_booking_data():
+    import time
+    unique_suffix = str(int(time.time() * 1000))
+    return {
+        "firstname": f"TestFirst{unique_suffix}",
+        "lastname": f"TestLast{unique_suffix}",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2026-01-01",
+            "checkout": "2026-01-10"
+        },
+        "additionalneeds": "Lunch"
+    }
+
+def test_CT001_criar_reserva_valida(unique_booking_data):
+    url = f"{BASE_URL}/booking"
+    response = requests.post(url, json=unique_booking_data, timeout=TIMEOUT)
+    assert response.status_code == 200
+    data = response.json()
+    assert "bookingid" in data
+    assert isinstance(data["bookingid"], int)
+    booking = data["booking"]
+    assert booking["firstname"] == unique_booking_data["firstname"]
+    assert booking["lastname"] == unique_booking_data["lastname"]
+    assert booking["totalprice"] == unique_booking_data["totalprice"]
+    assert booking["depositpaid"] == unique_booking_data["depositpaid"]
+    assert booking["bookingdates"]["checkin"] == unique_booking_data["bookingdates"]["checkin"]
+    assert booking["bookingdates"]["checkout"] == unique_booking_data["bookingdates"]["checkout"]
+    assert booking["additionalneeds"] == unique_booking_data["additionalneeds"]
+
+def test_CT002_consultar_reserva_existente(unique_booking_data):
+    url_create = f"{BASE_URL}/booking"
+    create_response = requests.post(url_create, json=unique_booking_data, timeout=TIMEOUT)
+    assert create_response.status_code == 200
+    booking_id = create_response.json()["bookingid"]
+
+    url_get = f"{BASE_URL}/booking/{booking_id}"
+    get_response = requests.get(url_get, timeout=TIMEOUT)
+    assert get_response.status_code == 200
+    booking = get_response.json()
+    assert booking["firstname"] == unique_booking_data["firstname"]
+    assert booking["lastname"] == unique_booking_data["lastname"]
+    assert booking["totalprice"] == unique_booking_data["totalprice"]
+    assert booking["depositpaid"] == unique_booking_data["depositpaid"]
+    assert booking["bookingdates"]["checkin"] == unique_booking_data["bookingdates"]["checkin"]
+    assert booking["bookingdates"]["checkout"] == unique_booking_data["bookingdates"]["checkout"]
+    assert booking["additionalneeds"] == unique_booking_data["additionalneeds"]
+
+def test_CT003_consultar_reserva_inexistente():
+    url = f"{BASE_URL}/booking/99999999"
+    response = requests.get(url, timeout=TIMEOUT)
+    assert response.status_code == 404
+
+def test_CT004_filtrar_reservas_por_nome(unique_booking_data):
+    url_create = f"{BASE_URL}/booking"
+    create_response = requests.post(url_create, json=unique_booking_data, timeout=TIMEOUT)
+    assert create_response.status_code == 200
+    booking_id = create_response.json()["bookingid"]
+
+    fn = unique_booking_data["firstname"]
+    ln = unique_booking_data["lastname"]
+    url_filter = f"{BASE_URL}/booking?firstname={fn}&lastname={ln}"
+    filter_response = requests.get(url_filter, timeout=TIMEOUT)
+    assert filter_response.status_code == 200
+    results = filter_response.json()
+    
+    found = any(item.get("bookingid") == booking_id for item in results)
+    assert found is True
+```

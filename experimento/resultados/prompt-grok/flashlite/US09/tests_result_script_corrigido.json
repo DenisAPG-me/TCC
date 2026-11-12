@@ -1,0 +1,10 @@
+{
+ "arquivo": "script_corrigido.py",
+ "compila": 1,
+ "coletou": 0,
+ "tests": [],
+ "stdout_tail": "s_prompt-grok\\flashlite\\US09\\script_corrigido.py:90\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\flashlite\\US09\\script_corrigido.py::test_TC03_excluir_reserva_token_valido\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\flashlite\\US09\\script_corrigido.py::test_TC04_consultar_reserva_apos_exclusao\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\flashlite\\US09\\script_corrigido.py::test_TC05_excluir_reserva_novamente\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\flashlite\\US09\\script_corrigido.py::test_TC06_listar_reservas_filtrando_nome_apos_exclusao\n2 passed, 1 warning, 4 errors in 6.93s\n",
+ "returncode": 1,
+ "duracao_s": 7.51,
+ "erro": "sem relatorio (erro de coleta/import)"
+}

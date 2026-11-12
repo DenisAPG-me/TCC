@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US03",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 60.91,
+ "tokens": {
+  "total": 4911
+ },
+ "n_casos_extraidos": 14,
+ "tem_codigo": true,
+ "stderr_tail": "   pay_by_credit_card(page)\n\n    page.get_by_role(\n        \"button\", name=\"Confirm order\", exact=True\n    ).click()\n\n    confirmation = page.get_by_test_id(\"order-confirmation\")\n    expect(confirmation).to_be_visible()\n    expect(confirmation).to_contain_text(\n        re.compile(\n            r\"Thanks for your order!\\s+\"\n            r\"Your invoice number is INV-[^\\s.]+\"\n        )\n    )\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, *sys.argv[1:]]))\n```\ntokens used\n4,911\n"
+}

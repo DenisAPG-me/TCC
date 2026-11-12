@@ -1,0 +1,66 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "positivo",
+  "criterio": "AC1",
+  "passos": "POST `/booking` com payload completo",
+  "esperado": "Status 200; `bookingid` numérico (int); `booking` idêntico ao payload enviado"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "positivo",
+  "criterio": "AC2",
+  "passos": "Criar reserva (fixture); GET `/booking/{bookingid}`",
+  "esperado": "Status 200; corpo idêntico ao payload enviado"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Consultar identificador inexistente (99999999)",
+  "tipo": "negativo",
+  "criterio": "AC3",
+  "passos": "GET `/booking/99999999`",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Listar por nome e sobrenome únicos inclui o identificador criado",
+  "tipo": "positivo",
+  "criterio": "AC4",
+  "passos": "Criar reserva; GET `/booking?firstname=...&lastname=...`",
+  "esperado": "Status 200; lista contém o `bookingid` criado"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Consultar identificador zero (borda do intervalo)",
+  "tipo": "borda",
+  "criterio": "AC3",
+  "passos": "GET `/booking/0`",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Criar reserva com valores de borda (preço 0, depósito não pago, check-in igual ao check-out)",
+  "tipo": "borda",
+  "criterio": "AC1",
+  "passos": "POST `/booking` com `totalprice=0`, `depositpaid=false`, `checkin=checkout`",
+  "esperado": "Status 200; `booking` idêntico ao payload enviado"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Listar por nome e sobrenome inexistentes",
+  "tipo": "negativo",
+  "criterio": "AC4",
+  "passos": "GET `/booking?firstname=...&lastname=...` com nomes aleatórios não cadastrados",
+  "esperado": "Status 200; lista vazia"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Criar reserva com corpo JSON malformado",
+  "tipo": "negativo",
+  "criterio": "AC1",
+  "passos": "POST `/booking` com corpo `{invalido` e `Content-Type: application/json`",
+  "esperado": "Status 4xx ou 5xx (≥ 400); nenhum `bookingid` retornado"
+ }
+]

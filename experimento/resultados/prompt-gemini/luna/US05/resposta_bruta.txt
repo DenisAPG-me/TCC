@@ -1,0 +1,89 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT-01 | Login com usuário e senha vazios | Negativo | 1 | Abrir `/admin`; enviar o formulário sem preencher os campos. | Exibe “Invalid credentials” e permanece na tela de login. |
+| CT-02 | Login com senha incorreta | Negativo | 2 | Abrir `/admin`; informar `admin` e uma senha incorreta; enviar. | Exibe “Invalid credentials”. |
+| CT-03 | Login válido e conteúdo da lista de quartos | Positivo | 3 | Abrir `/admin`; informar `admin` e `password`; enviar. | A lista de quartos aparece, inclui o quarto 101 do tipo Single e o menu exibe Rooms, Report, Branding e Messages. |
+| CT-04 | Logout retorna à página pública | Positivo | 4 | Fazer login válido; clicar em Logout. | Retorna à página inicial pública da pousada. |
+| CT-05 | Acesso à lista de quartos após logout | Borda | 5 | Fazer login válido; sair; acessar diretamente `/admin/rooms`. | A tela de login é exibida novamente. |
+
+## SUPOSIÇÕES
+
+- A tela de login está em `/admin` e a lista de quartos em `/admin/rooms`.
+- O formulário possui campos acessíveis pelos rótulos `Username` e `Password`, e botão `Login`.
+- A mensagem de erro é exibida como texto `Invalid credentials`.
+- Após login, os itens de navegação e o botão `Logout` são acessíveis por seus nomes visíveis.
+- O quarto aparece em uma linha de tabela contendo `101` e `Single`.
+- A página pública inicial corresponde à URL base, com ou sem barra final.
+- A senha incorreta usada no teste é `wrong-password`.
+- O ambiente de execução fornece `pytest`, `pytest-playwright` e `playwright`; a base URL pode ser substituída com `--base-url`.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://automationintesting.online"
+
+
+def open_login(page: Page) -> None:
+    page.goto(f"{BASE_URL}/admin")
+
+
+def login(page: Page, username: str = "admin", password: str = "password") -> None:
+    page.get_by_label("Username").fill(username)
+    page.get_by_label("Password").fill(password)
+    page.get_by_role("button", name="Login").click()
+
+
+def test_CT_01_login_com_campos_vazios(page: Page) -> None:
+    open_login(page)
+    page.get_by_role("button", name="Login").click()
+
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def test_CT_02_login_com_senha_incorreta(page: Page) -> None:
+    open_login(page)
+    login(page, username="admin", password="wrong-password")
+
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+
+
+def test_CT_03_login_valido_exibe_lista_e_menu(page: Page) -> None:
+    open_login(page)
+    login(page)
+
+    expect(page).to_have_url(re.compile(r"/admin/rooms/?$"))
+    room_101 = page.get_by_role("row").filter(has_text="101")
+    expect(room_101).to_contain_text("Single")
+
+    for menu_item in ("Rooms", "Report", "Branding", "Messages"):
+        expect(page.get_by_text(menu_item, exact=True)).to_be_visible()
+
+
+def test_CT_04_logout_retorna_a_pagina_publica(page: Page) -> None:
+    open_login(page)
+    login(page)
+    expect(page.get_by_role("button", name="Logout")).to_be_visible()
+
+    page.get_by_role("button", name="Logout").click()
+
+    expect(page).to_have_url(re.compile(r"^https://automationintesting\.online/?$"))
+
+
+def test_CT_05_lista_de_quartos_requer_login_apos_logout(page: Page) -> None:
+    open_login(page)
+    login(page)
+    page.get_by_role("button", name="Logout").click()
+
+    page.goto(f"{BASE_URL}/admin/rooms")
+
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+```

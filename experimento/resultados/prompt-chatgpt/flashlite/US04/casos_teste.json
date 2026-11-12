@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Envio do formulario de contato vazio",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Acessar a pagina inicial, localizar o formulario de contato e clicar no botao de envio sem preencher nenhum campo",
+  "esperado": "Exibe mensagens indicando que nome, e-mail, telefone, assunto e mensagem nao podem ficar em branco"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Envio de telefone com menos de 11 caracteres",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Acessar a pagina inicial, preencher nome, e-mail, telefone com 10 digitos, assunto e mensagem validos e enviar",
+  "esperado": "Exibe a mensagem \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT003",
+  "titulo": "Envio de assunto com menos de 5 caracteres e mensagem com menos de 20",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Acessar a pagina inicial, preencher campos validos exceto assunto com 3 caracteres e mensagem com 10 caracteres e enviar",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT004",
+  "titulo": "Envio de e-mail malformado",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Acessar a pagina inicial, preencher nome, e-mail \"bad\", telefone, assunto e mensagem validos e enviar",
+  "esperado": "Exibe \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT005",
+  "titulo": "Envio de todos os campos com dados válidos",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Acessar a pagina inicial, preencher todos os campos com dados validos e enviar",
+  "esperado": "Exibe \"Thanks for getting in touch Joao Silva!\" e o assunto informado na confirmacao"
+ }
+]

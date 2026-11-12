@@ -1,0 +1,370 @@
+{
+ "created": 1793431334.2308638,
+ "duration": 38.89078640937805,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03",
+ "environment": {},
+ "summary": {
+  "failed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_envio_do_login_vazio[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_CT002_login_com_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 90
+    },
+    {
+     "nodeid": "script.py::test_CT003_checkout_sem_autenticacao[chromium]",
+     "type": "Function",
+     "lineno": 103
+    },
+    {
+     "nodeid": "script.py::test_CT004_login_bem_sucedido[chromium]",
+     "type": "Function",
+     "lineno": 111
+    },
+    {
+     "nodeid": "script.py::test_CT005_validacao_e_preenchimento_do_endereco[chromium]",
+     "type": "Function",
+     "lineno": 118
+    },
+    {
+     "nodeid": "script.py::test_CT006_pagamento_e_confirmacao_do_pedido[chromium]",
+     "type": "Function",
+     "lineno": 134
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_envio_do_login_vazio[chromium]",
+   "lineno": 81,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT001_envio_do_login_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4501141000073403,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.4949970999732614,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+     "lineno": 34,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\n    1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\n    2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\n  - waiting for get_by_label(\"Password\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 83,
+      "message": "in test_CT001_envio_do_login_vazio"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 34,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:83: in test_CT001_envio_do_login_vazio\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:34: in open_login\n    expect(page.get_by_label(\"Password\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\nE       1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\nE       2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\nE     - waiting for get_by_label(\"Password\")"
+   },
+   "teardown": {
+    "duration": 0.011823499924503267,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_login_com_senha_incorreta[chromium]",
+   "lineno": 90,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT002_login_com_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0874395000282675,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2853026000084355,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+     "lineno": 34,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\n    1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\n    2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\n  - waiting for get_by_label(\"Password\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 92,
+      "message": "in test_CT002_login_com_senha_incorreta"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 34,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:92: in test_CT002_login_com_senha_incorreta\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:34: in open_login\n    expect(page.get_by_label(\"Password\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\nE       1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\nE       2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\nE     - waiting for get_by_label(\"Password\")"
+   },
+   "teardown": {
+    "duration": 0.012003499898128211,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_checkout_sem_autenticacao[chromium]",
+   "lineno": 103,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT003_checkout_sem_autenticacao[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10573429998476058,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.01266459992621,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_role(\"button\", name=\"Add to cart\").first"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 105,
+      "message": "in test_CT003_checkout_sem_autenticacao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 46,
+      "message": "in add_product_to_cart"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:105: in test_CT003_checkout_sem_autenticacao\n    add_product_to_cart(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:46: in add_product_to_cart\n    page.get_by_role(\"button\", name=\"Add to cart\").first.click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"button\", name=\"Add to cart\").first"
+   },
+   "teardown": {
+    "duration": 0.013639000011608005,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_login_bem_sucedido[chromium]",
+   "lineno": 111,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT004_login_bem_sucedido[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1198878000723198,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3293455999810249,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+     "lineno": 34,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\n    1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\n    2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\n  - waiting for get_by_label(\"Password\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 113,
+      "message": "in test_CT004_login_bem_sucedido"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 38,
+      "message": "in login_as_demo_user"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 34,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:113: in test_CT004_login_bem_sucedido\n    login_as_demo_user(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:38: in login_as_demo_user\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:34: in open_login\n    expect(page.get_by_label(\"Password\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\nE       1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\nE       2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\nE     - waiting for get_by_label(\"Password\")"
+   },
+   "teardown": {
+    "duration": 0.012945099966600537,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_validacao_e_preenchimento_do_endereco[chromium]",
+   "lineno": 118,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT005_validacao_e_preenchimento_do_endereco[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10835480003152043,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.9268561999779195,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+     "lineno": 34,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\n    1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\n    2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\n  - waiting for get_by_label(\"Password\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 120,
+      "message": "in test_CT005_validacao_e_preenchimento_do_endereco"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 38,
+      "message": "in login_as_demo_user"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 34,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:120: in test_CT005_validacao_e_preenchimento_do_endereco\n    login_as_demo_user(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:38: in login_as_demo_user\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:34: in open_login\n    expect(page.get_by_label(\"Password\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\nE       1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\nE       2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\nE     - waiting for get_by_label(\"Password\")"
+   },
+   "teardown": {
+    "duration": 0.011725199990905821,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_pagamento_e_confirmacao_do_pedido[chromium]",
+   "lineno": 134,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT006_pagamento_e_confirmacao_do_pedido[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1101895000319928,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3430495000211522,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+     "lineno": 34,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\n    1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\n    2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\n  - waiting for get_by_label(\"Password\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 136,
+      "message": "in test_CT006_pagamento_e_confirmacao_do_pedido"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 38,
+      "message": "in login_as_demo_user"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py",
+      "lineno": 34,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:136: in test_CT006_pagamento_e_confirmacao_do_pedido\n    login_as_demo_user(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:38: in login_as_demo_user\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US03\\script.py:34: in open_login\n    expect(page.get_by_label(\"Password\")).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_label(\"Password\") resolved to 2 elements:\nE       1) <input id=\"password\" type=\"password\" class=\"form-control\" data-test=\"password\" aria-invalid=\"false\" placeholder=\"Your password\"/> aka locator(\"[data-test=\\\"password\\\"]\")\nE       2) <a class=\"ForgetPwd\" _ngcontent-ng-c713820125=\"\" href=\"/auth/forgot-password\" data-test=\"forgot-password-link\" routerlink=\"/auth/forgot-password\" aria-label=\"Forgot your Password?\">Forgot your Password?</a> aka locator(\"[data-test=\\\"forgot-password-link\\\"]\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Password\") with timeout 5000ms\nE     - waiting for get_by_label(\"Password\")"
+   },
+   "teardown": {
+    "duration": 0.24459779995959252,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

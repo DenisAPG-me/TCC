@@ -1,0 +1,18 @@
+[
+ "BASE_URL = `https://practicesoftwaretesting.com/`; a tela de login é a rota relativa `auth/login`.",
+ "Campos de login rotulados \"Email address\" e \"Password\"; botão \"Login\" (exact).",
+ "Botão \"Add to cart\" na página do produto; produto acessado pelo primeiro `.card` (CSS, por falta de alternativa semântica conhecida).",
+ "Após adicionar, aparece \"Product added to shopping cart.\".",
+ "Link de carrinho com role `link` cujo nome contém \"Cart\"; botão \"Proceed to Checkout\" no carrinho.",
+ "Passo de endereço: select \"Country\"; campos \"Street\", \"House number\", \"Postcode\", \"City\", \"State\"; botão \"Proceed to Payment\".",
+ "Valores de endereço fictícios: país \"Brazil\", rua \"Rua das Flores\", número \"100\", CEP \"01001000\", cidade \"Sao Paulo\", estado \"SP\".",
+ "Passo de pagamento: select \"Payment method\" com opção \"Credit Card\"; campos \"Card holder name\", \"Card number\", \"Expiration date\" (MM/YY) e \"CVV\"; botão \"Confirm\" (exact) para pagar e \"Confirm order\" (exact) para concluir.",
+ "Cartão fictício: número `4111111111111111`, validade `12/30` (futura em 2026-10-30), CVV `123`, titular \"Joao Teste\"; assume-se que o sistema demo aceita esses dados.",
+ "Senha incorreta usada: `SenhaErrada123`.",
+ "Nome do usuário exibido no menu após login: \"Jane\" (assumido; a US não informa o nome).",
+ "Heading \"My account\" na página de conta.",
+ "Cada mensagem de obrigatoriedade aparece individualmente, conforme o campo vazio.",
+ "Login bem-sucedido não exige ação extra antes de adicionar produto ao carrinho.",
+ "Sincronismo feito apenas por `expect` com auto-wait (sem `time.sleep`). Os testes \"não avança\" (TC07, TC09) usam `to_have_count(0)`, que pode passar antes de uma navegação lenta concluir.",
+ "Testes executados com `pytest-playwright`; o navegador e a `page` vêm do plugin (ex.: `pytest --browser chromium`)."
+]

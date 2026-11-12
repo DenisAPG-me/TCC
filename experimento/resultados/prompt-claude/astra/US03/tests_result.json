@@ -1,0 +1,64 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_vazio[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_sem_email[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_sem_senha[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct04_senha_incorreta_sem_sessao[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct05_checkout_exige_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct06_login_com_credenciais_validas[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct07_endereco_vazio_bloqueia_pagamento[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct08_endereco_preenchido_libera_pagamento[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct09_compra_com_cartao_de_credito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  }
+ ],
+ "stdout_tail": " <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct01_login_vazio[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct02_login_sem_email[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct03_login_sem_senha[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct04_senha_incorreta_sem_sessao[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct05_checkout_exige_login[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct06_login_com_credenciais_validas[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct07_endereco_vazio_bloqueia_pagamento[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct08_endereco_preenchido_libera_pagamento[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py::test_ct09_compra_com_cartao_de_credito[chromium]\n9 failed, 2 warnings in 168.29s (0:02:48)\n",
+ "returncode": 1,
+ "duracao_s": 168.87
+}

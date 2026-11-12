@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos e helpers curtos",
+  "estrutura": "Fixture com limpeza e helpers de requisicao",
+  "assercoes": "Verifica status e persistencia, lista antes/depois",
+  "espera": "Timeout, UUID, limpeza condicional",
+  "manutenibilidade": "Constantes, cleanup, independencia entre testes"
+ }
+}

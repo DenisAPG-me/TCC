@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US09",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 35.6,
+ "tokens": {
+  "total": 5190
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "O filtro pelo nome único deve localizar exatamente uma reserva\"\n    )\n    assert isinstance(initial[0], dict)\n    assert initial[0].get(\"bookingid\") == booking[\"id\"], (\n        \"A listagem inicial deve localizar a reserva criada\"\n    )\n\n    response = delete_booking(booking[\"id\"], valid_token)\n    assert_status(response, 201)\n\n    remaining = list_bookings(booking[\"payload\"])\n    assert remaining == [], (\n        \"A listagem filtrada deve ficar vazia após a exclusão\"\n    )\n```\ntokens used\n5,190\n"
+}

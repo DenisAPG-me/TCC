@@ -1,0 +1,82 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Criar reserva; enviar DELETE /booking/{id} sem cookie de token; consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Criar reserva; enviar DELETE com cookie `token=<valor aleatório>`; consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Autenticar em POST /auth com admin/password123; criar reserva; enviar DELETE com cookie `token=<token válido>`",
+  "esperado": "DELETE retorna 201"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Consultar reserva após exclusão",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva; excluí-la com token válido; consultar GET /booking/{id}",
+  "esperado": "GET retorna 404"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Excluir novamente reserva já excluída sem afetar outras",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Criar reservas A e B; excluir A com token válido; excluir A novamente com token válido; consultar B",
+  "esperado": "Segundo DELETE retorna status 4xx; B retorna 200 com dados inalterados"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Filtrar por nome único após exclusão",
+  "tipo": "positivo",
+  "criterio": "CA6",
+  "passos": "Criar reserva com nome/sobrenome únicos; confirmar que o filtro GET /booking?firstname&lastname a retorna; excluí-la; repetir o filtro",
+  "esperado": "Antes: lista contém o id; depois: lista vazia (status 200)"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Excluir reserva com token vazio",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva; enviar DELETE com cookie `token=` (vazio); consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Tentativas não autorizadas não alteram os dados da reserva",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva; tentar DELETE sem token e com token inválido; consultar GET /booking/{id}",
+  "esperado": "Ambas as tentativas retornam 403; corpo do GET é idêntico ao enviado na criação"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Autenticação com credenciais incorretas não concede permissão de exclusão",
+  "tipo": "borda",
+  "criterio": "CA2, CA3",
+  "passos": "POST /auth com senha errada; criar reserva; enviar DELETE com o \"token\" obtido (ou vazio); consultar GET /booking/{id}",
+  "esperado": "Resposta de /auth sem campo `token`; DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "TC10",
+  "titulo": "Excluir identificador inexistente com token válido",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Autenticar; enviar DELETE para um id muito alto e inexistente",
+  "esperado": "DELETE retorna status 4xx"
+ }
+]

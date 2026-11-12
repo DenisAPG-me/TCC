@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Criar reserva com corpo JSON válido",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar POST /booking com todos os campos válidos",
+  "esperado": "Status 200; `bookingid` inteiro positivo; `booking` igual ao corpo enviado"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Criar reserva via POST /booking; enviar GET /booking/{bookingid}",
+  "esperado": "Status 200; todos os campos iguais aos enviados na criação"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Consultar reserva com identificador inexistente",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Enviar GET /booking/99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Listar reservas filtrando por nome e sobrenome únicos",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva com nome e sobrenome únicos; enviar GET /booking?firstname=...&lastname=...",
+  "esperado": "Status 200; lista contém o `bookingid` criado"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Criar e consultar reserva com valores-limite e caracteres especiais",
+  "tipo": "borda",
+  "criterio": "CA01, CA02",
+  "passos": "Enviar POST /booking com preço total 0, depósito não pago, check-in igual ao check-out e textos acentuados; enviar GET /booking/{bookingid}",
+  "esperado": "Status 200 em ambas as requisições; `bookingid` inteiro positivo; dados retornados iguais aos enviados"
+ }
+]

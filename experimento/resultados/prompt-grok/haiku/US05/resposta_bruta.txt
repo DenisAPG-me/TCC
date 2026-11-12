@@ -1,0 +1,125 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Login com usuário e senha vazios exibe erro e permanece na tela de login | negativo | AC1 | Abrir /admin; deixar usuário e senha vazios; clicar em Login | Exibe "Invalid credentials"; continua na tela de login |
+| TC02 | Login com usuário admin e senha incorreta exibe erro | negativo | AC2 | Abrir /admin; informar admin e "senha-incorreta"; clicar em Login | Exibe "Invalid credentials"; continua na tela de login |
+| TC03 | Login com usuário vazio e senha válida exibe erro | borda | AC1, AC2 | Abrir /admin; usuário vazio e senha "password"; clicar em Login | Exibe "Invalid credentials"; continua na tela de login |
+| TC04 | Login com usuário inexistente e senha válida exibe erro | borda | AC2 | Abrir /admin; informar "usuario-inexistente" e "password"; clicar em Login | Exibe "Invalid credentials"; continua na tela de login |
+| TC05 | Login com usuário admin e senha vazia exibe erro | borda | AC1, AC2 | Abrir /admin; usuário "admin" e senha vazia; clicar em Login | Exibe "Invalid credentials"; continua na tela de login |
+| TC06 | Login válido leva à lista de quartos com quarto 101 Single | positivo | AC3 | Abrir /admin; informar admin e password; clicar em Login | URL /admin/rooms; linha com quarto 101 e tipo Single visível |
+| TC07 | Menu exibe Rooms, Report, Branding e Messages após login | positivo | AC3 | Fazer login com admin e password; verificar menu | Links Rooms, Report, Branding e Messages visíveis |
+| TC08 | Logout retorna à página inicial pública | positivo | AC4 | Fazer login; clicar em Logout | URL igual a https://automationintesting.online/ |
+| TC09 | Acesso direto à lista de quartos após logout exibe tela de login | negativo | AC5 | Fazer login; clicar em Logout; acessar /admin/rooms diretamente | Campo Username e botão Login visíveis |
+
+SUPOSIÇÕES
+
+- A URL base é `https://automationintesting.online/` (constante `BASE_URL`). A tela de login fica em `/admin` e a lista de quartos em `/admin/rooms`.
+- Os campos do login são identificados pelos rótulos "Username" e "Password" (`get_by_label`). O botão de envio tem o papel `button` com nome "Login".
+- A mensagem de erro é o texto exato "Invalid credentials", exibido após a submissão, localizado com `get_by_text`.
+- A submissão com campos vazios é permitida (sem atributo `required` bloqueando o envio) e a aplicação mostra a mensagem de erro.
+- Após login bem-sucedido, a URL passa a ser `/admin/rooms`. A lista de quartos é uma tabela em que cada quarto é uma linha (`role=row`) cujo nome acessível contém "101" e "Single".
+- O menu pós-login contém links (`role=link`) com os nomes Rooms, Report, Branding e Messages.
+- O Logout pode ser um link ou um botão com o nome "Logout". O locator aceita os dois papéis.
+- Após o logout, a página inicial pública é exatamente `BASE_URL`, sem redirecionamento para outra rota.
+- Um acesso direto a `/admin/rooms` sem sessão válida mostra a tela de login (campo Username e botão Login visíveis), seja por redirecionamento ou renderização direta.
+- O pytest-playwright isola o contexto do navegador por teste, então cada teste começa sem sessão anterior.
+- As credenciais de demonstração (admin/password) estão ativas no ambiente. Os testes são somente leitura e não alteram dados.
+- As esperas usam o auto-wait e os timeouts padrão do Playwright (`expect`), sem `time.sleep`.
+- A execução requer `pytest` e `pytest-playwright`, com os navegadores do Playwright instalados (`playwright install`).
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_URL = BASE_URL + "admin"
+ROOMS_URL = BASE_URL + "admin/rooms"
+VALID_USER = "admin"
+VALID_PASSWORD = "password"
+INVALID_CREDENTIALS = "Invalid credentials"
+
+
+def open_login(page: Page) -> None:
+    page.goto(ADMIN_URL)
+
+
+def submit_login(page: Page, username: str, password: str) -> None:
+    page.get_by_label("Username").fill(username)
+    page.get_by_label("Password").fill(password)
+    page.get_by_role("button", name="Login").click()
+
+
+def login_as_admin(page: Page) -> None:
+    open_login(page)
+    submit_login(page, VALID_USER, VALID_PASSWORD)
+    expect(page).to_have_url(ROOMS_URL)
+
+
+def logout(page: Page) -> None:
+    page.get_by_role("link", name="Logout").or_(
+        page.get_by_role("button", name="Logout")
+    ).click()
+
+
+def expect_login_error(page: Page) -> None:
+    expect(page.get_by_text(INVALID_CREDENTIALS)).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+    expect(page).not_to_have_url(ROOMS_URL)
+
+
+def test_TC01_login_campos_vazios_exibe_erro(page: Page):
+    open_login(page)
+    submit_login(page, "", "")
+    expect_login_error(page)
+
+
+def test_TC02_login_senha_incorreta_exibe_erro(page: Page):
+    open_login(page)
+    submit_login(page, VALID_USER, "senha-incorreta")
+    expect_login_error(page)
+
+
+def test_TC03_login_usuario_vazio_exibe_erro(page: Page):
+    open_login(page)
+    submit_login(page, "", VALID_PASSWORD)
+    expect_login_error(page)
+
+
+def test_TC04_login_usuario_inexistente_exibe_erro(page: Page):
+    open_login(page)
+    submit_login(page, "usuario-inexistente", VALID_PASSWORD)
+    expect_login_error(page)
+
+
+def test_TC05_login_senha_vazia_exibe_erro(page: Page):
+    open_login(page)
+    submit_login(page, VALID_USER, "")
+    expect_login_error(page)
+
+
+def test_TC06_login_valido_lista_quarto_101_single(page: Page):
+    login_as_admin(page)
+    expect(page.get_by_role("row", name=re.compile(r"101.*Single"))).to_be_visible()
+
+
+def test_TC07_menu_exibe_rooms_report_branding_messages(page: Page):
+    login_as_admin(page)
+    for item in ["Rooms", "Report", "Branding", "Messages"]:
+        expect(page.get_by_role("link", name=item)).to_be_visible()
+
+
+def test_TC08_logout_retorna_home_publica(page: Page):
+    login_as_admin(page)
+    logout(page)
+    expect(page).to_have_url(BASE_URL)
+
+
+def test_TC09_acesso_direto_lista_quartos_apos_logout_exibe_login(page: Page):
+    login_as_admin(page)
+    logout(page)
+    page.goto(ROOMS_URL)
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+```

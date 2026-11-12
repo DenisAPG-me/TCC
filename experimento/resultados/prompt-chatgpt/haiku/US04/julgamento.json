@@ -1,0 +1,236 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C04",
+  "US04-C05",
+  "US04-C06",
+  "US04-C07",
+  "US04-C08",
+  "US04-C09",
+  "US04-C10",
+  "US04-C11",
+  "US04-C12",
+  "US04-C13"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "espacos em branco (novo)"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "21 aceito"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "22 rejeitado"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C06"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "assunto 100 aceito (novo)"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C07"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C09"
+   ],
+   "nota": ""
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "mensagem 2000 aceita (novo)"
+  },
+  "12": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C10"
+   ],
+   "nota": ""
+  },
+  "13": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "14": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  },
+  "15": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C13"
+   ],
+   "nota": "acentos"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_envio_vazio_exibe_mensagens_de_campo_em_branco[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT002_campos_somente_com_espacos_exibem_mensagens_de_campo_em_branco[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT003_telefone_com_10_caracteres_exibe_erro_de_tamanho[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT004_telefone_com_11_caracteres_e_aceito[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT005_telefone_com_21_caracteres_e_aceito[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT006_telefone_com_22_caracteres_exibe_erro_de_tamanho[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT007_assunto_com_4_e_mensagem_com_19_caracteres_exibem_erros[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT008_assunto_com_5_caracteres_e_aceito[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT009_assunto_com_100_caracteres_e_aceito[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT010_assunto_com_101_caracteres_exibe_erro_de_tamanho[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT011_mensagem_com_20_caracteres_e_aceita[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT012_mensagem_com_2000_caracteres_e_aceita[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT013_mensagem_com_2001_caracteres_exibe_erro_de_tamanho[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT014_email_malformado_exibe_erro_de_formato[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT015_dados_validos_exibem_confirmacao_com_nome_e_assunto[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT016_nome_com_acentuacao_aparece_na_confirmacao[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  }
+ ]
+}

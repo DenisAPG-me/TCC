@@ -1,0 +1,271 @@
+{
+ "created": 1793429534.3731058,
+ "duration": 73.23478364944458,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02",
+ "environment": {},
+ "summary": {
+  "failed": 4,
+  "passed": 1,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_adicionar_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 115
+    },
+    {
+     "nodeid": "script.py::test_ct02_conferir_totais_de_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 127
+    },
+    {
+     "nodeid": "script.py::test_ct03_reduzir_quantidade_para_uma_unidade[chromium]",
+     "type": "Function",
+     "lineno": 141
+    },
+    {
+     "nodeid": "script.py::test_ct04_rejeitar_tres_unidades_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 162
+    },
+    {
+     "nodeid": "script.py::test_ct05_aceitar_uma_unidade_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 171
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_adicionar_tres_unidades[chromium]",
+   "lineno": 115,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_adicionar_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.42134359991177917,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.142607699963264,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+     "lineno": 46,
+     "message": "AssertionError: Locator expected to have count '1'\nActual value: 2 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\n  - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\n    6 \u00d7 locator resolved to 0 elements\n      - unexpected value \"0\"\n    27 \u00d7 locator resolved to 2 elements\n       - unexpected value \"2\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 117,
+      "message": "in test_ct01_adicionar_tres_unidades"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 46,
+      "message": "in open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:117: in test_ct01_adicionar_tres_unidades\n    open_product(page, REGULAR_PRODUCT)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 \u00d7 locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 \u00d7 locator resolved to 2 elements\nE          - unexpected value \"2\""
+   },
+   "teardown": {
+    "duration": 0.012788100051693618,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_conferir_totais_de_tres_unidades[chromium]",
+   "lineno": 127,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_conferir_totais_de_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09683230007067323,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.0124327999074,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+     "lineno": 46,
+     "message": "AssertionError: Locator expected to have count '1'\nActual value: 2 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\n  - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\n    6 \u00d7 locator resolved to 0 elements\n      - unexpected value \"0\"\n    27 \u00d7 locator resolved to 2 elements\n       - unexpected value \"2\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 129,
+      "message": "in test_ct02_conferir_totais_de_tres_unidades"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 89,
+      "message": "in prepare_cart"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 46,
+      "message": "in open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:129: in test_ct02_conferir_totais_de_tres_unidades\n    row = prepare_cart(page, REGULAR_PRODUCT, INITIAL_QUANTITY)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:89: in prepare_cart\n    open_product(page, product_name)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 \u00d7 locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 \u00d7 locator resolved to 2 elements\nE          - unexpected value \"2\""
+   },
+   "teardown": {
+    "duration": 0.01303059991914779,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_reduzir_quantidade_para_uma_unidade[chromium]",
+   "lineno": 141,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_reduzir_quantidade_para_uma_unidade[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10629849997349083,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.02569969999604,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+     "lineno": 46,
+     "message": "AssertionError: Locator expected to have count '1'\nActual value: 2 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\n  - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\n    6 \u00d7 locator resolved to 0 elements\n      - unexpected value \"0\"\n    27 \u00d7 locator resolved to 2 elements\n       - unexpected value \"2\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 143,
+      "message": "in test_ct03_reduzir_quantidade_para_uma_unidade"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 89,
+      "message": "in prepare_cart"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 46,
+      "message": "in open_product"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:143: in test_ct03_reduzir_quantidade_para_uma_unidade\n    row = prepare_cart(page, REGULAR_PRODUCT, INITIAL_QUANTITY)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:89: in prepare_cart\n    open_product(page, product_name)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 \u00d7 locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 \u00d7 locator resolved to 2 elements\nE          - unexpected value \"2\""
+   },
+   "teardown": {
+    "duration": 0.013523500063456595,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_rejeitar_tres_unidades_de_thor_hammer[chromium]",
+   "lineno": 162,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_rejeitar_tres_unidades_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10252489999402314,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.627757600042969,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01774789998307824,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_aceitar_uma_unidade_de_thor_hammer[chromium]",
+   "lineno": 171,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_aceitar_uma_unidade_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10049230000004172,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 19.213943999959156,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+     "lineno": 181,
+     "message": "AssertionError: Locator expected to have text '1'\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_have_text\" get_by_test_id(\"cart-quantity\") with timeout 15000ms\n  - waiting for get_by_test_id(\"cart-quantity\")\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n    - menuitem \"cart\":\n      - link \"cart\":\n        - /url: /checkout\n        - text: \"1\"\n  - button \"Select language\": EN\n- figure \"Photo by ANIRUDH on Unsplash.\":\n  - img \"Thor Hammer\"\n  - text: Photo by\n  - link \"ANIRUDH\":\n    - /url: https://unsplash.com/@lanirudhreddy\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/3esjG-nlgyk\n  - text: .\n- heading \"Thor Hammer\" [level=1]\n- paragraph: Hammer ForgeFlex Tools\n- text: \"$11.14 CO\u2082: A B C D E\"\n- paragraph: \"The legendary Thor Hammer combines premium craftsmanship with raw striking power in a tool that is truly built to last generations. Forged from Uru metal with a hand-wrapped leather grip, this extraordinary 5kg masterpiece delivers unmatched impact force for the most demanding demolition, forging, and heavy construction tasks. The perfectly balanced oversized head ensures every swing transfers maximum energy to the target, while the enlarged striking face covers more surface area than any conventional hammer. Despite its impressive mass, the ergonomic handle design and precise weight distribution allow for surprisingly controlled, accurate swings. This is not merely a tool but a statement piece for those who accept nothing less than the absolute best in their workshop. Comes with a lifetime warranty because true legends never fade. Please note: only one Thor Hammer is permitted per customer.\"\n- button \"Decrease quantity\"\n- text: Quantity\n- spinbutton \"Quantity\": \"1\"\n- button \"Increase quantity\"\n- button \"Add to cart\"\n- button \"Add to favourites\"\n- button \"Compare\"\n- heading \"Specifications\" [level=3]\n- table:\n  - rowgroup:\n    - row \"Handle Material Leather Wrapped\":\n      - cell \"Handle Material\"\n      - cell \"Leather Wrapped\"\n    - row \"Head Weight 4500g\":\n      - cell \"Head Weight\"\n      - cell \"4500g\"\n    - row \"Length 450mm\":\n      - cell \"Length\"\n      - cell \"450mm\"\n    - row \"Material Uru Metal\":\n      - cell \"Material\"\n      - cell \"Uru Metal\"\n    - row \"Warranty Lifetime\":\n      - cell \"Warranty\"\n      - cell \"Lifetime\"\n    - row \"Weight 5000g\":\n      - cell \"Weight\"\n      - cell \"5000g\"\n- separator\n- heading \"Related products\" [level=2]\n- link \"Claw Hammer with Shock Reduction Grip Claw Hammer with Shock Reduction Grip More information\":\n  - /url: /product/01M688PWETXNRTA3EK9KRC1F6K\n  - img \"Claw Hammer with Shock Reduction Grip\"\n  - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Hammer Hammer More information\":\n  - /url: /product/01M688PWEVTAX7VSWZGZZX7T0N\n  - img \"Hammer\"\n  - heading \"Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Sledgehammer Sledgehammer More information\":\n  - /url: /product/01M688PWF2BSWEK6ECNZ9KVBBR\n  - img \"Sledgehammer\"\n  - heading \"Sledgehammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Claw Hammer with Fiberglass Handle Claw Hammer with Fiberglass Handle More information\":\n  - /url: /product/01M688PWF3E7GF4EBJK56T07X1\n  - img \"Claw Hammer with Fiberglass Handle\"\n  - heading \"Claw Hammer with Fiberglass Handle\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Court Hammer Court Hammer More information\":\n  - /url: /product/01M688PWF5Y0FVF64NS2W4XGS7\n  - img \"Court Hammer\"\n  - heading \"Court Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Claw Hammer Claw Hammer More information\":\n  - /url: /product/01M688PWEXQ9N8PCQSG066GCHW\n  - img \"Claw Hammer\"\n  - heading \"Claw Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py",
+      "lineno": 181,
+      "message": "in test_ct05_aceitar_uma_unidade_de_thor_hammer"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:181: in test_ct05_aceitar_uma_unidade_de_thor_hammer\n    ).to_have_text(str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: Locator expected to have text '1'\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_have_text\" get_by_test_id(\"cart-quantity\") with timeout 15000ms\nE     - waiting for get_by_test_id(\"cart-quantity\")\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE       - menuitem \"cart\":\nE         - link \"cart\":\nE           - /url: /checkout\nE           - text: \"1\"\nE     - button \"Select language\": EN\nE   - figure \"Photo by ANIRUDH on Unsplash.\":\nE     - img \"Thor Hammer\"\nE     - text: Photo by\nE     - link \"ANIRUDH\":\nE       - /url: https://unsplash.com/@lanirudhreddy\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/3esjG-nlgyk\nE     - text: .\nE   - heading \"Thor Hammer\" [level=1]\nE   - paragraph: Hammer ForgeFlex Tools\nE   - text: \"$11.14 CO\u2082: A B C D E\"\nE   - paragraph: \"The legendary Thor Hammer combines premium craftsmanship with raw striking power in a tool that is truly built to last generations. Forged from Uru metal with a hand-wrapped leather grip, this extraordinary 5kg masterpiece delivers unmatched impact force for the most demanding demolition, forging, and heavy construction tasks. The perfectly balanced oversized head ensures every swing transfers maximum energy to the target, while the enlarged striking face covers more surface area than any conventional hammer. Despite its impressive mass, the ergonomic handle design and precise weight distribution allow for surprisingly controlled, accurate swings. This is not merely a tool but a statement piece for those who accept nothing less than the absolute best in their workshop. Comes with a lifetime warranty because true legends never fade. Please note: only one Thor Hammer is permitted per customer.\"\nE   - button \"Decrease quantity\"\nE   - text: Quantity\nE   - spinbutton \"Quantity\": \"1\"\nE   - button \"Increase quantity\"\nE   - button \"Add to cart\"\nE   - button \"Add to favourites\"\nE   - button \"Compare\"\nE   - heading \"Specifications\" [level=3]\nE   - table:\nE     - rowgroup:\nE       - row \"Handle Material Leather Wrapped\":\nE         - cell \"Handle Material\"\nE         - cell \"Leather Wrapped\"\nE       - row \"Head Weight 4500g\":\nE         - cell \"Head Weight\"\nE         - cell \"4500g\"\nE       - row \"Length 450mm\":\nE         - cell \"Length\"\nE         - cell \"450mm\"\nE       - row \"Material Uru Metal\":\nE         - cell \"Material\"\nE         - cell \"Uru Metal\"\nE       - row \"Warranty Lifetime\":\nE         - cell \"Warranty\"\nE         - cell \"Lifetime\"\nE       - row \"Weight 5000g\":\nE         - cell \"Weight\"\nE         - cell \"5000g\"\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - link \"Claw Hammer with Shock Reduction Grip Claw Hammer with Shock Reduction Grip More information\":\nE     - /url: /product/01M688PWETXNRTA3EK9KRC1F6K\nE     - img \"Claw Hammer with Shock Reduction Grip\"\nE     - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Hammer Hammer More information\":\nE     - /url: /product/01M688PWEVTAX7VSWZGZZX7T0N\nE     - img \"Hammer\"\nE     - heading \"Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Sledgehammer Sledgehammer More information\":\nE     - /url: /product/01M688PWF2BSWEK6ECNZ9KVBBR\nE     - img \"Sledgehammer\"\nE     - heading \"Sledgehammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Claw Hammer with Fiberglass Handle Claw Hammer with Fiberglass Handle More information\":\nE     - /url: /product/01M688PWF3E7GF4EBJK56T07X1\nE     - img \"Claw Hammer with Fiberglass Handle\"\nE     - heading \"Claw Hammer with Fiberglass Handle\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Court Hammer Court Hammer More information\":\nE     - /url: /product/01M688PWF5Y0FVF64NS2W4XGS7\nE     - img \"Court Hammer\"\nE     - heading \"Court Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Claw Hammer Claw Hammer More information\":\nE     - /url: /product/01M688PWEXQ9N8PCQSG066GCHW\nE     - img \"Claw Hammer\"\nE     - heading \"Claw Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.23101460002362728,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

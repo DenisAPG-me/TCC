@@ -1,0 +1,102 @@
+CASOS DE TESTE
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Criar reserva com dados válidos | Positivo | Critério 1 | Enviar POST para `/booking` com payload JSON válido contendo nome, sobrenome, preço, depósito pago, datas e necessidades adicionais. | Status HTTP 200, ID numérico retornado e dados correspondentes aos enviados. |
+| CT02 | Consultar reserva existente por ID | Positivo | Critério 2 | Criar uma reserva via POST, extrair o ID retornado e enviar GET para `/booking/{id}`. | Status HTTP 200 e todos os campos retornados iguais aos enviados. |
+| CT03 | Consultar reserva com ID inexistente | Negativo | Critério 3 | Enviar GET para `/booking/99999999`. | Status HTTP 404. |
+| CT04 | Listar reservas filtrando por nome e sobrenome únicos | Positivo | Critério 4 | Criar uma reserva com nome e sobrenome únicos, depois enviar GET para `/booking?firstname={nome}&lastname={sobrenome}`. | Status HTTP 200 e a lista contém um objeto com o ID criado. |
+
+SUPOSIÇÕES
+- URL base da API: `https://restful-booker.herokuapp.com`
+- Endpoint de criação e consulta: `/booking`
+- Formato de payload aceito para POST `/booking`:
+  ```json
+  {
+    "firstname": "John",
+    "lastname": "Doe",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2024-01-01",
+      "checkout": "2024-01-02"
+    },
+    "additionalneeds": "Breakfast"
+  }
+  ```
+- O payload de resposta do POST `/booking` retorna um objeto contendo a chave `"bookingid"` (numérico) e a chave `"booking"` com os dados enviados.
+- A consulta GET `/booking/{id}` retorna diretamente o objeto com os campos da reserva.
+- A listagem com filtros GET `/booking?firstname=...&lastname=...` retorna um array de objetos JSON contendo a chave `"bookingid"`.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+
+@pytest.fixture
+def unique_booking_data():
+    import time
+    unique_suffix = str(int(time.time() * 1000))
+    return {
+        "firstname": f"TestName{unique_suffix}",
+        "lastname": f"TestLast{unique_suffix}",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2026-06-01",
+            "checkout": "2026-06-10"
+        },
+        "additionalneeds": "WiFi"
+    }
+
+def test_CT01_criar_reserva_com_dados_validos(unique_booking_data):
+    response = requests.post(f"{BASE_URL}/booking", json=unique_booking_data)
+    assert response.status_code == 200
+    data = response.json()
+    assert "bookingid" in data
+    assert isinstance(data["bookingid"], int)
+    
+    booking = data["booking"]
+    assert booking["firstname"] == unique_booking_data["firstname"]
+    assert booking["lastname"] == unique_booking_data["lastname"]
+    assert booking["totalprice"] == unique_booking_data["totalprice"]
+    assert booking["depositpaid"] == unique_booking_data["depositpaid"]
+    assert booking["bookingdates"] == unique_booking_data["bookingdates"]
+    assert booking["additionalneeds"] == unique_booking_data["additionalneeds"]
+
+def test_CT02_consultar_reserva_existente_por_id(unique_booking_data):
+    post_response = requests.post(f"{BASE_URL}/booking", json=unique_booking_data)
+    assert post_response.status_code == 200
+    booking_id = post_response.json()["bookingid"]
+
+    get_response = requests.get(f"{BASE_URL}/booking/{booking_id}")
+    assert get_response.status_code == 200
+    booking = get_response.json()
+    
+    assert booking["firstname"] == unique_booking_data["firstname"]
+    assert booking["lastname"] == unique_booking_data["lastname"]
+    assert booking["totalprice"] == unique_booking_data["totalprice"]
+    assert booking["depositpaid"] == unique_booking_data["depositpaid"]
+    assert booking["bookingdates"] == unique_booking_data["bookingdates"]
+    assert booking["additionalneeds"] == unique_booking_data["additionalneeds"]
+
+def test_CT03_consultar_reserva_com_id_inexistente():
+    response = requests.get(f"{BASE_URL}/booking/99999999")
+    assert response.status_code == 404
+
+def test_CT04_listar_reservas_filtrando_por_nome_e_sobrenome_unicos(unique_booking_data):
+    post_response = requests.post(f"{BASE_URL}/booking", json=unique_booking_data)
+    assert post_response.status_code == 200
+    booking_id = post_response.json()["bookingid"]
+
+    params = {
+        "firstname": unique_booking_data["firstname"],
+        "lastname": unique_booking_data["lastname"]
+    }
+    get_response = requests.get(f"{BASE_URL}/booking", params=params)
+    assert get_response.status_code == 200
+    results = get_response.json()
+    
+    matched_ids = [item["bookingid"] for item in results]
+    assert booking_id in matched_ids
+```

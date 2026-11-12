@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "claro mas verboso",
+  "estrutura": "helpers sem fixtures; payloads inline",
+  "assercoes": "valores e preservacao verificados",
+  "espera": "timeout, dados fixos",
+  "manutenibilidade": "constantes parciais, sem cleanup"
+ }
+}

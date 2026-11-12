@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Nomes claros, helpers bem nomeados, docstring/comentarios curtos",
+  "estrutura": "Helpers e constantes, sem duplicacao; abertura e busca reutilizadas",
+  "assercoes": "Compara sequencia inteira ordenada e mensagem exata",
+  "espera": "Usa expect, sem sleep, mas depende de contrato hipotetico (aria-busy, data-applied) inexistente",
+  "manutenibilidade": "Constantes centralizadas, mas test-ids/atributos inventados quebram tudo"
+ }
+}

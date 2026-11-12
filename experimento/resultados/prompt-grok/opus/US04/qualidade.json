@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "Nomes e helpers claros",
+  "estrutura": "Fixture, helpers e constantes",
+  "assercoes": "Mensagens exatas e confirmacao com nome/assunto",
+  "espera": "expect auto-wait e checagem de form pronto",
+  "manutenibilidade": "data-testid e constantes"
+ }
+}

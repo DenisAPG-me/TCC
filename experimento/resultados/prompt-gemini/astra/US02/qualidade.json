@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "claro, nomes em portugues, constantes",
+  "estrutura": "fixture, helpers de produto/carrinho",
+  "assercoes": "valida confirmacao, badge, linha e total com Decimal",
+  "espera": "expect com timeout, sem sleep",
+  "manutenibilidade": "test-id configurado e constantes de mensagens"
+ }
+}

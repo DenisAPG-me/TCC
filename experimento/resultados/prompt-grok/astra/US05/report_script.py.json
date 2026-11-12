@@ -1,0 +1,306 @@
+{
+ "created": 1793428707.673578,
+ "duration": 40.59898138046265,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 3,
+  "total": 7,
+  "collected": 7
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_login_com_ambos_os_campos_vazios[chromium]",
+     "type": "Function",
+     "lineno": 83
+    },
+    {
+     "nodeid": "script.py::test_TC02_login_com_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 90
+    },
+    {
+     "nodeid": "script.py::test_TC03_login_valido_exibe_quarto_e_menu[chromium]",
+     "type": "Function",
+     "lineno": 96
+    },
+    {
+     "nodeid": "script.py::test_TC04_logout_retorna_a_pagina_publica[chromium]",
+     "type": "Function",
+     "lineno": 117
+    },
+    {
+     "nodeid": "script.py::test_TC05_acesso_direto_apos_logout_exibe_login[chromium]",
+     "type": "Function",
+     "lineno": 122
+    },
+    {
+     "nodeid": "script.py::test_TC06_login_com_usuario_vazio[chromium]",
+     "type": "Function",
+     "lineno": 135
+    },
+    {
+     "nodeid": "script.py::test_TC07_login_com_senha_vazia[chromium]",
+     "type": "Function",
+     "lineno": 143
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_login_com_ambos_os_campos_vazios[chromium]",
+   "lineno": 83,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_login_com_ambos_os_campos_vazios[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.42453069996554404,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.203980699996464,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012251700041815639,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_login_com_senha_incorreta[chromium]",
+   "lineno": 90,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_login_com_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09312440000940114,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0494755000108853,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011362900026142597,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_login_valido_exibe_quarto_e_menu[chromium]",
+   "lineno": 96,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_login_valido_exibe_quarto_e_menu[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.08870910003315657,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 11.419037799932994,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+     "lineno": 69,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 98,
+      "message": "in test_TC03_login_valido_exibe_quarto_e_menu"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 69,
+      "message": "in login_successfully"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:98: in test_TC03_login_valido_exibe_quarto_e_menu\n    login_successfully(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:69: in login_successfully\n    expect(page.get_by_role(\"link\", name=\"Logout\", exact=True)).to_be_visible(\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.012211799970827997,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_logout_retorna_a_pagina_publica[chromium]",
+   "lineno": 117,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_logout_retorna_a_pagina_publica[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10214279999490827,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 11.743166500004008,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+     "lineno": 69,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 119,
+      "message": "in test_TC04_logout_retorna_a_pagina_publica"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 69,
+      "message": "in login_successfully"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:119: in test_TC04_logout_retorna_a_pagina_publica\n    login_successfully(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:69: in login_successfully\n    expect(page.get_by_role(\"link\", name=\"Logout\", exact=True)).to_be_visible(\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.012277300003916025,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_acesso_direto_apos_logout_exibe_login[chromium]",
+   "lineno": 122,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_acesso_direto_apos_logout_exibe_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10260700003709644,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 11.653488099924289,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+     "lineno": 69,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 124,
+      "message": "in test_TC05_acesso_direto_apos_logout_exibe_login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py",
+      "lineno": 69,
+      "message": "in login_successfully"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:124: in test_TC05_acesso_direto_apos_logout_exibe_login\n    login_successfully(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US05\\script.py:69: in login_successfully\n    expect(page.get_by_role(\"link\", name=\"Logout\", exact=True)).to_be_visible(\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Logout\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"link\", name=\"Logout\", exact=True)\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.01306929998099804,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_login_com_usuario_vazio[chromium]",
+   "lineno": 135,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_login_com_usuario_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10494720004498959,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1158606999088079,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011521400068886578,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC07_login_com_senha_vazia[chromium]",
+   "lineno": 143,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC07_login_com_senha_vazia[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10236940009053797,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0109662000322714,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.22739729995373636,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

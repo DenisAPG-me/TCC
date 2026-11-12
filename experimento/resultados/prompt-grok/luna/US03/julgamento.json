@@ -1,0 +1,143 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so CEP"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so pais"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_login_empty_form_shows_required_messages",
+   "categoria": "seletor inexistente",
+   "nota": "botao 'sign in|login' ambiguo (Sign in with Google)"
+  },
+  {
+   "teste": "test_TC02_wrong_password_rejected_without_session",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC03_unauthenticated_checkout_requests_credentials",
+   "categoria": "seletor inexistente",
+   "nota": "botao add to cart/cart link nao localizado (timeout)"
+  },
+  {
+   "teste": "test_TC04_valid_login_shows_account_and_user_name",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  },
+  {
+   "teste": "test_TC05_empty_address_cannot_advance_to_payment",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  },
+  {
+   "teste": "test_TC06_complete_address_advances_to_payment",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  },
+  {
+   "teste": "test_TC07_credit_card_payment_and_order_confirmation",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  },
+  {
+   "teste": "test_TC08_missing_zip_prevents_payment_step",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  },
+  {
+   "teste": "test_TC09_missing_country_prevents_payment_step",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+[
+ "Base URL: `https://practicesoftwaretesting.com/` (constante `BASE_URL`). Cada teste roda em contexto novo do plugin `pytest-playwright`, portanto o carrinho inicia vazio.",
+ "Acesso ao produto: na home, o nome do produto é um link acessível (`get_by_role(\"link\", name=...)`), usado com `.first`.",
+ "Página do produto: campo de quantidade rotulado \"Quantity\" (`get_by_label`) e botão \"Add to cart\" (`get_by_role(\"button\")`). Quantidade padrão não é usada pelos testes, pois sempre é preenchida explicitamente.",
+ "Confirmação \"Product added to shopping cart.\" e mensagem \"You can only have one Thor Hammer in the cart.\" são textos exatos exibidos na página após o clique (`get_by_text(..., exact=True)`).",
+ "Indicador do carrinho: elemento com `data-testid=\"cart-quantity\"` contendo o número de unidades; quando vazio, exibe \"0\".",
+ "Link para o carrinho: `data-testid=\"nav-cart\"`; a página do carrinho tem heading \"Shopping Cart\".",
+ "Página do carrinho: preço unitário em `data-testid=\"product-price\"`, quantidade editável em `data-testid=\"product-quantity\"` (botão \"Update\" para aplicar), total da linha em `data-testid=\"line-price\"` e total do carrinho em `data-testid=\"cart-total\"`.",
+ "Formato de preço: símbolo de moeda e ponto decimal (ex.: \"$12.99\"); a extração remove tudo que não seja dígito ou ponto.",
+ "Thor Hammer tem limite de 1 unidade por carrinho; Claw Hammer não tem limite com 3 unidades.",
+ "Asserções de valores numéricos que dependem de atualização da página usam `expect.poll`, evitando `time.sleep`."
+]

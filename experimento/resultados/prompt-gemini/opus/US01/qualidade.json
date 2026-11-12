@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "claro, helpers bem nomeados",
+  "estrutura": "fixtures (test-id, home, app_url) e helpers",
+  "assercoes": "compara DOM com resposta da API, legenda, ordem",
+  "espera": "expect_response e expects auto-wait; sem sleep",
+  "manutenibilidade": "get_by_test_id com data-test configurado, constantes, base_url"
+ }
+}

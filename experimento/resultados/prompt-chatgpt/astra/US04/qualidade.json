@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros, tipagem",
+  "estrutura": "fixtures e helpers, sem parametrizacao",
+  "assercoes": "asserts de negocio e de ausencia de sucesso",
+  "espera": "expect com timeout, sem sleep",
+  "manutenibilidade": "constantes e helpers, mas get_by_label inexistente e browser proprio em vez de page"
+ }
+}

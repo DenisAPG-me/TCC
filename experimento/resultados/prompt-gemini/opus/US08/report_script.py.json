@@ -1,0 +1,405 @@
+{
+ "created": 1793387161.7933247,
+ "duration": 22.007848501205444,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US08",
+ "environment": {},
+ "summary": {
+  "passed": 13,
+  "total": 13,
+  "collected": 13
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_autenticacao_credenciais_validas",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_ct02_autenticacao_senha_invalida",
+     "type": "Function",
+     "lineno": 76
+    },
+    {
+     "nodeid": "script.py::test_ct03_autenticacao_usuario_invalido",
+     "type": "Function",
+     "lineno": 84
+    },
+    {
+     "nodeid": "script.py::test_ct04_autenticacao_credenciais_vazias",
+     "type": "Function",
+     "lineno": 92
+    },
+    {
+     "nodeid": "script.py::test_ct05_atualizacao_completa_novo_nome_e_preco",
+     "type": "Function",
+     "lineno": 100
+    },
+    {
+     "nodeid": "script.py::test_ct06_atualizacao_completa_persiste",
+     "type": "Function",
+     "lineno": 117
+    },
+    {
+     "nodeid": "script.py::test_ct07_atualizacao_parcial_sobrenome",
+     "type": "Function",
+     "lineno": 134
+    },
+    {
+     "nodeid": "script.py::test_ct08_atualizacao_completa_sem_token",
+     "type": "Function",
+     "lineno": 151
+    },
+    {
+     "nodeid": "script.py::test_ct09_atualizacao_parcial_sem_token",
+     "type": "Function",
+     "lineno": 164
+    },
+    {
+     "nodeid": "script.py::test_ct10_atualizacao_completa_token_invalido",
+     "type": "Function",
+     "lineno": 177
+    },
+    {
+     "nodeid": "script.py::test_ct11_atualizacao_completa_sem_campo_obrigatorio",
+     "type": "Function",
+     "lineno": 190
+    },
+    {
+     "nodeid": "script.py::test_ct12_atualizacao_completa_corpo_vazio",
+     "type": "Function",
+     "lineno": 205
+    },
+    {
+     "nodeid": "script.py::test_ct13_atualizacao_rejeitada_nao_altera_reserva",
+     "type": "Function",
+     "lineno": 218
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_autenticacao_credenciais_validas",
+   "lineno": 67,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_autenticacao_credenciais_validas",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.000345999957062304,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6346801000181586,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00014009990263730288,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_autenticacao_senha_invalida",
+   "lineno": 76,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_autenticacao_senha_invalida",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020680006127804518,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5838317000307143,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011729996185749769,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_autenticacao_usuario_invalido",
+   "lineno": 84,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_autenticacao_usuario_invalido",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002759000053629279,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5847956000361592,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00010820000898092985,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_autenticacao_credenciais_vazias",
+   "lineno": 92,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_autenticacao_credenciais_vazias",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.000255499966442585,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6064110000152141,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011359993368387222,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_atualizacao_completa_novo_nome_e_preco",
+   "lineno": 100,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_atualizacao_completa_novo_nome_e_preco",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2937917999224737,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6507439999841154,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6312228000024334,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_atualizacao_completa_persiste",
+   "lineno": 117,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_atualizacao_completa_persiste",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6511733999941498,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2978676999919116,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6487701999722049,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_atualizacao_parcial_sobrenome",
+   "lineno": 134,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_atualizacao_parcial_sobrenome",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6411730999825522,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6430839999811724,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6388296999502927,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_atualizacao_completa_sem_token",
+   "lineno": 151,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_atualizacao_completa_sem_token",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6340867999242619,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6728528999956325,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6338770999573171,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_atualizacao_parcial_sem_token",
+   "lineno": 164,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct09_atualizacao_parcial_sem_token",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6496980000520125,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6522515999386087,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6531014000065625,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct10_atualizacao_completa_token_invalido",
+   "lineno": 177,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct10_atualizacao_completa_token_invalido",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6742692000698298,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6539356999564916,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6644968999316916,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct11_atualizacao_completa_sem_campo_obrigatorio",
+   "lineno": 190,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct11_atualizacao_completa_sem_campo_obrigatorio",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6583360000513494,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6927737999940291,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6404319000430405,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct12_atualizacao_completa_corpo_vazio",
+   "lineno": 205,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct12_atualizacao_completa_corpo_vazio",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6550717999925837,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6492525000358,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6572913000127301,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct13_atualizacao_rejeitada_nao_altera_reserva",
+   "lineno": 218,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct13_atualizacao_rejeitada_nao_altera_reserva",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6544367999304086,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2946375999599695,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6331614000955597,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

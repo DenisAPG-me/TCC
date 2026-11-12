@@ -1,0 +1,56 @@
+Você é um engenheiro de qualidade especializado em automação de testes. Sua única fonte de informação é a User Story fornecida abaixo. Você NÃO tem acesso ao sistema real, à internet, a documentação externa, a código-fonte nem a seletores reais. Deve deduzir seletores, dados de teste e fluxos de forma razoável e declarar explicitamente todas as suposições.
+
+USER STORY:
+Como visitante da pousada, quero enviar uma mensagem pelo formulário de contato, para tirar dúvidas antes de reservar.
+URL base: https://automationintesting.online/
+
+Critérios de aceitação:
+1. Dado que estou na página inicial, quando envio o formulário de contato vazio, então vejo mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco.
+2. Dado que preenchi um telefone com menos de 11 caracteres, quando envio, então vejo "Phone must be between 11 and 21 characters.".
+3. Dado que preenchi assunto com menos de 5 caracteres e mensagem com menos de 20 caracteres, quando envio, então vejo "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters.".
+4. Dado que preenchi um e-mail malformado (ex.: "bad"), quando envio, então vejo "must be a well-formed email address".
+5. Dado que preenchi todos os campos com dados válidos, quando envio, então vejo "Thanks for getting in touch <nome>!" e o assunto informado na confirmação.
+
+Sua tarefa é, usando EXCLUSIVAMENTE o texto da User Story acima:
+
+1. Identificar e listar os casos de teste necessários (positivos, negativos e de borda) cobrindo os critérios de aceitação.
+2. Escrever um script de automação de testes em Python que implemente esses casos.
+
+REGRAS OBRIGATÓRIAS:
+
+- Se a User Story for de interface web: utilize Python + pytest + Playwright (API síncrona).
+- Se a User Story for de API REST: utilize Python + pytest + requests.
+- O script deve ser um único arquivo autocontido, sem dependências além das mencionadas (pytest, playwright ou requests).
+- Deve haver exatamente um teste (função) por caso de teste listado.
+- Os nomes das funções de teste devem incluir o ID do caso correspondente (ex.: test_TC01_..., test_TC02_...).
+- Declare todas as suposições (seletores, URLs relativas, dados de entrada, comportamentos esperados etc.) de forma clara.
+
+FORMATO DE SAÍDA OBRIGATÓRIO (não adicione nada fora desta estrutura):
+
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | ... | positivo / negativo / borda | ... | ... | ... |
+| ... | ... | ... | ... | ... | ... |
+
+SUPOSIÇÕES
+
+- ...
+- ...
+
+```python
+# código completo e executável do arquivo de teste aqui
+```
+
+Responda APENAS com o formato acima. Nada de introduções, explicações adicionais, comentários fora do código ou seções extras.
+
+
+REQUISITOS TÉCNICOS OBRIGATÓRIOS (em caso de conflito com instruções anteriores, estes requisitos prevalecem):
+- Testes de UI usam o plugin oficial pytest-playwright e recebem a fixture `page` (e, se precisarem, `context`/`browser`) do próprio plugin.
+- É proibido criar navegador com `sync_playwright()` e é proibido criar fixture própria de browser/page.
+- As asserções de UI usam `expect` de `playwright.sync_api`.
+- Dê preferência a locators recomendados: `get_by_role`, `get_by_label`, `get_by_text`, `get_by_test_id`.
+- Nada de `time.sleep`.
+- A base URL vem de uma constante no topo do arquivo ou da opção `--base-url`.
+- Testes de API usam pytest + requests, sem mudança.

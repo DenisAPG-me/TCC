@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Impedir exclusão sem token",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Criar reserva; consultar seu conteúdo; excluir sem autenticação; consultar novamente.",
+  "esperado": "DELETE retorna 403; GET retorna 200 e mantém o conteúdo original."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Impedir exclusão com token inválido",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Criar reserva; consultar seu conteúdo; excluir com token inválido; consultar novamente.",
+  "esperado": "DELETE retorna 403; GET retorna 200 e mantém o conteúdo original."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Criar reserva; obter token com as credenciais fornecidas; excluir com esse token.",
+  "esperado": "DELETE retorna exatamente 201."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Consultar reserva excluída",
+  "tipo": "positivo",
+  "criterio": "3 e 4",
+  "passos": "Criar reserva; autenticar; excluir; consultar o mesmo identificador.",
+  "esperado": "DELETE retorna 201; GET posterior retorna 404."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Repetir exclusão sem afetar outra reserva",
+  "tipo": "borda",
+  "criterio": "3, 4 e 5",
+  "passos": "Criar reserva alvo e reserva de controle; autenticar; excluir a primeira; repetir a exclusão; consultar ambas.",
+  "esperado": "Primeira exclusão retorna 201; segunda retorna 4xx; alvo continua retornando 404; controle retorna 200 com conteúdo inalterado."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Não listar reserva excluída pelo nome único",
+  "tipo": "positivo",
+  "criterio": "3 e 6",
+  "passos": "Criar reserva com nome único; confirmar sua presença na listagem filtrada; autenticar; excluir; repetir o filtro.",
+  "esperado": "Listagem inicial contém apenas o ID criado; DELETE retorna 201; listagem posterior retorna 200 e `[]`."
+ }
+]

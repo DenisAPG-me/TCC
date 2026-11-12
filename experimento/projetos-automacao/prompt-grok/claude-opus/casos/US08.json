@@ -1,0 +1,114 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "CA1",
+  "passos": "POST /auth com admin / password123",
+  "esperado": "Status 200 e campo `token` presente e não vazio"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Autenticação com senha inválida",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "POST /auth com admin / senha incorreta",
+  "esperado": "Corpo sem `token` e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "TC03",
+  "titulo": "Autenticação com usuário inexistente",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "POST /auth com usuário inexistente / password123",
+  "esperado": "Corpo sem `token` e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "TC04",
+  "titulo": "Autenticação com credenciais vazias",
+  "tipo": "borda",
+  "criterio": "CA2",
+  "passos": "POST /auth com username e password vazios",
+  "esperado": "Corpo sem `token` e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "TC05",
+  "titulo": "Atualização completa com novo nome e novo preço",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva; obter token; PUT /booking/{id} com payload completo alterando nome e preço",
+  "esperado": "Status 200 e corpo com os novos valores"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Atualização completa persiste os novos valores",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva; PUT completo com token; GET /booking/{id}",
+  "esperado": "GET retorna os novos nome e preço"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Atualização parcial apenas do sobrenome",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva; obter token; PATCH /booking/{id} com apenas `lastname`",
+  "esperado": "Status 200, `lastname` alterado e demais campos iguais aos originais"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Atualização parcial persiste e preserva demais campos",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva; PATCH `lastname` com token; GET /booking/{id}",
+  "esperado": "GET retorna novo `lastname` e demais campos inalterados"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Atualização completa sem token",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva; PUT /booking/{id} sem cookie de token",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC10",
+  "titulo": "Atualização parcial sem token",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva; PATCH /booking/{id} sem cookie de token",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC11",
+  "titulo": "Atualização completa com token inválido",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Criar reserva; PUT /booking/{id} com token inexistente",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC12",
+  "titulo": "Atualização completa sem `firstname`",
+  "tipo": "negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva; obter token; PUT com payload sem `firstname`",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "TC13",
+  "titulo": "Atualização completa sem `bookingdates`",
+  "tipo": "negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva; obter token; PUT com payload sem `bookingdates`",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "TC14",
+  "titulo": "Atualização completa com corpo vazio",
+  "tipo": "borda",
+  "criterio": "CA6",
+  "passos": "Criar reserva; obter token; PUT com corpo `{}`",
+  "esperado": "Status 400"
+ }
+]

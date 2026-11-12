@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 4,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos",
+  "estrutura": "Helper _submit com overrides e constantes",
+  "assercoes": "Regex de 'blank' frouxa no caso vazio, demais exatas",
+  "espera": "expect com auto-wait",
+  "manutenibilidade": "Seletores por label quebram tudo; constantes ok"
+ }
+}

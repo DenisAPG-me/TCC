@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Exclusão de reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "1. Criar uma reserva.<br>2. Tentar excluir a reserva sem enviar o cabeçalho de autorização (token).<br>3. Consultar a reserva excluída.",
+  "esperado": "1. Receber status 403 na exclusão.<br>2. Receber status 200 na consulta da reserva."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Exclusão de reserva com token inválido",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "1. Criar uma reserva.<br>2. Tentar excluí-la enviando um token de autorização inválido.<br>3. Consultar a reserva.",
+  "esperado": "1. Receber status 403 na exclusão.<br>2. Receber status 200 na consulta da reserva (a reserva continua existindo)."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Exclusão de reserva com sucesso",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "1. Obter token válido via endpoint de autenticação (admin / password123).<br>2. Criar uma reserva.<br>3. Excluir a reserva enviando o token válido no cabeçalho Cookie.",
+  "esperado": "Receber status 201 (ou 200 conforme comportamento da API Restful Booker) ao excluir."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Consulta de reserva após exclusão",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Criar e excluir uma reserva com token válido.<br>2. Tentar consultar a reserva pelo seu ID.",
+  "esperado": "Receber status 404."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Exclusão duplicada da mesma reserva",
+  "tipo": "Borda",
+  "criterio": "Critério 5",
+  "passos": "1. Criar e excluir uma reserva com token válido.<br>2. Tentar excluir a mesma reserva novamente utilizando token válido.",
+  "esperado": "Receber status 4xx (ex: 405 Method Not Allowed ou 404 Not Found) e garantir que nenhuma outra reserva foi afetada."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Listagem por nome após exclusão",
+  "tipo": "Positivo",
+  "criterio": "Critério 6",
+  "passos": "1. Criar uma reserva com um nome único (ex: 'UniqueNameDeleteTest').<br>2. Excluir a reserva.<br>3. Listar reservas filtrando pelo parâmetro de nome único.",
+  "esperado": "A lista retornada deve estar vazia."
+ }
+]

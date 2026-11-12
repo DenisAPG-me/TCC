@@ -1,0 +1,20 @@
+[
+ "A aplicação é web (SPA). A URL base é `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`. A página inicial lista os produtos.",
+ "Os elementos expõem o atributo `data-test`. Por isso, `get_by_test_id` é configurado para esse atributo com `playwright.selectors.set_test_id_attribute(\"data-test\")`.",
+ "Os seletores deduzidos são estes:",
+ "campo de busca: `search-query`; botão de busca: `search-submit`",
+ "título do produto na listagem: `product-name`",
+ "preço unitário na página do produto: `unit-price`",
+ "campo de quantidade na página do produto: `quantity`",
+ "botão \"Add to cart\": role button com o nome \"Add to cart\"",
+ "link do carrinho no menu: `nav-cart`; indicador de quantidade do carrinho: `cart-quantity`",
+ "no carrinho: `product-quantity`, `product-price`, `line-price` e `cart-total`",
+ "Os produtos são localizados pela busca da página inicial, porque podem não aparecer na primeira página da listagem. O título é comparado de forma exata, para não confundir \"Claw Hammer\" com variantes de nome parecido.",
+ "O carrinho fica na rota `/checkout`, aberta pelo link `nav-cart`.",
+ "Os preços são exibidos com duas casas decimais, com ou sem o símbolo `$`. Os valores são extraídos por expressão regular.",
+ "A alteração de quantidade no carrinho é aplicada ao sair do campo (evento `change`, disparado com Tab). Os totais são recalculados sem recarregar a página.",
+ "As mensagens de confirmação e de erro aparecem como toast, com o texto exato informado na User Story.",
+ "Cada teste usa um contexto novo do pytest-playwright, então o carrinho começa vazio.",
+ "O \"Thor Hammer\" permite adicionar 1 unidade. A mensagem do CA4 (\"only have one\") implica isso.",
+ "Ambos os produtos estão disponíveis em estoque."
+]

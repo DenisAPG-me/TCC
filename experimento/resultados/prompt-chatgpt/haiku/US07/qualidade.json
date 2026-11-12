@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos, helpers",
+  "estrutura": "Fixtures com limpeza, builders de payload",
+  "assercoes": "Compara corpo inteiro e status",
+  "espera": "Timeout; nomes aleatórios sem UUID",
+  "manutenibilidade": "Constantes, limpeza via DELETE, ordem independente"
+ }
+}

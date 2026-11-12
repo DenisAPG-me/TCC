@@ -1,0 +1,223 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Excluir reserva sem token é recusado | Negativo | CA1 | Criar reserva com nome único; Enviar DELETE /booking/{id} sem cabeçalho Cookie nem Authorization; Consultar GET /booking/{id} | DELETE retorna 403; GET retorna 200 com o mesmo firstname e lastname |
+| CT02 | Excluir reserva com token inválido é recusado | Negativo | CA2 | Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token=token_invalido_inexistente; Consultar GET /booking/{id} | DELETE retorna 403; GET retorna 200 com os dados originais da reserva |
+| CT03 | Excluir reserva com token vazio é recusado | Borda | CA2 | Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token= (vazio); Consultar GET /booking/{id} | DELETE retorna 403; GET retorna 200 |
+| CT04 | Credenciais inválidas não geram token capaz de excluir | Borda | CA2, CA3 | Criar reserva com nome único; Autenticar em POST /auth com admin e senha errada; Tentar DELETE /booking/{id} com o valor retornado como token; Consultar GET /booking/{id} | POST /auth não retorna campo token; DELETE retorna 403; GET retorna 200 |
+| CT05 | Excluir reserva com token válido | Positivo | CA3 | Autenticar em POST /auth com admin/password123; Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token={token} | POST /auth retorna 200 com token não vazio; DELETE retorna 201 |
+| CT06 | Consultar reserva excluída retorna 404 | Positivo | CA4 | Criar reserva; Obter token válido; Excluir reserva (201); Enviar GET /booking/{id} | GET retorna 404 |
+| CT07 | Excluir novamente reserva já excluída retorna erro 4xx sem afetar outras | Negativo | CA5 | Criar reserva A e reserva B com nomes únicos; Obter token válido; Excluir A (201); Excluir A novamente com token válido; Consultar GET /booking/{B} | Segundo DELETE retorna status entre 400 e 499; GET de B retorna 200 com dados inalterados |
+| CT08 | Excluir identificador inexistente com token válido retorna 4xx | Borda | CA5 | Criar reserva de controle; Obter token válido; Enviar DELETE /booking/999999999; Consultar GET da reserva de controle | DELETE retorna status entre 400 e 499; reserva de controle retorna 200 |
+| CT09 | Excluir uma reserva não afeta outra reserva | Borda | CA3, CA5 | Criar reservas A e B com nomes únicos; Obter token válido; Excluir A (201); Consultar GET /booking/{B}; Filtrar GET /booking pelo nome de B | GET de B retorna 200 com dados idênticos aos criados; filtro pelo nome de B contém o id de B |
+| CT10 | Filtro pelo nome único encontra a reserva antes da exclusão | Positivo | CA6 | Criar reserva com nome único; Enviar GET /booking?firstname={nome}&lastname={sobrenome} | Retorna 200 com lista contendo exatamente o id da reserva criada |
+| CT11 | Filtro pelo nome único após a exclusão retorna lista vazia | Positivo | CA6 | Criar reserva com nome único; Obter token válido; Excluir reserva (201); Enviar GET /booking?firstname={nome}&lastname={sobrenome} | Retorna 200 com lista vazia |
+
+## SUPOSIÇÕES
+
+- A User Story é de API REST; a tecnologia escolhida é Python + pytest + requests, e os requisitos técnicos de Playwright não se aplicam.
+- Autenticação via `POST /auth` com corpo JSON `{"username": "admin", "password": "password123"}`, retornando 200 e `{"token": "<valor>"}`.
+- Com credenciais inválidas, `POST /auth` retorna 200 com `{"reason": "Bad credentials"}` e sem o campo `token`.
+- O token é enviado no cabeçalho `Cookie: token=<valor>`.
+- Criação de reserva via `POST /booking` com cabeçalhos `Content-Type: application/json` e `Accept: application/json`, corpo com `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`. A resposta tem o formato `{"bookingid": <id>, "booking": {...}}`.
+- Consulta via `GET /booking/{id}`: retorna 200 quando a reserva existe e 404 após a exclusão.
+- Exclusão via `DELETE /booking/{id}`: retorna 201 com token válido e 403 sem token, com token inválido ou com token vazio.
+- Uma segunda exclusão ou a exclusão de um id inexistente retorna um status 4xx (no sistema real, provavelmente 405). Por isso o teste valida apenas a faixa 400–499.
+- O id `999999999` é tratado como inexistente.
+- Listagem filtrada via `GET /booking?firstname=<x>&lastname=<y>`, retornando 200 e uma lista de objetos `{"bookingid": <id>}`.
+- Os nomes únicos são gerados com `uuid4` (prefixos "QA" e "Del") para isolar os testes de dados de terceiros na API pública.
+- Cada teste cria as próprias reservas por meio de uma fixture fábrica. No teardown, as reservas ainda existentes são excluídas e erros são ignorados.
+- O timeout é de 15 segundos em todas as requisições.
+
+## SCRIPT
+
+```python
+import uuid
+
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+USERNAME = "admin"
+PASSWORD = "password123"
+WRONG_PASSWORD = "senha_errada_123"
+INVALID_TOKEN = "token_invalido_inexistente"
+NONEXISTENT_ID = 999999999
+TIMEOUT = 15
+
+JSON_HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+
+BOOKING_TEMPLATE = {
+    "totalprice": 250,
+    "depositpaid": True,
+    "bookingdates": {"checkin": "2026-11-10", "checkout": "2026-11-15"},
+    "additionalneeds": "Breakfast",
+}
+
+
+def obter_token(username=USERNAME, password=PASSWORD):
+    return requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": username, "password": password},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+
+
+def token_valido():
+    resp = obter_token()
+    assert resp.status_code == 200
+    token = resp.json().get("token")
+    assert token
+    return token
+
+
+def excluir(booking_id, token=None, cookie=None):
+    headers = {"Content-Type": "application/json"}
+    if cookie is not None:
+        headers["Cookie"] = cookie
+    elif token is not None:
+        headers["Cookie"] = f"token={token}"
+    return requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers, timeout=TIMEOUT)
+
+
+def consultar(booking_id):
+    return requests.get(
+        f"{BASE_URL}/booking/{booking_id}", headers={"Accept": "application/json"}, timeout=TIMEOUT
+    )
+
+
+def filtrar(firstname, lastname):
+    return requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": firstname, "lastname": lastname},
+        headers={"Accept": "application/json"},
+        timeout=TIMEOUT,
+    )
+
+
+@pytest.fixture
+def criar_reserva():
+    criadas = []
+
+    def _criar():
+        sufixo = uuid.uuid4().hex[:12]
+        payload = dict(BOOKING_TEMPLATE, firstname=f"QA{sufixo}", lastname=f"Del{sufixo}")
+        resp = requests.post(f"{BASE_URL}/booking", json=payload, headers=JSON_HEADERS, timeout=TIMEOUT)
+        assert resp.status_code == 200
+        booking_id = resp.json()["bookingid"]
+        criadas.append(booking_id)
+        return {"id": booking_id, "payload": payload}
+
+    yield _criar
+
+    try:
+        token = obter_token().json().get("token")
+        for booking_id in criadas:
+            excluir(booking_id, token=token)
+    except requests.RequestException:
+        pass
+
+
+def assert_reserva_intacta(reserva):
+    resp = consultar(reserva["id"])
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["firstname"] == reserva["payload"]["firstname"]
+    assert body["lastname"] == reserva["payload"]["lastname"]
+    assert body["totalprice"] == reserva["payload"]["totalprice"]
+    assert body["bookingdates"] == reserva["payload"]["bookingdates"]
+
+
+def test_ct01_excluir_sem_token_recusado(criar_reserva):
+    reserva = criar_reserva()
+    resp = excluir(reserva["id"])
+    assert resp.status_code == 403
+    assert_reserva_intacta(reserva)
+
+
+def test_ct02_excluir_com_token_invalido_recusado(criar_reserva):
+    reserva = criar_reserva()
+    resp = excluir(reserva["id"], token=INVALID_TOKEN)
+    assert resp.status_code == 403
+    assert_reserva_intacta(reserva)
+
+
+def test_ct03_excluir_com_token_vazio_recusado(criar_reserva):
+    reserva = criar_reserva()
+    resp = excluir(reserva["id"], cookie="token=")
+    assert resp.status_code == 403
+    assert consultar(reserva["id"]).status_code == 200
+
+
+def test_ct04_credenciais_invalidas_nao_geram_token_para_excluir(criar_reserva):
+    reserva = criar_reserva()
+    auth = obter_token(password=WRONG_PASSWORD)
+    body = auth.json()
+    assert "token" not in body
+    resp = excluir(reserva["id"], token=body.get("token", ""))
+    assert resp.status_code == 403
+    assert consultar(reserva["id"]).status_code == 200
+
+
+def test_ct05_excluir_com_token_valido(criar_reserva):
+    token = token_valido()
+    reserva = criar_reserva()
+    resp = excluir(reserva["id"], token=token)
+    assert resp.status_code == 201
+
+
+def test_ct06_consultar_reserva_excluida_retorna_404(criar_reserva):
+    reserva = criar_reserva()
+    token = token_valido()
+    assert excluir(reserva["id"], token=token).status_code == 201
+    assert consultar(reserva["id"]).status_code == 404
+
+
+def test_ct07_excluir_novamente_retorna_4xx_sem_afetar_outras(criar_reserva):
+    reserva_a = criar_reserva()
+    reserva_b = criar_reserva()
+    token = token_valido()
+    assert excluir(reserva_a["id"], token=token).status_code == 201
+    resp = excluir(reserva_a["id"], token=token)
+    assert 400 <= resp.status_code < 500
+    assert_reserva_intacta(reserva_b)
+
+
+def test_ct08_excluir_id_inexistente_retorna_4xx(criar_reserva):
+    controle = criar_reserva()
+    token = token_valido()
+    resp = excluir(NONEXISTENT_ID, token=token)
+    assert 400 <= resp.status_code < 500
+    assert_reserva_intacta(controle)
+
+
+def test_ct09_excluir_reserva_nao_afeta_outra(criar_reserva):
+    reserva_a = criar_reserva()
+    reserva_b = criar_reserva()
+    token = token_valido()
+    assert excluir(reserva_a["id"], token=token).status_code == 201
+    assert_reserva_intacta(reserva_b)
+    resp = filtrar(reserva_b["payload"]["firstname"], reserva_b["payload"]["lastname"])
+    assert resp.status_code == 200
+    ids = [item["bookingid"] for item in resp.json()]
+    assert reserva_b["id"] in ids
+
+
+def test_ct10_filtro_por_nome_unico_encontra_reserva_antes_da_exclusao(criar_reserva):
+    reserva = criar_reserva()
+    resp = filtrar(reserva["payload"]["firstname"], reserva["payload"]["lastname"])
+    assert resp.status_code == 200
+    ids = [item["bookingid"] for item in resp.json()]
+    assert ids == [reserva["id"]]
+
+
+def test_ct11_filtro_por_nome_unico_apos_exclusao_retorna_vazio(criar_reserva):
+    reserva = criar_reserva()
+    token = token_valido()
+    assert excluir(reserva["id"], token=token).status_code == 201
+    resp = filtrar(reserva["payload"]["firstname"], reserva["payload"]["lastname"])
+    assert resp.status_code == 200
+    assert resp.json() == []
+```

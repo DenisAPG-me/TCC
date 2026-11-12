@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Busca por \"hammer\" lista somente produtos com \"hammer\" no nome",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; digitar \"hammer\" no campo de busca; pressionar Enter; verificar o texto de busca; verificar os nomes listados",
+  "esperado": "A página indica \"Searched for: hammer\"; há ao menos um produto listado; todos os nomes contêm \"hammer\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Busca por termo inexistente exibe mensagem e nenhum produto",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; digitar \"zzzzxx\" no campo de busca; pressionar Enter",
+  "esperado": "A mensagem \"There are no products found.\" é exibida; nenhum produto é listado"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Ordenação por preço do menor para o maior",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; aguardar produtos; selecionar \"Price (Low - High)\" na ordenação; ler os preços da página",
+  "esperado": "Os preços da página estão em ordem crescente"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Ordenação por nome de Z a A",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar a página inicial; aguardar produtos; selecionar \"Name (Z - A)\" na ordenação; ler os nomes da página",
+  "esperado": "Os nomes da página estão em ordem alfabética decrescente"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Busca ignora diferença entre maiúsculas e minúsculas",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; digitar \"HAMMER\" no campo de busca; pressionar Enter; verificar os nomes listados",
+  "esperado": "Há produtos listados; todos os nomes contêm \"hammer\" sem distinção de caixa"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Ordenação por preço aplicada sobre resultados de busca",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; buscar \"hammer\"; selecionar \"Price (Low - High)\"; ler os preços da página",
+  "esperado": "Há produtos listados; os preços estão em ordem crescente"
+ }
+]

@@ -1,0 +1,164 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Login com usuário e senha vazios | negativo | CA1 | Acessar /admin; deixar usuário e senha vazios; clicar em Login | Mensagem "Invalid credentials" exibida; formulário de login continua visível; menu administrativo ausente |
+| TC02 | Login com usuário "admin" e senha incorreta | negativo | CA2 | Acessar /admin; informar "admin" / "wrongpass"; clicar em Login | Mensagem "Invalid credentials" exibida; formulário de login continua visível |
+| TC03 | Login com credenciais válidas | positivo | CA3 | Acessar /admin; informar "admin" / "password"; clicar em Login | Redirecionado para /admin/rooms; quarto 101 do tipo Single listado; menu exibe Rooms, Report, Branding e Messages |
+| TC04 | Logout retorna à página inicial pública | positivo | CA4 | Fazer login válido; clicar em Logout | URL é a página inicial pública (/); formulário de login e menu administrativo ausentes |
+| TC05 | Acesso direto à lista de quartos após logout | negativo | CA5 | Fazer login válido; clicar em Logout; acessar /admin/rooms diretamente | Tela de login exibida; lista de quartos e menu administrativo ausentes |
+| TC06 | Login com usuário "admin" e senha vazia | borda | CA1, CA2 | Acessar /admin; informar "admin" e senha vazia; clicar em Login | Mensagem "Invalid credentials" exibida; formulário de login continua visível |
+| TC07 | Login com senha correta em maiúsculas (sensibilidade a caixa) | borda | CA2 | Acessar /admin; informar "admin" / "PASSWORD"; clicar em Login | Mensagem "Invalid credentials" exibida; formulário de login continua visível |
+| TC08 | Login com usuário vazio e senha correta | borda | CA1, CA2 | Acessar /admin; deixar usuário vazio e informar "password"; clicar em Login | Mensagem "Invalid credentials" exibida; formulário de login continua visível |
+| TC09 | Acesso direto à lista de quartos sem nunca ter autenticado | borda | CA5 | Em sessão nova, acessar /admin/rooms diretamente | Tela de login exibida; lista de quartos e menu administrativo ausentes |
+
+SUPOSIÇÕES
+
+- A URL base é `https://automationintesting.online/`, definida na constante `BASE_URL`; se `--base-url` for informado ao pytest, ele prevalece.
+- A tela de login do painel fica em `/admin` e a lista de quartos do painel em `/admin/rooms`.
+- Após login válido, o sistema redireciona para uma URL que contém `/admin/rooms`.
+- O campo de usuário é localizável pelo rótulo "Username" ou, alternativamente, pelo id `#username`; o campo de senha pelo rótulo "Password" ou pelo id `#password`.
+- O botão de envio do login é um botão com nome acessível "Login".
+- A mensagem de erro contém exatamente o texto "Invalid credentials" e fica visível na própria tela de login.
+- Os campos vazios não são bloqueados por validação nativa do navegador, permitindo o envio do formulário (conforme CA1).
+- O menu administrativo é composto por links com nomes acessíveis "Rooms", "Report", "Branding" e "Messages".
+- O controle de Logout é um botão ou link com nome acessível "Logout".
+- Na lista de quartos, o número "101" e o tipo "Single" aparecem como textos exatos e visíveis.
+- A página inicial pública corresponde à URL base (com ou sem barra final ou fragmento `#`).
+- A senha é sensível a maiúsculas/minúsculas, portanto "PASSWORD" é tratada como senha incorreta.
+- A senha incorreta usada nos testes negativos é "wrongpass".
+- Cada teste recebe um contexto de navegador novo (comportamento padrão do pytest-playwright), sem sessão autenticada prévia.
+- Os dados de demonstração (conta admin/password e quarto 101 Single) existem e não foram alterados no ambiente.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_PATH = "/admin"
+ROOMS_PATH = "/admin/rooms"
+VALID_USER = "admin"
+VALID_PASSWORD = "password"
+WRONG_PASSWORD = "wrongpass"
+INVALID_CREDENTIALS_MSG = "Invalid credentials"
+ADMIN_MENU_ITEMS = ["Rooms", "Report", "Branding", "Messages"]
+
+
+@pytest.fixture
+def app_url(base_url):
+    return (base_url or BASE_URL).rstrip("/")
+
+
+def username_field(page: Page):
+    return page.get_by_label("Username").or_(page.locator("#username"))
+
+
+def password_field(page: Page):
+    return page.get_by_label("Password").or_(page.locator("#password"))
+
+
+def login_button(page: Page):
+    return page.get_by_role("button", name="Login", exact=True)
+
+
+def logout_control(page: Page):
+    return page.get_by_role("button", name="Logout").or_(
+        page.get_by_role("link", name="Logout")
+    )
+
+
+def open_login(page: Page, app_url: str):
+    page.goto(f"{app_url}{ADMIN_PATH}")
+    expect(login_button(page)).to_be_visible()
+
+
+def submit_login(page: Page, username: str, password: str):
+    username_field(page).first.fill(username)
+    password_field(page).first.fill(password)
+    login_button(page).click()
+
+
+def login_as_admin(page: Page, app_url: str):
+    open_login(page, app_url)
+    submit_login(page, VALID_USER, VALID_PASSWORD)
+    expect(page).to_have_url(re.compile(re.escape(ROOMS_PATH)))
+
+
+def expect_login_screen(page: Page):
+    expect(username_field(page).first).to_be_visible()
+    expect(password_field(page).first).to_be_visible()
+    expect(login_button(page)).to_be_visible()
+
+
+def expect_invalid_credentials(page: Page):
+    expect(page.get_by_text(INVALID_CREDENTIALS_MSG)).to_be_visible()
+    expect_login_screen(page)
+    expect(page.get_by_role("link", name="Messages", exact=True)).to_have_count(0)
+
+
+def test_TC01_login_com_usuario_e_senha_vazios(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, "", "")
+    expect_invalid_credentials(page)
+
+
+def test_TC02_login_admin_com_senha_incorreta(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, VALID_USER, WRONG_PASSWORD)
+    expect_invalid_credentials(page)
+
+
+def test_TC03_login_valido_exibe_lista_de_quartos_e_menu(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, VALID_USER, VALID_PASSWORD)
+    expect(page).to_have_url(re.compile(re.escape(ROOMS_PATH)))
+    expect(page.get_by_text("101", exact=True).first).to_be_visible()
+    expect(page.get_by_text("Single", exact=True).first).to_be_visible()
+    for item in ADMIN_MENU_ITEMS:
+        expect(page.get_by_role("link", name=item, exact=True).first).to_be_visible()
+
+
+def test_TC04_logout_retorna_para_pagina_inicial_publica(page: Page, app_url):
+    login_as_admin(page, app_url)
+    logout_control(page).first.click()
+    expect(page).to_have_url(re.compile(rf"^{re.escape(app_url)}/?(#.*)?$"))
+    expect(login_button(page)).to_have_count(0)
+    expect(page.get_by_role("link", name="Messages", exact=True)).to_have_count(0)
+
+
+def test_TC05_acesso_direto_a_lista_de_quartos_apos_logout(page: Page, app_url):
+    login_as_admin(page, app_url)
+    logout_control(page).first.click()
+    expect(page).to_have_url(re.compile(rf"^{re.escape(app_url)}/?(#.*)?$"))
+    page.goto(f"{app_url}{ROOMS_PATH}")
+    expect_login_screen(page)
+    expect(page.get_by_role("link", name="Messages", exact=True)).to_have_count(0)
+    expect(logout_control(page)).to_have_count(0)
+
+
+def test_TC06_login_admin_com_senha_vazia(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, VALID_USER, "")
+    expect_invalid_credentials(page)
+
+
+def test_TC07_login_com_senha_em_maiusculas(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, VALID_USER, VALID_PASSWORD.upper())
+    expect_invalid_credentials(page)
+
+
+def test_TC08_login_com_usuario_vazio_e_senha_correta(page: Page, app_url):
+    open_login(page, app_url)
+    submit_login(page, "", VALID_PASSWORD)
+    expect_invalid_credentials(page)
+
+
+def test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao(page: Page, app_url):
+    page.goto(f"{app_url}{ROOMS_PATH}")
+    expect_login_screen(page)
+    expect(page.get_by_role("link", name="Messages", exact=True)).to_have_count(0)
+    expect(logout_control(page)).to_have_count(0)
+```

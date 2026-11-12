@@ -1,0 +1,15 @@
+[
+ "Tecnologia: Python + pytest + Playwright, usando o plugin oficial pytest-playwright e a fixture `page`. A User Story é de interface web e o foco dos critérios é o formulário na página.",
+ "Navegador: Chromium em modo headless, conforme o padrão do plugin pytest-playwright.",
+ "Base URL: `https://automationintesting.online/`, definida na constante `BASE_URL`. O formulário de contato fica na página inicial.",
+ "Seletores: os campos são localizados por `get_by_label` com rótulos exatos \"Name\", \"Email\", \"Phone\", \"Subject\" e \"Message\". O botão é localizado por `get_by_role(\"button\", name=\"Submit\")`.",
+ "Mensagens de campo obrigatório: deduzidas no padrão \"<Campo> may not be blank\" (\"Name\", \"Email\", \"Phone\", \"Subject\", \"Message\"). A User Story não traz o texto exato.",
+ "Mensagens de validação: as strings de tamanho e de e-mail são as da User Story. A verificação de e-mail usa a substring \"must be a well-formed email address\", para aceitar qualquer prefixo de campo.",
+ "Sucesso: a confirmação exibe \"Thanks for getting in touch <nome>!\" e o assunto informado, na mesma página após o envio.",
+ "Dados de teste: nome \"Maria Teste\"; e-mail \"maria.teste@example.com\"; telefone válido \"11999999999\"; assunto válido \"Dúvida sobre reserva\"; mensagem válida de 52 caracteres.",
+ "Limites: telefone de 10, 11, 21 e 22 caracteres; assunto de 4, 5, 100 e 101 caracteres; mensagem de 19, 20, 2000 e 2001 caracteres. Os casos de borda válidos são confirmados pela mensagem de sucesso, que comprova também a ausência de erros.",
+ "Asserções de ausência: não são usadas, porque poderiam passar antes da renderização. A validação de ausência de erro é feita pela confirmação de sucesso.",
+ "Isolamento: cada teste recebe uma `page` nova do plugin e navega para `BASE_URL`. Não há dependência entre testes.",
+ "Espera: as asserções `expect` aguardam automaticamente. Não há `time.sleep`, `skip` ou `xfail`.",
+ "Execução: o script é executado com `pytest <arquivo>.py`. Para navegador visível, usar `--headed`."
+]

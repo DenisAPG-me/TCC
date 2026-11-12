@@ -1,0 +1,9 @@
+[
+ "A URL base é `https://automationintesting.online/`; o login está em `/admin` e a lista de quartos autenticada em `/admin/rooms`.",
+ "O formulário de login tem campos acessíveis com os nomes `Username` e `Password`, além de um botão `Login`.",
+ "O formulário permite enviar campos vazios e não bloqueia o envio por validação HTML do navegador.",
+ "`Invalid credentials`, `Rooms`, `Report`, `Branding`, `Messages` e `Logout` são textos visíveis na interface e podem ser localizados por papel ou texto.",
+ "O quarto 101 e o tipo Single aparecem juntos em um mesmo texto ou contêiner visível.",
+ "Após logout, a página pública corresponde à URL base; o acesso direto a `/admin/rooms` sem autenticação redireciona para `/admin`.",
+ "Cada teste é independente e usa um contexto de navegador limpo fornecido pelo plugin `pytest-playwright`. A configuração do plugin é responsável por disponibilizar a fixture `page` e a asserção `expect`."
+]

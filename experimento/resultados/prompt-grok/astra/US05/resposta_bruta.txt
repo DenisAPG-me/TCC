@@ -1,0 +1,180 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Login com ambos os campos vazios | borda | 1 | Acessar o login; deixar usuário e senha vazios; enviar. | Exibe “Invalid credentials” e permanece na tela de login. |
+| TC02 | Login com senha incorreta | negativo | 2 | Acessar o login; preencher `admin` e `wrong-password`; enviar. | Exibe “Invalid credentials”. |
+| TC03 | Login válido e conteúdo do painel | positivo | 3 | Acessar o login; preencher `admin` e `password`; enviar; verificar quartos e menu. | Abre a lista de quartos; a mesma linha contém quarto 101 e tipo Single; exibe Rooms, Report, Branding e Messages. |
+| TC04 | Logout de sessão autenticada | positivo | 4 | Fazer login válido; clicar em Logout. | Retorna à página inicial pública da pousada. |
+| TC05 | Acesso direto à lista de quartos após logout | negativo | 5 | Fazer login válido; fazer logout; navegar diretamente para a URL da lista de quartos. | Exibe novamente a tela de login. |
+| TC06 | Login com usuário vazio | borda | 1 — extensão por suposição | Acessar o login; deixar usuário vazio; preencher `password`; enviar. | Por suposição, exibe “Invalid credentials” e permanece na tela de login. |
+| TC07 | Login com senha vazia | borda | 1 — extensão por suposição | Acessar o login; preencher `admin`; deixar senha vazia; enviar. | Por suposição, exibe “Invalid credentials” e permanece na tela de login. |
+
+SUPOSIÇÕES
+
+- Nenhum sistema, documentação, código ou seletor real foi consultado. O código é executável, mas não foi validado contra a aplicação; URLs e locators inferidos precisam ser confirmados.
+- Trata-se de uma interface web. São necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, exigido pelos requisitos técnicos, além do navegador instalado pelo Playwright. Não há dependências adicionais.
+- O arquivo pode ser salvo como `test_admin.py` e executado com `pytest test_admin.py`. A URL base está na constante `BASE_URL`.
+- `/admin` é a tela de login informada. Supõe-se que `/admin/rooms` seja a rota da lista de quartos e `/` seja a página inicial pública. As verificações de URL aceitam barra final opcional, mas não parâmetros ou fragmentos.
+- Os campos têm rótulos acessíveis exatos `Username` e `Password`. O envio usa um botão com nome acessível exato `Login`.
+- Rooms, Report, Branding, Messages e Logout são links com esses nomes acessíveis exatos, únicos e visíveis quando pertinentes.
+- A lista de quartos possui semântica de tabela: uma linha com uma célula de texto exato `101` e, na mesma linha, outra célula de texto exato `Single`. O quarto está disponível sem paginação ou filtros adicionais.
+- A mensagem de erro possui texto exato `Invalid credentials` e é identificável por um único elemento visível.
+- O formulário permite enviar campos vazios, sem bloqueio pela validação nativa do navegador, conforme necessário para observar o resultado do critério 1.
+- `wrong-password` é uma senha inválida para `admin`. Nos casos com apenas um campo vazio, supõe-se o mesmo erro e permanência no login; esses comportamentos são extensões propostas, não exigências explícitas da história.
+- A conta de demonstração permanece válida durante todos os testes, sem CAPTCHA, autenticação adicional ou bloqueio causado pelas tentativas inválidas.
+- Após logout, a URL pública e a ausência do link Logout são usadas como evidências do retorno público. Não se presume nenhum título ou conteúdo público não descrito.
+- Cada teste recebe a fixture `page` do plugin, com contexto isolado e sem autenticação previamente carregada. Os testes não dependem da ordem de execução.
+- As navegações devem concluir em até 30 segundos; as condições verificadas por `expect`, em até 10 segundos. Esses limites são escolhas técnicas, não requisitos de desempenho.
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://automationintesting.online"
+LOGIN_URL = f"{BASE_URL}/admin"
+ROOMS_URL = f"{BASE_URL}/admin/rooms"
+HOME_URL = f"{BASE_URL}/"
+
+VALID_USERNAME = "admin"
+VALID_PASSWORD = "password"
+INVALID_PASSWORD = "wrong-password"
+
+UI_TIMEOUT_MS = 10_000
+NAVIGATION_TIMEOUT_MS = 30_000
+
+
+def url_pattern(url: str) -> re.Pattern:
+    """Aceita somente a URL esperada, com barra final opcional."""
+    return re.compile(rf"^{re.escape(url.rstrip('/'))}/?$")
+
+
+def assert_login_visible(page: Page) -> None:
+    expect(page.get_by_label("Username", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+    expect(page.get_by_label("Password", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+    expect(page.get_by_role("button", name="Login", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+
+
+def open_login(page: Page) -> None:
+    page.goto(LOGIN_URL, timeout=NAVIGATION_TIMEOUT_MS)
+    expect(page).to_have_url(url_pattern(LOGIN_URL), timeout=UI_TIMEOUT_MS)
+    assert_login_visible(page)
+
+
+def submit_credentials(page: Page, username: str, password: str) -> None:
+    page.get_by_label("Username", exact=True).fill(
+        username, timeout=UI_TIMEOUT_MS
+    )
+    page.get_by_label("Password", exact=True).fill(
+        password, timeout=UI_TIMEOUT_MS
+    )
+    page.get_by_role("button", name="Login", exact=True).click(
+        timeout=UI_TIMEOUT_MS
+    )
+
+
+def assert_invalid_credentials(page: Page) -> None:
+    expect(
+        page.get_by_text("Invalid credentials", exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def assert_still_on_login(page: Page) -> None:
+    expect(page).to_have_url(url_pattern(LOGIN_URL), timeout=UI_TIMEOUT_MS)
+    assert_login_visible(page)
+
+
+def login_successfully(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, VALID_USERNAME, VALID_PASSWORD)
+    expect(page).to_have_url(url_pattern(ROOMS_URL), timeout=UI_TIMEOUT_MS)
+    expect(page.get_by_role("link", name="Logout", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+
+
+def logout_and_assert_public_home(page: Page) -> None:
+    page.get_by_role("link", name="Logout", exact=True).click(
+        timeout=UI_TIMEOUT_MS
+    )
+    expect(page).to_have_url(url_pattern(HOME_URL), timeout=UI_TIMEOUT_MS)
+    expect(page.get_by_role("link", name="Logout", exact=True)).to_have_count(
+        0, timeout=UI_TIMEOUT_MS
+    )
+
+
+def test_TC01_login_com_ambos_os_campos_vazios(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, "", "")
+    assert_invalid_credentials(page)
+    assert_still_on_login(page)
+
+
+def test_TC02_login_com_senha_incorreta(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, VALID_USERNAME, INVALID_PASSWORD)
+    assert_invalid_credentials(page)
+
+
+def test_TC03_login_valido_exibe_quarto_e_menu(page: Page) -> None:
+    login_successfully(page)
+
+    room_row = page.get_by_role("row").filter(
+        has=page.get_by_role("cell", name="101", exact=True)
+    )
+    expect(room_row).to_have_count(1, timeout=UI_TIMEOUT_MS)
+    expect(room_row).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        room_row.get_by_role("cell", name="101", exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        room_row.get_by_role("cell", name="Single", exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+    for menu_name in ("Rooms", "Report", "Branding", "Messages"):
+        expect(
+            page.get_by_role("link", name=menu_name, exact=True)
+        ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def test_TC04_logout_retorna_a_pagina_publica(page: Page) -> None:
+    login_successfully(page)
+    logout_and_assert_public_home(page)
+
+
+def test_TC05_acesso_direto_apos_logout_exibe_login(page: Page) -> None:
+    login_successfully(page)
+    logout_and_assert_public_home(page)
+
+    page.goto(ROOMS_URL, timeout=NAVIGATION_TIMEOUT_MS)
+
+    # O critério exige a tela de login, sem definir sua URL após o acesso.
+    assert_login_visible(page)
+    expect(page.get_by_role("link", name="Logout", exact=True)).to_have_count(
+        0, timeout=UI_TIMEOUT_MS
+    )
+
+
+def test_TC06_login_com_usuario_vazio(page: Page) -> None:
+    # Extensão proposta: comportamento não explicitado na User Story.
+    open_login(page)
+    submit_credentials(page, "", VALID_PASSWORD)
+    assert_invalid_credentials(page)
+    assert_still_on_login(page)
+
+
+def test_TC07_login_com_senha_vazia(page: Page) -> None:
+    # Extensão proposta: comportamento não explicitado na User Story.
+    open_login(page)
+    submit_credentials(page, VALID_USERNAME, "")
+    assert_invalid_credentials(page)
+    assert_still_on_login(page)
+```

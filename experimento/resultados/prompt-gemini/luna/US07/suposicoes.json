@@ -1,0 +1,10 @@
+[
+ "A User Story descreve uma API REST; portanto, os testes usam `pytest` e `requests`, sem seletores de interface.",
+ "A URL base é `https://restful-booker.herokuapp.com`.",
+ "A criação usa `POST /booking`, com JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.",
+ "A consulta usa `GET /booking/{bookingid}` e retorna os campos da reserva diretamente no JSON.",
+ "A listagem filtrada usa `GET /booking?firstname={nome}&lastname={sobrenome}` e retorna uma lista de objetos contendo `bookingid`.",
+ "Os nomes dos campos seguem o formato convencional da API Restful-Booker. Datas usam `YYYY-MM-DD`; `totalprice` é numérico e `depositpaid` é booleano.",
+ "Os critérios não especificam rejeição de payload inválido nem outros valores de borda; não foram inferidos testes adicionais para esses comportamentos.",
+ "Cada teste cria seus próprios dados. Os nomes para o filtro são únicos dentro da execução; os registros criados permanecem no serviço, pois a história não especifica limpeza ou exclusão."
+]

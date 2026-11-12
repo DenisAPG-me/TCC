@@ -1,0 +1,24 @@
+{
+ "model": "haiku",
+ "us": "US07",
+ "cmd": [
+  "claude",
+  "-p",
+  "--model",
+  "haiku",
+  "--tools",
+  "",
+  "--output-format",
+  "json"
+ ],
+ "returncode": 0,
+ "tempo_s": 47.16,
+ "tokens": {
+  "input": 8835,
+  "output": 11981,
+  "cost_usd": 0.007176279999999999
+ },
+ "n_casos_extraidos": 8,
+ "tem_codigo": true,
+ "stderr_tail": ""
+}

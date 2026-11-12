@@ -1,0 +1,9 @@
+[
+ "A API usa `POST /booking` para criar, `GET /booking/{id}` para consultar e `GET /booking?firstname=...&lastname=...` para filtrar reservas.",
+ "Os corpos e campos seguem o formato esperado pelo serviço: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.",
+ "O identificador retornado é disponibilizado em `bookingid`, e a resposta da criação contém `booking`.",
+ "Datas válidas são representadas como `YYYY-MM-DD`; o check-out ocorre depois do check-in.",
+ "A API está disponível na URL base fornecida e não exige autenticação para essas operações.",
+ "Cada teste cria sua própria reserva; para o filtro, o nome e sobrenome incluem um sufixo aleatório para reduzir colisões.",
+ "Não foram especificados casos de rejeição de campos inválidos; os casos negativos limitam-se ao identificador inexistente descrito na história."
+]

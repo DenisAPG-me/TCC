@@ -1,0 +1,170 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Autenticar com credenciais válidas | Positivo | CA1 | Enviar admin e password123 ao endpoint de autenticação; validar status e token | Status 200 e token presente, não vazio e em formato de texto |
+| CT02 | Rejeitar credenciais inválidas | Negativo | CA2 | Enviar credenciais inválidas ao endpoint de autenticação; validar o corpo da resposta | Resposta sem token e com motivo Bad credentials |
+| CT03 | Atualizar reserva completa | Positivo | CA3 | Criar reserva de teste; autenticar; atualizar a reserva com payload completo, novo nome e novo preço | Status 200 e resposta contém os novos valores |
+| CT04 | Atualizar parcialmente o sobrenome | Positivo | CA4 | Criar reserva de teste; autenticar; enviar PATCH somente com novo sobrenome | Status 200; sobrenome atualizado e demais campos iguais aos valores originais |
+| CT05 | Atualizar sem token | Negativo | CA5 | Criar reserva de teste; enviar atualização sem cookie de autenticação | Status 403 |
+| CT06 | Atualizar sem campos obrigatórios | Negativo | CA6 | Criar reserva de teste; autenticar; enviar PUT sem um campo obrigatório | Status 400 |
+
+## SUPOSIÇÕES
+
+- A história descreve uma API REST; a automação usa pytest e requests, conforme o foco dos critérios.
+- O endpoint de autenticação é `POST /auth`, com JSON `{"username": "...", "password": "..."}`; o token retornado fica na propriedade `token`.
+- Credenciais inválidas devem retornar JSON com a propriedade `reason` igual a `Bad credentials`, sem propriedade `token`.
+- As reservas são criadas com `POST /booking` e consultadas com `GET /booking/{id}`. A criação não exige autenticação e retorna o identificador em `bookingid`.
+- A atualização completa usa `PUT /booking/{id}`; a parcial usa `PATCH /booking/{id}`. A autenticação da reserva é enviada no cookie `token`.
+- O payload da reserva contém `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.
+- Para CA3, “novo nome” significa novo `firstname`; o preço é atualizado em `totalprice`. Para CA4, somente `lastname` é enviado no PATCH.
+- `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates` são tratados como obrigatórios no PUT; CA6 omite `firstname`.
+- Cada teste cria sua própria reserva para manter independência. Não há endpoint de limpeza pressuposto; as reservas criadas permanecem no ambiente.
+- Todas as requisições usam timeout; os valores de reserva são dados fictícios e datas fixas.
+
+## SCRIPT
+
+```python
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+USERNAME = "admin"
+PASSWORD = "password123"
+INVALID_USERNAME = "invalid-admin"
+INVALID_PASSWORD = "invalid-password"
+TIMEOUT = 10
+
+INITIAL_BOOKING = {
+    "firstname": "QA",
+    "lastname": "Original",
+    "totalprice": 100,
+    "depositpaid": True,
+    "bookingdates": {
+        "checkin": "2026-11-01",
+        "checkout": "2026-11-05",
+    },
+    "additionalneeds": "Breakfast",
+}
+
+
+def _authenticate(username=USERNAME, password=PASSWORD):
+    return requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": username, "password": password},
+        timeout=TIMEOUT,
+    )
+
+
+def _create_booking():
+    response = requests.post(
+        f"{BASE_URL}/booking",
+        json=INITIAL_BOOKING,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200, (
+        f"Booking creation failed: {response.status_code} {response.text}"
+    )
+    booking_id = response.json().get("bookingid")
+    assert booking_id is not None
+    return booking_id
+
+
+def _get_token():
+    response = _authenticate()
+    assert response.status_code == 200
+    token = response.json().get("token")
+    assert isinstance(token, str) and token
+    return token
+
+
+def test_ct01_autenticar_com_credenciais_validas():
+    response = _authenticate()
+
+    assert response.status_code == 200
+    token = response.json().get("token")
+    assert isinstance(token, str)
+    assert token.strip()
+
+
+def test_ct02_rejeitar_credenciais_invalidas():
+    response = _authenticate(INVALID_USERNAME, INVALID_PASSWORD)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_ct03_atualizar_reserva_completa():
+    booking_id = _create_booking()
+    token = _get_token()
+    updated_booking = {
+        **INITIAL_BOOKING,
+        "firstname": "Updated",
+        "totalprice": 250,
+    }
+
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=updated_booking,
+        cookies={"token": token},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["firstname"] == "Updated"
+    assert body["totalprice"] == 250
+
+
+def test_ct04_atualizar_parcialmente_o_sobrenome():
+    booking_id = _create_booking()
+    token = _get_token()
+
+    response = requests.patch(
+        f"{BASE_URL}/booking/{booking_id}",
+        json={"lastname": "Changed"},
+        cookies={"token": token},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["lastname"] == "Changed"
+    assert body["firstname"] == INITIAL_BOOKING["firstname"]
+    assert body["totalprice"] == INITIAL_BOOKING["totalprice"]
+    assert body["depositpaid"] == INITIAL_BOOKING["depositpaid"]
+    assert body["bookingdates"] == INITIAL_BOOKING["bookingdates"]
+    assert body["additionalneeds"] == INITIAL_BOOKING["additionalneeds"]
+
+
+def test_ct05_atualizar_sem_token():
+    booking_id = _create_booking()
+
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json={**INITIAL_BOOKING, "firstname": "NoToken"},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 403
+
+
+def test_ct06_atualizar_sem_campo_obrigatorio():
+    booking_id = _create_booking()
+    token = _get_token()
+    incomplete_booking = {
+        key: value
+        for key, value in INITIAL_BOOKING.items()
+        if key != "firstname"
+    }
+
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=incomplete_booking,
+        cookies={"token": token},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 400
+```

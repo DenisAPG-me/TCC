@@ -1,0 +1,357 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Autenticar com credenciais válidas | Positivo | CA1 | Enviar autenticação com admin e password123 | Status 200 e token do tipo texto, não vazio |
+| CT02 | Autenticar com senha inválida | Negativo | CA2 | Enviar autenticação com admin e senha incorreta | Resposta JSON sem a chave token e com reason igual a Bad credentials |
+| CT03 | Autenticar com credenciais vazias | Borda | CA2 | Enviar autenticação com usuário e senha vazios | Resposta JSON sem a chave token e com reason igual a Bad credentials |
+| CT04 | Atualizar completamente uma reserva | Positivo | CA3 | Criar reserva exclusiva; obter token válido; enviar PUT completo com novo nome e novo preço | Status 200 e resposta com todos os campos enviados, incluindo novo nome e novo preço |
+| CT05 | Atualizar somente o sobrenome | Positivo | CA4 | Criar reserva exclusiva; obter token válido; enviar PATCH contendo apenas lastname | Status 200; sobrenome atualizado; todos os demais campos permanecem iguais |
+| CT06 | Atualizar sem autenticação | Negativo | CA5 | Criar reserva exclusiva; enviar PUT completo sem token; enviar PATCH sem token | Status 403 em ambas as tentativas |
+| CT07 | Omitir campos obrigatórios individualmente | Negativo | CA6 | Criar reserva exclusiva; obter token válido; enviar PUTs omitindo um campo obrigatório por vez, incluindo as datas internas | Status 400 em cada tentativa |
+| CT08 | Atualizar completamente com objeto vazio | Borda | CA6 | Criar reserva exclusiva; obter token válido; enviar PUT com objeto JSON vazio | Status 400 |
+
+## SUPOSIÇÕES
+
+- A tecnologia escolhida é Python + pytest + requests, pois todos os critérios tratam de API REST. Não há interface nem seletores.
+- Não houve acesso ao sistema, consulta à documentação ou execução dos testes. Os contratos abaixo são deduções e precisam ser confirmados no ambiente real.
+- Os critérios foram identificados como CA1 a CA6, na ordem apresentada.
+- A autenticação usa `POST /auth`, com JSON contendo `username` e `password`. O sucesso retorna um objeto JSON com `token`; a falha retorna um objeto sem a chave `token` e com `reason` exatamente igual a `Bad credentials`.
+- O status de autenticação inválida não é verificado, pois CA2 não o especifica. Credenciais vazias são consideradas inválidas.
+- A criação de dados usa `POST /booking`, retorna status 200 e um objeto contendo `bookingid` inteiro positivo e `booking` com os dados criados.
+- A atualização completa usa `PUT /booking/{bookingid}`; a parcial usa `PATCH /booking/{bookingid}`. Ambas recebem JSON e retornam diretamente o objeto da reserva quando bem-sucedidas.
+- O token é enviado no cabeçalho `Cookie`, no formato `token=<token>`. Nenhuma outra autenticação é utilizada.
+- Os campos obrigatórios deduzidos são `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`; dentro de `bookingdates`, `checkin` e `checkout` também são obrigatórios. `additionalneeds` é considerado opcional.
+- Os nomes são textos, o preço é inteiro, o depósito é booleano e as datas usam `YYYY-MM-DD`. Os dados são fictícios: Ana Silva, preço 150, depósito pago, hospedagem de 10 a 15 de janeiro de 2030 e necessidade adicional Breakfast.
+- A atualização completa altera o nome para Beatriz e o preço para 275; a parcial altera o sobrenome para Souza. As respostas preservam os tipos JSON e não acrescentam campos ao objeto da reserva.
+- CA5 é aplicado tanto ao PUT quanto ao PATCH. CA6 é aplicado à ausência individual de cada campo obrigatório e ao objeto vazio; o status 400 é exigido mesmo que a implementação real se comporte diferentemente.
+- Cada teste que modifica reservas cria sua própria reserva. CT07 reutiliza sua reserva entre tentativas inválidas, supondo que requisições rejeitadas não a alterem.
+- A limpeza usa `DELETE /booking/{bookingid}` autenticado e considera status 201 como sucesso. Falhas de limpeza são reportadas por aviso para preservar o resultado principal do teste.
+- Todas as requisições usam timeout de 15 segundos e não seguem redirecionamentos. As sessões ignoram autenticação e proxies herdados do ambiente para manter o cenário sem token controlado.
+- O arquivo pode ser salvo como `test_reservas.py` e executado com `pytest test_reservas.py`, em um ambiente com pytest e requests instalados e acesso à URL base.
+
+## SCRIPT
+
+```python
+from copy import deepcopy
+import warnings
+
+import pytest
+import requests
+
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 15
+
+CREDENCIAIS_VALIDAS = {
+    "username": "admin",
+    "password": "password123",
+}
+CREDENCIAIS_INVALIDAS = {
+    "username": "admin",
+    "password": "senha_incorreta",
+}
+CREDENCIAIS_VAZIAS = {
+    "username": "",
+    "password": "",
+}
+
+DADOS_RESERVA = {
+    "firstname": "Ana",
+    "lastname": "Silva",
+    "totalprice": 150,
+    "depositpaid": True,
+    "bookingdates": {
+        "checkin": "2030-01-10",
+        "checkout": "2030-01-15",
+    },
+    "additionalneeds": "Breakfast",
+}
+NOVO_NOME = "Beatriz"
+NOVO_PRECO = 275
+NOVO_SOBRENOME = "Souza"
+PAYLOAD_VAZIO = {}
+
+CAMPOS_OBRIGATORIOS = (
+    ("firstname",),
+    ("lastname",),
+    ("totalprice",),
+    ("depositpaid",),
+    ("bookingdates",),
+    ("bookingdates", "checkin"),
+    ("bookingdates", "checkout"),
+)
+
+
+@pytest.fixture
+def api():
+    with requests.Session() as session:
+        session.trust_env = False
+        session.headers.update({"Accept": "application/json"})
+        yield session
+
+
+def requisitar(api, metodo, caminho, *, payload=None, token=None):
+    # Evita que cookies recebidos em chamadas anteriores autentiquem
+    # acidentalmente uma requisição que deveria estar sem token.
+    api.cookies.clear()
+    headers = {}
+    if token is not None:
+        headers["Cookie"] = f"token={token}"
+
+    return api.request(
+        method=metodo,
+        url=f"{BASE_URL}{caminho}",
+        json=payload,
+        headers=headers,
+        timeout=TIMEOUT,
+        allow_redirects=False,
+    )
+
+
+def verificar_status(resposta, esperado, contexto):
+    assert resposta.status_code == esperado, (
+        f"{contexto}: esperado status {esperado}, "
+        f"recebido {resposta.status_code}. "
+        f"Corpo: {resposta.text[:500]}"
+    )
+
+
+def objeto_json(resposta):
+    try:
+        corpo = resposta.json()
+    except ValueError:
+        pytest.fail(
+            f"Esperado JSON válido; recebido: {resposta.text[:500]}",
+            pytrace=False,
+        )
+    assert isinstance(corpo, dict), "A resposta deve ser um objeto JSON"
+    return corpo
+
+
+def autenticar(api, credenciais):
+    return requisitar(api, "POST", "/auth", payload=deepcopy(credenciais))
+
+
+def obter_token(api):
+    resposta = autenticar(api, CREDENCIAIS_VALIDAS)
+    verificar_status(resposta, 200, "Autenticação válida")
+    corpo = objeto_json(resposta)
+    token = corpo.get("token")
+    assert isinstance(token, str), "O token deve ser texto"
+    assert token.strip(), "O token não pode estar vazio"
+    return token
+
+
+def verificar_credenciais_rejeitadas(resposta):
+    corpo = objeto_json(resposta)
+    assert "token" not in corpo, "A resposta não deve conter a chave token"
+    assert corpo.get("reason") == "Bad credentials", (
+        f"Motivo inesperado: {corpo.get('reason')!r}"
+    )
+
+
+def verificar_objeto_exato(recebido, esperado, caminho="reserva"):
+    # Verifica também tipos: em Python, True == 1, por exemplo.
+    assert type(recebido) is type(esperado), (
+        f"{caminho}: tipo esperado {type(esperado).__name__}, "
+        f"recebido {type(recebido).__name__}"
+    )
+    if isinstance(esperado, dict):
+        assert recebido.keys() == esperado.keys(), (
+            f"{caminho}: conjunto de campos diferente do esperado"
+        )
+        for chave, valor in esperado.items():
+            verificar_objeto_exato(
+                recebido[chave], valor, f"{caminho}.{chave}"
+            )
+    else:
+        assert recebido == esperado, (
+            f"{caminho}: esperado {esperado!r}, recebido {recebido!r}"
+        )
+
+
+@pytest.fixture
+def token_valido(api):
+    return obter_token(api)
+
+
+@pytest.fixture
+def reserva(api):
+    resposta = requisitar(
+        api, "POST", "/booking", payload=deepcopy(DADOS_RESERVA)
+    )
+    verificar_status(resposta, 200, "Criação da reserva")
+    corpo = objeto_json(resposta)
+    booking_id = corpo.get("bookingid")
+
+    assert type(booking_id) is int and booking_id > 0, (
+        "A criação deve retornar bookingid inteiro positivo"
+    )
+
+    # O bloco finally cobre também falhas na validação da reserva criada.
+    try:
+        booking = corpo.get("booking")
+        verificar_objeto_exato(booking, DADOS_RESERVA)
+        yield booking_id, deepcopy(booking)
+    finally:
+        try:
+            token_limpeza = obter_token(api)
+            resposta_limpeza = requisitar(
+                api,
+                "DELETE",
+                f"/booking/{booking_id}",
+                token=token_limpeza,
+            )
+            verificar_status(
+                resposta_limpeza, 201, "Exclusão da reserva de teste"
+            )
+        except (requests.RequestException, AssertionError, pytest.fail.Exception):
+            warnings.warn(
+                f"Não foi possível confirmar a limpeza da reserva "
+                f"{booking_id}; verifique e remova esse dado de teste.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+
+
+def test_ct01_login_com_credenciais_validas(api):
+    resposta = autenticar(api, CREDENCIAIS_VALIDAS)
+
+    verificar_status(resposta, 200, "CA1")
+    corpo = objeto_json(resposta)
+    assert isinstance(corpo.get("token"), str)
+    assert corpo["token"].strip(), "CA1: token vazio"
+
+
+def test_ct02_login_com_senha_invalida(api):
+    resposta = autenticar(api, CREDENCIAIS_INVALIDAS)
+
+    verificar_credenciais_rejeitadas(resposta)
+
+
+def test_ct03_login_com_credenciais_vazias(api):
+    resposta = autenticar(api, CREDENCIAIS_VAZIAS)
+
+    verificar_credenciais_rejeitadas(resposta)
+
+
+def test_ct04_atualizacao_completa(api, reserva, token_valido):
+    booking_id, original = reserva
+    payload = deepcopy(original)
+    payload["firstname"] = NOVO_NOME
+    payload["totalprice"] = NOVO_PRECO
+
+    resposta = requisitar(
+        api,
+        "PUT",
+        f"/booking/{booking_id}",
+        payload=payload,
+        token=token_valido,
+    )
+
+    verificar_status(resposta, 200, "CA3")
+    atualizado = objeto_json(resposta)
+    assert atualizado.get("firstname") == NOVO_NOME
+    assert atualizado.get("totalprice") == NOVO_PRECO
+    verificar_objeto_exato(atualizado, payload)
+
+
+def test_ct05_atualizacao_apenas_sobrenome(api, reserva, token_valido):
+    booking_id, original = reserva
+
+    resposta = requisitar(
+        api,
+        "PATCH",
+        f"/booking/{booking_id}",
+        payload={"lastname": NOVO_SOBRENOME},
+        token=token_valido,
+    )
+
+    verificar_status(resposta, 200, "CA4")
+    atualizado = objeto_json(resposta)
+    assert atualizado.get("lastname") == NOVO_SOBRENOME
+    assert atualizado["lastname"] != original["lastname"]
+
+    esperado = deepcopy(original)
+    esperado["lastname"] = NOVO_SOBRENOME
+    verificar_objeto_exato(atualizado, esperado)
+
+
+def test_ct06_atualizacao_sem_token(api, reserva):
+    booking_id, original = reserva
+    completo = deepcopy(original)
+    completo["firstname"] = NOVO_NOME
+    completo["totalprice"] = NOVO_PRECO
+
+    # Executa as duas tentativas antes das asserções.
+    respostas = [
+        (
+            "PUT",
+            requisitar(
+                api, "PUT", f"/booking/{booking_id}", payload=completo
+            ),
+        ),
+        (
+            "PATCH",
+            requisitar(
+                api,
+                "PATCH",
+                f"/booking/{booking_id}",
+                payload={"lastname": NOVO_SOBRENOME},
+            ),
+        ),
+    ]
+
+    erros = []
+    for metodo, resposta in respostas:
+        if resposta.status_code != 403:
+            erros.append(
+                f"{metodo}: esperado 403, recebido {resposta.status_code}; "
+                f"corpo={resposta.text[:300]}"
+            )
+    assert not erros, "CA5:\n" + "\n".join(erros)
+
+
+def test_ct07_atualizacao_com_campos_ausentes(api, reserva, token_valido):
+    booking_id, original = reserva
+    erros = []
+
+    for caminho in CAMPOS_OBRIGATORIOS:
+        payload = deepcopy(original)
+        objeto = payload
+        for chave in caminho[:-1]:
+            objeto = objeto[chave]
+        del objeto[caminho[-1]]
+
+        resposta = requisitar(
+            api,
+            "PUT",
+            f"/booking/{booking_id}",
+            payload=payload,
+            token=token_valido,
+        )
+
+        if resposta.status_code != 400:
+            erros.append(
+                f"Ausência de {'.'.join(caminho)}: esperado 400, "
+                f"recebido {resposta.status_code}; "
+                f"corpo={resposta.text[:300]}"
+            )
+
+    assert not erros, "CA6:\n" + "\n".join(erros)
+
+
+def test_ct08_atualizacao_com_objeto_vazio(api, reserva, token_valido):
+    booking_id, _ = reserva
+
+    resposta = requisitar(
+        api,
+        "PUT",
+        f"/booking/{booking_id}",
+        payload=deepcopy(PAYLOAD_VAZIO),
+        token=token_valido,
+    )
+
+    verificar_status(resposta, 400, "CA6: objeto vazio")
+```

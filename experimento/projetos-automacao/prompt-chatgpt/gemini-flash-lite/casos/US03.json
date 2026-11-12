@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Validação de campos obrigatórios vazios no login",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Acessar URL de login deixar email e senha em branco e submeter formulário",
+  "esperado": "Exibir mensagens Email is required e Password is required"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Tentativa de login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Acessar URL de login preencher email válido e senha incorreta e submeter",
+  "esperado": "Exibir mensagem Invalid email or password e permanecer sem sessão"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Redirecionamento para login ao avançar checkout sem autenticação",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Adicionar produto ao carrinho sem estar logado e avançar para o checkout",
+  "esperado": "Ser direcionado para a tela de login informando e-mail e senha"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Visualização da página My account após autenticação bem-sucedida",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Realizar login com as credenciais da conta de demonstração",
+  "esperado": "Visualizar a página My account com o nome do usuário no menu"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Validação de campos obrigatórios de endereço no checkout",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Autenticar adicionar produto ir ao passo de endereço deixar campos vazios tentar avançar e depois preenchê-los",
+  "esperado": "Bloquear avanço com campos vazios e permitir avançar ao preencher país CEP número rua cidade estado"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Conclusão de compra com cartão de crédito com sucesso",
+  "tipo": "positivo",
+  "criterio": "CA06",
+  "passos": "Estar autenticado com produto no carrinho preencher endereço escolher cartão de crédito dados válidos e confirmar",
+  "esperado": "Visualizar Payment was successful e posteriormente Thanks for your order e número da fatura INV-..."
+ }
+]

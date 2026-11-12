@@ -1,0 +1,10 @@
+[
+ "A história descreve uma API REST, então os testes usam `pytest` e `requests`; não há seletores de interface.",
+ "A URL base padrão é `https://restful-booker.herokuapp.com`, configurável pela constante `BASE_URL`.",
+ "A criação de reserva usa `POST /booking`, com um payload contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`. A resposta de sucesso é `200` e inclui `bookingid`.",
+ "A autenticação usa `POST /auth` com `{\"username\": \"admin\", \"password\": \"password123\"}`. A resposta de sucesso contém `token`.",
+ "A exclusão usa `DELETE /booking/{bookingid}` e o token é enviado no cabeçalho `Cookie` como `token=<valor>`.",
+ "A consulta individual usa `GET /booking/{bookingid}`. A listagem com filtro por primeiro nome usa `GET /booking?firstname=<nome>`.",
+ "Nomes gerados pelos testes são exclusivos para evitar colisões. Erros de rede e respostas diferentes das especificadas fazem os testes falharem.",
+ "Os testes removem as reservas de apoio que ainda existirem, usando autenticação, para limitar dados residuais."
+]

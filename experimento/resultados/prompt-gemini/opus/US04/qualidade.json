@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros, testes curtos",
+  "estrutura": "helpers e constantes; sem parametrizacao",
+  "assercoes": "mensagens exatas, heading de sucesso, assunto e ausencia de erro",
+  "espera": "timeout explicito e auto-wait, sem sleep",
+  "manutenibilidade": "test-id/role, constantes, independente de ordem"
+ }
+}

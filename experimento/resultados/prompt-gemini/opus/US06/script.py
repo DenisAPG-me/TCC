@@ -1,0 +1,157 @@
+import re
+import uuid
+
+from playwright.sync_api import Browser, Page, expect
+
+BASE_URL = "https://automationintesting.online"
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+VALID_EMAIL = "visitante.teste@example.com"
+VALID_PHONE = "+5511987654321"
+VALID_MESSAGE = "Gostaria de saber a disponibilidade de quartos para o próximo feriado."
+
+
+def build_url(base_url, path):
+    return (base_url or BASE_URL).rstrip("/") + path
+
+
+def unique(prefix):
+    return f"{prefix} {uuid.uuid4().hex[:8]}"
+
+
+def messages_link(page: Page):
+    return page.get_by_role("link", name=re.compile(r"^\s*Messages"))
+
+
+def counter_pattern(count):
+    if count:
+        return re.compile(rf"^\s*Messages\s*{count}\s*$")
+    return re.compile(r"^\s*Messages\s*$")
+
+
+def login(page: Page, base_url):
+    page.goto(build_url(base_url, "/admin"))
+    page.get_by_test_id("username").fill(ADMIN_USER)
+    page.get_by_test_id("password").fill(ADMIN_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    expect(messages_link(page)).to_be_visible()
+
+
+def logout(page: Page):
+    page.get_by_role("button", name="Logout").click()
+    expect(messages_link(page)).to_have_count(0)
+
+
+def read_counter(page: Page):
+    page.wait_for_load_state("networkidle")
+    match = re.search(r"\d+", messages_link(page).inner_text())
+    return int(match.group()) if match else 0
+
+
+def submit_contact(page: Page, base_url, name, subject, email=VALID_EMAIL, phone=VALID_PHONE, message=VALID_MESSAGE):
+    page.goto(build_url(base_url, "/"))
+    page.get_by_test_id("ContactName").fill(name)
+    page.get_by_test_id("ContactEmail").fill(email)
+    page.get_by_test_id("ContactPhone").fill(phone)
+    page.get_by_test_id("ContactSubject").fill(subject)
+    page.get_by_test_id("ContactDescription").fill(message)
+    page.get_by_role("button", name="Submit").click()
+
+
+def confirmation(page: Page, name):
+    return page.get_by_text(f"Thanks for getting in touch {name}!")
+
+
+def visitor_page(browser: Browser):
+    return browser.new_context().new_page()
+
+
+def test_ct01_admin_autenticado_visualiza_contador_messages(page: Page, base_url):
+    login(page, base_url)
+    count = read_counter(page)
+    assert count >= 0
+    expect(messages_link(page)).to_have_text(counter_pattern(count))
+
+
+def test_ct02_visitante_envia_formulario_valido(page: Page, base_url):
+    name = unique("Visitante")
+    submit_contact(page, base_url, name, unique("Reserva"))
+    expect(confirmation(page, name)).to_be_visible()
+
+
+def test_ct03_envio_com_nome_em_branco_exibe_erro(page: Page, base_url):
+    submit_contact(page, base_url, "", unique("Reserva"))
+    expect(page.get_by_text("Name may not be blank")).to_be_visible()
+    expect(page.get_by_text("Thanks for getting in touch")).to_have_count(0)
+
+
+def test_ct04_envio_com_assunto_no_tamanho_minimo(page: Page, base_url):
+    name = unique("Visitante")
+    submit_contact(page, base_url, name, "Vagas")
+    expect(confirmation(page, name)).to_be_visible()
+
+
+def test_ct05_envio_com_assunto_abaixo_do_minimo_exibe_erro(page: Page, base_url):
+    submit_contact(page, base_url, unique("Visitante"), "Vaga")
+    expect(page.get_by_text("Subject must be between 5 and 100 characters.")).to_be_visible()
+    expect(page.get_by_text("Thanks for getting in touch")).to_have_count(0)
+
+
+def test_ct06_contador_incrementa_apos_envio_do_visitante(page: Page, browser: Browser, base_url):
+    login(page, base_url)
+    before = read_counter(page)
+
+    visitor = visitor_page(browser)
+    name = unique("Visitante")
+    submit_contact(visitor, base_url, name, unique("Reserva"))
+    expect(confirmation(visitor, name)).to_be_visible()
+    visitor.context.close()
+
+    logout(page)
+    login(page, base_url)
+    expect(messages_link(page)).to_have_text(counter_pattern(before + 1))
+
+
+def test_ct07_envio_invalido_nao_altera_contador(page: Page, browser: Browser, base_url):
+    login(page, base_url)
+    before = read_counter(page)
+
+    visitor = visitor_page(browser)
+    submit_contact(visitor, base_url, "", unique("Reserva"))
+    expect(visitor.get_by_text("Name may not be blank")).to_be_visible()
+    visitor.context.close()
+
+    page.reload()
+    expect(messages_link(page)).to_be_visible()
+    assert read_counter(page) == before
+
+
+def test_ct08_mensagem_recem_enviada_aparece_na_caixa(page: Page, browser: Browser, base_url):
+    name = unique("Visitante")
+    subject = unique("Reserva")
+
+    visitor = visitor_page(browser)
+    submit_contact(visitor, base_url, name, subject)
+    expect(confirmation(visitor, name)).to_be_visible()
+    visitor.context.close()
+
+    login(page, base_url)
+    messages_link(page).click()
+    expect(page).to_have_url(re.compile(r"/admin/message"))
+    message = (
+        page.get_by_test_id(re.compile(r"^message\d+$"))
+        .filter(has_text=name)
+        .filter(has_text=subject)
+    )
+    expect(message).to_have_count(1)
+    expect(message).to_be_visible()
+
+
+def test_ct09_acesso_direto_apos_logout_exige_login(page: Page, base_url):
+    login(page, base_url)
+    logout(page)
+    page.goto(build_url(base_url, "/admin/message"))
+    expect(page.get_by_test_id("username")).to_be_visible()
+    expect(page.get_by_test_id("password")).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+    expect(messages_link(page)).to_have_count(0)

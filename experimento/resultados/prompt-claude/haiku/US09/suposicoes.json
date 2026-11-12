@@ -1,0 +1,13 @@
+[
+ "Tecnologia: User Story de API REST, portanto Python + pytest + requests, com `timeout` em todas as requisições.",
+ "Endpoints: POST /auth (corpo `username`/`password`, retorna `token`); POST /booking (retorna 200 com `bookingid`); GET /booking/{id}; DELETE /booking/{id}; GET /booking?firstname=.",
+ "Autenticação da exclusão: header `Cookie: token=<valor>`. Sem header de token, o teste envia a requisição sem cookie.",
+ "Token inválido de teste: literal `token_invalido_123`. Token vazio: `token=` no cookie.",
+ "Status de sucesso da exclusão: 201, conforme CA3. Status de reserva inexistente: 404. Status de erro para exclusão repetida: qualquer 4xx, conforme CA5.",
+ "Payload de reserva: `firstname` com nome único gerado por uuid, `lastname` fixo \"Silva\", `totalprice` 150, `depositpaid` true, `bookingdates` com checkin 2027-01-10 e checkout 2027-01-15, `additionalneeds` \"Breakfast\".",
+ "Nome único: prefixo \"Nome\" seguido de 12 caracteres hexadecimais de uuid4, usado no filtro de listagem do CT07.",
+ "Comportamento de listagem: GET /booking com filtro por firstname retorna uma lista JSON; após exclusão, a lista é `[]`.",
+ "Dados de teste não são removidos ao final, pois o ambiente de demonstração não oferece limpeza garantida; a unicidade dos nomes isola os casos entre si.",
+ "Cada teste cria seus próprios dados e obtém seu próprio token, garantindo independência.",
+ "Nenhum conftest.py, plugin ou fixture externa é usado."
+]

@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_validacao_campos_obrigatorios_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "ick\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"button\", name=\"Login\")"
+  },
+  {
+   "nodeid": "script.py::test_CT002_tentativa_login_senha_incorreta[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": ": in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"E-mail Address\")"
+  },
+  {
+   "nodeid": "script.py::test_CT003_checkout_sem_autenticacao[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "  await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"button\", name=\"Add to cart\")"
+  },
+  {
+   "nodeid": "script.py::test_CT004_visualizacao_my_account_apos_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": ": in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"E-mail Address\")"
+  },
+  {
+   "nodeid": "script.py::test_CT005_validacao_campos_endereco_checkout[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": ": in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"E-mail Address\")"
+  },
+  {
+   "nodeid": "script.py::test_CT006_conclusao_compra_cartao_credito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": ": in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"E-mail Address\")"
+  }
+ ],
+ "stdout_tail": " a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT001_validacao_campos_obrigatorios_login[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT002_tentativa_login_senha_incorreta[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT003_checkout_sem_autenticacao[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT004_visualizacao_my_account_apos_login[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT005_validacao_campos_endereco_checkout[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US03\\script.py::test_CT006_conclusao_compra_cartao_credito[chromium]\n6 failed, 2 warnings in 189.27s (0:03:09)\n",
+ "returncode": 1,
+ "duracao_s": 189.94
+}

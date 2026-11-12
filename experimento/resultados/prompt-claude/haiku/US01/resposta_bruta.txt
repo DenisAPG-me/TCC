@@ -1,0 +1,124 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Busca por "hammer" lista somente produtos com "hammer" no nome | Positivo | CA1 | Acessar a página inicial; digitar "hammer" no campo de busca; pressionar Enter; verificar o texto de busca; verificar os nomes listados | A página indica "Searched for: hammer"; há ao menos um produto listado; todos os nomes contêm "hammer" |
+| CT02 | Busca por termo inexistente exibe mensagem e nenhum produto | Negativo | CA2 | Acessar a página inicial; digitar "zzzzxx" no campo de busca; pressionar Enter | A mensagem "There are no products found." é exibida; nenhum produto é listado |
+| CT03 | Ordenação por preço do menor para o maior | Positivo | CA3 | Acessar a página inicial; aguardar produtos; selecionar "Price (Low - High)" na ordenação; ler os preços da página | Os preços da página estão em ordem crescente |
+| CT04 | Ordenação por nome de Z a A | Positivo | CA4 | Acessar a página inicial; aguardar produtos; selecionar "Name (Z - A)" na ordenação; ler os nomes da página | Os nomes da página estão em ordem alfabética decrescente |
+| CT05 | Busca ignora diferença entre maiúsculas e minúsculas | Borda | CA1 | Acessar a página inicial; digitar "HAMMER" no campo de busca; pressionar Enter; verificar os nomes listados | Há produtos listados; todos os nomes contêm "hammer" sem distinção de caixa |
+| CT06 | Ordenação por preço aplicada sobre resultados de busca | Borda | CA3 | Acessar a página inicial; buscar "hammer"; selecionar "Price (Low - High)"; ler os preços da página | Há produtos listados; os preços estão em ordem crescente |
+
+## SUPOSIÇÕES
+
+- Tecnologia: Python + pytest + pytest-playwright (fixture `page` do plugin), pois a User Story é de interface web. Os testes usam `expect` de `playwright.sync_api`. O navegador é o Chromium padrão do plugin, em modo headless por padrão.
+- Campo de busca: `[data-test="search-query"]`. A busca é disparada com Enter.
+- Seletor de ordenação: `[data-test="sort"]`, um `<select>` com opções "Price (Low - High)" e "Name (Z - A)".
+- Produtos: nome em `[data-test="product-name"]` e preço em `[data-test="product-price"]`, com preço no formato "$12.50" (ponto decimal).
+- O texto de busca é exibido como "Searched for: hammer". A verificação é feita com regex sem distinção de caixa.
+- A mensagem de ausência de resultados é exatamente "There are no products found.".
+- A listagem é atualizada por uma requisição de rede cuja URL contém "products". Os testes aguardam essa resposta e depois o estado `networkidle`, sem `time.sleep`.
+- A busca e a ordenação são case-insensitive quanto ao nome do produto (CT05 assume que "HAMMER" retorna os mesmos resultados de "hammer").
+- Existe ao menos um produto com "hammer" no nome e a listagem tem mais de um produto para ordenar (CT03, CT04, CT06).
+- As verificações de ordenação consideram apenas os itens da página atual, pois a paginação não é descrita na User Story.
+- Não há dados reais disponíveis; os valores de teste vêm da própria User Story.
+
+## SCRIPT
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+TERMO_BUSCA = "hammer"
+TERMO_INEXISTENTE = "zzzzxx"
+MENSAGEM_SEM_PRODUTOS = "There are no products found."
+OPCAO_PRECO_CRESCENTE = "Price (Low - High)"
+OPCAO_NOME_Z_A = "Name (Z - A)"
+
+CAMPO_BUSCA = '[data-test="search-query"]'
+SELECT_ORDENACAO = '[data-test="sort"]'
+NOME_PRODUTO = '[data-test="product-name"]'
+PRECO_PRODUTO = '[data-test="product-price"]'
+
+
+def _buscar(page: Page, termo: str) -> None:
+    campo = page.locator(CAMPO_BUSCA)
+    campo.fill(termo)
+    with page.expect_response(lambda r: "products" in r.url):
+        campo.press("Enter")
+    page.wait_for_load_state("networkidle")
+
+
+def _ordenar(page: Page, opcao: str) -> None:
+    with page.expect_response(lambda r: "products" in r.url):
+        page.locator(SELECT_ORDENACAO).select_option(label=opcao)
+    page.wait_for_load_state("networkidle")
+
+
+def _nomes(page: Page) -> list[str]:
+    return page.locator(NOME_PRODUTO).all_inner_texts()
+
+
+def _precos(page: Page) -> list[float]:
+    return [float(re.sub(r"[^\d.]", "", t)) for t in page.locator(PRECO_PRODUTO).all_inner_texts()]
+
+
+def test_ct01_busca_hammer_lista_somente_produtos_com_hammer(page: Page):
+    page.goto(BASE_URL)
+    _buscar(page, TERMO_BUSCA)
+
+    expect(page.get_by_text(re.compile(r"Searched for:\s*hammer", re.IGNORECASE)).first).to_be_visible()
+    nomes = _nomes(page)
+    assert nomes, "A busca por 'hammer' deveria retornar produtos"
+    assert all(TERMO_BUSCA in nome.lower() for nome in nomes), nomes
+
+
+def test_ct02_busca_termo_inexistente_exibe_mensagem_sem_produtos(page: Page):
+    page.goto(BASE_URL)
+    _buscar(page, TERMO_INEXISTENTE)
+
+    expect(page.get_by_text(MENSAGEM_SEM_PRODUTOS)).to_be_visible()
+    expect(page.locator(NOME_PRODUTO)).to_have_count(0)
+
+
+def test_ct03_ordenar_por_preco_do_menor_para_o_maior(page: Page):
+    page.goto(BASE_URL)
+    expect(page.locator(NOME_PRODUTO).first).to_be_visible()
+    _ordenar(page, OPCAO_PRECO_CRESCENTE)
+
+    precos = _precos(page)
+    assert len(precos) > 1, "A listagem deveria conter mais de um produto para ordenar"
+    assert precos == sorted(precos), precos
+
+
+def test_ct04_ordenar_por_nome_de_z_a(page: Page):
+    page.goto(BASE_URL)
+    expect(page.locator(NOME_PRODUTO).first).to_be_visible()
+    _ordenar(page, OPCAO_NOME_Z_A)
+
+    nomes = _nomes(page)
+    assert len(nomes) > 1, "A listagem deveria conter mais de um produto para ordenar"
+    assert nomes == sorted(nomes, key=str.lower, reverse=True), nomes
+
+
+def test_ct05_busca_ignora_diferenca_de_maiusculas_e_minusculas(page: Page):
+    page.goto(BASE_URL)
+    _buscar(page, TERMO_BUSCA.upper())
+
+    nomes = _nomes(page)
+    assert nomes, "A busca por 'HAMMER' deveria retornar produtos"
+    assert all(TERMO_BUSCA in nome.lower() for nome in nomes), nomes
+
+
+def test_ct06_ordenar_por_preco_sobre_resultados_da_busca(page: Page):
+    page.goto(BASE_URL)
+    _buscar(page, TERMO_BUSCA)
+    expect(page.locator(NOME_PRODUTO).first).to_be_visible()
+    _ordenar(page, OPCAO_PRECO_CRESCENTE)
+
+    precos = _precos(page)
+    assert precos, "A busca por 'hammer' deveria retornar produtos"
+    assert precos == sorted(precos), precos
+```

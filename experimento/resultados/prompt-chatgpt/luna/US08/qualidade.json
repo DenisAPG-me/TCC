@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Claro, mensagens de falha",
+  "estrutura": "Helpers, mas try/finally repetido sem fixtures",
+  "assercoes": "Verifica resposta e GET posterior",
+  "espera": "Timeout; limpeza com try/finally; dados fixos",
+  "manutenibilidade": "Constantes ok, limpeza, repetição"
+ }
+}

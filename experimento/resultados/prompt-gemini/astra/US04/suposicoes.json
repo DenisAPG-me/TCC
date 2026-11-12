@@ -1,0 +1,16 @@
+[
+ "Não houve acesso ao sistema ou à internet, nem execução dos testes. Os seletores e detalhes não especificados são premissas a validar.",
+ "O formulário está na rota `/` da URL base `https://automationintesting.online/`, sem necessidade de autenticação.",
+ "Os campos possuem rótulos acessíveis únicos `Name`, `Email`, `Phone`, `Subject` e `Message`, associados aos respectivos controles. O botão possui papel `button` e nome acessível exato `Submit`.",
+ "As mensagens de obrigatoriedade são, por suposição: `Name may not be blank`, `Email may not be blank`, `Phone may not be blank`, `Subject may not be blank` e `Message may not be blank`. Esses textos deverão ser ajustados caso a aplicação use outras expressões.",
+ "Os erros são apresentados como textos visíveis. O erro de e-mail pode incluir um prefixo; por isso, verifica-se a presença da expressão exigida pelo critério.",
+ "A confirmação apresenta o texto exato `Thanks for getting in touch <nome>!` e o assunto em um elemento de texto próprio.",
+ "Os intervalos mencionados nas mensagens de erro são inclusivos e definem também os limites máximos aceitos. Os casos acima dos máximos são derivados desses intervalos.",
+ "Os controles permitem inserir valores acima dos limites e submeter e-mail malformado; validações nativas do navegador ou atributos `maxlength` não impedem observar as mensagens especificadas.",
+ "Telefones compostos apenas por dígitos são válidos quando respeitam o comprimento. Não são presumidas regras adicionais de formato, DDD ou país.",
+ "`Ana Silva`, `ana.silva@example.com`, telefone de 15 dígitos, assunto `Consulta sobre reserva` e a mensagem padrão do script são dados válidos. Os dados de borda usam caracteres ASCII para tornar inequívoca a contagem.",
+ "Cada teste começa em um contexto isolado fornecido pelo plugin. O ambiente permite envios sucessivos com os mesmos dados.",
+ "Não são adicionadas regras ausentes da User Story, como limites para nome, tratamento de espaços, formatos específicos de telefone ou persistência da mensagem.",
+ "O requisito obrigatório autoriza `pytest-playwright`, além de `pytest` e `playwright`. Instalação: `python -m pip install pytest playwright pytest-playwright`; navegador: `python -m playwright install chromium`.",
+ "Salve o arquivo como `test_contato.py` e execute `python -m pytest test_contato.py --browser chromium` ou `python test_contato.py`. Há exatamente uma função de teste por ID, sem parametrização."
+]

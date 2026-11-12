@@ -1,0 +1,209 @@
+{
+ "created": 1793432094.4989111,
+ "duration": 29.213093757629395,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT01_exclusao_sem_token_preserva_reserva",
+     "type": "Function",
+     "lineno": 130
+    },
+    {
+     "nodeid": "script.py::test_CT02_exclusao_com_token_invalido_preserva_reserva",
+     "type": "Function",
+     "lineno": 141
+    },
+    {
+     "nodeid": "script.py::test_CT03_exclusao_com_token_valido_retorna_201",
+     "type": "Function",
+     "lineno": 153
+    },
+    {
+     "nodeid": "script.py::test_CT04_consulta_de_reserva_excluida_retorna_404",
+     "type": "Function",
+     "lineno": 163
+    },
+    {
+     "nodeid": "script.py::test_CT05_exclusao_repetida_retorna_4xx_e_preserva_controle",
+     "type": "Function",
+     "lineno": 175
+    },
+    {
+     "nodeid": "script.py::test_CT06_filtro_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+     "type": "Function",
+     "lineno": 204
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT01_exclusao_sem_token_preserva_reserva",
+   "lineno": 130,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT01_exclusao_sem_token_preserva_reserva",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.666637499933131,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3790443000616506,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.9112772999797016,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT02_exclusao_com_token_invalido_preserva_reserva",
+   "lineno": 141,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT02_exclusao_com_token_invalido_preserva_reserva",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6208242999855429,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.514138499973342,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.8729480999754742,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT03_exclusao_com_token_valido_retorna_201",
+   "lineno": 153,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT03_exclusao_com_token_valido_retorna_201",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6632891000481322,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.843249199911952,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6353568999329582,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT04_consulta_de_reserva_excluida_retorna_404",
+   "lineno": 163,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT04_consulta_de_reserva_excluida_retorna_404",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6201899000443518,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.449763600016013,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.586425399989821,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT05_exclusao_repetida_retorna_4xx_e_preserva_controle",
+   "lineno": 175,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT05_exclusao_repetida_retorna_4xx_e_preserva_controle",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6362756000598893,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.956663700053468,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 2.4207444000057876,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT06_filtro_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+   "lineno": 204,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT06_filtro_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6353252999251708,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.061820900067687,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6697763999691233,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

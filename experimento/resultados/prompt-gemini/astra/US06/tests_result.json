@@ -1,0 +1,52 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT01_registrar_contador_de_mensagens[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT02_confirmar_envio_valido[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT03_incrementar_contador_apos_envio[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "    await self._channel.send(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Page.goto: net::ERR_ABORTED at https://automationintesting.online/admin\nE   Call log:\nE     - navigating to \"https://automationintesting.online/admin\", waiting until \"load\""
+  },
+  {
+   "nodeid": "script.py::test_CT04_exibir_remetente_e_assunto_na_mesma_linha[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT05_exigir_login_no_acesso_direto_apos_logout[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: Name\nE   - paragraph: Subject\nE   - paragraph: James Dean\nE   - paragraph: Booking enquiry\nE   - text: \nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT06_preservar_nome_com_acentos_e_apostrofo[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_CT07_incrementar_em_dois_envios_consecutivos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "    await self._channel.send(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Page.goto: net::ERR_ABORTED at https://automationintesting.online/admin\nE   Call log:\nE     - navigating to \"https://automationintesting.online/admin\", waiting until \"load\""
+  }
+ ],
+ "stdout_tail": " Use a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT02_confirmar_envio_valido[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT03_incrementar_contador_apos_envio[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT04_exibir_remetente_e_assunto_na_mesma_linha[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT05_exigir_login_no_acesso_direto_apos_logout[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT06_preservar_nome_com_acentos_e_apostrofo[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US06\\script.py::test_CT07_incrementar_em_dois_envios_consecutivos[chromium]\n6 failed, 1 passed, 2 warnings in 119.49s (0:01:59)\n",
+ "returncode": 1,
+ "duracao_s": 120.15
+}

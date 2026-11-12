@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "helpers fazer_login/verificar_tela_login",
+  "assercoes": "mensagem, URL e tela de login verificados",
+  "espera": "auto-wait, sem sleep; logout sem espera",
+  "manutenibilidade": "label/role mas row nao existe"
+ }
+}

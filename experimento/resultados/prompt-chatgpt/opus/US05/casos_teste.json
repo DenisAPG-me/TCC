@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Acessar /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; URL permanece em /admin; campos de login e botão Login continuam visíveis"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login com usuário admin e senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Acessar /admin; informar \"admin\" e uma senha diferente de \"password\"; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; botão Logout não aparece"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Login com usuário admin e senha vazia",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Acessar /admin; informar \"admin\" e deixar a senha vazia; clicar em Login",
+  "esperado": "Mensagem \"Invalid credentials\" visível; tela de login continua exibida"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Login válido exibe lista de quartos e menu",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Acessar /admin; informar \"admin\" e \"password\"; clicar em Login",
+  "esperado": "URL em /admin/rooms; lista contém o quarto 101 com tipo Single; menu exibe os links Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Fazer login válido; clicar em Logout",
+  "esperado": "URL passa a ser a raiz da URL base; botão Logout deixa de existir"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Acesso direto à lista de quartos após logout",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Fazer login válido; clicar em Logout; acessar diretamente /admin/rooms",
+  "esperado": "Tela de login exibida (Username, Password e botão Login); lista de quartos não é exibida"
+ }
+]

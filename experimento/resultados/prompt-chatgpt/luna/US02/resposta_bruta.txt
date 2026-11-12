@@ -1,0 +1,133 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Adicionar três unidades de Claw Hammer | positivo | CA01 | Abrir Claw Hammer, definir quantidade 3 e adicionar ao carrinho. | A confirmação indicada aparece e o indicador do carrinho mostra 3. |
+| CT002 | Conferir totais com três unidades | positivo | CA02 | Adicionar três unidades de Claw Hammer e abrir o carrinho. | O total da linha e o total do carrinho correspondem ao preço unitário multiplicado por 3. |
+| CT003 | Atualizar quantidade no carrinho | positivo | CA03 | Adicionar três unidades de Claw Hammer, alterar a quantidade no carrinho para 1. | O total do carrinho corresponde ao preço unitário. |
+| CT004 | Impedir três unidades de Thor Hammer | negativo | CA04 | Abrir Thor Hammer, definir quantidade 3 e tentar adicionar ao carrinho. | A mensagem “You can only have one Thor Hammer in the cart.” aparece. |
+
+SUPOSIÇÕES
+
+1. Os critérios não têm identificadores próprios. A correspondência, na ordem apresentada, é: CA01 = critério 1, CA02 = critério 2, CA03 = critério 3 e CA04 = critério 4.
+2. A User Story especifica os resultados observáveis; não especifica seletores, rotas internas nem detalhes da estrutura da página. O código presume que os nomes dos produtos são clicáveis, que o campo de quantidade tem o rótulo “Quantity”, que o botão se chama “Add to cart” e que o carrinho pode ser aberto pelo link acessível “Cart”.
+3. Para acessar os produtos, o código presume que ambos estão disponíveis na página inicial por seus nomes visíveis. O preço unitário é obtido do texto visível `.product-price`; a automação presume que esse texto contém um valor monetário com ponto decimal.
+4. Para verificar o carrinho, o código presume um indicador `#cart-count`, itens `.cart-item` identificáveis pelo nome do produto, preço `.product-price`, campo de quantidade rotulado “Quantity” e totais `.line-total` e `#cart-total`. Esses seletores e rótulos são deduções para viabilizar a automação e podem precisar de ajuste no sistema real.
+5. O código presume que preços usam duas casas decimais e que a quantidade pode ser editada diretamente no carrinho. A comparação monetária usa centavos para evitar diferenças de arredondamento.
+6. Cada teste usa a fixture `page` do pytest-playwright e pressupõe um contexto isolado por teste. Não são necessários dados criados por outro teste nem limpeza externa.
+7. Os cenários negativos e de borda foram considerados em conjunto: CA04 verifica a rejeição de uma quantidade acima da restrição expressa para Thor Hammer. Não há outros limites ou regras de negócio especificados que justifiquem casos adicionais.
+8. O arquivo pressupõe pytest-playwright instalado e configurado com Chromium, conforme os requisitos técnicos. A sintaxe executável não comprova compatibilidade dos seletores com o site real.
+
+```python
+import re
+from decimal import Decimal, ROUND_HALF_UP
+
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+# Seletores inferidos da User Story; podem precisar de ajuste no site real.
+PRODUCT_PRICE_SELECTOR = ".product-price"
+CART_COUNT_SELECTOR = "#cart-count"
+CART_ITEM_SELECTOR = ".cart-item"
+LINE_TOTAL_SELECTOR = ".line-total"
+CART_TOTAL_SELECTOR = "#cart-total"
+QUANTITY_LABEL = "Quantity"
+ADD_TO_CART_BUTTON = "Add to cart"
+CART_LINK = "Cart"
+ADD_CONFIRMATION = "Product added to shopping cart."
+THOR_LIMIT_MESSAGE = "You can only have one Thor Hammer in the cart."
+
+
+def _open_product(page: Page, product_name: str) -> Decimal:
+    page.goto(BASE_URL)
+    product_link = page.get_by_role("link", name=product_name, exact=True)
+    expect(product_link).to_be_visible()
+    product_link.click()
+
+    price_text = page.locator(PRODUCT_PRICE_SELECTOR).first.inner_text()
+    return _money_from_text(price_text)
+
+
+def _set_product_quantity(page: Page, quantity: int) -> None:
+    quantity_input = page.get_by_label(QUANTITY_LABEL)
+    expect(quantity_input).to_be_visible()
+    quantity_input.fill(str(quantity))
+
+
+def _add_to_cart(page: Page) -> None:
+    page.get_by_role("button", name=ADD_TO_CART_BUTTON, exact=True).click()
+
+
+def _open_cart(page: Page) -> None:
+    page.get_by_role("link", name=re.compile(CART_LINK, re.IGNORECASE)).click()
+
+
+def _money_from_text(value: str) -> Decimal:
+    match = re.search(r"-?\d[\d,.]*", value)
+    assert match is not None, f"Não foi possível extrair um valor monetário de: {value!r}"
+    normalized = match.group(0).replace(",", "")
+    return Decimal(normalized).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
+
+def _cart_item(page: Page, product_name: str):
+    item = page.locator(CART_ITEM_SELECTOR).filter(has_text=product_name)
+    expect(item).to_have_count(1)
+    return item
+
+
+def test_CT001_adicionar_tres_unidades_de_claw_hammer(page: Page) -> None:
+    _open_product(page, "Claw Hammer")
+    _set_product_quantity(page, 3)
+    _add_to_cart(page)
+
+    expect(page.get_by_text(ADD_CONFIRMATION, exact=True)).to_be_visible()
+    expect(page.locator(CART_COUNT_SELECTOR)).to_have_text("3")
+
+
+def test_CT002_conferir_totais_com_tres_unidades(page: Page) -> None:
+    unit_price = _open_product(page, "Claw Hammer")
+    _set_product_quantity(page, 3)
+    _add_to_cart(page)
+    expect(page.get_by_text(ADD_CONFIRMATION, exact=True)).to_be_visible()
+
+    _open_cart(page)
+    item = _cart_item(page, "Claw Hammer")
+
+    line_total = _money_from_text(item.locator(LINE_TOTAL_SELECTOR).inner_text())
+    cart_total = _money_from_text(page.locator(CART_TOTAL_SELECTOR).inner_text())
+    expected_total = (unit_price * 3).quantize(
+        Decimal("0.01"), rounding=ROUND_HALF_UP
+    )
+
+    assert line_total == expected_total
+    assert cart_total == line_total
+
+
+def test_CT003_atualizar_quantidade_no_carrinho(page: Page) -> None:
+    unit_price = _open_product(page, "Claw Hammer")
+    _set_product_quantity(page, 3)
+    _add_to_cart(page)
+    expect(page.get_by_text(ADD_CONFIRMATION, exact=True)).to_be_visible()
+
+    _open_cart(page)
+    item = _cart_item(page, "Claw Hammer")
+    quantity_input = item.get_by_label(QUANTITY_LABEL)
+    quantity_input.fill("1")
+    quantity_input.press("Enter")
+
+    expected_total = unit_price.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    expect(quantity_input).to_have_value("1")
+    expect(page.locator(CART_TOTAL_SELECTOR)).to_have_text(
+        re.compile(re.escape(f"{expected_total:.2f}"))
+    )
+
+
+def test_CT004_impedir_tres_unidades_de_thor_hammer(page: Page) -> None:
+    _open_product(page, "Thor Hammer")
+    _set_product_quantity(page, 3)
+    _add_to_cart(page)
+
+    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()
+```

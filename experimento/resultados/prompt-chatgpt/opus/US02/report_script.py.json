@@ -1,0 +1,193 @@
+{
+ "created": 1793383460.5595593,
+ "duration": 27.48373031616211,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US02",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_adicionar_tres_unidades_claw_hammer[chromium]",
+     "type": "Function",
+     "lineno": 85
+    },
+    {
+     "nodeid": "script.py::test_CT002_totais_carrinho_com_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 93
+    },
+    {
+     "nodeid": "script.py::test_CT003_alterar_quantidade_carrinho_para_um[chromium]",
+     "type": "Function",
+     "lineno": 105
+    },
+    {
+     "nodeid": "script.py::test_CT004_bloquear_tres_unidades_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 116
+    },
+    {
+     "nodeid": "script.py::test_CT005_bloquear_duas_unidades_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 123
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_adicionar_tres_unidades_claw_hammer[chromium]",
+   "lineno": 85,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_adicionar_tres_unidades_claw_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.47317540005315095,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.611798800062388,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.02124909998383373,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_totais_carrinho_com_tres_unidades[chromium]",
+   "lineno": 93,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_totais_carrinho_com_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12078460003249347,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.66007870004978,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.018984800088219345,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_alterar_quantidade_carrinho_para_um[chromium]",
+   "lineno": 105,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_alterar_quantidade_carrinho_para_um[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11275239998940378,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.06130080006551,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.02059119998011738,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_bloquear_tres_unidades_thor_hammer[chromium]",
+   "lineno": 116,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_bloquear_tres_unidades_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12515129998791963,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.862706799991429,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.020438099978491664,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_bloquear_duas_unidades_thor_hammer[chromium]",
+   "lineno": 123,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT005_bloquear_duas_unidades_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1237964000320062,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.9810636000474915,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.2470470000989735,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

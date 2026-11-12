@@ -1,0 +1,20 @@
+[
+ "O foco é interface web. O script utiliza Python, pytest, Playwright síncrono e **pytest-playwright**, conforme os requisitos técnicos finais, que prevalecem sobre a proibição anterior de plugins e a exigência de fixtures próprias.",
+ "O arquivo deve ser salvo como `test_compra.py`. O ambiente precisa ter pytest, playwright e pytest-playwright instalados, além do Chromium instalado pelo Playwright. A execução é `pytest test_compra.py`; os padrões do plugin são Chromium headless e contexto isolado por teste.",
+ "Não houve acesso ao sistema ou à internet. Rotas, seletores, nome do cliente e contratos de interação abaixo são hipóteses de implementação; precisam ser conferidos antes da execução real. O script é completo, mas não foi executado nem validado contra a aplicação.",
+ "Os critérios fornecidos correspondem, na ordem, a CA1 até CA6. CT02 e CT03 estendem CA1 para verificar cada obrigatório isoladamente.",
+ "As rotas de interface são `/auth/login`, `/account` e `/checkout`. Não são utilizados endpoints de API nem payloads HTTP construídos pelo script.",
+ "A interface está em inglês. Login usa os rótulos acessíveis exatos `Email` e `Password` e o botão `Login`. A conta tem o cabeçalho `My account`.",
+ "O nome da conta demonstrativa é presumido como `Jane Doe`, exibido no elemento `data-testid=\"nav-menu\"`. Esse valor é uma hipótese independente das credenciais fornecidas.",
+ "Todos os identificadores utilizados por `get_by_test_id` são presumidos como atributos `data-testid`, com valores centralizados em `TEST_IDS`. Não se presume que esses atributos existam realmente.",
+ "A página inicial possui pelo menos um produto disponível, identificado por `product-card`. O primeiro produto pode ser comprado em quantidade unitária e não requer seleção de variante. Após adicioná-lo, `cart-quantity` mostra `1`; o checkout apresenta exatamente uma linha `cart-item`.",
+ "O checkout possui painéis identificáveis `checkout-sign-in`, `checkout-address` e `checkout-payment`, além de botões distintos para avançar de cada etapa. Para clientes autenticados, a etapa de identificação ainda exige clicar em continuar.",
+ "Os seis campos de endereço são controles de texto, inclusive país e número, com os identificadores definidos no script. Ao limpar todos, o formulário permanece bloqueado; ao preencher todos com os dados propostos, permite avançar. Não foram inventadas mensagens de validação do endereço.",
+ "Quando o avanço está bloqueado, seu botão pode ficar desabilitado ou permitir clique sem mudar de etapa. O script contempla ambos os comportamentos. Os painéis inativos ficam ocultos ou ausentes.",
+ "CT04 considera que uma tentativa de acesso direto a `/account` sem sessão redireciona para `/auth/login`. Cada teste começa com contexto novo, sem sessão nem carrinho persistido localmente.",
+ "Os dados de endereço são fictícios. O ambiente demonstrativo aceita `Brazil`, CEP `01310-100`, número `100`, rua `Avenida Paulista`, cidade `Sao Paulo` e estado `SP`.",
+ "Pagamento usa um elemento HTML `select`, com opção `Credit Card`; número de cartão, validade, código de segurança e titular são campos de texto. A validade aceita `MM/YYYY`.",
+ "O cartão `4111111111111111`, validade `12/2035`, código `123` e titular `Jane Doe` são dados fictícios aceitos pelo ambiente de demonstração. Não há cobrança real, autenticação adicional, CAPTCHA ou 3-D Secure.",
+ "Pagamento e pedido são confirmações distintas. A mensagem de pagamento coincide com o texto do CA6, e a confirmação final contém `Thanks for your order! Your invoice number is INV-` seguido por um identificador não vazio.",
+ "Os elementos e transições ficam disponíveis em até 15 segundos. Os testes usam esperas automáticas e asserções `expect`, sem pausas fixas."
+]

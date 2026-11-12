@@ -1,0 +1,132 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Criar reserva com dados válidos | positivo | 1 | Enviar uma reserva válida para criação. | HTTP 200; resposta contém identificador numérico e os mesmos dados enviados. |
+| CT002 | Consultar reserva criada | positivo | 2 | Criar uma reserva e consultar pelo identificador retornado. | HTTP 200; todos os campos da reserva correspondem aos dados enviados. |
+| CT003 | Consultar identificador inexistente | negativo | 3 | Consultar a reserva com identificador 99999999. | HTTP 404. |
+| CT004 | Filtrar reservas pelo nome e sobrenome | positivo | 4 | Criar reserva com nome e sobrenome únicos e listar usando ambos os filtros. | A lista contém o identificador da reserva criada. |
+
+SUPOSIÇÕES
+
+1. Os critérios não têm identificadores próprios; a correspondência adotada é CA01 para o critério 1, CA02 para o 2, CA03 para o 3 e CA04 para o 4, na ordem apresentada.
+2. A API REST usa `POST /booking` para criar reservas, `GET /booking/{id}` para consultar uma reserva e `GET /booking?firstname=...&lastname=...` para filtrar reservas. Essas rotas e métodos são inferidos da URL base e dos critérios.
+3. O corpo de criação usa os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, e `additionalneeds`. A resposta de criação contém `bookingid` e `booking`; a consulta retorna diretamente os campos da reserva. Esses formatos são inferidos e podem precisar de ajuste para compatibilidade com o sistema real.
+4. Os testes enviam `Content-Type: application/json` e `Accept: application/json`, sem autenticação. As credenciais, cabeçalhos adicionais e pré-condições de autenticação não foram especificados.
+5. Os dados válidos usados nos testes são exemplos plausíveis, sem assumir limites de preço ou regras adicionais de datas. No caso de listagem, um sufixo gerado em tempo de execução torna nome e sobrenome únicos para reduzir colisões.
+6. O identificador `99999999` é usado conforme o exemplo do critério 3 e presume-se que não exista no ambiente. O serviço precisa estar acessível na URL base. Os testes não removem reservas criadas, pois o critério não especifica endpoint de limpeza nem autenticação para exclusão.
+7. Os critérios não especificam casos de entrada inválida ou limites de campos; por isso, casos adicionais negativos ou de borda exigiriam inventar regras. O caso negativo aplicável é a consulta de identificador inexistente, explicitamente descrita.
+
+```python
+import uuid
+
+import pytest
+import requests
+
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+REQUEST_TIMEOUT_SECONDS = 15
+
+HEADERS = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+
+def make_booking(firstname="Ana", lastname="Silva"):
+    return {
+        "firstname": firstname,
+        "lastname": lastname,
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2027-05-10",
+            "checkout": "2027-05-15",
+        },
+        "additionalneeds": "Breakfast",
+    }
+
+
+def create_booking(payload):
+    response = requests.post(
+        f"{BASE_URL}/booking",
+        json=payload,
+        headers=HEADERS,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
+    return response
+
+
+def assert_booking_fields(actual, expected):
+    assert actual["firstname"] == expected["firstname"]
+    assert actual["lastname"] == expected["lastname"]
+    assert actual["totalprice"] == expected["totalprice"]
+    assert actual["depositpaid"] == expected["depositpaid"]
+    assert actual["bookingdates"]["checkin"] == expected["bookingdates"]["checkin"]
+    assert actual["bookingdates"]["checkout"] == expected["bookingdates"]["checkout"]
+    assert actual["additionalneeds"] == expected["additionalneeds"]
+
+
+def test_CT001_criar_reserva_com_dados_validos():
+    payload = make_booking()
+    response = create_booking(payload)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert isinstance(body["bookingid"], int)
+    assert body["bookingid"] > 0
+    assert_booking_fields(body["booking"], payload)
+
+
+def test_CT002_consultar_reserva_criada():
+    payload = make_booking(firstname="Bruno", lastname="Costa")
+    create_response = create_booking(payload)
+
+    assert create_response.status_code == 200
+    booking_id = create_response.json()["bookingid"]
+    assert isinstance(booking_id, int)
+
+    response = requests.get(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers=HEADERS,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
+
+    assert response.status_code == 200
+    assert_booking_fields(response.json(), payload)
+
+
+def test_CT003_consultar_identificador_inexistente():
+    response = requests.get(
+        f"{BASE_URL}/booking/99999999",
+        headers=HEADERS,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
+
+    assert response.status_code == 404
+
+
+def test_CT004_filtrar_reservas_por_nome_e_sobrenome():
+    unique_suffix = uuid.uuid4().hex
+    firstname = f"Teste{unique_suffix[:8]}"
+    lastname = f"Reserva{unique_suffix[8:16]}"
+    payload = make_booking(firstname=firstname, lastname=lastname)
+
+    create_response = create_booking(payload)
+
+    assert create_response.status_code == 200
+    booking_id = create_response.json()["bookingid"]
+    assert isinstance(booking_id, int)
+
+    response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": firstname, "lastname": lastname},
+        headers=HEADERS,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+    )
+
+    assert response.status_code == 200
+    bookings = response.json()
+    assert isinstance(bookings, list)
+    assert any(item["bookingid"] == booking_id for item in bookings)
+```

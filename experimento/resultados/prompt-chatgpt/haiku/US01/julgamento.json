@@ -1,0 +1,74 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C02",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "Espera busca+ordenacao por preco; o real nao ordena resultados da busca"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca",
+   "categoria": "comportamento real diferente da doc",
+   "nota": "Busca nao respeita ordenacao: preco na busca vem em ordem de relevancia"
+  }
+ ]
+}

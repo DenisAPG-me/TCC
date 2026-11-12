@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar mensagem válida como visitante",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher nome, assunto, e-mail e mensagem válidos; enviar o formulário",
+  "esperado": "A página exibe “Thanks for getting in touch <nome>!” com o nome informado"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Conferir incremento do contador e mensagem recebida",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA3, CA4",
+  "passos": "Fazer login; anotar o contador de Messages; enviar mensagem válida como visitante; abrir o painel; conferir o contador e abrir Messages",
+  "esperado": "O contador aumenta exatamente uma unidade e a lista contém o nome e o assunto enviados"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Bloquear envio sem nome",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher os demais campos obrigatórios e deixar o nome vazio; enviar o formulário",
+  "esperado": "A mensagem não é enviada e a confirmação de sucesso não aparece"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Bloquear envio sem assunto",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher os demais campos obrigatórios e deixar o assunto vazio; enviar o formulário",
+  "esperado": "A mensagem não é enviada e a confirmação de sucesso não aparece"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Solicitar login ao abrir Messages após logout",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Fazer login; sair do painel; abrir diretamente a URL de Messages",
+  "esperado": "O administrador é redirecionado à tela de login ou recebe solicitação para se autenticar"
+ }
+]

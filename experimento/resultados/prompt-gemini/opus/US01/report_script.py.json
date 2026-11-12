@@ -1,0 +1,307 @@
+{
+ "created": 1793386665.5981789,
+ "duration": 112.92899465560913,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01",
+ "environment": {},
+ "summary": {
+  "passed": 3,
+  "failed": 3,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+     "type": "Function",
+     "lineno": 48
+    },
+    {
+     "nodeid": "script.py::test_ct02_busca_por_hammer_maiusculo_ignora_caixa[chromium]",
+     "type": "Function",
+     "lineno": 53
+    },
+    {
+     "nodeid": "script.py::test_ct03_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+     "type": "Function",
+     "lineno": 58
+    },
+    {
+     "nodeid": "script.py::test_ct04_ordenacao_por_preco_crescente[chromium]",
+     "type": "Function",
+     "lineno": 64
+    },
+    {
+     "nodeid": "script.py::test_ct05_ordenacao_por_nome_z_a[chromium]",
+     "type": "Function",
+     "lineno": 71
+    },
+    {
+     "nodeid": "script.py::test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina[chromium]",
+     "type": "Function",
+     "lineno": 78
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+   "lineno": 48,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 2.9828790999017656,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6173256000038236,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014157800003886223,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_busca_por_hammer_maiusculo_ignora_caixa[chromium]",
+   "lineno": 53,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_busca_por_hammer_maiusculo_ignora_caixa[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 2.4991694000782445,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5871167000150308,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013203099952079356,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+   "lineno": 58,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 2.5402834999840707,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6337531000608578,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012680800049565732,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_ordenacao_por_preco_crescente[chromium]",
+   "lineno": 64,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_ordenacao_por_preco_crescente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 2.514839000068605,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 30.01795080001466,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 66,
+      "message": "in test_ct04_ordenacao_por_preco_crescente"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 30,
+      "message": "in sort_by"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:66: in test_ct04_ordenacao_por_preco_crescente\n    sort_by(home, \"Price (Low - High)\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:30: in sort_by\n    with page.expect_response(lambda r: \"/products\" in r.url and \"sort=\" in r.url) as response_info:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.014667400042526424,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_ordenacao_por_nome_z_a[chromium]",
+   "lineno": 71,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_ordenacao_por_nome_z_a[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 4.507128099910915,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 30.017167199985124,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 73,
+      "message": "in test_ct05_ordenacao_por_nome_z_a"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 30,
+      "message": "in sort_by"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:73: in test_ct05_ordenacao_por_nome_z_a\n    sort_by(home, \"Name (Z - A)\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:30: in sort_by\n    with page.expect_response(lambda r: \"/products\" in r.url and \"sort=\" in r.url) as response_info:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.013947700033895671,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina[chromium]",
+   "lineno": 78,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 5.570585099980235,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 30.011025200015865,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+     "lineno": 59,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 82,
+      "message": "in test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py",
+      "lineno": 30,
+      "message": "in sort_by"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 85,
+      "message": "in __exit__"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py",
+      "lineno": 59,
+      "message": "in value"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:82: in test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina\n    sort_by(home, \"Price (Low - High)\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US01\\script.py:30: in sort_by\n    with page.expect_response(lambda r: \"/products\" in r.url and \"sort=\" in r.url) as response_info:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event \"response\""
+   },
+   "teardown": {
+    "duration": 0.21283560001756996,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

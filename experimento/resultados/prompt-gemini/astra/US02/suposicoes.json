@@ -1,0 +1,18 @@
+[
+ "Nenhum acesso ao sistema ou à internet foi realizado. Seletores, navegação e apresentação monetária abaixo são deduções que precisam ser confirmadas no sistema real.",
+ "A interface está em inglês. “Claw Hammer” e “Thor Hammer” estão disponíveis na página inicial, sem necessidade de autenticação, busca ou paginação.",
+ "A URL base é `https://practicesoftwaretesting.com/`, definida em uma constante no início do arquivo.",
+ "Os produtos são acessíveis por links com nomes acessíveis exatamente iguais aos seus nomes. As rotas de produto e carrinho não são conhecidas; a navegação utiliza os links da interface.",
+ "O atributo de identificação dos elementos é `data-test`, configurado para uso com `get_by_test_id`.",
+ "Na página do produto, `quantity` identifica o campo editável da quantidade e `add-to-cart` identifica o botão de adicionar.",
+ "`cart-quantity` identifica o indicador numérico do carrinho; `nav-cart` identifica o acesso ao carrinho.",
+ "No carrinho, cada produto ocupa uma linha com papel acessível `row`, contendo seu nome. Dentro dessa linha, `product-price` identifica o preço unitário, `product-total` identifica o total da linha e `product-quantity` identifica o campo editável da quantidade.",
+ "`cart-total` identifica exclusivamente o total monetário do carrinho.",
+ "Os preços são exibidos em dólares, com símbolo `$`, ponto decimal, duas casas decimais e sem separador de milhares. Não há frete, taxas ou descontos nos totais especificados.",
+ "Alterar a quantidade no carrinho e retirar o foco com `Tab` dispara o recálculo automaticamente.",
+ "As mensagens exigidas são elementos visíveis, com os textos exatos dos critérios.",
+ "Cada teste usa a fixture `page` e um contexto isolado fornecidos pelo plugin oficial `pytest-playwright`, começando com carrinho vazio. Não existe carrinho compartilhado entre sessões.",
+ "CT03 cobre a borda de uma unidade explicitamente mencionada. Isso não estabelece um mínimo permitido. Quantidades zero, negativas, fracionárias, vazias, limites de estoque e outros valores para “Thor Hammer” não possuem resultados definidos na história e, portanto, não geram casos adicionais.",
+ "CT04 verifica somente a mensagem exigida; o critério não define o estado final do carrinho após a tentativa.",
+ "O ambiente deve conter `pytest`, `playwright`, o plugin obrigatório `pytest-playwright` e o navegador Chromium instalado. Execução: `python -m pytest test_carrinho.py --browser chromium`."
+]

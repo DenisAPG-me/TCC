@@ -1,0 +1,13 @@
+[
+ "Tecnologia: Python + pytest + pytest-playwright (fixture `page` do plugin), pois a User Story é de interface web. Os testes usam `expect` de `playwright.sync_api`. O navegador é o Chromium padrão do plugin, em modo headless por padrão.",
+ "Campo de busca: `[data-test=\"search-query\"]`. A busca é disparada com Enter.",
+ "Seletor de ordenação: `[data-test=\"sort\"]`, um `<select>` com opções \"Price (Low - High)\" e \"Name (Z - A)\".",
+ "Produtos: nome em `[data-test=\"product-name\"]` e preço em `[data-test=\"product-price\"]`, com preço no formato \"$12.50\" (ponto decimal).",
+ "O texto de busca é exibido como \"Searched for: hammer\". A verificação é feita com regex sem distinção de caixa.",
+ "A mensagem de ausência de resultados é exatamente \"There are no products found.\".",
+ "A listagem é atualizada por uma requisição de rede cuja URL contém \"products\". Os testes aguardam essa resposta e depois o estado `networkidle`, sem `time.sleep`.",
+ "A busca e a ordenação são case-insensitive quanto ao nome do produto (CT05 assume que \"HAMMER\" retorna os mesmos resultados de \"hammer\").",
+ "Existe ao menos um produto com \"hammer\" no nome e a listagem tem mais de um produto para ordenar (CT03, CT04, CT06).",
+ "As verificações de ordenação consideram apenas os itens da página atual, pois a paginação não é descrita na User Story.",
+ "Não há dados reais disponíveis; os valores de teste vêm da própria User Story."
+]

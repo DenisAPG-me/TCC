@@ -1,0 +1,417 @@
+{
+ "created": 1793384642.6181297,
+ "duration": 29.650346994400024,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 6,
+  "total": 10,
+  "collected": 10
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_busca_hammer_lista_somente_produtos_com_hammer[chromium]",
+     "type": "Function",
+     "lineno": 40
+    },
+    {
+     "nodeid": "script.py::test_ct02_pagina_indica_que_busca_foi_por_hammer[chromium]",
+     "type": "Function",
+     "lineno": 48
+    },
+    {
+     "nodeid": "script.py::test_ct03_termo_inexistente_exibe_mensagem_nenhum_produto[chromium]",
+     "type": "Function",
+     "lineno": 54
+    },
+    {
+     "nodeid": "script.py::test_ct04_termo_inexistente_nao_lista_produtos[chromium]",
+     "type": "Function",
+     "lineno": 60
+    },
+    {
+     "nodeid": "script.py::test_ct05_ordena_por_preco_do_menor_para_o_maior[chromium]",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_ct06_ordena_por_nome_de_z_a_a[chromium]",
+     "type": "Function",
+     "lineno": 74
+    },
+    {
+     "nodeid": "script.py::test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas[chromium]",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados[chromium]",
+     "type": "Function",
+     "lineno": 91
+    },
+    {
+     "nodeid": "script.py::test_ct09_ordenacao_por_preco_preserva_filtro_da_busca[chromium]",
+     "type": "Function",
+     "lineno": 101
+    },
+    {
+     "nodeid": "script.py::test_ct10_ordenacao_em_busca_sem_resultados_nao_exibe_produtos[chromium]",
+     "type": "Function",
+     "lineno": 111
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_busca_hammer_lista_somente_produtos_com_hammer[chromium]",
+   "lineno": 40,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_busca_hammer_lista_somente_produtos_com_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4567541000433266,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.2808098000241444,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014013999956659973,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_pagina_indica_que_busca_foi_por_hammer[chromium]",
+   "lineno": 48,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_pagina_indica_que_busca_foi_por_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09377390006557107,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.124849700019695,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 52,
+     "message": "AssertionError: Locator expected to have Value 'hammer'\nActual value:  \nCall log:\n  - Expect \"to_have_value\" get_by_role(\"textbox\", name=\"Search\") with timeout 5000ms\n  - waiting for get_by_role(\"textbox\", name=\"Search\")\n    14 \u00d7 locator resolved to <input type=\"text\" wfd-id=\"id0\" id=\"search-query\" placeholder=\"Search\" formcontrolname=\"query\" data-test=\"search-query\" _ngcontent-ng-c2621549667=\"\" class=\"form-control ng-untouched ng-pristine ng-invalid\"/>\n       - unexpected value \"\"\n\nAria snapshot:\n- textbox \"Search\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 52,
+      "message": "in test_ct02_pagina_indica_que_busca_foi_por_hammer"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:52: in test_ct02_pagina_indica_que_busca_foi_por_hammer\n    expect(page.get_by_role(\"textbox\", name=SEARCH_BOX)).to_have_value(\"hammer\")\nE   AssertionError: Locator expected to have Value 'hammer'\nE   Actual value:  \nE   Call log:\nE     - Expect \"to_have_value\" get_by_role(\"textbox\", name=\"Search\") with timeout 5000ms\nE     - waiting for get_by_role(\"textbox\", name=\"Search\")\nE       14 \u00d7 locator resolved to <input type=\"text\" wfd-id=\"id0\" id=\"search-query\" placeholder=\"Search\" formcontrolname=\"query\" data-test=\"search-query\" _ngcontent-ng-c2621549667=\"\" class=\"form-control ng-untouched ng-pristine ng-invalid\"/>\nE          - unexpected value \"\"\nE   \nE   Aria snapshot:\nE   - textbox \"Search\""
+   },
+   "teardown": {
+    "duration": 0.015368100022897124,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_termo_inexistente_exibe_mensagem_nenhum_produto[chromium]",
+   "lineno": 54,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_termo_inexistente_exibe_mensagem_nenhum_produto[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12393890006933361,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1292725999373943,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01377299998421222,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_termo_inexistente_nao_lista_produtos[chromium]",
+   "lineno": 60,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_termo_inexistente_nao_lista_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11413529992569238,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.297974699991755,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01335090002976358,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_ordena_por_preco_do_menor_para_o_maior[chromium]",
+   "lineno": 67,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_ordena_por_preco_do_menor_para_o_maior[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11869130004197359,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1706752000609413,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 72,
+     "message": "assert [14.15, 12.01...7, 13.41, ...] == [9.17, 11.14,...8, 13.41, ...]\n  \n  At index 0 diff: 14.15 != 9.17\n  Use -v to get more diff"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 72,
+      "message": "in test_ct05_ordena_por_preco_do_menor_para_o_maior"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:72: in test_ct05_ordena_por_preco_do_menor_para_o_maior\n    assert prices == sorted(prices)\nE   assert [14.15, 12.01...7, 13.41, ...] == [9.17, 11.14,...8, 13.41, ...]\nE     \nE     At index 0 diff: 14.15 != 9.17\nE     Use -v to get more diff"
+   },
+   "teardown": {
+    "duration": 0.013329700101166964,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_ordena_por_nome_de_z_a_a[chromium]",
+   "lineno": 74,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct06_ordena_por_nome_de_z_a_a[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12003380001988262,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1880524998996407,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 79,
+     "message": "AssertionError: assert [' Combinatio...n Grip ', ...] == ['Thor Hammer...Pliers ', ...]\n  \n  At index 0 diff: ' Combination Pliers ' != 'Thor Hammer'\n  Use -v to get more diff"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 79,
+      "message": "in test_ct06_ordena_por_nome_de_z_a_a"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:79: in test_ct06_ordena_por_nome_de_z_a_a\n    assert names == sorted(names, key=str.lower, reverse=True)\nE   AssertionError: assert [' Combinatio...n Grip ', ...] == ['Thor Hammer...Pliers ', ...]\nE     \nE     At index 0 diff: ' Combination Pliers ' != 'Thor Hammer'\nE     Use -v to get more diff"
+   },
+   "teardown": {
+    "duration": 0.01318800006993115,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas[chromium]",
+   "lineno": 81,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11692319996654987,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1504200999625027,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 89,
+     "message": "AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\n  \n  At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\n  Right contains 3 more items, first extra item: 'Pliers'\n  Use -v to get more diff"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 89,
+      "message": "in test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:89: in test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas\n    assert lower_names == upper_names\nE   AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\nE     \nE     At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\nE     Right contains 3 more items, first extra item: 'Pliers'\nE     Use -v to get more diff"
+   },
+   "teardown": {
+    "duration": 0.013197000022046268,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados[chromium]",
+   "lineno": 91,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11629860009998083,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.159257399966009,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 99,
+     "message": "AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\n  \n  At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\n  Right contains 3 more items, first extra item: 'Pliers'\n  Use -v to get more diff"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 99,
+      "message": "in test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:99: in test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados\n    assert actual == expected\nE   AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\nE     \nE     At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\nE     Right contains 3 more items, first extra item: 'Pliers'\nE     Use -v to get more diff"
+   },
+   "teardown": {
+    "duration": 0.014235900016501546,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_ordenacao_por_preco_preserva_filtro_da_busca[chromium]",
+   "lineno": 101,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct09_ordenacao_por_preco_preserva_filtro_da_busca[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12157980003394186,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.2028883000602946,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+     "lineno": 107,
+     "message": "assert False\n +  where False = all(<generator object test_ct09_ordenacao_por_preco_preserva_filtro_da_busca.<locals>.<genexpr> at 0x0000019BE9951000>)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py",
+      "lineno": 107,
+      "message": "in test_ct09_ordenacao_por_preco_preserva_filtro_da_busca"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:107: in test_ct09_ordenacao_por_preco_preserva_filtro_da_busca\n    assert all(\"hammer\" in name.lower() for name in names)\nE   assert False\nE    +  where False = all(<generator object test_ct09_ordenacao_por_preco_preserva_filtro_da_busca.<locals>.<genexpr> at 0x0000019BE9951000>)"
+   },
+   "teardown": {
+    "duration": 0.013981200056150556,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct10_ordenacao_em_busca_sem_resultados_nao_exibe_produtos[chromium]",
+   "lineno": 111,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct10_ordenacao_em_busca_sem_resultados_nao_exibe_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11501260008662939,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.9555305999238044,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.23991410003509372,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

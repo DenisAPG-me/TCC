@@ -1,0 +1,10 @@
+[
+ "1. A aplicação está hospedada na URL base `https://practicesoftwaretesting.com/` e está acessível e funcional.",
+ "2. O campo de busca de produtos na página inicial é um elemento de entrada (input) ou possui um rótulo/placeholder identificável, e assumimos o seletor `[data-test=\"search-query\"]` ou campo de busca acessível por placeholder \"Search\", juntamente com um botão de busca `[data-test=\"search-submit\"]`.",
+ "3. Os critérios de aceitação foram numerados de CA01 a CA04 na ordem de apresentação, uma vez que não possuíam identificadores prévios na User Story.",
+ "4. Para a verificação da listagem em CT001, assume-se que os cartões de produtos possuem o seletor `[data-test^=\"product-\"]` e que o título da busca é exibido em elemento com seletor `[data-test=\"search-caption\"]` ou similar.",
+ "5. Para a mensagem de produto não encontrado em CT002, assume-se que a mensagem \"There are no products found.\" é exibida em elemento com seletor `[data-test=\"no-results\"]` ou texto correspondente na página.",
+ "6. Para a ordenação (CT003 e CT004), assume-se que existe um elemento select de ordenação com seletor `[data-test=\"sort\"]`, cujas opções correspondem a ordenar por preço ascendente (valor correspondente a preço menor para maior, ex: `price,asc`) e por nome decrescente (valor correspondente a Z a A, ex: `name,desc`).",
+ "7. Não se aplica teste de API REST explícito na User Story, pois a descrição foca exclusivamente em busca de produtos e ordenação na interface web da loja; portanto, todos os testes são de interface web implementados com pytest-playwright.",
+ "8. Não há casos de borda aplicáveis estritamente além dos cenários positivos e negativos contemplados, justificando a ausência de testes específicos de borda adicionais."
+]

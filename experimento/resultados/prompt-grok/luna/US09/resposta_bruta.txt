@@ -1,0 +1,153 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Excluir sem token | negativo | 1 | Criar reserva; tentar excluí-la sem cabeçalho de token; consultá-la pelo ID. | Exclusão retorna 403; consulta retorna 200. |
+| TC02 | Excluir com token inválido | negativo | 2 | Criar reserva; tentar excluí-la com token inválido; consultá-la pelo ID. | Exclusão retorna 403; a reserva continua existindo. |
+| TC03 | Excluir com token válido | positivo | 3, 4 | Criar reserva; obter token autenticando como admin; excluir a reserva; consultá-la pelo ID. | Exclusão retorna 201; consulta retorna 404. |
+| TC04 | Excluir a mesma reserva novamente | borda | 5 | Criar duas reservas; excluir uma com token válido; tentar excluí-la novamente; consultar a outra. | Segunda exclusão retorna 4xx; a outra reserva permanece consultável com status 200. |
+| TC05 | Listar por nome após exclusão | positivo | 6 | Criar reserva com nome único; excluí-la com token válido; listar reservas filtrando pelo primeiro e último nome. | Lista retornada está vazia. |
+
+SUPOSIÇÕES
+
+- A API usa `POST /booking` para criar reservas, `POST /auth` para autenticar, `DELETE /booking/{id}` para excluir e `GET /booking/{id}` para consultar.
+- A listagem aceita os parâmetros `firstname` e `lastname` em `GET /booking`; com esses filtros, retorna uma lista JSON de identificadores.
+- O token retornado por `POST /auth` pode ser enviado como cookie `Cookie: token=<valor>`; token inválido também é enviado nesse formato.
+- Reservas podem ser criadas com os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`, e as respostas de criação incluem `bookingid`.
+- As credenciais `admin / password123` são aceitas em `POST /auth` no corpo JSON com os campos `username` e `password`.
+- Cada teste cria seus próprios dados; os nomes usam UUID para reduzir colisões. A disponibilidade e o estado da API externa não são garantidos.
+- Respostas JSON da listagem contêm identificadores em objetos com a chave `bookingid`; para o filtro pelo nome único, a lista vazia é representada por `[]`.
+- Os status esperados e o comportamento após exclusão seguem os critérios da User Story; não são derivados de documentação externa.
+
+```python
+import uuid
+
+import pytest
+import requests
+
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 15
+
+
+def unique_names():
+    suffix = uuid.uuid4().hex
+    return f"QA{suffix}", f"Test{suffix}"
+
+
+def create_booking(firstname, lastname):
+    response = requests.post(
+        f"{BASE_URL}/booking",
+        json={
+            "firstname": firstname,
+            "lastname": lastname,
+            "totalprice": 123,
+            "depositpaid": True,
+            "bookingdates": {
+                "checkin": "2027-01-01",
+                "checkout": "2027-01-05",
+            },
+            "additionalneeds": "QA test",
+        },
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200, response.text
+    booking_id = response.json()["bookingid"]
+    return booking_id
+
+
+def get_token():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "admin", "password": "password123"},
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200, response.text
+    token = response.json().get("token")
+    assert token, response.text
+    return token
+
+
+def delete_booking(booking_id, token=None):
+    headers = {}
+    if token is not None:
+        headers["Cookie"] = f"token={token}"
+    return requests.delete(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers=headers,
+        timeout=TIMEOUT,
+    )
+
+
+def booking_exists(booking_id):
+    return requests.get(
+        f"{BASE_URL}/booking/{booking_id}",
+        timeout=TIMEOUT,
+    )
+
+
+def test_TC01_delete_without_token_returns_403_and_booking_remains():
+    firstname, lastname = unique_names()
+    booking_id = create_booking(firstname, lastname)
+
+    delete_response = delete_booking(booking_id)
+    assert delete_response.status_code == 403
+
+    get_response = booking_exists(booking_id)
+    assert get_response.status_code == 200
+
+
+def test_TC02_delete_with_invalid_token_returns_403_and_booking_remains():
+    firstname, lastname = unique_names()
+    booking_id = create_booking(firstname, lastname)
+
+    delete_response = delete_booking(booking_id, token="invalid-token")
+    assert delete_response.status_code == 403
+
+    get_response = booking_exists(booking_id)
+    assert get_response.status_code == 200
+
+
+def test_TC03_delete_with_valid_token_returns_201_and_booking_is_gone():
+    firstname, lastname = unique_names()
+    booking_id = create_booking(firstname, lastname)
+    token = get_token()
+
+    delete_response = delete_booking(booking_id, token=token)
+    assert delete_response.status_code == 201
+
+    get_response = booking_exists(booking_id)
+    assert get_response.status_code == 404
+
+
+def test_TC04_repeated_delete_returns_4xx_without_affecting_other_booking():
+    token = get_token()
+    first_id = create_booking(*unique_names())
+    second_id = create_booking(*unique_names())
+
+    first_delete = delete_booking(first_id, token=token)
+    assert first_delete.status_code == 201
+
+    repeated_delete = delete_booking(first_id, token=token)
+    assert 400 <= repeated_delete.status_code < 500
+
+    unaffected_booking = booking_exists(second_id)
+    assert unaffected_booking.status_code == 200
+
+
+def test_TC05_listing_by_unique_name_is_empty_after_deletion():
+    firstname, lastname = unique_names()
+    booking_id = create_booking(firstname, lastname)
+    token = get_token()
+
+    delete_response = delete_booking(booking_id, token=token)
+    assert delete_response.status_code == 201
+
+    list_response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": firstname, "lastname": lastname},
+        timeout=TIMEOUT,
+    )
+    assert list_response.status_code == 200
+    assert list_response.json() == []
+```

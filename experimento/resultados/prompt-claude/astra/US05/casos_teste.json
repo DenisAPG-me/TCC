@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar credenciais vazias",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; Manter usuário e senha vazios; Clicar em Login",
+  "esperado": "Exibe Invalid credentials; Permanece em /admin com formulário de login visível"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; Informar admin e senha_incorreta; Clicar em Login",
+  "esperado": "Exibe Invalid credentials; Formulário de login permanece visível"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Entrar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar /admin; Informar admin e password; Clicar em Login; Conferir quartos e menu",
+  "esperado": "Acessa /admin/rooms; Exibe uma linha com quarto 101 e tipo Single; Menu exibe Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Sair do painel administrativo",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar /admin; Autenticar com admin e password; Clicar em Logout",
+  "esperado": "Retorna à URL inicial pública; Formulário de login não está visível"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Acessar quartos diretamente após logout",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Acessar /admin; Autenticar com admin e password; Clicar em Logout; Acessar diretamente /admin/rooms na mesma sessão",
+  "esperado": "Redireciona para /admin; Exibe novamente o formulário de login; Lista de quartos não está visível"
+ }
+]

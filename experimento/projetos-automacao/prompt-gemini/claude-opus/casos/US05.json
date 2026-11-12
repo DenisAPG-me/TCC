@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "Negativo",
+  "criterio": "AC1",
+  "passos": "1. Acessar `/admin`. 2. Deixar usuário e senha vazios. 3. Clicar em \"Login\".",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível em `/admin`."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com usuário \"admin\" e senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "1. Acessar `/admin`. 2. Informar \"admin\" / \"senhaErrada123\". 3. Clicar em \"Login\".",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; usuário não autenticado."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com senha correta em caixa diferente (\"Password\")",
+  "tipo": "Borda",
+  "criterio": "AC2",
+  "passos": "1. Acessar `/admin`. 2. Informar \"admin\" / \"Password\". 3. Clicar em \"Login\".",
+  "esperado": "Mensagem \"Invalid credentials\" exibida (senha sensível a maiúsculas/minúsculas)."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com usuário \"admin\" e senha vazia",
+  "tipo": "Borda",
+  "criterio": "AC1, AC2",
+  "passos": "1. Acessar `/admin`. 2. Informar \"admin\" e deixar a senha vazia. 3. Clicar em \"Login\".",
+  "esperado": "Mensagem \"Invalid credentials\" exibida; formulário de login continua visível."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Login válido exibe lista de quartos com o quarto 101 Single",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "1. Acessar `/admin`. 2. Informar \"admin\" / \"password\". 3. Clicar em \"Login\".",
+  "esperado": "Redirecionado para `/admin/rooms`; lista contém o quarto \"101\" do tipo \"Single\"."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login válido exibe menu com Rooms, Report, Branding e Messages",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "1. Fazer login válido. 2. Verificar o menu de navegação.",
+  "esperado": "Menu exibe os itens \"Rooms\", \"Report\", \"Branding\" e \"Messages\"."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "Positivo",
+  "criterio": "AC4",
+  "passos": "1. Fazer login válido. 2. Clicar em \"Logout\".",
+  "esperado": "Usuário é levado à página inicial pública (`/`)."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Acesso direto à lista de quartos após logout exige login",
+  "tipo": "Negativo",
+  "criterio": "AC5",
+  "passos": "1. Fazer login válido. 2. Clicar em \"Logout\". 3. Acessar diretamente `/admin/rooms`.",
+  "esperado": "Tela de login exibida; lista de quartos não acessível."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Acesso direto à lista de quartos sem nunca ter autenticado",
+  "tipo": "Borda",
+  "criterio": "AC5",
+  "passos": "1. Em sessão nova, acessar diretamente `/admin/rooms`.",
+  "esperado": "Tela de login exibida; lista de quartos não acessível."
+ }
+]

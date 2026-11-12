@@ -1,0 +1,15 @@
+[
+ "Os critérios fornecidos correspondem, na ordem, a CA1 até CA5. Os cinco casos cobrem os comportamentos definidos, incluindo a borda de ambos os campos vazios.",
+ "A tecnologia escolhida é Python com pytest e Playwright síncrono. Conforme os requisitos técnicos finais, que prevalecem sobre a proibição anterior de plugins, o script usa o plugin oficial pytest-playwright e sua fixture `page`, sem criar navegador ou fixtures próprias.",
+ "O ambiente deve ter pytest, playwright e pytest-playwright instalados, além do Chromium instalado pelo Playwright. A execução é `pytest test_admin.py`, utilizando os padrões do plugin: Chromium headless e contexto isolado por teste. O plugin gerencia o encerramento dos recursos.",
+ "Não houve acesso ao sistema nem execução dos testes. Rotas complementares, seletores e estrutura de página abaixo são deduções que precisam ser confirmadas no ambiente real.",
+ "A tela de login fica em `/admin`, a lista protegida fica em `/admin/rooms` e a página pública inicial fica em `/`. As verificações de URL aceitam barra final opcional, query string e fragmento.",
+ "Os campos possuem rótulos acessíveis exatos `Username` e `Password`. O envio usa um botão com nome acessível exato `Login`.",
+ "O formulário permite enviar campos vazios, sem bloqueio pela validação nativa do navegador. A mensagem exibida é exatamente `Invalid credentials`.",
+ "As credenciais válidas são `admin` e `password`. A senha `senha_incorreta` é considerada inválida.",
+ "A lista de quartos usa uma tabela acessível com linhas e células. Existe uma única linha contendo uma célula com texto exato `101` e outra com texto exato `Single`. Esse dado deve estar disponível durante a execução.",
+ "Existe um único elemento de navegação, contendo links com nomes acessíveis exatos `Rooms`, `Report`, `Branding` e `Messages`. `Logout` é um botão visível.",
+ "O logout redireciona para a página pública inicial e encerra a autenticação. O acesso posterior à rota protegida, no mesmo contexto do navegador, redireciona para `/admin`.",
+ "A página pública não exibe os campos de login administrativo. A tela de login não exibe a linha do quarto 101.",
+ "Não são presumidos endpoints REST nem payloads: a autenticação e o logout são realizados exclusivamente pela interface."
+]

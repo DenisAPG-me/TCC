@@ -1,0 +1,72 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C01",
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C01",
+    "US02-C04"
+   ],
+   "nota": "qtd 1 e total=unitario"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Thor Hammer com 1 unidade e aceito"
+  }
+ },
+ "falhas": []
+}

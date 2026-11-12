@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Consultar contador inicial",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Autenticar como administrador; localizar Messages; registrar o contador; recarregar o painel",
+  "esperado": "Contador é um inteiro não negativo e permanece igual sem novos envios"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar contato válido",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher todos os campos com dados válidos; enviar",
+  "esperado": "Confirmação exibe exatamente Thanks for getting in touch seguido do nome informado e exclamação"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Incrementar contador após envio",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA2, CA3",
+  "passos": "Autenticar; registrar contador; sair; enviar contato válido; autenticar novamente; comparar contador",
+  "esperado": "Visitante recebe confirmação e contador aumenta exatamente uma unidade"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Localizar mensagem enviada",
+  "tipo": "Positivo",
+  "criterio": "CA2, CA4",
+  "passos": "Enviar contato com assunto exclusivo; autenticar como administrador; abrir Messages; localizar mensagem",
+  "esperado": "Uma linha apresenta exatamente o nome e o assunto enviados"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Bloquear acesso direto após logout",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Autenticar; abrir Messages; sair; acessar diretamente a URL da caixa de mensagens",
+  "esperado": "Formulário de login é apresentado e lista de mensagens não fica visível"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Rejeitar contato com e-mail inválido",
+  "tipo": "Negativo",
+  "criterio": "CA1, CA2, CA3",
+  "passos": "Registrar contador autenticado; sair; preencher contato com e-mail inválido; tentar enviar; autenticar novamente; comparar contador",
+  "esperado": "E-mail fica inválido no formulário; confirmação não aparece; contador permanece igual"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Processar dois envios com os mesmos dados",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2, CA3, CA4",
+  "passos": "Registrar contador; sair; enviar contato válido; autenticar e verificar incremento; sair; repetir os mesmos dados; autenticar; verificar contador e lista",
+  "esperado": "Cada envio recebe confirmação e acrescenta uma unidade; duas linhas apresentam o mesmo nome e assunto"
+ }
+]

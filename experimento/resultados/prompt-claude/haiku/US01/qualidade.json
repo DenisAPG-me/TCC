@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes e organizacao claros.",
+  "estrutura": "Helpers/fixtures e pouca duplicacao.",
+  "assercoes": "Assercoes de negocio claras sobre texto/valores.",
+  "espera": "Esperas fragilizadas (networkidle, leitura imediata ou API incorreta).",
+  "manutenibilidade": "Constantes e seletores robustos (test-id/role)."
+ }
+}

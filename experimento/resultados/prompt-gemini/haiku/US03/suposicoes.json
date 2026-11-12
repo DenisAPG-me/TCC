@@ -1,0 +1,17 @@
+[
+ "**URLs:** login em `https://practicesoftwaretesting.com/#/auth/login`; página inicial em `https://practicesoftwaretesting.com/`. Aplicação Angular com roteamento por hash.",
+ "**Login:** campos por label `Email address` e `Password`; botão `Login` (role button, nome exato).",
+ "**Conta demo:** `customer@practicesoftwaretesting.com` / `welcome01`. Nome exibido no menu assumido como `Jane Doe` (constante `USER_NAME`).",
+ "**Mensagem para e-mail não cadastrado:** assume-se a mesma mensagem de senha incorreta, \"Invalid email or password\".",
+ "**Menu do usuário:** `<nav>` (role `navigation`) contém o nome do usuário; clicar nele abre dropdown com link/texto `My account`. A página tem heading `My account`.",
+ "**Produtos:** card de produto com `data-test=\"product-name\"`; primeiro produto da listagem é usado.",
+ "**Carrinho:** ícone com `data-test=\"nav-cart\"`; botão `Add to cart` na página do produto; toast `Product added to shopping cart.`; botão `Proceed to checkout` na página do carrinho.",
+ "**Carrinho anônimo:** o carrinho com produto adicionado sem login persiste após o login.",
+ "**Checkout sem login:** avançar para o checkout redireciona para a tela de login.",
+ "**Passo de endereço:** labels `Street`, `City`, `State`, `Postcode`, `Building number` (campos de texto) e `Country` (select). Campos podem vir pré-preenchidos; o teste os limpa com `fill(\"\")`. Existe uma opção vazia no select de país, usada em CT08 via `select_option(\"\")`. País usado: `United States`.",
+ "**Botão de avanço do endereço:** `Proceed to payment`.",
+ "**Passo de pagamento:** select `Payment method` com opção `Credit Card`; campos `Card number`, expiração (label contendo \"expir\"), `CVV`, `Card holder name`. Dados fictícios: 4111111111111111, 12/2030, 123, John Doe.",
+ "**Confirmação em duas etapas:** botão `Confirm` (nome exato) confirma o pagamento e exibe \"Payment was successful\"; botão `Confirm order` finaliza e exibe \"Thanks for your order! Your invoice number is INV-...\".",
+ "**Cartão inválido e expirado:** assume-se que a aplicação rejeita o pagamento sem exibir sucesso e permanece no passo de pagamento. Asserções negativas são imediatas e podem precisar de espera do servidor para ter validade plena.",
+ "**Seletores `data-test`:** usados como fallback quando não há role/label estável (`product-name`, `nav-cart`)."
+]

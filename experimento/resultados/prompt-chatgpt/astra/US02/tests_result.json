@@ -1,0 +1,34 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_adicionar_tres_unidades[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT002_calcular_totais_para_tres_unidades[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_CT003_reduzir_quantidade_para_uma_unidade[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_CT004_restringir_tres_unidades_de_thor_hammer[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "\"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\"\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py::test_CT002_calcular_totais_para_tres_unidades[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py::test_CT003_reduzir_quantidade_para_uma_unidade[chromium]\n2 failed, 2 passed, 1 warning in 53.84s\n",
+ "returncode": 1,
+ "duracao_s": 54.42
+}

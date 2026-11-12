@@ -1,0 +1,856 @@
+{
+ "created": 1793384043.4118335,
+ "duration": 2.2020602226257324,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03",
+ "environment": {},
+ "summary": {
+  "failed": 14,
+  "total": 14,
+  "collected": 14
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT01_login_formulario_vazio[chromium]",
+     "type": "Function",
+     "lineno": 146
+    },
+    {
+     "nodeid": "script.py::test_CT02_login_senha_incorreta_sem_sessao[chromium]",
+     "type": "Function",
+     "lineno": 160
+    },
+    {
+     "nodeid": "script.py::test_CT03_checkout_solicita_autenticacao[chromium]",
+     "type": "Function",
+     "lineno": 184
+    },
+    {
+     "nodeid": "script.py::test_CT04_login_valido_exibe_conta_e_nome[chromium]",
+     "type": "Function",
+     "lineno": 197
+    },
+    {
+     "nodeid": "script.py::test_CT05_endereco_todos_obrigatorios_vazios[chromium]",
+     "type": "Function",
+     "lineno": 201
+    },
+    {
+     "nodeid": "script.py::test_CT06_endereco_sem_pais[chromium]",
+     "type": "Function",
+     "lineno": 207
+    },
+    {
+     "nodeid": "script.py::test_CT07_endereco_sem_cep[chromium]",
+     "type": "Function",
+     "lineno": 211
+    },
+    {
+     "nodeid": "script.py::test_CT08_endereco_sem_numero[chromium]",
+     "type": "Function",
+     "lineno": 215
+    },
+    {
+     "nodeid": "script.py::test_CT09_endereco_sem_rua[chromium]",
+     "type": "Function",
+     "lineno": 219
+    },
+    {
+     "nodeid": "script.py::test_CT10_endereco_sem_cidade[chromium]",
+     "type": "Function",
+     "lineno": 223
+    },
+    {
+     "nodeid": "script.py::test_CT11_endereco_sem_estado[chromium]",
+     "type": "Function",
+     "lineno": 227
+    },
+    {
+     "nodeid": "script.py::test_CT12_corrigir_endereco_permite_avancar[chromium]",
+     "type": "Function",
+     "lineno": 231
+    },
+    {
+     "nodeid": "script.py::test_CT13_pagamento_cartao_ficticio_valido[chromium]",
+     "type": "Function",
+     "lineno": 240
+    },
+    {
+     "nodeid": "script.py::test_CT14_confirmacao_pedido_com_numero_fatura[chromium]",
+     "type": "Function",
+     "lineno": 245
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT01_login_formulario_vazio[chromium]",
+   "lineno": 146,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT01_login_formulario_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4685468999668956,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0002397000789642334,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 148,
+      "message": "in test_CT01_login_formulario_vazio"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:148: in test_CT01_login_formulario_vazio\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.016861799987964332,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT02_login_senha_incorreta_sem_sessao[chromium]",
+   "lineno": 160,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT02_login_senha_incorreta_sem_sessao[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09275149996392429,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0002413999754935503,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 162,
+      "message": "in test_CT02_login_senha_incorreta_sem_sessao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:162: in test_CT02_login_senha_incorreta_sem_sessao\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010171700036153197,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT03_checkout_solicita_autenticacao[chromium]",
+   "lineno": 184,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT03_checkout_solicita_autenticacao[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09206659998744726,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.000139000010676682,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 186,
+      "message": "in test_CT03_checkout_solicita_autenticacao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 55,
+      "message": "in add_product"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:186: in test_CT03_checkout_solicita_autenticacao\n    add_product(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:55: in add_product\n    visit(page, \"/\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010036100051365793,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT04_login_valido_exibe_conta_e_nome[chromium]",
+   "lineno": 197,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT04_login_valido_exibe_conta_e_nome[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09418050001841038,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0001482999650761485,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 199,
+      "message": "in test_CT04_login_valido_exibe_conta_e_nome"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:199: in test_CT04_login_valido_exibe_conta_e_nome\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010766300023533404,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT05_endereco_todos_obrigatorios_vazios[chromium]",
+   "lineno": 201,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT05_endereco_todos_obrigatorios_vazios[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11481380008626729,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0001404000213369727,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 203,
+      "message": "in test_CT05_endereco_todos_obrigatorios_vazios"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:203: in test_CT05_endereco_todos_obrigatorios_vazios\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.019981699995696545,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT06_endereco_sem_pais[chromium]",
+   "lineno": 207,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT06_endereco_sem_pais[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09941989998333156,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00013559998478740454,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 209,
+      "message": "in test_CT06_endereco_sem_pais"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:209: in test_CT06_endereco_sem_pais\n    check_single_missing_field(page, \"Country\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010662100045010448,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT07_endereco_sem_cep[chromium]",
+   "lineno": 211,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT07_endereco_sem_cep[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09471530001610518,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00014619994908571243,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 213,
+      "message": "in test_CT07_endereco_sem_cep"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:213: in test_CT07_endereco_sem_cep\n    check_single_missing_field(page, \"Postal code\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.014951199991628528,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT08_endereco_sem_numero[chromium]",
+   "lineno": 215,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT08_endereco_sem_numero[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0932479000184685,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00020540005061775446,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 217,
+      "message": "in test_CT08_endereco_sem_numero"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:217: in test_CT08_endereco_sem_numero\n    check_single_missing_field(page, \"Number\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.011559700011275709,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT09_endereco_sem_rua[chromium]",
+   "lineno": 219,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT09_endereco_sem_rua[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0985814998857677,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00014569994527846575,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 221,
+      "message": "in test_CT09_endereco_sem_rua"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:221: in test_CT09_endereco_sem_rua\n    check_single_missing_field(page, \"Street\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010168500011786819,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT10_endereco_sem_cidade[chromium]",
+   "lineno": 223,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT10_endereco_sem_cidade[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09140260005369782,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0001330999657511711,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 225,
+      "message": "in test_CT10_endereco_sem_cidade"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:225: in test_CT10_endereco_sem_cidade\n    check_single_missing_field(page, \"City\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.009860899997875094,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT11_endereco_sem_estado[chromium]",
+   "lineno": 227,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT11_endereco_sem_estado[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09008770005311817,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00013679999392479658,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 229,
+      "message": "in test_CT11_endereco_sem_estado"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 103,
+      "message": "in check_single_missing_field"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:229: in test_CT11_endereco_sem_estado\n    check_single_missing_field(page, \"State\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:103: in check_single_missing_field\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.010381400003097951,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT12_corrigir_endereco_permite_avancar[chromium]",
+   "lineno": 231,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT12_corrigir_endereco_permite_avancar[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0925462000304833,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00013379997108131647,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 233,
+      "message": "in test_CT12_corrigir_endereco_permite_avancar"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:233: in test_CT12_corrigir_endereco_permite_avancar\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.01042760000564158,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT13_pagamento_cartao_ficticio_valido[chromium]",
+   "lineno": 240,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT13_pagamento_cartao_ficticio_valido[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09956400003284216,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.0001425999216735363,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 242,
+      "message": "in test_CT13_pagamento_cartao_ficticio_valido"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 123,
+      "message": "in reach_payment"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:242: in test_CT13_pagamento_cartao_ficticio_valido\n    reach_payment(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:123: in reach_payment\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.013847500085830688,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT14_confirmacao_pedido_com_numero_fatura[chromium]",
+   "lineno": 245,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT14_confirmacao_pedido_com_numero_fatura[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09823959995992482,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.00021389999892562628,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+     "lineno": 35,
+     "message": "AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 247,
+      "message": "in test_CT14_confirmacao_pedido_com_numero_fatura"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 123,
+      "message": "in reach_payment"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 72,
+      "message": "in reach_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 44,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py",
+      "lineno": 35,
+      "message": "in visit"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:247: in test_CT14_confirmacao_pedido_com_numero_fatura\n    reach_payment(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:123: in reach_payment\n    reach_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:72: in reach_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:44: in login\n    visit(page, \"/auth/login\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US03\\script.py:35: in visit\n    configured_base_url = page.context.base_url\n                          ^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'BrowserContext' object has no attribute 'base_url'"
+   },
+   "teardown": {
+    "duration": 0.1620029000332579,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

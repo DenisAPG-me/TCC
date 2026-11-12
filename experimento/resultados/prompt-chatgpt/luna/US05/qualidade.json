@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "claro e constantes",
+  "estrutura": "helpers e BASE_URL por env",
+  "assercoes": "menu validado com get_by_text generico",
+  "espera": "expect auto-wait, sem sleep",
+  "manutenibilidade": "get_by_text ambiguo e titulo da home inventado"
+ }
+}

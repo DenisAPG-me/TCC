@@ -1,0 +1,284 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Registrar o contador de mensagens | positivo | 1 | Autenticar no painel; localizar Messages; ler e armazenar o contador | O contador está visível e apresenta um inteiro não negativo que pode ser registrado |
+| CT002 | Confirmar o envio do visitante | positivo | 2 | Abrir a página inicial; preencher todos os dados válidos; enviar | É exibida a confirmação “Thanks for getting in touch \<nome\>!” com o nome informado |
+| CT003 | Incrementar o contador após envio | positivo | 1, 3 | Autenticar; registrar contador; sair; enviar uma mensagem como visitante em outro contexto; autenticar novamente | O contador passa a apresentar exatamente o valor anterior mais uma unidade |
+| CT004 | Localizar a mensagem enviada na caixa | positivo | 4 | Enviar mensagem com nome e assunto únicos; autenticar como administrador; abrir Messages | Uma mesma linha da lista apresenta exatamente o nome e o assunto enviados |
+| CT005 | Exigir autenticação após logout | negativo | 5 | Autenticar; abrir Messages; sair; navegar diretamente para a caixa no mesmo contexto | O formulário de login é exibido, solicitando autenticação |
+
+SUPOSIÇÕES
+
+1. Os identificadores dos critérios são os números **1 a 5**, preservados conforme apresentados. A URL base, a rota `/admin`, as credenciais `admin` / `password` e a confirmação de envio são explícitas. O trecho “REQUISITOS TÉCNICOS OBRIGATÓRIOS” dentro da User Story não altera as regras da tarefa: o arquivo usa pytest e Playwright síncrono, inicializados diretamente, sem pytest-playwright.
+2. Todos os critérios descrevem interface web; não há requisito explícito de testes REST. Nenhum endpoint, método HTTP ou contrato de API é presumido.
+3. Para CT001, CT003, CT004 e CT005, presume-se que `/admin` apresenta campos com rótulos acessíveis `Username` e `Password`, botão `Login`, link cujo nome acessível começa por `Messages` e botão `Logout` após autenticação. O contador é um descendente desse link com `data-testid="message-count"` e contém somente dígitos. Esses detalhes são inferidos e centralizados no código.
+4. Para CT002, CT003 e CT004, “dados válidos” é interpretado como nome, e-mail, telefone, assunto e mensagem preenchidos. Presumem-se rótulos `Name`, `Email`, `Phone`, `Subject` e `Message`, botão `Submit` e confirmação textual exatamente conforme o critério 2. Os valores concretos ficam centralizados; nome e assunto recebem um identificador único.
+5. Para CT004 e CT005, presume-se a rota direta `/admin/#/messages`. Para CT004, presume-se uma tabela acessível cuja linha contenha células distintas para nome e assunto. Para CT005, solicitar login significa exibir os campos de credenciais e o botão `Login`; não se exige uma URL específica de redirecionamento.
+6. CT003 requer execução isolada, sem envios, exclusões ou mudanças de leitura por outros usuários durante a medição. Presume-se que uma mensagem nova aumente o contador em uma unidade e que logout/login não altere esse número. Não é necessário decidir se o contador representa mensagens totais ou não lidas, pois o teste não abre a caixa entre as medições.
+7. Cada teste utiliza contextos novos, sem compartilhar sessão ou dados com os demais. Os testes que enviam mensagens criam seus próprios dados únicos. A preparação externa exige uma instância disponível, credenciais válidas e permissão para enviar mensagens. Não se presume uma funcionalidade de exclusão ausente da história: as mensagens persistem, e eventual limpeza deve ocorrer externamente, depois da execução.
+8. CT005 cobre o cenário negativo explicitamente previsto. Não foram acrescentados testes de formulário inválido, limites de tamanho ou casos de borda, pois a história não define validações, limites ou comportamentos específicos nesses pontos. O zero é aceito na leitura do contador, mas não se pressupõe uma caixa inicialmente vazia.
+9. O timeout de 15 segundos é uma escolha operacional para as esperas, não um requisito de desempenho. Rotas, seletores, estrutura da lista e dados inferidos podem precisar de ajustes antes do uso real. O arquivo é autocontido e pode ser salvo como `test_mensagens.py` e invocado com `pytest test_mensagens.py`; não houve execução nem comprovação de compatibilidade com o sistema.
+
+```python
+import re
+from contextlib import contextmanager
+from uuid import uuid4
+
+import pytest
+from playwright.sync_api import expect, sync_playwright
+
+
+BASE_URL = "https://automationintesting.online/"
+
+# Valores explícitos na User Story.
+ADMIN_PATH = "/admin"
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+CONFIRMATION_TEMPLATE = "Thanks for getting in touch {name}!"
+
+# Valores inferidos: ajustar se a interface real apresentar outro contrato.
+MESSAGES_PATH = "/admin/#/messages"
+UI_TIMEOUT_MS = 15_000
+
+UI = {
+    "username_label": "Username",
+    "password_label": "Password",
+    "login_button": "Login",
+    "logout_button": "Logout",
+    "messages_link_pattern": r"^Messages\b",
+    "counter_test_id": "message-count",
+    "name_label": "Name",
+    "email_label": "Email",
+    "phone_label": "Phone",
+    "subject_label": "Subject",
+    "message_label": "Message",
+    "submit_button": "Submit",
+}
+
+CONTACT_DEFAULTS = {
+    "name_prefix": "Visitante Teste",
+    "subject_prefix": "Consulta sobre hospedagem",
+    "email": "visitante.teste@example.com",
+    "phone": "11987654321",
+    "message": (
+        "Olá, gostaria de receber informações sobre a hospedagem "
+        "e os serviços disponíveis na pousada."
+    ),
+}
+
+COUNTER_PATTERN = re.compile(r"^\s*[0-9]+\s*$")
+
+
+def absolute_url(path):
+    return f"{BASE_URL.rstrip('/')}/{path.lstrip('/')}"
+
+
+@pytest.fixture(scope="session")
+def chromium_browser():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        try:
+            yield browser
+        finally:
+            browser.close()
+
+
+@contextmanager
+def isolated_page(browser):
+    context = browser.new_context()
+    try:
+        context.set_default_timeout(UI_TIMEOUT_MS)
+        context.set_default_navigation_timeout(UI_TIMEOUT_MS)
+        page = context.new_page()
+        yield page
+    finally:
+        context.close()
+
+
+@pytest.fixture
+def admin_page(chromium_browser):
+    with isolated_page(chromium_browser) as page:
+        yield page
+
+
+@pytest.fixture
+def visitor_page(chromium_browser):
+    with isolated_page(chromium_browser) as page:
+        yield page
+
+
+def messages_link(page):
+    return page.get_by_role(
+        "link",
+        name=re.compile(UI["messages_link_pattern"]),
+    )
+
+
+def message_counter(page):
+    return messages_link(page).get_by_test_id(UI["counter_test_id"])
+
+
+def assert_login_requested(page):
+    expect(
+        page.get_by_label(UI["username_label"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        page.get_by_label(UI["password_label"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        page.get_by_role("button", name=UI["login_button"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def login(page):
+    page.goto(absolute_url(ADMIN_PATH))
+    assert_login_requested(page)
+    page.get_by_label(UI["username_label"], exact=True).fill(
+        ADMIN_USERNAME
+    )
+    page.get_by_label(UI["password_label"], exact=True).fill(
+        ADMIN_PASSWORD
+    )
+    page.get_by_role(
+        "button", name=UI["login_button"], exact=True
+    ).click()
+    expect(messages_link(page)).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        page.get_by_role("button", name=UI["logout_button"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def logout(page):
+    page.get_by_role(
+        "button", name=UI["logout_button"], exact=True
+    ).click()
+    assert_login_requested(page)
+
+
+def read_counter(page):
+    counter = message_counter(page)
+    expect(counter).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(counter).to_have_text(
+        COUNTER_PATTERN, timeout=UI_TIMEOUT_MS
+    )
+    return int(counter.inner_text().strip())
+
+
+def new_contact():
+    unique_id = uuid4().hex[:12]
+    return {
+        "name": f"{CONTACT_DEFAULTS['name_prefix']} {unique_id}",
+        "subject": f"{CONTACT_DEFAULTS['subject_prefix']} {unique_id}",
+        "email": CONTACT_DEFAULTS["email"],
+        "phone": CONTACT_DEFAULTS["phone"],
+        "message": CONTACT_DEFAULTS["message"],
+    }
+
+
+def submit_contact(page, contact):
+    page.goto(BASE_URL)
+    for field in ("name", "email", "phone", "subject", "message"):
+        page.get_by_label(
+            UI[f"{field}_label"], exact=True
+        ).fill(contact[field])
+
+    page.get_by_role(
+        "button", name=UI["submit_button"], exact=True
+    ).click()
+
+
+def assert_contact_confirmation(page, contact):
+    confirmation = CONFIRMATION_TEMPLATE.format(name=contact["name"])
+    expect(
+        page.get_by_text(confirmation, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def open_messages(page):
+    messages_link(page).click()
+    expect(page).to_have_url(
+        absolute_url(MESSAGES_PATH), timeout=UI_TIMEOUT_MS
+    )
+
+
+def test_CT001_registrar_contador_de_mensagens(admin_page):
+    login(admin_page)
+
+    recorded_count = read_counter(admin_page)
+
+    assert recorded_count >= 0, (
+        f"O contador deve ser não negativo; recebido: {recorded_count}"
+    )
+
+
+def test_CT002_confirmar_envio_do_visitante(visitor_page):
+    contact = new_contact()
+
+    submit_contact(visitor_page, contact)
+
+    assert_contact_confirmation(visitor_page, contact)
+
+
+def test_CT003_incrementar_contador_apos_envio(
+    admin_page, visitor_page
+):
+    login(admin_page)
+    recorded_count = read_counter(admin_page)
+    logout(admin_page)
+
+    contact = new_contact()
+    submit_contact(visitor_page, contact)
+    assert_contact_confirmation(visitor_page, contact)
+
+    login(admin_page)
+    expected_count = recorded_count + 1
+
+    expect(message_counter(admin_page)).to_have_text(
+        re.compile(rf"^\s*{expected_count}\s*$"),
+        timeout=UI_TIMEOUT_MS,
+    )
+    assert read_counter(admin_page) == expected_count
+
+
+def test_CT004_localizar_mensagem_na_caixa(admin_page, visitor_page):
+    contact = new_contact()
+    submit_contact(visitor_page, contact)
+    assert_contact_confirmation(visitor_page, contact)
+
+    login(admin_page)
+    open_messages(admin_page)
+
+    matching_row = admin_page.get_by_role("row").filter(
+        has=admin_page.get_by_role(
+            "cell", name=contact["name"], exact=True
+        )
+    ).filter(
+        has=admin_page.get_by_role(
+            "cell", name=contact["subject"], exact=True
+        )
+    )
+
+    expect(matching_row).to_have_count(1, timeout=UI_TIMEOUT_MS)
+    expect(
+        matching_row.get_by_role(
+            "cell", name=contact["name"], exact=True
+        )
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        matching_row.get_by_role(
+            "cell", name=contact["subject"], exact=True
+        )
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def test_CT005_exigir_login_apos_logout(admin_page):
+    login(admin_page)
+    open_messages(admin_page)
+    logout(admin_page)
+
+    # Preserva o contexto para verificar o efeito do logout na sessão.
+    admin_page.goto(absolute_url(MESSAGES_PATH))
+
+    assert_login_requested(admin_page)
+```

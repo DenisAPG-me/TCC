@@ -1,0 +1,16 @@
+[
+ "Tecnologia: Python + pytest + pytest-playwright, pois a User Story é de interface web. Os testes usam a fixture `page` do plugin, sem fixture própria de browser e sem `sync_playwright()`. O Chromium headless é o padrão do plugin.",
+ "Base URL: constante `BASE_URL = \"https://automationintesting.online\"`.",
+ "Tela de login em `/admin`, com campos rotulados \"Username\" e \"Password\" (`get_by_label`) e botão \"Login\" (`get_by_role(\"button\")`).",
+ "O formulário não usa atributo `required`, então clicar em Login com campos vazios envia a requisição e o servidor retorna a mensagem de erro.",
+ "A mensagem \"Invalid credentials\" aparece como texto na própria tela de login, sem redirecionamento.",
+ "Login válido redireciona para `/admin/rooms`.",
+ "A lista de quartos é uma tabela, e a linha do quarto 101 contém os textos \"101\" e \"Single\".",
+ "O menu contém links (`get_by_role(\"link\")`) com nomes exatos Rooms, Report, Branding e Messages.",
+ "O link \"Logout\" fica no menu e é acessível por `get_by_role(\"link\")`.",
+ "Após logout, o sistema redireciona para a home pública `https://automationintesting.online/`, que não exibe campo \"Username\".",
+ "A verificação de senha diferencia maiúsculas de minúsculas (CT04).",
+ "Dados de teste: senha incorreta `senha_incorreta`; usuário vazio como string vazia.",
+ "Sessão não persiste após logout: acessar `/admin/rooms` diretamente redireciona para a tela de login (CT07).",
+ "Cada teste recebe uma `page` nova do plugin, com contexto isolado, o que garante independência entre os testes."
+]

@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Login com formulário vazio exibe mensagens de obrigatoriedade",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir /auth/login; sem preencher campos, clicar em Login",
+  "esperado": "\"Email is required\" e \"Password is required\" visíveis; URL continua em /auth/login"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login apenas com e-mail preenchido exige somente a senha",
+  "tipo": "borda",
+  "criterio": "CA01",
+  "passos": "Abrir /auth/login; preencher só o e-mail da conta de demonstração; clicar em Login",
+  "esperado": "\"Password is required\" visível; \"Email is required\" ausente; URL continua em /auth/login"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Login com senha incorreta é rejeitado sem criar sessão",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir /auth/login; informar customer@practicesoftwaretesting.com com senha incorreta; clicar em Login",
+  "esperado": "\"Invalid email or password\" visível; URL continua em /auth/login; link \"Sign in\" visível; menu do usuário ausente"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Checkout sem autenticação solicita e-mail e senha",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Sem login, adicionar produto ao carrinho; abrir carrinho; avançar do passo 1",
+  "esperado": "Passo de checkout mostra campos de e-mail e senha e botão de login"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Login válido leva a My account com nome no menu",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Abrir /auth/login; informar credenciais de demonstração; clicar em Login",
+  "esperado": "URL termina em /account; título \"My account\" visível; menu exibe \"Jane Doe\""
+ },
+ {
+  "id": "CT006",
+  "titulo": "Endereço com todos os campos obrigatórios vazios bloqueia o avanço",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Login; adicionar produto; avançar até o passo de endereço; limpar país, CEP, número, rua, cidade e estado",
+  "esperado": "Botão de avançar para pagamento desabilitado"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Endereço com apenas o CEP vazio bloqueia o avanço",
+  "tipo": "borda",
+  "criterio": "CA05",
+  "passos": "Login; adicionar produto; ir ao passo de endereço; preencher todos os campos obrigatórios e depois limpar só o CEP",
+  "esperado": "Botão de avançar para pagamento desabilitado"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Endereço completo permite avançar ao pagamento",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Login; adicionar produto; ir ao passo de endereço; preencher país, CEP, número, rua, cidade e estado; clicar em avançar",
+  "esperado": "Botão habilitado; passo de pagamento exibido com seleção de forma de pagamento"
+ },
+ {
+  "id": "CT009",
+  "titulo": "Pagamento com cartão de crédito válido finaliza o pedido",
+  "tipo": "positivo",
+  "criterio": "CA06",
+  "passos": "Login; adicionar produto; preencher endereço; escolher Credit Card; informar dados fictícios válidos; Confirm; Confirm novamente",
+  "esperado": "\"Payment was successful\" visível; depois \"Thanks for your order! Your invoice number is INV-\" seguido do número"
+ }
+]

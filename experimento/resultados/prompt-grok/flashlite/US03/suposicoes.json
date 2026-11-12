@@ -1,0 +1,7 @@
+[
+ "A URL base padrão é https://practicesoftwaretesting.com/, podendo ser sobrescrita pela opção `--base-url` do pytest-playwright.",
+ "A página de login é acessada via rota relativa `/auth/login` (ou link correspondente na página inicial).",
+ "Os seletores de interface utilizam preferencialmente `get_by_role`, `get_by_label`, `get_by_text` ou `get_by_test_id`, conforme as diretrizes do Playwright.",
+ "Os produtos e o fluxo de carrinho utilizam elementos comuns da aplicação Practice Software Testing (como adicionar o primeiro produto da listagem à home page ao carrinho).",
+ "Os dados fictícios válidos de cartão de crédito contemplam campos típicos de formulário de pagamento simulado."
+]

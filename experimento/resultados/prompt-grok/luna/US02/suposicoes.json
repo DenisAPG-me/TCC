@@ -1,0 +1,10 @@
+[
+ "A página inicial permite localizar os produtos por nome e abrir suas páginas; os caminhos relativos específicos não são conhecidos.",
+ "A URL da página de produto contém o nome do produto, em letras minúsculas e com hífens entre palavras. O script também tenta localizar o produto pelo texto visível na página inicial.",
+ "A interface tem um campo de quantidade acessível por rótulo contendo “quantity”, um botão “Add to cart” e um link ou botão acessível “Shopping cart”.",
+ "O indicador do carrinho é um elemento visível com o total de unidades como texto; a confirmação e a mensagem de restrição aparecem como texto visível.",
+ "No carrinho, a linha do produto contém nome, preço unitário, quantidade e total da linha; o total geral está em um elemento cujo texto contém “Cart total” ou “Total”.",
+ "Os valores monetários exibidos usam ponto decimal opcional e podem conter símbolo de moeda ou separadores de milhar. O script converte esses textos para números usando a convenção de vírgula como separador de milhar quando ponto e vírgula aparecem juntos.",
+ "Cada teste começa com um contexto de navegador isolado fornecido pelo plugin. O carrinho inicia vazio, ou o produto usado pelo teste não está previamente no carrinho.",
+ "As dependências de execução são `pytest`, `pytest-playwright` e `playwright`; o navegador do Playwright deve estar instalado. O teste pode receber `--base-url` pelo pytest-playwright ou usar a constante padrão."
+]

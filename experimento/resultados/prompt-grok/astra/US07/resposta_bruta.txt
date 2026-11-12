@@ -1,0 +1,205 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Criar reserva com todos os campos válidos | positivo | 1 | Enviar JSON completo para criação. | Status 200, identificador numérico inteiro e dados iguais aos enviados. |
+| TC02 | Consultar reserva criada pelo identificador | positivo | 2 | Criar reserva; consultar usando o identificador retornado. | Status 200 e todos os campos iguais aos enviados, incluindo tipos e datas. |
+| TC03 | Consultar identificador inexistente | negativo | 3 | Consultar o identificador 99999999. | Status 404. |
+| TC04 | Filtrar reservas por nome e sobrenome únicos | positivo | 4 | Criar reserva com nomes exclusivos; listar informando ambos os filtros. | Lista contém o identificador criado. |
+| TC05 | Criar e consultar reserva com depósito não pago | borda | 1 e 2 | Criar reserva com depósito pago igual a `false`; consultar pelo identificador. | Ambas as operações retornam 200 e preservam todos os dados, incluindo o booleano `false`. |
+| TC06 | Criar e consultar reserva que atravessa a mudança de ano | borda | 1 e 2 | Criar reserva com check-in em 31/12 e check-out em 01/01 do ano seguinte; consultar. | Ambas as operações retornam 200 e preservam todos os dados e as datas enviadas. |
+
+SUPOSIÇÕES
+
+- A User Story descreve uma API REST; são utilizados Python, pytest e requests. A biblioteca padrão do Python também é utilizada.
+- Os contratos abaixo são deduzidos, não verificados no sistema real. O script não foi executado.
+- A criação utiliza `POST /booking`; a consulta utiliza `GET /booking/{id}`; a listagem filtrada utiliza `GET /booking` com os parâmetros de consulta `firstname` e `lastname`.
+- O corpo da criação utiliza os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`. `bookingdates` contém `checkin` e `checkout`.
+- A criação retorna um objeto JSON com `bookingid` e `booking`. A consulta retorna diretamente o objeto da reserva. A listagem retorna uma lista de objetos que contêm `bookingid`.
+- O identificador numérico é interpretado como um inteiro JSON, excluindo booleanos. Não se presume valor inicial, sequência ou limite.
+- Nomes, sobrenomes e necessidades adicionais são strings; preço total é um inteiro; depósito pago é booleano; datas são strings no formato `YYYY-MM-DD`. “Mesmos dados” inclui preservação desses tipos.
+- O objeto da reserva retornado deve conter exatamente os campos enviados. Campos extras no envelope da criação e nos itens da listagem são permitidos.
+- As operações não exigem autenticação. Os endpoints aceitam respostas JSON e a criação aceita `Content-Type: application/json`.
+- A listagem filtrada retorna status 200 e inclui a reserva criada na resposta, sem necessidade de percorrer páginas. Não se exige que o resultado contenha somente essa reserva.
+- Os dados válidos adotados usam preço 150, necessidade adicional `Breakfast` e datas futuras. Nomes e sobrenomes recebem sufixos UUID para reduzir colisões entre execuções.
+- Ambos os valores booleanos de depósito pago são válidos. TC05 exercita o limite do domínio booleano; TC06 exercita uma fronteira de calendário com estadia de uma noite. Não são presumidos limites de preço, comprimento de nomes ou duração máxima.
+- O identificador 99999999 é considerado inexistente, conforme o exemplo fornecido. Se ele existir no ambiente, essa premissa deixa de ser válida.
+- Reservas ficam disponíveis para consulta e filtragem imediatamente após a criação, sem espera ou repetição automática.
+- Cada teste cria seus próprios dados quando necessário. Não há limpeza porque a User Story não define operação de exclusão.
+- As chamadas usam timeout de 15 segundos e não seguem redirecionamentos, para verificar o status do endpoint solicitado. Falhas de conexão ou timeout fazem o teste falhar.
+- Não são incluídos testes de JSON inválido, campos ausentes ou datas invertidas porque seus resultados esperados não foram definidos.
+- Salve o arquivo como `test_reservas.py` e execute `pytest -v test_reservas.py` em um ambiente com pytest e requests instalados.
+
+```python
+from datetime import date
+from uuid import uuid4
+
+import pytest
+import requests
+
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT_SECONDS = 15
+
+
+@pytest.fixture
+def api():
+    with requests.Session() as session:
+        session.headers.update({
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        })
+        yield session
+
+
+def enviar(api, metodo, caminho, **kwargs):
+    return api.request(
+        method=metodo,
+        url=f"{BASE_URL.rstrip('/')}/{caminho.lstrip('/')}",
+        timeout=TIMEOUT_SECONDS,
+        allow_redirects=False,
+        **kwargs,
+    )
+
+
+def verificar_status(resposta, esperado):
+    assert resposta.status_code == esperado, (
+        f"{resposta.request.method} {resposta.url}: "
+        f"esperado status {esperado}, recebido {resposta.status_code}. "
+        f"Corpo: {resposta.text[:1000]}"
+    )
+
+
+def verificar_json_exato(recebido, esperado, caminho="$"):
+    # A igualdade comum do Python considera True == 1 e 150 == 150.0.
+    # A verificação explícita de tipos evita aceitar essas diferenças.
+    assert type(recebido) is type(esperado), (
+        f"{caminho}: tipo esperado {type(esperado).__name__}, "
+        f"recebido {type(recebido).__name__}"
+    )
+
+    if isinstance(esperado, dict):
+        assert recebido.keys() == esperado.keys(), (
+            f"{caminho}: campos diferentes. "
+            f"Esperados: {list(esperado)}; recebidos: {list(recebido)}"
+        )
+        for campo, valor in esperado.items():
+            verificar_json_exato(
+                recebido[campo], valor, f"{caminho}.{campo}"
+            )
+    else:
+        assert recebido == esperado, (
+            f"{caminho}: esperado {esperado!r}, recebido {recebido!r}"
+        )
+
+
+def novos_dados(deposito_pago=True, virada_de_ano=False):
+    sufixo = uuid4().hex
+    ano = date.today().year + 1
+
+    if virada_de_ano:
+        checkin = date(ano, 12, 31)
+        checkout = date(ano + 1, 1, 1)
+    else:
+        checkin = date(ano, 6, 10)
+        checkout = date(ano, 6, 12)
+
+    return {
+        "firstname": f"Nome{sufixo}",
+        "lastname": f"Sobrenome{sufixo}",
+        "totalprice": 150,
+        "depositpaid": deposito_pago,
+        "bookingdates": {
+            "checkin": checkin.isoformat(),
+            "checkout": checkout.isoformat(),
+        },
+        "additionalneeds": "Breakfast",
+    }
+
+
+def criar_e_validar(api, dados):
+    resposta = enviar(api, "POST", "/booking", json=dados)
+    verificar_status(resposta, 200)
+
+    corpo = resposta.json()
+    assert isinstance(corpo, dict), "Criação deve retornar um objeto JSON."
+    assert "bookingid" in corpo, "Resposta sem bookingid."
+    assert type(corpo["bookingid"]) is int, (
+        "bookingid deve ser um inteiro JSON, não um booleano."
+    )
+    assert "booking" in corpo, "Resposta sem booking."
+
+    verificar_json_exato(corpo["booking"], dados, "$.booking")
+    return corpo["bookingid"]
+
+
+def consultar_e_validar(api, identificador, dados):
+    resposta = enviar(api, "GET", f"/booking/{identificador}")
+    verificar_status(resposta, 200)
+    verificar_json_exato(resposta.json(), dados)
+
+
+def test_TC01_criar_reserva_com_todos_os_campos_validos(api):
+    dados = novos_dados()
+    criar_e_validar(api, dados)
+
+
+def test_TC02_consultar_reserva_criada_pelo_identificador(api):
+    dados = novos_dados()
+    identificador = criar_e_validar(api, dados)
+    consultar_e_validar(api, identificador, dados)
+
+
+def test_TC03_consultar_identificador_inexistente(api):
+    resposta = enviar(api, "GET", "/booking/99999999")
+    verificar_status(resposta, 404)
+    # A User Story não especifica o conteúdo ou formato do corpo do erro.
+
+
+def test_TC04_filtrar_por_nome_e_sobrenome_unicos(api):
+    dados = novos_dados()
+    identificador = criar_e_validar(api, dados)
+
+    resposta = enviar(
+        api,
+        "GET",
+        "/booking",
+        params={
+            "firstname": dados["firstname"],
+            "lastname": dados["lastname"],
+        },
+    )
+    verificar_status(resposta, 200)
+
+    itens = resposta.json()
+    assert isinstance(itens, list), "Listagem deve retornar uma lista JSON."
+
+    identificadores = []
+    for indice, item in enumerate(itens):
+        assert isinstance(item, dict), f"Item {indice} deve ser um objeto."
+        assert "bookingid" in item, f"Item {indice} sem bookingid."
+        assert type(item["bookingid"]) is int, (
+            f"Item {indice}: bookingid deve ser um inteiro JSON."
+        )
+        identificadores.append(item["bookingid"])
+
+    assert identificador in identificadores, (
+        f"Reserva {identificador} ausente na listagem filtrada."
+    )
+
+
+def test_TC05_criar_e_consultar_com_deposito_nao_pago(api):
+    dados = novos_dados(deposito_pago=False)
+    identificador = criar_e_validar(api, dados)
+    consultar_e_validar(api, identificador, dados)
+
+
+def test_TC06_criar_e_consultar_na_mudanca_de_ano(api):
+    dados = novos_dados(virada_de_ano=True)
+    identificador = criar_e_validar(api, dados)
+    consultar_e_validar(api, identificador, dados)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__, "-v"]))
+```

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 61.57,
+ "tokens": {
+  "total": 5704
+ },
+ "n_casos_extraidos": 7,
+ "tem_codigo": true,
+ "stderr_tail": "\n    expect_counter(page, initial)\n\n\ndef test_ct07_processar_dois_envios_iguais(page: Page) -> None:\n    configure(page)\n    contact = new_contact()\n    login(page)\n    initial = read_counter(page)\n    logout(page)\n\n    send_contact(page, contact)\n    login(page)\n    expect_counter(page, initial + 1)\n    logout(page)\n\n    send_contact(page, contact)\n    login(page)\n    expect_counter(page, initial + 2)\n    open_messages(page)\n\n    expect_messages(page, contact, quantity=2)\n```\ntokens used\n5,704\n"
+}

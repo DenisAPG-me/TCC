@@ -1,0 +1,128 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Excluir reserva sem token | Negativo | Critério 1 | 1. Criar reserva.<br>2. Tentar excluir a reserva enviando o ID e sem cabeçalho de autorização ou token. | Retorna status 403 e a reserva continua consultável com status 200. |
+| TC02 | Excluir reserva com token inválido | Negativo | Critério 2 | 1. Criar reserva.<br>2. Tentar excluir a reserva enviando um token inválido no cabeçalho de autorização. | Retorna status 403 e a reserva continua existindo (status 200 ao consultar). |
+| TC03 | Excluir reserva com token válido | Positivo | Critério 3 | 1. Obter token de autenticação com credenciais válidas (admin / password123).<br>2. Criar reserva.<br>3. Excluir a reserva utilizando o token válido e o ID da reserva criada. | Retorna status 201 (conforme critério de aceitação). |
+| TC04 | Consultar reserva após exclusão | Positivo | Critério 4 | 1. Criar e excluir uma reserva com sucesso utilizando token válido.<br>2. Tentar consultar a reserva excluída pelo ID. | Retorna status 404 (Not Found). |
+| TC05 | Excluir reserva já excluída | Borda | Critério 5 | 1. Criar e excluir uma reserva com sucesso.<br>2. Tentar excluir a mesma reserva novamente utilizando token válido. | Retorna status de erro 4xx e nenhuma outra reserva é afetada. |
+| TC06 | Listar reservas filtrando por nome após exclusão | Positivo | Critério 6 | 1. Criar reserva com nome único (primeiro e último nome específicos).<br>2. Excluir a reserva.<br>3. Listar reservas filtrando pelo nome único criado. | A lista retornada está vazia. |
+
+SUPOSIÇÕES
+
+- A URL base da API é `https://restful-booker.herokuapp.com`.
+- A autenticação é feita enviando um JSON com `{"username": "admin", "password": "password123"}` para o endpoint `/auth`, retornando um token no formato `{"token": "..."}`.
+- A exclusão de uma reserva é feita via método `DELETE` no endpoint `/booking/{id}`, enviando o token no cabeçalho `Cookie: token=...` ou `Authorization` conforme o padrão da API Restful-booker (neste script, utiliza-se `Cookie: token={token}`).
+- Os dados padrão para criação de uma reserva utilizam uma estrutura válida para a API (ex: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates`, `additionalneeds`).
+- A listagem com filtro por nome utiliza o endpoint `/booking?firstname=X&lastname=Y`.
+- Um status 4xx retornado na segunda exclusão (TC05) pode ser 405 (Method Not Allowed) ou 403/404 dependendo da implementação específica da API, sendo tratado como qualquer código de erro 4xx.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+
+@pytest.fixture(scope="session")
+f_auth_token():
+    auth_response = requests.post(f"{BASE_URL}/auth", json={
+        "username": "admin",
+        "password": "password123"
+    })
+    assert auth_response.status_code == 200
+    token = auth_response.json().get("token")
+    assert token is not None
+    return token
+
+@pytest.fixture
+def f_sample_booking():
+    booking_data = {
+        "firstname": "TestUserUnique",
+        "lastname": "Integration",
+        "totalprice:int" if False else "totalprice": 111,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2026-01-01",
+            "checkout": "2026-01-02"
+        },
+        "additionalneeds": "Breakfast"
+    }
+    response = requests.post(f"{BASE_URL}/booking", json=booking_data)
+    assert response.status_code == 200
+    data = response.json()
+    booking_id = data.get("bookingid")
+    return booking_id, booking_data
+
+def test_TC01_excluir_reserva_sem_token(f_sample_booking):
+    booking_id, _ = f_sample_booking
+    
+    # Tentar excluir sem token
+    delete_response = requests.delete(f"{BASE_URL}/booking/{booking_id}")
+    assert delete_response.status_code == 403
+    
+    # A reserva continua consultável com status 200
+    get_response = requests.get(f"{BASE_URL}/booking/{booking_id}")
+    assert get_response.status_code == 200
+
+def test_TC02_excluir_reserva_token_invalido(f_sample_booking):
+    booking_id, _ = f_sample_booking
+    
+    # Tentar excluir com token inválido
+    headers = {"Cookie": "token=invalid_token_123"}
+    delete_response = requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    assert delete_response.status_code == 403
+    
+    # A reserva continua existindo
+    get_response = requests.get(f"{BASE_URL}/booking/{booking_id}")
+    assert get_response.status_code == 200
+
+def test_TC03_excluir_reserva_token_valido(f_sample_booking, f_auth_token):
+    booking_id, _ = f_sample_booking
+    
+    headers = {"Cookie": f"token={f_auth_token}"}
+    delete_response = requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    assert delete_response.status_code == 201
+
+def test_TC04_consultar_reserva_apos_exclusao(f_sample_booking, f_auth_token):
+    booking_id, _ = f_sample_booking
+    
+    # Excluir
+    headers = {"Cookie": f"token={f_auth_token}"}
+    requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    
+    # Consultar pelo mesmo identificador
+    get_response = requests.get(f"{BASE_URL}/booking/{booking_id}")
+    assert get_response.status_code == 404
+
+def test_TC05_excluir_reserva_novamente(f_sample_booking, f_auth_token):
+    booking_id, _ = f_sample_booking
+    
+    headers = {"Cookie": f"token={f_auth_token}"}
+    
+    # Primeira exclusão
+    first_delete = requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    assert first_delete.status_code == 201
+    
+    # Segunda exclusão
+    second_delete = requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    assert 400 <= second_delete.status_code < 500
+
+def test_TC06_listar_reservas_filtrando_nome_apos_exclusao(f_sample_booking, f_auth_token):
+    booking_id, booking_data = f_sample_booking
+    fname = booking_data["firstname"]
+    lname = booking_data["lastname"]
+    
+    # Excluir
+    headers = {"Cookie": f"token={f_auth_token}"}
+    requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    
+    # Listar filtrando pelo nome único
+    list_response = requests.get(f"{BASE_URL}/booking", params={"firstname": fname, "lastname": lname})
+    assert list_response.status_code == 200
+    reservations = list_response.json()
+    
+    # Verificar se a lista retornada está vazia ou não contém o ID excluído
+    matching_ids = [r for r in reservations if r.get("bookingid") == booking_id]
+    assert len(matching_ids) == 0
+```

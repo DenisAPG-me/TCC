@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produtos por “hammer”",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial; buscar “hammer”; verificar todos os nomes exibidos.",
+  "esperado": "Existe pelo menos um produto e todos os nomes contêm “hammer”."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Identificar o termo pesquisado na página",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial; buscar “hammer”; verificar a indicação da busca.",
+  "esperado": "A página apresenta uma indicação visível de que a busca foi por “hammer”."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Informar busca sem correspondências",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial; buscar “zzzzxx”.",
+  "esperado": "A mensagem “There are no products found.” está visível."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Exibir zero produtos na busca sem correspondências",
+  "tipo": "Borda",
+  "criterio": "2",
+  "passos": "Abrir a página inicial; buscar “zzzzxx”; verificar a quantidade de produtos.",
+  "esperado": "A listagem contém exatamente zero produtos, inclusive sem cartões remanescentes da página inicial."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Ordenar preços do menor para o maior",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Abrir a página inicial com produtos; selecionar preço crescente; verificar todos os preços da página.",
+  "esperado": "Os preços estão em ordem não decrescente; preços iguais são permitidos."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Ordenar nomes de Z a A",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Abrir a página inicial com produtos; selecionar nome decrescente; verificar todos os nomes da página.",
+  "esperado": "Os nomes estão em ordem alfabética decrescente; nomes iguais são permitidos."
+ }
+]

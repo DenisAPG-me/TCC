@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 5,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes e docstrings claros",
+  "estrutura": "fixture app_root e helpers por elemento",
+  "assercoes": "asserts de negocio e ausencia",
+  "espera": "expect.set_options e auto-wait",
+  "manutenibilidade": "constantes e roles, mas test id roomlisting inventado"
+ }
+}

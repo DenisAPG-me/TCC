@@ -1,0 +1,91 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C01",
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C01"
+   ],
+   "nota": "1 unidade de Claw Hammer, toast e badge 1"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_adicionar_tres_unidades_de_claw_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "heuristicas de busca (role link/text 3/row) nao localizam elementos"
+  },
+  {
+   "teste": "test_TC02_totais_com_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "heuristicas de busca (role link/text 3/row) nao localizam elementos"
+  },
+  {
+   "teste": "test_TC03_alterar_quantidade_para_uma_unidade",
+   "categoria": "seletor inexistente",
+   "nota": "heuristicas de busca (role link/text 3/row) nao localizam elementos"
+  },
+  {
+   "teste": "test_TC04_bloquear_tres_unidades_de_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "heuristicas de busca (role link/text 3/row) nao localizam elementos"
+  },
+  {
+   "teste": "test_TC05_adicionar_uma_unidade_de_claw_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "heuristicas de busca (role link/text 3/row) nao localizam elementos"
+  }
+ ]
+}

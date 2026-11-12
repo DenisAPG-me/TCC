@@ -1,0 +1,98 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Contador de Messages visível após login do administrador",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Abrir /admin; logar com admin/password; ler o número ao lado de Messages",
+  "esperado": "Contador visível com valor inteiro não negativo"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login com senha inválida não expõe o contador",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir /admin; logar com admin e senha incorreta",
+  "esperado": "Permanece na tela de login; link Messages com contador não aparece"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Envio válido do formulário exibe confirmação",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Abrir a home; preencher nome, e-mail, telefone, assunto e mensagem válidos; enviar",
+  "esperado": "Texto \"Thanks for getting in touch {nome}!\" visível"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Envio sem assunto não exibe confirmação",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Preencher os demais campos válidos com assunto vazio; enviar",
+  "esperado": "Confirmação não é exibida"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Confirmação preserva nome com acentos",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Enviar formulário com nome \"Ana Lúcia Gonçalves\" acrescido de sufixo único e dados válidos",
+  "esperado": "Confirmação exibe o nome exatamente como digitado"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Contador aumenta em uma unidade após envio",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Logar e anotar o contador; sair; enviar mensagem como visitante; logar novamente",
+  "esperado": "Novo contador igual ao anotado somado a 1"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Envio com e-mail inválido não altera o contador",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Anotar o contador; sair; enviar com e-mail inválido; logar novamente",
+  "esperado": "Contador igual ao anotado"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Mensagem recém-enviada aparece na caixa",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Enviar mensagem com nome e assunto únicos; logar; clicar em Messages",
+  "esperado": "Item da lista contém o nome e o assunto informados"
+ },
+ {
+  "id": "CT009",
+  "titulo": "Mensagem com acentos e caracteres especiais aparece corretamente",
+  "tipo": "borda",
+  "criterio": "CA04",
+  "passos": "Enviar mensagem com nome acentuado e assunto com acento, dois-pontos e número; logar; abrir Messages",
+  "esperado": "Item exibe nome e assunto exatamente como enviados"
+ },
+ {
+  "id": "CT010",
+  "titulo": "Mensagem não enviada não aparece na caixa",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Enviar com e-mail inválido e assunto único; logar; abrir Messages",
+  "esperado": "Nenhum item contém o assunto"
+ },
+ {
+  "id": "CT011",
+  "titulo": "Após logout, acesso direto à caixa exige login",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Logar; clicar em Logout; abrir /admin/messages",
+  "esperado": "Tela de login é exibida; contador de Messages não aparece"
+ },
+ {
+  "id": "CT012",
+  "titulo": "Acesso direto à caixa sem autenticação exige login",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Abrir /admin/messages sem login prévio",
+  "esperado": "Tela de login é exibida; nenhum item de mensagem listado"
+ }
+]

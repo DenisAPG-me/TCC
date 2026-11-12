@@ -1,0 +1,163 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C04",
+  "US04-C05",
+  "US04-C06",
+  "US04-C07",
+  "US04-C08",
+  "US04-C09",
+  "US04-C10",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03",
+    "US04-C06",
+    "US04-C09"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "limites maximos aceitos"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C07"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C10"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC05",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC06",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC08",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC09",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC10",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  }
+ ]
+}

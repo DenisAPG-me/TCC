@@ -1,0 +1,97 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "busca com resultado apos busca vazia"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "busca vazia apos busca com resultado"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_buscar_hammer",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  },
+  {
+   "teste": "test_ct02_buscar_termo_inexistente",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  },
+  {
+   "teste": "test_ct03_ordenar_preco_crescente",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  },
+  {
+   "teste": "test_ct04_ordenar_nome_decrescente",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  },
+  {
+   "teste": "test_ct05_buscar_hammer_apos_resultado_vazio",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  },
+  {
+   "teste": "test_ct06_buscar_inexistente_apos_resultado_valido",
+   "categoria": "espera/timing",
+   "nota": "expect_response em open_store expirou (15s) sem capturar /products"
+  }
+ ]
+}

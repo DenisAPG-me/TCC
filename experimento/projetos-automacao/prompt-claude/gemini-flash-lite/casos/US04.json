@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Envio do formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; deixar todos os campos em branco; clicar no botão de envio",
+  "esperado": "Exibir mensagens de erro indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Envio de telefone com menos de 11 caracteres",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher os campos válidos e o telefone com menos de 11 dígitos; clicar no botão de envio",
+  "esperado": "Exibir a mensagem Phone must be between 11 and 21 characters"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Envio de assunto curto e mensagem curta",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; preencher assunto com menos de 5 caracteres e mensagem com menos de 20 caracteres; clicar no botão de envio",
+  "esperado": "Exibir as mensagens Subject must be between 5 and 100 characters e Message must be between 20 and 2000 characters"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Envio de e-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Acessar a página inicial; preencher o campo de e-mail com valor malformado bad; clicar no botão de envio",
+  "esperado": "Exibir a mensagem must be a well-formed email address"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Envio de todos os campos com dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Acessar a página inicial; preencher todos os campos com dados válidos; clicar no botão de envio",
+  "esperado": "Exibir a mensagem Thanks for getting in touch <nome> e o assunto informado na confirmação"
+ }
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes e constantes claros, helpers curtos",
+  "estrutura": "Fixtures, helpers de request/asserção",
+  "assercoes": "Checa status, tipos e valores de todos os campos",
+  "espera": "Timeout configurado; dados únicos; sem retry",
+  "manutenibilidade": "Constantes centralizadas, UUID, sem limpeza de dados"
+ }
+}

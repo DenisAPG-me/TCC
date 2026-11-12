@@ -1,0 +1,166 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Buscar produtos pela palavra-chave "hammer" | Positivo | CA1 | Acessar a página inicial; Preencher o campo de busca com "hammer"; Clicar no botão de busca | A página exibe a indicação "Searched for: hammer"; ao menos um produto é listado; todos os nomes listados contêm "hammer" |
+| CT02 | Buscar com a palavra-chave em letras maiúsculas "HAMMER" | Borda | CA1 | Acessar a página inicial; Preencher o campo de busca com "HAMMER"; Clicar no botão de busca | A página indica que a busca foi por "HAMMER"; ao menos um produto é listado; todos os nomes contêm "hammer" sem diferenciar maiúsculas e minúsculas |
+| CT03 | Buscar por termo inexistente "zzzzxx" | Negativo | CA2 | Acessar a página inicial; Preencher o campo de busca com "zzzzxx"; Clicar no botão de busca | A mensagem "There are no products found." é exibida e nenhum produto é listado |
+| CT04 | Buscar por termo composto apenas de caracteres especiais | Borda | CA2 | Acessar a página inicial; Preencher o campo de busca com "#$%&*"; Clicar no botão de busca | A mensagem "There are no products found." é exibida e nenhum produto é listado |
+| CT05 | Ordenar produtos por preço do menor para o maior | Positivo | CA3 | Acessar a página inicial; Verificar que há produtos listados; Selecionar a ordenação "Price (Low - High)" | Os preços dos produtos da página aparecem em ordem crescente |
+| CT06 | Ordenar produtos por nome de Z a A | Positivo | CA4 | Acessar a página inicial; Verificar que há produtos listados; Selecionar a ordenação "Name (Z - A)" | Os nomes dos produtos da página aparecem em ordem alfabética decrescente |
+
+## SUPOSIÇÕES
+
+- Tecnologia: User Story de interface web, portanto Python + pytest + Playwright síncrono. Os "REQUISITOS TÉCNICOS OBRIGATÓRIOS" prevalecem sobre a instrução anterior, então o script usa o plugin pytest-playwright e as fixtures `page` e `playwright` fornecidas por ele, sem `sync_playwright()` nem fixture própria de browser/page.
+- O Chromium headless é o padrão do pytest-playwright. O comando de execução é `pytest test_busca_ordenacao.py` com `pytest-playwright` instalado e `playwright install chromium` executado.
+- A URL base vem da constante `BASE_URL` no topo do arquivo, e a navegação usa essa constante diretamente.
+- A aplicação expõe atributos `data-test`. O script configura `playwright.selectors.set_test_id_attribute("data-test")` numa fixture de sessão autouse, para que `get_by_test_id` funcione.
+- Seletores deduzidos:
+  - `data-test="search-query"`: campo de busca.
+  - `data-test="search-submit"`: botão de busca.
+  - `data-test="search-caption"`: indicação "Searched for: <termo>".
+  - `data-test="no-results"`: mensagem de busca sem resultados.
+  - `data-test="product-name"`: nome do produto no card.
+  - `data-test="product-price"`: preço do produto no card.
+  - `data-test="sort"`: select de ordenação.
+- As opções do select de ordenação têm os valores `price,asc` para "Price (Low - High)" e `name,desc` para "Name (Z - A)".
+- O frontend consome uma API REST. A busca chama uma URL que contém `/products/search`, e a ordenação chama uma URL de `/products` com o parâmetro `sort=<valor>`. As duas respostas são JSON paginado, com os produtos na chave `data` e cada item contendo `name`.
+- Para sincronizar sem `time.sleep`, o script aguarda a resposta da API (`expect_response`). Em seguida, usa `expect(...).to_have_text(...)` com os nomes retornados, o que garante que a listagem foi re-renderizada antes das verificações de ordenação e conteúdo.
+- O preço é exibido no formato "$12.34". O script extrai o valor numérico removendo os caracteres não numéricos.
+- A busca no sistema não diferencia maiúsculas de minúsculas, e a indicação de busca reproduz o termo como digitado.
+- A ordenação por nome é verificada sem diferenciar maiúsculas de minúsculas. Nomes iguais são considerados corretamente ordenados.
+- Um termo composto apenas de caracteres especiais ("#$%&*") não corresponde a nenhum produto e exibe a mesma mensagem de "sem resultados".
+- A mensagem de busca sem resultados é exatamente "There are no products found.".
+- "Produtos da página" refere-se apenas à página de resultados exibida (primeira página da paginação).
+- A página inicial lista mais de um produto, o que permite validar a ordenação.
+
+## SCRIPT
+
+```python
+import re
+from urllib.parse import unquote
+
+import pytest
+from playwright.sync_api import Page, Playwright, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+TERMO_EXISTENTE = "hammer"
+TERMO_EXISTENTE_MAIUSCULO = "HAMMER"
+TERMO_INEXISTENTE = "zzzzxx"
+TERMO_CARACTERES_ESPECIAIS = "#$%&*"
+MENSAGEM_SEM_RESULTADOS = "There are no products found."
+LEGENDA_BUSCA = "Searched for:"
+
+ORDEM_PRECO_CRESCENTE = "price,asc"
+ORDEM_NOME_DECRESCENTE = "name,desc"
+
+TIMEOUT_MS = 15000
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configurar_test_id(playwright: Playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+@pytest.fixture(autouse=True)
+def configurar_timeout():
+    expect.set_options(timeout=TIMEOUT_MS)
+
+
+def abrir_pagina_inicial(page: Page):
+    page.goto(BASE_URL)
+    expect(page.get_by_test_id("product-name").first).to_be_visible()
+
+
+def buscar(page: Page, termo: str) -> list[str]:
+    page.get_by_test_id("search-query").fill(termo)
+    with page.expect_response(
+        lambda r: "/products/search" in r.url and r.request.method == "GET",
+        timeout=TIMEOUT_MS,
+    ) as resposta:
+        page.get_by_test_id("search-submit").click()
+    return [produto["name"] for produto in resposta.value.json().get("data", [])]
+
+
+def ordenar(page: Page, valor: str) -> list[str]:
+    with page.expect_response(
+        lambda r: "/products" in r.url
+        and f"sort={valor}" in unquote(r.url)
+        and r.request.method == "GET",
+        timeout=TIMEOUT_MS,
+    ) as resposta:
+        page.get_by_test_id("sort").select_option(valor)
+    return [produto["name"] for produto in resposta.value.json().get("data", [])]
+
+
+def converter_preco(texto: str) -> float:
+    return float(re.sub(r"[^\d.]", "", texto))
+
+
+def validar_busca_com_resultados(page: Page, termo: str):
+    nomes_api = buscar(page, termo)
+    assert len(nomes_api) > 0, f"A busca por '{termo}' não retornou produtos"
+
+    expect(page.get_by_test_id("search-caption")).to_contain_text(LEGENDA_BUSCA)
+    expect(page.get_by_test_id("search-caption")).to_contain_text(termo)
+
+    nomes = page.get_by_test_id("product-name")
+    expect(nomes).to_have_text(nomes_api)
+    expect(nomes).to_have_text(
+        [re.compile(re.escape(TERMO_EXISTENTE), re.IGNORECASE)] * len(nomes_api)
+    )
+
+
+def validar_busca_sem_resultados(page: Page, termo: str):
+    buscar(page, termo)
+    expect(page.get_by_test_id("no-results")).to_have_text(MENSAGEM_SEM_RESULTADOS)
+    expect(page.get_by_test_id("product-name")).to_have_count(0)
+
+
+def test_ct01_buscar_produtos_por_hammer(page: Page):
+    abrir_pagina_inicial(page)
+    validar_busca_com_resultados(page, TERMO_EXISTENTE)
+
+
+def test_ct02_buscar_produtos_por_hammer_em_maiusculas(page: Page):
+    abrir_pagina_inicial(page)
+    validar_busca_com_resultados(page, TERMO_EXISTENTE_MAIUSCULO)
+
+
+def test_ct03_buscar_termo_inexistente(page: Page):
+    abrir_pagina_inicial(page)
+    validar_busca_sem_resultados(page, TERMO_INEXISTENTE)
+
+
+def test_ct04_buscar_termo_com_caracteres_especiais(page: Page):
+    abrir_pagina_inicial(page)
+    validar_busca_sem_resultados(page, TERMO_CARACTERES_ESPECIAIS)
+
+
+def test_ct05_ordenar_por_preco_crescente(page: Page):
+    abrir_pagina_inicial(page)
+    nomes_api = ordenar(page, ORDEM_PRECO_CRESCENTE)
+    assert len(nomes_api) > 1, "Produtos insuficientes para validar a ordenação"
+
+    expect(page.get_by_test_id("product-name")).to_have_text(nomes_api)
+    precos_locator = page.get_by_test_id("product-price")
+    expect(precos_locator).to_have_count(len(nomes_api))
+
+    precos = [converter_preco(t) for t in precos_locator.all_inner_texts()]
+    assert precos == sorted(precos), f"Preços fora de ordem crescente: {precos}"
+
+
+def test_ct06_ordenar_por_nome_z_a(page: Page):
+    abrir_pagina_inicial(page)
+    nomes_api = ordenar(page, ORDEM_NOME_DECRESCENTE)
+    assert len(nomes_api) > 1, "Produtos insuficientes para validar a ordenação"
+
+    nomes_locator = page.get_by_test_id("product-name")
+    expect(nomes_locator).to_have_text(nomes_api)
+
+    nomes = [n.strip() for n in nomes_locator.all_inner_texts()]
+    assert nomes == sorted(nomes, key=str.lower, reverse=True), (
+        f"Nomes fora de ordem alfabética decrescente: {nomes}"
+    )
+```

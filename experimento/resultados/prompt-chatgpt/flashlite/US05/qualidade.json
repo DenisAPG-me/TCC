@@ -1,0 +1,14 @@
+{
+ "legibilidade": 2,
+ "estrutura": 1,
+ "assercoes": 2,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "codigo repetido e verboso",
+  "estrutura": "sem helpers/fixtures, login copiado em cada teste",
+  "assercoes": "asserts fracos (texto solto) e API inexistente to_url",
+  "espera": "sem sleep, mas goto direto apos logout instavel",
+  "manutenibilidade": "dados hardcoded, .or_ com fallbacks e get_by_text ambiguo"
+ }
+}

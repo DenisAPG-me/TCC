@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar formulário de contato vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; deixar nome, e-mail, telefone, assunto e mensagem vazios; clicar em Submit",
+  "esperado": "Ver \"Name may not be blank\", \"Email may not be blank\", \"Phone may not be blank\", \"Subject may not be blank\" e \"Message may not be blank\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone com 10 caracteres é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher todos os campos válidos com telefone de 10 caracteres; clicar em Submit",
+  "esperado": "Ver \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Telefone com 11 caracteres (limite inferior) é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2, CA5",
+  "passos": "Acessar a página inicial; preencher todos os campos válidos com telefone de 11 caracteres; clicar em Submit",
+  "esperado": "Ver \"Thanks for getting in touch Maria Teste!\""
+ },
+ {
+  "id": "CT04",
+  "titulo": "Telefone com 21 caracteres (limite superior) é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2, CA5",
+  "passos": "Acessar a página inicial; preencher todos os campos válidos com telefone de 21 caracteres; clicar em Submit",
+  "esperado": "Ver \"Thanks for getting in touch Maria Teste!\""
+ },
+ {
+  "id": "CT05",
+  "titulo": "Telefone com 22 caracteres é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher todos os campos válidos com telefone de 22 caracteres; clicar em Submit",
+  "esperado": "Ver \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT06",
+  "titulo": "Assunto com 4 caracteres e mensagem com 19 caracteres são rejeitados",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; preencher campos válidos com assunto de 4 caracteres e mensagem de 19 caracteres; clicar em Submit",
+  "esperado": "Ver \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Assunto com 5 caracteres e mensagem com 20 caracteres (limites inferiores) são aceitos",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Acessar a página inicial; preencher campos válidos com assunto de 5 caracteres e mensagem de 20 caracteres; clicar em Submit",
+  "esperado": "Ver \"Thanks for getting in touch Maria Teste!\""
+ },
+ {
+  "id": "CT08",
+  "titulo": "Assunto com 100 caracteres e mensagem com 2000 caracteres (limites superiores) são aceitos",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Acessar a página inicial; preencher campos válidos com assunto de 100 caracteres e mensagem de 2000 caracteres; clicar em Submit",
+  "esperado": "Ver \"Thanks for getting in touch Maria Teste!\""
+ },
+ {
+  "id": "CT09",
+  "titulo": "Assunto com 101 caracteres e mensagem com 2001 caracteres são rejeitados",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; preencher campos válidos com assunto de 101 caracteres e mensagem de 2001 caracteres; clicar em Submit",
+  "esperado": "Ver \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT10",
+  "titulo": "E-mail malformado (\"bad\") é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Acessar a página inicial; preencher campos válidos com e-mail \"bad\"; clicar em Submit",
+  "esperado": "Ver \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT11",
+  "titulo": "Formulário com dados válidos gera confirmação com nome e assunto",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Acessar a página inicial; preencher todos os campos com dados válidos; clicar em Submit",
+  "esperado": "Ver \"Thanks for getting in touch Maria Teste!\" e o assunto \"Dúvida sobre reserva\" na confirmação"
+ }
+]

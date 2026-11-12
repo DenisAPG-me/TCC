@@ -1,0 +1,16 @@
+[
+ "1. Os critérios não possuem identificadores. Assumi CA01 a CA06 correspondendo, na ordem de apresentação, aos critérios 1 a 6 da User Story.",
+ "2. Explícito na User Story: URL base `https://restful-booker.herokuapp.com`, credenciais `admin` / `password123`, status 403 (sem token ou token inválido), 201 (exclusão com token válido), 404 (consulta após exclusão) e erro 4xx na exclusão repetida. O CA05 não fixa um código específico, então o teste aceita qualquer código entre 400 e 499.",
+ "3. Inferido: autenticação por `POST /auth` com corpo JSON `{\"username\", \"password\"}`, retornando o campo `token` em caso de sucesso. Cenários de credenciais inválidas não estão cobertos pela User Story.",
+ "4. Inferido: criação por `POST /booking` com JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`, retornando 200 com o campo `bookingid`. As datas fixas (2026-12-01 a 2026-12-05) são suposição e podem precisar de ajuste.",
+ "5. Inferido: consulta por `GET /booking/{id}`, retornando 200 com JSON para reserva existente e 404 para reserva inexistente.",
+ "6. Inferido: exclusão por `DELETE /booking/{id}` com o token enviado no header `Cookie: token=<valor>`. Sem header de token, com token inválido ou com token vazio, a resposta esperada é 403. Com token válido, a resposta esperada é 201. Não assumi suporte ao header `Authorization`.",
+ "7. Inferido: listagem por `GET /booking` com os parâmetros `firstname` e `lastname`, retornando uma lista de objetos `{\"bookingid\": n}` ou uma lista vazia quando não há correspondência. O nome único é gerado com UUID. CT008 depende de a busca filtrar por nome e de não haver reservas com o mesmo nome.",
+ "8. Inferido: os valores de teste são aceitos pelo sistema. Se houver regras de datas ou de conflito de reserva que não sejam conhecidas, a criação pode falhar.",
+ "9. Ausência de casos de borda ou negativos em alguns critérios: CA03 e CA04 não têm borda, pois o CA03 é definido por token válido e o CA04 por uma única consulta após exclusão, sem limites especificados. CA06 não tem caso negativo, pois o critério define apenas o resultado após a exclusão. CT007 assume que a exclusão é isolada por identificador.",
+ "10. Independência: cada teste cria suas próprias reservas, com nomes únicos, e o fixture de limpeza remove no teardown as reservas que ainda existirem. Na limpeza, a remoção deve retornar 201, e falhas aparecem como erro.",
+ "11. Pré-condições externas inevitáveis: o serviço público deve estar disponível, as credenciais de demonstração devem ser válidas e o sistema não deve ser resetado nem alterado por terceiros durante a execução. Nomes únicos reduzem, mas não eliminam, a interferência em uma API compartilhada.",
+ "12. Cada requisição tem timeout de 15 segundos. Não há pausas fixas; a limpeza verifica o estado antes de excluir.",
+ "13. A User Story exige apenas testes de API REST, sem critérios de interface. Por isso não há testes com Playwright nem uso de pytest-playwright.",
+ "14. O código não foi validado contra o sistema real. Antes da execução, confirme endpoints, nomes de campos, header do token e códigos de resposta, especialmente o código da exclusão repetida. Ajuste as constantes e os helpers no topo do arquivo, se necessário."
+]

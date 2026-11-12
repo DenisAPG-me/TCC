@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "claro, helpers nomeados",
+  "estrutura": "fixtures com cleanup e helpers",
+  "assercoes": "corpo completo comparado",
+  "espera": "timeout, dados unicos",
+  "manutenibilidade": "cleanup, constantes, sessao isolada"
+ }
+}

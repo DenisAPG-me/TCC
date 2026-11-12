@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes descritivos",
+  "estrutura": "fixtures e builders",
+  "assercoes": "status e campos verificados",
+  "espera": "timeout",
+  "manutenibilidade": "constantes; sem cleanup"
+ }
+}

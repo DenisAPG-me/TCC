@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Constantes e helpers expressivos",
+  "estrutura": "Fixture, helpers add_claw_hammer_x3/open_cart reutilizados",
+  "assercoes": "Totais, mensagem e badge com padroes de preco",
+  "espera": "expect auto-wait, sem sleep; leituras apos expect",
+  "manutenibilidade": "test-ids com data-test e constantes"
+ }
+}

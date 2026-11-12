@@ -1,0 +1,265 @@
+{
+ "created": 1793387187.8480515,
+ "duration": 25.313576698303223,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 8,
+  "total": 8,
+  "collected": 8
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_excluir_reserva_sem_token_retorna_403",
+     "type": "Function",
+     "lineno": 94
+    },
+    {
+     "nodeid": "script.py::test_ct02_excluir_reserva_com_token_invalido_retorna_403",
+     "type": "Function",
+     "lineno": 103
+    },
+    {
+     "nodeid": "script.py::test_ct03_excluir_reserva_com_token_vazio_retorna_403",
+     "type": "Function",
+     "lineno": 114
+    },
+    {
+     "nodeid": "script.py::test_ct04_autenticacao_com_credenciais_invalidas_nao_gera_token",
+     "type": "Function",
+     "lineno": 123
+    },
+    {
+     "nodeid": "script.py::test_ct05_excluir_reserva_com_token_valido_retorna_201",
+     "type": "Function",
+     "lineno": 129
+    },
+    {
+     "nodeid": "script.py::test_ct06_consultar_reserva_excluida_retorna_404",
+     "type": "Function",
+     "lineno": 137
+    },
+    {
+     "nodeid": "script.py::test_ct07_excluir_reserva_ja_excluida_retorna_4xx_sem_afetar_outras",
+     "type": "Function",
+     "lineno": 146
+    },
+    {
+     "nodeid": "script.py::test_ct08_listar_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+     "type": "Function",
+     "lineno": 159
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_excluir_reserva_sem_token_retorna_403",
+   "lineno": 94,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_excluir_reserva_sem_token_retorna_403",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6101585000287741,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.759907600004226,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6909175999462605,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_excluir_reserva_com_token_invalido_retorna_403",
+   "lineno": 103,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_excluir_reserva_com_token_invalido_retorna_403",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6512403000378981,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.9268149000126868,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6442616999847814,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_excluir_reserva_com_token_vazio_retorna_403",
+   "lineno": 114,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_excluir_reserva_com_token_vazio_retorna_403",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6694533999543637,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.9867662999313325,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6372699000639841,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_autenticacao_com_credenciais_invalidas_nao_gera_token",
+   "lineno": 123,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_autenticacao_com_credenciais_invalidas_nao_gera_token",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003488999791443348,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6590561999473721,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00019419996533542871,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_excluir_reserva_com_token_valido_retorna_201",
+   "lineno": 129,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_excluir_reserva_com_token_valido_retorna_201",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6375970999943092,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.27861669997219,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6492073000408709,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_consultar_reserva_excluida_retorna_404",
+   "lineno": 137,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_consultar_reserva_excluida_retorna_404",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6567570000188425,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.9342724999878556,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6490574999479577,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_excluir_reserva_ja_excluida_retorna_4xx_sem_afetar_outras",
+   "lineno": 146,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_excluir_reserva_ja_excluida_retorna_4xx_sem_afetar_outras",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6455931999953464,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.2688397999154404,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.324575199978426,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_listar_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+   "lineno": 159,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_listar_por_nome_unico_apos_exclusao_retorna_lista_vazia",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6452647000551224,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.6794268999947235,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6329283999511972,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

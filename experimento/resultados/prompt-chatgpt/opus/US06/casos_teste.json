@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Contador de Messages exibido após login",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Abrir /admin; autenticar com admin/password; localizar o link Messages e ler o número ao lado",
+  "esperado": "O link Messages está visível com um número inteiro não negativo ao lado, que pode ser anotado"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Envio válido do formulário de contato exibe confirmação com o nome",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; preencher nome, e-mail, telefone, assunto e mensagem válidos e únicos; clicar em Submit",
+  "esperado": "Aparece o texto \"Thanks for getting in touch <nome>!\" com o nome informado"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Envio do formulário vazio não exibe confirmação",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; clicar em Submit sem preencher campos",
+  "esperado": "Mensagens de validação de nome e assunto obrigatórios aparecem e nenhuma confirmação \"Thanks for getting in touch\" é exibida"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Confirmação preserva nome com acentos, apóstrofo e hífen",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; preencher o formulário com nome contendo acentos, apóstrofo e hífen e demais dados válidos; clicar em Submit",
+  "esperado": "A confirmação exibe exatamente \"Thanks for getting in touch <nome>!\" com o nome sem alterações"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Contador de Messages aumenta em uma unidade após envio de visitante",
+  "tipo": "positivo",
+  "criterio": "CA01, CA03",
+  "passos": "Autenticar; anotar o número de Messages; fazer logout; enviar mensagem válida como visitante; autenticar novamente; ler o número",
+  "esperado": "O número ao lado de Messages é exatamente o anotado mais um"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Mensagem recém-enviada aparece na caixa com nome e assunto",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Enviar mensagem válida com nome e assunto únicos; autenticar; clicar em Messages",
+  "esperado": "A lista contém exatamente uma linha com o assunto enviado e essa linha contém o nome do remetente"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Acesso direto à caixa de mensagens após logout solicita login",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Autenticar; fazer logout; navegar diretamente para /admin/message",
+  "esperado": "Campos Username e Password e botão Login são exibidos e nenhuma linha de mensagem é listada"
+ }
+]

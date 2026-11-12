@@ -1,0 +1,11 @@
+[
+ "A aplicação é uma interface web e os testes usam pytest, pytest-playwright e a API síncrona do Playwright; o plugin fornece a fixture `page`.",
+ "A constante `BASE_URL` contém a URL base informada. As rotas `/admin`, `/#contact` e `/admin/messages` são suposições deduzidas, pois a história só especifica `/admin`.",
+ "Os seletores são inferidos: campos identificáveis por rótulos acessíveis ou placeholders, links/botões acessíveis com nomes como `Contact`, `Submit`, `Login`, `Messages` e `Logout`. Se a interface real usar outros nomes, os seletores devem ser ajustados.",
+ "O formulário de contato exige nome, e-mail, telefone, assunto e mensagem. Os testes usam valores fictícios válidos; os critérios não especificam telefone, mensagem nem validações exatas.",
+ "O login usa os dados de demonstração `admin` e `password`.",
+ "Para contagem e listagem, cada teste cria uma mensagem com identificador único; assume-se que mensagens ficam persistidas e que o contador reflete mensagens recebidas.",
+ "A ausência de confirmação de sucesso é usada como verificação negativa, pois a história não define o texto de erro nem a apresentação da validação.",
+ "O acesso não autenticado a Messages pode mostrar a tela de login ou redirecionar para `/admin`; ambos são aceitos no TC04.",
+ "Os testes que verificam o contador dependem de uma aplicação isolada ou de que nenhuma outra mensagem seja enviada em paralelo durante a execução."
+]

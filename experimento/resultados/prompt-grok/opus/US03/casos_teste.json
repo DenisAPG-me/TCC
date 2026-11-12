@@ -1,0 +1,90 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "negativo",
+  "criterio": "AC1",
+  "passos": "Abrir `/auth/login`; clicar em \"Login\" sem preencher nada",
+  "esperado": "Exibe \"Email is required\" e \"Password is required\"; permanece na tela de login"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com e-mail preenchido e senha vazia",
+  "tipo": "borda",
+  "criterio": "AC1",
+  "passos": "Abrir login; informar apenas o e-mail da conta de demonstração; enviar",
+  "esperado": "Exibe \"Password is required\"; não exibe \"Email is required\"; permanece sem sessão"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "AC2",
+  "passos": "Abrir login; informar e-mail de demonstração e senha incorreta; enviar",
+  "esperado": "Exibe \"Invalid email or password\"; permanece em `/auth/login`; link \"Sign in\" visível e menu do usuário ausente"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Checkout sem autenticação exige credenciais",
+  "tipo": "positivo",
+  "criterio": "AC3",
+  "passos": "Sem login, adicionar produto ao carrinho; abrir carrinho; avançar para o checkout",
+  "esperado": "Passo de login é exibido com campos de e-mail e senha"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Login válido exibe \"My account\" e nome do usuário",
+  "tipo": "positivo",
+  "criterio": "AC4",
+  "passos": "Abrir login; informar credenciais de demonstração; enviar",
+  "esperado": "Redireciona para \"My account\"; menu do usuário exibe o nome; link \"Sign in\" desaparece"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Login no passo de checkout permite prosseguir",
+  "tipo": "positivo",
+  "criterio": "AC3, AC4",
+  "passos": "Sem login, adicionar produto; avançar ao checkout; informar credenciais válidas no passo de login",
+  "esperado": "Usuário fica autenticado no checkout e consegue avançar para o passo de endereço"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Endereço com campos obrigatórios vazios bloqueia avanço",
+  "tipo": "negativo",
+  "criterio": "AC5",
+  "passos": "Login; adicionar produto; avançar até o endereço; limpar todos os campos obrigatórios",
+  "esperado": "Botão de avançar para pagamento fica desabilitado; passo de pagamento não aparece"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Endereço com apenas um campo obrigatório vazio (CEP)",
+  "tipo": "borda",
+  "criterio": "AC5",
+  "passos": "Login; adicionar produto; avançar até endereço; preencher tudo exceto CEP",
+  "esperado": "Botão de avançar para pagamento permanece desabilitado"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Endereço completo permite avançar ao pagamento",
+  "tipo": "positivo",
+  "criterio": "AC5",
+  "passos": "Login; adicionar produto; avançar até endereço; preencher país, CEP, número, rua, cidade, estado; avançar",
+  "esperado": "Passo de pagamento é exibido com seleção de método de pagamento"
+ },
+ {
+  "id": "TC10",
+  "titulo": "Pagamento com cartão de crédito e confirmação do pedido",
+  "tipo": "positivo",
+  "criterio": "AC6",
+  "passos": "Fluxo completo até pagamento; escolher \"Credit Card\"; informar dados fictícios válidos; confirmar; confirmar novamente",
+  "esperado": "Exibe \"Payment was successful\" e depois \"Thanks for your order! Your invoice number is INV-...\""
+ },
+ {
+  "id": "TC11",
+  "titulo": "Cartão de crédito sem dados não permite confirmar",
+  "tipo": "negativo",
+  "criterio": "AC6",
+  "passos": "Fluxo até pagamento; escolher \"Credit Card\"; não preencher os dados do cartão",
+  "esperado": "Botão de confirmação permanece desabilitado; \"Payment was successful\" não aparece"
+ }
+]

@@ -1,0 +1,67 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT002_calcular_totais_para_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores do carrinho (linha/total) nao localizados"
+  },
+  {
+   "teste": "test_CT003_reduzir_quantidade_para_uma_unidade",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores do carrinho nao localizados"
+  }
+ ]
+}

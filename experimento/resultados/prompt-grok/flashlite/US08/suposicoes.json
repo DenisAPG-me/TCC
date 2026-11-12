@@ -1,0 +1,9 @@
+[
+ "A URL base utilizada é `https://restful-booker.herokuapp.com`.",
+ "O endpoint de autenticação é `/auth` e espera um JSON com as chaves `username` e `password`, retornando um JSON com a chave `token`.",
+ "O endpoint de reservas é `/booking` e os endpoints de modificação são `/booking/{id}`.",
+ "Para os testes que exigem uma reserva existente (TC03, TC04, TC05, TC06), o script cria dinamicamente uma reserva inicial via POST `/booking` antes de executar a ação de atualização, garantindo que o ID da reserva exista.",
+ "A autenticação via token no Restful-Booker é enviada no cabeçalho `Cookie` no formato `token=<token>` (ou conforme padrão suportado pela API).",
+ "Para a atualização parcial (PATCH), o payload contém apenas o campo de sobrenome (`lastname`).",
+ "Para a atualização completa (PUT) com campos obrigatórios ausentes, envia-se um payload incompleto (por exemplo, faltando o primeiro nome ou sobrenome)."
+]

@@ -1,0 +1,15 @@
+[
+ "Base URL: `https://restful-booker.herokuapp.com`, acessível e com dados de demonstração.",
+ "Autenticação: `POST /auth` com JSON `{\"username\": \"...\", \"password\": \"...\"}` retorna `{\"token\": \"...\"}` em caso de sucesso.",
+ "Falha de autenticação: retorna status 200 com `{\"reason\": \"Bad credentials\"}`, sem o campo `token`. Credenciais vazias e usuário inexistente seguem o mesmo padrão.",
+ "Token em atualizações: enviado no header `Cookie: token=<valor>` em `PUT /booking/{id}` e `PATCH /booking/{id}`.",
+ "Sem token ou com token inválido em atualizações: status 403.",
+ "Criação de reserva: `POST /booking` com JSON retorna `{\"bookingid\": <int>, \"booking\": {...}}`, com status 200.",
+ "Consulta de reserva: `GET /booking/{id}` retorna o objeto da reserva.",
+ "Payload de reserva: chaves `firstname` (string), `lastname` (string), `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`) e `additionalneeds` (string, opcional).",
+ "Campos obrigatórios para `PUT`: `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`. Ausência de qualquer um deles resulta em status 400.",
+ "`PATCH` aceita atualização parcial e preserva os campos não enviados.",
+ "Reservas criadas pelos testes não são removidas, por se tratar de ambiente de demonstração.",
+ "Não há caso de teste para ID de reserva inexistente, pois o comportamento da API para esse caso não está definido na User Story.",
+ "Valores de teste: `firstname` original \"Joao\", `lastname` original \"Silva\", `totalprice` original 150, novo `firstname` \"Maria\", novo `totalprice` 999, `checkin` 2026-01-01 e `checkout` 2026-01-05."
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Legivel, mas campo totalprice1 espurio com comentario confuso",
+  "estrutura": "Helpers minimos, repeticao de auth/delete em cada teste",
+  "assercoes": "Status corretos, poucos checks de corpo",
+  "espera": "Sem limpeza e nome fixo no CT006 pode colidir entre execucoes",
+  "manutenibilidade": "Reservas deixadas no servidor, dados fixos, URLs repetidas"
+ }
+}

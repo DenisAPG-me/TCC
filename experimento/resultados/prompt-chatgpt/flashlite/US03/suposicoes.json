@@ -1,0 +1,11 @@
+[
+ "1. Os critérios de aceitação foram numerados de CA01 a CA06 na ordem de apresentação da User Story.",
+ "2. A URL base utilizada é https://practicesoftwaretesting.com/.",
+ "3. A rota da página de login é /auth/login.",
+ "4. Os seletores de login utilizam campos com rótulos ou placeholders correspondentes a E-mail e Password, e botão de submissão com texto Login.",
+ "5. As mensagens de erro esperadas são exatamente \"Email is required\", \"Password is required\" e \"Invalid email or password\", exibidas na tela de login.",
+ "6. Para simular produto no carrinho e checkout, os testes utilizam navegação direta ou interações padrão da aplicação (adicionar produto genérico da página inicial, ir ao carrinho, prosseguir para checkout).",
+ "7. Os campos obrigatórios do endereço no checkout são país (country), CEP (postcode/zip), número (number), rua (street), cidade (city) e estado (state).",
+ "8. No passo de pagamento, a opção de cartão de crédito é selecionada por meio de rádio button ou select, preenchendo campos válidos fictícios (número do cartão, validade, CVV) e clicando em confirmar.",
+ "9. As mensagens de sucesso no pagamento e pedido são \"Payment was successful\" e \"Thanks for your order! Your invoice number is INV-...\"."
+]

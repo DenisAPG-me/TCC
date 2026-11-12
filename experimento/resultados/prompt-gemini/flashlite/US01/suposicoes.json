@@ -1,0 +1,8 @@
+[
+ "**URL Base:** `https://practicesoftwaretesting.com/`",
+ "**Campo de Busca (Input):** Localizado pelo test id ou placeholder ou label associado (ex: `[data-test=\"search-query\"]` ou input de busca). Assumimos `page.get_by_test_id(\"search-query\")` ou `page.get_by_placeholder(\"Search\")`.",
+ "**Botão de Busca:** Assumimos `page.get_by_test_id(\"search-submit\")` ou pressionar tecla `Enter`.",
+ "**Mensagem de Nenhum Produto:** Assumimos elemento com `[data-test=\"no-results\"]` ou texto correspondente a \"There are no products found.\".",
+ "**Filtro / Ordenação (Sort):** Assumimos elemento de seleção de ordenação (select ou dropdown) com `[data-test=\"sort\"]` ou seletor similar.",
+ "**Cards de Produtos:** Assumimos que os produtos listados possuem seletores baseados em `[data-test=\"product-card\"]`, contendo título (`[data-test=\"product-name\"]`) e preço (`[data-test=\"product-price\"]`)."
+]

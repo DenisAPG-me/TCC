@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 21.93,
+ "tokens": {
+  "total": 6306
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "unit_price.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n    expect(quantity_input).to_have_value(\"1\")\n    expect(page.locator(CART_TOTAL_SELECTOR)).to_have_text(\n        re.compile(re.escape(f\"{expected_total:.2f}\"))\n    )\n\n\ndef test_CT004_impedir_tres_unidades_de_thor_hammer(page: Page) -> None:\n    _open_product(page, \"Thor Hammer\")\n    _set_product_quantity(page, 3)\n    _add_to_cart(page)\n\n    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()\n```\ntokens used\n6,306\n"
+}

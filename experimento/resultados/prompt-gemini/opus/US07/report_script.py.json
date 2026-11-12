@@ -1,0 +1,293 @@
+{
+ "created": 1793387139.0812078,
+ "duration": 9.748085737228394,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 9,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_criar_reserva_com_corpo_valido",
+     "type": "Function",
+     "lineno": 69
+    },
+    {
+     "nodeid": "script.py::test_ct02_consultar_reserva_criada_pelo_identificador",
+     "type": "Function",
+     "lineno": 80
+    },
+    {
+     "nodeid": "script.py::test_ct03_consultar_reserva_com_identificador_inexistente",
+     "type": "Function",
+     "lineno": 89
+    },
+    {
+     "nodeid": "script.py::test_ct04_listar_reservas_filtrando_por_nome_e_sobrenome_unicos",
+     "type": "Function",
+     "lineno": 95
+    },
+    {
+     "nodeid": "script.py::test_ct05_filtrar_por_nome_e_sobrenome_sem_reservas_correspondentes",
+     "type": "Function",
+     "lineno": 105
+    },
+    {
+     "nodeid": "script.py::test_ct06_criar_e_consultar_reserva_com_deposito_nao_pago",
+     "type": "Function",
+     "lineno": 114
+    },
+    {
+     "nodeid": "script.py::test_ct07_criar_e_consultar_reserva_com_checkin_igual_checkout",
+     "type": "Function",
+     "lineno": 118
+    },
+    {
+     "nodeid": "script.py::test_ct08_criar_e_consultar_reserva_com_preco_total_zero",
+     "type": "Function",
+     "lineno": 123
+    },
+    {
+     "nodeid": "script.py::test_ct09_criar_e_consultar_reserva_com_acentos_e_caracteres_especiais",
+     "type": "Function",
+     "lineno": 127
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_criar_reserva_com_corpo_valido",
+   "lineno": 69,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_criar_reserva_com_corpo_valido",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00032510003075003624,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6734880999429151,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00013990001752972603,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_consultar_reserva_criada_pelo_identificador",
+   "lineno": 80,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_consultar_reserva_criada_pelo_identificador",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.5897590999957174,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5929419999010861,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00012880004942417145,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_consultar_reserva_com_identificador_inexistente",
+   "lineno": 89,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_consultar_reserva_com_identificador_inexistente",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.000278000021353364,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.574924899963662,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001490999711677432,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_listar_reservas_filtrando_por_nome_e_sobrenome_unicos",
+   "lineno": 95,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_listar_reservas_filtrando_por_nome_e_sobrenome_unicos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6442565000616014,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6395084001123905,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001324999611824751,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_filtrar_por_nome_e_sobrenome_sem_reservas_correspondentes",
+   "lineno": 105,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_filtrar_por_nome_e_sobrenome_sem_reservas_correspondentes",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020300003234297037,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6256309000309557,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00012800004333257675,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_criar_e_consultar_reserva_com_deposito_nao_pago",
+   "lineno": 114,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_criar_e_consultar_reserva_com_deposito_nao_pago",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00019310007337480783,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2818464000010863,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011420005466789007,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_criar_e_consultar_reserva_com_checkin_igual_checkout",
+   "lineno": 118,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_criar_e_consultar_reserva_com_checkin_igual_checkout",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00019310007337480783,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2823088000295684,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00013239996042102575,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_criar_e_consultar_reserva_com_preco_total_zero",
+   "lineno": 123,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_criar_e_consultar_reserva_com_preco_total_zero",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024259998463094234,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3076299999374896,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00017360004130750895,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_criar_e_consultar_reserva_com_acentos_e_caracteres_especiais",
+   "lineno": 127,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct09_criar_e_consultar_reserva_com_acentos_e_caracteres_especiais",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00038189999759197235,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.4616976999677718,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00016730010975152254,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

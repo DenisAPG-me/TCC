@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 2,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "legivel porem repetitivo",
+  "estrutura": "fixtures mas headers duplicados",
+  "assercoes": "aceita 401/403 e 400/500; preservacao so checa presenca",
+  "espera": "sem timeout",
+  "manutenibilidade": "valores fixos e duplicacao"
+ }
+}

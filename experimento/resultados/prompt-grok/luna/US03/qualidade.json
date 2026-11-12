@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 2,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Nomes em ingles consistentes, mas expressao morta 'if False'",
+  "estrutura": "Login/checkout repetidos em cada teste, ifs condicionais",
+  "assercoes": "not_to_be_visible sobre texto 'payment' e fraco; mensagens corretas nos demais",
+  "espera": "is_visible() sem espera e locator de passo capturado antes da navegacao",
+  "manutenibilidade": "Regex amplas e generic roles; sem test-ids"
+ }
+}

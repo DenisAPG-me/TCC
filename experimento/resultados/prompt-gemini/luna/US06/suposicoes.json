@@ -1,0 +1,12 @@
+[
+ "A aplicação é uma interface web e a URL base padrão é `https://automationintesting.online/`.",
+ "A conta de demonstração usa usuário `admin` e senha `password`.",
+ "O formulário da página inicial tem campos acessíveis por rótulos `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão `Submit`.",
+ "Os campos do formulário são obrigatórios; o e-mail deve ter formato válido. Essa validação é presumida para o caso negativo CT06.",
+ "A confirmação de envio contém o nome exatamente no formato `Thanks for getting in touch <nome>!`.",
+ "A rota do painel é `/admin`, a caixa de mensagens é `/admin/messages` e o logout está disponível por um botão ou link `Logout`.",
+ "O acesso ao painel usa campos `Username` e `Password` e um botão `Login`.",
+ "A navegação para Messages é um link cujo texto começa com `Messages`; o contador numérico aparece no texto desse link.",
+ "Os testes geram nomes e assuntos únicos para localizar as mensagens criadas na execução.",
+ "O código pressupõe que cada envio válido aceito cria exatamente uma mensagem e incrementa o contador em uma unidade."
+]

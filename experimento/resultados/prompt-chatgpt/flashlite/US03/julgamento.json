@@ -1,0 +1,109 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_validacao_campos_obrigatorios_login",
+   "categoria": "URL/endpoint errado",
+   "nota": "Rota com hash #/auth/login nao existe; botao Login ausente"
+  },
+  {
+   "teste": "test_CT002_tentativa_login_senha_incorreta",
+   "categoria": "URL/endpoint errado",
+   "nota": "Rota com hash inexistente; label \"E-mail Address\" nao encontrado"
+  },
+  {
+   "teste": "test_CT003_checkout_sem_autenticacao",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado apos clicar em .card"
+  },
+  {
+   "teste": "test_CT004_visualizacao_my_account_apos_login",
+   "categoria": "URL/endpoint errado",
+   "nota": "Rota com hash inexistente"
+  },
+  {
+   "teste": "test_CT005_validacao_campos_endereco_checkout",
+   "categoria": "URL/endpoint errado",
+   "nota": "Rota com hash inexistente"
+  },
+  {
+   "teste": "test_CT006_conclusao_compra_cartao_credito",
+   "categoria": "URL/endpoint errado",
+   "nota": "Rota com hash inexistente"
+  }
+ ]
+}

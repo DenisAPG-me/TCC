@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produtos por \"hammer\"",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "1. Acessar a página inicial. 2. Digitar \"hammer\" no campo de busca. 3. Clicar em pesquisar.",
+  "esperado": "A página indica busca por \"hammer\", ao menos um produto é listado e todos os nomes contêm \"hammer\"."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Buscar por \"HAMMER\" em maiúsculas",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "1. Acessar a página inicial. 2. Digitar \"HAMMER\". 3. Clicar em pesquisar.",
+  "esperado": "A página indica busca por \"HAMMER\", ao menos um produto é listado e todos os nomes contêm \"hammer\" (sem diferenciar maiúsculas/minúsculas)."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Buscar termo inexistente \"zzzzxx\"",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Acessar a página inicial. 2. Digitar \"zzzzxx\". 3. Clicar em pesquisar.",
+  "esperado": "A mensagem \"There are no products found.\" é exibida e nenhum produto é listado."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Ordenar por preço crescente",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "1. Acessar a página inicial com produtos listados. 2. Selecionar \"Price (Low - High)\".",
+  "esperado": "Os preços exibidos na página estão em ordem crescente (valores iguais são aceitos)."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Ordenar por nome de Z a A",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. Acessar a página inicial com produtos listados. 2. Selecionar \"Name (Z - A)\".",
+  "esperado": "Os nomes exibidos na página estão em ordem alfabética decrescente."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Ordenação mantém a página preenchida",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "1. Acessar a página inicial e contar os produtos. 2. Selecionar \"Price (Low - High)\".",
+  "esperado": "A quantidade de produtos exibidos após a ordenação é igual à de antes e maior que zero."
+ }
+]

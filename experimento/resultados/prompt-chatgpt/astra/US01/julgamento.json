@@ -1,0 +1,70 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_buscar_hammer",
+   "categoria": "dado de teste inventado",
+   "nota": "Texto \"Search results for: hammer\" inexistente (real: \"Searched for: hammer\")"
+  },
+  {
+   "teste": "test_CT003_ordenar_preco_crescente",
+   "categoria": "seletor inexistente",
+   "nota": "Controle de ordenacao por label \"Sort\" nao localizado"
+  },
+  {
+   "teste": "test_CT004_ordenar_nome_decrescente",
+   "categoria": "seletor inexistente",
+   "nota": "Controle de ordenacao por label \"Sort\" nao localizado"
+  }
+ ]
+}

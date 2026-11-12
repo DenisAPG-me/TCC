@@ -1,0 +1,17 @@
+[
+ "**URL base:** `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`.",
+ "**Campo de busca:** papel `textbox` com nome acessível \"Search\" (`get_by_role(\"textbox\", name=\"Search\")`). A busca é enviada com a tecla Enter.",
+ "**Requisição de busca e ordenação:** a listagem é atualizada por uma requisição HTTP cuja URL contém `products` (ex.: `api.../products?q=hammer`). O script aguarda essa resposta com `expect_response`.",
+ "**Indicação da busca (CT02):** após a busca, o valor do campo de busca permanece igual ao termo digitado.",
+ "**Seletor de ordenação:** elemento com rótulo acessível \"Sort\" (`get_by_label(\"Sort\")`). As opções aceitas são os textos \"Name (A - Z)\", \"Name (Z - A)\", \"Price (Low - High)\" e \"Price (High - Low)\".",
+ "**Cards de produto:** nome em `[data-test=\"product-name\"]` e preço em `[data-test=\"product-price\"]`.",
+ "**Formato do preço:** texto no formato `$12.50`, convertido para float removendo o `$`.",
+ "**Mensagem de vazio:** texto exato \"There are no products found.\", localizado com `get_by_text`.",
+ "**Nome do produto:** a comparação de \"hammer\" é feita sem diferenciar maiúsculas e minúsculas.",
+ "**Ordenação alfabética:** a ordenação Z-A usa `str.lower` como chave, para não depender de caixa alta ou baixa.",
+ "**Paginação:** os testes verificam apenas os produtos da primeira página exibida.",
+ "**Espaços (CT08):** a aplicação remove espaços no início e no fim do termo de busca antes de pesquisar.",
+ "**Maiúsculas (CT07):** a busca não diferencia maiúsculas de minúsculas.",
+ "**Ordenação sem resultados (CT10):** o seletor de ordenação continua habilitado quando não há produtos, e a mensagem de vazio permanece visível.",
+ "**Execução:** `pytest-playwright` fornece as fixtures `page`; o navegador usa o padrão do plugin (Chromium, headless)."
+]

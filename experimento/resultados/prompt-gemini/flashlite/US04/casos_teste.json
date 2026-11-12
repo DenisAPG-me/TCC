@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Envio do formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "1. Acessar a página inicial.<br>2. Clicar diretamente no botão de envio do formulário de contato sem preencher nenhum campo.",
+  "esperado": "Exibição de mensagens de erro indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone com menos de 11 caracteres",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher nome, e-mail, assunto, mensagem e telefone com menos de 11 caracteres.<br>3. Enviar o formulário.",
+  "esperado": "Exibição da mensagem \"Phone must be between 11 and 21 characters.\"."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Assunto e mensagem abaixo do limite mínimo",
+  "tipo": "Negativo",
+  "criterio": "3",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher nome, e-mail, telefone válidos, assunto com menos de 5 caracteres e mensagem com menos de 20 caracteres.<br>3. Enviar o formulário.",
+  "esperado": "Exibição das mensagens \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\"."
+ },
+ {
+  "id": "CT04",
+  "titulo": "E-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "4",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher os demais campos válidos e informar um e-mail malformado (ex.: \"bad\").<br>3. Enviar o formulário.",
+  "esperado": "Exibição da mensagem \"must be a well-formed email address\"."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Envio com todos os dados válidos",
+  "tipo": "Positivo",
+  "criterio": "5",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher todos os campos do formulário com dados válidos.<br>3. Enviar o formulário.",
+  "esperado": "Exibição da mensagem \"Thanks for getting in touch <nome>!\" contendo o nome e o assunto informado na confirmação."
+ }
+]

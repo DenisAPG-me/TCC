@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 31.34,
+ "tokens": {
+  "total": 3584
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "le()\n\n\ndef test_CT04_logout_retorna_a_pagina_publica(page: Page) -> None:\n    login_successfully(page)\n\n    logout(page)\n\n\ndef test_CT05_acesso_direto_a_quartos_apos_logout_exige_login(page: Page) -> None:\n    login_successfully(page)\n    logout(page)\n\n    # Mantém o contexto existente para verificar a sessão após o logout.\n    page.goto(ROOMS_URL)\n\n    assert_login_screen(page)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([str(Path(__file__).resolve())]))\n```\ntokens used\n3,584\n"
+}

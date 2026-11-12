@@ -1,0 +1,9 @@
+[
+ "A URL base é `https://automationintesting.online/`; o formulário de contato está acessível na página inicial.",
+ "Os campos podem ser localizados pelos rótulos acessíveis `Name`, `Email`, `Phone`, `Subject` e `Message`; o botão de envio tem o nome acessível `Submit`.",
+ "As mensagens de validação são texto visível na página. Para campos vazios, como o critério não fornece o texto literal, os testes procuram mensagens que contenham o nome do campo e indiquem que não pode ficar em branco.",
+ "Os limites de tamanho são inclusivos, conforme a expressão “between” e os valores dos critérios: telefone de 11 a 21, assunto de 5 a 100 e mensagem de 20 a 2000 caracteres.",
+ "Os dados válidos de exemplo são nome `Ana Silva`, e-mail `ana@example.com`, telefone `11987654321`, assunto `Dúvida` e mensagem com pelo menos 20 caracteres.",
+ "Cada caso de borda de envio bem-sucedido também verifica a confirmação com o nome e o assunto usados naquele caso.",
+ "Os casos de tamanho máximo pressupõem que o formulário permita inserir os valores completos nos campos."
+]

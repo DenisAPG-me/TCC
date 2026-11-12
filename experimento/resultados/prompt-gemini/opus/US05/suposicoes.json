@@ -1,0 +1,13 @@
+[
+ "URL base: `https://automationintesting.online` (constante `BASE_URL`), sobrescrevível via `--base-url` (fixture `base_url` do pytest-base-url, instalado junto com pytest-playwright).",
+ "Rota da tela de login: `/admin`; rota da lista de quartos: `/admin/rooms`; página inicial pública: `/`.",
+ "Campos de login possuem rótulos acessíveis \"Username\" e \"Password\" (`get_by_label(\"Username\")`, `get_by_label(\"Password\", exact=True)`); internamente `#username` e `#password`.",
+ "Botão de envio: `get_by_role(\"button\", name=\"Login\")` (internamente `#doLogin`).",
+ "Mensagem de erro exibida exatamente com o texto \"Invalid credentials\" (`get_by_text(\"Invalid credentials\")`).",
+ "O menu do painel está dentro de um elemento com papel `navigation`; \"Rooms\", \"Report\", \"Branding\" e \"Messages\" são links; \"Logout\" é acessível pelo texto exato \"Logout\" dentro da navegação (botão ou link).",
+ "Cada quarto da lista é renderizado em um contêiner com `data-testid=\"roomlisting\"`, contendo o número (\"101\") e o tipo (\"Single\", comparado sem diferenciar maiúsculas/minúsculas).",
+ "O quarto 101 do tipo Single existe nos dados de demonstração (o ambiente é reiniciado periodicamente).",
+ "Após o logout, a sessão (cookie de token) é invalidada; ao acessar `/admin/rooms` sem autenticação, a aplicação exibe o formulário de login (com ou sem redirecionamento de URL, por isso a URL não é validada nesse caso).",
+ "Cada teste usa a fixture `page` do pytest-playwright, que fornece um contexto novo e isolado (sem cookies de testes anteriores).",
+ "Senha incorreta usada nos testes: \"senhaErrada123\"; variação de caixa: \"Password\"."
+]

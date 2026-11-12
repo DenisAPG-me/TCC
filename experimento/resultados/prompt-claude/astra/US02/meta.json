@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 352.04,
+ "tokens": {
+  "total": 2885
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "duct(page, RESTRICTED_PRODUCT)\n    submit_quantity(page, MINIMUM_QUANTITY)\n\n    expect(\n        page.get_by_text(SUCCESS_MESSAGE, exact=True)\n    ).to_be_visible(timeout=UI_TIMEOUT_MS)\n    expect(\n        page.get_by_test_id(CART_BADGE_ID)\n    ).to_have_text(str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS)\n\n    row = open_cart_row(page, RESTRICTED_PRODUCT)\n    expect(\n        row.get_by_test_id(ROW_QUANTITY_ID)\n    ).to_have_value(str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS)\n```\ntokens used\n2,885\n"
+}

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes claros",
+  "estrutura": "Helpers",
+  "assercoes": "Asserts corretos mas menu por texto ambiguo",
+  "espera": "Corrida entre login e clique em Logout",
+  "manutenibilidade": "Seletores por texto fragil, URL por env"
+ }
+}

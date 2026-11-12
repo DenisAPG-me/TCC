@@ -1,0 +1,22 @@
+[
+ "1. Os critérios vieram numerados de 1 a 5 sem identificadores próprios. Adotei CA01 a CA05 na ordem de apresentação: CA01 = critério 1, CA02 = critério 2, e assim por diante.",
+ "2. Explícito na User Story: URL base `https://automationintesting.online/`, painel em `/admin`, credenciais `admin` / `password`, texto de confirmação \"Thanks for getting in touch <nome>!\", rótulo Messages com contador, logout e os cinco critérios.",
+ "3. Conflito de instruções: o enunciado proíbe `pytest-playwright`, mas os requisitos técnicos obrigatórios da User Story exigem o plugin e prevalecem. O arquivo usa `page` e `browser` do plugin e `expect` de `playwright.sync_api`.",
+ "4. Inferido: login em `{BASE_URL}admin` e caixa de mensagens em `{BASE_URL}admin/messages`. Se o sistema usar rotas com hash (por exemplo `/#/admin`) ou outro caminho, ajuste `ADMIN_URL` e `MESSAGES_URL`. Afeta CT001, CT002, CT006 a CT012.",
+ "5. Inferido: campos do login com rótulos \"Username\" e \"Password\" e botão \"Login\". Afeta todos os testes que autenticam.",
+ "6. Inferido: o link Messages contém o número do contador no próprio texto (por exemplo \"Messages (3)\"). Afeta CT001, CT002, CT006, CT007, CT011 e CT012.",
+ "7. Inferido: o botão de saída do painel se chama \"Logout\" e tem papel de botão. Afeta CT006, CT007 e CT011.",
+ "8. Inferido: o formulário da home tem rótulos exatos \"Name\", \"Email\", \"Phone\", \"Subject\" e \"Message\", e botão \"Submit\". Afeta todos os testes que enviam o formulário.",
+ "9. Inferido: a confirmação é um elemento cujo texto completo é \"Thanks for getting in touch {nome}!\". Afeta CT003, CT005 e as verificações de confirmação dos envios.",
+ "10. Inferido: o formulário exige assunto (CT004) e e-mail em formato válido (CT007 e CT010). Se o sistema aceitar esses envios, esses casos falharão, o que indica divergência com a suposição e não erro na automação.",
+ "11. Inferido: telefone de 11 dígitos e mensagem com texto razoável (mais de 20 caracteres) são aceitos. Valores usados: e-mail `visitante@example.com`, telefone `01234567890`. Afeta todos os envios válidos.",
+ "12. Inferido: a caixa de mensagens lista cada mensagem como item de lista (papel `listitem`) com remetente e assunto no mesmo item. Afeta CT008 a CT010.",
+ "13. Inferido: o contador conta todas as mensagens recebidas, lidas ou não, e aumenta em uma unidade a cada envio válido. Afeta CT006 e CT007.",
+ "14. Inferido: sem sessão ativa, o acesso à rota da caixa exibe o formulário de login. CA05 é explícito quanto ao comportamento; a forma exata da tela é inferida. Afeta CT011 e CT012.",
+ "15. Dependência entre casos: CT006 e CT007 usam logout como parte dos passos, portanto dependem do comportamento de CA05. Os testes não dependem de ordem de execução nem de dados criados por outro teste.",
+ "16. Independência: cada teste usa nome e assunto únicos (sufixo hexadecimal) e envia o formulário em contexto isolado de navegador. Como o ambiente é compartilhado, o contador é comparado antes e depois dentro do próprio teste, sem valor fixo.",
+ "17. Pré-condições externas inevitáveis: o site está acessível; a conta `admin` / `password` existe e está ativa; o formulário de contato e o painel estão disponíveis; o ambiente aceita envios de teste. Não há limpeza de dados, porque a User Story não descreve API ou ação de remoção.",
+ "18. Casos de borda: CA02 e CA04 têm casos de borda (CT005 e CT009). CA01, CA03 e CA05 não têm, porque a User Story não define limites, variações de valor nem regras para o contador ou o acesso. Criar esses limites seria inventar regras. Todos os critérios têm ao menos um caso negativo.",
+ "19. Os textos de erro de validação não são verificados, porque a User Story não os especifica. Os negativos verificam apenas a ausência do resultado esperado.",
+ "20. Código executável não garante compatibilidade com o sistema real. Seletores, rotas e textos inferidos podem exigir ajuste. Eles estão centralizados nas constantes do topo do arquivo (`BASE_URL`, `ADMIN_URL`, `MESSAGES_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `VISITOR_*`) e nos locators dos helpers."
+]

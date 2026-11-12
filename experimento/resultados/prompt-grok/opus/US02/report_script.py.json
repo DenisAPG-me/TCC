@@ -1,0 +1,207 @@
+{
+ "created": 1793378735.8630042,
+ "duration": 32.96109223365784,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US02",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 1,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_add_claw_hammer_quantity_3[chromium]",
+     "type": "Function",
+     "lineno": 64
+    },
+    {
+     "nodeid": "script.py::test_TC02_cart_line_total_and_cart_total_for_3_units[chromium]",
+     "type": "Function",
+     "lineno": 72
+    },
+    {
+     "nodeid": "script.py::test_TC03_change_cart_quantity_from_3_to_1[chromium]",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_TC04_thor_hammer_cannot_add_3_units[chromium]",
+     "type": "Function",
+     "lineno": 99
+    },
+    {
+     "nodeid": "script.py::test_TC05_thor_hammer_add_single_unit_allowed[chromium]",
+     "type": "Function",
+     "lineno": 107
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_add_claw_hammer_quantity_3[chromium]",
+   "lineno": 64,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_add_claw_hammer_quantity_3[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.5050643000286072,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.511059699929319,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.022068899939768016,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_cart_line_total_and_cart_total_for_3_units[chromium]",
+   "lineno": 72,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_cart_line_total_and_cart_total_for_3_units[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12090470001567155,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.2242512999800965,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.020372899947687984,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_change_cart_quantity_from_3_to_1[chromium]",
+   "lineno": 86,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC03_change_cart_quantity_from_3_to_1[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1254594000056386,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.787959899986163,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.024754400015808642,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_thor_hammer_cannot_add_3_units[chromium]",
+   "lineno": 99,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_thor_hammer_cannot_add_3_units[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.14225459995213896,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 9.430837499909103,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US02\\script.py",
+     "lineno": 105,
+     "message": "AssertionError: Locator expected not to have text '3'\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"not_to_have_text\" get_by_test_id(\"cart-quantity\") with timeout 5000ms\n  - waiting for get_by_test_id(\"cart-quantity\")\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- figure \"Photo by ANIRUDH on Unsplash.\":\n  - img \"Thor Hammer\"\n  - text: Photo by\n  - link \"ANIRUDH\":\n    - /url: https://unsplash.com/@lanirudhreddy\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/3esjG-nlgyk\n  - text: .\n- heading \"Thor Hammer\" [level=1]\n- paragraph: Hammer ForgeFlex Tools\n- text: \"$11.14 CO\u2082: A B C D E\"\n- paragraph: \"The legendary Thor Hammer combines premium craftsmanship with raw striking power in a tool that is truly built to last generations. Forged from Uru metal with a hand-wrapped leather grip, this extraordinary 5kg masterpiece delivers unmatched impact force for the most demanding demolition, forging, and heavy construction tasks. The perfectly balanced oversized head ensures every swing transfers maximum energy to the target, while the enlarged striking face covers more surface area than any conventional hammer. Despite its impressive mass, the ergonomic handle design and precise weight distribution allow for surprisingly controlled, accurate swings. This is not merely a tool but a statement piece for those who accept nothing less than the absolute best in their workshop. Comes with a lifetime warranty because true legends never fade. Please note: only one Thor Hammer is permitted per customer.\"\n- button \"Decrease quantity\"\n- text: Quantity\n- spinbutton \"Quantity\": \"3\"\n- button \"Increase quantity\"\n- button \"Add to cart\"\n- button \"Add to favourites\"\n- button \"Compare\"\n- heading \"Specifications\" [level=3]\n- table:\n  - rowgroup:\n    - row \"Handle Material Leather Wrapped\":\n      - cell \"Handle Material\"\n      - cell \"Leather Wrapped\"\n    - row \"Head Weight 4500g\":\n      - cell \"Head Weight\"\n      - cell \"4500g\"\n    - row \"Length 450mm\":\n      - cell \"Length\"\n      - cell \"450mm\"\n    - row \"Material Uru Metal\":\n      - cell \"Material\"\n      - cell \"Uru Metal\"\n    - row \"Warranty Lifetime\":\n      - cell \"Warranty\"\n      - cell \"Lifetime\"\n    - row \"Weight 5000g\":\n      - cell \"Weight\"\n      - cell \"5000g\"\n- separator\n- heading \"Related products\" [level=2]\n- link \"Claw Hammer with Shock Reduction Grip Claw Hammer with Shock Reduction Grip More information\":\n  - /url: /product/01M66RMY47JTFQ65AWR013B73H\n  - img \"Claw Hammer with Shock Reduction Grip\"\n  - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Hammer Hammer More information\":\n  - /url: /product/01M66RMY4B7J0HY3ZWYRGGCXJ3\n  - img \"Hammer\"\n  - heading \"Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Sledgehammer Sledgehammer More information\":\n  - /url: /product/01M66RMY4MBF1PSNJG6Q6HK86T\n  - img \"Sledgehammer\"\n  - heading \"Sledgehammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Claw Hammer with Fiberglass Handle Claw Hammer with Fiberglass Handle More information\":\n  - /url: /product/01M66RMY4QSXVHA7Y7C7WRJZVR\n  - img \"Claw Hammer with Fiberglass Handle\"\n  - heading \"Claw Hammer with Fiberglass Handle\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Court Hammer Court Hammer More information\":\n  - /url: /product/01M66RMY4S6PR0G7YSAWDV6VC1\n  - img \"Court Hammer\"\n  - heading \"Court Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- link \"Claw Hammer Claw Hammer More information\":\n  - /url: /product/01M66RMY4F37XPT8GWT6F5CNFH\n  - img \"Claw Hammer\"\n  - heading \"Claw Hammer\" [level=5]\n  - link \"More information\":\n    - /url: \"#\"\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\"\n- alert \"You can only have one Thor Hammer in the cart.\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US02\\script.py",
+      "lineno": 105,
+      "message": "in test_TC04_thor_hammer_cannot_add_3_units"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\opus\\US02\\script.py:105: in test_TC04_thor_hammer_cannot_add_3_units\n    expect(page.get_by_test_id(\"cart-quantity\")).not_to_have_text(\"3\")\nE   AssertionError: Locator expected not to have text '3'\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"not_to_have_text\" get_by_test_id(\"cart-quantity\") with timeout 5000ms\nE     - waiting for get_by_test_id(\"cart-quantity\")\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - figure \"Photo by ANIRUDH on Unsplash.\":\nE     - img \"Thor Hammer\"\nE     - text: Photo by\nE     - link \"ANIRUDH\":\nE       - /url: https://unsplash.com/@lanirudhreddy\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/3esjG-nlgyk\nE     - text: .\nE   - heading \"Thor Hammer\" [level=1]\nE   - paragraph: Hammer ForgeFlex Tools\nE   - text: \"$11.14 CO\u2082: A B C D E\"\nE   - paragraph: \"The legendary Thor Hammer combines premium craftsmanship with raw striking power in a tool that is truly built to last generations. Forged from Uru metal with a hand-wrapped leather grip, this extraordinary 5kg masterpiece delivers unmatched impact force for the most demanding demolition, forging, and heavy construction tasks. The perfectly balanced oversized head ensures every swing transfers maximum energy to the target, while the enlarged striking face covers more surface area than any conventional hammer. Despite its impressive mass, the ergonomic handle design and precise weight distribution allow for surprisingly controlled, accurate swings. This is not merely a tool but a statement piece for those who accept nothing less than the absolute best in their workshop. Comes with a lifetime warranty because true legends never fade. Please note: only one Thor Hammer is permitted per customer.\"\nE   - button \"Decrease quantity\"\nE   - text: Quantity\nE   - spinbutton \"Quantity\": \"3\"\nE   - button \"Increase quantity\"\nE   - button \"Add to cart\"\nE   - button \"Add to favourites\"\nE   - button \"Compare\"\nE   - heading \"Specifications\" [level=3]\nE   - table:\nE     - rowgroup:\nE       - row \"Handle Material Leather Wrapped\":\nE         - cell \"Handle Material\"\nE         - cell \"Leather Wrapped\"\nE       - row \"Head Weight 4500g\":\nE         - cell \"Head Weight\"\nE         - cell \"4500g\"\nE       - row \"Length 450mm\":\nE         - cell \"Length\"\nE         - cell \"450mm\"\nE       - row \"Material Uru Metal\":\nE         - cell \"Material\"\nE         - cell \"Uru Metal\"\nE       - row \"Warranty Lifetime\":\nE         - cell \"Warranty\"\nE         - cell \"Lifetime\"\nE       - row \"Weight 5000g\":\nE         - cell \"Weight\"\nE         - cell \"5000g\"\nE   - separator\nE   - heading \"Related products\" [level=2]\nE   - link \"Claw Hammer with Shock Reduction Grip Claw Hammer with Shock Reduction Grip More information\":\nE     - /url: /product/01M66RMY47JTFQ65AWR013B73H\nE     - img \"Claw Hammer with Shock Reduction Grip\"\nE     - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Hammer Hammer More information\":\nE     - /url: /product/01M66RMY4B7J0HY3ZWYRGGCXJ3\nE     - img \"Hammer\"\nE     - heading \"Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Sledgehammer Sledgehammer More information\":\nE     - /url: /product/01M66RMY4MBF1PSNJG6Q6HK86T\nE     - img \"Sledgehammer\"\nE     - heading \"Sledgehammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Claw Hammer with Fiberglass Handle Claw Hammer with Fiberglass Handle More information\":\nE     - /url: /product/01M66RMY4QSXVHA7Y7C7WRJZVR\nE     - img \"Claw Hammer with Fiberglass Handle\"\nE     - heading \"Claw Hammer with Fiberglass Handle\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Court Hammer Court Hammer More information\":\nE     - /url: /product/01M66RMY4S6PR0G7YSAWDV6VC1\nE     - img \"Court Hammer\"\nE     - heading \"Court Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - link \"Claw Hammer Claw Hammer More information\":\nE     - /url: /product/01M66RMY4F37XPT8GWT6F5CNFH\nE     - img \"Claw Hammer\"\nE     - heading \"Claw Hammer\" [level=5]\nE     - link \"More information\":\nE       - /url: \"#\"\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\"\nE   - alert \"You can only have one Thor Hammer in the cart.\""
+   },
+   "teardown": {
+    "duration": 0.022684700088575482,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_thor_hammer_add_single_unit_allowed[chromium]",
+   "lineno": 107,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC05_thor_hammer_add_single_unit_allowed[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.14624839997850358,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.4506653000134975,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.3091808999888599,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

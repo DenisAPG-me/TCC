@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Legível porém repetitivo",
+  "estrutura": "Helpers mínimos, payloads e headers duplicados",
+  "assercoes": "Asserções parciais (só dois campos na atualização completa)",
+  "espera": "Timeout; sem limpeza; dados fixos",
+  "manutenibilidade": "Reservas não removidas, dados fixos, headers repetidos"
+ }
+}

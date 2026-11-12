@@ -1,0 +1,96 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05",
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha vazia"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario vazio"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC03_valid_login_shows_rooms_and_menu",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_text('Single') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC04_logout_returns_to_public_home",
+   "categoria": "espera/timing",
+   "nota": "clica Logout antes do login concluir; URL segue em /admin/rooms"
+  },
+  {
+   "teste": "test_TC05_direct_room_list_after_logout_requires_login",
+   "categoria": "espera/timing",
+   "nota": "clica Logout antes do login concluir"
+  }
+ ]
+}

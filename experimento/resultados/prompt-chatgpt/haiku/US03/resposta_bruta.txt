@@ -1,0 +1,239 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Login com formulário vazio exibe mensagens de obrigatoriedade | negativo | CA01 | Abrir login; clicar em Login sem preencher campos | Exibe "Email is required" e "Password is required" |
+| CT002 | Login com e-mail preenchido e senha vazia | borda | CA01 | Informar e-mail demo; deixar senha vazia; clicar em Login | Exibe "Password is required"; "Email is required" não aparece |
+| CT003 | Login com senha incorreta não cria sessão | negativo | CA02 | Informar e-mail demo e senha incorreta; clicar em Login | Exibe "Invalid email or password"; permanece no login; sem "My account" e sem nome do usuário no menu |
+| CT004 | Checkout sem autenticação exige login | positivo | CA03 | Adicionar produto ao carrinho; abrir carrinho; clicar em Proceed to checkout | Exibe campos de e-mail e senha |
+| CT005 | Login válido exibe My account com nome do usuário no menu | positivo | CA04 | Acessar login; informar credenciais demo; clicar em Login | Exibe heading "My account" e nome do usuário na navegação |
+| CT006 | Endereço com campos obrigatórios vazios não avança para pagamento | negativo | CA05 | Chegar ao passo de endereço autenticado; não preencher campos; clicar em Proceed to payment | Permanece no endereço; campo "Payment method" não aparece |
+| CT007 | Endereço com apenas o estado vazio não avança para pagamento | borda | CA05 | Preencher país, CEP, número, rua e cidade; deixar estado vazio; clicar em Proceed to payment | Permanece no endereço; campo "Payment method" não aparece |
+| CT008 | Endereço com todos os campos obrigatórios avança para pagamento | positivo | CA05 | Preencher país, CEP, número, rua, cidade e estado; clicar em Proceed to payment | Exibe campo "Payment method" |
+| CT009 | Pagamento com cartão de crédito e dados fictícios válidos exibe sucesso | positivo | CA06 | Chegar ao pagamento; escolher Credit Card; preencher cartão fictício; clicar em Confirm payment | Exibe "Payment was successful" |
+| CT010 | Confirmação do pedido exibe número da fatura | positivo | CA06 | Fluxo completo até pagamento bem-sucedido; clicar em Confirm order | Exibe "Thanks for your order! Your invoice number is INV-" seguido do número |
+| CT011 | Confirmar pagamento sem dados do cartão não exibe sucesso | negativo | CA06 | Chegar ao pagamento; escolher Credit Card; não preencher cartão; clicar em Confirm payment | Não exibe "Payment was successful"; campo "Card number" permanece visível |
+
+SUPOSIÇÕES
+
+1. A User Story não numera os critérios. Foram mapeados na ordem de apresentação: CA01 (login com formulário vazio), CA02 (senha incorreta), CA03 (checkout sem autenticação), CA04 (página My account), CA05 (endereço obrigatório), CA06 (pagamento e confirmação do pedido).
+2. Conflito de requisitos: o bloco "REQUISITOS TÉCNICOS OBRIGATÓRIOS" da User Story exige o plugin pytest-playwright e a fixture `page` dele. As regras desta tarefa proíbem pytest-playwright e tratam a User Story apenas como especificação. Por isso o arquivo usa `sync_playwright()` dentro de fixtures próprias, com nomes que não colidem com o plugin (`chromium_browser` e `web_page`). Os demais itens desse bloco foram atendidos: `expect` síncrono, locators semânticos, sem `time.sleep` e URL base em constante.
+3. A interface é considerada em inglês, inferido pelos textos dos critérios. Rótulos, botões e links são localizados por esses textos.
+4. Navegação inferida: link "Sign in" na página inicial; link "Cart"; botões "Add to cart", "Proceed to checkout", "Login", "Proceed to payment", "Confirm payment" e "Confirm order". Caso algum seja link e não botão, o locator deve ser ajustado.
+5. O produto é escolhido pelo primeiro card (`.card`). O nome do produto não foi informado, então este seletor CSS não é semântico e pode exigir ajuste.
+6. Campos de login: rótulo de e-mail correspondente a `E-mail`/`Email` e rótulo de senha `Password`. Ambos são localizados por expressão regular.
+7. Após autenticação durante o checkout, o sistema retorna ao passo de endereço. CT005 não depende disso. CT006 a CT011 dependem.
+8. O passo de endereço inicia com campos vazios, sem dados salvos da conta. Se houver pré-preenchimento, CT006 e CT007 precisam de ajuste. Campos de texto: "Street", "House number", "Postcode", "City" e "State". Campo select: "Country", com valor "Canada". Valores fictícios: rua "Main Street 1", número "100", CEP "12345", cidade "Springfield" e estado "Illinois".
+9. São obrigatórios os seis campos citados no CA05 (país, CEP, número, rua, cidade e estado). CT007 assume que o estado é obrigatório e que deixá-lo vazio impede o avanço. Essa regra é inferida do texto do critério.
+10. O pagamento usa um select com rótulo "Payment method" e opção "Credit Card". Os campos do cartão são "Card number", "Expiry date" (MM/YY), "CVV" e "Card holder name". Dados fictícios: cartão 4111 1111 1111 1111, validade 12/30, CVV 123 e titular "Test Customer". O fluxo tem duas confirmações: "Confirm payment" gera "Payment was successful" e "Confirm order" gera a mensagem da fatura.
+11. CT011 é um caso negativo deduzido de "informo dados fictícios válidos". Assume-se que confirmar sem dados do cartão não é aprovado. A User Story não especifica esse comportamento. Se o botão ficar desabilitado sem dados, o clique falhará e o caso precisará de ajuste.
+12. O nome do usuário da conta demo é "Jane Doe", inferido. Ele deve ser ajustado para o nome real e é verificado na área `navigation`.
+13. "My account" é tratado como heading da página.
+14. A senha incorreta usada é "senha-incorreta-123". As mensagens de erro são verificadas como texto visível na página.
+15. Cada teste usa um novo contexto de navegador, então carrinho e sessão ficam isolados. Pré-condições externas: a conta demo existe e o catálogo tem produtos. Os testes não criam nem removem dados de apoio. CT010 cria um pedido real na conta demo, e não há rotina de limpeza disponível.
+16. Os casos cobrem positivos, negativos e de borda. Não há testes de API REST, porque a User Story descreve apenas interface web. O timeout do contexto é de 15 segundos.
+17. As asserções de ausência (`to_have_count(0)` e similares) podem passar antes de a interface reagir ao clique. Essa limitação é aceita e não foi mitigada.
+18. O código não foi executado nesta tarefa. Sua compatibilidade com o sistema real depende da confirmação dos seletores e textos acima.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Browser, Page, expect, sync_playwright
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+DEMO_EMAIL = "customer@practicesoftwaretesting.com"
+DEMO_PASSWORD = "welcome01"
+WRONG_PASSWORD = "senha-incorreta-123"
+DEMO_USER_NAME = "Jane Doe"
+COUNTRY = "Canada"
+ADDRESS_DATA = {
+    "Street": "Main Street 1",
+    "House number": "100",
+    "Postcode": "12345",
+    "City": "Springfield",
+    "State": "Illinois",
+}
+PAYMENT_METHOD = "Credit Card"
+CARD_DATA = {
+    "Card number": "4111 1111 1111 1111",
+    "Expiry date": "12/30",
+    "CVV": "123",
+    "Card holder name": "Test Customer",
+}
+PRODUCT_CARD_SELECTOR = ".card"
+TIMEOUT_MS = 15000
+
+EMAIL_LABEL = re.compile(r"E-?mail", re.IGNORECASE)
+PASSWORD_LABEL = re.compile(r"Password", re.IGNORECASE)
+SIGN_IN_LINK = re.compile(r"Sign in", re.IGNORECASE)
+LOGIN_BUTTON = re.compile(r"^Login$", re.IGNORECASE)
+CART_LINK = re.compile(r"Cart", re.IGNORECASE)
+ADD_TO_CART_BUTTON = re.compile(r"Add to cart", re.IGNORECASE)
+PROCEED_CHECKOUT_BUTTON = re.compile(r"Proceed to checkout", re.IGNORECASE)
+PROCEED_PAYMENT_BUTTON = re.compile(r"Proceed to payment", re.IGNORECASE)
+PAYMENT_CONFIRM_BUTTON = re.compile(r"Confirm payment", re.IGNORECASE)
+ORDER_CONFIRM_BUTTON = re.compile(r"Confirm order", re.IGNORECASE)
+MY_ACCOUNT_HEADING = re.compile(r"My account", re.IGNORECASE)
+INVOICE_MESSAGE = re.compile(r"Thanks for your order! Your invoice number is INV-\S+")
+
+
+@pytest.fixture(scope="session")
+def chromium_browser():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        yield browser
+        browser.close()
+
+
+@pytest.fixture
+def web_page(chromium_browser: Browser):
+    context = chromium_browser.new_context()
+    context.set_default_timeout(TIMEOUT_MS)
+    page = context.new_page()
+    yield page
+    context.close()
+
+
+def open_home(page: Page) -> None:
+    page.goto(BASE_URL)
+    expect(page.get_by_role("link", name=SIGN_IN_LINK)).to_be_visible()
+
+
+def go_to_login(page: Page) -> None:
+    open_home(page)
+    page.get_by_role("link", name=SIGN_IN_LINK).click()
+    expect(page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+
+
+def submit_login(page: Page, email: str, password: str) -> None:
+    page.get_by_label(EMAIL_LABEL).fill(email)
+    page.get_by_label(PASSWORD_LABEL).fill(password)
+    page.get_by_role("button", name=LOGIN_BUTTON).click()
+
+
+def add_first_product_to_cart(page: Page) -> None:
+    open_home(page)
+    page.locator(PRODUCT_CARD_SELECTOR).first.click()
+    page.get_by_role("button", name=ADD_TO_CART_BUTTON).click()
+
+
+def go_to_checkout_from_cart(page: Page) -> None:
+    add_first_product_to_cart(page)
+    page.get_by_role("link", name=CART_LINK).click()
+    page.get_by_role("button", name=PROCEED_CHECKOUT_BUTTON).click()
+
+
+def reach_address_step(page: Page) -> None:
+    go_to_checkout_from_cart(page)
+    submit_login(page, DEMO_EMAIL, DEMO_PASSWORD)
+    expect(page.get_by_label("Street", exact=True)).to_be_visible()
+
+
+def fill_address(page: Page, omit: str = "") -> None:
+    page.get_by_label("Country", exact=True).select_option(label=COUNTRY)
+    for label, value in ADDRESS_DATA.items():
+        if label != omit:
+            page.get_by_label(label, exact=True).fill(value)
+
+
+def reach_payment_step(page: Page) -> None:
+    reach_address_step(page)
+    fill_address(page)
+    page.get_by_role("button", name=PROCEED_PAYMENT_BUTTON).click()
+    expect(page.get_by_label("Payment method", exact=True)).to_be_visible()
+
+
+def choose_credit_card(page: Page) -> None:
+    page.get_by_label("Payment method", exact=True).select_option(label=PAYMENT_METHOD)
+
+
+def fill_card(page: Page) -> None:
+    for label, value in CARD_DATA.items():
+        page.get_by_label(label, exact=True).fill(value)
+
+
+def test_CT001_login_formulario_vazio_exibe_mensagens_obrigatorias(web_page: Page) -> None:
+    go_to_login(web_page)
+    web_page.get_by_role("button", name=LOGIN_BUTTON).click()
+    expect(web_page.get_by_text("Email is required")).to_be_visible()
+    expect(web_page.get_by_text("Password is required")).to_be_visible()
+
+
+def test_CT002_login_somente_email_exibe_senha_obrigatoria(web_page: Page) -> None:
+    go_to_login(web_page)
+    web_page.get_by_label(EMAIL_LABEL).fill(DEMO_EMAIL)
+    web_page.get_by_role("button", name=LOGIN_BUTTON).click()
+    expect(web_page.get_by_text("Password is required")).to_be_visible()
+    expect(web_page.get_by_text("Email is required")).to_have_count(0)
+
+
+def test_CT003_login_senha_incorreta_nao_cria_sessao(web_page: Page) -> None:
+    go_to_login(web_page)
+    submit_login(web_page, DEMO_EMAIL, WRONG_PASSWORD)
+    expect(web_page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(web_page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+    expect(web_page.get_by_role("heading", name=MY_ACCOUNT_HEADING)).to_have_count(0)
+    expect(web_page.get_by_role("navigation").get_by_text(DEMO_USER_NAME)).to_have_count(0)
+
+
+def test_CT004_checkout_sem_autenticacao_exige_login(web_page: Page) -> None:
+    go_to_checkout_from_cart(web_page)
+    expect(web_page.get_by_label(EMAIL_LABEL)).to_be_visible()
+    expect(web_page.get_by_label(PASSWORD_LABEL)).to_be_visible()
+
+
+def test_CT005_login_valido_exibe_my_account_com_nome_no_menu(web_page: Page) -> None:
+    go_to_login(web_page)
+    submit_login(web_page, DEMO_EMAIL, DEMO_PASSWORD)
+    expect(web_page.get_by_role("heading", name=MY_ACCOUNT_HEADING)).to_be_visible()
+    expect(web_page.get_by_role("navigation").get_by_text(DEMO_USER_NAME)).to_be_visible()
+
+
+def test_CT006_endereco_campos_vazios_nao_avanca_para_pagamento(web_page: Page) -> None:
+    reach_address_step(web_page)
+    web_page.get_by_role("button", name=PROCEED_PAYMENT_BUTTON).click()
+    expect(web_page.get_by_label("Payment method", exact=True)).to_have_count(0)
+    expect(web_page.get_by_label("Street", exact=True)).to_be_visible()
+
+
+def test_CT007_endereco_sem_estado_nao_avanca_para_pagamento(web_page: Page) -> None:
+    reach_address_step(web_page)
+    fill_address(web_page, omit="State")
+    web_page.get_by_role("button", name=PROCEED_PAYMENT_BUTTON).click()
+    expect(web_page.get_by_label("Payment method", exact=True)).to_have_count(0)
+    expect(web_page.get_by_label("State", exact=True)).to_be_visible()
+
+
+def test_CT008_endereco_completo_avanca_para_pagamento(web_page: Page) -> None:
+    reach_address_step(web_page)
+    fill_address(web_page)
+    web_page.get_by_role("button", name=PROCEED_PAYMENT_BUTTON).click()
+    expect(web_page.get_by_label("Payment method", exact=True)).to_be_visible()
+
+
+def test_CT009_pagamento_cartao_credito_dados_validos_exibe_sucesso(web_page: Page) -> None:
+    reach_payment_step(web_page)
+    choose_credit_card(web_page)
+    fill_card(web_page)
+    web_page.get_by_role("button", name=PAYMENT_CONFIRM_BUTTON).click()
+    expect(web_page.get_by_text("Payment was successful")).to_be_visible()
+
+
+def test_CT010_confirmar_pedido_exibe_numero_da_fatura(web_page: Page) -> None:
+    reach_payment_step(web_page)
+    choose_credit_card(web_page)
+    fill_card(web_page)
+    web_page.get_by_role("button", name=PAYMENT_CONFIRM_BUTTON).click()
+    expect(web_page.get_by_text("Payment was successful")).to_be_visible()
+    web_page.get_by_role("button", name=ORDER_CONFIRM_BUTTON).click()
+    expect(web_page.get_by_text(INVOICE_MESSAGE)).to_be_visible()
+
+
+def test_CT011_pagamento_sem_dados_do_cartao_nao_exibe_sucesso(web_page: Page) -> None:
+    reach_payment_step(web_page)
+    choose_credit_card(web_page)
+    web_page.get_by_role("button", name=PAYMENT_CONFIRM_BUTTON).click()
+    expect(web_page.get_by_text("Payment was successful")).to_have_count(0)
+    expect(web_page.get_by_label("Card number", exact=True)).to_be_visible()
+```

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "claro, mas __import__('re') inline",
+  "estrutura": "helpers e dicionario de campos",
+  "assercoes": "asserts exatos; vazio usa regex adivinhada",
+  "espera": "expect auto-wait",
+  "manutenibilidade": "constantes mas get_by_label inexistente"
+ }
+}

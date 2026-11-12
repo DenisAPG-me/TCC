@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 44.9,
+ "tokens": {
+  "total": 6296
+ },
+ "n_casos_extraidos": 8,
+ "tem_codigo": true,
+ "stderr_tail": "ng_id=booking[\"id\"]),\n        headers=auth_headers(valid_token),\n        json=incomplete,\n    )\n    assert_status(response, STATUS[\"invalid_payload\"])\n\n\ndef test_CT008_rejeitar_atualizacao_com_objeto_vazio(api, valid_token, booking):\n    response = request_api(\n        api,\n        \"complete_update\",\n        endpoint(\"booking\", booking_id=booking[\"id\"]),\n        headers=auth_headers(valid_token),\n        json={},\n    )\n    assert_status(response, STATUS[\"invalid_payload\"])\n```\ntokens used\n6,296\n"
+}

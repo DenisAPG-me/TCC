@@ -1,0 +1,88 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio vazio nao confirma (novo)"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "nome com especiais na confirmacao (novo)"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01",
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT006_mensagem_recem_enviada_aparece_na_lista[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "test id message\\d+ inexistente na lista"
+  },
+  {
+   "teste": "test_CT007_acesso_direto_apos_logout_solicita_login[chromium]",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "Logout existe tambem na tela de login; count 0 incorreto"
+  }
+ ]
+}

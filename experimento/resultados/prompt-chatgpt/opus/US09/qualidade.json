@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "Nomes e mensagens claros",
+  "estrutura": "Factory fixture, helpers, token fixture",
+  "assercoes": "Compara corpo inteiro, estado antes/depois",
+  "espera": "Timeout 30, UUID, limpeza condicional ao estado",
+  "manutenibilidade": "Constantes, cleanup robusto, independencia"
+ }
+}

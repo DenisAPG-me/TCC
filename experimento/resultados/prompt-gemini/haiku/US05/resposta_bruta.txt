@@ -1,0 +1,126 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Login com usuário e senha vazios exibe erro | Negativo | AC1 | 1) Acessar /admin; 2) Deixar usuário e senha vazios; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT02 | Login com usuário preenchido e senha vazia exibe erro | Borda | AC1 | 1) Acessar /admin; 2) Informar "admin" e deixar senha vazia; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT03 | Login com usuário vazio e senha preenchida exibe erro | Borda | AC1 | 1) Acessar /admin; 2) Deixar usuário vazio e informar "password"; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT04 | Login com usuário "admin" e senha incorreta exibe erro | Negativo | AC2 | 1) Acessar /admin; 2) Informar "admin" e "senha-incorreta"; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT05 | Login com usuário inexistente e senha correta exibe erro | Negativo | AC2 (extensão da regra de credenciais) | 1) Acessar /admin; 2) Informar "usuario-inexistente" e "password"; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT06 | Login com senha em caixa diferente exibe erro | Borda | AC2 | 1) Acessar /admin; 2) Informar "admin" e "Password"; 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT07 | Login com senha contendo espaço extra exibe erro | Borda | AC2 | 1) Acessar /admin; 2) Informar "admin" e "password " (com espaço final); 3) Clicar em Login | Exibe "Invalid credentials" e permanece na tela de login |
+| CT08 | Login válido leva à lista de quartos com quarto 101 Single e menu completo | Positivo | AC3 | 1) Acessar /admin; 2) Informar "admin" e "password"; 3) Clicar em Login; 4) Verificar lista de quartos e menu | URL da lista de quartos; linha do quarto 101 com tipo Single visível; menu exibe Rooms, Report, Branding e Messages |
+| CT09 | Logout retorna à página inicial pública | Positivo | AC4 | 1) Realizar login válido; 2) Clicar em Logout | URL é a página inicial pública da pousada (raiz do site) |
+| CT10 | Acesso direto à lista de quartos após logout exibe tela de login | Positivo | AC5 | 1) Realizar login válido; 2) Clicar em Logout; 3) Acessar diretamente /admin/rooms | Tela de login é exibida (campos Username/Password e botão Login visíveis) |
+
+## SUPOSIÇÕES
+
+- **URL base:** `https://automationintesting.online` (constante `BASE_URL`).
+- **Tela de login:** acessível em `/admin`.
+- **Lista de quartos:** rota `/admin/rooms`, para onde o login válido redireciona.
+- **Campos de login:** acessíveis por `get_by_label("Username")` e `get_by_label("Password")` (via `<label>` ou `aria-label`).
+- **Botão de envio:** `get_by_role("button", name="Login")`.
+- **Mensagem de erro:** texto visível "Invalid credentials", sem variação de texto para credenciais vazias, usuário inexistente ou senha incorreta.
+- **Validação de credenciais:** usuário e senha são comparados de forma sensível a maiúsculas/minúsculas, e espaços finais na senha não são removidos (CT06 e CT07 esperam rejeição).
+- **Lista de quartos:** exibida como tabela; cada quarto é uma linha (`role="row"`) contendo o número e o tipo (ex.: "101" e "Single").
+- **Menu administrativo:** itens são links com nomes exatos "Rooms", "Report", "Branding" e "Messages".
+- **Logout:** elemento com texto exato "Logout" (`get_by_text(..., exact=True)`), visível após login.
+- **Página inicial pública:** corresponde à raiz do site (`BASE_URL` com ou sem barra final).
+- **Dependências:** `pytest` e `pytest-playwright` instalados; execução com `pytest <arquivo>.py --browser chromium`.
+- **Estado:** cada teste usa a fixture `page` do plugin, que fornece uma sessão isolada; nenhum teste depende de estado de outro.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online"
+ADMIN_URL = f"{BASE_URL}/admin"
+ROOMS_URL = f"{BASE_URL}/admin/rooms"
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+
+
+def fazer_login(page: Page, usuario: str, senha: str) -> None:
+    page.goto(ADMIN_URL)
+    page.get_by_label("Username").fill(usuario)
+    page.get_by_label("Password").fill(senha)
+    page.get_by_role("button", name="Login").click()
+
+
+def verificar_tela_login(page: Page) -> None:
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+
+
+def test_CT01_login_com_campos_vazios_exibe_erro(page: Page) -> None:
+    fazer_login(page, "", "")
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT02_login_com_usuario_preenchido_e_senha_vazia_exibe_erro(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, "")
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT03_login_com_usuario_vazio_e_senha_preenchida_exibe_erro(page: Page) -> None:
+    fazer_login(page, "", ADMIN_PASSWORD)
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT04_login_com_senha_incorreta_exibe_erro(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, "senha-incorreta")
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT05_login_com_usuario_inexistente_exibe_erro(page: Page) -> None:
+    fazer_login(page, "usuario-inexistente", ADMIN_PASSWORD)
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT06_login_com_senha_em_caixa_diferente_exibe_erro(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, "Password")
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT07_login_com_senha_com_espaco_extra_exibe_erro(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, "password ")
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    verificar_tela_login(page)
+
+
+def test_CT08_login_valido_exibe_lista_de_quartos_e_menu(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, ADMIN_PASSWORD)
+    expect(page).to_have_url(re.compile(r"/admin/rooms/?$"))
+    expect(
+        page.get_by_role("row").filter(has_text="101").filter(has_text="Single")
+    ).to_be_visible()
+    for item in ["Rooms", "Report", "Branding", "Messages"]:
+        expect(page.get_by_role("link", name=item, exact=True)).to_be_visible()
+
+
+def test_CT09_logout_retorna_a_pagina_inicial_publica(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, ADMIN_PASSWORD)
+    page.get_by_text("Logout", exact=True).click()
+    expect(page).to_have_url(re.compile(rf"^{re.escape(BASE_URL)}/?$"))
+
+
+def test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login(page: Page) -> None:
+    fazer_login(page, ADMIN_USER, ADMIN_PASSWORD)
+    page.get_by_text("Logout", exact=True).click()
+    expect(page).to_have_url(re.compile(rf"^{re.escape(BASE_URL)}/?$"))
+    page.goto(ROOMS_URL)
+    verificar_tela_login(page)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))
+```

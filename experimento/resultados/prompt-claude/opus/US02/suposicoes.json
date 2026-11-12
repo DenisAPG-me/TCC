@@ -1,0 +1,13 @@
+[
+ "Tecnologia: interface web, portanto Python + pytest + plugin oficial pytest-playwright (API síncrona), usando as fixtures `page` e `playwright` fornecidas pelo plugin, conforme os requisitos técnicos obrigatórios (que prevalecem sobre a instrução anterior de criar o navegador com `sync_playwright`). Execução: `pytest arquivo.py` (o plugin roda o Chromium em headless por padrão).",
+ "Dependências: `pytest`, `pytest-playwright` e o Chromium instalado via `playwright install chromium`.",
+ "A aplicação usa atributos `data-test` nos elementos. Por isso, `get_by_test_id` é configurado com `playwright.selectors.set_test_id_attribute(\"data-test\")` em uma fixture de sessão autouse.",
+ "Seletores deduzidos: busca `search-query` e `search-submit`; nome do produto `product-name` (no card e na página de detalhe); preço unitário `unit-price`; campo de quantidade `quantity`; botão `add-to-cart`; indicador do carrinho `cart-quantity`; link do carrinho `nav-cart`; no carrinho, `product-title`, `product-quantity`, `line-price` e `cart-total`.",
+ "A página do carrinho fica em uma URL que contém `/checkout`.",
+ "O preço unitário na página do produto contém um número decimal com duas casas (ex.: `14.15`). Os totais no carrinho são exibidos com duas casas e podem ter o prefixo `$`.",
+ "A alteração de quantidade no carrinho é aplicada no evento `change` do campo, disparado ao sair dele (tecla Tab), e os totais são recalculados automaticamente.",
+ "As mensagens são exibidas como toast com os textos exatos dos critérios: \"Product added to shopping cart.\" e \"You can only have one Thor Hammer in the cart.\".",
+ "Os produtos \"Claw Hammer\" e \"Thor Hammer\" existem, estão disponíveis em estoque e são encontrados pela busca. O card é localizado pelo nome exato, para não confundir com produtos de nome semelhante.",
+ "O carrinho é mantido no armazenamento do navegador. Como o pytest-playwright cria um contexto novo por teste, cada teste começa com o carrinho vazio, o que garante a independência entre os testes.",
+ "A base URL vem da constante `BASE_URL` no topo do arquivo."
+]

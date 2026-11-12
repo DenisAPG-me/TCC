@@ -1,0 +1,42 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Envio de credenciais vazias na tela de login",
+  "tipo": "negativo",
+  "criterio": "Critério 1",
+  "passos": "Acessar a página de login (/admin), deixar campos de usuário e senha vazios e clicar no botão de login.",
+  "esperado": "Exibir mensagem \"Invalid credentials\" e permanecer na tela de login."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Envio de senha incorreta",
+  "tipo": "negativo",
+  "criterio": "Critério 2",
+  "passos": "Acessar a página de login (/admin), informar usuário \"admin\" e senha incorreta, e clicar no botão de login.",
+  "esperado": "Exibir mensagem \"Invalid credentials\"."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login bem-sucedido com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "Critério 3",
+  "passos": "Acessar a página de login (/admin), informar usuário \"admin\" e senha \"password\", e clicar no botão de login.",
+  "esperado": "Redirecionar para a lista de quartos, exibir quarto 101 do tipo Single e menu com Rooms, Report, Branding e Messages."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Logout a partir do painel administrativo",
+  "tipo": "positivo",
+  "criterio": "Critério 4",
+  "passos": "Efetuar login com sucesso e clicar no botão/link de Logout.",
+  "esperado": "Retornar à página inicial pública da pousada."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Acesso direto à lista de quartos após logout",
+  "tipo": "negativo",
+  "criterio": "Critério 5",
+  "passos": "Efetuar logout e tentar acessar diretamente a URL do painel de quartos (/admin ou listagem interna).",
+  "esperado": "Redirecionar ou exibir novamente a tela de login."
+ }
+]

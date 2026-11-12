@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Muito extenso, helpers e fixtures aninhadas dificultam leitura",
+  "estrutura": "Fixture factory com limpeza, helpers, constantes",
+  "assercoes": "Status, corpo completo e estado das demais reservas",
+  "espera": "Sem sleep, mas CT005 depende de estado global compartilhado (flaky)",
+  "manutenibilidade": "Constantes, UUID, limpeza; teste global frágil"
+ }
+}

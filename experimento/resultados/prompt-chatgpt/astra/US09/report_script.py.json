@@ -1,0 +1,233 @@
+{
+ "created": 1793431267.6898632,
+ "duration": 341.06416940689087,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "failed": 1,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_negar_exclusao_sem_token",
+     "type": "Function",
+     "lineno": 174
+    },
+    {
+     "nodeid": "script.py::test_CT002_negar_exclusao_com_token_invalido",
+     "type": "Function",
+     "lineno": 185
+    },
+    {
+     "nodeid": "script.py::test_CT003_excluir_com_token_valido",
+     "type": "Function",
+     "lineno": 199
+    },
+    {
+     "nodeid": "script.py::test_CT004_consultar_reserva_excluida",
+     "type": "Function",
+     "lineno": 209
+    },
+    {
+     "nodeid": "script.py::test_CT005_repetir_exclusao_preservando_demais",
+     "type": "Function",
+     "lineno": 218
+    },
+    {
+     "nodeid": "script.py::test_CT006_filtrar_nome_da_reserva_excluida",
+     "type": "Function",
+     "lineno": 259
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_negar_exclusao_sem_token",
+   "lineno": 174,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_negar_exclusao_sem_token",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6043938999064267,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3973627999657765,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.8253683999646455,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_negar_exclusao_com_token_invalido",
+   "lineno": 185,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_negar_exclusao_com_token_invalido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6036311000352725,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4819611000129953,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.831927000079304,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_excluir_com_token_valido",
+   "lineno": 199,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_excluir_com_token_valido",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6212268000235781,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.94840460002888,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.596970499958843,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_consultar_reserva_excluida",
+   "lineno": 209,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_consultar_reserva_excluida",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.6542104000691324,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.5754851999226958,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6280868999892846,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_repetir_exclusao_preservando_demais",
+   "lineno": 218,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT005_repetir_exclusao_preservando_demais",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.5850985000142828,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 313.9347811999032,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py",
+     "lineno": 68,
+     "message": "AssertionError: GET https://restful-booker.herokuapp.com/booking/677: esperado HTTP 200, recebido 404; corpo='Not Found'\nassert 404 == 200\n +  where 404 = <Response [404]>.status_code"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py",
+      "lineno": 234,
+      "message": "in test_CT005_repetir_exclusao_preservando_demais"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py",
+      "lineno": 81,
+      "message": "in get_booking"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py",
+      "lineno": 68,
+      "message": "in assert_status"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:234: in test_CT005_repetir_exclusao_preservando_demais\n    booking_id: get_booking(booking_id)\n                ^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:81: in get_booking\n    assert_status(response, READ_SUCCESS_STATUS)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US09\\script.py:68: in assert_status\n    assert response.status_code == expected, (\nE   AssertionError: GET https://restful-booker.herokuapp.com/booking/677: esperado HTTP 200, recebido 404; corpo='Not Found'\nE   assert 404 == 200\nE    +  where 404 = <Response [404]>.status_code"
+   },
+   "teardown": {
+    "duration": 5.233319699997082,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_filtrar_nome_da_reserva_excluida",
+   "lineno": 259,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT006_filtrar_nome_da_reserva_excluida",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.596626800019294,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.179849899956025,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.6133225999074057,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+[
+ "A história descreve uma interface web; foi escolhido Python com pytest e Playwright síncrono.",
+ "O requisito técnico obrigatório determina o uso do plugin oficial `pytest-playwright` e da fixture `page`. Portanto, o arquivo usa essa fixture e pressupõe que o plugin esteja instalado e configurado para Chromium headless.",
+ "A base URL é `https://practicesoftwaretesting.com/`; a busca é um campo com placeholder `Search`, e os resultados podem ser abertos pelo nome exato do produto.",
+ "A página do produto tem um campo de quantidade acessível como spinbutton e um botão `Add to cart`.",
+ "O indicador do carrinho é um link acessível cujo nome contém `cart`; o texto visível desse link mostra a quantidade total de itens.",
+ "A página do carrinho apresenta os produtos em linhas de tabela, com nome, preço unitário, quantidade e total da linha. O total geral aparece associado ao texto `Total`.",
+ "Os preços são exibidos como valores monetários com duas casas decimais. A automação converte os valores exibidos para centavos antes de comparar.",
+ "Cada teste começa com uma página/contexto isolado fornecido pelo plugin, sem itens prévios no carrinho.",
+ "Não foram fornecidos credenciais, endpoints ou payloads; os critérios são cobertos pela interface e não exigem autenticação."
+]

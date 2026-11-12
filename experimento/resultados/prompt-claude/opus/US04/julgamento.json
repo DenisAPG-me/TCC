@@ -1,0 +1,95 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C04",
+  "US04-C05",
+  "US04-C06",
+  "US04-C08",
+  "US04-C09",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C06",
+    "US04-C09"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": []
+}

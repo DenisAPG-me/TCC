@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Adicionar Claw Hammer com quantidade 3 ao carrinho",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar página inicial; Clicar no produto Claw Hammer; Definir quantidade como 3; Clicar em adicionar ao carrinho",
+  "esperado": "Ver a mensagem de confirmação Product added to shopping cart. e o indicador do carrinho mostra 3"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Validar total da linha e total do carrinho com 3 unidades",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Adicionar 3 unidades de Claw Hammer ao carrinho; Abrir a página do carrinho",
+  "esperado": "O total da linha é igual ao preço unitário multiplicado por 3 e o total do carrinho é igual ao total da linha"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Alterar quantidade no carrinho de 3 para 1",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Adicionar 3 unidades de Claw Hammer ao carrinho; Abrir o carrinho; Alterar a quantidade para 1",
+  "esperado": "O total do carrinho passa a ser igual ao preço unitário"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Tentar adicionar 3 unidades de Thor Hammer ao carrinho",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Acessar página do produto Thor Hammer; Definir quantidade como 3; Clicar em adicionar ao carrinho",
+  "esperado": "Ver a mensagem You can only have one Thor Hammer in the cart."
+ }
+]

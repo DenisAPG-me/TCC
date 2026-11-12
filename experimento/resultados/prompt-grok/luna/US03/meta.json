@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US03",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 20.24,
+ "tokens": {
+  "total": 6376
+ },
+ "n_casos_extraidos": 9,
+ "tem_codigo": true,
+ "stderr_tail": "yment_step(page):\n    login(page)\n    add_product_and_open_checkout(page)\n    if page.get_by_label(re.compile(\"email\", re.I)).is_visible():\n        page.get_by_label(re.compile(\"email\", re.I)).fill(EMAIL)\n        page.get_by_label(re.compile(\"password\", re.I)).fill(PASSWORD)\n        page.get_by_role(\"button\", name=re.compile(r\"sign in|login\", re.I)).click()\n\n    payment = is_payment_step(page)\n    fill_address(page, omit={\"Country\"})\n    expect(payment).not_to_be_visible()\n```\ntokens used\n6,376\n"
+}

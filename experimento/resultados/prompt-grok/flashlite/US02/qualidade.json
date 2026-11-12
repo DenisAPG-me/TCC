@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 1,
+ "assercoes": 2,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Testes curtos, nomes coerentes",
+  "estrutura": "Sem helpers; setup repetido em todos; usa toBeVisible (API JS) inexistente em Python",
+  "assercoes": "Asserts de negocio, mas comparacao float == e API inexistente toBeVisible",
+  "espera": "Sem espera apos alterar quantidade; leituras imediatas",
+  "manutenibilidade": "Seletores 'data-test=...' invalidos e get_by_text generico"
+ }
+}

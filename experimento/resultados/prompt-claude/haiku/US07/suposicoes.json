@@ -1,0 +1,16 @@
+[
+ "Tecnologia: a User Story é de API REST, então usei Python + pytest + requests, com `timeout=10` em todas as requisições.",
+ "Endpoints deduzidos da API pública restful-booker: POST /booking (criação), GET /booking/{id} (consulta), GET /booking com query `firstname` e `lastname` (listagem), POST /auth (token) e DELETE /booking/{id} (remoção).",
+ "Payload usa os nomes de campo da API: `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` com `checkin` e `checkout` no formato AAAA-MM-DD, e `additionalneeds` (string).",
+ "Datas de teste são futuras (2027-03-10 a 2027-03-15) para evitar datas passadas.",
+ "POST /booking responde 200 com `{\"bookingid\": <int>, \"booking\": {...}}`, onde `booking` tem os mesmos campos enviados.",
+ "GET /booking/{id} responde 200 com o objeto da reserva, sem `bookingid`. Para id inexistente ou 0, responde 404.",
+ "GET /booking com filtros responde 200 com lista de objetos `{\"bookingid\": <int>}`. Sem correspondência, retorna lista vazia.",
+ "Nomes únicos são gerados com UUID para evitar colisão entre execuções.",
+ "Com `totalprice` 0 e `depositpaid` false (CT08), assumo que a API aceita e devolve os mesmos valores.",
+ "Nomes com acentos e caracteres especiais (CT06) são preservados sem alteração na ida e na volta em UTF-8.",
+ "Credenciais `admin` / `password123` são as da conta pública de exemplo da API. Elas são usadas apenas para remover as reservas criadas pelos testes, via DELETE com cookie `token`.",
+ "Limpeza: as reservas criadas são removidas no teardown do fixture `ids_para_remover`.",
+ "Validações negativas de criação (campos ausentes ou inválidos) não aparecem nos critérios de aceitação, então não foram cobertas.",
+ "Não verifiquei se o host `restful-booker.herokuapp.com` está disponível, pois não tenho acesso à internet. Se estiver fora do ar, os testes falharão por conexão, não por defeito funcional."
+]

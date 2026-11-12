@@ -1,0 +1,157 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Busca por "hammer" lista somente produtos com "hammer" no nome | Positivo | AC1 | Abrir home; buscar "hammer"; coletar nomes da listagem | Lista não vazia; todos os nomes contêm "hammer" |
+| CT02 | Página indica que a busca foi por "hammer" | Positivo | AC1 | Abrir home; buscar "hammer"; verificar campo de busca | Campo de busca exibe o valor "hammer" |
+| CT03 | Termo inexistente exibe mensagem de nenhum produto | Negativo | AC2 | Abrir home; buscar "zzzzxx" | Mensagem "There are no products found." visível |
+| CT04 | Termo inexistente não lista produtos | Negativo | AC2 | Abrir home; buscar "zzzzxx"; contar cards de produto | Nenhum card de produto na página |
+| CT05 | Ordenação por preço do menor para o maior | Positivo | AC3 | Abrir home; selecionar "Price (Low - High)"; coletar preços | Preços da página em ordem crescente |
+| CT06 | Ordenação por nome de Z a A | Positivo | AC4 | Abrir home; selecionar "Name (Z - A)"; coletar nomes | Nomes da página em ordem alfabética decrescente |
+| CT07 | Busca sem diferença entre maiúsculas e minúsculas | Borda | AC1 | Buscar "hammer"; buscar "HAMMER"; comparar listas | Mesmos produtos nos dois resultados |
+| CT08 | Termo com espaços nas bordas retorna mesmos resultados | Borda | AC1 | Buscar "  hammer  "; comparar com busca "hammer" | Mesmos produtos nos dois resultados |
+| CT09 | Ordenação por preço preserva o filtro da busca | Borda | AC1, AC3 | Buscar "hammer"; selecionar "Price (Low - High)"; coletar nomes e preços | Somente produtos com "hammer"; preços em ordem crescente |
+| CT10 | Ordenação em busca sem resultados não exibe produtos | Borda | AC2, AC3 | Buscar "zzzzxx"; selecionar "Price (Low - High)" | Mensagem "There are no products found." permanece; nenhum produto listado |
+
+## SUPOSIÇÕES
+
+- **URL base:** `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`.
+- **Campo de busca:** papel `textbox` com nome acessível "Search" (`get_by_role("textbox", name="Search")`). A busca é enviada com a tecla Enter.
+- **Requisição de busca e ordenação:** a listagem é atualizada por uma requisição HTTP cuja URL contém `products` (ex.: `api.../products?q=hammer`). O script aguarda essa resposta com `expect_response`.
+- **Indicação da busca (CT02):** após a busca, o valor do campo de busca permanece igual ao termo digitado.
+- **Seletor de ordenação:** elemento com rótulo acessível "Sort" (`get_by_label("Sort")`). As opções aceitas são os textos "Name (A - Z)", "Name (Z - A)", "Price (Low - High)" e "Price (High - Low)".
+- **Cards de produto:** nome em `[data-test="product-name"]` e preço em `[data-test="product-price"]`.
+- **Formato do preço:** texto no formato `$12.50`, convertido para float removendo o `$`.
+- **Mensagem de vazio:** texto exato "There are no products found.", localizado com `get_by_text`.
+- **Nome do produto:** a comparação de "hammer" é feita sem diferenciar maiúsculas e minúsculas.
+- **Ordenação alfabética:** a ordenação Z-A usa `str.lower` como chave, para não depender de caixa alta ou baixa.
+- **Paginação:** os testes verificam apenas os produtos da primeira página exibida.
+- **Espaços (CT08):** a aplicação remove espaços no início e no fim do termo de busca antes de pesquisar.
+- **Maiúsculas (CT07):** a busca não diferencia maiúsculas de minúsculas.
+- **Ordenação sem resultados (CT10):** o seletor de ordenação continua habilitado quando não há produtos, e a mensagem de vazio permanece visível.
+- **Execução:** `pytest-playwright` fornece as fixtures `page`; o navegador usa o padrão do plugin (Chromium, headless).
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+PRODUCT_NAME = '[data-test="product-name"]'
+PRODUCT_PRICE = '[data-test="product-price"]'
+SEARCH_BOX = "Search"
+SORT_BOX = "Sort"
+NO_RESULTS = "There are no products found."
+PRICE_LOW_HIGH = "Price (Low - High)"
+NAME_Z_A = "Name (Z - A)"
+
+
+def open_home(page: Page) -> None:
+    page.goto(BASE_URL)
+
+
+def search(page: Page, term: str) -> None:
+    search_box = page.get_by_role("textbox", name=SEARCH_BOX)
+    search_box.fill(term)
+    with page.expect_response(lambda r: "products" in r.url):
+        search_box.press("Enter")
+
+
+def sort_by(page: Page, option: str) -> None:
+    with page.expect_response(lambda r: "products" in r.url):
+        page.get_by_label(SORT_BOX).select_option(label=option)
+
+
+def visible_texts(page: Page, selector: str) -> list[str]:
+    expect(page.locator(selector).first).to_be_visible()
+    return page.locator(selector).all_inner_texts()
+
+
+def parse_prices(texts: list[str]) -> list[float]:
+    return [float(t.replace("$", "").strip()) for t in texts]
+
+
+def test_ct01_busca_hammer_lista_somente_produtos_com_hammer(page: Page):
+    open_home(page)
+    search(page, "hammer")
+    names = visible_texts(page, PRODUCT_NAME)
+    assert names
+    assert all("hammer" in name.lower() for name in names)
+
+
+def test_ct02_pagina_indica_que_busca_foi_por_hammer(page: Page):
+    open_home(page)
+    search(page, "hammer")
+    expect(page.get_by_role("textbox", name=SEARCH_BOX)).to_have_value("hammer")
+
+
+def test_ct03_termo_inexistente_exibe_mensagem_nenhum_produto(page: Page):
+    open_home(page)
+    search(page, "zzzzxx")
+    expect(page.get_by_text(NO_RESULTS)).to_be_visible()
+
+
+def test_ct04_termo_inexistente_nao_lista_produtos(page: Page):
+    open_home(page)
+    search(page, "zzzzxx")
+    expect(page.get_by_text(NO_RESULTS)).to_be_visible()
+    expect(page.locator(PRODUCT_NAME)).to_have_count(0)
+
+
+def test_ct05_ordena_por_preco_do_menor_para_o_maior(page: Page):
+    open_home(page)
+    sort_by(page, PRICE_LOW_HIGH)
+    prices = parse_prices(visible_texts(page, PRODUCT_PRICE))
+    assert prices == sorted(prices)
+
+
+def test_ct06_ordena_por_nome_de_z_a_a(page: Page):
+    open_home(page)
+    sort_by(page, NAME_Z_A)
+    names = visible_texts(page, PRODUCT_NAME)
+    assert names == sorted(names, key=str.lower, reverse=True)
+
+
+def test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas(page: Page):
+    open_home(page)
+    search(page, "hammer")
+    lower_names = sorted(visible_texts(page, PRODUCT_NAME))
+    search(page, "HAMMER")
+    upper_names = sorted(visible_texts(page, PRODUCT_NAME))
+    assert lower_names
+    assert lower_names == upper_names
+
+
+def test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados(page: Page):
+    open_home(page)
+    search(page, "hammer")
+    expected = sorted(visible_texts(page, PRODUCT_NAME))
+    search(page, "  hammer  ")
+    actual = sorted(visible_texts(page, PRODUCT_NAME))
+    assert expected
+    assert actual == expected
+
+
+def test_ct09_ordenacao_por_preco_preserva_filtro_da_busca(page: Page):
+    open_home(page)
+    search(page, "hammer")
+    sort_by(page, PRICE_LOW_HIGH)
+    names = visible_texts(page, PRODUCT_NAME)
+    assert all("hammer" in name.lower() for name in names)
+    prices = parse_prices(visible_texts(page, PRODUCT_PRICE))
+    assert prices == sorted(prices)
+
+
+def test_ct10_ordenacao_em_busca_sem_resultados_nao_exibe_produtos(page: Page):
+    open_home(page)
+    search(page, "zzzzxx")
+    expect(page.get_by_text(NO_RESULTS)).to_be_visible()
+    sort_by(page, PRICE_LOW_HIGH)
+    expect(page.get_by_text(NO_RESULTS)).to_be_visible()
+    expect(page.locator(PRODUCT_NAME)).to_have_count(0)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))
+```

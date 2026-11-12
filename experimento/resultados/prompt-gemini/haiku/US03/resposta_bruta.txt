@@ -1,0 +1,244 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Login com formulário vazio | Negativo | AC1 | Abrir login; clicar em Login sem preencher | Exibe "Email is required" e "Password is required" |
+| CT02 | Login somente com senha preenchida | Borda | AC1 | Preencher senha; enviar sem e-mail | Exibe "Email is required"; não exibe "Password is required" |
+| CT03 | Login somente com e-mail preenchido | Borda | AC1 | Preencher e-mail; enviar sem senha | Exibe "Password is required"; não exibe "Email is required" |
+| CT04 | Login com senha incorreta | Negativo | AC2 | Informar e-mail demo e senha errada; enviar | Exibe "Invalid email or password"; permanece na tela de login |
+| CT05 | Login com e-mail não cadastrado | Borda | AC2 | Informar e-mail inexistente e senha qualquer; enviar | Exibe "Invalid email or password"; permanece sem sessão |
+| CT06 | Login válido exibe My account | Positivo | AC4 | Logar com conta demo; abrir menu do usuário; clicar em My account | Nome do usuário no menu e página "My account" exibidos |
+| CT07 | Checkout sem autenticação exige login | Positivo | AC3 | Adicionar produto ao carrinho; ir ao checkout sem login | Formulário de e-mail e senha exibido |
+| CT08 | Endereço com campos obrigatórios vazios bloqueia avanço | Negativo | AC5 | Logar; carrinho; checkout; limpar campos obrigatórios; avançar | Passo de pagamento não exibido |
+| CT09 | Endereço completo permite avançar | Positivo | AC5 | Logar; checkout; preencher todos os campos; avançar | Passo de pagamento exibido |
+| CT10 | CEP vazio isolado bloqueia avanço | Borda | AC5 | Preencher todos os campos exceto CEP; avançar | Passo de pagamento não exibido |
+| CT11 | Pagamento com cartão válido | Positivo | AC6 | Chegar ao pagamento; preencher cartão fictício válido; confirmar | Exibe "Payment was successful" |
+| CT12 | Confirmação do pedido gera número de fatura | Positivo | AC6 | Concluir pagamento; confirmar pedido | Exibe "Thanks for your order! Your invoice number is INV-..." |
+| CT13 | Cartão com número inválido não é aprovado | Negativo | AC6 | Chegar ao pagamento; informar número 1234567890123456; confirmar | Não exibe "Payment was successful"; permanece no pagamento |
+| CT14 | Cartão com validade expirada não é aprovado | Borda | AC6 | Chegar ao pagamento; informar validade 01/2020; confirmar | Não exibe "Payment was successful" |
+| CT15 | Fluxo ponta a ponta de compra com cartão | Positivo | AC3, AC4, AC5, AC6 | Adicionar produto sem login; ir ao checkout; logar; preencher endereço e cartão; confirmar pagamento e pedido | Exibe "Thanks for your order! Your invoice number is INV-..." |
+
+## SUPOSIÇÕES
+
+- **URLs:** login em `https://practicesoftwaretesting.com/#/auth/login`; página inicial em `https://practicesoftwaretesting.com/`. Aplicação Angular com roteamento por hash.
+- **Login:** campos por label `Email address` e `Password`; botão `Login` (role button, nome exato).
+- **Conta demo:** `customer@practicesoftwaretesting.com` / `welcome01`. Nome exibido no menu assumido como `Jane Doe` (constante `USER_NAME`).
+- **Mensagem para e-mail não cadastrado:** assume-se a mesma mensagem de senha incorreta, "Invalid email or password".
+- **Menu do usuário:** `<nav>` (role `navigation`) contém o nome do usuário; clicar nele abre dropdown com link/texto `My account`. A página tem heading `My account`.
+- **Produtos:** card de produto com `data-test="product-name"`; primeiro produto da listagem é usado.
+- **Carrinho:** ícone com `data-test="nav-cart"`; botão `Add to cart` na página do produto; toast `Product added to shopping cart.`; botão `Proceed to checkout` na página do carrinho.
+- **Carrinho anônimo:** o carrinho com produto adicionado sem login persiste após o login.
+- **Checkout sem login:** avançar para o checkout redireciona para a tela de login.
+- **Passo de endereço:** labels `Street`, `City`, `State`, `Postcode`, `Building number` (campos de texto) e `Country` (select). Campos podem vir pré-preenchidos; o teste os limpa com `fill("")`. Existe uma opção vazia no select de país, usada em CT08 via `select_option("")`. País usado: `United States`.
+- **Botão de avanço do endereço:** `Proceed to payment`.
+- **Passo de pagamento:** select `Payment method` com opção `Credit Card`; campos `Card number`, expiração (label contendo "expir"), `CVV`, `Card holder name`. Dados fictícios: 4111111111111111, 12/2030, 123, John Doe.
+- **Confirmação em duas etapas:** botão `Confirm` (nome exato) confirma o pagamento e exibe "Payment was successful"; botão `Confirm order` finaliza e exibe "Thanks for your order! Your invoice number is INV-...".
+- **Cartão inválido e expirado:** assume-se que a aplicação rejeita o pagamento sem exibir sucesso e permanece no passo de pagamento. Asserções negativas são imediatas e podem precisar de espera do servidor para ter validade plena.
+- **Seletores `data-test`:** usados como fallback quando não há role/label estável (`product-name`, `nav-cart`).
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+BASE_URL = "https://practicesoftwaretesting.com"
+LOGIN_URL = f"{BASE_URL}/#/auth/login"
+DEMO_EMAIL = "customer@practicesoftwaretesting.com"
+DEMO_PASSWORD = "welcome01"
+WRONG_PASSWORD = "senha-incorreta"
+UNREGISTERED_EMAIL = "inexistente@practicesoftwaretesting.com"
+USER_NAME = "Jane Doe"
+ADDRESS = {
+    "Street": "Main Street",
+    "City": "New York",
+    "State": "NY",
+    "Postcode": "10001",
+    "Building number": "100",
+}
+COUNTRY = "United States"
+CARD = {"holder": "John Doe", "number": "4111111111111111", "expiry": "12/2030", "cvv": "123"}
+INVALID_CARD_NUMBER = "1234567890123456"
+EXPIRED_CARD_EXPIRY = "01/2020"
+NEXT_STEP_BUTTON = "Proceed to payment"
+CONFIRM_BUTTON = "Confirm"
+CONFIRM_ORDER_BUTTON = "Confirm order"
+INVOICE_TEXT = re.compile(r"Thanks for your order! Your invoice number is INV-")
+
+
+def _submit_login(page, email, password):
+    page.get_by_label("Email address").fill(email)
+    page.get_by_label("Password", exact=True).fill(password)
+    page.get_by_role("button", name="Login", exact=True).click()
+
+
+def _login(page, email, password):
+    page.goto(LOGIN_URL)
+    _submit_login(page, email, password)
+
+
+def _add_product_to_cart(page):
+    page.goto(BASE_URL)
+    page.locator('[data-test="product-name"]').first.click()
+    page.get_by_role("button", name="Add to cart").click()
+    expect(page.get_by_text("Product added to shopping cart.")).to_be_visible()
+
+
+def _go_to_checkout(page):
+    page.locator('[data-test="nav-cart"]').click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+
+
+def _start_checkout_as_customer(page):
+    _login(page, DEMO_EMAIL, DEMO_PASSWORD)
+    _add_product_to_cart(page)
+    _go_to_checkout(page)
+
+
+def _fill_address(page):
+    for label, value in ADDRESS.items():
+        page.get_by_label(label).fill(value)
+    page.get_by_label("Country").select_option(COUNTRY)
+
+
+def _proceed_to_payment(page):
+    _fill_address(page)
+    page.get_by_role("button", name=NEXT_STEP_BUTTON).click()
+    expect(page.get_by_label("Payment method")).to_be_visible()
+
+
+def _fill_credit_card(page, number, expiry):
+    page.get_by_label("Payment method").select_option("Credit Card")
+    page.get_by_label("Card number").fill(number)
+    page.get_by_label(re.compile("expir", re.IGNORECASE)).fill(expiry)
+    page.get_by_label("CVV").fill(CARD["cvv"])
+    page.get_by_label("Card holder name").fill(CARD["holder"])
+
+
+def test_CT01_login_vazio_exibe_mensagens_obrigatorias(page):
+    page.goto(LOGIN_URL)
+    page.get_by_role("button", name="Login", exact=True).click()
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+
+
+def test_CT02_login_somente_com_senha_exibe_erro_de_email(page):
+    page.goto(LOGIN_URL)
+    page.get_by_label("Password", exact=True).fill(DEMO_PASSWORD)
+    page.get_by_role("button", name="Login", exact=True).click()
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_have_count(0)
+
+
+def test_CT03_login_somente_com_email_exibe_erro_de_senha(page):
+    page.goto(LOGIN_URL)
+    page.get_by_label("Email address").fill(DEMO_EMAIL)
+    page.get_by_role("button", name="Login", exact=True).click()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+    expect(page.get_by_text("Email is required")).to_have_count(0)
+
+
+def test_CT04_login_com_senha_incorreta_exibe_erro_e_mantem_sem_sessao(page):
+    _login(page, DEMO_EMAIL, WRONG_PASSWORD)
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+    expect(page.get_by_role("button", name="Login", exact=True)).to_be_visible()
+
+
+def test_CT05_login_com_email_nao_cadastrado_exibe_erro(page):
+    _login(page, UNREGISTERED_EMAIL, DEMO_PASSWORD)
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page.get_by_role("button", name="Login", exact=True)).to_be_visible()
+
+
+def test_CT06_login_valido_exibe_my_account_com_nome_no_menu(page):
+    _login(page, DEMO_EMAIL, DEMO_PASSWORD)
+    expect(page.get_by_role("navigation").get_by_text(USER_NAME)).to_be_visible()
+    page.get_by_role("navigation").get_by_text(USER_NAME).click()
+    page.get_by_text("My account", exact=True).click()
+    expect(page.get_by_role("heading", name="My account")).to_be_visible()
+
+
+def test_CT07_checkout_sem_autenticacao_exige_email_e_senha(page):
+    _add_product_to_cart(page)
+    _go_to_checkout(page)
+    expect(page.get_by_label("Email address")).to_be_visible()
+    expect(page.get_by_label("Password", exact=True)).to_be_visible()
+
+
+def test_CT08_endereço_com_campos_obrigatorios_vazios_bloqueia_avanco(page):
+    _start_checkout_as_customer(page)
+    for label in ADDRESS:
+        page.get_by_label(label).fill("")
+    page.get_by_label("Country").select_option("")
+    page.get_by_role("button", name=NEXT_STEP_BUTTON).click()
+    expect(page.get_by_label("Street")).to_be_visible()
+    expect(page.get_by_label("Payment method")).to_have_count(0)
+
+
+def test_CT09_endereco_completo_permite_avancar_para_pagamento(page):
+    _start_checkout_as_customer(page)
+    _proceed_to_payment(page)
+
+
+def test_CT10_cep_vazio_isolado_bloqueia_avanco_para_pagamento(page):
+    _start_checkout_as_customer(page)
+    _fill_address(page)
+    page.get_by_label("Postcode").fill("")
+    page.get_by_role("button", name=NEXT_STEP_BUTTON).click()
+    expect(page.get_by_label("Street")).to_be_visible()
+    expect(page.get_by_label("Payment method")).to_have_count(0)
+
+
+def test_CT11_pagamento_com_cartao_valido_exibe_sucesso(page):
+    _start_checkout_as_customer(page)
+    _proceed_to_payment(page)
+    _fill_credit_card(page, CARD["number"], CARD["expiry"])
+    page.get_by_role("button", name=CONFIRM_BUTTON, exact=True).click()
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+
+
+def test_CT12_confirmacao_do_pedido_exibe_numero_da_fatura(page):
+    _start_checkout_as_customer(page)
+    _proceed_to_payment(page)
+    _fill_credit_card(page, CARD["number"], CARD["expiry"])
+    page.get_by_role("button", name=CONFIRM_BUTTON, exact=True).click()
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+    page.get_by_role("button", name=CONFIRM_ORDER_BUTTON).click()
+    expect(page.get_by_text(INVOICE_TEXT)).to_be_visible()
+
+
+def test_CT13_cartao_com_numero_invalido_nao_e_aprovado(page):
+    _start_checkout_as_customer(page)
+    _proceed_to_payment(page)
+    _fill_credit_card(page, INVALID_CARD_NUMBER, CARD["expiry"])
+    page.get_by_role("button", name=CONFIRM_BUTTON, exact=True).click()
+    expect(page.get_by_text("Payment was successful")).to_have_count(0)
+    expect(page.get_by_label("Payment method")).to_be_visible()
+
+
+def test_CT14_cartao_com_validade_expirada_nao_e_aprovado(page):
+    _start_checkout_as_customer(page)
+    _proceed_to_payment(page)
+    _fill_credit_card(page, CARD["number"], EXPIRED_CARD_EXPIRY)
+    page.get_by_role("button", name=CONFIRM_BUTTON, exact=True).click()
+    expect(page.get_by_text("Payment was successful")).to_have_count(0)
+
+
+def test_CT15_fluxo_ponta_a_ponta_de_compra_com_cartao(page):
+    _add_product_to_cart(page)
+    _go_to_checkout(page)
+    _submit_login(page, DEMO_EMAIL, DEMO_PASSWORD)
+    expect(page.get_by_role("navigation").get_by_text(USER_NAME)).to_be_visible()
+    _go_to_checkout(page)
+    _proceed_to_payment(page)
+    _fill_credit_card(page, CARD["number"], CARD["expiry"])
+    page.get_by_role("button", name=CONFIRM_BUTTON, exact=True).click()
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+    page.get_by_role("button", name=CONFIRM_ORDER_BUTTON).click()
+    expect(page.get_by_text(INVOICE_TEXT)).to_be_visible()
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))
+```

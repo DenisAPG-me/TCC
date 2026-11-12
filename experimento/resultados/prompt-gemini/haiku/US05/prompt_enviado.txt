@@ -1,0 +1,39 @@
+Você é um engenheiro de qualidade de software especializado em automação de testes. Analise a User Story fornecida abaixo e realize as tarefas solicitadas seguindo rigorosamente todas as restrições e o formato de saída.
+
+### User Story
+Como administrador da pousada, quero entrar e sair do painel administrativo, para gerenciar quartos e mensagens com segurança. Conta de demonstração: admin / password (painel em /admin).
+URL base: https://automationintesting.online/
+
+Critérios de aceitação:
+1. Dado que estou na tela de login do painel, quando envio usuário e senha vazios, então vejo "Invalid credentials" e continuo na tela de login.
+2. Dado que estou na tela de login do painel, quando informo usuário "admin" e senha incorreta, então vejo "Invalid credentials".
+3. Dado que informo usuário "admin" e senha "password", quando faço login, então sou levado à lista de quartos, que inclui o quarto 101 do tipo Single, e o menu mostra Rooms, Report, Branding e Messages.
+4. Dado que estou autenticado, quando clico em Logout, então retorno à página inicial pública da pousada.
+5. Dado que fiz logout, quando acesso diretamente a lista de quartos do painel, então vejo novamente a tela de login.
+
+### Tarefas
+1. **Identificação de Casos de Teste:** Identifique e liste todos os casos de teste necessários (positivos, negativos e de borda) com base exclusivamente nos critérios de aceitação e nas informações presentes na User Story. Como você não tem acesso ao sistema ou à internet, deduza seletores, rotas e dados de forma razoável e declare explicitamente suas suposições.
+2. **Script de Automação:** Escreva um script de automação de testes em Python que implemente os casos de teste identificados.
+
+### Restrições Técnicas
+- **Tecnologias:** 
+  - Se a User Story for de **interface web**, utilize: `Python` + `pytest` + `Playwright` (API síncrona).
+  - Se a User Story for de **API REST**, utilize: `Python` + `pytest` + `requests`.
+- **Autocontenção:** O script deve ser escrito em um **único arquivo** Python executável, contendo exatamente um teste por caso de teste listado, e os nomes das funções de teste devem incluir os IDs correspondentes da tabela.
+- **Dependências:** Não utilize nenhuma dependência além das bibliotecas padrão do Python e das explicitamente citadas (`pytest`, `playwright` ou `requests`).
+
+### Formato de Saída Obrigatório
+Sua resposta deve conter **apenas** as seções a seguir, sem nenhum texto introdutório, explicações adicionais ou comentários fora dos blocos especificados:
+
+1. Uma seção intitulada `CASOS DE TESTE` contendo uma tabela em Markdown com as colunas: `ID`, `Título`, `Tipo (Positivo/Negativo/Borda)`, `Critério de Aceitação Relacionado`, `Passos Resumidos` e `Resultado Esperado`.
+2. Uma seção intitulada `SUPOSIÇÕES` listando todas as premissas e seletores deduzidos (ex: IDs de elementos, URLs de endpoints, chaves de payload).
+3. Um **único** bloco de código Markdown contendo o arquivo de teste completo e executável em Python (iniciado por ```python e encerrado por ```).
+
+REQUISITOS TÉCNICOS OBRIGATÓRIOS (em caso de conflito com instruções anteriores, estes requisitos prevalecem):
+- Testes de UI usam o plugin oficial pytest-playwright e recebem a fixture `page` (e, se precisarem, `context`/`browser`) do próprio plugin.
+- É proibido criar navegador com `sync_playwright()` e é proibido criar fixture própria de browser/page.
+- As asserções de UI usam `expect` de `playwright.sync_api`.
+- Dê preferência a locators recomendados: `get_by_role`, `get_by_label`, `get_by_text`, `get_by_test_id`.
+- Nada de `time.sleep`.
+- A base URL vem de uma constante no topo do arquivo ou da opção `--base-url`.
+- Testes de API usam pytest + requests, sem mudança.

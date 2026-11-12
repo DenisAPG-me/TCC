@@ -1,0 +1,12 @@
+[
+ "1. Os seis critérios apresentados não possuem identificadores próprios. A correspondência é CA01 a CA06, na ordem em que aparecem na User Story.",
+ "2. O sistema é a API REST do Restful Booker. As rotas inferidas são `POST /auth`, `POST /booking`, `GET /booking/{id}`, `PUT /booking/{id}` e `PATCH /booking/{id}`. Os testes usam JSON e timeout de 15 segundos.",
+ "3. O login usa `{\"username\": ..., \"password\": ...}`. A autenticação válida retorna `{\"token\": \"...\"}`; a inválida retorna JSON contendo `reason: \"Bad credentials\"` sem token. O token é enviado no cabeçalho `Cookie` como `token=<valor>`.",
+ "4. A atualização completa usa PUT e exige `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`. A parcial usa PATCH. Essas estruturas e o formato do cabeçalho são inferidos para automatizar os critérios.",
+ "5. Para CT003–CT006, cada teste cria uma reserva própria usando valores concretos; o serviço deve permitir criar, atualizar e consultar reservas. A limpeza tenta excluir a reserva criada usando o token de administrador. A exclusão via `DELETE /booking/{id}` é uma suposição de preparação e limpeza.",
+ "6. CT002 usa uma senha incorreta derivada das credenciais fornecidas. Pressupõe que a API represente a rejeição com o motivo especificado no critério.",
+ "7. CT006 omite `firstname` para representar campos obrigatórios ausentes. O critério não define quais campos devem faltar; a resposta HTTP 400 para essa omissão é uma dedução necessária.",
+ "8. CT005 verifica a ausência de token usando PUT com atualização completa, para isolar a condição de autenticação. Pressupõe que a API responda HTTP 403 nesse caso.",
+ "9. Não há cenários de borda adicionais fundamentados no texto: os critérios não especificam limites de valores, formatos extremos ou comportamento de fronteira. A categoria borda, portanto, não se aplica.",
+ "10. A URL base é a informada na User Story. Os endpoints, cabeçalhos, corpos e respostas inferidos podem exigir ajustes antes de funcionarem contra o sistema real; o arquivo executável não comprova compatibilidade."
+]

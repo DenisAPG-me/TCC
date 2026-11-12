@@ -1,0 +1,224 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Contador de Messages visível após login do administrador | positivo | CA01 | Abrir /admin; logar com admin/password; ler o número ao lado de Messages | Contador visível com valor inteiro não negativo |
+| CT002 | Login com senha inválida não expõe o contador | negativo | CA01 | Abrir /admin; logar com admin e senha incorreta | Permanece na tela de login; link Messages com contador não aparece |
+| CT003 | Envio válido do formulário exibe confirmação | positivo | CA02 | Abrir a home; preencher nome, e-mail, telefone, assunto e mensagem válidos; enviar | Texto "Thanks for getting in touch {nome}!" visível |
+| CT004 | Envio sem assunto não exibe confirmação | negativo | CA02 | Preencher os demais campos válidos com assunto vazio; enviar | Confirmação não é exibida |
+| CT005 | Confirmação preserva nome com acentos | borda | CA02 | Enviar formulário com nome "Ana Lúcia Gonçalves" acrescido de sufixo único e dados válidos | Confirmação exibe o nome exatamente como digitado |
+| CT006 | Contador aumenta em uma unidade após envio | positivo | CA03 | Logar e anotar o contador; sair; enviar mensagem como visitante; logar novamente | Novo contador igual ao anotado somado a 1 |
+| CT007 | Envio com e-mail inválido não altera o contador | negativo | CA03 | Anotar o contador; sair; enviar com e-mail inválido; logar novamente | Contador igual ao anotado |
+| CT008 | Mensagem recém-enviada aparece na caixa | positivo | CA04 | Enviar mensagem com nome e assunto únicos; logar; clicar em Messages | Item da lista contém o nome e o assunto informados |
+| CT009 | Mensagem com acentos e caracteres especiais aparece corretamente | borda | CA04 | Enviar mensagem com nome acentuado e assunto com acento, dois-pontos e número; logar; abrir Messages | Item exibe nome e assunto exatamente como enviados |
+| CT010 | Mensagem não enviada não aparece na caixa | negativo | CA04 | Enviar com e-mail inválido e assunto único; logar; abrir Messages | Nenhum item contém o assunto |
+| CT011 | Após logout, acesso direto à caixa exige login | positivo | CA05 | Logar; clicar em Logout; abrir /admin/messages | Tela de login é exibida; contador de Messages não aparece |
+| CT012 | Acesso direto à caixa sem autenticação exige login | negativo | CA05 | Abrir /admin/messages sem login prévio | Tela de login é exibida; nenhum item de mensagem listado |
+
+SUPOSIÇÕES
+
+1. Os critérios vieram numerados de 1 a 5 sem identificadores próprios. Adotei CA01 a CA05 na ordem de apresentação: CA01 = critério 1, CA02 = critério 2, e assim por diante.
+2. Explícito na User Story: URL base `https://automationintesting.online/`, painel em `/admin`, credenciais `admin` / `password`, texto de confirmação "Thanks for getting in touch <nome>!", rótulo Messages com contador, logout e os cinco critérios.
+3. Conflito de instruções: o enunciado proíbe `pytest-playwright`, mas os requisitos técnicos obrigatórios da User Story exigem o plugin e prevalecem. O arquivo usa `page` e `browser` do plugin e `expect` de `playwright.sync_api`.
+4. Inferido: login em `{BASE_URL}admin` e caixa de mensagens em `{BASE_URL}admin/messages`. Se o sistema usar rotas com hash (por exemplo `/#/admin`) ou outro caminho, ajuste `ADMIN_URL` e `MESSAGES_URL`. Afeta CT001, CT002, CT006 a CT012.
+5. Inferido: campos do login com rótulos "Username" e "Password" e botão "Login". Afeta todos os testes que autenticam.
+6. Inferido: o link Messages contém o número do contador no próprio texto (por exemplo "Messages (3)"). Afeta CT001, CT002, CT006, CT007, CT011 e CT012.
+7. Inferido: o botão de saída do painel se chama "Logout" e tem papel de botão. Afeta CT006, CT007 e CT011.
+8. Inferido: o formulário da home tem rótulos exatos "Name", "Email", "Phone", "Subject" e "Message", e botão "Submit". Afeta todos os testes que enviam o formulário.
+9. Inferido: a confirmação é um elemento cujo texto completo é "Thanks for getting in touch {nome}!". Afeta CT003, CT005 e as verificações de confirmação dos envios.
+10. Inferido: o formulário exige assunto (CT004) e e-mail em formato válido (CT007 e CT010). Se o sistema aceitar esses envios, esses casos falharão, o que indica divergência com a suposição e não erro na automação.
+11. Inferido: telefone de 11 dígitos e mensagem com texto razoável (mais de 20 caracteres) são aceitos. Valores usados: e-mail `visitante@example.com`, telefone `01234567890`. Afeta todos os envios válidos.
+12. Inferido: a caixa de mensagens lista cada mensagem como item de lista (papel `listitem`) com remetente e assunto no mesmo item. Afeta CT008 a CT010.
+13. Inferido: o contador conta todas as mensagens recebidas, lidas ou não, e aumenta em uma unidade a cada envio válido. Afeta CT006 e CT007.
+14. Inferido: sem sessão ativa, o acesso à rota da caixa exibe o formulário de login. CA05 é explícito quanto ao comportamento; a forma exata da tela é inferida. Afeta CT011 e CT012.
+15. Dependência entre casos: CT006 e CT007 usam logout como parte dos passos, portanto dependem do comportamento de CA05. Os testes não dependem de ordem de execução nem de dados criados por outro teste.
+16. Independência: cada teste usa nome e assunto únicos (sufixo hexadecimal) e envia o formulário em contexto isolado de navegador. Como o ambiente é compartilhado, o contador é comparado antes e depois dentro do próprio teste, sem valor fixo.
+17. Pré-condições externas inevitáveis: o site está acessível; a conta `admin` / `password` existe e está ativa; o formulário de contato e o painel estão disponíveis; o ambiente aceita envios de teste. Não há limpeza de dados, porque a User Story não descreve API ou ação de remoção.
+18. Casos de borda: CA02 e CA04 têm casos de borda (CT005 e CT009). CA01, CA03 e CA05 não têm, porque a User Story não define limites, variações de valor nem regras para o contador ou o acesso. Criar esses limites seria inventar regras. Todos os critérios têm ao menos um caso negativo.
+19. Os textos de erro de validação não são verificados, porque a User Story não os especifica. Os negativos verificam apenas a ausência do resultado esperado.
+20. Código executável não garante compatibilidade com o sistema real. Seletores, rotas e textos inferidos podem exigir ajuste. Eles estão centralizados nas constantes do topo do arquivo (`BASE_URL`, `ADMIN_URL`, `MESSAGES_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `VISITOR_*`) e nos locators dos helpers.
+
+```python
+import re
+import uuid
+
+from playwright.sync_api import Browser, Locator, Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_URL = f"{BASE_URL}admin"
+MESSAGES_URL = f"{ADMIN_URL}/messages"
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+VISITOR_EMAIL = "visitante@example.com"
+VISITOR_PHONE = "01234567890"
+VISITOR_MESSAGE = "Gostaria de saber a disponibilidade de quartos para o próximo fim de semana."
+
+
+def unique_text(prefix: str) -> str:
+    return f"{prefix} {uuid.uuid4().hex[:8]}"
+
+
+def messages_link(page: Page) -> Locator:
+    return page.get_by_role("link", name=re.compile(r"Messages"))
+
+
+def submit_contact_form(page: Page, name: str, subject: str, email: str = VISITOR_EMAIL) -> None:
+    page.goto(BASE_URL)
+    page.get_by_label("Name", exact=True).fill(name)
+    page.get_by_label("Email", exact=True).fill(email)
+    page.get_by_label("Phone", exact=True).fill(VISITOR_PHONE)
+    page.get_by_label("Subject", exact=True).fill(subject)
+    page.get_by_label("Message", exact=True).fill(VISITOR_MESSAGE)
+    page.get_by_role("button", name="Submit").click()
+
+
+def visitor_sends(
+    browser: Browser, name: str, subject: str, email: str = VISITOR_EMAIL, confirmed: bool = True
+) -> None:
+    context = browser.new_context()
+    try:
+        page = context.new_page()
+        submit_contact_form(page, name, subject, email)
+        page.wait_for_load_state("networkidle")
+        confirmation = page.get_by_text(f"Thanks for getting in touch {name}!", exact=True)
+        if confirmed:
+            expect(confirmation).to_be_visible()
+        else:
+            expect(confirmation).to_have_count(0)
+    finally:
+        context.close()
+
+
+def admin_login(page: Page) -> None:
+    page.goto(ADMIN_URL)
+    page.get_by_label("Username").fill(ADMIN_USERNAME)
+    page.get_by_label("Password").fill(ADMIN_PASSWORD)
+    page.get_by_role("button", name="Login").click()
+    expect(messages_link(page)).to_be_visible()
+
+
+def admin_logout(page: Page) -> None:
+    page.get_by_role("button", name="Logout").click()
+    expect(page.get_by_label("Username")).to_be_visible()
+
+
+def read_messages_count(page: Page) -> int:
+    link = messages_link(page)
+    expect(link).to_be_visible()
+    match = re.search(r"\d+", link.inner_text())
+    assert match is not None, "Contador ao lado de Messages não encontrado"
+    return int(match.group())
+
+
+def open_messages(page: Page) -> None:
+    messages_link(page).click()
+
+
+def message_item(page: Page, *texts: str) -> Locator:
+    item = page.get_by_role("listitem")
+    for text in texts:
+        item = item.filter(has_text=text)
+    return item
+
+
+def test_CT001_contador_messages_visivel_apos_login(page: Page) -> None:
+    admin_login(page)
+    assert read_messages_count(page) >= 0
+
+
+def test_CT002_login_com_senha_invalida_nao_exibe_contador(page: Page) -> None:
+    page.goto(ADMIN_URL)
+    page.get_by_label("Username").fill(ADMIN_USERNAME)
+    page.get_by_label("Password").fill("senha-incorreta")
+    page.get_by_role("button", name="Login").click()
+    page.wait_for_load_state("networkidle")
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(messages_link(page)).to_have_count(0)
+
+
+def test_CT003_envio_valido_exibe_confirmacao(page: Page) -> None:
+    name = unique_text("Visitante Confirmacao")
+    submit_contact_form(page, name, unique_text("Assunto"))
+    expect(page.get_by_text(f"Thanks for getting in touch {name}!", exact=True)).to_be_visible()
+
+
+def test_CT004_envio_sem_assunto_nao_exibe_confirmacao(browser: Browser) -> None:
+    visitor_sends(browser, unique_text("Visitante Sem Assunto"), "", confirmed=False)
+
+
+def test_CT005_confirmacao_preserva_nome_com_acentos(page: Page) -> None:
+    name = unique_text("Ana Lúcia Gonçalves")
+    submit_contact_form(page, name, unique_text("Reserva"))
+    expect(page.get_by_text(f"Thanks for getting in touch {name}!", exact=True)).to_be_visible()
+
+
+def test_CT006_contador_aumenta_uma_unidade_apos_envio(page: Page, browser: Browser) -> None:
+    admin_login(page)
+    before = read_messages_count(page)
+    admin_logout(page)
+    visitor_sends(browser, unique_text("Visitante Contador"), unique_text("Assunto"))
+    admin_login(page)
+    assert read_messages_count(page) == before + 1
+
+
+def test_CT007_envio_com_email_invalido_nao_altera_contador(page: Page, browser: Browser) -> None:
+    admin_login(page)
+    before = read_messages_count(page)
+    admin_logout(page)
+    visitor_sends(
+        browser,
+        unique_text("Visitante Email Invalido"),
+        unique_text("Assunto"),
+        email="email-invalido",
+        confirmed=False,
+    )
+    admin_login(page)
+    assert read_messages_count(page) == before
+
+
+def test_CT008_mensagem_recem_enviada_aparece_na_caixa(page: Page, browser: Browser) -> None:
+    name = unique_text("Visitante Lista")
+    subject = unique_text("Assunto Lista")
+    visitor_sends(browser, name, subject)
+    admin_login(page)
+    open_messages(page)
+    expect(message_item(page, name, subject)).to_be_visible()
+
+
+def test_CT009_mensagem_com_acentos_aparece_corretamente(page: Page, browser: Browser) -> None:
+    name = unique_text("Ângela Sá Pereira")
+    subject = unique_text("Dúvida: café da manhã às 8h")
+    visitor_sends(browser, name, subject)
+    admin_login(page)
+    open_messages(page)
+    expect(message_item(page, name, subject)).to_be_visible()
+
+
+def test_CT010_mensagem_nao_enviada_nao_aparece_na_caixa(page: Page, browser: Browser) -> None:
+    subject = unique_text("Assunto Nao Enviado")
+    visitor_sends(
+        browser,
+        unique_text("Visitante Invalido"),
+        subject,
+        email="email-invalido",
+        confirmed=False,
+    )
+    admin_login(page)
+    open_messages(page)
+    page.wait_for_load_state("networkidle")
+    expect(message_item(page, subject)).to_have_count(0)
+
+
+def test_CT011_logout_exige_login_ao_abrir_caixa(page: Page) -> None:
+    admin_login(page)
+    admin_logout(page)
+    page.goto(MESSAGES_URL)
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(messages_link(page)).to_have_count(0)
+
+
+def test_CT012_acesso_direto_sem_login_exige_login(page: Page) -> None:
+    page.goto(MESSAGES_URL)
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(message_item(page)).to_have_count(0)
+```

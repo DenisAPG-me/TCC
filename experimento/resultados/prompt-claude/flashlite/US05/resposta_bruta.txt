@@ -1,0 +1,83 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Tentativa de login com usuario e senha vazios | Negativo | CA1 | Acessar URL base `/admin`; deixar campos de usuario e senha vazios; clicar no botao de login | Exibir mensagem "Invalid credentials" e permanecer na tela de login |
+| CT02 | Tentativa de login com usuario admin e senha incorreta | Negativo | CA2 | Acessar URL base `/admin`; preencher usuario "admin"; preencher senha incorreta; clicar no botao de login | Exibir mensagem "Invalid credentials" e permanecer na tela de login |
+| CT03 | Login bem-sucedido com credenciais validas | Positivo | CA3 | Acessar URL base `/admin`; preencher usuario "admin"; preencher senha "password"; clicar no botao de login | Redirecionar para a lista de quartos incluindo o quarto 101 do tipo Single; menu exibe Rooms, Report, Branding e Messages |
+| CT04 | Realizar logout do painel administrativo | Positivo | CA4 | Efetuar login com credenciais validas; clicar no botao de Logout no menu | Retornar a pagina inicial publica da pousada |
+| CT05 | Acesso direto a lista de quartos do painel apos logout | Negativo | CA5 | Efetuar login; clicar em Logout; tentar acessar diretamente a URL do painel administrativo | Redirecionar ou exibir novamente a tela de login |
+
+## SUPOSIÇÕES
+
+- Tecnologia escolhida: Interface web utilizando Python + pytest + pytest-playwright (utilizando a fixture `page` fornecida pelo plugin).
+- URL base: `https://automationintesting.online/`
+- Credenciais e dados de teste: Usuário `admin`, senha `password`, quarto `101`, tipo de quarto `Single`.
+- Seletores e elementos da UI deduzidos com base em padrões comuns de aplicações Restful-Booker-Platform:
+  - Tela de login: acessada em `/admin` ou via link de login, contendo campos de input para username/login e password, e um botão de submit/login.
+  - Mensagem de erro de credenciais inválidas: texto visível "Invalid credentials" na página de login.
+  - Painel administrativo / Lista de quartos: URL contendo `/admin/room` ou painel protegido, exibindo tabela ou lista de quartos com o quarto "101" e tipo "Single".
+  - Menu de navegação do painel: contendo links/textos "Rooms", "Report", "Branding" e "Messages".
+  - Botão de logout: elemento com texto "Logout" ou botão visível no menu administrativo.
+  - Página inicial pública: URL base `https://automationintesting.online/` ou raiz contendo elementos públicos da pousada.
+
+## SCRIPT
+
+```python
+import pytest
+from playwright.sync_api import page as _page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_USER = "admin"
+ADMIN_PASS = "password"
+
+
+def test_ct01_login_com_credenciais_vazias(page: _page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    expect(page.get_by_role("textbox", name="Username")).to_be_visible()
+
+
+def test_ct02_login_com_senha_incorreta(page: _page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_role("textbox", name="Username").fill(ADMIN_USER)
+    page.get_by_role("textbox", name="Password").fill("wrongpassword")
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    expect(page.get_by_role("textbox", name="Username")).to_be_visible()
+
+
+def test_ct03_login_com_credenciais_validas(page: _page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_role("textbox", name="Username").fill(ADMIN_USER)
+    page.get_by_role("textbox", name="Password").fill(ADMIN_PASS)
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_text("101")).to_be_visible()
+    expect(page.get_by_text("Single")).to_be_visible()
+    expect(page.get_by_role("link", name="Rooms")).to_be_visible()
+    expect(page.get_by_role("link", name="Report")).to_be_visible()
+    expect(page.get_by_role("link", name="Branding")).to_be_visible()
+    expect(page.get_by_role("link", name="Messages")).to_be_visible()
+
+
+def test_ct04_realizar_logout(page: _page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_role("textbox", name="Username").fill(ADMIN_USER)
+    page.get_by_role("textbox", name="Password").fill(ADMIN_PASS)
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_role("link", name="Rooms")).to_be_visible()
+    page.get_by_role("button", name="Logout").click()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+
+
+def test_ct05_acesso_direto_apos_logout(page: _page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_role("textbox", name="Username").fill(ADMIN_USER)
+    page.get_by_role("textbox", name="Password").fill(ADMIN_PASS)
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_role("link", name="Rooms")).to_be_visible()
+    page.get_by_role("button", name="Logout").click()
+    page.goto(f"{BASE_URL}admin")
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+```

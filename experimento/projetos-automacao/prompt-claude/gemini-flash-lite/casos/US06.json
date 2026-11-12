@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Anotar contador inicial de mensagens no painel administrativo",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar URL base; Clicar no link de login; Preencher usuário admin e senha password; Clicar no botão de login; Localizar e anotar o número exibido ao lado de Messages",
+  "esperado": "O painel exibe o número de mensagens atual ao lado de Messages"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar mensagem de contato válida pelo formulário da página inicial",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Acessar URL base; Rolar até o formulário de contato; Preencher nome, email, telefone, assunto e mensagem válidos; Clicar no botão de envio",
+  "esperado": "Exibe a mensagem de confirmação Thanks for getting in touch <nome>!"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Verificar incremento no contador de mensagens após envio",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA3",
+  "passos": "Anotar contador inicial; Enviar mensagem de contato como visitante; Fazer login no painel administrativo; Verificar o novo contador ao lado de Messages",
+  "esperado": "O contador de mensagens é uma unidade maior que o anotado antes"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Validar exibição da mensagem recém-enviada na caixa de mensagens",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Fazer login no painel administrativo; Clicar na aba ou link de Messages; Localizar a mensagem recém-enviada na lista",
+  "esperado": "A mensagem aparece na lista com o nome do remetente e o assunto informados"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Restrição de acesso à caixa de mensagens após logout",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Fazer login no painel administrativo; Clicar no botão ou link de Logout; Tentar acessar diretamente a URL do painel de mensagens",
+  "esperado": "O usuário é redirecionado ou solicitado a fazer login"
+ }
+]

@@ -1,0 +1,80 @@
+CASOS DE TESTE
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Buscar produto existente por palavra-chave | positivo | CA01 | Acessar a URL base, preencher o campo de busca com "hammer", acionar a busca e aguardar os resultados. | A listagem exibe somente produtos cujo nome contém "hammer" e a página indica a busca por "hammer". |
+| CT002 | Buscar termo inexistente na loja | negativo | CA02 | Acessar a URL base, preencher o campo de busca com "zzzzxx", e acionar a busca. | Exibe a mensagem "There are no products found." e nenhum produto é listado. |
+| CT003 | Ordenar produtos por preço crescente | positivo | CA03 | Acessar a URL base, aguardar o carregamento dos produtos, selecionar a opção de ordenação por preço do menor para o maior. | Os preços dos produtos listados aparecem em ordem crescente. |
+| CT004 | Ordenar produtos por nome de Z a A | positivo | CA04 | Acessar a URL base, aguardar o carregamento dos produtos, selecionar a opção de ordenação por nome de Z a A. | Os nomes dos produtos listados aparecem em ordem alfabética decrescente. |
+
+SUPOSIÇÕES
+1. A aplicação está hospedada na URL base `https://practicesoftwaretesting.com/` e está acessível e funcional.
+2. O campo de busca de produtos na página inicial é um elemento de entrada (input) ou possui um rótulo/placeholder identificável, e assumimos o seletor `[data-test="search-query"]` ou campo de busca acessível por placeholder "Search", juntamente com um botão de busca `[data-test="search-submit"]`.
+3. Os critérios de aceitação foram numerados de CA01 a CA04 na ordem de apresentação, uma vez que não possuíam identificadores prévios na User Story.
+4. Para a verificação da listagem em CT001, assume-se que os cartões de produtos possuem o seletor `[data-test^="product-"]` e que o título da busca é exibido em elemento com seletor `[data-test="search-caption"]` ou similar.
+5. Para a mensagem de produto não encontrado em CT002, assume-se que a mensagem "There are no products found." é exibida em elemento com seletor `[data-test="no-results"]` ou texto correspondente na página.
+6. Para a ordenação (CT003 e CT004), assume-se que existe um elemento select de ordenação com seletor `[data-test="sort"]`, cujas opções correspondem a ordenar por preço ascendente (valor correspondente a preço menor para maior, ex: `price,asc`) e por nome decrescente (valor correspondente a Z a A, ex: `name,desc`).
+7. Não se aplica teste de API REST explícito na User Story, pois a descrição foca exclusivamente em busca de produtos e ordenação na interface web da loja; portanto, todos os testes são de interface web implementados com pytest-playwright.
+8. Não há casos de borda aplicáveis estritamente além dos cenários positivos e negativos contemplados, justificando a ausência de testes específicos de borda adicionais.
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+def test_CT001_buscar_produto_existente(page: Page) -> None:
+    page.goto(BASE_URL)
+    search_input = page.get_by_placeholder("Search")
+    search_input.fill("hammer")
+    page.get_by_role("button", name="Search").click()
+    
+    product_cards = page.locator(".card")
+    expect(product_cards.first).to_be_visible()
+    
+    for i in range(product_cards.count()):
+        title = product_cards.nth(i).locator(".card-title").inner_text().lower()
+        assert "hammer" in title
+
+def test_CT002_buscar_termo_inexistente(page: Page) -> None:
+    page.goto(BASE_URL)
+    search_input = page.get_by_placeholder("Search")
+    search_input.fill("zzzzxx")
+    page.get_by_role("button", name="Search").click()
+    
+    no_results = page.get_by_text("There are no products found.")
+    expect(no_results).to_be_visible()
+    
+    product_cards = page.locator(".card")
+    expect(product_cards).to_have_count(0)
+
+def test_CT003_ordenar_por_preco_crescente(page: Page) -> None:
+    page.goto(BASE_URL)
+    sort_select = page.locator("select[data-test='sort']")
+    expect(sort_select).to_be_visible()
+    sort_select.select_option(value="price,asc")
+    
+    prices = page.locator(".card-body .float-end")
+    expect(prices.first).to_be_visible()
+    
+    price_values = []
+    for i in range(prices.count()):
+        price_text = prices.nth(i).inner_text().replace("$", "").strip()
+        price_values.append(float(price_text))
+        
+    assert price_values == sorted(price_values), "Os preços não estão em ordem crescente"
+
+def test_CT004_ordenar_por_nome_z_a(page: Page) -> None:
+    page.goto(BASE_URL)
+    sort_select = page.locator("select[data-test='sort']")
+    expect(sort_select).to_be_visible()
+    sort_select.select_option(value="name,desc")
+    
+    product_titles = page.locator(".card-title")
+    expect(product_titles.first).to_be_visible()
+    
+    titles = []
+    for i in range(product_titles.count()):
+        titles.append(product_titles.nth(i).inner_text().strip())
+        
+    sorted_titles = sorted(titles, reverse=True)
+    assert titles == sorted_titles, "Os nomes não estão em ordem alfabética decrescente"
+```

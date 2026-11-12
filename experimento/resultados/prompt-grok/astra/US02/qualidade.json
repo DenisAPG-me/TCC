@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes claros e helpers curtos",
+  "estrutura": "Helpers reutilizados (open_product, add_quantity, cart_row)",
+  "assercoes": "Valida mensagem, badge, total de linha e do carrinho com Decimal",
+  "espera": "expect com timeout configurado, sem sleep",
+  "manutenibilidade": "Papel/label e constantes, mas test-ids chutados (unit-price, line-total)"
+ }
+}

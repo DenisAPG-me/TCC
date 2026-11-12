@@ -1,0 +1,90 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Envio do formulário totalmente vazio",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; não preencher nenhum campo; clicar em \"Submit\"",
+  "esperado": "Exibe mensagens de campo obrigatório para nome, e-mail, telefone, assunto e mensagem"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Telefone com 10 caracteres (abaixo do mínimo)",
+  "tipo": "negativo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher os demais campos com dados válidos; telefone com 10 dígitos; enviar",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "TC03",
+  "titulo": "Telefone com 11 caracteres (limite mínimo)",
+  "tipo": "borda",
+  "criterio": "CA2",
+  "passos": "Telefone com 11 dígitos; assunto inválido (4 caracteres) para manter o formulário na tela; enviar",
+  "esperado": "Exibe o erro de assunto; o erro de telefone não é exibido"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Telefone com 21 caracteres (limite máximo)",
+  "tipo": "borda",
+  "criterio": "CA2",
+  "passos": "Telefone com 21 dígitos; assunto inválido (4 caracteres); enviar",
+  "esperado": "Exibe o erro de assunto; o erro de telefone não é exibido"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Telefone com 22 caracteres (acima do máximo)",
+  "tipo": "negativo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher os demais campos válidos; telefone com 22 dígitos; enviar",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "TC06",
+  "titulo": "Assunto com 4 e mensagem com 19 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher nome, e-mail e telefone válidos; assunto com 4 e mensagem com 19 caracteres; enviar",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "TC07",
+  "titulo": "Assunto com 5 e mensagem com 20 caracteres (limites mínimos)",
+  "tipo": "borda",
+  "criterio": "CA3",
+  "passos": "Assunto com 5 e mensagem com 20 caracteres; telefone inválido (10 dígitos) para manter o formulário; enviar",
+  "esperado": "Exibe o erro de telefone; os erros de assunto e mensagem não são exibidos"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Assunto com 101 e mensagem com 2001 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher nome, e-mail e telefone válidos; assunto com 101 e mensagem com 2001 caracteres; enviar",
+  "esperado": "Exibe os erros de tamanho de assunto e de mensagem"
+ },
+ {
+  "id": "TC09",
+  "titulo": "E-mail malformado \"bad\"",
+  "tipo": "negativo",
+  "criterio": "CA4",
+  "passos": "Preencher os demais campos válidos; e-mail \"bad\"; enviar",
+  "esperado": "Exibe \"must be a well-formed email address\""
+ },
+ {
+  "id": "TC10",
+  "titulo": "Envio com todos os campos válidos",
+  "tipo": "positivo",
+  "criterio": "CA5",
+  "passos": "Preencher todos os campos com dados válidos; enviar",
+  "esperado": "Exibe \"Thanks for getting in touch <nome>!\" e o assunto informado"
+ },
+ {
+  "id": "TC11",
+  "titulo": "Assunto com 100 e mensagem com 2000 caracteres (limites máximos)",
+  "tipo": "borda / positivo",
+  "criterio": "CA3, CA5",
+  "passos": "Preencher nome, e-mail e telefone válidos; assunto com 100 e mensagem com 2000 caracteres; enviar",
+  "esperado": "Exibe \"Thanks for getting in touch <nome>!\" e o assunto informado"
+ }
+]

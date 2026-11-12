@@ -1,0 +1,110 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05",
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha vazia"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha em maiusculas"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario vazio"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": "sem nunca autenticar"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC03_login_valido_exibe_lista_de_quartos_e_menu",
+   "categoria": "seletor inexistente",
+   "nota": "role link 'Messages' exact nao casa (nome inclui contador)"
+  },
+  {
+   "teste": "test_TC05_acesso_direto_a_lista_de_quartos_apos_logout",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume Logout ausente na tela de login, mas existe"
+  },
+  {
+   "teste": "test_TC09_acesso_direto_a_lista_de_quartos_sem_autenticacao",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume Logout ausente na tela de login, mas existe"
+  }
+ ]
+}

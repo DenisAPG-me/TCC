@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Validar mensagens de erro com formulário de login vazio",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "1. Acessar a página de login.<br>2. Enviar o formulário sem preencher email e senha.",
+  "esperado": "Exibição das mensagens \"Email is required\" e \"Password is required\"."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Validar login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "1. Acessar a página de login.<br>2. Informar email da conta de demonstração e senha incorreta.<br>3. Enviar formulário.",
+  "esperado": "Exibição de \"Invalid email or password\" e permanência sem sessão."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Redirecionar para autenticação ao avançar para checkout sem login",
+  "tipo": "Negativo / Borda",
+  "criterio": "Critério 3",
+  "passos": "1. Adicionar um produto ao carrinho sem estar autenticado.<br>2. Tentar avançar para o checkout.",
+  "esperado": "Redirecionamento para a tela de autenticação (informar email e senha)."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Validar página My account após login bem-sucedido",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Acessar a página de login.<br>2. Autenticar com a conta de demonstração.<br>3. Verificar a página inicial/conta.",
+  "esperado": "Visualização da página \"My account\" com o nome do usuário no menu."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Validar campos obrigatórios do endereço no checkout",
+  "tipo": "Negativo / Borda",
+  "criterio": "Critério 5",
+  "passos": "1. Estar autenticado, com produto no carrinho e no passo de endereço.<br>2. Deixar campos de endereço vazios e tentar avançar.<br>3. Preencher todos os campos obrigatórios (país, CEP, número, rua, cidade, estado) e avançar.",
+  "esperado": "Bloqueio de avanço com campos vazios; avanço bem-sucedido após preenchimento correto."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Validar pagamento bem-sucedido com cartão de crédito e confirmação do pedido",
+  "tipo": "Positivo",
+  "criterio": "Critério 6",
+  "passos": "1. Estar no passo de pagamento do checkout.<br>2. Escolher cartão de crédito, informar dados fictícios válidos e confirmar.<br>3. Confirmar o pedido.",
+  "esperado": "Exibição de \"Payment was successful\" e em seguida \"Thanks for your order! Your invoice number is INV-...\"."
+ }
+]

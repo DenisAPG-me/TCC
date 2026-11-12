@@ -1,0 +1,18 @@
+[
+ "A tecnologia escolhida é Python + pytest + requests, pois todos os critérios tratam de API REST. Não há interface nem seletores.",
+ "Não houve acesso ao sistema, consulta à documentação ou execução dos testes. Os contratos abaixo são deduções e precisam ser confirmados no ambiente real.",
+ "Os critérios foram identificados como CA1 a CA6, na ordem apresentada.",
+ "A autenticação usa `POST /auth`, com JSON contendo `username` e `password`. O sucesso retorna um objeto JSON com `token`; a falha retorna um objeto sem a chave `token` e com `reason` exatamente igual a `Bad credentials`.",
+ "O status de autenticação inválida não é verificado, pois CA2 não o especifica. Credenciais vazias são consideradas inválidas.",
+ "A criação de dados usa `POST /booking`, retorna status 200 e um objeto contendo `bookingid` inteiro positivo e `booking` com os dados criados.",
+ "A atualização completa usa `PUT /booking/{bookingid}`; a parcial usa `PATCH /booking/{bookingid}`. Ambas recebem JSON e retornam diretamente o objeto da reserva quando bem-sucedidas.",
+ "O token é enviado no cabeçalho `Cookie`, no formato `token=<token>`. Nenhuma outra autenticação é utilizada.",
+ "Os campos obrigatórios deduzidos são `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`; dentro de `bookingdates`, `checkin` e `checkout` também são obrigatórios. `additionalneeds` é considerado opcional.",
+ "Os nomes são textos, o preço é inteiro, o depósito é booleano e as datas usam `YYYY-MM-DD`. Os dados são fictícios: Ana Silva, preço 150, depósito pago, hospedagem de 10 a 15 de janeiro de 2030 e necessidade adicional Breakfast.",
+ "A atualização completa altera o nome para Beatriz e o preço para 275; a parcial altera o sobrenome para Souza. As respostas preservam os tipos JSON e não acrescentam campos ao objeto da reserva.",
+ "CA5 é aplicado tanto ao PUT quanto ao PATCH. CA6 é aplicado à ausência individual de cada campo obrigatório e ao objeto vazio; o status 400 é exigido mesmo que a implementação real se comporte diferentemente.",
+ "Cada teste que modifica reservas cria sua própria reserva. CT07 reutiliza sua reserva entre tentativas inválidas, supondo que requisições rejeitadas não a alterem.",
+ "A limpeza usa `DELETE /booking/{bookingid}` autenticado e considera status 201 como sucesso. Falhas de limpeza são reportadas por aviso para preservar o resultado principal do teste.",
+ "Todas as requisições usam timeout de 15 segundos e não seguem redirecionamentos. As sessões ignoram autenticação e proxies herdados do ambiente para manter o cenário sem token controlado.",
+ "O arquivo pode ser salvo como `test_reservas.py` e executado com `pytest test_reservas.py`, em um ambiente com pytest e requests instalados e acesso à URL base."
+]

@@ -1,0 +1,106 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar POST /auth com usuário admin e senha password123; verificar status; verificar token",
+  "esperado": "Status 200 e token não vazio"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticar com senha inválida",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com usuário admin e senha incorreta; verificar corpo da resposta",
+  "esperado": "Resposta sem campo token e com reason igual a Bad credentials"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Autenticar com usuário inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com usuário inexistente e senha password123; verificar corpo da resposta",
+  "esperado": "Resposta sem campo token e com reason igual a Bad credentials"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Autenticar com credenciais em branco",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com usuário e senha vazios; verificar corpo da resposta",
+  "esperado": "Resposta sem campo token e com reason igual a Bad credentials"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Atualização completa com novo nome e novo preço",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva existente; autenticar; enviar PUT com novo firstname e novo totalprice; verificar resposta; consultar GET da reserva",
+  "esperado": "Status 200; firstname e totalprice atualizados na resposta e na consulta GET"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualização parcial apenas do sobrenome",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva existente; autenticar; enviar PATCH somente com lastname; verificar resposta",
+  "esperado": "Status 200; lastname alterado; firstname, totalprice, depositpaid, bookingdates e additionalneeds mantidos"
+ },
+ {
+  "id": "CT07",
+  "titulo": "PUT sem token retorna 403",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva existente; enviar PUT completo sem cabeçalho Cookie",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT08",
+  "titulo": "PATCH sem token retorna 403",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva existente; enviar PATCH sem cabeçalho Cookie",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT09",
+  "titulo": "PUT com token inválido retorna 403",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Criar reserva existente; enviar PUT com cabeçalho Cookie contendo token inválido",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT10",
+  "titulo": "PUT sem campo obrigatório firstname",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva existente; autenticar; enviar PUT completo sem o campo firstname",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT11",
+  "titulo": "PUT com corpo vazio",
+  "tipo": "Borda",
+  "criterio": "CA6",
+  "passos": "Criar reserva existente; autenticar; enviar PUT com corpo JSON vazio",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT12",
+  "titulo": "PUT com nome e sobrenome acentuados",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Criar reserva existente; autenticar; enviar PUT completo com firstname José e lastname Ação; verificar resposta",
+  "esperado": "Status 200; nome e sobrenome retornados com acentuação preservada"
+ },
+ {
+  "id": "CT13",
+  "titulo": "PATCH com corpo vazio mantém a reserva",
+  "tipo": "Borda",
+  "criterio": "CA4",
+  "passos": "Criar reserva existente; autenticar; enviar PATCH com corpo JSON vazio; verificar resposta",
+  "esperado": "Status 200; todos os campos da reserva permanecem inalterados"
+ }
+]

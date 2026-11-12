@@ -1,0 +1,104 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC02_login_invalid_password",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode, link Forgot password)"
+  },
+  {
+   "teste": "test_TC03_checkout_unauthenticated_redirects_to_login",
+   "categoria": "seletor inexistente",
+   "nota": "'.card' click timeout"
+  },
+  {
+   "teste": "test_TC04_successful_login_my_account",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo"
+  },
+  {
+   "teste": "test_TC05_checkout_address_mandatory_fields",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo"
+  },
+  {
+   "teste": "test_TC06_checkout_credit_card_payment_success",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo"
+  }
+ ]
+}

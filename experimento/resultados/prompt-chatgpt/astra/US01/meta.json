@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 65.64,
+ "tokens": {
+  "total": 5379
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "duct_names(page)\n    count = cards.count()\n    assert count >= MIN_SORT_PRODUCTS, (\n        \"São necessários pelo menos dois produtos para comparar nomes.\"\n    )\n    expect(names_locator).to_have_count(count, timeout=TIMEOUT_MS)\n\n    names = read_visible_texts(names_locator)\n    comparison_names = [name.lower() for name in names]\n\n    assert comparison_names == sorted(comparison_names, reverse=True), (\n        f\"Nomes fora da ordem alfabética decrescente: {names!r}.\"\n    )\n```\ntokens used\n5,379\n"
+}

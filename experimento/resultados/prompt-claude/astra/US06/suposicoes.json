@@ -1,0 +1,20 @@
+[
+ "A análise usa somente a User Story. O sistema não foi acessado; seletores, rotas e comportamentos deduzidos precisam ser conferidos antes do uso real. O script não foi executado.",
+ "Os critérios fornecidos correspondem, na ordem, a CA1 até CA5.",
+ "O foco é interface web. São usados Python, pytest, Playwright síncrono e o plugin oficial pytest-playwright. Os requisitos técnicos finais prevalecem sobre a proibição anterior de plugins e a exigência anterior de fixtures próprias.",
+ "O ambiente deve ter pytest, playwright e pytest-playwright instalados, além do Chromium instalado pelo Playwright. O comando `pytest arquivo.py` usa Chromium headless por padrão; o plugin cria e encerra os recursos e fornece uma página isolada para cada teste.",
+ "A página inicial está em `/`, o painel em `/admin` e a caixa de mensagens em `/admin/messages`. O acesso é feito pela interface; nenhum endpoint de API ou payload HTTP é presumido.",
+ "O login possui campos com rótulos acessíveis `Username` e `Password` e botão `Login`. As credenciais são `admin` e `password`.",
+ "O painel possui um link cujo nome acessível segue `Messages N` ou `Messages (N)`, sendo N um inteiro não negativo. O contador está incluído no texto do link e atualiza após recarregar o painel.",
+ "O logout é um botão com nome acessível `Logout`. Após sair, o formulário de login aparece. Acesso direto sem sessão à caixa de mensagens também apresenta esse formulário.",
+ "O formulário de contato contém campos com rótulos acessíveis exatos `Name`, `Email`, `Phone`, `Subject` e `Message`, únicos na página, e botão `Submit`.",
+ "A confirmação é um elemento de texto único, exatamente `Thanks for getting in touch <nome>!`.",
+ "Nome, assunto, e-mail, telefone e corpo usados no script são dados sintéticos considerados válidos. Um identificador aleatório no assunto distingue mensagens criadas por execuções diferentes. CT07 reutiliza intencionalmente os mesmos dados nos dois envios.",
+ "A caixa usa uma tabela HTML, com nome e assunto em células separadas. Mensagens recém-enviadas aparecem sem exigir pesquisa ou paginação.",
+ "O contador representa mensagens recebidas e não diminui apenas ao abrir a caixa. Cada envio aceito acrescenta uma unidade, inclusive quando os dados são iguais.",
+ "CT06 acrescenta uma regra deduzida: o campo de e-mail usa validação HTML nativa, rejeita `email-invalido` e impede a criação da mensagem. Essa regra não está explicitamente definida nos critérios.",
+ "CT07 cobre a borda de repetição de dados; não presume limites de tamanho ausentes na história.",
+ "Para comparar incrementos exatos, a execução ocorre sequencialmente em ambiente sem envios, exclusões ou outras alterações concorrentes. Um ambiente público compartilhado pode violar essa condição.",
+ "Cada teste prepara seu próprio estado e não depende de mensagens de outros testes. As mensagens criadas permanecem no sistema, pois a história não define exclusão nem limpeza.",
+ "Elementos e atualizações devem ficar disponíveis em até 15 segundos; navegações têm limite de 30 segundos. As verificações usam a espera automática de `expect`, sem pausas fixas."
+]

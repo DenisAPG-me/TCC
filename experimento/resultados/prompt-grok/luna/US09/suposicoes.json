@@ -1,0 +1,10 @@
+[
+ "A API usa `POST /booking` para criar reservas, `POST /auth` para autenticar, `DELETE /booking/{id}` para excluir e `GET /booking/{id}` para consultar.",
+ "A listagem aceita os parâmetros `firstname` e `lastname` em `GET /booking`; com esses filtros, retorna uma lista JSON de identificadores.",
+ "O token retornado por `POST /auth` pode ser enviado como cookie `Cookie: token=<valor>`; token inválido também é enviado nesse formato.",
+ "Reservas podem ser criadas com os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`, e as respostas de criação incluem `bookingid`.",
+ "As credenciais `admin / password123` são aceitas em `POST /auth` no corpo JSON com os campos `username` e `password`.",
+ "Cada teste cria seus próprios dados; os nomes usam UUID para reduzir colisões. A disponibilidade e o estado da API externa não são garantidos.",
+ "Respostas JSON da listagem contêm identificadores em objetos com a chave `bookingid`; para o filtro pelo nome único, a lista vazia é representada por `[]`.",
+ "Os status esperados e o comportamento após exclusão seguem os critérios da User Story; não são derivados de documentação externa."
+]

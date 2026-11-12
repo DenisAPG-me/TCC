@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US03",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 23.82,
+ "tokens": {
+  "total": 7174
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "_to_payment(page)\n    fill_credit_card(page)\n\n    page.get_by_role(\"button\", name=re.compile(\"Confirm|Pay\", re.IGNORECASE)).click()\n    expect(page.get_by_text(\"Payment was successful\", exact=True)).to_be_visible()\n\n    page.get_by_role(\"button\", name=re.compile(\"Confirm order|Place order\", re.IGNORECASE)).click()\n    expect(page.get_by_text(\"Thanks for your order!\", exact=True)).to_be_visible()\n    expect(page.get_by_text(re.compile(r\"INV-[A-Za-z0-9-]+\"))).to_be_visible()\n```\ntokens used\n7,174\n"
+}

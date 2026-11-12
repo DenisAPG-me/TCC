@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Enviar formulário vazio",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial; deixar os cinco campos vazios; enviar",
+  "esperado": "Exibir uma mensagem de obrigatoriedade para cada campo"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Telefone imediatamente abaixo do mínimo",
+  "tipo": "borda",
+  "criterio": "2",
+  "passos": "Preencher dados válidos, exceto telefone com 10 caracteres; enviar",
+  "esperado": "Exibir \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT003",
+  "titulo": "Assunto e mensagem imediatamente abaixo dos mínimos",
+  "tipo": "borda",
+  "criterio": "3",
+  "passos": "Preencher dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar",
+  "esperado": "Exibir as duas mensagens de tamanho especificadas"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Enviar e-mail malformado",
+  "tipo": "negativo",
+  "criterio": "4",
+  "passos": "Preencher dados válidos, exceto e-mail \"bad\"; enviar",
+  "esperado": "Exibir \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT005",
+  "titulo": "Enviar dados válidos intermediários",
+  "tipo": "positivo",
+  "criterio": "5",
+  "passos": "Preencher todos os campos com dados válidos entre os limites; enviar",
+  "esperado": "Exibir agradecimento com o nome e o assunto informado"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Enviar dados nos limites mínimos",
+  "tipo": "borda",
+  "criterio": "2, 3, 5",
+  "passos": "Preencher telefone com 11 caracteres, assunto com 5 e mensagem com 20; preencher os demais campos validamente; enviar",
+  "esperado": "Exibir agradecimento com o nome e o assunto informado"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Enviar dados nos limites máximos",
+  "tipo": "borda",
+  "criterio": "2, 3, 5",
+  "passos": "Preencher telefone com 21 caracteres, assunto com 100 e mensagem com 2000; preencher os demais campos validamente; enviar",
+  "esperado": "Exibir agradecimento com o nome e o assunto informado"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Telefone imediatamente acima do máximo",
+  "tipo": "borda",
+  "criterio": "2",
+  "passos": "Preencher dados válidos, exceto telefone com 22 caracteres; enviar",
+  "esperado": "Exibir \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT009",
+  "titulo": "Assunto e mensagem imediatamente acima dos máximos",
+  "tipo": "borda",
+  "criterio": "3",
+  "passos": "Preencher dados válidos, exceto assunto com 101 caracteres e mensagem com 2001; enviar",
+  "esperado": "Exibir as duas mensagens de tamanho especificadas"
+ }
+]

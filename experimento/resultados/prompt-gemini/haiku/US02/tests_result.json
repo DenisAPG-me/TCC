@@ -1,0 +1,52 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "trict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "trict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "trict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "trict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC06_quantidade_zero_nao_adiciona_ao_carrinho[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "trict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">…</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC07_thor_hammer_1_unidade_e_aceito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  }
+ ],
+ "stdout_tail": "xture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC06_quantidade_zero_nao_adiciona_ao_carrinho[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py::test_TC07_thor_hammer_1_unidade_e_aceito[chromium]\n7 failed, 2 warnings in 21.03s\n",
+ "returncode": 1,
+ "duracao_s": 21.71
+}

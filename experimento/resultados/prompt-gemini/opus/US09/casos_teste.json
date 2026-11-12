@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "1. Criar reserva via `POST /booking`. 2. Enviar `DELETE /booking/{id}` sem cookie `token`. 3. Consultar `GET /booking/{id}`.",
+  "esperado": "DELETE retorna 403. GET retorna 200."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Criar reserva. 2. Enviar `DELETE /booking/{id}` com cookie `token=<valor inexistente>`. 3. Consultar a reserva.",
+  "esperado": "DELETE retorna 403. GET retorna 200 com os mesmos dados da criação."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Excluir reserva com token vazio",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Criar reserva. 2. Enviar `DELETE /booking/{id}` com cookie `token=` (vazio). 3. Consultar a reserva.",
+  "esperado": "DELETE retorna 403. GET retorna 200."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Autenticação com credenciais inválidas não gera token",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "1. Enviar `POST /auth` com `admin` e uma senha incorreta.",
+  "esperado": "A resposta não contém a chave `token`."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "1. Autenticar com `admin`/`password123` e obter o token. 2. Criar reserva. 3. Enviar `DELETE /booking/{id}` com cookie `token=<token>`.",
+  "esperado": "DELETE retorna 201."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Consultar reserva após exclusão",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. Criar reserva. 2. Excluí-la com token válido. 3. Consultar `GET /booking/{id}`.",
+  "esperado": "DELETE retorna 201. GET retorna 404."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Excluir novamente uma reserva já excluída",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "1. Criar as reservas A e B. 2. Excluir A com token válido. 3. Excluir A novamente com token válido. 4. Consultar B.",
+  "esperado": "A segunda exclusão retorna status 4xx. B retorna 200 com dados inalterados."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Listar por nome único após exclusão",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "1. Criar reserva com `firstname`/`lastname` únicos. 2. Listar `GET /booking?firstname=..&lastname=..` e confirmar que o ID aparece. 3. Excluir com token válido. 4. Listar novamente com o mesmo filtro.",
+  "esperado": "Antes da exclusão, a lista contém o ID. Após a exclusão, retorna 200 com lista vazia `[]`."
+ }
+]

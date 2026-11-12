@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_buscar_produtos_por_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "\n    nomes_api = buscar(page, termo)\n                ^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_ct02_buscar_produtos_por_hammer_em_maiusculas[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "\n    nomes_api = buscar(page, termo)\n                ^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_ct03_buscar_termo_inexistente[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "01\\script.py:77: in validar_busca_sem_resultados\n    buscar(page, termo)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_ct04_buscar_termo_com_caracteres_especiais[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "01\\script.py:77: in validar_busca_sem_resultados\n    buscar(page, termo)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:39: in buscar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_ct05_ordenar_por_preco_crescente[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "M_PRECO_CRESCENTE)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:48: in ordenar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_ct06_ordenar_por_nome_z_a[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "NOME_DECRESCENTE)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py:48: in ordenar\n    with page.expect_response(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  }
+ ],
+ "stdout_tail": "instance while the fixture runs only once per class.\n  Use a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct01_buscar_produtos_por_hammer[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct02_buscar_produtos_por_hammer_em_maiusculas[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct03_buscar_termo_inexistente[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct04_buscar_termo_com_caracteres_especiais[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct05_ordenar_por_preco_crescente[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US01\\script.py::test_ct06_ordenar_por_nome_z_a[chromium]\n6 failed, 2 warnings in 106.06s (0:01:46)\n",
+ "returncode": 1,
+ "duracao_s": 106.74
+}

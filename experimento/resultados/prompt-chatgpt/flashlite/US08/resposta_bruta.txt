@@ -1,0 +1,179 @@
+CASOS DE TESTE
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Autenticação com credenciais válidas admin | positivo | CA01 | Enviar requisição POST para /auth com JSON contendo username admin e password password123 | Retorna status 200 e um token não vazio |
+| CT002 | Autenticação com credenciais inválidas | negativo | CA02 | Enviar requisição POST para /auth com JSON contendo username inválido e password inválido | Retorna resposta informando Bad credentials e sem token |
+| CT003 | Atualização completa de reserva com token válido | positivo | CA03 | Obter ID de reserva existente, autenticar, enviar PUT para /booking/{id} com token no header Cookie e payload completo com novo nome e preço | Retorna status 200 e os novos valores atualizados |
+| CT004 | Atualização parcial de reserva com token válido | positivo | CA04 | Obter ID de reserva existente, autenticar, enviar PATCH para /booking/{id} com token no header Cookie e payload parcial apenas com o sobrenome | Retorna status 200, o sobrenome é alterado e os demais campos permanecem inalterados |
+| CT005 | Atualização de reserva sem token | negativo | CA05 | Obter ID de reserva existente, enviar PUT para /booking/{id} sem o header de autenticação | Retorna status 403 Forbidden |
+| CT006 | Atualização completa com campos obrigatórios ausentes | negativo | CA06 | Obter ID de reserva existente, autenticar, enviar PUT para /booking/{id} com token e payload incompleto faltando campos obrigatórios | Retorna status 400 Bad Request |
+
+SUPOSIÇÕES
+1. A API sob teste é o Restful Booker público em `https://restful-booker.herokuapp.com`.
+2. O endpoint de autenticação é `POST /auth`, aceitando JSON `{ "username": "...", "password": "..." }` e retornando `{ "token": "..." }` no sucesso ou `{ "reason": "Bad credentials" }` no erro.
+3. O token de autenticação é fornecido nas requisições protegidas (`PUT` e `PATCH`) através do cabeçalho `Cookie: token=<valor_do_token>`.
+4. Os Critérios de Aceitação CA01 a CA06 mapeiam diretamente para os 6 casos de teste listados. Como a User Story menciona apenas a API de reservas e autenticação, nenhum teste de interface web (Playwright) é aplicável ou necessário, utilizando-se exclusivamente `requests` e `pytest` para testes de API REST.
+5. Para os testes que exigem uma reserva existente (`CT003`, `CT004`, `CT005`, `CT006`), cada teste cria dinamicamente sua própria reserva via `POST /booking` na fase de preparação (setup) para garantir independência entre os testes.
+6. A atualização completa (`PUT /booking/{id}`) requer o envio de todos os campos obrigatórios da estrutura de reserva (`firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, `additionalneeds`). A ausência de campos obrigatórios no `CA06` é simulada enviando um objeto JSON vazio `{}` ou faltando campos principais como `firstname`.
+7. O tempo limite (`timeout`) padrão para todas as requisições HTTP é de 10 segundos.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 10
+
+def _get_auth_token():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "admin", "password": "password123"},
+        timeout=TIMEOUT
+    )
+    return response.json().get("token")
+
+def _create_sample_booking():
+    payload = {
+        "firstname": "Jim",
+        "lastname": "Brown",
+        "totalprice": 111,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2018-01-01",
+            "checkout": "2019-01-01"
+        },
+        "additionalneeds": "Breakfast"
+    }
+    response = requests.post(
+        f"{BASE_URL}/booking",
+        json=payload,
+        timeout=TIMEOUT
+    )
+    return response.json().get("bookingid")
+
+def test_CT001_autenticacao_valida():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "admin", "password": "password123"},
+        timeout=TIMEOUT
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "token" in data
+    assert len(data["token"]) > 0
+
+def test_CT002_autenticacao_invalida():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "invalid_user", "password": "wrongpassword"},
+        timeout=TIMEOUT
+    )
+    data = response.json()
+    assert "token" not in data
+    assert data.get("reason") == "Bad credentials"
+
+def test_CT003_atualizacao_completa():
+    booking_id = _create_sample_booking()
+    token = _get_auth_token()
+    
+    updated_payload = {
+        "firstname": "JamesNew",
+        "lastname": "Bond",
+        "totalprice": 999,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2024-01-01",
+            "checkout": "2024-01-10"
+        },
+        "additionalneeds": "Lunch"
+    }
+    
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers={
+            "Cookie": f"token={token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        json=updated_payload,
+        timeout=TIMEOUT
+    )
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["firstname"] == "JamesNew"
+    assert data["totalprice"] == 999
+
+def test_CT004_atualizacao_parcial():
+    booking_id = _create_sample_booking()
+    token = _get_auth_token()
+    
+    partial_payload = {
+        "lastname": "UpdatedLastName"
+    }
+    
+    response = requests.patch(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers={
+            "Cookie": f"token={token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        json=partial_payload,
+        timeout=TIMEOUT
+    )
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["lastname"] == "UpdatedLastName"
+    assert data["firstname"] == "Jim"
+    assert data["totalprice"] == 111
+
+def test_CT005_atualizacao_sem_token():
+    booking_id = _create_sample_booking()
+    
+    updated_payload = {
+        "firstname": "NoToken",
+        "lastname": "User",
+        "totalprice": 100,
+        "depositpaid": True,
+        "bookingdates": {
+            "checkin": "2024-01-01",
+            "checkout": "2024-01-02"
+        },
+        "additionalneeds": "None"
+    }
+    
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        json=updated_payload,
+        timeout=TIMEOUT
+    )
+    
+    assert response.status_code == 403
+
+def test_CT006_atualizacao_campos_obrigatorios_ausentes():
+    booking_id = _create_sample_booking()
+    token = _get_auth_token()
+    
+    incomplete_payload = {
+        "totalprice": 500
+    }
+    
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        headers={
+            "Cookie": f"token={token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        json=incomplete_payload,
+        timeout=TIMEOUT
+    )
+    
+    assert response.status_code == 400
+```

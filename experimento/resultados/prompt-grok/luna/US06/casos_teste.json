@@ -1,0 +1,66 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Enviar mensagem válida pelo formulário de contato",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial, preencher nome, assunto e demais campos obrigatórios com dados válidos e enviar.",
+  "esperado": "A página exibe `Thanks for getting in touch <nome>!`."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Comparar contador antes e depois do envio",
+  "tipo": "positivo",
+  "criterio": "1, 3",
+  "passos": "Entrar no painel, anotar o contador de Messages, enviar uma mensagem válida como visitante e consultar o painel novamente.",
+  "esperado": "O contador aumenta exatamente uma unidade."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Encontrar mensagem enviada na caixa de mensagens",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Enviar uma mensagem válida, entrar no painel e abrir Messages.",
+  "esperado": "A lista contém o nome do remetente e o assunto enviados."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Solicitar login ao abrir Messages após logout",
+  "tipo": "positivo",
+  "criterio": "5",
+  "passos": "Entrar no painel, sair, tentar abrir diretamente a caixa de mensagens.",
+  "esperado": "O painel solicita autenticação ou redireciona para a tela de login."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Impedir envio sem nome",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Preencher os demais campos do contato com dados válidos, deixar o nome vazio e enviar.",
+  "esperado": "A mensagem não é enviada e a confirmação de sucesso não aparece."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Impedir envio sem assunto",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Preencher os demais campos do contato com dados válidos, deixar o assunto vazio e enviar.",
+  "esperado": "A mensagem não é enviada e a confirmação de sucesso não aparece."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Não incrementar o contador sem envio válido",
+  "tipo": "negativo",
+  "criterio": "1, 2, 3",
+  "passos": "Anotar o contador no painel, tentar enviar contato sem nome e voltar ao painel.",
+  "esperado": "O contador permanece igual ao valor anotado."
+ },
+ {
+  "id": "TC08",
+  "titulo": "Exibir os dados informados sem confundir mensagens",
+  "tipo": "borda",
+  "criterio": "2, 4",
+  "passos": "Enviar uma mensagem com nome e assunto únicos, incluindo espaços internos, e consultar a caixa de mensagens.",
+  "esperado": "A confirmação e a entrada na lista correspondem exatamente aos dados enviados."
+ }
+]

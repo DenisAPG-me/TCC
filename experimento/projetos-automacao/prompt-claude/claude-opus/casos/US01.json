@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produtos pela palavra-chave \"hammer\"",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; Preencher o campo de busca com \"hammer\"; Clicar no botão de busca",
+  "esperado": "A página exibe a indicação \"Searched for: hammer\"; ao menos um produto é listado; todos os nomes listados contêm \"hammer\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Buscar com a palavra-chave em letras maiúsculas \"HAMMER\"",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; Preencher o campo de busca com \"HAMMER\"; Clicar no botão de busca",
+  "esperado": "A página indica que a busca foi por \"HAMMER\"; ao menos um produto é listado; todos os nomes contêm \"hammer\" sem diferenciar maiúsculas e minúsculas"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Buscar por termo inexistente \"zzzzxx\"",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; Preencher o campo de busca com \"zzzzxx\"; Clicar no botão de busca",
+  "esperado": "A mensagem \"There are no products found.\" é exibida e nenhum produto é listado"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Buscar por termo composto apenas de caracteres especiais",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; Preencher o campo de busca com \"#$%&*\"; Clicar no botão de busca",
+  "esperado": "A mensagem \"There are no products found.\" é exibida e nenhum produto é listado"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Ordenar produtos por preço do menor para o maior",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; Verificar que há produtos listados; Selecionar a ordenação \"Price (Low - High)\"",
+  "esperado": "Os preços dos produtos da página aparecem em ordem crescente"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Ordenar produtos por nome de Z a A",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar a página inicial; Verificar que há produtos listados; Selecionar a ordenação \"Name (Z - A)\"",
+  "esperado": "Os nomes dos produtos da página aparecem em ordem alfabética decrescente"
+ }
+]

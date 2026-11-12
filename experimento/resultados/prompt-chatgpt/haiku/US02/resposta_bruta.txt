@@ -1,0 +1,145 @@
+CASOS DE TESTE
+
+ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado
+--- | --- | --- | --- | --- | ---
+CT001 | Adicionar 3 unidades de Claw Hammer exibe confirmação e contador 3 | positivo | CA01 | Abrir Claw Hammer; informar quantidade 3; clicar em Add to cart | Exibe "Product added to shopping cart." e o indicador do carrinho mostra 3
+CT002 | Total da linha e total do carrinho com 3 unidades | positivo | CA02 | Ler preço unitário; adicionar 3 unidades; abrir o carrinho; comparar totais | Total da linha é igual ao preço unitário x 3 e total do carrinho é igual ao total da linha
+CT003 | Alterar quantidade no carrinho para 1 atualiza o total | positivo | CA03 | Com 3 unidades no carrinho, alterar a quantidade para 1 e clicar em Update | Total do carrinho passa a ser igual ao preço unitário
+CT004 | Thor Hammer com 3 unidades exibe mensagem de limite | negativo | CA04 | Abrir Thor Hammer; informar quantidade 3; clicar em Add to cart | Exibe "You can only have one Thor Hammer in the cart."
+CT005 | Thor Hammer com 1 unidade é aceito | borda | CA04 | Abrir Thor Hammer; informar quantidade 1; clicar em Add to cart | Exibe "Product added to shopping cart." e o indicador do carrinho mostra 1
+
+SUPOSIÇÕES
+
+1. Explícito na US: URL base `https://practicesoftwaretesting.com/`; produtos "Claw Hammer" e "Thor Hammer"; textos das mensagens de confirmação e de limite; quantidades 3 e 1; critérios de aceitação 1 a 4.
+2. Inferido: os critérios não têm identificadores, então foram atribuídos CA01 a CA04 na ordem de apresentação.
+3. Inferido, conflito de requisitos: a US pede pytest-playwright e a fixture `page` do plugin. As regras deste pedido proíbem plugins adicionais e exigem Playwright síncrono com inicialização no próprio arquivo. Adotei `sync_playwright()` dentro da fixture `pagina`, com escopo por teste. Os requisitos da US não foram aplicados.
+4. Inferido: a navegação para o carrinho usa a rota `checkout` (`ROTA_CARRINHO`). Os testes não clicam no ícone do carrinho.
+5. Inferido: o campo de quantidade da página do produto é rotulado como "Quantity" (`get_by_label`).
+6. Inferido: o botão de adicionar ao carrinho tem nome acessível "Add to cart".
+7. Inferido: o produto é aberto clicando no texto exato do nome na página inicial. Os testes assumem que o link do produto é o primeiro elemento com esse texto.
+8. Inferido: o preço unitário na página do produto, o contador do carrinho, o campo de quantidade da linha, o total da linha e o total do carrinho podem ser localizados por atributos `data-test`, conforme as constantes `SELETOR_*`. Se o sistema usar outros atributos, esses valores precisam ser ajustados.
+9. Inferido: a alteração de quantidade no carrinho exige o botão "Update" (`TEXTO_BOTAO_ATUALIZAR`). CT003 depende dessa suposição.
+10. Inferido: valores monetários usam ponto decimal, com ou sem prefixo de moeda. A função `valor_monetario` extrai o número e o compara com duas casas decimais.
+11. Inferido: cada teste inicia com um contexto de navegador novo, então o carrinho começa vazio. As pré-condições externas são: produtos disponíveis, carrinho vazio no início e sessão anônima aceita pelo sistema. CT002 e CT003 usam apenas um produto, para que o total do carrinho seja igual ao total da linha.
+12. Inferido: CT005 assume que a regra "only one Thor Hammer in the cart" permite exatamente uma unidade. A US não cita esse caso de forma explícita.
+13. Ausência de casos negativos para CA01, CA02 e CA03: a US não define comportamentos de erro, como quantidade zero, negativa ou acima do estoque. Não foram inventados limites. Ausência de casos de borda para CA01, CA02 e CA03: a US não define limites de quantidade além de 1 e 3, e esses valores já aparecem nos casos existentes.
+14. Ausência de testes REST: a US não exige API.
+
+```python
+import re
+from decimal import Decimal
+from urllib.parse import urljoin
+
+import pytest
+from playwright.sync_api import expect, sync_playwright
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+HEADLESS = True
+TIMEOUT_MS = 10000
+
+PRODUTO_PRINCIPAL = "Claw Hammer"
+PRODUTO_LIMITE_UM = "Thor Hammer"
+QUANTIDADE_TESTE = 3
+
+ROTULO_QUANTIDADE = "Quantity"
+TEXTO_BOTAO_ADICIONAR = "Add to cart"
+TEXTO_BOTAO_ATUALIZAR = "Update"
+MSG_ADICIONADO = "Product added to shopping cart."
+MSG_LIMITE_THOR = "You can only have one Thor Hammer in the cart."
+ROTA_CARRINHO = "checkout"
+
+SELETOR_PRECO_UNITARIO = '[data-test="unit-price"]'
+SELETOR_CONTADOR_CARRINHO = '[data-test="cart-quantity"]'
+SELETOR_QUANTIDADE_LINHA = '[data-test="product-quantity"]'
+SELETOR_TOTAL_LINHA = '[data-test="line-price"]'
+SELETOR_TOTAL_CARRINHO = '[data-test="cart-total"]'
+
+
+@pytest.fixture
+def pagina():
+    with sync_playwright() as playwright:
+        navegador = playwright.chromium.launch(headless=HEADLESS)
+        contexto = navegador.new_context()
+        aba = contexto.new_page()
+        aba.set_default_timeout(TIMEOUT_MS)
+        yield aba
+        contexto.close()
+        navegador.close()
+
+
+def valor_monetario(texto):
+    encontrado = re.search(r"\d+(?:\.\d+)?", texto)
+    assert encontrado, f"Valor monetário não encontrado em: {texto!r}"
+    return Decimal(encontrado.group()).quantize(Decimal("0.01"))
+
+
+def abrir_produto(pagina, nome):
+    pagina.goto(BASE_URL)
+    pagina.get_by_text(nome, exact=True).first.click()
+    expect(pagina.get_by_role("button", name=TEXTO_BOTAO_ADICIONAR)).to_be_visible()
+    expect(pagina.locator(SELETOR_PRECO_UNITARIO)).to_be_visible()
+
+
+def adicionar_ao_carrinho(pagina, quantidade):
+    pagina.get_by_label(ROTULO_QUANTIDADE).fill(str(quantidade))
+    pagina.get_by_role("button", name=TEXTO_BOTAO_ADICIONAR).click()
+
+
+def abrir_carrinho(pagina):
+    pagina.goto(urljoin(BASE_URL, ROTA_CARRINHO))
+
+
+def test_CT001_adicionar_3_unidades_exibe_confirmacao_e_contador(pagina):
+    abrir_produto(pagina, PRODUTO_PRINCIPAL)
+    adicionar_ao_carrinho(pagina, QUANTIDADE_TESTE)
+
+    expect(pagina.get_by_text(MSG_ADICIONADO, exact=True)).to_be_visible()
+    expect(pagina.locator(SELETOR_CONTADOR_CARRINHO)).to_have_text(str(QUANTIDADE_TESTE))
+
+
+def test_CT002_total_da_linha_e_do_carrinho_com_3_unidades(pagina):
+    abrir_produto(pagina, PRODUTO_PRINCIPAL)
+    preco_unitario = valor_monetario(pagina.locator(SELETOR_PRECO_UNITARIO).inner_text())
+    adicionar_ao_carrinho(pagina, QUANTIDADE_TESTE)
+    expect(pagina.get_by_text(MSG_ADICIONADO, exact=True)).to_be_visible()
+
+    abrir_carrinho(pagina)
+    expect(pagina.locator(SELETOR_TOTAL_LINHA)).to_be_visible()
+    total_linha = valor_monetario(pagina.locator(SELETOR_TOTAL_LINHA).inner_text())
+    total_carrinho = valor_monetario(pagina.locator(SELETOR_TOTAL_CARRINHO).inner_text())
+
+    assert total_linha == preco_unitario * QUANTIDADE_TESTE
+    assert total_carrinho == total_linha
+
+
+def test_CT003_alterar_quantidade_para_1_faz_total_igual_ao_preco_unitario(pagina):
+    abrir_produto(pagina, PRODUTO_PRINCIPAL)
+    preco_unitario = valor_monetario(pagina.locator(SELETOR_PRECO_UNITARIO).inner_text())
+    adicionar_ao_carrinho(pagina, QUANTIDADE_TESTE)
+    expect(pagina.get_by_text(MSG_ADICIONADO, exact=True)).to_be_visible()
+
+    abrir_carrinho(pagina)
+    expect(pagina.locator(SELETOR_QUANTIDADE_LINHA)).to_have_value(str(QUANTIDADE_TESTE))
+    pagina.locator(SELETOR_QUANTIDADE_LINHA).fill("1")
+    pagina.get_by_role("button", name=TEXTO_BOTAO_ATUALIZAR).click()
+    expect(pagina.locator(SELETOR_QUANTIDADE_LINHA)).to_have_value("1")
+
+    expect.poll(
+        lambda: valor_monetario(pagina.locator(SELETOR_TOTAL_CARRINHO).inner_text())
+    ).to_equal(preco_unitario)
+
+
+def test_CT004_thor_hammer_com_3_unidades_exibe_mensagem_de_limite(pagina):
+    abrir_produto(pagina, PRODUTO_LIMITE_UM)
+    adicionar_ao_carrinho(pagina, QUANTIDADE_TESTE)
+
+    expect(pagina.get_by_text(MSG_LIMITE_THOR, exact=True)).to_be_visible()
+
+
+def test_CT005_thor_hammer_com_1_unidade_e_aceito(pagina):
+    abrir_produto(pagina, PRODUTO_LIMITE_UM)
+    adicionar_ao_carrinho(pagina, 1)
+
+    expect(pagina.get_by_text(MSG_ADICIONADO, exact=True)).to_be_visible()
+    expect(pagina.locator(SELETOR_CONTADOR_CARRINHO)).to_have_text("1")
+```

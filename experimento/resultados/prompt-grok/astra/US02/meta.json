@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 44.88,
+ "tokens": {
+  "total": 6228
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": ")\n\n    expect(\n        page.get_by_text(\n            \"You can only have one Thor Hammer in the cart.\",\n            exact=True,\n        )\n    ).to_be_visible()\n\n\ndef test_TC05_aceitar_uma_unidade_de_thor_hammer(page: Page) -> None:\n    # Expectativa inferida: o limite de uma unidade é inclusivo.\n    open_product(page, \"Thor Hammer\")\n    add_quantity(page, 1)\n\n    row = open_cart_row(page, \"Thor Hammer\")\n    expect(row.get_by_label(\"Quantity\", exact=True)).to_have_value(\"1\")\n```\ntokens used\n6,228\n"
+}

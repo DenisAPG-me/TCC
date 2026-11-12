@@ -1,0 +1,101 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Envio do formulário vazio | Negativo | CA1 | Acessar a página inicial; deixar todos os campos em branco; clicar no botão de envio | Exibir mensagens de erro indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco |
+| CT02 | Envio de telefone com menos de 11 caracteres | Negativo | CA2 | Acessar a página inicial; preencher os campos válidos e o telefone com menos de 11 dígitos; clicar no botão de envio | Exibir a mensagem Phone must be between 11 and 21 characters |
+| CT03 | Envio de assunto curto e mensagem curta | Negativo | CA3 | Acessar a página inicial; preencher assunto com menos de 5 caracteres e mensagem com menos de 20 caracteres; clicar no botão de envio | Exibir as mensagens Subject must be between 5 and 100 characters e Message must be between 20 and 2000 characters |
+| CT04 | Envio de e-mail malformado | Negativo | CA4 | Acessar a página inicial; preencher o campo de e-mail com valor malformado bad; clicar no botão de envio | Exibir a mensagem must be a well-formed email address |
+| CT05 | Envio de todos os campos com dados válidos | Positivo | CA5 | Acessar a página inicial; preencher todos os campos com dados válidos; clicar no botão de envio | Exibir a mensagem Thanks for getting in touch <nome> e o assunto informado na confirmação |
+
+## SUPOSIÇÕES
+
+- Tecnologia escolhida: Interface web, utilizando Python + pytest + pytest-playwright (fixture `page`), conforme os requisitos técnicos obrigatórios.
+- Seletores de elementos deduzidos com base em IDs e rótulos padrão de formulários de contato em aplicações web: campo nome (`input[name='name']` ou `get_by_label('Name')`), campo e-mail (`input[name='email']` ou `get_by_label('Email')`), campo telefone (`input[name='phone']` ou `get_by_label('Phone')`), campo assunto (`input[name='subject']` ou `get_by_label('Subject')`), campo mensagem (`textarea[name='description']` ou `get_by_label('Message')`), botão de envio (`button#submitContact` ou `get_by_role('button', name='Submit')`).
+- Mensagens de erro e confirmação exibidas após o envio utilizando os textos exatos especificados nos critérios de aceitação.
+- Dados de teste válidos: Nome = "John Doe", E-mail = "john.doe@example.com", Telefone = "11987654321", Assunto = "Dúvida sobre reserva", Mensagem = "Gostaria de saber se há disponibilidade de vaga para o próximo final de semana.".
+
+## SCRIPT
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+VALID_NAME = "John Doe"
+VALID_EMAIL = "john.doe@example.com"
+VALID_PHONE = "11987654321"
+VALID_SUBJECT = "Dúvida sobre reserva"
+VALID_MESSAGE = "Gostaria de saber se há disponibilidade de vaga para o próximo final de semana."
+
+
+def test_ct01_envio_do_formulario_vazio(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_role("button", name="Submit").click()
+
+    expect(page.get_by_text("Name may not be blank")).to_be_visible()
+    expect(page.get_by_text("Email may not be blank")).to_be_visible()
+    expect(page.get_by_text("Phone may not be blank")).to_be_visible()
+    expect(page.get_by_text("Subject may not be blank")).to_be_visible()
+    expect(page.get_by_text("Message may not be blank")).to_be_visible()
+
+
+def test_ct02_envio_de_telefone_com_menos_de_11_caracteres(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(VALID_NAME)
+    page.get_by_label("Email").fill(VALID_EMAIL)
+    page.get_by_label("Phone").fill("12345")
+    page.get_by_label("Subject").fill(VALID_SUBJECT)
+    page.get_by_label("Message").fill(VALID_MESSAGE)
+    page.get_by_role("button", name="Submit").click()
+
+    expect(
+        page.get_by_text("Phone must be between 11 and 21 characters.")
+    ).to_be_visible()
+
+
+def test_ct03_envio_de_assunto_curto_e_mensagem_curta(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(VALID_NAME)
+    page.get_by_label("Email").fill(VALID_EMAIL)
+    page.get_by_label("Phone").fill(VALID_PHONE)
+    page.get_by_label("Subject").fill("Oi")
+    page.get_by_label("Message").fill("Curta")
+    page.get_by_role("button", name="Submit").click()
+
+    expect(
+        page.get_by_text("Subject must be between 5 and 100 characters.")
+    ).to_be_visible()
+    expect(
+        page.get_by_text("Message must be between 20 and 2000 characters.")
+    ).to_be_visible()
+
+
+def test_ct04_envio_de_email_malformado(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(VALID_NAME)
+    page.get_by_label("Email").fill("bad")
+    page.get_by_label("Phone").fill(VALID_PHONE)
+    page.get_by_label("Subject").fill(VALID_SUBJECT)
+    page.get_by_label("Message").fill(VALID_MESSAGE)
+    page.get_by_role("button", name="Submit").click()
+
+    expect(
+        page.get_by_text("must be a well-formed email address")
+    ).to_be_visible()
+
+
+def test_ct05_envio_de_todos_os_campos_com_dados_validos(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(VALID_NAME)
+    page.get_by_label("Email").fill(VALID_EMAIL)
+    page.get_by_label("Phone").fill(VALID_PHONE)
+    page.get_by_label("Subject").fill(VALID_SUBJECT)
+    page.get_by_label("Message").fill(VALID_MESSAGE)
+    page.get_by_role("button", name="Submit").click()
+
+    expect(
+        page.get_by_text(f"Thanks for getting in touch {VALID_NAME}!")
+    ).to_be_visible()
+    expect(page.get_by_text(VALID_SUBJECT)).to_be_visible()
+```

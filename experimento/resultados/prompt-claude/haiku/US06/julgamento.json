@@ -1,0 +1,116 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C05",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C05"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct02_formulario_valido_exibe_confirmacao",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct03_contador_aumenta_uma_unidade_apos_envio",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct04_mensagem_recem_enviada_aparece_na_caixa",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct05_apos_logout_caixa_exige_login",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct07_nome_com_acentos_aparece_na_confirmacao",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct08_email_invalido_nao_incrementa_contador",
+   "categoria": "espera/timing",
+   "nota": "le contador sem aguardar renderizar; re.search retorna None"
+  }
+ ]
+}

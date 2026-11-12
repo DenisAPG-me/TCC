@@ -1,0 +1,18 @@
+[
+ "Apenas a User Story foi utilizada. O código não foi executado nem validado contra o sistema; URLs adicionais, seletores e estrutura visual abaixo são hipóteses que precisarão ser ajustadas.",
+ "Por prevalência dos requisitos técnicos, são necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, além do navegador instalado pelo Playwright. O arquivo pode ser salvo como `test_messages.py` e executado com `pytest test_messages.py`.",
+ "A URL base está na constante `BASE_URL`. A página inicial fica em `/`, o painel em `/admin` e a caixa de mensagens, por suposição, em `/admin/messages`.",
+ "O login possui campos com labels acessíveis exatos `Username` e `Password` e botão `Login`. As credenciais são `admin` / `password`.",
+ "Após o login, existe um link cujo nome acessível começa com `Messages`. Seu contador é um elemento filho com `data-testid=\"message-count\"`, contendo somente um inteiro não negativo, possivelmente cercado por espaços.",
+ "O logout usa um botão acessível chamado `Logout` e exibe o formulário de login. O acesso direto sem sessão também exibe esse formulário, sem exigir uma URL específica de redirecionamento.",
+ "O contato possui labels acessíveis exatos `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão `Submit`. E-mail, telefone e corpo são os “dados válidos” inferidos da história.",
+ "E-mails no domínio `example.com`, telefone `11987654321` e os textos gerados no código são aceitos. Não há CAPTCHA nem outra etapa de envio.",
+ "Nomes compostos com acentos são válidos e preservados. TC07 verifica essa borda de representação; limites mínimo e máximo de tamanho não foram especificados.",
+ "A confirmação é um elemento visível com o texto exato definido no critério 2.",
+ "A caixa utiliza linhas com papel acessível `row`; nome e assunto aparecem como textos exatos em elementos da mesma linha. A mensagem enviada fica disponível sem paginação, busca ou filtros adicionais.",
+ "O contador aumenta uma unidade por envio. Durante TC03, nenhum outro usuário envia, remove ou altera mensagens; o login não modifica o contador.",
+ "Atualizações de interface e persistência tornam-se visíveis em até 15 segundos, sem necessidade de recarregamento manual.",
+ "Cada teste recebe `page` do plugin em contexto isolado, sem autenticação previamente carregada, e cria seus próprios dados. Os testes devem ser executados sequencialmente em ambiente dedicado.",
+ "TC06 estende o critério 5 à ausência inicial de sessão. Não se presumem regras para senha inválida, campos obrigatórios ou limites de tamanho, pois a história não define seus resultados esperados.",
+ "Os testes deixam as mensagens criadas no ambiente: a história não fornece operação de exclusão ou limpeza."
+]

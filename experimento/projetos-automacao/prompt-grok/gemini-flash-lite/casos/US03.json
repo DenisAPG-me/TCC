@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Validação de campos obrigatórios no login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "Acessar página de login e enviar o formulário de login sem preencher e-mail e senha.",
+  "esperado": "Exibição das mensagens \"Email is required\" e \"Password is required\"."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Tentativa de login com credenciais inválidas (senha incorreta)",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "Acessar página de login, preencher e-mail da conta de demonstração e senha incorreta, e enviar o formulário.",
+  "esperado": "Exibição da mensagem \"Invalid email or password\" e permanência na tela de login sem sessão ativa."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Redirecionamento para autenticação ao avançar para o checkout sem estar logado",
+  "tipo": "Negativo",
+  "criterio": "Critério 3",
+  "passos": "Adicionar um produto ao carrinho sem estar autenticado e avançar para o checkout.",
+  "esperado": "Redirecionamento para a tela solicitando e-mail e senha para autenticação."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Verificação da página \"My account\" após autenticação bem-sucedida",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "Realizar login com as credenciais da conta de demonstração (customer@practicesoftwaretesting.com / welcome01).",
+  "esperado": "Visualização da página \"My account\" com o nome do usuário exibido no menu."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Validação de campos obrigatórios do endereço no checkout",
+  "tipo": "Negativo / Borda",
+  "criterio": "Critério 5",
+  "passos": "Estando autenticado e com produto no carrinho, avançar até o passo de endereço, deixar os campos obrigatórios vazios e tentar avançar; em seguida, preenchê-los corretamente (país, CEP, número, rua, cidade, estado).",
+  "esperado": "Impede o avanço para o pagamento quando vazios; permite avançar com sucesso após o preenchimento correto."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Conclusão de pedido com pagamento por cartão de crédito",
+  "tipo": "Positivo",
+  "criterio": "Critério 6",
+  "passos": "Estando no passo de pagamento do checkout, escolher cartão de crédito, preencher dados fictícios válidos e confirmar.",
+  "esperado": "Exibição da mensagem \"Payment was successful\" e, ao confirmar o pedido, exibição de \"Thanks for your order! Your invoice number is INV-...\"."
+ }
+]

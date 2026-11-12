@@ -1,0 +1,58 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Registrar o contador inicial",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Fazer login; localizar o contador de Messages; registrar seu valor.",
+  "esperado": "O contador está visível e contém um inteiro não negativo, disponível para comparação."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Confirmar envio válido",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial; preencher o contato com dados válidos; enviar.",
+  "esperado": "Aparece exatamente “Thanks for getting in touch \\<nome\\>!”."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Incrementar o contador após um envio",
+  "tipo": "positivo",
+  "criterio": "1, 2 e 3",
+  "passos": "Fazer login; registrar o contador; sair; enviar um contato; fazer login novamente; comparar.",
+  "esperado": "O contador passa de N para N+1."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Exibir remetente e assunto na caixa de mensagens",
+  "tipo": "positivo",
+  "criterio": "2 e 4",
+  "passos": "Enviar contato com dados únicos; fazer login; abrir Messages; localizar a mensagem.",
+  "esperado": "Uma mesma linha apresenta o nome e o assunto enviados."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Bloquear acesso direto após logout",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Fazer login; abrir Messages; sair; navegar diretamente para a caixa.",
+  "esperado": "O formulário de login é exibido."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Bloquear acesso direto sem autenticação prévia",
+  "tipo": "negativo",
+  "criterio": "5 — extensão assumida",
+  "passos": "Em contexto sem autenticação, navegar diretamente para a caixa.",
+  "esperado": "O formulário de login é exibido."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Preservar nome com acentos e espaços",
+  "tipo": "borda",
+  "criterio": "2 e 4",
+  "passos": "Enviar contato com nome composto acentuado; verificar confirmação; fazer login; localizar a mensagem.",
+  "esperado": "A confirmação e a linha da mensagem preservam o nome informado, incluindo acentos e espaços."
+ }
+]

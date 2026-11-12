@@ -1,0 +1,15 @@
+[
+ "Tecnologia escolhida: API REST utilizando Python + pytest + requests, conforme a User Story focar em API de reservas (Restful Booker).",
+ "Endpoints utilizados baseados na documentação padrão do Restful-Booker:",
+ "Autenticação: POST `/auth` com payload `{\"username\": \"admin\", \"password\": \"password123\"}` retornando token.",
+ "Criação de reserva: POST `/booking` com payload contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`), `additionalneeds`.",
+ "Consulta de reserva: GET `/booking/{id}`.",
+ "Exclusão de reserva: DELETE `/booking/{id}` exigindo cabeçalho `Cookie: token=<token>` ou `Authorization` conforme o padrão da API. O Restful-Booker utiliza autenticação via Cookie `token=<token>`.",
+ "Listagem de reservas com filtro: GET `/booking?firstname=<firstname>&lastname=<lastname>`.",
+ "Códigos de status esperados pelo sistema Restful-Booker:",
+ "Exclusão bem-sucedida retorna status `201 Created`.",
+ "Falha de autorização (sem token ou token inválido) retorna status `403 Forbidden`.",
+ "Tentativa de exclusão de recurso inexistente/já excluído retorna status `405 Method Not Allowed` ou `404 Not Found` (mapeado como 4xx na regra de negócio).",
+ "Consulta de recurso inexistente retorna status `404 Not Found`.",
+ "Dados de teste gerados dinamicamente com carimbos de data/hora ou strings únicas para garantir isolamento entre os testes."
+]

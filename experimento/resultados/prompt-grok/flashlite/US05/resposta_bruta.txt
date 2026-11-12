@@ -1,0 +1,97 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Envio de credenciais vazias na tela de login | negativo | Critério 1 | Acessar a página de login (/admin), deixar campos de usuário e senha vazios e clicar no botão de login. | Exibir mensagem "Invalid credentials" e permanecer na tela de login. |
+| TC02 | Envio de senha incorreta | negativo | Critério 2 | Acessar a página de login (/admin), informar usuário "admin" e senha incorreta, e clicar no botão de login. | Exibir mensagem "Invalid credentials". |
+| TC03 | Login bem-sucedido com credenciais válidas | positivo | Critério 3 | Acessar a página de login (/admin), informar usuário "admin" e senha "password", e clicar no botão de login. | Redirecionar para a lista de quartos, exibir quarto 101 do tipo Single e menu com Rooms, Report, Branding e Messages. |
+| TC04 | Logout a partir do painel administrativo | positivo | Critério 4 | Efetuar login com sucesso e clicar no botão/link de Logout. | Retornar à página inicial pública da pousada. |
+| TC05 | Acesso direto à lista de quartos após logout | negativo | Critério 5 | Efetuar logout e tentar acessar diretamente a URL do painel de quartos (/admin ou listagem interna). | Redirecionar ou exibir novamente a tela de login. |
+
+SUPOSIÇÕES
+
+- A URL base padrão é https://automationintesting.online/ e a tela de login do painel administrativo é acessada em /admin.
+- Os campos de login possuem os rótulos "Username" e "Password" ou podem ser localizados por placeholder/role.
+- O botão de envio do formulário de login possui o texto ou papel de "Login" ou "Submit".
+- A mensagem de erro "Invalid credentials" aparece visível na tela após uma tentativa de login falha.
+- A lista de quartos exibe elementos contendo o número "101" e o tipo "Single".
+- O menu de navegação contém links ou textos correspondentes a "Rooms", "Report", "Branding" e "Messages".
+- O botão de Logout pode ser localizado pelo texto "Logout".
+- O redirecionamento após o logout leva à página inicial pública (URL base / ou raiz).
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online"
+
+def test_TC01_empty_credentials(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Tentativa de login com campos vazios
+    # Assumindo campos de input de usuário e senha e botão de login
+    page.get_by_label("Username").fill("")
+    page.get_by_label("Password").fill("")
+    page.get_by_role("button", name="Login").click()
+    
+    # Validação de que a mensagem de erro é exibida e continua na tela de login
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+    expect(page).to_have_url(f"{BASE_URL}/admin")
+
+def test_TC02_incorrect_password(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Tentativa de login com senha incorreta
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("wrongpassword")
+    page.get_by_role("button", name="Login").click()
+    
+    # Validação de que a mensagem de erro é exibida
+    expect(page.get_by_text("Invalid credentials")).to_be_visible()
+
+def test_TC03_successful_login(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Login com credenciais válidas
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    # Validação da lista de quartos, quarto 101 do tipo Single e menu completo
+    expect(page.get_by_text("101")).to_be_visible()
+    expect(page.get_by_text("Single")).to_be_visible()
+    expect(page.get_by_text("Rooms")).to_be_visible()
+    expect(page.get_by_text("Report")).to_be_visible()
+    expect(page.get_by_text("Branding")).to_be_visible()
+    expect(page.get_by_text("Messages")).to_be_visible()
+
+def test_TC04_logout(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Realiza login para depois fazer logout
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    # Clica em Logout
+    page.get_by_role("link", name="Logout").click()
+    
+    # Valida retorno à página inicial pública
+    expect(page).to_have_url(f"{BASE_URL}/")
+
+def test_TC05_direct_access_after_logout(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Login e posterior logout
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    page.get_by_role("link", name="Logout").click()
+    
+    # Tenta acessar diretamente a área administrativa restrita
+    page.goto(f"{BASE_URL}/admin")
+    
+    # Valida que é redirecionado ou vê novamente a tela de login
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+```

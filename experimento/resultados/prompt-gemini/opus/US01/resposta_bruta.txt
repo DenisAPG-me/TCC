@@ -1,0 +1,117 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Buscar produtos por "hammer" | Positivo | CA1 | 1. Acessar a página inicial. 2. Digitar "hammer" no campo de busca. 3. Clicar em pesquisar. | A página indica busca por "hammer", ao menos um produto é listado e todos os nomes contêm "hammer". |
+| CT02 | Buscar por "HAMMER" em maiúsculas | Borda | CA1 | 1. Acessar a página inicial. 2. Digitar "HAMMER". 3. Clicar em pesquisar. | A página indica busca por "HAMMER", ao menos um produto é listado e todos os nomes contêm "hammer" (sem diferenciar maiúsculas/minúsculas). |
+| CT03 | Buscar termo inexistente "zzzzxx" | Negativo | CA2 | 1. Acessar a página inicial. 2. Digitar "zzzzxx". 3. Clicar em pesquisar. | A mensagem "There are no products found." é exibida e nenhum produto é listado. |
+| CT04 | Ordenar por preço crescente | Positivo | CA3 | 1. Acessar a página inicial com produtos listados. 2. Selecionar "Price (Low - High)". | Os preços exibidos na página estão em ordem crescente (valores iguais são aceitos). |
+| CT05 | Ordenar por nome de Z a A | Positivo | CA4 | 1. Acessar a página inicial com produtos listados. 2. Selecionar "Name (Z - A)". | Os nomes exibidos na página estão em ordem alfabética decrescente. |
+| CT06 | Ordenação mantém a página preenchida | Borda | CA3 | 1. Acessar a página inicial e contar os produtos. 2. Selecionar "Price (Low - High)". | A quantidade de produtos exibidos após a ordenação é igual à de antes e maior que zero. |
+
+## SUPOSIÇÕES
+
+- A aplicação usa o atributo `data-test` para identificadores de teste. Por isso, o script configura `selectors.set_test_id_attribute("data-test")` para que `get_by_test_id` funcione.
+- Campo de busca: `data-test="search-query"`.
+- Botão de pesquisa: `data-test="search-submit"`.
+- Indicação da busca: `data-test="search-caption"`, com texto no formato "Searched for: <termo>".
+- Nome de cada produto no card: `data-test="product-name"`.
+- Preço de cada produto no card: `data-test="product-price"`, no formato `$14.15`.
+- Seletor de ordenação: elemento `<select>` com `data-test="sort"`. As opções têm os rótulos "Price (Low - High)" e "Name (Z - A)".
+- Mensagem de busca sem resultado: texto exato "There are no products found.".
+- A listagem é carregada via API REST:
+  - a busca chama uma URL que contém `/products/search`;
+  - a ordenação chama uma URL de `/products` que contém o parâmetro `sort=`;
+  - a resposta é um JSON com a lista de produtos na chave `data`, e cada item tem a chave `name`.
+- O script usa essas respostas para sincronizar a espera, sem `time.sleep`.
+- A busca não diferencia maiúsculas de minúsculas. O CA1 não diz isso explicitamente, então o CT02 depende dessa premissa.
+- A ordenação por nome é verificada sem diferenciar maiúsculas de minúsculas (`casefold`).
+- A verificação de ordenação considera apenas os produtos da página atual, conforme os critérios de aceitação ("os preços/nomes da página").
+- A URL base vem da opção `--base-url` do pytest-playwright. Se a opção não for informada, o script usa a constante `BASE_URL`.
+- Dependências: `pip install pytest pytest-playwright` e `playwright install`.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id(playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+@pytest.fixture
+def home(page: Page, pytestconfig) -> Page:
+    url = pytestconfig.getoption("base_url", default=None) or BASE_URL
+    page.goto(url)
+    expect(page.get_by_test_id("product-name").first).to_be_visible()
+    return page
+
+
+def search(page: Page, term: str) -> list:
+    with page.expect_response(lambda r: "/products/search" in r.url) as response_info:
+        page.get_by_test_id("search-query").fill(term)
+        page.get_by_test_id("search-submit").click()
+    return response_info.value.json().get("data", [])
+
+
+def sort_by(page: Page, label: str) -> None:
+    with page.expect_response(lambda r: "/products" in r.url and "sort=" in r.url) as response_info:
+        page.get_by_test_id("sort").select_option(label=label)
+    expected_names = [p["name"] for p in response_info.value.json()["data"]]
+    expect(page.get_by_test_id("product-name")).to_have_text(expected_names)
+
+
+def assert_search_results(page: Page, term: str, results: list) -> None:
+    expect(page.get_by_test_id("search-caption")).to_contain_text(term)
+    names = page.get_by_test_id("product-name")
+    assert len(results) > 0
+    expect(names).to_have_count(len(results))
+    for i in range(len(results)):
+        expect(names.nth(i)).to_contain_text(re.compile("hammer", re.IGNORECASE))
+
+
+def parse_price(text: str) -> float:
+    return float(text.replace("$", "").replace(",", "").strip())
+
+
+def test_ct01_busca_por_hammer_lista_somente_produtos_com_hammer(home: Page):
+    results = search(home, "hammer")
+    assert_search_results(home, "hammer", results)
+
+
+def test_ct02_busca_por_hammer_maiusculo_ignora_caixa(home: Page):
+    results = search(home, "HAMMER")
+    assert_search_results(home, "HAMMER", results)
+
+
+def test_ct03_busca_por_termo_inexistente_exibe_mensagem_sem_produtos(home: Page):
+    search(home, "zzzzxx")
+    expect(home.get_by_text("There are no products found.")).to_be_visible()
+    expect(home.get_by_test_id("product-name")).to_have_count(0)
+
+
+def test_ct04_ordenacao_por_preco_crescente(home: Page):
+    sort_by(home, "Price (Low - High)")
+    prices = [parse_price(t) for t in home.get_by_test_id("product-price").all_inner_texts()]
+    assert len(prices) > 0
+    assert prices == sorted(prices)
+
+
+def test_ct05_ordenacao_por_nome_z_a(home: Page):
+    sort_by(home, "Name (Z - A)")
+    names = [n.strip() for n in home.get_by_test_id("product-name").all_inner_texts()]
+    assert len(names) > 0
+    assert names == sorted(names, key=str.casefold, reverse=True)
+
+
+def test_ct06_ordenacao_mantem_quantidade_de_produtos_na_pagina(home: Page):
+    count_before = home.get_by_test_id("product-name").count()
+    assert count_before > 0
+    sort_by(home, "Price (Low - High)")
+    expect(home.get_by_test_id("product-name")).to_have_count(count_before)
+```

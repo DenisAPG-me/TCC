@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Testes curtos e comentados, nomes coerentes",
+  "estrutura": "Sem helpers/fixtures; busca e ordenacao duplicadas",
+  "assercoes": "Asserts de negocio, mas get_by_text('hammer') generico e ordenacao por floats simples",
+  "espera": "Sem espera apos ordenar; le count logo apos select",
+  "manutenibilidade": "Seletores CSS por classe e lista alternativa; URL como constante unica"
+ }
+}

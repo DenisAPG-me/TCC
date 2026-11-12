@@ -1,0 +1,14 @@
+[
+ "A história descreve principalmente fluxos de interface web, então a automação usa Python, pytest e Playwright.",
+ "Foi seguida a exigência técnica final de usar a fixture `page` do plugin oficial pytest-playwright e `expect` de `playwright.sync_api`. Isso conflita com a exigência anterior de não usar plugins e criar as fixtures localmente; prevaleceu a exigência técnica marcada como obrigatória em caso de conflito. É necessário instalar `pytest-playwright` além de pytest e Playwright.",
+ "A URL base é `https://automationintesting.online/`; o painel está em `/admin`, conforme informado.",
+ "O login usa os campos rotulados `Username` e `Password`, credenciais `admin` e `password`, e botão `Login`.",
+ "A tela de administração exibe um link ou botão `Messages`, cujo texto inclui o contador, e a caixa de mensagens fica em `/admin/messages`.",
+ "O logout é feito por um controle com nome acessível `Logout`; após logout, o acesso direto a `/admin/messages` redireciona para `/admin`.",
+ "O formulário público contém campos acessíveis rotulados `Name`, `Email`, `Phone` e `Subject`, além de um campo `Message`; o envio ocorre pelo botão `Submit`.",
+ "Nome, e-mail, telefone, assunto e conteúdo da mensagem são obrigatórios, e e-mail válido é necessário para o envio. Os dados de teste são únicos por execução para facilitar identificar a mensagem.",
+ "O sucesso do envio é mostrado no texto `Thanks for getting in touch <nome>!`.",
+ "CT02 compara o contador anterior e posterior ao envio da própria mensagem. Como a história não define como armazenar estado entre testes, o caso realiza os passos no mesmo teste.",
+ "Nos cenários sem nome ou assunto, espera-se validação do formulário ou ausência de confirmação de sucesso; não se presume texto específico para a validação.",
+ "Seletores e caminhos não especificados foram deduzidos e podem precisar de ajuste conforme a implementação real."
+]

@@ -1,0 +1,76 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_formulario_vazio[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_senha_vazia[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_senha_incorreta[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct04_checkout_sem_autenticacao_solicita_credenciais[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "t\" data-test=\"add-to-cart\" class=\"btn-success btn\" _ngcontent-ng-c2605822289=\"\">…</button>\nE     - attempting click action\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE       - waiting 20ms\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE         - waiting 100ms\nE       57 × waiting for element to be visible, enabled and stable\nE          - element is not enabled\nE        - retrying click action\nE          - waiting 500ms"
+  },
+  {
+   "nodeid": "script.py::test_ct05_autenticacao_no_checkout_permite_avancar[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "t\" data-test=\"add-to-cart\" class=\"btn-success btn\" _ngcontent-ng-c2605822289=\"\">…</button>\nE     - attempting click action\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE       - waiting 20ms\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE         - waiting 100ms\nE       57 × waiting for element to be visible, enabled and stable\nE          - element is not enabled\nE        - retrying click action\nE          - waiting 500ms"
+  },
+  {
+   "nodeid": "script.py::test_ct06_login_valido_exibe_my_account_e_nome[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct07_endereco_campos_obrigatorios_vazios[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "t\" data-test=\"add-to-cart\" class=\"btn-success btn\" _ngcontent-ng-c2605822289=\"\">…</button>\nE     - attempting click action\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE       - waiting 20ms\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE         - waiting 100ms\nE       57 × waiting for element to be visible, enabled and stable\nE          - element is not enabled\nE        - retrying click action\nE          - waiting 500ms"
+  },
+  {
+   "nodeid": "script.py::test_ct08_endereco_sem_cep[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct09_endereco_completo_avanca_para_pagamento[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct10_confirmacao_desabilitada_sem_metodo_pagamento[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  },
+  {
+   "nodeid": "script.py::test_ct11_compra_com_cartao_de_credito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "t\" data-test=\"add-to-cart\" class=\"btn-success btn\" _ngcontent-ng-c2605822289=\"\">…</button>\nE     - attempting click action\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE       - waiting 20ms\nE       2 × waiting for element to be visible, enabled and stable\nE         - element is not enabled\nE       - retrying click action\nE         - waiting 100ms\nE       57 × waiting for element to be visible, enabled and stable\nE          - element is not enabled\nE        - retrying click action\nE          - waiting 500ms"
+  }
+ ],
+ "stdout_tail": "instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct04_checkout_sem_autenticacao_solicita_credenciais[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct05_autenticacao_no_checkout_permite_avancar[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct07_endereco_campos_obrigatorios_vazios[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct08_endereco_sem_cep[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct09_endereco_completo_avanca_para_pagamento[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct10_confirmacao_desabilitada_sem_metodo_pagamento[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US03\\script.py::test_ct11_compra_com_cartao_de_credito[chromium]\n7 failed, 4 passed, 2 warnings in 169.69s (0:02:49)\n",
+ "returncode": 1,
+ "duracao_s": 170.32
+}

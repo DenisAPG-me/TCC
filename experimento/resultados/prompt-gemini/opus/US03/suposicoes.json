@@ -1,0 +1,16 @@
+[
+ "A aplicação é web (Angular) e expõe atributos `data-test`; o script configura `data-test` como atributo de `get_by_test_id` via `playwright.selectors.set_test_id_attribute`.",
+ "Base URL padrão: `https://practicesoftwaretesting.com`; pode ser sobrescrita com `--base-url`.",
+ "Rotas: login em `/auth/login`, conta em `/account`, carrinho/checkout em `/checkout`, página inicial `/` lista produtos.",
+ "Seletores do login: `data-test=\"email\"`, `\"password\"`, `\"login-submit\"`; título da conta `data-test=\"page-title\"` com texto \"My account\".",
+ "Menu: usuário autenticado exibe `data-test=\"nav-menu\"` com o nome do usuário; não autenticado exibe `data-test=\"nav-sign-in\"`. O nome exato da conta demo não é informado, então a validação verifica que o menu contém um nome não vazio.",
+ "Produtos na home possuem `data-test=\"product-<id>\"`; na página do produto o botão é `data-test=\"add-to-cart\"`; o contador do carrinho é `data-test=\"cart-quantity\"`; o link do carrinho é `data-test=\"nav-cart\"`.",
+ "Botões do checkout: `proceed-1` (carrinho), `proceed-2` (login/conta), `proceed-3` (endereço) e `finish` (confirmação do pagamento e do pedido).",
+ "No passo de login do checkout são reutilizados os mesmos `data-test` da tela de login.",
+ "Campos de endereço: `data-test` `country`, `postal_code`, `house_number`, `street`, `city`, `state`. O país pode ser `<select>` (selecionado por rótulo) ou `<input>` (preenchido); o script trata ambos. O formulário pode vir pré-preenchido com o endereço do cliente, por isso os testes negativos limpam os campos explicitamente.",
+ "`proceed-3` fica desabilitado enquanto o formulário de endereço é inválido; `finish` fica desabilitado sem método de pagamento.",
+ "Pagamento: `data-test=\"payment-method\"` é um `<select>` com a opção \"Credit Card\"; campos `credit_card_number` (formato `0000-0000-0000-0000`), `expiration_date` (`MM/AAAA`, data futura), `cvv` (3 dígitos) e `card_holder_name`.",
+ "Mensagens são localizadas por texto exato conforme os critérios de aceitação; a confirmação do pedido segue o padrão `Thanks for your order! Your invoice number is INV-<dígitos>`.",
+ "A conta de demonstração está ativa e não é bloqueada por uma única tentativa com senha incorreta.",
+ "Execução: `pip install pytest pytest-playwright && playwright install` e `pytest test_checkout.py`."
+]

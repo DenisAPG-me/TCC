@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Import dentro de funcao, nomes ok",
+  "estrutura": "Helpers razoaveis",
+  "assercoes": "TC04 aceita login ou heading Admin (frouxo)",
+  "espera": "Sem sleep, mas sem espera apos envio",
+  "manutenibilidade": "Label inexistente e URL /admin/messages errada"
+ }
+}

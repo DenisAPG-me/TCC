@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Buscar por “hammer”",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial; pesquisar “hammer”.",
+  "esperado": "Há produtos; todos os nomes contêm “hammer”; a página identifica o termo pesquisado."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Buscar termo inexistente",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial; pesquisar “zzzzxx”.",
+  "esperado": "Exibe “There are no products found.” e nenhum produto."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Ordenar preços do menor para o maior",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Abrir a página inicial; selecionar preço crescente.",
+  "esperado": "Os preços visíveis estão em ordem não decrescente, permitindo empates."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Ordenar nomes de Z a A",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Abrir a página inicial; selecionar nome decrescente.",
+  "esperado": "Os nomes visíveis estão em ordem alfabética decrescente, permitindo empates."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Buscar parte de uma palavra",
+  "tipo": "borda",
+  "criterio": "1 — extensão assumida",
+  "passos": "Abrir a página inicial; pesquisar “ham”.",
+  "esperado": "Há produtos; todos os nomes contêm “ham”; a página identifica o termo pesquisado."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Buscar pelo nome completo de um produto",
+  "tipo": "borda",
+  "criterio": "1 — extensão assumida",
+  "passos": "Obter um nome completo nos resultados de “hammer”; voltar à página inicial; pesquisar esse nome.",
+  "esperado": "O produto aparece; todos os resultados contêm o nome pesquisado; a página identifica o termo."
+ }
+]

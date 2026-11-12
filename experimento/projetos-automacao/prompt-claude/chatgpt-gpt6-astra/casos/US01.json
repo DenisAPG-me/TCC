@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produtos por hammer",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; Informar hammer; Executar a busca",
+  "esperado": "A página indica a busca por hammer; Existe pelo menos um produto; Todos os nomes exibidos contêm hammer"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Buscar termo inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; Informar zzzzxx; Executar a busca",
+  "esperado": "A mensagem There are no products found. é exibida; Nenhum produto é listado"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Ordenar produtos por preço crescente",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; Selecionar preço do menor para o maior; Ler os preços da página atual",
+  "esperado": "Existem pelo menos dois produtos; Os preços estão em ordem crescente, permitindo valores iguais"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Ordenar produtos por nome decrescente",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Abrir a página inicial; Selecionar nome de Z a A; Ler os nomes da página atual",
+  "esperado": "Existem pelo menos dois produtos; Os nomes estão em ordem alfabética decrescente, permitindo nomes iguais"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Buscar hammer após uma busca sem resultados",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Abrir a página inicial; Buscar zzzzxx; Verificar ausência de produtos; Substituir o termo por hammer; Buscar novamente",
+  "esperado": "A primeira busca apresenta a mensagem de ausência e zero produtos; A segunda indica hammer, lista somente nomes contendo hammer e remove a mensagem anterior"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Buscar termo inexistente após uma busca com resultados",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Abrir a página inicial; Buscar hammer; Verificar os resultados; Substituir o termo por zzzzxx; Buscar novamente",
+  "esperado": "A primeira busca indica hammer e lista somente nomes contendo hammer; A segunda apresenta a mensagem de ausência e remove todos os produtos anteriores"
+ }
+]

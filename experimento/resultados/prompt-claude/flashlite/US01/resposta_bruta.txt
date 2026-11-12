@@ -1,0 +1,93 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Buscar produto por palavra-chave existente | Positivo | CA1 | Acessar a pagina inicial; Digitar hammer no campo de busca; Acionar a busca | A listagem exibe somente produtos cujo nome contem hammer e a pagina indica que a busca foi por hammer |
+| CT02 | Buscar por termo inexistente | Negativo | CA2 | Acessar a pagina inicial; Digitar zzzzxx no campo de busca; Acionar a busca | A pagina exibe a mensagem There are no products found. e nenhum produto e listado |
+| CT03 | Ordenar produtos por preco do menor para o maior | Positivo | CA3 | Acessar a pagina inicial com produtos listados; Selecionar a ordenacao preco do menor para o maior | Os precos da pagina aparecem em ordem crescente |
+| CT04 | Ordenar produtos por nome de Z a A | Positivo | CA4 | Acessar a pagina inicial com produtos listados; Selecionar a ordenacao nome de Z a A | Os nomes da pagina aparecem em ordem alfabetica decrescente |
+
+## SUPOSIÇÕES
+
+- Tecnologia escolhida: Python + pytest + pytest-playwright, utilizando a fixture `page` integrada conforme os REQUISITOS TÉCNICOS OBRIGATÓRIOS.
+- URL base: `https://practicesoftwaretesting.com/` definida em constante no topo do arquivo.
+- Seletores e locators baseados nas boas práticas do Playwright e convencionais para aplicações web modernas (test IDs e roles):
+  - Campo de busca: `page.get_by_placeholder("Search")` ou `page.get_by_test_id("search-query")`.
+  - Botão de busca: `page.get_by_role("button", name="Search")` ou `page.get_by_test_id("search-submit")`.
+  - Indicador de busca / Mensagem de nenhum produto: `page.get_by_text("There are no products found.")` e elementos de indicação da query de busca.
+  - Seletor de ordenação (Sort): `page.get_by_test_id("sort")` ou elemento `select` de ordenação.
+  - Cards de produtos: `page.get_by_test_id("product-card")` ou seletores de título e preço dos produtos na listagem.
+- Dados de teste: "hammer" para busca positiva, "zzzzxx" para busca negativa, opções de ordenação por preço crescente e nome decrescente (Z a A).
+
+## SCRIPT
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+def test_ct01_buscar_produto_por_palavra_chave_existente(page: Page) -> None:
+    page.goto(BASE_URL)
+    search_input = page.get_by_placeholder("Search")
+    search_input.fill("hammer")
+    search_button = page.get_by_role("button", name="Search")
+    search_button.click()
+
+    expect(page.get_by_text("hammer")).to_be_visible()
+    product_cards = page.get_by_test_id("product-card")
+    count = product_cards.count()
+    assert count > 0
+    for i in range(count):
+        title = product_cards.nth(i).locator(".card-title").inner_text().lower()
+        assert "hammer" in title
+
+
+def test_ct02_buscar_por_termo_inexistente(page: Page) -> None:
+    page.goto(BASE_URL)
+    search_input = page.get_by_placeholder("Search")
+    search_input.fill("zzzzxx")
+    search_button = page.get_by_role("button", name="Search")
+    search_button.click()
+
+    expect(page.get_by_text("There are no products found.")).to_be_visible()
+    product_cards = page.get_by_test_id("product-card")
+    assert product_cards.count() == 0
+
+
+def test_ct03_ordenar_produtos_por_preco_crescente(page: Page) -> None:
+    page.goto(BASE_URL)
+    sort_select = page.get_by_test_id("sort")
+    sort_select.select_option(label="Price (Low - High)")
+
+    product_cards = page.get_by_test_id("product-card")
+    expect(product_cards.first).to_be_visible()
+    count = product_cards.count()
+    assert count > 1
+
+    prices = []
+    for i in range(count):
+        price_text = product_cards.nth(i).locator(".card-footer span").inner_text()
+        clean_price = float(price_text.replace("$", "").strip())
+        prices.append(clean_price)
+
+    assert prices == sorted(prices)
+
+
+def test_ct04_ordenar_produtos_por_nome_z_a(page: Page) -> None:
+    page.goto(BASE_URL)
+    sort_select = page.get_by_test_id("sort")
+    sort_select.select_option(label="Name (Z - A)")
+
+    product_cards = page.get_by_test_id("product-card")
+    expect(product_cards.first).to_be_visible()
+    count = product_cards.count()
+    assert count > 1
+
+    names = []
+    for i in range(count):
+        name_text = product_cards.nth(i).locator(".card-title").inner_text()
+        names.append(name_text)
+
+    assert names == sorted(names, reverse=True)
+```

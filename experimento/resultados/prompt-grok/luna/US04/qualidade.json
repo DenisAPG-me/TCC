@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 4,
+ "assercoes": 2,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Helper _reset sem uso e comentarios repetitivos",
+  "estrutura": "Parametrizacao e helpers",
+  "assercoes": "TC01 so verifica nomes de campos, nao as mensagens de branco",
+  "espera": "to_have_count(0) imediato pode passar antes da resposta",
+  "manutenibilidade": "Seletores por label inexistente"
+ }
+}

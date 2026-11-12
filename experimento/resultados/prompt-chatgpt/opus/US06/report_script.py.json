@@ -1,0 +1,283 @@
+{
+ "created": 1793383763.2135963,
+ "duration": 47.73170351982117,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "failed": 2,
+  "total": 7,
+  "collected": 7
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_contador_messages_exibido_apos_login[chromium]",
+     "type": "Function",
+     "lineno": 98
+    },
+    {
+     "nodeid": "script.py::test_CT002_envio_valido_exibe_confirmacao_com_nome[chromium]",
+     "type": "Function",
+     "lineno": 106
+    },
+    {
+     "nodeid": "script.py::test_CT003_envio_vazio_nao_exibe_confirmacao[chromium]",
+     "type": "Function",
+     "lineno": 118
+    },
+    {
+     "nodeid": "script.py::test_CT004_confirmacao_preserva_nome_com_caracteres_especiais[chromium]",
+     "type": "Function",
+     "lineno": 130
+    },
+    {
+     "nodeid": "script.py::test_CT005_contador_messages_aumenta_uma_unidade_apos_envio[chromium]",
+     "type": "Function",
+     "lineno": 142
+    },
+    {
+     "nodeid": "script.py::test_CT006_mensagem_recem_enviada_aparece_na_lista[chromium]",
+     "type": "Function",
+     "lineno": 157
+    },
+    {
+     "nodeid": "script.py::test_CT007_acesso_direto_apos_logout_solicita_login[chromium]",
+     "type": "Function",
+     "lineno": 171
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_contador_messages_exibido_apos_login[chromium]",
+   "lineno": 98,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_contador_messages_exibido_apos_login[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4583108000224456,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3089176999637857,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011853600037284195,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_envio_valido_exibe_confirmacao_com_nome[chromium]",
+   "lineno": 106,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_envio_valido_exibe_confirmacao_com_nome[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0946185999782756,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.517868100083433,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013398500042967498,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_envio_vazio_nao_exibe_confirmacao[chromium]",
+   "lineno": 118,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_envio_vazio_nao_exibe_confirmacao[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12075260002166033,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3309017999563366,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01295520004350692,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_confirmacao_preserva_nome_com_caracteres_especiais[chromium]",
+   "lineno": 130,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_confirmacao_preserva_nome_com_caracteres_especiais[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11978269997052848,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.4862927000503987,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014190500020049512,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_contador_messages_aumenta_uma_unidade_apos_envio[chromium]",
+   "lineno": 142,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT005_contador_messages_aumenta_uma_unidade_apos_envio[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1204502999316901,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.310553100076504,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014736000099219382,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_mensagem_recem_enviada_aparece_na_lista[chromium]",
+   "lineno": 157,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT006_mensagem_recem_enviada_aparece_na_lista[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11751440004445612,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 18.43107220006641,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py",
+     "lineno": 167,
+     "message": "AssertionError: Locator expected to have count '1'\nActual value: 0 \nCall log:\n  - Expect \"to_have_count\" get_by_test_id(re.compile(r\"^message\\d+$\")).filter(has_text=\"Reserva teste c41a12ce\") with timeout 15000ms\n  - waiting for get_by_test_id(re.compile(r\"^message\\d+$\")).filter(has_text=\"Reserva teste c41a12ce\")\n    33 \u00d7 locator resolved to 0 elements\n       - unexpected value \"0\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py",
+      "lineno": 167,
+      "message": "in test_CT006_mensagem_recem_enviada_aparece_na_lista"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py:167: in test_CT006_mensagem_recem_enviada_aparece_na_lista\n    expect(row).to_have_count(1)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 0 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_test_id(re.compile(r\"^message\\d+$\")).filter(has_text=\"Reserva teste c41a12ce\") with timeout 15000ms\nE     - waiting for get_by_test_id(re.compile(r\"^message\\d+$\")).filter(has_text=\"Reserva teste c41a12ce\")\nE       33 \u00d7 locator resolved to 0 elements\nE          - unexpected value \"0\""
+   },
+   "teardown": {
+    "duration": 0.017847899929620326,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT007_acesso_direto_apos_logout_solicita_login[chromium]",
+   "lineno": 171,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT007_acesso_direto_apos_logout_solicita_login[chromium]",
+    "chromium",
+    "script.py",
+    "US06",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12530969991348684,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 15.782460800022818,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py",
+     "lineno": 85,
+     "message": "AssertionError: Locator expected to have count '0'\nActual value: 1 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 15000ms\n  - waiting for get_by_role(\"button\", name=\"Logout\")\n    4 \u00d7 locator resolved to 1 element\n      - unexpected value \"1\"\n    - waiting for \"https://automationintesting.online/\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\"\n    29 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py",
+      "lineno": 174,
+      "message": "in test_CT007_acesso_direto_apos_logout_solicita_login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py",
+      "lineno": 85,
+      "message": "in logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py:174: in test_CT007_acesso_direto_apos_logout_solicita_login\n    logout(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US06\\script.py:85: in logout\n    expect(page.get_by_role(\"button\", name=LOGOUT_BUTTON_NAME)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\") with timeout 15000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\")\nE       4 \u00d7 locator resolved to 1 element\nE         - unexpected value \"1\"\nE       - waiting for \"https://automationintesting.online/\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\"\nE       29 \u00d7 locator resolved to 1 element\nE          - unexpected value \"1\""
+   },
+   "teardown": {
+    "duration": 0.20964030001778156,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

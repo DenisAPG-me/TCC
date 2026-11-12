@@ -1,0 +1,12 @@
+[
+ "A história descreve uma API REST; a automação usa Python, pytest e requests.",
+ "A autenticação ocorre em `POST /auth`, com JSON `{\"username\": \"admin\", \"password\": \"password123\"}`. A resposta contém o token na chave `token`.",
+ "Reservas são criadas por `POST /booking`; a resposta contém o identificador na chave `bookingid`.",
+ "O payload de criação inclui `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, e `additionalneeds`.",
+ "A consulta individual é `GET /booking/{id}`; a exclusão é `DELETE /booking/{id}`; a listagem filtrada por nome usa `GET /booking?firstname=...&lastname=...`.",
+ "O token válido é enviado no cabeçalho `Cookie: token=<token>`. Sem token, o cabeçalho de autorização é omitido; o token inválido é enviado pelo mesmo cabeçalho.",
+ "Cada teste cria seus próprios dados, usando nomes únicos derivados de UUID, para manter os cenários independentes.",
+ "Para CA5, considera-se qualquer status HTTP entre 400 e 499 como erro. A reserva de controle criada no mesmo teste deve permanecer consultável com status 200.",
+ "Para CA6, considera-se que a listagem filtrada retorna uma lista JSON de identificadores; uma resposta vazia equivale a `[]`.",
+ "Todas as requisições usam timeout e não dependem de arquivos externos."
+]

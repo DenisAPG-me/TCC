@@ -1,0 +1,18 @@
+[
+ "Tecnologia: Python + pytest + pytest-playwright (UI), pois os critérios de aceitação são de interface web. Instalação prevista: `pip install pytest pytest-playwright` e `playwright install chromium`.",
+ "Fixture `page` fornecida pelo plugin pytest-playwright; o navegador é Chromium headless por padrão do plugin. Nenhuma fixture própria de browser é criada.",
+ "Acesso sem login: o carrinho de visitante é usado nos testes.",
+ "Isolamento: cada teste roda em um contexto novo do plugin, portanto o carrinho começa vazio em cada caso.",
+ "Busca de produto: campo de busca com placeholder \"Search\", seguido de Enter e clique no título exato do produto (heading) na lista de resultados.",
+ "Campo de quantidade na página do produto: label \"Quantity\".",
+ "Botão de adicionar: role button com nome \"Add to cart\".",
+ "Mensagem de confirmação: texto \"Product added to shopping cart.\", exibida em toast/alerta.",
+ "Indicador do carrinho: texto dentro do link de navegação \"Cart\", que exibe a quantidade total de itens.",
+ "Preço unitário na página do produto: elemento `[data-test='unit-price']`.",
+ "Página do carrinho: acessada pelo link \"Cart\". Nela, a quantidade da linha usa `[data-test='product-quantity']`, o total da linha usa `[data-test='line-price']` e o total do carrinho usa `[data-test='cart-total']`.",
+ "Atualização da quantidade no carrinho: preencher o campo e clicar no botão \"Update\".",
+ "Formato de preço: valor numérico com ponto ou vírgula decimal, possivelmente precedido por \"$\". Comparações usam `Decimal`.",
+ "Limite de quantidade: apenas o Thor Hammer tem a restrição de uma unidade (CA4). Não há limite máximo para os demais produtos descrito na User Story.",
+ "Dados de teste: \"Claw Hammer\" com quantidades 1 e 3; \"Thor Hammer\" com quantidades 1 e 3.",
+ "Os seletores `data-test` são usados onde não há role ou label recomendado e precisam ser validados contra a página real."
+]

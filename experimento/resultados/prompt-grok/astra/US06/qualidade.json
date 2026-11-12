@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Helpers e nomes claros",
+  "estrutura": "Helpers, dados unicos por teste, constantes",
+  "assercoes": "Contador exato, linha com nome e assunto",
+  "espera": "expect com timeout, dados unicos",
+  "manutenibilidade": "Constantes, mas test-id, label e URL chutados"
+ }
+}

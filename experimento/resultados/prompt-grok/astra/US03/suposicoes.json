@@ -1,0 +1,21 @@
+[
+ "Nenhum acesso ao sistema, internet, documentação ou código foi realizado. O arquivo é uma implementação baseada em contratos de interface **supostos**; sua execução contra o sistema real depende da confirmação e eventual adaptação desses contratos.",
+ "Por prevalência dos requisitos técnicos, são necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, além do navegador instalado pelo Playwright. Não há outras dependências externas. Execução sugerida: `pytest test_compra.py`.",
+ "A URL base fica em uma constante. Supõem-se as rotas relativas `/auth/login` para login e `/` para catálogo. As demais etapas são alcançadas pela interface.",
+ "Supõe-se que cada teste receba do plugin uma página em contexto novo, sem sessão, carrinho ou estado de armazenamento previamente carregado. A conta existe, está ativa e aceita as credenciais fornecidas.",
+ "A interface está em inglês. Todos os nomes acessíveis e `data-testid` usados no código são inventados, exceto os textos explicitamente fornecidos na User Story. Os seletores supostos estão centralizados no código.",
+ "No login, existem os rótulos `Email` e `Password` e o botão `Login`. Os erros são visíveis após o envio, inclusive quando somente um campo está vazio. Os campos não utilizam validação nativa que impeça a apresentação dessas mensagens.",
+ "Após autenticar, aparece um título `My account` e um elemento `data-testid=\"user-menu-name\"` contendo exclusivamente um nome não vazio. O nome real não foi fornecido; verifica-se esse contrato sem inventar um valor específico.",
+ "A ausência de sessão é observada pela ausência do menu autenticado e, após navegar novamente ao login, pela presença do formulário. Não se presume acesso a cookies ou endpoints internos.",
+ "Supõe-se um catálogo com ao menos um produto disponível, representado por um link `data-testid=\"product-card\"`. O primeiro produto aceita inclusão de uma unidade; o contador `cart-count` passa a `1`. Os controles `Add to cart`, `Cart` e `Proceed to checkout` têm nomes acessíveis conforme o código.",
+ "O checkout não autenticado apresenta o mesmo formulário de login. Não se presume redirecionamento para uma rota específica nesse cenário.",
+ "Para usuário autenticado, iniciar checkout leva diretamente ao formulário `address-step`. Valores eventualmente preenchidos previamente são substituídos pelos dados de cada teste.",
+ "País é um `<select>` rotulado `Country`, com opção vazia de valor `\"\"` e opção `Brazil`. CEP, número, rua, cidade e estado são campos editáveis com os rótulos definidos no código.",
+ "Os seis campos de endereço são obrigatórios individualmente. Ao enviar um endereço incompleto pelo botão `Continue to payment`, cada campo vazio recebe `aria-invalid=\"true\"`; o endereço permanece visível e `payment-step` não fica visível.",
+ "O endereço fictício brasileiro fornecido no código é aceito para entrega. Não há verificação externa de endereço, cálculo de frete ou campos obrigatórios adicionais.",
+ "Os casos de borda exercitam a ausência de exatamente um campo obrigatório. Não se deduzem limites de tamanho, faixas numéricas, regras de CEP ou rejeições de cartão, pois não foram especificados.",
+ "O passo `payment-step` contém um `<select>` `Payment method`, com opção `Credit Card`, campos `Card number`, `Expiration date`, `CVV`, `Cardholder name` e botão `Pay`.",
+ "O ambiente é de demonstração e aceita o cartão fictício `4111111111111111`, CVV `123`, titular `CLIENTE TESTE` e validade futura no formato `MM/YYYY`. A validade é calculada com dois anos de antecedência. Não há cobrança real, iframe, CAPTCHA ou autenticação adicional do cartão.",
+ "Após pagar, aparece a mensagem especificada. Um botão `Confirm order` confirma o pedido; o elemento `order-confirmation` contém a mensagem especificada com sufixo de fatura não vazio, formado por letras, números ou hífens.",
+ "Cada caso listado corresponde a exatamente uma função de teste, sem parametrização. Os auxiliares apenas reutilizam preparação e verificações. Nenhum teste depende da execução de outro."
+]

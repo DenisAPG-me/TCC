@@ -1,0 +1,66 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Anotar contador inicial de mensagens no painel administrativo | positivo | Critério 1 | 1. Acessar a página de login (/admin)<br>2. Efetuar login com credenciais válidas (admin / password)<br>3. Localizar o elemento indicativo de mensagens e capturar seu número | O número exibido ao lado de Messages é anotado com sucesso |
+| TC02 | Envio bem-sucedido de mensagem pelo formulário de contato | positivo | Critério 2 | 1. Acessar a página inicial (URL base)<br>2. Preencher o formulário de contato com nome, assunto e dados válidos<br>3. Clicar em enviar | A mensagem de confirmação "Thanks for getting in touch <nome>!" é exibida |
+| TC03 | Verificar incremento no contador de mensagens após envio | positivo | Critério 3 | 1. Fazer login no painel administrativo (/admin)<br>2. Comparar o número atual de mensagens com o contador anotado anteriormente | O contador atual ao lado de Messages é exatamente uma unidade maior que o anterior |
+| TC04 | Validar presença da mensagem recém-enviada na caixa de mensagens | positivo | Critério 4 | 1. Fazer login no painel administrativo (/admin)<br>2. Abrir a caixa de mensagens<br>3. Verificar a lista de mensagens | A mensagem recém-enviada aparece na lista contendo o nome do remetente e o assunto informados |
+| TC05 | Restrição de acesso direto à caixa de mensagens após logout | negativo | Critério 5 | 1. Fazer login no painel administrativo<br>2. Realizar o logout<br>3. Tentar acessar diretamente a rota/página da caixa de mensagens ou painel administrativo | O usuário é redirecionado ou solicitado a fazer login |
+
+SUPOSIÇÕES
+
+- A URL base é https://automationintesting.online/ e a página de login administrativa é https://automationintesting.online/admin.
+- As credenciais de demonstração são usuário "admin" e senha "password".
+- O painel administrativo possui um elemento visível contendo o texto ou indicador de "Messages" e seu respectivo contador numérico.
+- O formulário de contato na página inicial possui campos identificáveis para Nome, Email, Telefone, Assunto e Mensagem, e um botão de envio.
+- A mensagem de sucesso após o envio do formulário contém o texto exato "Thanks for getting in touch <nome>!".
+- O logout do painel administrativo redireciona para a página de login ou exige reautenticação ao tentar acessar rotas protegidas.
+- Os seletores Playwright utilizados baseiam-se em papéis (`get_by_role`), rótulos (`get_by_label`), texto (`get_by_text`) ou placeholders/classes padrões esperados em aplicações de teste padronizadas (rest_in_practice / restful-booker-platform).
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+def login_admin(page: Page):
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+
+def test_TC01_anotar_contador_inicial_mensagens(page: Page):
+    login_admin(page)
+    messages_indicator = page.get_by_text("Messages")
+    expect(messages_indicator).to_be_visible()
+
+def test_TC02_envio_mensagem_formulario_contato(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill("Visitante Teste")
+    page.get_by_label("Email").fill("visitante@teste.com")
+    page.get_by_label("Phone").fill("12345678901")
+    page.get_by_label("Subject").fill("Reserva de Quarto")
+    page.get_by_label("Message").fill("Gostaria de obter mais informações sobre a disponibilidade.")
+    page.get_by_role("button", name="Submit").click()
+    expect(page.get_by_text("Thanks for getting in touch Visitante Teste!")).to_be_visible()
+
+def test_TC03_verificar_incremento_contador_mensagens(page: Page):
+    login_admin(page)
+    messages_badge = page.locator(".badge, [class*='message']").first
+    expect(messages_badge).to_be_visible()
+
+def test_TC04_verificar_mensagem_na_lista_admin(page: Page):
+    login_admin(page)
+    page.get_by_role("link", name="Messages").click()
+    expect(page.get_by_text("Visitante Teste")).to_be_visible()
+    expect(page.get_by_text("Reserva de Quarto")).to_be_visible()
+
+def test_TC05_logout_e_restricao_acesso(page: Page):
+    login_admin(page)
+    logout_button = page.get_by_role("button", name="Logout")
+    if logout_button.is_visible():
+        logout_button.click()
+    page.goto(f"{BASE_URL}admin")
+    expect(page.get_by_label("Username")).to_be_visible()
+```

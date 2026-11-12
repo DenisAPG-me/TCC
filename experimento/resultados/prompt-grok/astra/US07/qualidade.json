@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 5,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "bom (nota 4)",
+  "estrutura": "nomes e estrutura claros (nota 5)",
+  "assercoes": "nomes e estrutura claros (nota 5)",
+  "espera": "nomes e estrutura claros (nota 5)",
+  "manutenibilidade": "bom (nota 4)"
+ }
+}

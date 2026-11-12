@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_adicionar_3_unidades_exibe_confirmacao_e_badge[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "    1) <h1 data-test=\"product-name\" _ngcontent-ng-c2605822289=\"\">…</h1> aka locator(\"[data-test=\\\"product-name\\\"]\")\nE       2) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer with Fiberglass Handle </h5> aka get_by_role(\"link\", name=\"Claw Hammer with Fiberglass\")\nE       3) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer </h5> aka get_by_role(\"link\", name=\"Claw Hammer Claw Hammer More\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"heading\", name=\"Claw Hammer\") with timeout 5000ms\nE     - waiting for get_by_role(\"heading\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC02_total_linha_e_total_carrinho_igual_preco_x3[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "    1) <h1 data-test=\"product-name\" _ngcontent-ng-c2605822289=\"\">…</h1> aka locator(\"[data-test=\\\"product-name\\\"]\")\nE       2) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer with Fiberglass Handle </h5> aka get_by_role(\"link\", name=\"Claw Hammer with Fiberglass\")\nE       3) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer </h5> aka get_by_role(\"link\", name=\"Claw Hammer Claw Hammer More\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"heading\", name=\"Claw Hammer\") with timeout 5000ms\nE     - waiting for get_by_role(\"heading\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC03_alterar_quantidade_para_1_ajusta_total_ao_preco_unitario[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "    1) <h1 data-test=\"product-name\" _ngcontent-ng-c2605822289=\"\">…</h1> aka locator(\"[data-test=\\\"product-name\\\"]\")\nE       2) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer with Fiberglass Handle </h5> aka get_by_role(\"link\", name=\"Claw Hammer with Fiberglass\")\nE       3) <h5 class=\"card-title\" _ngcontent-ng-c2605822289=\"\"> Claw Hammer </h5> aka get_by_role(\"link\", name=\"Claw Hammer Claw Hammer More\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"heading\", name=\"Claw Hammer\") with timeout 5000ms\nE     - waiting for get_by_role(\"heading\", name=\"Claw Hammer\")"
+  },
+  {
+   "nodeid": "script.py::test_TC04_adicionar_3_thor_hammer_exibe_mensagem_de_limite[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_TC05_tentativa_rejeitada_thor_hammer_nao_altera_carrinho[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  },
+  {
+   "nodeid": "script.py::test_TC06_adicionar_1_thor_hammer_e_aceito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e quantity\">…</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">…</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+  }
+ ],
+ "stdout_tail": "elow @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC01_adicionar_3_unidades_exibe_confirmacao_e_badge[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC02_total_linha_e_total_carrinho_igual_preco_x3[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC03_alterar_quantidade_para_1_ajusta_total_ao_preco_unitario[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC04_adicionar_3_thor_hammer_exibe_mensagem_de_limite[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC05_tentativa_rejeitada_thor_hammer_nao_altera_carrinho[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US02\\script.py::test_TC06_adicionar_1_thor_hammer_e_aceito[chromium]\n6 failed, 2 warnings in 20.59s\n",
+ "returncode": 1,
+ "duracao_s": 21.23
+}

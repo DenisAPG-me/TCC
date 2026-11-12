@@ -1,0 +1,100 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Adicionar 3 unidades de Claw Hammer exibe confirmação e badge 3 | positivo | AC1 | Abrir Claw Hammer; definir quantidade 3; clicar em "Add to cart" | Mensagem "Product added to shopping cart." visível; indicador do carrinho mostra "3" |
+| TC02 | Total da linha e total do carrinho corretos com 3 unidades | positivo | AC2 | Adicionar 3 unidades de Claw Hammer; abrir carrinho; ler preço unitário, total da linha e total do carrinho | Total da linha = preço unitário × 3; total do carrinho = total da linha |
+| TC03 | Alterar quantidade no carrinho para 1 ajusta total ao preço unitário | positivo | AC3 | Adicionar 3 unidades de Claw Hammer; abrir carrinho; alterar quantidade para 1; clicar em "Update" | Total do carrinho = preço unitário |
+| TC04 | Adicionar 3 unidades de Thor Hammer exibe mensagem de limite | negativo | AC4 | Abrir Thor Hammer; definir quantidade 3; clicar em "Add to cart" | Mensagem "You can only have one Thor Hammer in the cart." visível |
+| TC05 | Tentativa rejeitada de Thor Hammer não altera o carrinho | negativo | AC4 | Abrir Thor Hammer; definir quantidade 3; tentar adicionar; verificar indicador do carrinho | Indicador do carrinho permanece "0" |
+| TC06 | Adicionar 1 unidade de Thor Hammer é aceito (limite exato) | borda | AC4 | Abrir Thor Hammer; definir quantidade 1; clicar em "Add to cart" | Mensagem "Product added to shopping cart." visível; indicador do carrinho mostra "1" |
+
+SUPOSIÇÕES
+
+- Base URL: `https://practicesoftwaretesting.com/` (constante `BASE_URL`). Cada teste roda em contexto novo do plugin `pytest-playwright`, portanto o carrinho inicia vazio.
+- Acesso ao produto: na home, o nome do produto é um link acessível (`get_by_role("link", name=...)`), usado com `.first`.
+- Página do produto: campo de quantidade rotulado "Quantity" (`get_by_label`) e botão "Add to cart" (`get_by_role("button")`). Quantidade padrão não é usada pelos testes, pois sempre é preenchida explicitamente.
+- Confirmação "Product added to shopping cart." e mensagem "You can only have one Thor Hammer in the cart." são textos exatos exibidos na página após o clique (`get_by_text(..., exact=True)`).
+- Indicador do carrinho: elemento com `data-testid="cart-quantity"` contendo o número de unidades; quando vazio, exibe "0".
+- Link para o carrinho: `data-testid="nav-cart"`; a página do carrinho tem heading "Shopping Cart".
+- Página do carrinho: preço unitário em `data-testid="product-price"`, quantidade editável em `data-testid="product-quantity"` (botão "Update" para aplicar), total da linha em `data-testid="line-price"` e total do carrinho em `data-testid="cart-total"`.
+- Formato de preço: símbolo de moeda e ponto decimal (ex.: "$12.99"); a extração remove tudo que não seja dígito ou ponto.
+- Thor Hammer tem limite de 1 unidade por carrinho; Claw Hammer não tem limite com 3 unidades.
+- Asserções de valores numéricos que dependem de atualização da página usam `expect.poll`, evitando `time.sleep`.
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+CLAW_HAMMER = "Claw Hammer"
+THOR_HAMMER = "Thor Hammer"
+ADDED_MESSAGE = "Product added to shopping cart."
+THOR_LIMIT_MESSAGE = "You can only have one Thor Hammer in the cart."
+
+
+def parse_price(text: str) -> float:
+    return round(float(re.sub(r"[^\d.]", "", text)), 2)
+
+
+def open_product(page: Page, name: str) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("link", name=name).first.click()
+    expect(page.get_by_role("heading", name=name)).to_be_visible()
+
+
+def add_to_cart(page: Page, name: str, quantity: int) -> None:
+    open_product(page, name)
+    page.get_by_label("Quantity").fill(str(quantity))
+    page.get_by_role("button", name="Add to cart").click()
+
+
+def open_cart(page: Page) -> None:
+    page.get_by_test_id("nav-cart").click()
+    expect(page.get_by_role("heading", name="Shopping Cart")).to_be_visible()
+
+
+def test_TC01_adicionar_3_unidades_exibe_confirmacao_e_badge(page: Page) -> None:
+    add_to_cart(page, CLAW_HAMMER, 3)
+    expect(page.get_by_text(ADDED_MESSAGE, exact=True)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("3")
+
+
+def test_TC02_total_linha_e_total_carrinho_igual_preco_x3(page: Page) -> None:
+    add_to_cart(page, CLAW_HAMMER, 3)
+    open_cart(page)
+    expect(page.get_by_test_id("line-price")).to_be_visible()
+    unit_price = parse_price(page.get_by_test_id("product-price").inner_text())
+    line_total = parse_price(page.get_by_test_id("line-price").inner_text())
+    expect.poll(lambda: parse_price(page.get_by_test_id("cart-total").inner_text())).to_equal(line_total)
+    assert line_total == round(unit_price * 3, 2)
+
+
+def test_TC03_alterar_quantidade_para_1_ajusta_total_ao_preco_unitario(page: Page) -> None:
+    add_to_cart(page, CLAW_HAMMER, 3)
+    open_cart(page)
+    expect(page.get_by_test_id("product-quantity")).to_have_value("3")
+    unit_price = parse_price(page.get_by_test_id("product-price").inner_text())
+    page.get_by_test_id("product-quantity").fill("1")
+    page.get_by_role("button", name="Update").click()
+    expect(page.get_by_test_id("product-quantity")).to_have_value("1")
+    expect.poll(lambda: parse_price(page.get_by_test_id("cart-total").inner_text())).to_equal(unit_price)
+
+
+def test_TC04_adicionar_3_thor_hammer_exibe_mensagem_de_limite(page: Page) -> None:
+    add_to_cart(page, THOR_HAMMER, 3)
+    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()
+
+
+def test_TC05_tentativa_rejeitada_thor_hammer_nao_altera_carrinho(page: Page) -> None:
+    add_to_cart(page, THOR_HAMMER, 3)
+    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("0")
+
+
+def test_TC06_adicionar_1_thor_hammer_e_aceito(page: Page) -> None:
+    add_to_cart(page, THOR_HAMMER, 1)
+    expect(page.get_by_text(ADDED_MESSAGE, exact=True)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("1")
+```

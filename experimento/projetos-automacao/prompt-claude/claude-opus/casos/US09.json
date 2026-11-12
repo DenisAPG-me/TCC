@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Excluir reserva sem token é recusado",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Criar reserva com nome único; Enviar DELETE /booking/{id} sem cabeçalho Cookie nem Authorization; Consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200 com o mesmo firstname e lastname"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Excluir reserva com token inválido é recusado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token=token_invalido_inexistente; Consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200 com os dados originais da reserva"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Excluir reserva com token vazio é recusado",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token= (vazio); Consultar GET /booking/{id}",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Credenciais inválidas não geram token capaz de excluir",
+  "tipo": "Borda",
+  "criterio": "CA2, CA3",
+  "passos": "Criar reserva com nome único; Autenticar em POST /auth com admin e senha errada; Tentar DELETE /booking/{id} com o valor retornado como token; Consultar GET /booking/{id}",
+  "esperado": "POST /auth não retorna campo token; DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Autenticar em POST /auth com admin/password123; Criar reserva com nome único; Enviar DELETE /booking/{id} com Cookie token={token}",
+  "esperado": "POST /auth retorna 200 com token não vazio; DELETE retorna 201"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Consultar reserva excluída retorna 404",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva; Obter token válido; Excluir reserva (201); Enviar GET /booking/{id}",
+  "esperado": "GET retorna 404"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Excluir novamente reserva já excluída retorna erro 4xx sem afetar outras",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva A e reserva B com nomes únicos; Obter token válido; Excluir A (201); Excluir A novamente com token válido; Consultar GET /booking/{B}",
+  "esperado": "Segundo DELETE retorna status entre 400 e 499; GET de B retorna 200 com dados inalterados"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Excluir identificador inexistente com token válido retorna 4xx",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Criar reserva de controle; Obter token válido; Enviar DELETE /booking/999999999; Consultar GET da reserva de controle",
+  "esperado": "DELETE retorna status entre 400 e 499; reserva de controle retorna 200"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Excluir uma reserva não afeta outra reserva",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Criar reservas A e B com nomes únicos; Obter token válido; Excluir A (201); Consultar GET /booking/{B}; Filtrar GET /booking pelo nome de B",
+  "esperado": "GET de B retorna 200 com dados idênticos aos criados; filtro pelo nome de B contém o id de B"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Filtro pelo nome único encontra a reserva antes da exclusão",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Criar reserva com nome único; Enviar GET /booking?firstname={nome}&lastname={sobrenome}",
+  "esperado": "Retorna 200 com lista contendo exatamente o id da reserva criada"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Filtro pelo nome único após a exclusão retorna lista vazia",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Criar reserva com nome único; Obter token válido; Excluir reserva (201); Enviar GET /booking?firstname={nome}&lastname={sobrenome}",
+  "esperado": "Retorna 200 com lista vazia"
+ }
+]

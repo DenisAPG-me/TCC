@@ -1,0 +1,146 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Adicionar 3 unidades de "Claw Hammer" ao carrinho | positivo | CA1 | Abrir a página do "Claw Hammer"; definir quantidade 3; clicar em "Add to cart" | Mensagem "Product added to shopping cart." é exibida e o indicador do carrinho mostra 3 |
+| TC02 | Total da linha e total do carrinho com 3 unidades | positivo | CA2 | Adicionar 3 unidades de "Claw Hammer"; guardar o preço unitário; abrir o carrinho | Total da linha = preço unitário × 3; total do carrinho = total da linha |
+| TC03 | Alterar a quantidade no carrinho de 3 para 1 | positivo | CA3 | Adicionar 3 unidades de "Claw Hammer"; abrir o carrinho; alterar a quantidade para 1 | Total do carrinho = preço unitário |
+| TC04 | Bloquear a adição de 3 unidades de "Thor Hammer" | negativo | CA4 | Abrir a página do "Thor Hammer"; definir quantidade 3; clicar em "Add to cart" | Mensagem "You can only have one Thor Hammer in the cart." é exibida e o indicador do carrinho não mostra 3 |
+| TC05 | Adicionar exatamente 1 unidade de "Thor Hammer" (limite permitido) | borda | CA4 / CA1 | Abrir a página do "Thor Hammer"; manter/definir quantidade 1; clicar em "Add to cart" | Mensagem "Product added to shopping cart." é exibida e o indicador do carrinho mostra 1 |
+
+SUPOSIÇÕES
+
+- A aplicação é web (SPA). A URL base é `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`. A página inicial lista os produtos.
+- Os elementos expõem o atributo `data-test`. Por isso, `get_by_test_id` é configurado para esse atributo com `playwright.selectors.set_test_id_attribute("data-test")`.
+- Os seletores deduzidos são estes:
+  - campo de busca: `search-query`; botão de busca: `search-submit`
+  - título do produto na listagem: `product-name`
+  - preço unitário na página do produto: `unit-price`
+  - campo de quantidade na página do produto: `quantity`
+  - botão "Add to cart": role button com o nome "Add to cart"
+  - link do carrinho no menu: `nav-cart`; indicador de quantidade do carrinho: `cart-quantity`
+  - no carrinho: `product-quantity`, `product-price`, `line-price` e `cart-total`
+- Os produtos são localizados pela busca da página inicial, porque podem não aparecer na primeira página da listagem. O título é comparado de forma exata, para não confundir "Claw Hammer" com variantes de nome parecido.
+- O carrinho fica na rota `/checkout`, aberta pelo link `nav-cart`.
+- Os preços são exibidos com duas casas decimais, com ou sem o símbolo `$`. Os valores são extraídos por expressão regular.
+- A alteração de quantidade no carrinho é aplicada ao sair do campo (evento `change`, disparado com Tab). Os totais são recalculados sem recarregar a página.
+- As mensagens de confirmação e de erro aparecem como toast, com o texto exato informado na User Story.
+- Cada teste usa um contexto novo do pytest-playwright, então o carrinho começa vazio.
+- O "Thor Hammer" permite adicionar 1 unidade. A mensagem do CA4 ("only have one") implica isso.
+- Ambos os produtos estão disponíveis em estoque.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+CLAW_HAMMER = "Claw Hammer"
+THOR_HAMMER = "Thor Hammer"
+MSG_ADDED = "Product added to shopping cart."
+MSG_THOR_LIMIT = "You can only have one Thor Hammer in the cart."
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id(playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+def parse_price(text: str) -> float:
+    match = re.search(r"\d+(?:[.,]\d+)?", text.replace(",", ""))
+    assert match, f"Preço não encontrado em: {text!r}"
+    return float(match.group(0))
+
+
+def price_pattern(value: float) -> re.Pattern:
+    return re.compile(rf"^\s*\$?\s*{re.escape(f'{value:.2f}')}\s*$")
+
+
+def open_product(page: Page, name: str) -> None:
+    page.goto(BASE_URL)
+    page.get_by_test_id("search-query").fill(name)
+    page.get_by_test_id("search-submit").click()
+    page.get_by_test_id("product-name").filter(
+        has_text=re.compile(rf"^\s*{re.escape(name)}\s*$")
+    ).first.click()
+    expect(page.get_by_role("heading", name=name, exact=True)).to_be_visible()
+
+
+def set_quantity_and_add(page: Page, quantity: int) -> None:
+    page.get_by_test_id("quantity").fill(str(quantity))
+    page.get_by_role("button", name="Add to cart").click()
+
+
+def get_unit_price(page: Page) -> float:
+    unit_price = page.get_by_test_id("unit-price")
+    expect(unit_price).to_have_text(re.compile(r"\d"))
+    return parse_price(unit_price.inner_text())
+
+
+def add_claw_hammer_x3(page: Page) -> float:
+    open_product(page, CLAW_HAMMER)
+    unit_price = get_unit_price(page)
+    set_quantity_and_add(page, 3)
+    expect(page.get_by_text(MSG_ADDED)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("3")
+    return unit_price
+
+
+def open_cart(page: Page) -> None:
+    page.get_by_test_id("nav-cart").click()
+    expect(page).to_have_url(re.compile(r"/checkout"))
+    expect(page.get_by_test_id("cart-total")).to_be_visible()
+
+
+def test_TC01_add_claw_hammer_quantity_3(page: Page):
+    open_product(page, CLAW_HAMMER)
+    set_quantity_and_add(page, 3)
+
+    expect(page.get_by_text(MSG_ADDED)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("3")
+
+
+def test_TC02_cart_line_total_and_cart_total_for_3_units(page: Page):
+    unit_price = add_claw_hammer_x3(page)
+    open_cart(page)
+
+    expect(page.get_by_test_id("product-quantity")).to_have_value("3")
+    expected_line_total = round(unit_price * 3, 2)
+    expect(page.get_by_test_id("line-price")).to_have_text(price_pattern(expected_line_total))
+    expect(page.get_by_test_id("cart-total")).to_have_text(price_pattern(expected_line_total))
+
+    line_total = parse_price(page.get_by_test_id("line-price").inner_text())
+    cart_total = parse_price(page.get_by_test_id("cart-total").inner_text())
+    assert cart_total == line_total
+
+
+def test_TC03_change_cart_quantity_from_3_to_1(page: Page):
+    unit_price = add_claw_hammer_x3(page)
+    open_cart(page)
+
+    quantity_input = page.get_by_test_id("product-quantity")
+    expect(quantity_input).to_have_value("3")
+    quantity_input.fill("1")
+    quantity_input.press("Tab")
+
+    expect(quantity_input).to_have_value("1")
+    expect(page.get_by_test_id("cart-total")).to_have_text(price_pattern(unit_price))
+
+
+def test_TC04_thor_hammer_cannot_add_3_units(page: Page):
+    open_product(page, THOR_HAMMER)
+    set_quantity_and_add(page, 3)
+
+    expect(page.get_by_text(MSG_THOR_LIMIT)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).not_to_have_text("3")
+
+
+def test_TC05_thor_hammer_add_single_unit_allowed(page: Page):
+    open_product(page, THOR_HAMMER)
+    set_quantity_and_add(page, 1)
+
+    expect(page.get_by_text(MSG_ADDED)).to_be_visible()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("1")
+```

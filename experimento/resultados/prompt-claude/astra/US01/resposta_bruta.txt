@@ -1,0 +1,282 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Buscar produtos por hammer | Positivo | CA1 | Abrir a página inicial; Informar hammer; Executar a busca | A página indica a busca por hammer; Existe pelo menos um produto; Todos os nomes exibidos contêm hammer |
+| CT02 | Buscar termo inexistente | Negativo | CA2 | Abrir a página inicial; Informar zzzzxx; Executar a busca | A mensagem There are no products found. é exibida; Nenhum produto é listado |
+| CT03 | Ordenar produtos por preço crescente | Positivo | CA3 | Abrir a página inicial; Selecionar preço do menor para o maior; Ler os preços da página atual | Existem pelo menos dois produtos; Os preços estão em ordem crescente, permitindo valores iguais |
+| CT04 | Ordenar produtos por nome decrescente | Positivo | CA4 | Abrir a página inicial; Selecionar nome de Z a A; Ler os nomes da página atual | Existem pelo menos dois produtos; Os nomes estão em ordem alfabética decrescente, permitindo nomes iguais |
+| CT05 | Buscar hammer após uma busca sem resultados | Borda | CA1, CA2 | Abrir a página inicial; Buscar zzzzxx; Verificar ausência de produtos; Substituir o termo por hammer; Buscar novamente | A primeira busca apresenta a mensagem de ausência e zero produtos; A segunda indica hammer, lista somente nomes contendo hammer e remove a mensagem anterior |
+| CT06 | Buscar termo inexistente após uma busca com resultados | Borda | CA1, CA2 | Abrir a página inicial; Buscar hammer; Verificar os resultados; Substituir o termo por zzzzxx; Buscar novamente | A primeira busca indica hammer e lista somente nomes contendo hammer; A segunda apresenta a mensagem de ausência e remove todos os produtos anteriores |
+
+## SUPOSIÇÕES
+
+- Nenhum acesso ao sistema ou à internet foi realizado. Os seletores e contratos abaixo são hipóteses e precisam ser confirmados antes de executar a suíte contra o sistema real.
+- O foco é interface web. Foram escolhidos Python, pytest, Playwright síncrono e o plugin oficial pytest-playwright. Os requisitos técnicos finais prevalecem sobre a proibição anterior de plugins e sobre a solicitação de fixtures próprias.
+- O ambiente possui pytest, playwright, pytest-playwright e o Chromium do Playwright instalados. A execução é feita com `pytest test_busca_produtos.py`; o plugin utiliza Chromium headless por padrão e gerencia a criação e o encerramento dos recursos.
+- A loja permite busca e ordenação sem autenticação; por isso, as constantes de credenciais são `None`.
+- O campo de busca possui rótulo acessível Search; o botão possui nome acessível Search; a seleção de ordenação possui rótulo acessível Sort.
+- As opções de ordenação têm valores `price,asc` e `name,desc`.
+- Os atributos `data-testid` são: `product-card` para cada cartão, `product-name` para seu nome, `product-price` para seu preço e `search-caption` para a indicação da busca.
+- A indicação da busca contém o termo utilizado. A mensagem de ausência é exatamente a fornecida no CA2 e desaparece quando uma busca posterior encontra produtos.
+- A página inicial e cada busca ou ordenação solicitam `GET /products`, em qualquer origem. A busca utiliza o parâmetro `search`; a ordenação utiliza `sort`. Não há payload de requisição.
+- As respostas de listagem retornam HTTP 200 e um objeto JSON com `data`, uma lista de produtos da página atual. Cada produto contém `name`, uma string não vazia. Essa resposta é utilizada para sincronizar a renderização; os critérios são verificados na interface.
+- Existe pelo menos um produto com hammer no nome, zzzzxx não encontra produtos e a página inicial contém pelo menos dois produtos. Não são inventados nomes ou preços específicos.
+- A correspondência de hammer ignora diferenças entre letras maiúsculas e minúsculas. Os nomes do catálogo permitem comparação alfabética usando `casefold()`, sem regras especiais de ordenação por idioma.
+- Os preços aparecem em dólares, com ponto decimal e duas casas decimais, podendo conter vírgulas como separadores de milhares. A comparação usa `Decimal` e admite preços iguais.
+- A ordenação é validada somente na página atual, conforme os critérios; não é pressuposto que os mesmos produtos permaneçam nessa página após ordenar.
+- CT05 e CT06 exercitam transições entre zero e algum resultado. Pressupõe-se que uma nova busca substitua integralmente a anterior.
+- Cada teste recebe uma página e um contexto isolados do plugin. As respostas e a interface devem atualizar em até 15 segundos.
+
+## SCRIPT
+
+```python
+import re
+from decimal import Decimal
+from urllib.parse import parse_qs, urlsplit
+
+import pytest
+from playwright.sync_api import Page, Response, expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+USERNAME = None
+PASSWORD = None
+
+SEARCH_TERM = "hammer"
+MISSING_TERM = "zzzzxx"
+NO_RESULTS_MESSAGE = "There are no products found."
+TIMEOUT_MS = 15_000
+
+SEARCH_LABEL = "Search"
+SEARCH_BUTTON_NAME = "Search"
+SORT_LABEL = "Sort"
+PRICE_ASC_VALUE = "price,asc"
+NAME_DESC_VALUE = "name,desc"
+
+CARD_TEST_ID = "product-card"
+NAME_TEST_ID = "product-name"
+PRICE_TEST_ID = "product-price"
+SEARCH_CAPTION_TEST_ID = "search-caption"
+
+PRODUCTS_PATH = "/products"
+SEARCH_PARAMETER = "search"
+SORT_PARAMETER = "sort"
+RESPONSE_DATA_KEY = "data"
+RESPONSE_NAME_KEY = "name"
+
+PRICE_PATTERN = re.compile(
+    r"^\s*\$\s*(?P<amount>(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2})\s*$"
+)
+HAMMER_PATTERN = re.compile(re.escape(SEARCH_TERM), re.IGNORECASE)
+
+
+def is_products_response(
+    response: Response,
+    parameter: str = None,
+    value: str = None,
+) -> bool:
+    parsed = urlsplit(response.url)
+    if response.request.method != "GET":
+        return False
+    if parsed.path.rstrip("/") != PRODUCTS_PATH:
+        return False
+    if parameter is None:
+        return True
+    return parse_qs(parsed.query).get(parameter) == [value]
+
+
+def cards(page: Page):
+    return page.get_by_test_id(CARD_TEST_ID)
+
+
+def product_names(page: Page):
+    return cards(page).get_by_test_id(NAME_TEST_ID)
+
+
+def product_prices(page: Page):
+    return cards(page).get_by_test_id(PRICE_TEST_ID)
+
+
+def synchronize_products(page: Page, response: Response) -> None:
+    """Espera que a UI reflita os nomes retornados pela ação executada."""
+    assert response.status == 200, (
+        f"Resposta de produtos inesperada: HTTP {response.status}"
+    )
+    payload = response.json()
+    assert isinstance(payload, dict), "A resposta deve ser um objeto JSON."
+    products = payload.get(RESPONSE_DATA_KEY)
+    assert isinstance(products, list), "O campo data deve ser uma lista."
+
+    expected_names = []
+    for product in products:
+        assert isinstance(product, dict), "Produto inválido na resposta."
+        name = product.get(RESPONSE_NAME_KEY)
+        assert isinstance(name, str) and name.strip(), (
+            "Cada produto deve possuir um nome não vazio."
+        )
+        expected_names.append(name)
+
+    expect(cards(page)).to_have_count(len(expected_names))
+    if expected_names:
+        expect(product_names(page)).to_have_text(expected_names)
+        expect(cards(page).first).to_be_visible()
+
+
+def open_store(page: Page) -> None:
+    page.set_default_timeout(TIMEOUT_MS)
+    expect.set_options(timeout=TIMEOUT_MS)
+
+    with page.expect_response(
+        lambda response: is_products_response(response),
+        timeout=TIMEOUT_MS,
+    ) as pending:
+        page.goto(BASE_URL, wait_until="domcontentloaded")
+
+    synchronize_products(page, pending.value)
+    expect(page.get_by_label(SEARCH_LABEL, exact=True)).to_be_visible()
+    expect(page.get_by_label(SORT_LABEL, exact=True)).to_be_visible()
+
+
+def search(page: Page, term: str) -> None:
+    page.get_by_label(SEARCH_LABEL, exact=True).fill(term)
+
+    with page.expect_response(
+        lambda response: is_products_response(
+            response, SEARCH_PARAMETER, term
+        ),
+        timeout=TIMEOUT_MS,
+    ) as pending:
+        page.get_by_role(
+            "button", name=SEARCH_BUTTON_NAME, exact=True
+        ).click()
+
+    synchronize_products(page, pending.value)
+
+
+def sort_products(page: Page, value: str) -> None:
+    with page.expect_response(
+        lambda response: is_products_response(
+            response, SORT_PARAMETER, value
+        ),
+        timeout=TIMEOUT_MS,
+    ) as pending:
+        page.get_by_label(SORT_LABEL, exact=True).select_option(
+            value=value
+        )
+
+    synchronize_products(page, pending.value)
+
+
+def verify_hammer_results(page: Page) -> None:
+    caption = page.get_by_test_id(SEARCH_CAPTION_TEST_ID)
+    expect(caption).to_be_visible()
+    expect(caption).to_contain_text(SEARCH_TERM)
+    expect(cards(page).first).to_be_visible()
+
+    names = product_names(page)
+    expect(names).to_have_count(cards(page).count())
+    for index in range(names.count()):
+        expect(names.nth(index)).to_be_visible()
+        expect(names.nth(index)).to_contain_text(HAMMER_PATTERN)
+
+    expect(
+        page.get_by_text(NO_RESULTS_MESSAGE, exact=True)
+    ).to_be_hidden()
+
+
+def verify_no_results(page: Page) -> None:
+    expect(
+        page.get_by_text(NO_RESULTS_MESSAGE, exact=True)
+    ).to_be_visible()
+    expect(cards(page)).to_have_count(0)
+    expect(product_names(page)).to_have_count(0)
+
+
+def parse_price(text: str) -> Decimal:
+    match = PRICE_PATTERN.fullmatch(text)
+    if match is None:
+        pytest.fail(f"Formato de preço não previsto: {text!r}")
+    return Decimal(match.group("amount").replace(",", ""))
+
+
+def verify_price_ascending(page: Page) -> None:
+    # Dois itens evitam uma aprovação trivial com lista vazia ou unitária.
+    expect(cards(page).nth(1)).to_be_visible()
+
+    prices = product_prices(page)
+    expect(prices).to_have_count(cards(page).count())
+    for index in range(prices.count()):
+        expect(prices.nth(index)).to_be_visible()
+        expect(prices.nth(index)).to_have_text(PRICE_PATTERN)
+
+    displayed = prices.all_text_contents()
+    expected = sorted(displayed, key=parse_price)
+    expect(prices).to_have_text(expected)
+
+
+def verify_name_descending(page: Page) -> None:
+    expect(cards(page).nth(1)).to_be_visible()
+
+    names = product_names(page)
+    expect(names).to_have_count(cards(page).count())
+    for index in range(names.count()):
+        expect(names.nth(index)).to_be_visible()
+        expect(names.nth(index)).to_have_text(re.compile(r"\S"))
+
+    displayed = names.all_text_contents()
+    expected = sorted(
+        displayed,
+        key=lambda name: name.strip().casefold(),
+        reverse=True,
+    )
+    expect(names).to_have_text(expected)
+
+
+def test_ct01_buscar_hammer(page: Page) -> None:
+    open_store(page)
+    search(page, SEARCH_TERM)
+    verify_hammer_results(page)
+
+
+def test_ct02_buscar_termo_inexistente(page: Page) -> None:
+    open_store(page)
+    search(page, MISSING_TERM)
+    verify_no_results(page)
+
+
+def test_ct03_ordenar_preco_crescente(page: Page) -> None:
+    open_store(page)
+    expect(cards(page).nth(1)).to_be_visible()
+    sort_products(page, PRICE_ASC_VALUE)
+    expect(page.get_by_label(SORT_LABEL, exact=True)).to_have_value(
+        PRICE_ASC_VALUE
+    )
+    verify_price_ascending(page)
+
+
+def test_ct04_ordenar_nome_decrescente(page: Page) -> None:
+    open_store(page)
+    expect(cards(page).nth(1)).to_be_visible()
+    sort_products(page, NAME_DESC_VALUE)
+    expect(page.get_by_label(SORT_LABEL, exact=True)).to_have_value(
+        NAME_DESC_VALUE
+    )
+    verify_name_descending(page)
+
+
+def test_ct05_buscar_hammer_apos_resultado_vazio(page: Page) -> None:
+    open_store(page)
+    search(page, MISSING_TERM)
+    verify_no_results(page)
+    search(page, SEARCH_TERM)
+    verify_hammer_results(page)
+
+
+def test_ct06_buscar_inexistente_apos_resultado_valido(page: Page) -> None:
+    open_store(page)
+    search(page, SEARCH_TERM)
+    verify_hammer_results(page)
+    search(page, MISSING_TERM)
+    verify_no_results(page)
+```

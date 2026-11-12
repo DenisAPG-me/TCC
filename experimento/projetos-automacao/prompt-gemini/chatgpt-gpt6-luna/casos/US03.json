@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT-01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Abrir login e enviar sem preencher os campos.",
+  "esperado": "Exibe “Email is required” e “Password is required”."
+ },
+ {
+  "id": "CT-02",
+  "titulo": "Login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Informar o e-mail de demonstração e uma senha incorreta; enviar.",
+  "esperado": "Exibe “Invalid email or password” e continua sem sessão autenticada."
+ },
+ {
+  "id": "CT-03",
+  "titulo": "Checkout sem autenticação",
+  "tipo": "Negativo",
+  "criterio": "3",
+  "passos": "Adicionar um produto ao carrinho e avançar para checkout sem autenticar.",
+  "esperado": "Solicita e-mail e senha, exibindo o formulário de login."
+ },
+ {
+  "id": "CT-04",
+  "titulo": "Login com conta de demonstração",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Entrar com as credenciais fornecidas.",
+  "esperado": "Exibe “My account” e o nome do usuário no menu."
+ },
+ {
+  "id": "CT-05",
+  "titulo": "Endereço obrigatório vazio",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Autenticar, adicionar um produto, abrir checkout e tentar avançar com os campos de endereço vazios.",
+  "esperado": "Não avança para pagamento; campos obrigatórios são indicados."
+ },
+ {
+  "id": "CT-06",
+  "titulo": "Endereço preenchido e compra com cartão",
+  "tipo": "Positivo",
+  "criterio": "5 e 6",
+  "passos": "Preencher país, CEP, número, rua, cidade e estado; escolher cartão, informar dados fictícios e confirmar o pagamento e o pedido.",
+  "esperado": "Avança para pagamento, exibe “Payment was successful” e depois “Thanks for your order!” com número iniciado por “INV-”."
+ }
+]

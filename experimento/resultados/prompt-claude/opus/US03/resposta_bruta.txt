@@ -1,0 +1,224 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Login com formulário vazio | Negativo | CA1 | Acessar /auth/login; não preencher e-mail nem senha; clicar em "Login" | Mensagens "Email is required" e "Password is required" exibidas; usuário permanece na tela de login |
+| CT02 | Login apenas com senha preenchida | Borda | CA1 | Acessar /auth/login; deixar e-mail vazio; preencher senha "welcome01"; clicar em "Login" | Mensagem "Email is required" exibida; mensagem "Password is required" não exibida; usuário permanece na tela de login |
+| CT03 | Login com e-mail válido e senha incorreta | Negativo | CA2 | Acessar /auth/login; preencher customer@practicesoftwaretesting.com; preencher senha incorreta; clicar em "Login" | Mensagem "Invalid email or password" exibida; URL permanece em /auth/login; link "Sign in" continua visível (sem sessão) |
+| CT04 | Checkout sem autenticação solicita credenciais | Positivo | CA3 | Sem login, abrir produto; adicionar ao carrinho; acessar o carrinho (/checkout); clicar em "Proceed to checkout" | Passo de login exibido com campos de e-mail, senha e botão "Login" |
+| CT05 | Autenticação durante o checkout permite prosseguir | Positivo | CA3, CA4 | Sem login, adicionar produto ao carrinho; avançar no carrinho; informar credenciais de demonstração no passo de login; confirmar; clicar em "Proceed to checkout" | Mensagem de usuário já autenticado exibida; ao prosseguir o passo de endereço é exibido |
+| CT06 | Login com conta de demonstração | Positivo | CA4 | Acessar /auth/login; preencher credenciais de demonstração; clicar em "Login" | Redirecionado para /account; título "My account" exibido; menu exibe "Jane Doe" |
+| CT07 | Endereço com todos os campos obrigatórios vazios | Negativo | CA5 | Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; limpar país, CEP, número, rua, cidade e estado | Botão "Proceed to checkout" do passo de endereço desabilitado; passo de pagamento não exibido |
+| CT08 | Endereço com apenas o CEP vazio | Borda | CA5 | Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; preencher todos os campos exceto CEP | Botão "Proceed to checkout" do passo de endereço desabilitado |
+| CT09 | Endereço completo permite avançar para pagamento | Positivo | CA5 | Autenticar; adicionar produto ao carrinho; avançar até o passo de endereço; preencher país, CEP, número, rua, cidade e estado; clicar em "Proceed to checkout" | Botão habilitado; passo de pagamento exibido com seletor de forma de pagamento |
+| CT10 | Pagamento com cartão de crédito válido e confirmação do pedido | Positivo | CA6 | Autenticar; adicionar produto; preencher endereço; escolher "Credit Card"; informar número, validade futura, CVV e titular fictícios; clicar em "Confirm"; clicar em "Confirm" novamente | Mensagem "Payment was successful" exibida; depois "Thanks for your order! Your invoice number is INV-" seguido de número |
+| CT11 | Pagamento com número de cartão em formato inválido | Negativo | CA6 | Autenticar; adicionar produto; preencher endereço; escolher "Credit Card"; informar número "1234" e demais dados válidos | Botão "Confirm" desabilitado; mensagem "Payment was successful" não exibida |
+
+## SUPOSIÇÕES
+
+- Foco da User Story é interface web; tecnologia escolhida: Python + pytest + Playwright síncrono.
+- Conforme os requisitos técnicos obrigatórios (que prevalecem sobre as instruções anteriores), o script usa o plugin oficial pytest-playwright com a fixture `page`, sem `sync_playwright()` e sem fixture própria de browser/page; Chromium headless é o padrão do plugin (`pytest arquivo.py` ou `pytest arquivo.py --browser chromium`).
+- A base URL vem da constante `BASE_URL` no topo do arquivo; as rotas são concatenadas a ela.
+- A aplicação usa o atributo `data-test` para identificar elementos; uma fixture autouse de sessão (que usa a fixture `playwright` do plugin, sem criar navegador) configura `get_by_test_id` para esse atributo.
+- Test IDs supostos: login `email`, `password`, `login-submit`, `email-error`, `password-error`, `login-error`; menu `nav-menu`, `nav-sign-in`; conta `page-title`; produto `product-name`, `add-to-cart`, `cart-quantity`; checkout `proceed-1`, `proceed-2`, `proceed-3`, `finish`; endereço `country`, `postal_code`, `house_number`, `street`, `city`, `state`; pagamento `payment-method`, `credit_card_number`, `expiration_date`, `cvv`, `card_holder_name`, `payment-success-message`.
+- Rotas supostas: login em `/auth/login`, conta em `/account`, carrinho/checkout em `/checkout`; o primeiro produto da home está em estoque.
+- O nome exibido no menu para a conta de demonstração é "Jane Doe".
+- Os campos de endereço são inputs de texto e podem vir pré-preenchidos com o endereço do cliente; por isso são limpos antes dos cenários negativos.
+- O botão de avançar do passo de endereço (`proceed-3`) fica desabilitado enquanto há campo obrigatório vazio.
+- A forma de pagamento é um `select` com a opção de rótulo "Credit Card"; o número do cartão segue o formato `0000-0000-0000-0000`, a validade `MM/YYYY` (data futura calculada em tempo de execução), CVV com 3 dígitos; com número em formato inválido o botão `finish` fica desabilitado.
+- No passo de pagamento, o primeiro clique em "Confirm" exibe "Payment was successful" e o segundo confirma o pedido exibindo "Thanks for your order! Your invoice number is INV-<dígitos>".
+- No checkout, após autenticar no passo 2, é exibida uma mensagem contendo "already logged in" e o botão `proceed-2`.
+- Dados de teste fictícios: senha incorreta "senhaErrada123", endereço em São Paulo/Brasil, cartão "0000-0000-0000-0000", titular "Jane Doe".
+- Timeout padrão das asserções `expect` ampliado para 15 s por se tratar de ambiente público remoto.
+- Cada teste recebe contexto de navegador novo do plugin (sessão e carrinho isolados), garantindo independência.
+
+## SCRIPT
+
+```python
+import re
+from datetime import date
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+LOGIN_URL = f"{BASE_URL}auth/login"
+CHECKOUT_URL = f"{BASE_URL}checkout"
+
+USER_EMAIL = "customer@practicesoftwaretesting.com"
+USER_PASSWORD = "welcome01"
+USER_NAME = "Jane Doe"
+WRONG_PASSWORD = "senhaErrada123"
+
+ADDRESS = {
+    "country": "Brazil",
+    "postal_code": "01001-000",
+    "house_number": "100",
+    "street": "Rua Exemplo",
+    "city": "Sao Paulo",
+    "state": "SP",
+}
+
+CARD_NUMBER = "0000-0000-0000-0000"
+INVALID_CARD_NUMBER = "1234"
+CARD_EXPIRATION = f"{date.today().month:02d}/{date.today().year + 2}"
+CARD_CVV = "123"
+CARD_HOLDER = "Jane Doe"
+
+expect.set_options(timeout=15_000)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id(playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+def login(page: Page, email: str = USER_EMAIL, password: str = USER_PASSWORD):
+    page.goto(LOGIN_URL)
+    page.get_by_test_id("email").fill(email)
+    page.get_by_test_id("password").fill(password)
+    page.get_by_test_id("login-submit").click()
+
+
+def login_successfully(page: Page):
+    login(page)
+    expect(page).to_have_url(re.compile(r"/account$"))
+
+
+def add_product_to_cart(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_test_id("product-name").first.click()
+    page.get_by_test_id("add-to-cart").click()
+    expect(page.get_by_test_id("cart-quantity")).to_have_text("1")
+
+
+def go_to_address_step(page: Page):
+    login_successfully(page)
+    add_product_to_cart(page)
+    page.goto(CHECKOUT_URL)
+    page.get_by_test_id("proceed-1").click()
+    page.get_by_test_id("proceed-2").click()
+    expect(page.get_by_test_id("street")).to_be_visible()
+
+
+def fill_address(page: Page, address: dict):
+    for field, value in address.items():
+        page.get_by_test_id(field).fill(value)
+
+
+def go_to_payment_step(page: Page):
+    go_to_address_step(page)
+    fill_address(page, ADDRESS)
+    page.get_by_test_id("proceed-3").click()
+    expect(page.get_by_test_id("payment-method")).to_be_visible()
+
+
+def fill_credit_card(page: Page, card_number: str):
+    page.get_by_test_id("payment-method").select_option(label="Credit Card")
+    page.get_by_test_id("credit_card_number").fill(card_number)
+    page.get_by_test_id("expiration_date").fill(CARD_EXPIRATION)
+    page.get_by_test_id("cvv").fill(CARD_CVV)
+    page.get_by_test_id("card_holder_name").fill(CARD_HOLDER)
+
+
+def test_ct01_login_com_formulario_vazio(page: Page):
+    page.goto(LOGIN_URL)
+    page.get_by_test_id("login-submit").click()
+
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+
+
+def test_ct02_login_apenas_com_senha_preenchida(page: Page):
+    login(page, email="", password=USER_PASSWORD)
+
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_have_count(0)
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+
+
+def test_ct03_login_com_senha_incorreta(page: Page):
+    login(page, password=WRONG_PASSWORD)
+
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page).to_have_url(re.compile(r"/auth/login"))
+    expect(page.get_by_test_id("nav-sign-in")).to_be_visible()
+    expect(page.get_by_test_id("nav-menu")).to_have_count(0)
+
+
+def test_ct04_checkout_sem_autenticacao_solicita_credenciais(page: Page):
+    add_product_to_cart(page)
+    page.goto(CHECKOUT_URL)
+    page.get_by_test_id("proceed-1").click()
+
+    expect(page.get_by_test_id("email")).to_be_visible()
+    expect(page.get_by_test_id("password")).to_be_visible()
+    expect(page.get_by_test_id("login-submit")).to_be_visible()
+
+
+def test_ct05_autenticacao_no_checkout_permite_prosseguir(page: Page):
+    add_product_to_cart(page)
+    page.goto(CHECKOUT_URL)
+    page.get_by_test_id("proceed-1").click()
+    page.get_by_test_id("email").fill(USER_EMAIL)
+    page.get_by_test_id("password").fill(USER_PASSWORD)
+    page.get_by_test_id("login-submit").click()
+
+    expect(page.get_by_text(re.compile("already logged in"))).to_be_visible()
+    page.get_by_test_id("proceed-2").click()
+    expect(page.get_by_test_id("street")).to_be_visible()
+
+
+def test_ct06_login_com_conta_de_demonstracao(page: Page):
+    login(page)
+
+    expect(page).to_have_url(re.compile(r"/account$"))
+    expect(page.get_by_test_id("page-title")).to_have_text("My account")
+    expect(page.get_by_test_id("nav-menu")).to_contain_text(USER_NAME)
+
+
+def test_ct07_endereco_com_campos_obrigatorios_vazios(page: Page):
+    go_to_address_step(page)
+    fill_address(page, {field: "" for field in ADDRESS})
+
+    expect(page.get_by_test_id("proceed-3")).to_be_disabled()
+    expect(page.get_by_test_id("payment-method")).to_have_count(0)
+
+
+def test_ct08_endereco_apenas_com_cep_vazio(page: Page):
+    go_to_address_step(page)
+    fill_address(page, {**ADDRESS, "postal_code": ""})
+
+    expect(page.get_by_test_id("proceed-3")).to_be_disabled()
+
+
+def test_ct09_endereco_completo_permite_avancar_para_pagamento(page: Page):
+    go_to_address_step(page)
+    fill_address(page, ADDRESS)
+
+    expect(page.get_by_test_id("proceed-3")).to_be_enabled()
+    page.get_by_test_id("proceed-3").click()
+    expect(page.get_by_test_id("payment-method")).to_be_visible()
+
+
+def test_ct10_pagamento_com_cartao_valido_e_confirmacao_do_pedido(page: Page):
+    go_to_payment_step(page)
+    fill_credit_card(page, CARD_NUMBER)
+
+    page.get_by_test_id("finish").click()
+    expect(page.get_by_test_id("payment-success-message")).to_have_text("Payment was successful")
+
+    page.get_by_test_id("finish").click()
+    expect(
+        page.get_by_text(re.compile(r"Thanks for your order! Your invoice number is INV-\d+"))
+    ).to_be_visible()
+
+
+def test_ct11_pagamento_com_numero_de_cartao_invalido(page: Page):
+    go_to_payment_step(page)
+    fill_credit_card(page, INVALID_CARD_NUMBER)
+
+    expect(page.get_by_test_id("finish")).to_be_disabled()
+    expect(page.get_by_text("Payment was successful")).to_have_count(0)
+```

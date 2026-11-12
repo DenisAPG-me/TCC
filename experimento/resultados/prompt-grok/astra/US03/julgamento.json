@@ -1,0 +1,209 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login so com senha"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login so com e-mail"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so pais"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so CEP"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so numero"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so rua"
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so cidade"
+  },
+  "12": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so estado"
+  },
+  "13": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "14": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_login_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC02_login_sem_email",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC03_login_sem_senha",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC04_senha_incorreta",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC05_checkout_exige_autenticacao",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC06_login_com_sucesso",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC07_endereco_totalmente_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC08_endereco_sem_pais",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC09_endereco_sem_cep",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC10_endereco_sem_numero",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC11_endereco_sem_rua",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC12_endereco_sem_cidade",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC13_endereco_sem_estado",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC14_corrigir_endereco_vazio_e_avancar",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  },
+  {
+   "teste": "test_TC15_pagar_com_cartao_e_confirmar_pedido",
+   "categoria": "seletor inexistente",
+   "nota": "test-ids/labels/botoes inventados (user-menu-name, address-step, 'Continue to payment')"
+  }
+ ]
+}

@@ -1,0 +1,166 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Novo caso valido"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Novo caso valido"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C12"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Novo caso valido"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_login_formulario_vazio_exibe_mensagens_obrigatorias",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(regex Password) ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT002_login_somente_email_exibe_senha_obrigatoria",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(regex Password) ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT003_login_senha_incorreta_nao_cria_sessao",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(regex Password) ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT004_checkout_sem_autenticacao_exige_login",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT005_login_valido_exibe_my_account_com_nome_no_menu",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(regex Password) ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_CT006_endereco_campos_vazios_nao_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT007_endereco_sem_estado_nao_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT008_endereco_completo_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT009_pagamento_cartao_credito_dados_validos_exibe_sucesso",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT010_confirmar_pedido_exibe_numero_da_fatura",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  },
+  {
+   "teste": "test_CT011_pagamento_sem_dados_do_cartao_nao_exibe_sucesso",
+   "categoria": "seletor inexistente",
+   "nota": "Botao \"Add to cart\" nao localizado"
+  }
+ ]
+}

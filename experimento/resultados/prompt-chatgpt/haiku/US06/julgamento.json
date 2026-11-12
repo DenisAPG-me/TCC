@@ -1,0 +1,175 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C05",
+  "US06-C06",
+  "US06-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login invalido nao exibe contador (novo)"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio sem assunto nao confirma (novo)"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "acentos na confirmacao (novo)"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C05"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C09"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "mensagem nao enviada nao aparece (novo)"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_contador_messages_visivel_apos_login[chromium]",
+   "categoria": "espera/timing",
+   "nota": "contador lido antes de carregar (inner_text sem digitos)"
+  },
+  {
+   "teste": "test_CT002_login_com_senha_invalida_nao_exibe_contador[chromium]",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state networkidle excede timeout"
+  },
+  {
+   "teste": "test_CT003_envio_valido_exibe_confirmacao[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT004_envio_sem_assunto_nao_exibe_confirmacao[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT005_confirmacao_preserva_nome_com_acentos[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT006_contador_aumenta_uma_unidade_apos_envio[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT007_envio_com_email_invalido_nao_altera_contador[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT008_mensagem_recem_enviada_aparece_na_caixa[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT009_mensagem_com_acentos_aparece_corretamente[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT010_mensagem_nao_enviada_nao_aparece_na_caixa[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT011_logout_exige_login_ao_abrir_caixa[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": "MESSAGES_URL /admin/messages inexistente (real /admin/message)"
+  },
+  {
+   "teste": "test_CT012_acesso_direto_sem_login_exige_login[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": "MESSAGES_URL /admin/messages inexistente (real /admin/message)"
+  }
+ ]
+}

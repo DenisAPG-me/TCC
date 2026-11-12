@@ -1,0 +1,20 @@
+[
+ "1. A User Story não numera os critérios. Foram mapeados na ordem de apresentação: CA01 (login com formulário vazio), CA02 (senha incorreta), CA03 (checkout sem autenticação), CA04 (página My account), CA05 (endereço obrigatório), CA06 (pagamento e confirmação do pedido).",
+ "2. Conflito de requisitos: o bloco \"REQUISITOS TÉCNICOS OBRIGATÓRIOS\" da User Story exige o plugin pytest-playwright e a fixture `page` dele. As regras desta tarefa proíbem pytest-playwright e tratam a User Story apenas como especificação. Por isso o arquivo usa `sync_playwright()` dentro de fixtures próprias, com nomes que não colidem com o plugin (`chromium_browser` e `web_page`). Os demais itens desse bloco foram atendidos: `expect` síncrono, locators semânticos, sem `time.sleep` e URL base em constante.",
+ "3. A interface é considerada em inglês, inferido pelos textos dos critérios. Rótulos, botões e links são localizados por esses textos.",
+ "4. Navegação inferida: link \"Sign in\" na página inicial; link \"Cart\"; botões \"Add to cart\", \"Proceed to checkout\", \"Login\", \"Proceed to payment\", \"Confirm payment\" e \"Confirm order\". Caso algum seja link e não botão, o locator deve ser ajustado.",
+ "5. O produto é escolhido pelo primeiro card (`.card`). O nome do produto não foi informado, então este seletor CSS não é semântico e pode exigir ajuste.",
+ "6. Campos de login: rótulo de e-mail correspondente a `E-mail`/`Email` e rótulo de senha `Password`. Ambos são localizados por expressão regular.",
+ "7. Após autenticação durante o checkout, o sistema retorna ao passo de endereço. CT005 não depende disso. CT006 a CT011 dependem.",
+ "8. O passo de endereço inicia com campos vazios, sem dados salvos da conta. Se houver pré-preenchimento, CT006 e CT007 precisam de ajuste. Campos de texto: \"Street\", \"House number\", \"Postcode\", \"City\" e \"State\". Campo select: \"Country\", com valor \"Canada\". Valores fictícios: rua \"Main Street 1\", número \"100\", CEP \"12345\", cidade \"Springfield\" e estado \"Illinois\".",
+ "9. São obrigatórios os seis campos citados no CA05 (país, CEP, número, rua, cidade e estado). CT007 assume que o estado é obrigatório e que deixá-lo vazio impede o avanço. Essa regra é inferida do texto do critério.",
+ "10. O pagamento usa um select com rótulo \"Payment method\" e opção \"Credit Card\". Os campos do cartão são \"Card number\", \"Expiry date\" (MM/YY), \"CVV\" e \"Card holder name\". Dados fictícios: cartão 4111 1111 1111 1111, validade 12/30, CVV 123 e titular \"Test Customer\". O fluxo tem duas confirmações: \"Confirm payment\" gera \"Payment was successful\" e \"Confirm order\" gera a mensagem da fatura.",
+ "11. CT011 é um caso negativo deduzido de \"informo dados fictícios válidos\". Assume-se que confirmar sem dados do cartão não é aprovado. A User Story não especifica esse comportamento. Se o botão ficar desabilitado sem dados, o clique falhará e o caso precisará de ajuste.",
+ "12. O nome do usuário da conta demo é \"Jane Doe\", inferido. Ele deve ser ajustado para o nome real e é verificado na área `navigation`.",
+ "13. \"My account\" é tratado como heading da página.",
+ "14. A senha incorreta usada é \"senha-incorreta-123\". As mensagens de erro são verificadas como texto visível na página.",
+ "15. Cada teste usa um novo contexto de navegador, então carrinho e sessão ficam isolados. Pré-condições externas: a conta demo existe e o catálogo tem produtos. Os testes não criam nem removem dados de apoio. CT010 cria um pedido real na conta demo, e não há rotina de limpeza disponível.",
+ "16. Os casos cobrem positivos, negativos e de borda. Não há testes de API REST, porque a User Story descreve apenas interface web. O timeout do contexto é de 15 segundos.",
+ "17. As asserções de ausência (`to_have_count(0)` e similares) podem passar antes de a interface reagir ao clique. Essa limitação é aceita e não foi mitigada.",
+ "18. O código não foi executado nesta tarefa. Sua compatibilidade com o sistema real depende da confirmação dos seletores e textos acima."
+]

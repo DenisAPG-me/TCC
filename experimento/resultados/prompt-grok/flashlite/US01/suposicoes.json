@@ -1,0 +1,9 @@
+[
+ "A URL base utilizada é https://practicesoftwaretesting.com/.",
+ "O campo de busca é acessível via seletor de input de busca (utilizando `get_by_placeholder` ou `get_by_label` / `get_by_test_id` assumidos como `search-query` ou similar, simulando interações padrão com Playwright).",
+ "O botão de submissão da busca é um botão de busca ou tecla Enter.",
+ "O elemento indicador de busca realizada é um texto ou cabeçalho contendo o termo pesquisado.",
+ "A mensagem de nenhum produto encontrado é exatamente \"There are no products found.\".",
+ "O componente de ordenação é um elemento `<select>` ou dropdown de ordenação (sort).",
+ "Os seletores baseiam-se em boas práticas recomendadas pelo Playwright (`get_by_role`, `get_by_test_id`, etc.)."
+]

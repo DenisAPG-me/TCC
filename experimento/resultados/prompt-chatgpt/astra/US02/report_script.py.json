@@ -1,0 +1,184 @@
+{
+ "created": 1793430542.1419735,
+ "duration": 53.85301494598389,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02",
+ "environment": {},
+ "summary": {
+  "passed": 2,
+  "failed": 2,
+  "total": 4,
+  "collected": 4
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_adicionar_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 141
+    },
+    {
+     "nodeid": "script.py::test_CT002_calcular_totais_para_tres_unidades[chromium]",
+     "type": "Function",
+     "lineno": 152
+    },
+    {
+     "nodeid": "script.py::test_CT003_reduzir_quantidade_para_uma_unidade[chromium]",
+     "type": "Function",
+     "lineno": 175
+    },
+    {
+     "nodeid": "script.py::test_CT004_restringir_tres_unidades_de_thor_hammer[chromium]",
+     "type": "Function",
+     "lineno": 196
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_adicionar_tres_unidades[chromium]",
+   "lineno": 141,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_adicionar_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.5000374000519514,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 7.4204590999288484,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.007761200075037777,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_calcular_totais_para_tres_unidades[chromium]",
+   "lineno": 152,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT002_calcular_totais_para_tres_unidades[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.03949490003287792,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 20.84725949994754,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py",
+     "lineno": 159,
+     "message": "AssertionError: Locator expected to have Value '3'\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_have_value\" get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True) with timeout 15000ms\n  - waiting for get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n    - menuitem \"cart\":\n      - link \"cart\":\n        - /url: /checkout\n        - text: \"3\"\n  - button \"Select language\": EN\n- list:\n  - listitem: Cart 1\n  - listitem: Sign in 2\n  - listitem: Billing Address 3\n  - listitem: Payment 4\n- table:\n  - rowgroup:\n    - row \"Item Quantity Price Total\":\n      - columnheader \"Item\"\n      - columnheader \"Quantity\"\n      - columnheader \"Price\"\n      - columnheader \"Total\"\n      - columnheader\n  - rowgroup:\n    - row \"Claw Hammer Quantity for Claw Hammer $11.48 $34.44\":\n      - cell \"Claw Hammer\"\n      - cell \"Quantity for Claw Hammer\":\n        - text: Quantity for Claw Hammer\n        - spinbutton \"Quantity for Claw Hammer\": \"3\"\n      - cell \"$11.48\"\n      - cell \"$34.44\"\n      - cell\n  - rowgroup:\n    - row \"Total $34.44\":\n      - cell\n      - cell\n      - cell \"Total\":\n        - strong: Total\n      - cell \"$34.44\"\n      - cell\n- button \"Continue Shopping\"\n- button \"Proceed to checkout\"\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py",
+      "lineno": 159,
+      "message": "in test_CT002_calcular_totais_para_tres_unidades"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py:159: in test_CT002_calcular_totais_para_tres_unidades\n    ).to_have_value(\"3\", timeout=ACTION_TIMEOUT_MS)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AssertionError: Locator expected to have Value '3'\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_have_value\" get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True) with timeout 15000ms\nE     - waiting for get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE       - menuitem \"cart\":\nE         - link \"cart\":\nE           - /url: /checkout\nE           - text: \"3\"\nE     - button \"Select language\": EN\nE   - list:\nE     - listitem: Cart 1\nE     - listitem: Sign in 2\nE     - listitem: Billing Address 3\nE     - listitem: Payment 4\nE   - table:\nE     - rowgroup:\nE       - row \"Item Quantity Price Total\":\nE         - columnheader \"Item\"\nE         - columnheader \"Quantity\"\nE         - columnheader \"Price\"\nE         - columnheader \"Total\"\nE         - columnheader\nE     - rowgroup:\nE       - row \"Claw Hammer Quantity for Claw Hammer $11.48 $34.44\":\nE         - cell \"Claw Hammer\"\nE         - cell \"Quantity for Claw Hammer\":\nE           - text: Quantity for Claw Hammer\nE           - spinbutton \"Quantity for Claw Hammer\": \"3\"\nE         - cell \"$11.48\"\nE         - cell \"$34.44\"\nE         - cell\nE     - rowgroup:\nE       - row \"Total $34.44\":\nE         - cell\nE         - cell\nE         - cell \"Total\":\nE           - strong: Total\nE         - cell \"$34.44\"\nE         - cell\nE   - button \"Continue Shopping\"\nE   - button \"Proceed to checkout\"\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.003288300009444356,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_reduzir_quantidade_para_uma_unidade[chromium]",
+   "lineno": 175,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT003_reduzir_quantidade_para_uma_unidade[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.03699669998604804,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 20.374088100041263,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py",
+     "lineno": 181,
+     "message": "AssertionError: Locator expected to have Value '3'\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_have_value\" get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True) with timeout 15000ms\n  - waiting for get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n    - menuitem \"cart\":\n      - link \"cart\":\n        - /url: /checkout\n        - text: \"3\"\n  - button \"Select language\": EN\n- list:\n  - listitem: Cart 1\n  - listitem: Sign in 2\n  - listitem: Billing Address 3\n  - listitem: Payment 4\n- table:\n  - rowgroup:\n    - row \"Item Quantity Price Total\":\n      - columnheader \"Item\"\n      - columnheader \"Quantity\"\n      - columnheader \"Price\"\n      - columnheader \"Total\"\n      - columnheader\n  - rowgroup:\n    - row \"Claw Hammer Quantity for Claw Hammer $11.48 $34.44\":\n      - cell \"Claw Hammer\"\n      - cell \"Quantity for Claw Hammer\":\n        - text: Quantity for Claw Hammer\n        - spinbutton \"Quantity for Claw Hammer\": \"3\"\n      - cell \"$11.48\"\n      - cell \"$34.44\"\n      - cell\n  - rowgroup:\n    - row \"Total $34.44\":\n      - cell\n      - cell\n      - cell \"Total\":\n        - strong: Total\n      - cell \"$34.44\"\n      - cell\n- button \"Continue Shopping\"\n- button \"Proceed to checkout\"\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py",
+      "lineno": 181,
+      "message": "in test_CT003_reduzir_quantidade_para_uma_unidade"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US02\\script.py:181: in test_CT003_reduzir_quantidade_para_uma_unidade\n    expect(quantity).to_have_value(\"3\", timeout=ACTION_TIMEOUT_MS)\nE   AssertionError: Locator expected to have Value '3'\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_have_value\" get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True) with timeout 15000ms\nE     - waiting for get_by_role(\"row\").filter(has=get_by_text(\"Claw Hammer\", exact=True)).get_by_label(\"Quantity\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE       - menuitem \"cart\":\nE         - link \"cart\":\nE           - /url: /checkout\nE           - text: \"3\"\nE     - button \"Select language\": EN\nE   - list:\nE     - listitem: Cart 1\nE     - listitem: Sign in 2\nE     - listitem: Billing Address 3\nE     - listitem: Payment 4\nE   - table:\nE     - rowgroup:\nE       - row \"Item Quantity Price Total\":\nE         - columnheader \"Item\"\nE         - columnheader \"Quantity\"\nE         - columnheader \"Price\"\nE         - columnheader \"Total\"\nE         - columnheader\nE     - rowgroup:\nE       - row \"Claw Hammer Quantity for Claw Hammer $11.48 $34.44\":\nE         - cell \"Claw Hammer\"\nE         - cell \"Quantity for Claw Hammer\":\nE           - text: Quantity for Claw Hammer\nE           - spinbutton \"Quantity for Claw Hammer\": \"3\"\nE         - cell \"$11.48\"\nE         - cell \"$34.44\"\nE         - cell\nE     - rowgroup:\nE       - row \"Total $34.44\":\nE         - cell\nE         - cell\nE         - cell \"Total\":\nE           - strong: Total\nE         - cell \"$34.44\"\nE         - cell\nE   - button \"Continue Shopping\"\nE   - button \"Proceed to checkout\"\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.0036409000167623162,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_restringir_tres_unidades_de_thor_hammer[chromium]",
+   "lineno": 196,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_restringir_tres_unidades_de_thor_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.03685969999060035,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 4.426799100008793,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.04810070001985878,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

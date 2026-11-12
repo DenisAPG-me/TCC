@@ -1,0 +1,16 @@
+[
+ "1. Explícito na US: URL base `https://practicesoftwaretesting.com/`; produtos \"Claw Hammer\" e \"Thor Hammer\"; textos das mensagens de confirmação e de limite; quantidades 3 e 1; critérios de aceitação 1 a 4.",
+ "2. Inferido: os critérios não têm identificadores, então foram atribuídos CA01 a CA04 na ordem de apresentação.",
+ "3. Inferido, conflito de requisitos: a US pede pytest-playwright e a fixture `page` do plugin. As regras deste pedido proíbem plugins adicionais e exigem Playwright síncrono com inicialização no próprio arquivo. Adotei `sync_playwright()` dentro da fixture `pagina`, com escopo por teste. Os requisitos da US não foram aplicados.",
+ "4. Inferido: a navegação para o carrinho usa a rota `checkout` (`ROTA_CARRINHO`). Os testes não clicam no ícone do carrinho.",
+ "5. Inferido: o campo de quantidade da página do produto é rotulado como \"Quantity\" (`get_by_label`).",
+ "6. Inferido: o botão de adicionar ao carrinho tem nome acessível \"Add to cart\".",
+ "7. Inferido: o produto é aberto clicando no texto exato do nome na página inicial. Os testes assumem que o link do produto é o primeiro elemento com esse texto.",
+ "8. Inferido: o preço unitário na página do produto, o contador do carrinho, o campo de quantidade da linha, o total da linha e o total do carrinho podem ser localizados por atributos `data-test`, conforme as constantes `SELETOR_*`. Se o sistema usar outros atributos, esses valores precisam ser ajustados.",
+ "9. Inferido: a alteração de quantidade no carrinho exige o botão \"Update\" (`TEXTO_BOTAO_ATUALIZAR`). CT003 depende dessa suposição.",
+ "10. Inferido: valores monetários usam ponto decimal, com ou sem prefixo de moeda. A função `valor_monetario` extrai o número e o compara com duas casas decimais.",
+ "11. Inferido: cada teste inicia com um contexto de navegador novo, então o carrinho começa vazio. As pré-condições externas são: produtos disponíveis, carrinho vazio no início e sessão anônima aceita pelo sistema. CT002 e CT003 usam apenas um produto, para que o total do carrinho seja igual ao total da linha.",
+ "12. Inferido: CT005 assume que a regra \"only one Thor Hammer in the cart\" permite exatamente uma unidade. A US não cita esse caso de forma explícita.",
+ "13. Ausência de casos negativos para CA01, CA02 e CA03: a US não define comportamentos de erro, como quantidade zero, negativa ou acima do estoque. Não foram inventados limites. Ausência de casos de borda para CA01, CA02 e CA03: a US não define limites de quantidade além de 1 e 3, e esses valores já aparecem nos casos existentes.",
+ "14. Ausência de testes REST: a US não exige API."
+]

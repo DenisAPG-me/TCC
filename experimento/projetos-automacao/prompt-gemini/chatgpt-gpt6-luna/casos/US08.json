@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Enviar `admin` / `password123` para autenticação.",
+  "esperado": "Status 200 e token não vazio."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Rejeitar credenciais inválidas",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Enviar credenciais inválidas para autenticação.",
+  "esperado": "Resposta sem token e motivo `Bad credentials`."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Atualizar reserva completa",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Criar reserva, autenticar e enviar atualização completa com novo nome e preço.",
+  "esperado": "Status 200 e resposta contém os novos valores."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Atualizar somente o sobrenome",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Criar reserva, autenticar e enviar atualização parcial do sobrenome.",
+  "esperado": "Status 200; sobrenome muda e os demais campos permanecem."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Rejeitar atualização sem token",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Criar reserva e tentar atualizá-la sem token.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Rejeitar atualização completa sem campo obrigatório",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Criar reserva, autenticar e enviar atualização completa omitindo um campo obrigatório.",
+  "esperado": "Status 400."
+ }
+]

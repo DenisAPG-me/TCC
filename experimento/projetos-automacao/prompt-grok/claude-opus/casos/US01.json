@@ -1,0 +1,58 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Buscar por \"hammer\" exibe só produtos com \"hammer\" e indica o termo buscado",
+  "tipo": "positivo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; digitar \"hammer\" no campo de busca; acionar a busca",
+  "esperado": "Pelo menos um produto listado; todo nome listado contém \"hammer\" (case-insensitive); a legenda da busca mostra \"hammer\""
+ },
+ {
+  "id": "TC02",
+  "titulo": "Buscar por \"HAMMER\" (maiúsculas) retorna os mesmos tipos de produto",
+  "tipo": "borda",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; buscar \"HAMMER\"",
+  "esperado": "Pelo menos um produto listado; todo nome contém \"hammer\" ignorando maiúsculas/minúsculas; a legenda mostra \"HAMMER\""
+ },
+ {
+  "id": "TC03",
+  "titulo": "Buscar termo inexistente \"zzzzxx\" exibe mensagem de nenhum produto",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; buscar \"zzzzxx\"",
+  "esperado": "Mensagem \"There are no products found.\" visível; nenhum produto listado"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Buscar termo só com caracteres especiais \"@#$%\" não lista produtos",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; buscar \"@#$%\"",
+  "esperado": "Mensagem \"There are no products found.\" visível; nenhum produto listado"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Ordenar por preço do menor para o maior",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial com produtos; selecionar \"Price (Low - High)\" no seletor de ordenação",
+  "esperado": "Os preços exibidos na página estão em ordem crescente"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Ordenar por nome de Z a A",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Abrir a página inicial com produtos; selecionar \"Name (Z - A)\" no seletor de ordenação",
+  "esperado": "Os nomes exibidos na página estão em ordem alfabética decrescente"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Buscar \"hammer\" e depois ordenar por preço crescente mantém o filtro",
+  "tipo": "borda",
+  "criterio": "CA1, CA3",
+  "passos": "Abrir a página inicial; buscar \"hammer\"; selecionar \"Price (Low - High)\"",
+  "esperado": "Todos os nomes continuam contendo \"hammer\" e os preços estão em ordem crescente"
+ }
+]

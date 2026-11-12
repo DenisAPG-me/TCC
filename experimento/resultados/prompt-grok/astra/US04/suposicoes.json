@@ -1,0 +1,17 @@
+[
+ "A única fonte utilizada é a User Story. O código não foi executado contra o sistema; seletores e comportamentos não foram verificados.",
+ "O formulário está diretamente em `https://automationintesting.online/`. Não são presumidas outras rotas.",
+ "Conforme o requisito técnico prevalecente, são necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, além do navegador instalado pelo Playwright. A fixture `page` é fornecida exclusivamente pelo plugin.",
+ "Os campos possuem rótulos acessíveis únicos e exatos: `Name`, `Email`, `Phone`, `Subject` e `Message`. O botão de envio possui papel `button` e nome acessível exato `Submit`. Esses seletores são deduzidos e podem precisar de ajuste.",
+ "Cada teste recebe uma página isolada do plugin. O formulário pode ser acessado e enviado sem autenticação, CAPTCHA, consentimento, dados prévios ou etapas adicionais.",
+ "Os campos aceitam `fill()`, inclusive com valores inválidos e acima dos limites. Não há truncamento, máscara ou validação nativa do navegador impedindo o envio dos cenários negativos.",
+ "Para o critério 1, cujos textos exatos não foram fornecidos, presumem-se mensagens contendo `Name may not be blank`, `Email may not be blank`, `Phone may not be blank`, `Subject may not be blank` e `Message may not be blank`.",
+ "As mensagens de erro aparecem como textos visíveis únicos. A busca por trecho permite prefixos ou outros textos no mesmo elemento. Erros adicionais não invalidam os testes.",
+ "Os limites indicados nas mensagens são inclusivos. A rejeição acima dos máximos é inferida dessas mensagens, embora não esteja descrita como cenário explícito.",
+ "Os dados válidos padrão são nome `Ana Silva`, e-mail `ana.silva@example.com`, telefone `119876543210`, assunto `Duvida sobre reserva` e mensagem `Gostaria de saber se ha quartos disponiveis em dezembro.`.",
+ "Telefones são sequências de dígitos e sua validade depende apenas do comprimento descrito. Assuntos e mensagens formados por letras repetidas são aceitos quando respeitam os limites; não são presumidas outras regras de conteúdo.",
+ "A confirmação contém um texto visível único exatamente igual a `Thanks for getting in touch Ana Silva!` e outro exatamente igual ao assunto enviado, preservando seu conteúdo completo.",
+ "Os testes de sucesso verificam apenas a confirmação na interface; entrega de e-mail, persistência e processamento posterior não fazem parte dos critérios.",
+ "Cada cenário inválido mantém os demais campos válidos, exceto TC01 e TC03, que exercitam explicitamente erros simultâneos. TC06 e TC07 combinam limites válidos.",
+ "O arquivo pode ser salvo como `test_contato.py` e executado com `pytest test_contato.py`. Os testes usam as esperas automáticas do Playwright."
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Enviar login vazio",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir login; enviar sem preencher os campos.",
+  "esperado": "Exibe “Email is required” e “Password is required”."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Enviar login somente com senha",
+  "tipo": "borda",
+  "criterio": "1",
+  "passos": "Preencher apenas a senha; enviar.",
+  "esperado": "Exibe “Email is required”; permanece sem sessão."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Enviar login somente com e-mail",
+  "tipo": "borda",
+  "criterio": "1",
+  "passos": "Preencher apenas o e-mail; enviar.",
+  "esperado": "Exibe “Password is required”; permanece sem sessão."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Informar senha incorreta",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Informar o e-mail de demonstração e uma senha incorreta; enviar.",
+  "esperado": "Exibe “Invalid email or password”; permanece sem sessão."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Iniciar checkout sem autenticação",
+  "tipo": "negativo",
+  "criterio": "3",
+  "passos": "Adicionar um produto ao carrinho; iniciar checkout sem sessão.",
+  "esperado": "Solicita e-mail e senha."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Autenticar conta de demonstração",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Enviar as credenciais fornecidas.",
+  "esperado": "Exibe “My account” e um nome de usuário no menu."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Enviar endereço totalmente vazio",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Autenticar; adicionar produto; chegar ao endereço; limpar todos os campos obrigatórios; avançar.",
+  "esperado": "Identifica os campos inválidos e impede acesso ao pagamento."
+ },
+ {
+  "id": "TC08",
+  "titulo": "Omitir somente país",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto país; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher país permite avançar."
+ },
+ {
+  "id": "TC09",
+  "titulo": "Omitir somente CEP",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto CEP; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher CEP permite avançar."
+ },
+ {
+  "id": "TC10",
+  "titulo": "Omitir somente número",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto número; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher número permite avançar."
+ },
+ {
+  "id": "TC11",
+  "titulo": "Omitir somente rua",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto rua; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher rua permite avançar."
+ },
+ {
+  "id": "TC12",
+  "titulo": "Omitir somente cidade",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto cidade; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher cidade permite avançar."
+ },
+ {
+  "id": "TC13",
+  "titulo": "Omitir somente estado",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Preencher o endereço, exceto estado; avançar.",
+  "esperado": "Impede acesso ao pagamento; preencher estado permite avançar."
+ },
+ {
+  "id": "TC14",
+  "titulo": "Preencher endereço após rejeição do formulário vazio",
+  "tipo": "positivo",
+  "criterio": "5",
+  "passos": "Enviar endereço vazio; preencher todos os campos obrigatórios; avançar.",
+  "esperado": "A validação é corrigida e o passo de pagamento aparece."
+ },
+ {
+  "id": "TC15",
+  "titulo": "Pagar com cartão e confirmar pedido",
+  "tipo": "positivo",
+  "criterio": "6",
+  "passos": "Autenticar; adicionar produto; preencher endereço; selecionar cartão; preencher dados fictícios; pagar; confirmar pedido.",
+  "esperado": "Exibe “Payment was successful” e confirmação com número de fatura iniciado por “INV-”."
+ }
+]

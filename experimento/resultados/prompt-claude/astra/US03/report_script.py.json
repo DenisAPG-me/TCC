@@ -1,0 +1,501 @@
+{
+ "created": 1793429704.2347457,
+ "duration": 168.29273390769958,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03",
+ "environment": {},
+ "summary": {
+  "failed": 9,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_login_vazio[chromium]",
+     "type": "Function",
+     "lineno": 172
+    },
+    {
+     "nodeid": "script.py::test_ct02_login_sem_email[chromium]",
+     "type": "Function",
+     "lineno": 180
+    },
+    {
+     "nodeid": "script.py::test_ct03_login_sem_senha[chromium]",
+     "type": "Function",
+     "lineno": 188
+    },
+    {
+     "nodeid": "script.py::test_ct04_senha_incorreta_sem_sessao[chromium]",
+     "type": "Function",
+     "lineno": 196
+    },
+    {
+     "nodeid": "script.py::test_ct05_checkout_exige_login[chromium]",
+     "type": "Function",
+     "lineno": 213
+    },
+    {
+     "nodeid": "script.py::test_ct06_login_com_credenciais_validas[chromium]",
+     "type": "Function",
+     "lineno": 225
+    },
+    {
+     "nodeid": "script.py::test_ct07_endereco_vazio_bloqueia_pagamento[chromium]",
+     "type": "Function",
+     "lineno": 237
+    },
+    {
+     "nodeid": "script.py::test_ct08_endereco_preenchido_libera_pagamento[chromium]",
+     "type": "Function",
+     "lineno": 242
+    },
+    {
+     "nodeid": "script.py::test_ct09_compra_com_cartao_de_credito[chromium]",
+     "type": "Function",
+     "lineno": 251
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_vazio[chromium]",
+   "lineno": 172,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_login_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.42384770000353456,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.079405099968426,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 174,
+      "message": "in test_ct01_login_vazio"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:174: in test_ct01_login_vazio\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.013719099923036993,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_sem_email[chromium]",
+   "lineno": 180,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct02_login_sem_email[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09357789997011423,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.01168669993058,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 182,
+      "message": "in test_ct02_login_sem_email"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:182: in test_ct02_login_sem_email\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.011761200032196939,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_sem_senha[chromium]",
+   "lineno": 188,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_login_sem_senha[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09827630000654608,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 15.991709000081755,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 190,
+      "message": "in test_ct03_login_sem_senha"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:190: in test_ct03_login_sem_senha\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.012587400036863983,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_senha_incorreta_sem_sessao[chromium]",
+   "lineno": 196,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_senha_incorreta_sem_sessao[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09787670010700822,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 15.940078800078481,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 198,
+      "message": "in test_ct04_senha_incorreta_sem_sessao"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:198: in test_ct04_senha_incorreta_sem_sessao\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.013159400084987283,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_checkout_exige_login[chromium]",
+   "lineno": 213,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_checkout_exige_login[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10736809996888041,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 18.232088800054044,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 118,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_test_id(\"product-card\").first with timeout 15000ms\n  - waiting for get_by_test_id(\"product-card\").first\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Practice Software Testing - Toolshop\" [level=1]\n- paragraph:\n  - img \"Banner\"\n- separator\n- text: Enjoyed testing this app? Level up with hands-on software testing courses.\n- link \"Explore courses\":\n  - /url: https://onlinecourses.testsmith.io/?utm_source=pst&utm_medium=homepage&utm_campaign=app_promo\n- heading \"Sort\" [level=4]\n- separator\n- combobox \"sort\":\n  - option [selected]\n  - option \"Name (A - Z)\"\n  - option \"Name (Z - A)\"\n  - option \"Price (High - Low)\"\n  - option \"Price (Low - High)\"\n  - option \"CO\u2082 Rating (A - E)\"\n  - option \"CO\u2082 Rating (E - A)\"\n- heading \"Price Range\" [level=4]\n- separator\n- slider \"ngx-slider\"\n- slider \"ngx-slider-max\"\n- text: 0 200 1 100\n- heading \"Search\" [level=4]\n- separator\n- text: Search\n- textbox \"Search\"\n- button \"X\"\n- button \"Search\"\n- heading \"Filters\" [level=4]\n- separator\n- heading \"By category:\" [level=4]\n- group \"Categories\":\n  - text: Categories\n  - checkbox \"Hand Tools\"\n  - text: Hand Tools\n  - list:\n    - group \"Categories\":\n      - text: Categories\n      - checkbox \"Hammer\"\n      - text: Hammer\n      - checkbox \"Hand Saw\"\n      - text: Hand Saw\n      - checkbox \"Wrench\"\n      - text: Wrench\n      - checkbox \"Screwdriver\"\n      - text: Screwdriver\n      - checkbox \"Pliers\"\n      - text: Pliers\n      - checkbox \"Chisels\"\n      - text: Chisels\n      - checkbox \"Measures\"\n      - text: Measures\n  - checkbox \"Power Tools\"\n  - text: Power Tools\n  - list:\n    - group \"Categories\":\n      - text: Categories\n      - checkbox \"Grinder\"\n      - text: Grinder\n      - checkbox \"Sander\"\n      - text: Sander\n      - checkbox \"Saw\"\n      - text: Saw\n      - checkbox \"Drill\"\n      - text: Drill\n  - checkbox \"Other\"\n  - text: Other\n  - list:\n    - group \"Categories\":\n      - text: Categories\n      - checkbox \"Tool Belts\"\n      - text: Tool Belts\n      - checkbox \"Storage Solutions\"\n      - text: Storage Solutions\n      - checkbox \"Workbench\"\n      - text: Workbench\n      - checkbox \"Safety Gear\"\n      - text: Safety Gear\n      - checkbox \"Fasteners\"\n      - text: Fasteners\n- heading \"By brand:\" [level=4]\n- group \"Brands\":\n  - text: Brands\n  - checkbox \"ForgeFlex Tools\"\n  - text: ForgeFlex Tools\n  - checkbox \"MightyCraft Hardware\"\n  - text: MightyCraft Hardware\n- heading \"Sustainability:\" [level=4]\n- group \"Eco-Friendly Products\":\n  - text: Eco-Friendly Products\n  - checkbox \"Show only eco-friendly products\"\n  - text: Show only eco-friendly products\n- 'link \"Combination Pliers Compare Combination Pliers CO\u2082: A B C D E $14.15\"':\n  - /url: /product/01M688PWECT6S0BHGVTPGK496J\n  - img \"Combination Pliers\"\n  - button \"Compare\"\n  - heading \"Combination Pliers\" [level=5]\n  - text: \"CO\u2082: A B C D E $14.15\"\n- 'link \"Pliers Compare Pliers CO\u2082: A B C D E $12.01\"':\n  - /url: /product/01M688PWEJ0H1HJZDTFX6FA7ZE\n  - img \"Pliers\"\n  - button \"Compare\"\n  - heading \"Pliers\" [level=5]\n  - text: \"CO\u2082: A B C D E $12.01\"\n- 'link \"Bolt Cutters Compare Bolt Cutters CO\u2082: A B C D E $48.41\"':\n  - /url: /product/01M688PWEMDAW488G81X41CE8W\n  - img \"Bolt Cutters\"\n  - button \"Compare\"\n  - heading \"Bolt Cutters\" [level=5]\n  - text: \"CO\u2082: A B C D E $48.41\"\n- 'link \"Long Nose Pliers Compare Long Nose Pliers CO\u2082: A B C D E Out of stock $14.24\"':\n  - /url: /product/01M688PWEPXZWYQNYHQH6W1AXF\n  - img \"Long Nose Pliers\"\n  - button \"Compare\"\n  - heading \"Long Nose Pliers\" [level=5]\n  - text: \"CO\u2082: A B C D E Out of stock $14.24\"\n- 'link \"Slip Joint Pliers Compare Slip Joint Pliers CO\u2082: A B C D E $9.17\"':\n  - /url: /product/01M688PWERXYPFYCJD4VC7GJKW\n  - img \"Slip Joint Pliers\"\n  - button \"Compare\"\n  - heading \"Slip Joint Pliers\" [level=5]\n  - text: \"CO\u2082: A B C D E $9.17\"\n- 'link \"Claw Hammer with Shock Reduction Grip Compare Claw Hammer with Shock Reduction Grip CO\u2082: A B C D E $13.41\"':\n  - /url: /product/01M688PWETXNRTA3EK9KRC1F6K\n  - img \"Claw Hammer with Shock Reduction Grip\"\n  - button \"Compare\"\n  - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\n  - text: \"CO\u2082: A B C D E $13.41\"\n- 'link \"Hammer Compare Hammer CO\u2082: A B C D E $12.58\"':\n  - /url: /product/01M688PWEVTAX7VSWZGZZX7T0N\n  - img \"Hammer\"\n  - button \"Compare\"\n  - heading \"Hammer\" [level=5]\n  - text: \"CO\u2082: A B C D E $12.58\"\n- 'link \"Claw Hammer Compare Claw Hammer CO\u2082: A B C D E $11.48\"':\n  - /url: /product/01M688PWEXQ9N8PCQSG066GCHW\n  - img \"Claw Hammer\"\n  - button \"Compare\"\n  - heading \"Claw Hammer\" [level=5]\n  - text: \"CO\u2082: A B C D E $11.48\"\n- 'link \"Thor Hammer Compare Thor Hammer CO\u2082: A B C D E $11.14\"':\n  - /url: /product/01M688PWF06D2HDHTWV41R72SW\n  - img \"Thor Hammer\"\n  - button \"Compare\"\n  - heading \"Thor Hammer\" [level=5]\n  - text: \"CO\u2082: A B C D E $11.14\"\n- navigation:\n  - list:\n    - listitem:\n      - button \"Previous\"\n    - listitem:\n      - button \"Page-1\": \"1\"\n    - listitem:\n      - button \"Page-2\": \"2\"\n    - listitem:\n      - button \"Page-3\": \"3\"\n    - listitem:\n      - button \"Page-4\": \"4\"\n    - listitem:\n      - button \"Page-5\": \"5\"\n    - listitem:\n      - button \"Next\"\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 215,
+      "message": "in test_ct05_checkout_exige_login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 118,
+      "message": "in add_product_and_open_checkout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:215: in test_ct05_checkout_exige_login\n    add_product_and_open_checkout(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:118: in add_product_and_open_checkout\n    expect(product).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_test_id(\"product-card\").first with timeout 15000ms\nE     - waiting for get_by_test_id(\"product-card\").first\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Practice Software Testing - Toolshop\" [level=1]\nE   - paragraph:\nE     - img \"Banner\"\nE   - separator\nE   - text: Enjoyed testing this app? Level up with hands-on software testing courses.\nE   - link \"Explore courses\":\nE     - /url: https://onlinecourses.testsmith.io/?utm_source=pst&utm_medium=homepage&utm_campaign=app_promo\nE   - heading \"Sort\" [level=4]\nE   - separator\nE   - combobox \"sort\":\nE     - option [selected]\nE     - option \"Name (A - Z)\"\nE     - option \"Name (Z - A)\"\nE     - option \"Price (High - Low)\"\nE     - option \"Price (Low - High)\"\nE     - option \"CO\u2082 Rating (A - E)\"\nE     - option \"CO\u2082 Rating (E - A)\"\nE   - heading \"Price Range\" [level=4]\nE   - separator\nE   - slider \"ngx-slider\"\nE   - slider \"ngx-slider-max\"\nE   - text: 0 200 1 100\nE   - heading \"Search\" [level=4]\nE   - separator\nE   - text: Search\nE   - textbox \"Search\"\nE   - button \"X\"\nE   - button \"Search\"\nE   - heading \"Filters\" [level=4]\nE   - separator\nE   - heading \"By category:\" [level=4]\nE   - group \"Categories\":\nE     - text: Categories\nE     - checkbox \"Hand Tools\"\nE     - text: Hand Tools\nE     - list:\nE       - group \"Categories\":\nE         - text: Categories\nE         - checkbox \"Hammer\"\nE         - text: Hammer\nE         - checkbox \"Hand Saw\"\nE         - text: Hand Saw\nE         - checkbox \"Wrench\"\nE         - text: Wrench\nE         - checkbox \"Screwdriver\"\nE         - text: Screwdriver\nE         - checkbox \"Pliers\"\nE         - text: Pliers\nE         - checkbox \"Chisels\"\nE         - text: Chisels\nE         - checkbox \"Measures\"\nE         - text: Measures\nE     - checkbox \"Power Tools\"\nE     - text: Power Tools\nE     - list:\nE       - group \"Categories\":\nE         - text: Categories\nE         - checkbox \"Grinder\"\nE         - text: Grinder\nE         - checkbox \"Sander\"\nE         - text: Sander\nE         - checkbox \"Saw\"\nE         - text: Saw\nE         - checkbox \"Drill\"\nE         - text: Drill\nE     - checkbox \"Other\"\nE     - text: Other\nE     - list:\nE       - group \"Categories\":\nE         - text: Categories\nE         - checkbox \"Tool Belts\"\nE         - text: Tool Belts\nE         - checkbox \"Storage Solutions\"\nE         - text: Storage Solutions\nE         - checkbox \"Workbench\"\nE         - text: Workbench\nE         - checkbox \"Safety Gear\"\nE         - text: Safety Gear\nE         - checkbox \"Fasteners\"\nE         - text: Fasteners\nE   - heading \"By brand:\" [level=4]\nE   - group \"Brands\":\nE     - text: Brands\nE     - checkbox \"ForgeFlex Tools\"\nE     - text: ForgeFlex Tools\nE     - checkbox \"MightyCraft Hardware\"\nE     - text: MightyCraft Hardware\nE   - heading \"Sustainability:\" [level=4]\nE   - group \"Eco-Friendly Products\":\nE     - text: Eco-Friendly Products\nE     - checkbox \"Show only eco-friendly products\"\nE     - text: Show only eco-friendly products\nE   - 'link \"Combination Pliers Compare Combination Pliers CO\u2082: A B C D E $14.15\"':\nE     - /url: /product/01M688PWECT6S0BHGVTPGK496J\nE     - img \"Combination Pliers\"\nE     - button \"Compare\"\nE     - heading \"Combination Pliers\" [level=5]\nE     - text: \"CO\u2082: A B C D E $14.15\"\nE   - 'link \"Pliers Compare Pliers CO\u2082: A B C D E $12.01\"':\nE     - /url: /product/01M688PWEJ0H1HJZDTFX6FA7ZE\nE     - img \"Pliers\"\nE     - button \"Compare\"\nE     - heading \"Pliers\" [level=5]\nE     - text: \"CO\u2082: A B C D E $12.01\"\nE   - 'link \"Bolt Cutters Compare Bolt Cutters CO\u2082: A B C D E $48.41\"':\nE     - /url: /product/01M688PWEMDAW488G81X41CE8W\nE     - img \"Bolt Cutters\"\nE     - button \"Compare\"\nE     - heading \"Bolt Cutters\" [level=5]\nE     - text: \"CO\u2082: A B C D E $48.41\"\nE   - 'link \"Long Nose Pliers Compare Long Nose Pliers CO\u2082: A B C D E Out of stock $14.24\"':\nE     - /url: /product/01M688PWEPXZWYQNYHQH6W1AXF\nE     - img \"Long Nose Pliers\"\nE     - button \"Compare\"\nE     - heading \"Long Nose Pliers\" [level=5]\nE     - text: \"CO\u2082: A B C D E Out of stock $14.24\"\nE   - 'link \"Slip Joint Pliers Compare Slip Joint Pliers CO\u2082: A B C D E $9.17\"':\nE     - /url: /product/01M688PWERXYPFYCJD4VC7GJKW\nE     - img \"Slip Joint Pliers\"\nE     - button \"Compare\"\nE     - heading \"Slip Joint Pliers\" [level=5]\nE     - text: \"CO\u2082: A B C D E $9.17\"\nE   - 'link \"Claw Hammer with Shock Reduction Grip Compare Claw Hammer with Shock Reduction Grip CO\u2082: A B C D E $13.41\"':\nE     - /url: /product/01M688PWETXNRTA3EK9KRC1F6K\nE     - img \"Claw Hammer with Shock Reduction Grip\"\nE     - button \"Compare\"\nE     - heading \"Claw Hammer with Shock Reduction Grip\" [level=5]\nE     - text: \"CO\u2082: A B C D E $13.41\"\nE   - 'link \"Hammer Compare Hammer CO\u2082: A B C D E $12.58\"':\nE     - /url: /product/01M688PWEVTAX7VSWZGZZX7T0N\nE     - img \"Hammer\"\nE     - button \"Compare\"\nE     - heading \"Hammer\" [level=5]\nE     - text: \"CO\u2082: A B C D E $12.58\"\nE   - 'link \"Claw Hammer Compare Claw Hammer CO\u2082: A B C D E $11.48\"':\nE     - /url: /product/01M688PWEXQ9N8PCQSG066GCHW\nE     - img \"Claw Hammer\"\nE     - button \"Compare\"\nE     - heading \"Claw Hammer\" [level=5]\nE     - text: \"CO\u2082: A B C D E $11.48\"\nE   - 'link \"Thor Hammer Compare Thor Hammer CO\u2082: A B C D E $11.14\"':\nE     - /url: /product/01M688PWF06D2HDHTWV41R72SW\nE     - img \"Thor Hammer\"\nE     - button \"Compare\"\nE     - heading \"Thor Hammer\" [level=5]\nE     - text: \"CO\u2082: A B C D E $11.14\"\nE   - navigation:\nE     - list:\nE       - listitem:\nE         - button \"Previous\"\nE       - listitem:\nE         - button \"Page-1\": \"1\"\nE       - listitem:\nE         - button \"Page-2\": \"2\"\nE       - listitem:\nE         - button \"Page-3\": \"3\"\nE       - listitem:\nE         - button \"Page-4\": \"4\"\nE       - listitem:\nE         - button \"Page-5\": \"5\"\nE       - listitem:\nE         - button \"Next\"\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.012062499998137355,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_login_com_credenciais_validas[chromium]",
+   "lineno": 225,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct06_login_com_credenciais_validas[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0966842999914661,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 26.111685400013812,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 227,
+      "message": "in test_ct06_login_com_credenciais_validas"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:227: in test_ct06_login_com_credenciais_validas\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.01333879993762821,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_endereco_vazio_bloqueia_pagamento[chromium]",
+   "lineno": 237,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct07_endereco_vazio_bloqueia_pagamento[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10175540007185191,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 20.064859699923545,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 239,
+      "message": "in test_ct07_endereco_vazio_bloqueia_pagamento"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 130,
+      "message": "in open_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 106,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:239: in test_ct07_endereco_vazio_bloqueia_pagamento\n    open_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:130: in open_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:106: in login\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.012157400022260845,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_endereco_preenchido_libera_pagamento[chromium]",
+   "lineno": 242,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct08_endereco_preenchido_libera_pagamento[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0959878999274224,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 19.9439339999808,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 244,
+      "message": "in test_ct08_endereco_preenchido_libera_pagamento"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 130,
+      "message": "in open_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 106,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:244: in test_ct08_endereco_preenchido_libera_pagamento\n    open_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:130: in open_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:106: in login\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.011669700033962727,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_compra_com_cartao_de_credito[chromium]",
+   "lineno": 251,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct09_compra_com_cartao_de_credito[chromium]",
+    "chromium",
+    "script.py",
+    "US03",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09692079992964864,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 18.239200899959542,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+     "lineno": 95,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\n  - waiting for get_by_label(\"Email\", exact=True)\n\nAria snapshot:\n- text: View the\n- link \"Documentation\":\n  - /url: https://testsmith-io.github.io/practice-software-testing/#/\n- text: for this application. Practice Black Box Testing & Bug Hunting\n- button \"Testing Guide\"\n- button \"\ud83d\udc1b Bug Hunting\"\n- navigation:\n  - link \"Practice Software Testing - Toolshop\":\n    - /url: /\n    - img\n  - menubar \"Main menu\":\n    - menuitem \"Home\":\n      - link \"Home\":\n        - /url: /\n    - menuitem \"Categories\":\n      - button \"Categories\"\n    - menuitem \"Contact\":\n      - link \"Contact\":\n        - /url: /contact\n    - menuitem \"Sign in\":\n      - link \"Sign in\":\n        - /url: /auth/login\n  - button \"Select language\": EN\n- heading \"Login\" [level=3]\n- button \"Sign in with Google\"\n- text: or use Email address *\n- textbox \"Email address *\":\n  - /placeholder: Your email\n- text: Password *\n- textbox \"Password *\":\n  - /placeholder: Your password\n- button\n- button \"Login\"\n- paragraph:\n  - text: Not yet an account?\n  - link \"Register your account\":\n    - /url: /auth/register\n  - link \"Forgot your Password?\":\n    - /url: /auth/forgot-password\n- contentinfo:\n  - text: Learn & Explore\n  - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\n    - /url: https://onlinecourses.testsmith.io\n  - link \"API Spector Open-source API testing, mocking and contract testing\":\n    - /url: https://api-spector.dev\n  - link \"GitHub Source code, issues and contributions\":\n    - /url: https://github.com/testsmith-io/practice-software-testing\n  - text: This is a DEMO application, used for software testing training purpose. |\n  - link \"Privacy Policy\":\n    - /url: /privacy\n  - text: \"| Banner photo by\"\n  - link \"Barn Images\":\n    - /url: https://unsplash.com/@barnimages\n  - text: \"on\"\n  - link \"Unsplash\":\n    - /url: https://unsplash.com/photos/t5YUoHW6zRo\n  - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\n- button \"Open chat\":\n  - img\n- button \"Show live shop activity\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 253,
+      "message": "in test_ct09_compra_com_cartao_de_credito"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 130,
+      "message": "in open_address"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 106,
+      "message": "in login"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py",
+      "lineno": 95,
+      "message": "in open_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:253: in test_ct09_compra_com_cartao_de_credito\n    open_address(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:130: in open_address\n    login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:106: in login\n    open_login(page)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US03\\script.py:95: in open_login\n    expect(page.get_by_label(\"Email\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_label(\"Email\", exact=True) with timeout 15000ms\nE     - waiting for get_by_label(\"Email\", exact=True)\nE   \nE   Aria snapshot:\nE   - text: View the\nE   - link \"Documentation\":\nE     - /url: https://testsmith-io.github.io/practice-software-testing/#/\nE   - text: for this application. Practice Black Box Testing & Bug Hunting\nE   - button \"Testing Guide\"\nE   - button \"\ud83d\udc1b Bug Hunting\"\nE   - navigation:\nE     - link \"Practice Software Testing - Toolshop\":\nE       - /url: /\nE       - img\nE     - menubar \"Main menu\":\nE       - menuitem \"Home\":\nE         - link \"Home\":\nE           - /url: /\nE       - menuitem \"Categories\":\nE         - button \"Categories\"\nE       - menuitem \"Contact\":\nE         - link \"Contact\":\nE           - /url: /contact\nE       - menuitem \"Sign in\":\nE         - link \"Sign in\":\nE           - /url: /auth/login\nE     - button \"Select language\": EN\nE   - heading \"Login\" [level=3]\nE   - button \"Sign in with Google\"\nE   - text: or use Email address *\nE   - textbox \"Email address *\":\nE     - /placeholder: Your email\nE   - text: Password *\nE   - textbox \"Password *\":\nE     - /placeholder: Your password\nE   - button\nE   - button \"Login\"\nE   - paragraph:\nE     - text: Not yet an account?\nE     - link \"Register your account\":\nE       - /url: /auth/register\nE     - link \"Forgot your Password?\":\nE       - /url: /auth/forgot-password\nE   - contentinfo:\nE     - text: Learn & Explore\nE     - link \"Learn Test Automation Hands-on courses for Playwright, Robot Framework, APIs and more\":\nE       - /url: https://onlinecourses.testsmith.io\nE     - link \"API Spector Open-source API testing, mocking and contract testing\":\nE       - /url: https://api-spector.dev\nE     - link \"GitHub Source code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+   },
+   "teardown": {
+    "duration": 0.22963329998310655,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

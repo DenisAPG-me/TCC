@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Helpers com nomes claros",
+  "estrutura": "Helpers e constantes por fluxo",
+  "assercoes": "Verifica URL, mensagem e linha 101/Single",
+  "espera": "expect com timeouts explicitos",
+  "manutenibilidade": "Constantes boas, mas role link Logout errado"
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 42.72,
+ "tokens": {
+  "total": 4638
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "logout(page: Page) -> None:\n    login_successfully(page)\n    logout(page)\n\n    # Preserva o mesmo contexto para verificar a sessão após o logout.\n    page.goto(\n        absolute_url(ROOMS_PATH),\n        wait_until=\"domcontentloaded\",\n        timeout=NAVIGATION_TIMEOUT_MS,\n    )\n\n    expect(page).to_have_url(\n        url_pattern(LOGIN_PATH), timeout=EXPECT_TIMEOUT_MS\n    )\n    assert_login_form_visible(page)\n    expect(room_row(page)).to_be_hidden(timeout=EXPECT_TIMEOUT_MS)\n```\ntokens used\n4,638\n"
+}

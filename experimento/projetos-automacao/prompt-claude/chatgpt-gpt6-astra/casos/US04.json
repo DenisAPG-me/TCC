@@ -1,0 +1,98 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; limpar os cinco campos; enviar",
+  "esperado": "Exibir mensagens de obrigatoriedade para nome, e-mail, telefone, assunto e mensagem"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone abaixo do mínimo",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher telefone com 10 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Telefone no mínimo",
+  "tipo": "Borda",
+  "criterio": "CA2, CA5",
+  "passos": "Abrir a página inicial; preencher telefone com 11 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir agradecimento com o nome e confirmação com o assunto"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Telefone no máximo",
+  "tipo": "Borda",
+  "criterio": "CA2, CA5",
+  "passos": "Abrir a página inicial; preencher telefone com 21 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir agradecimento com o nome e confirmação com o assunto"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Telefone acima do máximo",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher telefone com 22 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT06",
+  "titulo": "Assunto e mensagem abaixo do mínimo",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; preencher assunto com 4 caracteres, mensagem com 19 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Assunto e mensagem nos mínimos",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Abrir a página inicial; preencher assunto com 5 caracteres, mensagem com 20 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir agradecimento com o nome e confirmação com o assunto"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Assunto e mensagem nos máximos",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Abrir a página inicial; preencher assunto com 100 caracteres, mensagem com 2000 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir agradecimento com o nome e confirmação com o assunto"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Assunto acima do máximo",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; preencher assunto com 101 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir \"Subject must be between 5 and 100 characters.\""
+ },
+ {
+  "id": "CT10",
+  "titulo": "Mensagem acima do máximo",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; preencher mensagem com 2001 caracteres e demais campos válidos; enviar",
+  "esperado": "Exibir \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT11",
+  "titulo": "E-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Abrir a página inicial; preencher e-mail com \"bad\" e demais campos válidos; enviar",
+  "esperado": "Exibir texto contendo \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT12",
+  "titulo": "Enviar dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Abrir a página inicial; preencher todos os campos com dados válidos; enviar",
+  "esperado": "Exibir \"Thanks for getting in touch Ana Teste!\" e o assunto informado"
+ }
+]

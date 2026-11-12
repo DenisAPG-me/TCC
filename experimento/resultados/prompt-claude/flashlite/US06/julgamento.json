@@ -1,0 +1,90 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_anotar_contador_inicial_mensagens",
+   "categoria": "URL/endpoint errado",
+   "nota": "navega para #/admin em vez de /admin; campo Username nao encontrado"
+  },
+  {
+   "teste": "test_ct02_enviar_mensagem_contato_valida",
+   "categoria": "outro",
+   "nota": "API inexistente toBeVisible (camelCase) no Playwright Python"
+  },
+  {
+   "teste": "test_ct03_verificar_incremento_contador_mensagens",
+   "categoria": "URL/endpoint errado",
+   "nota": "navega para #/admin em vez de /admin; campo Username nao encontrado"
+  },
+  {
+   "teste": "test_ct04_validar_exibicao_mensagem_recem_enviada",
+   "categoria": "URL/endpoint errado",
+   "nota": "navega para #/admin em vez de /admin; campo Username nao encontrado"
+  },
+  {
+   "teste": "test_ct05_restricao_acesso_caixa_mensagens_apos_logout",
+   "categoria": "URL/endpoint errado",
+   "nota": "navega para #/admin em vez de /admin; campo Username nao encontrado"
+  }
+ ]
+}

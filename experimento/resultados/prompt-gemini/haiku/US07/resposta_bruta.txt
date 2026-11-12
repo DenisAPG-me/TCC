@@ -1,0 +1,147 @@
+### CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT-01 | Criar reserva com dados válidos | Positivo | 1 | POST /booking com payload válido e verificar status, bookingid e dados retornados | Status 200, bookingid numérico inteiro e campos de `booking` iguais aos enviados |
+| CT-02 | Consultar reserva criada pelo identificador | Positivo | 2 | Criar reserva, GET /booking/{bookingid} | Status 200 e todos os campos iguais aos enviados |
+| CT-03 | Consultar identificador inexistente (99999999) | Negativo | 3 | GET /booking/99999999 | Status 404 |
+| CT-04 | Listar reservas por nome e sobrenome contendo o identificador criado | Positivo | 4 | Criar reserva com nome/sobrenome únicos, GET /booking?firstname=&lastname= | Status 200 e lista contendo `bookingid` criado |
+| CT-05 | Consultar identificador zero (limite inferior) | Borda | 3 | GET /booking/0 | Status 404 |
+| CT-06 | Listar reservas com nome e sobrenome sem correspondência | Borda | 4 | GET /booking?firstname=&lastname= com valores inexistentes | Status 200 e lista vazia |
+| CT-07 | Criar reserva com preço zero e depósito não pago | Borda | 1 | POST /booking com totalprice 0 e depositpaid false | Status 200 e campos retornados iguais aos enviados |
+| CT-08 | Criar reserva com caracteres especiais e acentuados | Borda | 1 | POST /booking com nome e necessidades contendo acentos, hífen e apóstrofo | Status 200 e campos retornados iguais aos enviados, sem alteração de caracteres |
+| CT-09 | Criar reserva com corpo sem campos obrigatórios | Negativo | 1 | POST /booking com corpo `{}` | Status de erro (>= 400) e ausência de bookingid na resposta |
+
+### SUPOSIÇÕES
+
+- URL base: `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL`.
+- Criação: `POST /booking`, corpo JSON, resposta `200` com `{"bookingid": <int>, "booking": {...}}`.
+- Consulta: `GET /booking/{id}`, resposta `200` com o objeto da reserva ou `404` quando inexistente.
+- Listagem: `GET /booking?firstname=<nome>&lastname=<sobrenome>`, resposta `200` com lista de objetos `{"bookingid": <int>}`.
+- Chaves do payload: `firstname` (string), `lastname` (string), `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` em formato `YYYY-MM-DD`), `additionalneeds` (string).
+- O objeto `booking` retornado na criação e na consulta tem as mesmas chaves e valores enviados.
+- Criação, consulta e listagem não exigem autenticação. A exclusão exige autenticação e não é usada aqui, portanto as reservas criadas não são removidas ao final dos testes.
+- Nomes e sobrenomes únicos são gerados com `uuid4` para evitar colisão entre execuções.
+- Para o CT-05, assume-se que o identificador `0` não existe e retorna `404`.
+- Para o CT-09, assume-se que a API rejeita corpo incompleto com código de erro (>= 400); o código exato não é garantido.
+- Para o CT-08, assume-se que a API armazena caracteres Unicode sem transformação.
+
+```python
+import uuid
+
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 10
+
+
+def build_payload(**overrides):
+    payload = {
+        "firstname": f"Ana{uuid.uuid4().hex[:8]}",
+        "lastname": f"Silva{uuid.uuid4().hex[:8]}",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2026-11-01", "checkout": "2026-11-05"},
+        "additionalneeds": "Café da manhã",
+    }
+    payload.update(overrides)
+    return payload
+
+
+@pytest.fixture
+def created_booking():
+    payload = build_payload()
+    response = requests.post(f"{BASE_URL}/booking", json=payload, timeout=TIMEOUT)
+    assert response.status_code == 200
+    return response.json()["bookingid"], payload
+
+
+def test_ct01_criar_reserva_com_dados_validos():
+    payload = build_payload()
+
+    response = requests.post(f"{BASE_URL}/booking", json=payload, timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert isinstance(body["bookingid"], int) and not isinstance(body["bookingid"], bool)
+    assert body["booking"] == payload
+
+
+def test_ct02_consultar_reserva_criada_pelo_identificador(created_booking):
+    booking_id, payload = created_booking
+
+    response = requests.get(f"{BASE_URL}/booking/{booking_id}", timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    assert response.json() == payload
+
+
+def test_ct03_consultar_identificador_inexistente_retorna_404():
+    response = requests.get(f"{BASE_URL}/booking/99999999", timeout=TIMEOUT)
+
+    assert response.status_code == 404
+
+
+def test_ct04_listar_reservas_por_nome_contem_identificador_criado(created_booking):
+    booking_id, payload = created_booking
+
+    response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": payload["firstname"], "lastname": payload["lastname"]},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    assert any(item["bookingid"] == booking_id for item in response.json())
+
+
+def test_ct05_consultar_identificador_zero_retorna_404():
+    response = requests.get(f"{BASE_URL}/booking/0", timeout=TIMEOUT)
+
+    assert response.status_code == 404
+
+
+def test_ct06_listar_reservas_sem_correspondencia_retorna_lista_vazia():
+    response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": f"Inexistente{uuid.uuid4().hex}", "lastname": f"Nulo{uuid.uuid4().hex}"},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_ct07_criar_reserva_com_preco_zero_e_deposito_nao_pago():
+    payload = build_payload(totalprice=0, depositpaid=False)
+
+    response = requests.post(f"{BASE_URL}/booking", json=payload, timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    assert response.json()["booking"] == payload
+
+
+def test_ct08_criar_reserva_com_caracteres_especiais_e_acentuados():
+    payload = build_payload(
+        firstname="José-Ângelo",
+        lastname="O'Neil Çaçá",
+        additionalneeds="Berço ao lado da janela, sem glúten",
+    )
+
+    response = requests.post(f"{BASE_URL}/booking", json=payload, timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    assert response.json()["booking"] == payload
+
+
+def test_ct09_criar_reserva_com_corpo_sem_campos_obrigatorios_retorna_erro():
+    response = requests.post(f"{BASE_URL}/booking", json={}, timeout=TIMEOUT)
+
+    assert response.status_code >= 400
+    assert "bookingid" not in response.text
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__, "-v"]))
+```

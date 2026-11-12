@@ -1,0 +1,188 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C04",
+  "US04-C05",
+  "US04-C06",
+  "US04-C07",
+  "US04-C08",
+  "US04-C09",
+  "US04-C10",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C06",
+    "US04-C09"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C07"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C10"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_enviar_formulario_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct02_telefone_abaixo_do_minimo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct03_telefone_no_minimo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct04_telefone_no_maximo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct05_telefone_acima_do_maximo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct06_assunto_e_mensagem_abaixo_do_minimo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct07_assunto_e_mensagem_nos_minimos",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct08_assunto_e_mensagem_nos_maximos",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct09_assunto_acima_do_maximo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct10_mensagem_acima_do_maximo",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct11_email_malformado",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct12_enviar_dados_validos",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  }
+ ]
+}

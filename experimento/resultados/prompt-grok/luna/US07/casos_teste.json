@@ -1,0 +1,34 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Enviar um corpo JSON válido para criar reserva.",
+  "esperado": "Status 200; resposta contém identificador numérico e os mesmos dados enviados."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Consultar reserva recém-criada",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Criar reserva e consultar pelo identificador retornado.",
+  "esperado": "Status 200; todos os campos correspondem aos dados enviados."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "negativo",
+  "criterio": "3",
+  "passos": "Consultar o identificador `99999999`.",
+  "esperado": "Status 404."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Listar reserva por nome e sobrenome únicos",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Criar reserva com nome e sobrenome únicos; listar usando ambos como filtros.",
+  "esperado": "A lista contém o identificador da reserva criada."
+ }
+]

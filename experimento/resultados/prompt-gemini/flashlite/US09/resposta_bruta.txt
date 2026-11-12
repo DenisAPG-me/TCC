@@ -1,0 +1,123 @@
+CASOS DE TESTE
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Exclusão de reserva sem token | Negativo | Critério 1 | 1. Criar uma reserva.<br>2. Tentar excluir a reserva sem enviar o cabeçalho de autorização (token).<br>3. Consultar a reserva excluída. | 1. Receber status 403 na exclusão.<br>2. Receber status 200 na consulta da reserva. |
+| CT02 | Exclusão de reserva com token inválido | Negativo | Critério 2 | 1. Criar uma reserva.<br>2. Tentar excluí-la enviando um token de autorização inválido.<br>3. Consultar a reserva. | 1. Receber status 403 na exclusão.<br>2. Receber status 200 na consulta da reserva (a reserva continua existindo). |
+| CT03 | Exclusão de reserva com sucesso | Positivo | Critério 3 | 1. Obter token válido via endpoint de autenticação (admin / password123).<br>2. Criar uma reserva.<br>3. Excluir a reserva enviando o token válido no cabeçalho Cookie. | Receber status 201 (ou 200 conforme comportamento da API Restful Booker) ao excluir. |
+| CT04 | Consulta de reserva após exclusão | Positivo | Critério 4 | 1. Criar e excluir uma reserva com token válido.<br>2. Tentar consultar a reserva pelo seu ID. | Receber status 404. |
+| CT05 | Exclusão duplicada da mesma reserva | Borda | Critério 5 | 1. Criar e excluir uma reserva com token válido.<br>2. Tentar excluir a mesma reserva novamente utilizando token válido. | Receber status 4xx (ex: 405 Method Not Allowed ou 404 Not Found) e garantir que nenhuma outra reserva foi afetada. |
+| CT06 | Listagem por nome após exclusão | Positivo | Critério 6 | 1. Criar uma reserva com um nome único (ex: 'UniqueNameDeleteTest').<br>2. Excluir a reserva.<br>3. Listar reservas filtrando pelo parâmetro de nome único. | A lista retornada deve estar vazia. |
+
+SUPOSIÇÕES
+- Endpoint de Autenticação: `POST /auth` com JSON `{"username": "admin", "password": "password123"}` retornando um token no formato `{"token": "<string>"}`.
+- Endpoint de Criação de Reserva: `POST /booking` aceitando payload JSON com dados de reserva (firstname, lastname, totalprice, depositpaid, bookingdates, additionalneeds) e retornando o ID da reserva criada (`bookingid`).
+- Endpoint de Consulta/Exclusão de Reserva: `GET /booking/{id}` e `DELETE /booking/{id}`.
+- Autenticação via `DELETE`: A API Restful Booker espera o token de autorização no cabeçalho `Cookie` no formato `token=<token_value>`.
+- Endpoint de Listagem por Nome: `GET /booking?firstname=<firstname>&lastname=<lastname>`.
+- Comportamento de exclusão duplicada: A API Restful Booker retorna status 405 (Method Not Allowed) ou 404 ao tentar deletar uma reserva inexistente ou já deletada.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+
+
+@pytest.fixture(scope="session")
+def auth_token():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "admin", "password": "password123"},
+    )
+    assert response.status_code == 200
+    return response.json().get("token")
+
+
+@pytest.fixture
+def sample_booking():
+    payload = {
+        "firstname": "John",
+        "lastname": "Doe",
+        "totalprice": 111,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2026-01-01", "checkout": "2026-01-02"},
+        "additionalneeds": "Breakfast",
+    }
+    response = requests.post(f"{BASE_URL}/booking", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    return data["bookingid"]
+
+
+def test_CT01_exclusao_sem_token(sample_booking):
+    delete_response = requests.delete(f"{BASE_URL}/booking/{sample_booking}")
+    assert delete_response.status_code == 403
+
+    get_response = requests.get(f"{BASE_URL}/booking/{sample_booking}")
+    assert get_response.status_code == 200
+
+
+def test_CT02_exclusao_token_invalido(sample_booking):
+    headers = {"Cookie": "token=invalidtoken123"}
+    delete_response = requests.delete(
+        f"{BASE_URL}/booking/{sample_booking}", headers=headers
+    )
+    assert delete_response.status_code == 403
+
+    get_response = requests.get(f"{BASE_URL}/booking/{sample_booking}")
+    assert get_response.status_code == 200
+
+
+def test_CT03_exclusao_com_sucesso(auth_token, sample_booking):
+    headers = {"Cookie": f"token={auth_token}"}
+    delete_response = requests.delete(
+        f"{BASE_URL}/booking/{sample_booking}", headers=headers
+    )
+    assert delete_response.status_code in [201, 200]
+
+
+def test_CT04_consulta_apos_exclusao(auth_token, sample_booking):
+    headers = {"Cookie": f"token={auth_token}"}
+    requests.delete(f"{BASE_URL}/booking/{sample_booking}", headers=headers)
+
+    get_response = requests.get(f"{BASE_URL}/booking/{sample_booking}")
+    assert get_response.status_code == 404
+
+
+def test_CT05_exclusao_duplicada(auth_token, sample_booking):
+    headers = {"Cookie": f"token={auth_token}"}
+    # Primeira exclusão
+    res1 = requests.delete(f"{BASE_URL}/booking/{sample_booking}", headers=headers)
+    assert res1.status_code in [201, 200]
+
+    # Segunda exclusão
+    res2 = requests.delete(f"{BASE_URL}/booking/{sample_booking}", headers=headers)
+    assert 400 <= res2.status_code < 500
+
+
+def test_CT06_listagem_por_nome_apos_exclusao(auth_token):
+    unique_firstname = "UniqueNameDeleteTest"
+    unique_lastname = "UniqueLast"
+    payload = {
+        "firstname": unique_firstname,
+        "lastname": unique_lastname,
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2026-05-01", "checkout": "2026-05-05"},
+        "additionalneeds": "Lunch",
+    }
+    create_res = requests.post(f"{BASE_URL}/booking", json=payload)
+    assert create_res.status_code == 200
+    booking_id = create_res.json()["bookingid"]
+
+    headers = {"Cookie": f"token={auth_token}"}
+    del_res = requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    assert del_res.status_code in [201, 200]
+
+    list_res = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": unique_firstname, "lastname": unique_lastname},
+    )
+    assert list_res.status_code == 200
+    assert list_res.json() == []
+```

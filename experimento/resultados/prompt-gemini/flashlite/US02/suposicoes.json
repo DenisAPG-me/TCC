@@ -1,0 +1,16 @@
+[
+ "**URL Base:** `https://practicesoftwaretesting.com/`",
+ "**Navegação e Seleção de Produtos:**",
+ "A busca pelo produto \"Claw Hammer\" e \"Thor Hammer\" é feita na página inicial ou na listagem de produtos, clicando no card correspondente pelo texto do nome do produto (`page.get_by_text(\"Claw Hammer\")` ou `page.get_by_role(\"link\", name=\"Claw Hammer\")`).",
+ "**Seletores de Quantidade e Carrinho:**",
+ "Campo de quantidade na página do produto: input numérico identificado por `page.get_by_label(\"Quantity\")` ou `page.get_by_test_id(\"quantity\")`.",
+ "Botão de adicionar ao carrinho: `page.get_by_role(\"button\", name=\"Add to cart\")` ou `page.get_by_test_id(\"add-to-cart\")`.",
+ "Mensagem de confirmação: `page.get_by_text(\"Product added to shopping cart.\")`.",
+ "Indicador do carrinho: elemento badge/contador de itens no topo (`page.get_by_test_id(\"nav-cart\")` ou `page.get_by_text(\"3\")`).",
+ "Link/Ícone do carrinho: `page.get_by_test_id(\"nav-cart\")` ou `page.get_by_role(\"link\", name=\"Cart\")`.",
+ "**Carrinho e Totais:**",
+ "Input ou campo de quantidade dentro da página do carrinho para alteração: `page.get_by_test_id(\"product-quantity\")` ou input do tipo número na tabela do carrinho.",
+ "Preço unitário, total da linha e total geral da compra mapeados por seletores de teste `page.get_by_test_id(\"product-price\")`, `page.get_by_test_id(\"line-price\")`, `page.get_by_test_id(\"cart-total\")`.",
+ "**Restrição do Thor Hammer:**",
+ "Mensagem de erro/alerta exibida na interface: `page.get_by_text(\"You can only have one Thor Hammer in the cart.\")`."
+]

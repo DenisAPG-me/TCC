@@ -1,0 +1,209 @@
+{
+ "created": 1793431515.5605552,
+ "duration": 12.983818769454956,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\luna\\US08",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_autenticar_com_credenciais_validas",
+     "type": "Function",
+     "lineno": 81
+    },
+    {
+     "nodeid": "script.py::test_CT002_rejeitar_credenciais_invalidas",
+     "type": "Function",
+     "lineno": 90
+    },
+    {
+     "nodeid": "script.py::test_CT003_atualizar_todos_os_dados_da_reserva",
+     "type": "Function",
+     "lineno": 98
+    },
+    {
+     "nodeid": "script.py::test_CT004_atualizar_apenas_o_sobrenome",
+     "type": "Function",
+     "lineno": 132
+    },
+    {
+     "nodeid": "script.py::test_CT005_recusar_atualizacao_sem_token",
+     "type": "Function",
+     "lineno": 157
+    },
+    {
+     "nodeid": "script.py::test_CT006_recusar_atualizacao_sem_campo_obrigatorio",
+     "type": "Function",
+     "lineno": 173
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_autenticar_com_credenciais_validas",
+   "lineno": 81,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_autenticar_com_credenciais_validas",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003003000747412443,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6155705999117345,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011909997556358576,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_rejeitar_credenciais_invalidas",
+   "lineno": 90,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_rejeitar_credenciais_invalidas",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0001868999097496271,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5800842000171542,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011360005009919405,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_atualizar_todos_os_dados_da_reserva",
+   "lineno": 98,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_atualizar_todos_os_dados_da_reserva",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024500000290572643,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.0332296000560746,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00013539998326450586,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_atualizar_apenas_o_sobrenome",
+   "lineno": 132,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_atualizar_apenas_o_sobrenome",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00031139992643147707,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.8156056000152603,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00017169991042464972,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_recusar_atualizacao_sem_token",
+   "lineno": 157,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT005_recusar_atualizacao_sem_token",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024779990781098604,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4691006999928504,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00010720000136643648,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_recusar_atualizacao_sem_campo_obrigatorio",
+   "lineno": 173,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT006_recusar_atualizacao_sem_campo_obrigatorio",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0001908999402076006,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4041746000293642,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00019349996000528336,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

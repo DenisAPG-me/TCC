@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva válida",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Gerar nome e sobrenome únicos; Enviar uma reserva com todos os campos preenchidos",
+  "esperado": "Status 200; Identificador inteiro positivo; Dados retornados iguais aos enviados"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Criar uma reserva válida; Consultar pelo identificador retornado",
+  "esperado": "Criação bem-sucedida; Consulta com status 200; Todos os campos e tipos preservados"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Consultar a reserva com identificador 99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Filtrar pelo nome e sobrenome",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva com nome e sobrenome únicos; Listar reservas passando ambos como filtros",
+  "esperado": "Criação bem-sucedida; Listagem com status 200; Lista contém o identificador criado"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Preservar preço zero e depósito não pago",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva com preço total zero e depósito pago falso; Consultar pelo identificador retornado",
+  "esperado": "Criação e consulta com status 200; Identificador inteiro positivo; Zero, falso e demais dados preservados"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Preservar acentos e necessidades adicionais vazias",
+  "tipo": "Borda",
+  "criterio": "CA1, CA2, CA4",
+  "passos": "Criar reserva com nomes únicos contendo acentos e necessidades adicionais vazias; Consultar pelo identificador; Filtrar pelo nome e sobrenome",
+  "esperado": "Criação, consulta e listagem com status 200; Dados e acentos preservados; Lista contém o identificador criado"
+ }
+]

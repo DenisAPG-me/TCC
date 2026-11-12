@@ -1,0 +1,12 @@
+[
+ "**URL Base:** `https://automationintesting.online/`",
+ "**Rota de Login:** `/admin`",
+ "**Seletores de UI:**",
+ "Campo de Usuário: input com label ou placeholder correspondente a \"Username\" / `get_by_label(\"Username\")` ou `get_by_placeholder(\"Username\")` (também testado com `input[name=\"username\"]`).",
+ "Campo de Senha: input com label ou placeholder correspondente a \"Password\" / `get_by_label(\"Password\")` ou `get_by_placeholder(\"Password\")` (também testado com `input[name=\"password\"]`).",
+ "Botão de Login: botão com texto \"Login\" / `get_by_role(\"button\", name=\"Login\")`.",
+ "Mensagem de Erro: elemento contendo \"Invalid credentials\" / `get_by_text(\"Invalid credentials\")`.",
+ "Menu de Navegação: links/elementos contendo \"Rooms\", \"Report\", \"Branding\", \"Messages\".",
+ "Quarto 101 / Tipo Single: texto contendo \"101\" e \"Single\".",
+ "Botão de Logout: botão ou link contendo \"Logout\" / `get_by_role(\"button\", name=\"Logout\")` ou `get_by_text(\"Logout\")`."
+]

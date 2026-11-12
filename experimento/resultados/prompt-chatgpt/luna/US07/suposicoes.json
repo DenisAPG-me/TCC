@@ -1,0 +1,9 @@
+[
+ "1. Os critérios não têm identificadores próprios; a correspondência adotada é CA01 para o critério 1, CA02 para o 2, CA03 para o 3 e CA04 para o 4, na ordem apresentada.",
+ "2. A API REST usa `POST /booking` para criar reservas, `GET /booking/{id}` para consultar uma reserva e `GET /booking?firstname=...&lastname=...` para filtrar reservas. Essas rotas e métodos são inferidos da URL base e dos critérios.",
+ "3. O corpo de criação usa os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, e `additionalneeds`. A resposta de criação contém `bookingid` e `booking`; a consulta retorna diretamente os campos da reserva. Esses formatos são inferidos e podem precisar de ajuste para compatibilidade com o sistema real.",
+ "4. Os testes enviam `Content-Type: application/json` e `Accept: application/json`, sem autenticação. As credenciais, cabeçalhos adicionais e pré-condições de autenticação não foram especificados.",
+ "5. Os dados válidos usados nos testes são exemplos plausíveis, sem assumir limites de preço ou regras adicionais de datas. No caso de listagem, um sufixo gerado em tempo de execução torna nome e sobrenome únicos para reduzir colisões.",
+ "6. O identificador `99999999` é usado conforme o exemplo do critério 3 e presume-se que não exista no ambiente. O serviço precisa estar acessível na URL base. Os testes não removem reservas criadas, pois o critério não especifica endpoint de limpeza nem autenticação para exclusão.",
+ "7. Os critérios não especificam casos de entrada inválida ou limites de campos; por isso, casos adicionais negativos ou de borda exigiriam inventar regras. O caso negativo aplicável é a consulta de identificador inexistente, explicitamente descrita."
+]

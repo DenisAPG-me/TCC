@@ -1,0 +1,222 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Autenticação com credenciais válidas | Positivo | AC1 | POST /auth com admin / password123 | Status 200 e campo `token` não vazio |
+| CT02 | Autenticação com senha inválida | Negativo | AC2 | POST /auth com admin e senha incorreta | Sem `token` na resposta e `reason` = "Bad credentials" |
+| CT03 | Autenticação com usuário inexistente | Negativo | AC2 | POST /auth com usuário desconhecido e senha qualquer | Sem `token` na resposta e `reason` = "Bad credentials" |
+| CT04 | Autenticação com credenciais vazias | Borda | AC2 | POST /auth com username e password vazios | Sem `token` na resposta e `reason` = "Bad credentials" |
+| CT05 | Atualização completa com novo nome e novo preço | Positivo | AC3 | Criar reserva, PUT completo com novo `firstname` e `totalprice` e token válido | Status 200 e valores novos refletidos na resposta |
+| CT06 | Atualização parcial apenas do sobrenome | Positivo | AC4 | Criar reserva, PATCH apenas com `lastname` e token válido | Status 200, `lastname` alterado e demais campos iguais aos originais |
+| CT07 | Atualização completa sem token | Negativo | AC5 | PUT completo em reserva existente sem header de autenticação | Status 403 |
+| CT08 | Atualização completa com campos obrigatórios ausentes | Negativo | AC6 | PUT com payload sem `firstname` e token válido | Status 400 |
+| CT09 | Atualização completa com token inválido | Negativo | AC5 (variação) | PUT completo com token inexistente | Status 403 |
+| CT10 | Atualização parcial sem token | Negativo | AC5 (variação) | PATCH apenas com `lastname` sem autenticação | Status 403 |
+| CT11 | Atualização completa com preço zero | Borda | AC3 (limite) | PUT completo com `totalprice` = 0 e token válido | Status 200 e `totalprice` = 0 |
+
+## SUPOSIÇÕES
+
+- Base URL: `https://restful-booker.herokuapp.com`, acessível e com dados de demonstração.
+- Autenticação: `POST /auth` com JSON `{"username": "...", "password": "..."}` retorna `{"token": "..."}` em caso de sucesso.
+- Falha de autenticação: retorna status 200 com `{"reason": "Bad credentials"}`, sem o campo `token`. Credenciais vazias e usuário inexistente seguem o mesmo padrão.
+- Token em atualizações: enviado no header `Cookie: token=<valor>` em `PUT /booking/{id}` e `PATCH /booking/{id}`.
+- Sem token ou com token inválido em atualizações: status 403.
+- Criação de reserva: `POST /booking` com JSON retorna `{"bookingid": <int>, "booking": {...}}`, com status 200.
+- Consulta de reserva: `GET /booking/{id}` retorna o objeto da reserva.
+- Payload de reserva: chaves `firstname` (string), `lastname` (string), `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`) e `additionalneeds` (string, opcional).
+- Campos obrigatórios para `PUT`: `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`. Ausência de qualquer um deles resulta em status 400.
+- `PATCH` aceita atualização parcial e preserva os campos não enviados.
+- Reservas criadas pelos testes não são removidas, por se tratar de ambiente de demonstração.
+- Não há caso de teste para ID de reserva inexistente, pois o comportamento da API para esse caso não está definido na User Story.
+- Valores de teste: `firstname` original "Joao", `lastname` original "Silva", `totalprice` original 150, novo `firstname` "Maria", novo `totalprice` 999, `checkin` 2026-01-01 e `checkout` 2026-01-05.
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 30
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password123"
+JSON_HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+
+
+def build_booking(**overrides):
+    booking = {
+        "firstname": "Joao",
+        "lastname": "Silva",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2026-01-01", "checkout": "2026-01-05"},
+        "additionalneeds": "Breakfast",
+    }
+    booking.update(overrides)
+    return booking
+
+
+def auth_headers(token):
+    return {**JSON_HEADERS, "Cookie": f"token={token}"}
+
+
+def get_booking(booking_id):
+    response = requests.get(f"{BASE_URL}/booking/{booking_id}", headers=JSON_HEADERS, timeout=TIMEOUT)
+    assert response.status_code == 200
+    return response.json()
+
+
+@pytest.fixture(scope="session")
+def auth_token():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": ADMIN_USER, "password": ADMIN_PASSWORD},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    token = response.json().get("token")
+    assert token, f"Token não obtido: {response.text}"
+    return token
+
+
+@pytest.fixture
+def booking_id():
+    response = requests.post(
+        f"{BASE_URL}/booking",
+        json=build_booking(),
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    return response.json()["bookingid"]
+
+
+def test_CT01_autenticacao_credenciais_validas():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": ADMIN_USER, "password": ADMIN_PASSWORD},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    token = response.json().get("token")
+    assert isinstance(token, str) and token.strip()
+
+
+def test_CT02_autenticacao_senha_invalida():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": ADMIN_USER, "password": "senha_errada"},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_CT03_autenticacao_usuario_inexistente():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "usuario_inexistente", "password": ADMIN_PASSWORD},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_CT04_autenticacao_credenciais_vazias():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": "", "password": ""},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_CT05_put_atualizacao_completa_novo_nome_e_preco(auth_token, booking_id):
+    payload = build_booking(firstname="Maria", totalprice=999)
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=payload,
+        headers=auth_headers(auth_token),
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["firstname"] == "Maria"
+    assert body["totalprice"] == 999
+
+
+def test_CT06_patch_atualizacao_parcial_sobrenome(auth_token, booking_id):
+    original = get_booking(booking_id)
+    response = requests.patch(
+        f"{BASE_URL}/booking/{booking_id}",
+        json={"lastname": "Oliveira"},
+        headers=auth_headers(auth_token),
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["lastname"] == "Oliveira"
+    assert body["firstname"] == original["firstname"]
+    assert body["totalprice"] == original["totalprice"]
+    assert body["depositpaid"] == original["depositpaid"]
+    assert body["bookingdates"] == original["bookingdates"]
+
+
+def test_CT07_put_sem_token_retorna_403(booking_id):
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=build_booking(firstname="Maria"),
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 403
+
+
+def test_CT08_put_campos_obrigatorios_ausentes_retorna_400(auth_token, booking_id):
+    payload = build_booking()
+    del payload["firstname"]
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=payload,
+        headers=auth_headers(auth_token),
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 400
+
+
+def test_CT09_put_token_invalido_retorna_403(booking_id):
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=build_booking(firstname="Maria"),
+        headers=auth_headers("token_invalido_123"),
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 403
+
+
+def test_CT10_patch_sem_token_retorna_403(booking_id):
+    response = requests.patch(
+        f"{BASE_URL}/booking/{booking_id}",
+        json={"lastname": "Oliveira"},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 403
+
+
+def test_CT11_put_preco_zero_borda(auth_token, booking_id):
+    response = requests.put(
+        f"{BASE_URL}/booking/{booking_id}",
+        json=build_booking(totalprice=0),
+        headers=auth_headers(auth_token),
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    assert response.json()["totalprice"] == 0
+```

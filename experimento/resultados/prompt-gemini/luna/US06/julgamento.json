@@ -1,0 +1,91 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio incompleto nao confirma"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT05",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota /admin/messages inexistente (real /admin/message)"
+  }
+ ]
+}

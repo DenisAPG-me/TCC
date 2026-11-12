@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 1,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Legivel, comentarios excessivos",
+  "estrutura": "Sem helpers, login repetido",
+  "assercoes": "Asserts corretos mas por texto ambiguo",
+  "espera": "expect auto-wait, sem sleep",
+  "manutenibilidade": "Seletores por texto ambiguos, sem constantes de credencial"
+ }
+}

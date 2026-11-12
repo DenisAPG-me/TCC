@@ -1,0 +1,90 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com formulário vazio exibe mensagens de obrigatoriedade",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Abrir tela de login; clicar em Login sem preencher nada",
+  "esperado": "\"Email is required\" e \"Password is required\" visíveis"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com senha incorreta não cria sessão",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Informar e-mail demo e senha incorreta; clicar em Login",
+  "esperado": "\"Invalid email or password\" visível; permanece na tela de login; nome do usuário ausente no menu"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login com e-mail vazio e senha preenchida",
+  "tipo": "borda",
+  "criterio": "CA1",
+  "passos": "Preencher só a senha; clicar em Login",
+  "esperado": "\"Email is required\" visível; \"Password is required\" não visível"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Login com senha vazia e e-mail preenchido",
+  "tipo": "borda",
+  "criterio": "CA1",
+  "passos": "Preencher só o e-mail; clicar em Login",
+  "esperado": "\"Password is required\" visível; \"Email is required\" não visível"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Login com credenciais válidas exibe My account",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Informar e-mail e senha da conta demo; clicar em Login",
+  "esperado": "Heading \"My account\" visível; nome do usuário no menu"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Checkout sem autenticação leva à tela de login",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Sem login, adicionar produto ao carrinho; abrir carrinho; clicar em Proceed to Checkout",
+  "esperado": "Campos de e-mail e senha visíveis"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Endereço com campos obrigatórios vazios não avança para pagamento",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Logar; adicionar produto; ir ao checkout; clicar em Proceed to Payment sem preencher endereço",
+  "esperado": "Permanece no passo de endereço; campo \"Card number\" não existe"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Endereço com campos obrigatórios preenchidos avança para pagamento",
+  "tipo": "positivo",
+  "criterio": "CA5",
+  "passos": "Logar; adicionar produto; ir ao checkout; preencher país, CEP, número, rua, cidade e estado; clicar em Proceed to Payment",
+  "esperado": "Campo \"Card number\" visível (passo de pagamento)"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Endereço sem apenas o CEP não avança para pagamento",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Logar; adicionar produto; ir ao checkout; preencher todos os campos exceto CEP; clicar em Proceed to Payment",
+  "esperado": "Permanece no passo de endereço; campo \"Card number\" não existe"
+ },
+ {
+  "id": "TC10",
+  "titulo": "Pagamento com cartão de crédito fictício válido exibe sucesso",
+  "tipo": "positivo",
+  "criterio": "CA6",
+  "passos": "Chegar ao pagamento; selecionar \"Credit Card\"; preencher dados do cartão fictício; clicar em Confirm",
+  "esperado": "\"Payment was successful\" visível"
+ },
+ {
+  "id": "TC11",
+  "titulo": "Confirmar pedido exibe número da fatura",
+  "tipo": "positivo",
+  "criterio": "CA6",
+  "passos": "Executar TC10; clicar em Confirm order",
+  "esperado": "\"Thanks for your order! Your invoice number is INV-...\" visível"
+ }
+]

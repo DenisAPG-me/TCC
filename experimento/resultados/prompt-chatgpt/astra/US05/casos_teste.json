@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Enviar credenciais vazias",
+  "tipo": "borda",
+  "criterio": "1",
+  "passos": "Abrir o login; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Exibe “Invalid credentials” e permanece na tela de login"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Rejeitar senha incorreta",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Abrir o login; preencher admin e senha incorreta; clicar em Login",
+  "esperado": "Exibe “Invalid credentials”"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Acessar quartos com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Abrir o login; preencher admin e password; clicar em Login; verificar quartos e menu",
+  "esperado": "Abre a lista de quartos; o quarto 101 tem tipo Single; o menu apresenta Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Sair do painel",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Autenticar; clicar em Logout",
+  "esperado": "Retorna à página inicial pública da pousada"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Impedir acesso direto após logout",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Autenticar; sair; acessar diretamente a URL da lista de quartos no mesmo contexto",
+  "esperado": "Exibe novamente a tela de login"
+ }
+]

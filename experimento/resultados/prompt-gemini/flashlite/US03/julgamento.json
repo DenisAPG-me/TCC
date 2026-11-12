@@ -1,0 +1,108 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01",
+   "categoria": "seletor inexistente",
+   "nota": "botao login|sign in casa 2 (Google); strict mode"
+  },
+  {
+   "teste": "test_ct02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(password) casa 2"
+  },
+  {
+   "teste": "test_ct03",
+   "categoria": "seletor inexistente",
+   "nota": "botao 'add to cart' nao achado apos clicar .card"
+  },
+  {
+   "teste": "test_ct04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(password) casa 2"
+  },
+  {
+   "teste": "test_ct05",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(password) casa 2"
+  },
+  {
+   "teste": "test_ct06",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(password) casa 2"
+  }
+ ]
+}

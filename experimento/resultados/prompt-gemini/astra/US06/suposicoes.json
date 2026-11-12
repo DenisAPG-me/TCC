@@ -1,0 +1,18 @@
+[
+ "Não houve acesso ao sistema ou à internet. Rotas, seletores e comportamentos abaixo são hipóteses que precisam ser confirmadas antes da execução.",
+ "A aplicação é uma interface web. O arquivo utiliza `pytest`, `playwright` e o plugin oficial `pytest-playwright`, exigido pelos requisitos técnicos. A fixture `page` é fornecida pelo plugin, sem fixtures próprias de navegador.",
+ "A URL base é definida pela constante `BASE_URL`. A página inicial contém o formulário de contato; `/admin` permite autenticar com `admin` / `password`.",
+ "O login possui campos associados aos rótulos `Username` e `Password` e botão `Login`. O logout é um botão chamado `Logout`.",
+ "O menu administrativo possui um link cujo nome acessível começa por `Messages`. Dentro dele existe um elemento `.badge` contendo apenas o contador decimal, inclusive `0`.",
+ "A rota da caixa de mensagens é obtida pelo link `Messages` durante o teste. Não se presume um caminho adicional.",
+ "O formulário de contato possui campos associados aos rótulos `Name`, `Email`, `Phone`, `Subject` e `Message`, além do botão `Submit`. Esses controles são únicos na página.",
+ "A confirmação é um elemento com o texto exato solicitado, sem espaços adicionais ou texto complementar no mesmo elemento.",
+ "A caixa de mensagens possui uma tabela com nome acessível `Messages`; cada mensagem corresponde a uma linha com células contendo exatamente o nome e o assunto. A mensagem recém-enviada fica disponível sem paginação ou filtros adicionais.",
+ "Os dados gerados são considerados válidos: endereço de e-mail sintaticamente válido, telefone com 11 dígitos e textos não vazios. Não são pressupostos limites de tamanho.",
+ "CT06 representa uma borda de representação textual: considera nomes com acentos e apóstrofo válidos. CT07 representa a repetição consecutiva do fluxo, sem pressupor limites numéricos.",
+ "Não há envios concorrentes, exclusões ou outras alterações externas do contador durante os testes. Abrir a caixa de mensagens não reduz o contador; nenhuma mensagem é marcada como lida nos testes.",
+ "Após logout, acessar diretamente a caixa apresenta o formulário de login e não apresenta a tabela de mensagens.",
+ "Cada teste começa em um contexto isolado fornecido pelo plugin. Mensagens persistem no servidor; os testes usam identificadores exclusivos e não dependem da ordem de execução.",
+ "Não foram criados testes de campos inválidos, credenciais incorretas, limites de caracteres ou exclusão, pois seus resultados esperados não estão definidos na User Story.",
+ "O ambiente deve permitir mensagens de teste. Não há limpeza automática porque a história não informa uma funcionalidade de exclusão."
+]

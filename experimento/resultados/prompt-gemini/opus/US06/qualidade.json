@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros e consistentes",
+  "estrutura": "helpers, base_url, contextos isolados para o visitante",
+  "assercoes": "contador exato, confirmacao, erro e ausencia de confirmacao, lista com nome e assunto",
+  "espera": "expect com auto-wait, mas wait_for_load_state('networkidle')",
+  "manutenibilidade": "constantes e dados unicos, mas test-id username inexistente"
+ }
+}

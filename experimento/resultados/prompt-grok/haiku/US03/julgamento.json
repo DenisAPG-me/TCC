@@ -1,0 +1,156 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so senha, sem e-mail"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so e-mail, sem senha"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "omitir so CEP"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC02_senha_incorreta_exibe_erro_e_sem_sessao",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC03_email_vazio_exibe_apenas_mensagem_do_email",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC05_login_valido_exibe_my_account_com_nome",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC06_checkout_sem_autenticacao_leva_ao_login",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC07_endereco_vazio_nao_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') ambiguo (strict mode)"
+  },
+  {
+   "teste": "test_TC08_endereco_preenchido_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "'.card' click timeout/label ambiguo"
+  },
+  {
+   "teste": "test_TC09_endereco_sem_cep_nao_avanca_para_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login previo"
+  },
+  {
+   "teste": "test_TC10_pagamento_cartao_credito_exibe_sucesso",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login previo"
+  },
+  {
+   "teste": "test_TC11_confirmar_pedido_exibe_numero_da_fatura",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label ambiguo no login previo"
+  }
+ ]
+}

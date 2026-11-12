@@ -1,0 +1,148 @@
+### CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT-01 | Excluir reserva sem token | Negativo | 1 | Criar reserva; executar DELETE sem header de autenticação; consultar GET da reserva | DELETE retorna 403; GET retorna 200 |
+| CT-02 | Excluir reserva com token inválido | Negativo | 2 | Criar reserva; executar DELETE com token inválido; consultar GET da reserva | DELETE retorna 403; GET retorna 200 |
+| CT-03 | Excluir reserva com token válido | Positivo | 3 | Obter token via /auth; criar reserva; executar DELETE com token válido | DELETE retorna 201 |
+| CT-04 | Consultar reserva após exclusão | Positivo | 4 | Criar e excluir reserva com token válido; executar GET pelo mesmo ID | GET retorna 404 |
+| CT-05 | Excluir novamente com token válido e preservar demais reservas | Negativo | 5 | Criar duas reservas; excluir a primeira; excluí-la novamente com token válido; consultar a segunda | Segunda exclusão retorna status 4xx; segunda reserva continua com GET 200 |
+| CT-06 | Listar por nome único após exclusão | Positivo | 6 | Criar reserva com nome único; excluí-la; GET /booking filtrando por firstname | Status 200 e lista vazia |
+| CT-07 | Excluir reserva inexistente com token válido | Borda | 5 | Obter token; executar DELETE em ID inexistente | Status 4xx |
+| CT-08 | Excluir com token vazio | Borda | 1 e 2 | Criar reserva; executar DELETE com token vazio; consultar GET da reserva | DELETE retorna 403; GET retorna 200 |
+
+### SUPOSIÇÕES
+
+- **Base URL:** `https://restful-booker.herokuapp.com`, definida como constante `BASE_URL`.
+- **Autenticação:** `POST /auth` com JSON `{"username": "admin", "password": "password123"}` retorna `{"token": "<valor>"}`.
+- **Criação de reserva:** `POST /booking` com JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`. A resposta contém `bookingid` (inteiro).
+- **Nome único:** `firstname` recebe o prefixo `Nome` seguido de `uuid4().hex`. O `lastname` é fixo em `Teste`.
+- **Consulta:** `GET /booking/{id}` retorna 200 com JSON para reservas existentes e 404 para reservas inexistentes ou excluídas.
+- **Exclusão:** `DELETE /booking/{id}` autenticado pelo header `Cookie: token=<valor>`.
+  - Sem header de token: 403.
+  - Token inválido ou vazio: 403.
+  - Token válido: 201.
+- **Exclusão repetida ou de ID inexistente:** retorna status 4xx. O código exato (por exemplo, 404 ou 405) não é verificado.
+- **ID inexistente:** `999999999` assumido como não existente.
+- **Listagem:** `GET /booking?firstname=<nome>` retorna 200 com lista JSON. Lista vazia é `[]`.
+- **Dados compartilhados:** a API de demonstração é pública. As reservas criadas pelos testes são removidas no teardown por melhor esforço, sem asserção.
+- **Timeout:** 30 segundos por requisição, para tolerar cold start do Heroku.
+- **Nomenclatura dos testes:** o ID `CT-XX` aparece no nome da função como `test_ct_XX_...`, por ser um identificador Python válido.
+
+```python
+import uuid
+
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+ADMIN_CREDENTIALS = {"username": "admin", "password": "password123"}
+INVALID_TOKEN = "token-invalido-0000"
+TIMEOUT = 30
+JSON_HEADERS = {"Accept": "application/json"}
+
+
+def get_booking(booking_id):
+    return requests.get(f"{BASE_URL}/booking/{booking_id}", headers=JSON_HEADERS, timeout=TIMEOUT)
+
+
+def delete_booking(booking_id, token=None):
+    headers = {} if token is None else {"Cookie": f"token={token}"}
+    return requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers, timeout=TIMEOUT)
+
+
+@pytest.fixture(scope="session")
+def token():
+    response = requests.post(f"{BASE_URL}/auth", json=ADMIN_CREDENTIALS, timeout=TIMEOUT)
+    response.raise_for_status()
+    return response.json()["token"]
+
+
+@pytest.fixture
+def new_booking(token):
+    created_ids = []
+
+    def factory():
+        name = f"Nome{uuid.uuid4().hex}"
+        payload = {
+            "firstname": name,
+            "lastname": "Teste",
+            "totalprice": 150,
+            "depositpaid": True,
+            "bookingdates": {"checkin": "2027-01-10", "checkout": "2027-01-15"},
+            "additionalneeds": "Café da manhã",
+        }
+        response = requests.post(f"{BASE_URL}/booking", json=payload, headers=JSON_HEADERS, timeout=TIMEOUT)
+        response.raise_for_status()
+        booking_id = response.json()["bookingid"]
+        created_ids.append(booking_id)
+        return booking_id, name
+
+    yield factory
+
+    for booking_id in created_ids:
+        delete_booking(booking_id, token)
+
+
+def test_ct_01_excluir_sem_token_retorna_403_e_reserva_permanece(new_booking):
+    booking_id, _ = new_booking()
+
+    assert delete_booking(booking_id).status_code == 403
+    assert get_booking(booking_id).status_code == 200
+
+
+def test_ct_02_excluir_com_token_invalido_retorna_403_e_reserva_permanece(new_booking):
+    booking_id, _ = new_booking()
+
+    assert delete_booking(booking_id, INVALID_TOKEN).status_code == 403
+    assert get_booking(booking_id).status_code == 200
+
+
+def test_ct_03_excluir_com_token_valido_retorna_201(token, new_booking):
+    booking_id, _ = new_booking()
+
+    assert delete_booking(booking_id, token).status_code == 201
+
+
+def test_ct_04_consultar_reserva_excluida_retorna_404(token, new_booking):
+    booking_id, _ = new_booking()
+    assert delete_booking(booking_id, token).status_code == 201
+
+    assert get_booking(booking_id).status_code == 404
+
+
+def test_ct_05_excluir_novamente_retorna_4xx_e_outra_reserva_nao_e_afetada(token, new_booking):
+    booking_id, _ = new_booking()
+    other_booking_id, _ = new_booking()
+    assert delete_booking(booking_id, token).status_code == 201
+
+    response = delete_booking(booking_id, token)
+
+    assert 400 <= response.status_code < 500
+    assert get_booking(other_booking_id).status_code == 200
+
+
+def test_ct_06_listar_por_nome_unico_apos_exclusao_retorna_lista_vazia(token, new_booking):
+    booking_id, name = new_booking()
+    assert delete_booking(booking_id, token).status_code == 201
+
+    response = requests.get(
+        f"{BASE_URL}/booking", params={"firstname": name}, headers=JSON_HEADERS, timeout=TIMEOUT
+    )
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_ct_07_excluir_reserva_inexistente_com_token_valido_retorna_4xx(token):
+    response = delete_booking(999999999, token)
+
+    assert 400 <= response.status_code < 500
+
+
+def test_ct_08_excluir_com_token_vazio_retorna_403_e_reserva_permanece(new_booking):
+    booking_id, _ = new_booking()
+
+    assert delete_booking(booking_id, "").status_code == 403
+    assert get_booking(booking_id).status_code == 200
+```

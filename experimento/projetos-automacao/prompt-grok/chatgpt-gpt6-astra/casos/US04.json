@@ -1,0 +1,82 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Enviar todos os campos vazios",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial; manter os cinco campos vazios; enviar.",
+  "esperado": "Exibir mensagens de obrigatoriedade para nome, e-mail, telefone, assunto e mensagem."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Telefone abaixo do limite mínimo",
+  "tipo": "borda",
+  "criterio": "2",
+  "passos": "Preencher telefone com 10 caracteres e demais campos válidos; enviar.",
+  "esperado": "Exibir “Phone must be between 11 and 21 characters.”."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Assunto e mensagem abaixo dos limites mínimos",
+  "tipo": "borda",
+  "criterio": "3",
+  "passos": "Preencher assunto com 4 caracteres, mensagem com 19 e demais campos válidos; enviar.",
+  "esperado": "Exibir “Subject must be between 5 and 100 characters.” e “Message must be between 20 and 2000 characters.”."
+ },
+ {
+  "id": "TC04",
+  "titulo": "E-mail malformado",
+  "tipo": "negativo",
+  "criterio": "4",
+  "passos": "Preencher e-mail com “bad” e demais campos válidos; enviar.",
+  "esperado": "Exibir “must be a well-formed email address”."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Enviar dados válidos intermediários",
+  "tipo": "positivo",
+  "criterio": "5",
+  "passos": "Preencher todos os campos com dados válidos, afastados dos limites; enviar.",
+  "esperado": "Exibir “Thanks for getting in touch Ana Silva!” e o assunto informado."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Aceitar os limites mínimos",
+  "tipo": "borda",
+  "criterio": "2, 3 e 5",
+  "passos": "Preencher telefone com 11, assunto com 5 e mensagem com 20 caracteres; preencher nome e e-mail válidos; enviar.",
+  "esperado": "Exibir confirmação com nome e assunto."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Aceitar os limites máximos",
+  "tipo": "borda",
+  "criterio": "2, 3 e 5",
+  "passos": "Preencher telefone com 21, assunto com 100 e mensagem com 2000 caracteres; preencher nome e e-mail válidos; enviar.",
+  "esperado": "Exibir confirmação com nome e assunto."
+ },
+ {
+  "id": "TC08",
+  "titulo": "Telefone acima do limite máximo",
+  "tipo": "borda",
+  "criterio": "2 — limite inferido da mensagem",
+  "passos": "Preencher telefone com 22 caracteres e demais campos válidos; enviar.",
+  "esperado": "Exibir “Phone must be between 11 and 21 characters.”."
+ },
+ {
+  "id": "TC09",
+  "titulo": "Assunto acima do limite máximo",
+  "tipo": "borda",
+  "criterio": "3 — limite inferido da mensagem",
+  "passos": "Preencher assunto com 101 caracteres e demais campos válidos; enviar.",
+  "esperado": "Exibir “Subject must be between 5 and 100 characters.”."
+ },
+ {
+  "id": "TC10",
+  "titulo": "Mensagem acima do limite máximo",
+  "tipo": "borda",
+  "criterio": "3 — limite inferido da mensagem",
+  "passos": "Preencher mensagem com 2001 caracteres e demais campos válidos; enviar.",
+  "esperado": "Exibir “Message must be between 20 and 2000 characters.”."
+ }
+]

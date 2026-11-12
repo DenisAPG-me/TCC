@@ -1,0 +1,84 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C05",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C05"
+   ],
+   "nota": "espacos nas extremidades; API retorna resultados"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_buscar_produtos_por_palavra_chave",
+   "categoria": "seletor inexistente",
+   "nota": "a[href*='/product/'] retornou lista vazia"
+  },
+  {
+   "teste": "test_ct03_ordenar_precos_em_ordem_crescente",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de opcao 'Price (low to high)' inexistente (real 'Price (Low - High)')"
+  },
+  {
+   "teste": "test_ct04_ordenar_nomes_em_ordem_decrescente",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de opcao 'Name (Z to A)' inexistente (real 'Name (Z - A)')"
+  },
+  {
+   "teste": "test_ct05_buscar_termo_com_espacos_nas_extremidades",
+   "categoria": "seletor inexistente",
+   "nota": "a[href*='/product/'] retornou lista vazia"
+  }
+ ]
+}

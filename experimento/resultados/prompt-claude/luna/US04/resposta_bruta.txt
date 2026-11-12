@@ -1,0 +1,116 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Enviar formulário vazio | Negativo | CA1 | Abrir a página inicial; enviar o formulário sem preencher campos | São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco |
+| CT02 | Enviar telefone abaixo do mínimo | Borda | CA2 | Abrir a página inicial; preencher todos os campos; informar telefone com 10 caracteres; enviar | É exibida a mensagem "Phone must be between 11 and 21 characters." |
+| CT03 | Enviar assunto e mensagem abaixo do mínimo | Borda | CA3 | Abrir a página inicial; preencher os campos com dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar | São exibidas as mensagens "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." |
+| CT04 | Enviar e-mail malformado | Negativo | CA4 | Abrir a página inicial; preencher todos os campos com dados válidos, exceto e-mail "bad"; enviar | É exibida a mensagem "must be a well-formed email address" |
+| CT05 | Enviar mensagem válida | Positivo | CA5 | Abrir a página inicial; preencher todos os campos com dados válidos; enviar | A confirmação contém "Thanks for getting in touch Ana Silva!" e o assunto "Dúvida sobre reservas" |
+
+## SUPOSIÇÕES
+
+- A história descreve uma interface web; portanto, o script usa Python, pytest e Playwright com API síncrona.
+- O requisito técnico final exige a fixture `page` do plugin oficial pytest-playwright, apesar do requisito anterior pedir fixture própria. O script não cria navegador nem fixture própria.
+- Os campos do formulário são identificáveis por rótulos acessíveis: "Name", "Email", "Phone", "Subject" e "Message"; o botão de envio tem o nome acessível "Submit".
+- A página inicial é acessada pela URL base acrescida de `/`.
+- Os erros de validação aparecem como texto visível na página após o envio. Para o caso vazio, presume-se que cada campo tenha uma mensagem de obrigatoriedade identificável pelo nome do campo e pelo texto "required".
+- As mensagens de validação dos campos de telefone, assunto, mensagem e e-mail correspondem literalmente aos textos dos critérios de aceitação.
+- Um envio válido exibe na página a confirmação "Thanks for getting in touch <nome>!" e o assunto informado.
+- Os dados válidos são sintéticos; nome usado: "Ana Silva"; e-mail: "ana.silva@example.com"; telefone: "11987654321"; assunto: "Dúvida sobre reservas"; mensagem: texto com pelo menos 20 caracteres.
+- O navegador e a página são fornecidos e encerrados pelo plugin pytest-playwright; a execução requer pytest-playwright instalado e Chromium disponível.
+- A constante `BASE_URL` contém a URL informada. Os casos exercitam somente validação e confirmação na interface; não se presume endpoint nem payload de API.
+
+## SCRIPT
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+NOME_VALIDO = "Ana Silva"
+EMAIL_VALIDO = "ana.silva@example.com"
+TELEFONE_VALIDO = "11987654321"
+ASSUNTO_VALIDO = "Dúvida sobre reservas"
+MENSAGEM_VALIDA = "Gostaria de saber mais sobre as opções de reserva disponíveis."
+
+
+def abrir_pagina(page: Page) -> None:
+    page.goto(BASE_URL)
+
+
+def preencher_formulario(
+    page: Page,
+    *,
+    nome: str = NOME_VALIDO,
+    email: str = EMAIL_VALIDO,
+    telefone: str = TELEFONE_VALIDO,
+    assunto: str = ASSUNTO_VALIDO,
+    mensagem: str = MENSAGEM_VALIDA,
+) -> None:
+    page.get_by_label("Name").fill(nome)
+    page.get_by_label("Email").fill(email)
+    page.get_by_label("Phone").fill(telefone)
+    page.get_by_label("Subject").fill(assunto)
+    page.get_by_label("Message").fill(mensagem)
+
+
+def enviar_formulario(page: Page) -> None:
+    page.get_by_role("button", name="Submit").click()
+
+
+def test_ct01_enviar_formulario_vazio(page: Page) -> None:
+    abrir_pagina(page)
+    enviar_formulario(page)
+
+    for campo in ("Name", "Email", "Phone", "Subject", "Message"):
+        expect(page.get_by_text(campo, exact=False)).to_be_visible()
+        expect(page.get_by_text("required", exact=False)).to_be_visible()
+
+
+def test_ct02_telefone_abaixo_do_minimo(page: Page) -> None:
+    abrir_pagina(page)
+    preencher_formulario(page, telefone="1234567890")
+    enviar_formulario(page)
+
+    expect(
+        page.get_by_text("Phone must be between 11 and 21 characters.", exact=True)
+    ).to_be_visible()
+
+
+def test_ct03_assunto_e_mensagem_abaixo_do_minimo(page: Page) -> None:
+    abrir_pagina(page)
+    preencher_formulario(page, assunto="abc", mensagem="1234567890123456789")
+    enviar_formulario(page)
+
+    expect(
+        page.get_by_text("Subject must be between 5 and 100 characters.", exact=True)
+    ).to_be_visible()
+    expect(
+        page.get_by_text("Message must be between 20 and 2000 characters.", exact=True)
+    ).to_be_visible()
+
+
+def test_ct04_email_malformado(page: Page) -> None:
+    abrir_pagina(page)
+    preencher_formulario(page, email="bad")
+    enviar_formulario(page)
+
+    expect(
+        page.get_by_text("must be a well-formed email address", exact=False)
+    ).to_be_visible()
+
+
+def test_ct05_enviar_mensagem_valida(page: Page) -> None:
+    abrir_pagina(page)
+    preencher_formulario(page)
+    enviar_formulario(page)
+
+    expect(
+        page.get_by_text(
+            f"Thanks for getting in touch {NOME_VALIDO}!",
+            exact=True,
+        )
+    ).to_be_visible()
+    expect(page.get_by_text(ASSUNTO_VALIDO, exact=True)).to_be_visible()
+```

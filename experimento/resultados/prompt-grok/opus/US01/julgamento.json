@@ -1,0 +1,97 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C02",
+  "US01-C03",
+  "US01-C05",
+  "US01-C06",
+  "US01-C09",
+  "US01-C10"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C05"
+   ],
+   "nota": "caracteres especiais"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C10"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC05_ordenar_preco_crescente",
+   "categoria": "espera/timing",
+   "nota": "expect_response aguarda URL com 'sort=' que nunca casa; timeout"
+  },
+  {
+   "teste": "test_TC06_ordenar_nome_z_a",
+   "categoria": "espera/timing",
+   "nota": "expect_response aguarda URL com 'sort=' que nunca casa; timeout"
+  },
+  {
+   "teste": "test_TC07_busca_hammer_e_ordena_preco_crescente_mantem_filtro",
+   "categoria": "espera/timing",
+   "nota": "expect_response aguarda URL com 'sort=' que nunca casa; timeout"
+  }
+ ]
+}

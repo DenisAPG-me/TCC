@@ -1,0 +1,58 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Abrir `/admin`, enviar o formulário sem preencher os campos.",
+  "esperado": "A mensagem `Invalid credentials` aparece e a tela de login continua visível."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Abrir `/admin`, informar `admin` e uma senha incorreta, enviar.",
+  "esperado": "A mensagem `Invalid credentials` aparece e a tela de login continua visível."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login válido exibe a lista de quartos e menu",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Abrir `/admin`, entrar com `admin` / `password`.",
+  "esperado": "A lista inclui o quarto 101 do tipo Single e o menu mostra Rooms, Report, Branding e Messages."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Entrar com as credenciais válidas e clicar em Logout.",
+  "esperado": "A página inicial pública da pousada é exibida."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Acesso direto à lista de quartos após logout",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Entrar, fazer logout e acessar diretamente a lista de quartos do painel.",
+  "esperado": "A tela de login é exibida novamente."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Login com usuário válido e senha vazia",
+  "tipo": "borda",
+  "criterio": "1, 2",
+  "passos": "Abrir `/admin`, informar `admin`, deixar a senha vazia e enviar.",
+  "esperado": "A mensagem `Invalid credentials` aparece e a tela de login continua visível."
+ },
+ {
+  "id": "TC07",
+  "titulo": "Login com usuário vazio e senha válida",
+  "tipo": "borda",
+  "criterio": "1, 2",
+  "passos": "Abrir `/admin`, deixar o usuário vazio, informar `password` e enviar.",
+  "esperado": "A mensagem `Invalid credentials` aparece e a tela de login continua visível."
+ }
+]

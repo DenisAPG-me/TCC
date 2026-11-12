@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Claro e enxuto",
+  "estrutura": "Helpers, sem fixtures",
+  "assercoes": "Status, tipo e campos",
+  "espera": "Timeout; nomes fixos em CT001/CT002 podem colidir",
+  "manutenibilidade": "Constantes ok, sem limpeza"
+ }
+}

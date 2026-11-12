@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos, constantes de mensagens",
+  "estrutura": "Helpers e constantes; sem duplicacao",
+  "assercoes": "Mensagens e totais com round(), poll para totais",
+  "espera": "expect.poll e expect, mas inner_text imediato antes de poll",
+  "manutenibilidade": "test-ids e constantes de mensagens"
+ }
+}

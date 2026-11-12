@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 23.33,
+ "tokens": {
+  "total": 5243
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "expect(_product_cards(page).first).to_be_visible()\n\n    _sort_select(page, re.compile(r\"name.*(z.*a|desc|descending)\", re.I))\n    page.wait_for_load_state(\"networkidle\")\n\n    names = _product_names(page)\n    assert len(names) >= 2, \"Esperados ao menos dois produtos para verificar a ordenação.\"\n    normalized = [name.casefold() for name in names]\n    assert normalized == sorted(normalized, reverse=True), (\n        f\"Nomes fora de ordem alfabética decrescente: {names}\"\n    )\n```\ntokens used\n5,243\n"
+}

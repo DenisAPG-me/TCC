@@ -1,0 +1,8 @@
+[
+ "**URL Base:** `https://automationintesting.online/`",
+ "**Seletores e Elementos (baseados nas convenções da aplicação Restful Booker Platform / automationintesting.online):**",
+ "Campos de entrada identificados por `get_by_testid` ou rótulos/placeholders característicos:",
+ "Nome: `get_by_test_id(\"ContactName\")` ou input de nome (fallback: `page.locator(\"input[placeholder='Name']\")` ou input correspondente ao rótulo). Assumiremos seletores baseados em `get_by_test_id` comuns da plataforma (`contactName`, `contactEmail`, `contactPhone`, `contactSubject`, `contactDescription`) ou locators por placeholder/rótulo. Como padrão da plataforma Restful Booker Platform, os inputs de contato possuem os data-testid ou placeholders: `Name`, `Email`, `Phone`, `Subject`, `Message`.",
+ "Botão de envio: `get_by_role(\"button\", name=\"Submit\")` ou botão com texto \"Submit\".",
+ "Mensagens de erro e confirmação: Validadas através de `expect(page.get_by_text(...))`."
+]

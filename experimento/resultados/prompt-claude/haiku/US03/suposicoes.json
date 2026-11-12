@@ -1,0 +1,20 @@
+[
+ "Tecnologia: Python + pytest + pytest-playwright (plugin oficial, fixture `page`), porque a User Story é de interface web. Asserções com `expect` de `playwright.sync_api`.",
+ "Navegador: Chromium headless pelos padrões do pytest-playwright. Para outro navegador ou modo visível, use as opções `--browser` e `--headed`.",
+ "URL base: `https://practicesoftwaretesting.com`. Login em `/#/auth/login`, pois a aplicação usa roteamento por hash.",
+ "Credenciais: `customer@practicesoftwaretesting.com` / `welcome01`. Senha incorreta fictícia: `senha-incorreta-123`.",
+ "Nome do usuário demo: \"Jack Howe\". Deve ser validado na aplicação real.",
+ "Login: campos com labels \"Email address\" e \"Password\"; botão \"Login\"; erros exibidos como texto na tela.",
+ "Página pós-login: heading \"My account\" e nome do usuário visível em `<nav>`.",
+ "Produto: primeiro card (`a.card`) da home, com botão \"Add to cart\". Após adicionar, aparece a mensagem \"Product added to shopping cart.\".",
+ "Carrinho: acessado pelo link cujo nome contém \"Cart\". O botão de avanço é \"Proceed to checkout\" (case insensitive) e aparece no carrinho e no passo de endereço.",
+ "Redirecionamento: checkout sem sessão leva ao login (`/auth/login`).",
+ "Endereço: labels \"Address\" (rua), \"City\" (cidade), \"State\" (estado), \"Country\" (país, select com valor \"Brazil\"), \"Postcode\" (CEP) e \"Phone\" (número). O formulário não tem campo separado de número residencial, então \"número\" foi mapeado para \"Phone\". Campos obrigatórios são os seis citados no CA5.",
+ "Pagamento: select \"Payment method\" com opção \"Credit Card\"; labels \"Card number\", \"Expiration date\" (MM/AAAA), \"CVV\" e \"Card holder name\"; botão \"Confirm\".",
+ "Dados fictícios de cartão: número `4111 1111 1111 1111`, validade `12/2030` (futura em relação a 2026-10-30), CVV `123`, titular \"Jack Howe\".",
+ "Resultado do pagamento: ao clicar em Confirm, aparece \"Payment was successful\" e, na mesma ação, a tela de confirmação com \"Thanks for your order! Your invoice number is INV-...\". Se houver um botão extra de confirmação do pedido, o passo deve ser incluído em CT11.",
+ "Cartão com dados vazios (CT12): o sistema não confirma o pagamento e não exibe \"Payment was successful\". A mensagem de validação exata não é verificada.",
+ "Estado inicial: campos de endereço vazios antes do preenchimento.",
+ "Isolamento: cada teste recebe um contexto de navegador novo do pytest-playwright, sem compartilhar sessão ou carrinho.",
+ "Sincronização: esperas implícitas do `expect` e do Playwright; sem `time.sleep`."
+]

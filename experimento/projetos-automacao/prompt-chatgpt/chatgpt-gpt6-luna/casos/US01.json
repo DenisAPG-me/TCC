@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Buscar produtos por “hammer”",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial, buscar “hammer” e enviar a busca.",
+  "esperado": "Todos os produtos exibidos têm “hammer” no nome, sem distinção entre maiúsculas e minúsculas, e a página indica que a busca foi por “hammer”."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Buscar termo sem resultados",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial e buscar “zzzzxx”.",
+  "esperado": "A mensagem “There are no products found.” é exibida e nenhum produto aparece."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Ordenar preços em ordem crescente",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Abrir a página inicial com produtos e escolher a ordenação de preço crescente.",
+  "esperado": "Os preços dos produtos exibidos estão em ordem crescente."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Ordenar nomes de Z a A",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Abrir a página inicial com produtos e escolher a ordenação por nome decrescente.",
+  "esperado": "Os nomes exibidos estão em ordem alfabética decrescente, sem distinção entre maiúsculas e minúsculas."
+ }
+]

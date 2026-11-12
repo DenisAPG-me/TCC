@@ -1,0 +1,19 @@
+[
+ "1. **Explícito:** a User Story traz quatro critérios numerados de 1 a 4, sem identificadores próprios. **Inferido:** atribuí os IDs CA01 a CA04 na mesma ordem (1→CA01, 2→CA02, 3→CA03, 4→CA04).",
+ "2. **Conflito de regras:** a mensagem traz \"REQUISITOS TÉCNICOS OBRIGATÓRIOS\", declarados prevalentes sobre as regras anteriores. Por isso, o código usa o plugin oficial pytest-playwright e a fixture `page`. Não usa `sync_playwright()` nem fixture própria de browser ou page. Suponho que o plugin esteja instalado. Assim, `pytest nome_do_arquivo.py` executa os testes no Chromium headless, o padrão do plugin.",
+ "3. **Inferido:** a User Story pede apenas comportamento de interface web. Por isso, não há testes de API REST.",
+ "4. **Inferido:** não é necessário login para adicionar itens ao carrinho, pois a User Story não menciona autenticação. Todos os casos dependem dessa suposição.",
+ "5. **Inferido:** o carrinho fica no armazenamento do navegador. Como o pytest-playwright cria um contexto novo por teste, cada teste começa com o carrinho vazio, sem limpeza adicional. Os casos CT002 e CT003 preparam o próprio carrinho pela interface.",
+ "6. **Pré-condição externa:** os produtos \"Claw Hammer\" e \"Thor Hammer\" existem, estão disponíveis e aparecem na busca da página inicial com esses nomes exatos.",
+ "7. **Inferido (seletores):** o site expõe o atributo `data-test`, configurado como atributo de test id. Os valores usados são:",
+ "`search-query` e `search-submit` para a busca;",
+ "`product-name`, `unit-price`, `quantity` e `add-to-cart` na página do produto;",
+ "`cart-quantity` e `nav-cart` no cabeçalho;",
+ "`product-quantity`, `line-price` e `cart-total` no carrinho.",
+ "8. **Inferido:** as mensagens de CA01 e CA04 aparecem como texto visível na página, por exemplo em uma notificação. Elas são localizadas pelo texto exato informado na User Story.",
+ "9. **Inferido:** os preços aparecem como número decimal com ponto, com ou sem o símbolo \"$\". As comparações extraem o valor numérico com duas casas decimais. O preço unitário de referência é o exibido na página do produto.",
+ "10. **Inferido:** alterar a quantidade no carrinho exige preencher o campo e tirar o foco dele (tecla Tab) para o total ser recalculado (CT003).",
+ "11. **Inferido (CT005):** a regra \"You can only have one Thor Hammer in the cart.\" vale para qualquer quantidade maior que um, não apenas para 3. A User Story só exemplifica o valor 3, então CT005 depende dessa interpretação.",
+ "12. **Ausência de outros casos:** não incluí cenários sem fundamento no texto, como quantidade zero, negativa, acima de estoque ou adicionar 1 Thor Hammer. A User Story não define esses comportamentos.",
+ "13. **Ajustes possíveis:** o código é sintaticamente completo, mas seletores, textos e formatos inferidos podem precisar de ajuste no sistema real. Os valores ajustáveis estão concentrados nas constantes do topo do arquivo."
+]

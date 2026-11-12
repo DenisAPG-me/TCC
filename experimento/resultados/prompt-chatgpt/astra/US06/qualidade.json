@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "fixtures de pagina admin/visitante e helpers",
+  "assercoes": "asserts de contagem exata, linha com nome e assunto",
+  "espera": "expect com timeout, sem sleep",
+  "manutenibilidade": "test id e URL de mensagens inventados, browser proprio"
+ }
+}

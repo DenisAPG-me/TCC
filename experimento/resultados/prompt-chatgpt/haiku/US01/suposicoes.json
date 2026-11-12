@@ -1,0 +1,20 @@
+[
+ "1. Mapeamento dos critérios: a User Story não define identificadores. Foram atribuídos CA01 (busca por \"hammer\"), CA02 (termo inexistente), CA03 (ordenação por preço crescente) e CA04 (ordenação por nome Z a A), na ordem de apresentação.",
+ "2. Conflito de requisitos: o bloco \"REQUISITOS TÉCNICOS OBRIGATÓRIOS\" dentro da User Story exige pytest-playwright e a fixture `page` do plugin. Ele foi tratado como especificação do sistema e não como instrução que altera as regras gerais. Por isso, o arquivo usa pytest com Playwright na API síncrona, com fixtures próprias para Playwright, navegador e contexto, sem pytest-playwright.",
+ "3. Ambiente: Python, pytest e Playwright estão instalados, com Chromium disponível. Os testes de interface rodam em modo headless. Não há arquivos de configuração nem módulos auxiliares.",
+ "4. URL base: `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`.",
+ "5. Página inicial: lista ao menos 2 produtos sem login, sem filtro prévio e com a ordenação padrão. A ordenação é verificada somente sobre os produtos exibidos na página atual, sem considerar paginação.",
+ "6. Campo de busca: identificado pelo atributo `data-test=\"search-query\"`, configurado via `set_test_id_attribute`. A busca é submetida com a tecla Enter.",
+ "7. Ordenação: o seletor tem `data-test=\"sort\"`, e as opções têm os rótulos exatos \"Price (Low - High)\" e \"Name (Z - A)\".",
+ "8. Produtos: cada nome tem `data-test=\"product-name\"` e cada preço tem `data-test=\"product-price\"`. O preço contém um número, possivelmente precedido de símbolo de moeda, com ponto ou vírgula como separador decimal.",
+ "9. Indicação da busca: a página exibe um texto \"Searched for: <termo>\", comparado sem diferenciar maiúsculas de minúsculas. Os casos CT001, CT002 e CT005 dependem disso.",
+ "10. Mensagem sem resultados: o texto exato \"There are no products found.\" aparece e nenhum elemento `product-name` é exibido. CT003 depende disso.",
+ "11. Busca sem diferenciação de maiúsculas (inferido): a História não especifica essa regra. CT002 depende dela, e CT001 e CT005 comparam os nomes em minúsculas.",
+ "12. Ordem alfabética: comparada por `casefold` e pela ordem de código dos caracteres. Assume-se nomes em ASCII, sem regras de collation específicas de idioma. Se o sistema usar outra regra, CT006 pode precisar de ajuste.",
+ "13. Preço: removido o símbolo de moeda, o valor é convertido em `float`. Valores iguais são aceitos, pois a verificação usa igualdade com a lista ordenada.",
+ "14. Sincronização: após cada ação de busca ou ordenação, os testes aguardam `networkidle` e usam `expect` com timeout explícito. Não há pausas fixas.",
+ "15. Pré-condições externas: o site deve estar acessível. Deve haver ao menos 2 produtos no catálogo padrão e ao menos 2 produtos com \"hammer\" no nome (CT005). Não há credenciais, dados criados nem limpeza, porque cada teste usa um contexto novo e não depende de estado anterior.",
+ "16. Ausências justificadas: CA03 e CA04 não têm casos negativos, porque a User Story não define opções de ordenação inválidas. CA02 não tem caso de borda, porque a User Story não define limites para o termo (tamanho, espaços ou caracteres especiais), e esses limites não foram inventados. CA01 não tem caso negativo além de CA02, porque a User Story não define um cenário negativo específico de busca por \"hammer\".",
+ "17. Testes de API REST: não se aplicam, porque a User Story não exige verificação de API. O arquivo não usa `requests`.",
+ "18. Compatibilidade: o código é executável, mas não foi comprovado contra o sistema real. Seletores, textos e comportamentos inferidos podem exigir ajuste nas constantes do início do arquivo."
+]

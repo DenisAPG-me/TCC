@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Constantes e helpers com nomes expressivos",
+  "estrutura": "Fixture de sessao, helpers e constantes; sem duplicacao",
+  "assercoes": "Asserts de negocio com caption, to_have_text em lista ordenada",
+  "espera": "wait_for_function e expect_response, mas filtro de URL errado quebra ordenacao",
+  "manutenibilidade": "test-ids, constantes de mensagens/rotulos; seletores CSS misturados"
+ }
+}

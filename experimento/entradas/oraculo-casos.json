@@ -1,0 +1,997 @@
+{
+ "US01": {
+  "casos": [
+   {
+    "id": "US01-C01",
+    "tipo": "positivo",
+    "descricao": "Buscar 'hammer' lista apenas produtos com hammer no nome e indica o termo buscado",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C02",
+    "tipo": "positivo",
+    "descricao": "Buscar em minúsculas e maiúsculas (HAMMER) retorna o mesmo resultado",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C03",
+    "tipo": "negativo",
+    "descricao": "Buscar termo inexistente mostra 'There are no products found.'",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C04",
+    "tipo": "borda",
+    "descricao": "Buscar string vazia retorna a listagem padrão",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C05",
+    "tipo": "borda",
+    "descricao": "Buscar com espaços/caracteres especiais não quebra a página",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C06",
+    "tipo": "positivo",
+    "descricao": "Ordenar por preço crescente mantém preços em ordem não decrescente",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C07",
+    "tipo": "positivo",
+    "descricao": "Ordenar por preço decrescente mantém preços em ordem não crescente",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C08",
+    "tipo": "positivo",
+    "descricao": "Ordenar por nome A-Z",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C09",
+    "tipo": "positivo",
+    "descricao": "Ordenar por nome Z-A mantém ordem decrescente",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C10",
+    "tipo": "positivo",
+    "descricao": "Combinar busca com ordenação",
+    "criterios": [
+     1,
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US01-C11",
+    "tipo": "positivo",
+    "descricao": "Limpar a busca (botão X) restaura a listagem",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C12",
+    "tipo": "positivo",
+    "descricao": "Paginação: avançar para a página 2 mostra outros produtos",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US01-C13",
+    "tipo": "positivo",
+    "descricao": "Filtrar por categoria Hammer",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ },
+ "US02": {
+  "casos": [
+   {
+    "id": "US02-C01",
+    "tipo": "positivo",
+    "descricao": "Adicionar produto disponível com quantidade 1 exibe toast e badge 1",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C02",
+    "tipo": "positivo",
+    "descricao": "Adicionar com quantidade 3 exibe toast e badge 3",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C03",
+    "tipo": "positivo",
+    "descricao": "Total da linha = preço unitário x quantidade",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C04",
+    "tipo": "positivo",
+    "descricao": "Total do carrinho = total da linha com um item",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C05",
+    "tipo": "positivo",
+    "descricao": "Alterar quantidade no carrinho para 1 atualiza o total",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C06",
+    "tipo": "positivo",
+    "descricao": "Adicionar dois produtos diferentes soma os totais",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C07",
+    "tipo": "positivo",
+    "descricao": "Remover item do carrinho esvazia o total",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C08",
+    "tipo": "negativo",
+    "descricao": "Thor Hammer: limite de 1 por carrinho exibe mensagem",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US02-C09",
+    "tipo": "borda",
+    "descricao": "Quantidade mínima 1 no botão decrementar não vai a 0",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C10",
+    "tipo": "borda",
+    "descricao": "Quantidade máxima 99 / valor acima do máximo no campo do carrinho",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C11",
+    "tipo": "borda",
+    "descricao": "Quantidade 0 ou negativa no carrinho",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C12",
+    "tipo": "negativo",
+    "descricao": "Produto fora de estoque não pode ser adicionado (se existir)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US02-C13",
+    "tipo": "positivo",
+    "descricao": "Carrinho persiste ao navegar para outra página",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ },
+ "US03": {
+  "casos": [
+   {
+    "id": "US03-C01",
+    "tipo": "negativo",
+    "descricao": "Login com formulário vazio mostra as duas mensagens de obrigatório",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C02",
+    "tipo": "negativo",
+    "descricao": "Login com senha errada mostra 'Invalid email or password'",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C03",
+    "tipo": "negativo",
+    "descricao": "Login com e-mail malformado mostra 'Email format is invalid'",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US03-C04",
+    "tipo": "negativo",
+    "descricao": "Login com e-mail não cadastrado",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C05",
+    "tipo": "positivo",
+    "descricao": "Login válido leva a /account com título My account e nome no menu",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C06",
+    "tipo": "positivo",
+    "descricao": "Checkout sem login pede credenciais",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C07",
+    "tipo": "positivo",
+    "descricao": "Logout após login",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US03-C08",
+    "tipo": "negativo",
+    "descricao": "Endereço com campos obrigatórios vazios mantém botão desabilitado",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C09",
+    "tipo": "positivo",
+    "descricao": "Endereço completo habilita avanço ao pagamento",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C10",
+    "tipo": "negativo",
+    "descricao": "Finalizar sem escolher método de pagamento (botão desabilitado)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US03-C11",
+    "tipo": "positivo",
+    "descricao": "Pagamento com cartão de crédito válido exibe 'Payment was successful'",
+    "criterios": [
+     6
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C12",
+    "tipo": "positivo",
+    "descricao": "Confirmar pedido exibe número de fatura INV-",
+    "criterios": [
+     6
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US03-C13",
+    "tipo": "negativo",
+    "descricao": "Cartão com número/validade/CVV inválidos",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US03-C14",
+    "tipo": "positivo",
+    "descricao": "Pagamento por Cash on Delivery / Bank Transfer conclui",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US03-C15",
+    "tipo": "borda",
+    "descricao": "Checkout fluxo completo ponta a ponta (carrinho->login->endereço->pagamento->confirmação)",
+    "criterios": [
+     3,
+     4,
+     5,
+     6
+    ],
+    "origem": "criterio"
+   }
+  ]
+ },
+ "US04": {
+  "casos": [
+   {
+    "id": "US04-C01",
+    "tipo": "negativo",
+    "descricao": "Formulário vazio mostra mensagens de campo em branco para os 5 campos",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C02",
+    "tipo": "negativo",
+    "descricao": "Telefone com 10 caracteres rejeitado",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C03",
+    "tipo": "borda",
+    "descricao": "Telefone com exatamente 11 caracteres aceito",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C04",
+    "tipo": "borda",
+    "descricao": "Telefone com 21 e 22 caracteres",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US04-C05",
+    "tipo": "negativo",
+    "descricao": "Assunto com 4 caracteres rejeitado",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C06",
+    "tipo": "borda",
+    "descricao": "Assunto com 5 caracteres aceito",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C07",
+    "tipo": "borda",
+    "descricao": "Assunto com 101 caracteres rejeitado",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US04-C08",
+    "tipo": "negativo",
+    "descricao": "Mensagem com 19 caracteres rejeitada",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C09",
+    "tipo": "borda",
+    "descricao": "Mensagem com 20 caracteres aceita",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C10",
+    "tipo": "borda",
+    "descricao": "Mensagem com 2001 caracteres rejeitada",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US04-C11",
+    "tipo": "negativo",
+    "descricao": "E-mail malformado rejeitado",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C12",
+    "tipo": "positivo",
+    "descricao": "Envio válido exibe agradecimento com o nome e o assunto",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US04-C13",
+    "tipo": "borda",
+    "descricao": "Caracteres especiais/acentos nos campos",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US04-C14",
+    "tipo": "positivo",
+    "descricao": "Após erro e correção dos campos o envio é aceito",
+    "criterios": [
+     1,
+     5
+    ],
+    "origem": "criterio"
+   }
+  ]
+ },
+ "US05": {
+  "casos": [
+   {
+    "id": "US05-C01",
+    "tipo": "negativo",
+    "descricao": "Login com campos vazios mostra Invalid credentials",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C02",
+    "tipo": "negativo",
+    "descricao": "Login com senha errada mostra Invalid credentials",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C03",
+    "tipo": "negativo",
+    "descricao": "Login com usuário inexistente",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C04",
+    "tipo": "positivo",
+    "descricao": "Login admin/password leva à lista de quartos",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C05",
+    "tipo": "positivo",
+    "descricao": "Lista de quartos contém 101 Single",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C06",
+    "tipo": "positivo",
+    "descricao": "Menu exibe Rooms, Report, Branding e Messages",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C07",
+    "tipo": "positivo",
+    "descricao": "Logout retorna à home pública",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C08",
+    "tipo": "negativo",
+    "descricao": "Acesso direto a /admin/rooms sem sessão exibe login",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C09",
+    "tipo": "borda",
+    "descricao": "Back do navegador após logout não restaura sessão",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US05-C10",
+    "tipo": "borda",
+    "descricao": "Usuário válido com maiúsculas diferentes (Admin)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US05-C11",
+    "tipo": "borda",
+    "descricao": "Espaços antes/depois nas credenciais",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ },
+ "US06": {
+  "casos": [
+   {
+    "id": "US06-C01",
+    "tipo": "positivo",
+    "descricao": "Ler contador de Messages antes do envio",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C02",
+    "tipo": "positivo",
+    "descricao": "Visitante envia mensagem válida e vê confirmação com o nome",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C03",
+    "tipo": "positivo",
+    "descricao": "Contador de Messages aumenta em 1 após envio",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C04",
+    "tipo": "positivo",
+    "descricao": "Mensagem aparece na lista com nome e assunto",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C05",
+    "tipo": "negativo",
+    "descricao": "Envio inválido do visitante não incrementa o contador",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US06-C06",
+    "tipo": "negativo",
+    "descricao": "Sem login, caixa de mensagens exige autenticação",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C07",
+    "tipo": "positivo",
+    "descricao": "Mensagem persiste após logout e novo login",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C08",
+    "tipo": "borda",
+    "descricao": "Duas mensagens seguidas incrementam o contador em 2",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US06-C09",
+    "tipo": "borda",
+    "descricao": "Nome com caracteres especiais aparece corretamente na lista",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   }
+  ]
+ },
+ "US07": {
+  "casos": [
+   {
+    "id": "US07-C01",
+    "tipo": "positivo",
+    "descricao": "POST com corpo válido retorna 200, bookingid numérico e dados ecoados",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C02",
+    "tipo": "positivo",
+    "descricao": "GET do id criado retorna os mesmos dados",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C03",
+    "tipo": "positivo",
+    "descricao": "Campos tipados corretamente (totalprice número, depositpaid booleano, datas YYYY-MM-DD)",
+    "criterios": [
+     1,
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C04",
+    "tipo": "positivo",
+    "descricao": "POST sem additionalneeds (opcional) é aceito",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C05",
+    "tipo": "positivo",
+    "descricao": "Filtro por firstname/lastname retorna o id criado",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C06",
+    "tipo": "positivo",
+    "descricao": "Filtro por datas checkin/checkout retorna 200 e lista",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C07",
+    "tipo": "positivo",
+    "descricao": "GET /booking sem filtros retorna lista de ids",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C08",
+    "tipo": "negativo",
+    "descricao": "GET de id inexistente retorna 404",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C09",
+    "tipo": "negativo",
+    "descricao": "GET com id não numérico retorna 404",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US07-C10",
+    "tipo": "negativo",
+    "descricao": "POST com campos obrigatórios ausentes não retorna 200 (observado 500)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C11",
+    "tipo": "negativo",
+    "descricao": "POST com JSON malformado retorna 400",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C12",
+    "tipo": "borda",
+    "descricao": "totalprice 0 e depositpaid false",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C13",
+    "tipo": "borda",
+    "descricao": "Filtro sem resultados retorna lista vazia 200",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US07-C14",
+    "tipo": "positivo",
+    "descricao": "Dois POSTs idênticos geram ids distintos",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ },
+ "US08": {
+  "casos": [
+   {
+    "id": "US08-C01",
+    "tipo": "positivo",
+    "descricao": "POST /auth com admin/password123 retorna 200 e token não vazio",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C02",
+    "tipo": "negativo",
+    "descricao": "POST /auth com senha errada retorna reason Bad credentials sem token",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C03",
+    "tipo": "negativo",
+    "descricao": "POST /auth com corpo vazio retorna Bad credentials",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C04",
+    "tipo": "positivo",
+    "descricao": "PUT completo com token (cookie) retorna 200 e novos valores",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C05",
+    "tipo": "positivo",
+    "descricao": "PUT com Authorization Basic também é aceito",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C06",
+    "tipo": "positivo",
+    "descricao": "PATCH parcial altera apenas o sobrenome e preserva o resto",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C07",
+    "tipo": "negativo",
+    "descricao": "PUT sem token retorna 403",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C08",
+    "tipo": "negativo",
+    "descricao": "PUT com token inválido retorna 403",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C09",
+    "tipo": "negativo",
+    "descricao": "PATCH sem token retorna 403",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C10",
+    "tipo": "negativo",
+    "descricao": "PUT com corpo incompleto retorna 400",
+    "criterios": [
+     6
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C11",
+    "tipo": "negativo",
+    "descricao": "PUT em id inexistente retorna erro (observado 405)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   },
+   {
+    "id": "US08-C12",
+    "tipo": "positivo",
+    "descricao": "GET após PUT reflete a atualização",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US08-C13",
+    "tipo": "borda",
+    "descricao": "PUT mudando datas para checkout anterior ao checkin (sem validação)",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ },
+ "US09": {
+  "casos": [
+   {
+    "id": "US09-C01",
+    "tipo": "negativo",
+    "descricao": "DELETE sem token retorna 403",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C02",
+    "tipo": "negativo",
+    "descricao": "Reserva continua existente (GET 200) após DELETE sem token",
+    "criterios": [
+     1
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C03",
+    "tipo": "negativo",
+    "descricao": "DELETE com token inválido retorna 403",
+    "criterios": [
+     2
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C04",
+    "tipo": "positivo",
+    "descricao": "DELETE com token válido retorna 201",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C05",
+    "tipo": "positivo",
+    "descricao": "DELETE com autenticação Basic retorna 201",
+    "criterios": [
+     3
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C06",
+    "tipo": "positivo",
+    "descricao": "GET após exclusão retorna 404",
+    "criterios": [
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C07",
+    "tipo": "negativo",
+    "descricao": "DELETE repetido retorna erro 4xx (observado 405)",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C08",
+    "tipo": "negativo",
+    "descricao": "DELETE de id inexistente retorna erro 4xx",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C09",
+    "tipo": "positivo",
+    "descricao": "Listagem filtrada pelo nome da reserva excluída está vazia",
+    "criterios": [
+     6
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C10",
+    "tipo": "positivo",
+    "descricao": "Outras reservas permanecem após exclusão de uma",
+    "criterios": [
+     5
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C11",
+    "tipo": "positivo",
+    "descricao": "Fluxo completo: auth, criar, excluir, confirmar 404",
+    "criterios": [
+     3,
+     4
+    ],
+    "origem": "criterio"
+   },
+   {
+    "id": "US09-C12",
+    "tipo": "borda",
+    "descricao": "DELETE com token de sessão anterior reutilizado",
+    "criterios": [],
+    "origem": "testador-experiente"
+   }
+  ]
+ }
+}

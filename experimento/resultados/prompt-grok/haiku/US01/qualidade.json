@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 1,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos, helpers pequenos",
+  "estrutura": "Helpers e fixture autouse; sem duplicacao relevante",
+  "assercoes": "Verifica nomes, mensagem e ordem, mas busca nao confirma o indicador 'Searched for'",
+  "espera": "networkidle em todos os testes causa timeout em todos",
+  "manutenibilidade": "get_by_test_id com constantes; boa manutencao"
+ }
+}

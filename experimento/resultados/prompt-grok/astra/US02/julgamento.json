@@ -1,0 +1,88 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Thor Hammer 1 unidade aceita"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_adicionar_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer'/'Thor Hammer' exact nao localiza o card (click timeout)"
+  },
+  {
+   "teste": "test_TC02_calcular_totais_para_tres_unidades",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer'/'Thor Hammer' exact nao localiza o card (click timeout)"
+  },
+  {
+   "teste": "test_TC03_reduzir_quantidade_para_uma_unidade",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer'/'Thor Hammer' exact nao localiza o card (click timeout)"
+  },
+  {
+   "teste": "test_TC04_rejeitar_tres_unidades_de_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer'/'Thor Hammer' exact nao localiza o card (click timeout)"
+  },
+  {
+   "teste": "test_TC05_aceitar_uma_unidade_de_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "link 'Claw Hammer'/'Thor Hammer' exact nao localiza o card (click timeout)"
+  }
+ ]
+}

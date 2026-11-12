@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 40.51,
+ "tokens": {
+  "total": 3960
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "):\n    payload = montar_payload(depositpaid=False)\n    booking_id = criar_reserva(api, payload)\n    consultar_e_verificar(api, booking_id, payload)\n\n\ndef test_CT06_preservar_datas_na_virada_do_ano(api):\n    payload = montar_payload(\n        checkin=\"2028-12-31\",\n        checkout=\"2029-01-01\",\n    )\n    booking_id = criar_reserva(api, payload)\n    consultar_e_verificar(api, booking_id, payload)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, \"-v\"]))\n```\ntokens used\n3,960\n"
+}

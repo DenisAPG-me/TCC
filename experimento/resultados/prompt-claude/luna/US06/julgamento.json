@@ -1,0 +1,88 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01",
+    "US06-C03",
+    "US06-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_enviar_mensagem_valida_como_visitante",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct02_conferir_incremento_e_mensagem_recebida",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct03_bloquear_envio_sem_nome",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct04_bloquear_envio_sem_assunto",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct05_solicitar_login_apos_logout",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  }
+ ]
+}

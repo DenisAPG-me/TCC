@@ -1,0 +1,12 @@
+[
+ "1. Os critérios numerados da User Story são identificados como CA01 a CA05, na mesma ordem de apresentação.",
+ "2. A URL da página de contato é a própria URL base informada. O formulário está disponível na página inicial.",
+ "3. Como não foram especificados seletores nem rótulos, o código deduz campos acessíveis pelos nomes `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão com papel `button` e nome `Submit`. Esses elementos podem precisar de ajuste para corresponder à implementação real.",
+ "4. As mensagens de campos obrigatórios não foram transcritas integralmente. Para CA01, o código verifica que há mensagens visíveis contendo o nome de cada campo e uma indicação de obrigatoriedade, inferindo termos como `required` ou `cannot be empty`.",
+ "5. Para os cenários inválidos, o código preenche com valores válidos os campos não relacionados àquela validação. Usa telefone `12345678901`, assunto `Consulta` e mensagem de 20 caracteres, exceto quando o critério testa seus limites.",
+ "6. O telefone de 10 caracteres em CT002 e assunto de 4 caracteres e mensagem de 19 caracteres em CT003 exercitam os limites imediatamente inferiores indicados pelos critérios. O limite mínimo válido inferido é 11 para telefone, 5 para assunto e 20 para mensagem.",
+ "7. Para CA05, assume-se que `Ana Silva`, `ana.silva@example.com`, `12345678901`, `Consulta sobre reserva` e uma mensagem de pelo menos 20 caracteres são dados aceitos. A confirmação deve exibir a saudação especificada e o assunto enviado.",
+ "8. Cada teste parte de uma nova navegação à página inicial; não depende de dados criados por outros testes. Não há casos de API, pois os critérios descrevem apenas o formulário e resultados visíveis na interface.",
+ "9. O requisito técnico final exige `pytest-playwright` e a fixture `page`, embora uma regra anterior proíba plugins adicionais. Os requisitos técnicos explícitos da User Story prevalecem neste conflito; portanto, o arquivo usa `page` e `expect` do Playwright síncrono.",
+ "10. O código é uma implementação executável sob as dependências indicadas, mas os rótulos, botão, mensagens de obrigatoriedade e estrutura da confirmação foram inferidos e não comprovados contra o sistema real."
+]

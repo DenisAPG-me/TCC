@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "claro, constantes e nomes descritivos",
+  "estrutura": "helpers e check_single_missing_field reaproveitado",
+  "assercoes": "valida mensagens, URL, ausencia de sessao e passos do checkout",
+  "espera": "expect com timeout configurado, sem sleep",
+  "manutenibilidade": "test-ids/labels inventados e acesso a context.base_url"
+ }
+}

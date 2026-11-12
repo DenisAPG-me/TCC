@@ -1,0 +1,10 @@
+[
+ "Tecnologia escolhida: Python + pytest + requests, pois a User Story é focada em API REST e os critérios envolvem endpoints HTTP, códigos de status e corpos JSON.",
+ "Endpoint de criação e listagem: POST e GET em `/booking`.",
+ "Endpoint de consulta e exclusão/busca por ID: GET em `/booking/{id}`.",
+ "Payload de criação de reserva (`/booking`): Objeto JSON com as chaves `firstname` (string), `lastname` (string), `totalprice` (integer), `depositpaid` (boolean), `bookingdates` (objeto com `checkin` e `checkout` no formato de data `YYYY-MM-DD`), e `additionalneeds` (string).",
+ "Resposta do endpoint de criação (`POST /booking`): Objeto JSON contendo `{ \"bookingid\": <numero>, \"booking\": { ...dados enviados... } }`.",
+ "Resposta do endpoint de consulta (`GET /booking/{id}`): Objeto JSON contendo exatamente os campos da reserva correspondentes aos enviados na criação.",
+ "Endpoint de listagem com filtro (`GET /booking?firstname=X&lastname=Y`): Retorna uma lista JSON de objetos contendo `{ \"bookingid\": <numero> }`.",
+ "Dados de teste gerados dinamicamente com carimbos de data/hora ou valores aleatórios para garantir unicidade nos testes, evitando conflitos no filtro por nome e sobrenome únicos."
+]

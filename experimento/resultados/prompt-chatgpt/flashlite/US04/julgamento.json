@@ -1,0 +1,92 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C05",
+  "US04-C08",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_envio_formulario_vazio[chromium]",
+   "categoria": "outro",
+   "nota": "API inexistente toBeVisible (camelCase) em Python"
+  },
+  {
+   "teste": "test_CT002_telefone_curto[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT003_assunto_e_mensagem_curtos[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT004_email_malformado[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  },
+  {
+   "teste": "test_CT005_envio_dados_validos[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label(Message) inexistente"
+  }
+ ]
+}

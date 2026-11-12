@@ -1,0 +1,12 @@
+[
+ "**URL:** a página de contato fica na página inicial `https://automationintesting.online/`, definida em `BASE_URL`.",
+ "**Campos e rótulos:** cada campo é localizado por `get_by_label` com nome exato de rótulo: `Name`, `Email`, `Phone`, `Subject` e `Message`.",
+ "**Botão de envio:** `get_by_role(\"button\", name=\"Submit\")`.",
+ "**Mensagens de obrigatoriedade:** exibidas como texto na página, no formato `<Campo> ... blank` (ex.: \"Name may not be blank\"). O teste usa a regex `<Campo>.*blank`, pois a mensagem exata não foi informada.",
+ "**Mensagens de validação:** os textos exatos dos critérios 2 a 4 aparecem como texto visível na página.",
+ "**Confirmação:** após envio válido, a página exibe `Thanks for getting in touch <nome>!` e o assunto informado como texto visível. O texto exato do assunto na confirmação é presumido.",
+ "**Contagem de caracteres:** os valores são enviados sem espaços extras, e o tamanho considera os caracteres digitados.",
+ "**Dados válidos padrão:** nome \"Maria Silva\", e-mail \"maria@exemplo.com\", telefone \"11999999999\" (11 dígitos), assunto \"Dúvida sobre reserva\" e mensagem de 66 caracteres.",
+ "**Sincronização:** `expect` do Playwright aguarda automaticamente, portanto não há `time.sleep`.",
+ "**Execução:** `pytest-playwright` instalado, com o navegador configurado pelo próprio plugin (ex.: `pytest --browser chromium`)."
+]

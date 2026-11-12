@@ -1,0 +1,42 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Anotar contador inicial de mensagens no painel administrativo",
+  "tipo": "positivo",
+  "criterio": "Critério 1",
+  "passos": "1. Acessar a página de login (/admin)<br>2. Efetuar login com credenciais válidas (admin / password)<br>3. Localizar o elemento indicativo de mensagens e capturar seu número",
+  "esperado": "O número exibido ao lado de Messages é anotado com sucesso"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Envio bem-sucedido de mensagem pelo formulário de contato",
+  "tipo": "positivo",
+  "criterio": "Critério 2",
+  "passos": "1. Acessar a página inicial (URL base)<br>2. Preencher o formulário de contato com nome, assunto e dados válidos<br>3. Clicar em enviar",
+  "esperado": "A mensagem de confirmação \"Thanks for getting in touch <nome>!\" é exibida"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Verificar incremento no contador de mensagens após envio",
+  "tipo": "positivo",
+  "criterio": "Critério 3",
+  "passos": "1. Fazer login no painel administrativo (/admin)<br>2. Comparar o número atual de mensagens com o contador anotado anteriormente",
+  "esperado": "O contador atual ao lado de Messages é exatamente uma unidade maior que o anterior"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Validar presença da mensagem recém-enviada na caixa de mensagens",
+  "tipo": "positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Fazer login no painel administrativo (/admin)<br>2. Abrir a caixa de mensagens<br>3. Verificar a lista de mensagens",
+  "esperado": "A mensagem recém-enviada aparece na lista contendo o nome do remetente e o assunto informados"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Restrição de acesso direto à caixa de mensagens após logout",
+  "tipo": "negativo",
+  "criterio": "Critério 5",
+  "passos": "1. Fazer login no painel administrativo<br>2. Realizar o logout<br>3. Tentar acessar diretamente a rota/página da caixa de mensagens ou painel administrativo",
+  "esperado": "O usuário é redirecionado ou solicitado a fazer login"
+ }
+]

@@ -1,0 +1,12 @@
+[
+ "A página de login está em `/auth/login`; carrinho e checkout podem ser acessados pelo ícone do carrinho e pelo botão de checkout.",
+ "Como não foram fornecidos seletores reais, o script usa roles, labels e textos acessíveis inferidos. Ajustes podem ser necessários caso os rótulos ou a estrutura real sejam diferentes.",
+ "A loja permite adicionar um produto por meio de um botão “Add to cart” e apresenta um botão “Proceed to checkout”.",
+ "Para os testes de checkout, a aplicação mantém o carrinho entre login e checkout; cada teste começa em contexto de navegador isolado fornecido pelo pytest-playwright.",
+ "O nome exibido no menu após login é presumido como “Jane Doe”; o texto exato não foi informado pela User Story.",
+ "Os campos de endereço e pagamento têm rótulos inferidos: Country, ZIP, Number, Street, City, State, Cardholder name, Card number, Expiry date e CVV. As opções de país e cartão são escolhidas por texto quando disponíveis.",
+ "Dados fictícios usados: endereço 12345, número 10, rua “Main Street”, cidade “Austin”, estado “Texas”; cartão 4111111111111111, validade 12/30 e CVV 123. A aplicação de demonstração deve aceitar esses dados.",
+ "O passo de pagamento é identificado por conteúdo ou título contendo “Payment”; o avanço do endereço é verificado pela presença desse conteúdo ou URL.",
+ "TC08 e TC09 exercitam campos obrigatórios citados no critério, embora a User Story não especifique mensagens de validação para cada campo; o resultado é inferido como bloqueio de avanço.",
+ "Os testes não foram executados contra o site; são um esqueleto executável sujeito a ajuste dos seletores inferidos."
+]

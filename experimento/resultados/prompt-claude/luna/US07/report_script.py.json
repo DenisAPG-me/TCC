@@ -1,0 +1,181 @@
+{
+ "created": 1793430465.3610995,
+ "duration": 5.332160234451294,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_criar_reserva_com_dados_validos",
+     "type": "Function",
+     "lineno": 34
+    },
+    {
+     "nodeid": "script.py::test_ct02_consultar_reserva_criada",
+     "type": "Function",
+     "lineno": 45
+    },
+    {
+     "nodeid": "script.py::test_ct03_consultar_identificador_inexistente",
+     "type": "Function",
+     "lineno": 61
+    },
+    {
+     "nodeid": "script.py::test_ct04_filtrar_por_nome_e_sobrenome_unicos",
+     "type": "Function",
+     "lineno": 70
+    },
+    {
+     "nodeid": "script.py::test_ct05_filtrar_sem_reservas_correspondentes",
+     "type": "Function",
+     "lineno": 99
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_criar_reserva_com_dados_validos",
+   "lineno": 34,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_criar_reserva_com_dados_validos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00032510003075003624,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6386514999903738,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011829996947199106,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_consultar_reserva_criada",
+   "lineno": 45,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_consultar_reserva_criada",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003809999907389283,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.773352700052783,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011979998089373112,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_consultar_identificador_inexistente",
+   "lineno": 61,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_consultar_identificador_inexistente",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0001879000337794423,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.9476361999986693,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00012770004104822874,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_filtrar_por_nome_e_sobrenome_unicos",
+   "lineno": 70,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_filtrar_por_nome_e_sobrenome_unicos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002807000419124961,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.267390500055626,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001362999901175499,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_filtrar_sem_reservas_correspondentes",
+   "lineno": 99,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_filtrar_sem_reservas_correspondentes",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002319000195711851,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6339472000254318,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001490000868216157,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

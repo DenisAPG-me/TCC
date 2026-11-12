@@ -1,0 +1,117 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06",
+  "US06-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "sem autenticacao previa"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_registrar_contador_inicial",
+   "categoria": "seletor inexistente",
+   "nota": "test-id message-count inexistente"
+  },
+  {
+   "teste": "test_TC02_confirmar_envio_valido",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC03_incrementar_contador_apos_envio",
+   "categoria": "seletor inexistente",
+   "nota": "test-id message-count inexistente"
+  },
+  {
+   "teste": "test_TC04_exibir_remetente_e_assunto",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC05_bloquear_acesso_direto_apos_logout",
+   "categoria": "URL/endpoint errado",
+   "nota": "URL real e /admin/message, nao /admin/messages"
+  },
+  {
+   "teste": "test_TC06_bloquear_acesso_sem_autenticacao",
+   "categoria": "URL/endpoint errado",
+   "nota": "/admin/messages retorna 404"
+  },
+  {
+   "teste": "test_TC07_preservar_nome_com_acentos_e_espacos",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  }
+ ]
+}

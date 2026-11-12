@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "claro",
+  "estrutura": "helpers mas try/finally repetido",
+  "assercoes": "so status",
+  "espera": "timeout e uuid",
+  "manutenibilidade": "cleanup e constantes"
+ }
+}

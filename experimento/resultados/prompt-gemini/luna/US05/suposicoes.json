@@ -1,0 +1,10 @@
+[
+ "A tela de login está em `/admin` e a lista de quartos em `/admin/rooms`.",
+ "O formulário possui campos acessíveis pelos rótulos `Username` e `Password`, e botão `Login`.",
+ "A mensagem de erro é exibida como texto `Invalid credentials`.",
+ "Após login, os itens de navegação e o botão `Logout` são acessíveis por seus nomes visíveis.",
+ "O quarto aparece em uma linha de tabela contendo `101` e `Single`.",
+ "A página pública inicial corresponde à URL base, com ou sem barra final.",
+ "A senha incorreta usada no teste é `wrong-password`.",
+ "O ambiente de execução fornece `pytest`, `pytest-playwright` e `playwright`; a base URL pode ser substituída com `--base-url`."
+]

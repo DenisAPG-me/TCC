@@ -1,0 +1,10 @@
+[
+ "1. A URL base da aplicação é `https://automationintesting.online/`, conforme informada na User Story.",
+ "2. O painel administrativo é acessível na rota `/admin` (ou `/#/admin`), e a tela de login possui campos com rótulos `Username` e `Password` (ou placeholders correspondentes) e um botão de login.",
+ "3. O contador de mensagens no painel administrativo está localizado próximo ao texto \"Messages\" ou possui um seletor/papel acessível identificável na interface administrativa.",
+ "4. O formulário de contato na página inicial possui campos rotulados ou identificáveis para Name, Email, Phone, Subject e Message, além de um botão de envio (Submit / Send).",
+ "5. As credenciais de demonstração fornecidas são usuário `admin` e senha `password`.",
+ "6. O teste de UI utiliza o plugin `pytest-playwright` com a fixture `page`, conforme exigido pelos requisitos técnicos obrigatórios, sem criação manual de `sync_playwright()`.",
+ "7. O critério CA05 (logout e acesso direto) assume que tentar abrir a rota protegida sem sessão ativa redireciona para a tela de autenticação.",
+ "8. Para os casos negativos e de borda (CT006, CT007, CT008), deduziu-se o comportamento padrão de validação de formulários web e autenticação REST/UI quando campos estão incorretos ou em limites extremos."
+]

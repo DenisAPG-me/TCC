@@ -1,0 +1,9 @@
+[
+ "A URL base é https://automationintesting.online/ e a página de login administrativa é https://automationintesting.online/admin.",
+ "As credenciais de demonstração são usuário \"admin\" e senha \"password\".",
+ "O painel administrativo possui um elemento visível contendo o texto ou indicador de \"Messages\" e seu respectivo contador numérico.",
+ "O formulário de contato na página inicial possui campos identificáveis para Nome, Email, Telefone, Assunto e Mensagem, e um botão de envio.",
+ "A mensagem de sucesso após o envio do formulário contém o texto exato \"Thanks for getting in touch <nome>!\".",
+ "O logout do painel administrativo redireciona para a página de login ou exige reautenticação ao tentar acessar rotas protegidas.",
+ "Os seletores Playwright utilizados baseiam-se em papéis (`get_by_role`), rótulos (`get_by_label`), texto (`get_by_text`) ou placeholders/classes padrões esperados em aplicações de teste padronizadas (rest_in_practice / restful-booker-platform)."
+]

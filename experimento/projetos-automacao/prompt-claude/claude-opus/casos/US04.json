@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Envio do formulário totalmente vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar a página inicial; deixar todos os campos do formulário de contato vazios; clicar em Submit",
+  "esperado": "São exibidas as mensagens \"Name may not be blank\", \"Email may not be blank\", \"Phone may not be blank\", \"Subject may not be blank\" e \"Message may not be blank\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone com 10 caracteres (abaixo do mínimo)",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 10 caracteres; clicar em Submit",
+  "esperado": "É exibida a mensagem \"Phone must be between 11 and 21 characters.\" e não há confirmação de envio"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Telefone com 11 caracteres (limite mínimo válido)",
+  "tipo": "Borda",
+  "criterio": "CA2, CA5",
+  "passos": "Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 11 caracteres; clicar em Submit",
+  "esperado": "É exibida a confirmação \"Thanks for getting in touch <nome>!\" e a mensagem de erro de telefone não aparece"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Telefone com 22 caracteres (acima do máximo)",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher nome, e-mail, assunto e mensagem válidos; preencher telefone com 22 caracteres; clicar em Submit",
+  "esperado": "É exibida a mensagem \"Phone must be between 11 and 21 characters.\" e não há confirmação de envio"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Assunto com 4 e mensagem com 19 caracteres",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Acessar a página inicial; preencher nome, e-mail e telefone válidos; preencher assunto com 4 caracteres e mensagem com 19 caracteres; clicar em Submit",
+  "esperado": "São exibidas as mensagens \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT06",
+  "titulo": "Assunto com 5 e mensagem com 20 caracteres (limites mínimos válidos)",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Acessar a página inicial; preencher nome, e-mail e telefone válidos; preencher assunto com 5 caracteres e mensagem com 20 caracteres; clicar em Submit",
+  "esperado": "É exibida a confirmação \"Thanks for getting in touch <nome>!\" com o assunto informado e sem mensagens de tamanho inválido"
+ },
+ {
+  "id": "CT07",
+  "titulo": "E-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Acessar a página inicial; preencher nome, telefone, assunto e mensagem válidos; preencher e-mail com \"bad\"; clicar em Submit",
+  "esperado": "É exibida a mensagem \"must be a well-formed email address\" e não há confirmação de envio"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Envio com todos os dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Acessar a página inicial; preencher nome, e-mail, telefone, assunto e mensagem válidos; clicar em Submit",
+  "esperado": "É exibida a confirmação \"Thanks for getting in touch <nome>!\" e o assunto informado aparece na confirmação"
+ }
+]

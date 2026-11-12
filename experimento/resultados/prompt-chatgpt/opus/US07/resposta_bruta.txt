@@ -1,0 +1,178 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Criar reserva com corpo JSON válido | positivo | CA01 | Enviar POST /booking com todos os campos válidos | Status 200; `bookingid` inteiro positivo; `booking` igual ao corpo enviado |
+| CT002 | Consultar reserva criada pelo identificador | positivo | CA02 | Criar reserva via POST /booking; enviar GET /booking/{bookingid} | Status 200; todos os campos iguais aos enviados na criação |
+| CT003 | Consultar reserva com identificador inexistente | negativo | CA03 | Enviar GET /booking/99999999 | Status 404 |
+| CT004 | Listar reservas filtrando por nome e sobrenome únicos | positivo | CA04 | Criar reserva com nome e sobrenome únicos; enviar GET /booking?firstname=...&lastname=... | Status 200; lista contém o `bookingid` criado |
+| CT005 | Criar e consultar reserva com valores-limite e caracteres especiais | borda | CA01, CA02 | Enviar POST /booking com preço total 0, depósito não pago, check-in igual ao check-out e textos acentuados; enviar GET /booking/{bookingid} | Status 200 em ambas as requisições; `bookingid` inteiro positivo; dados retornados iguais aos enviados |
+
+SUPOSIÇÕES
+
+1. Correspondência dos critérios (inferida): os critérios numerados 1, 2, 3 e 4 da User Story foram mapeados para CA01, CA02, CA03 e CA04, respectivamente.
+2. Escopo (explícito): a User Story trata apenas da API REST. Por isso, todos os testes usam pytest e requests. Os requisitos sobre pytest-playwright, `page` e `expect` valem apenas para testes de UI e não se aplicam. A opção `--base-url` pertence ao pytest-playwright e não é usada; a URL base fica na constante `BASE_URL`.
+3. Endpoints e métodos (inferidos):
+   - `POST /booking` cria a reserva.
+   - `GET /booking/{id}` consulta uma reserva.
+   - `GET /booking?firstname=X&lastname=Y` lista reservas filtradas.
+   - `POST /auth` obtém um token.
+   - `DELETE /booking/{id}` remove a reserva e exige o cookie `token`.
+   - As requisições usam os cabeçalhos `Content-Type: application/json` e `Accept: application/json`.
+4. Formato do corpo (inferido): os campos são `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` com `checkin` e `checkout` no formato `YYYY-MM-DD`, e `additionalneeds` (texto).
+5. Resposta da criação (inferida): o retorno tem o formato `{"bookingid": <int>, "booking": {...}}`. A consulta por identificador retorna o objeto da reserva diretamente. A listagem retorna uma lista de objetos `{"bookingid": <int>}`.
+6. Igualdade de dados (inferida): "os mesmos dados enviados" foi interpretado como igualdade exata entre o JSON enviado e o retornado, inclusive tipos e formato das datas.
+7. Limpeza (inferida): a limpeza autentica com as credenciais de teste `admin` / `password123`, mantidas na constante `AUTH_CREDENTIALS`, e espera status 201 no DELETE. Falhas na limpeza aparecem como erro de teardown. Ela não faz parte dos critérios de aceitação.
+8. Pré-condição externa (inferida): nenhuma reserva com o id 99999999 existe no ambiente (CT003).
+9. Isolamento (inferido): nomes e sobrenomes recebem um sufixo UUID para garantir unicidade e independência entre os testes, conforme exige o CA04. O filtro pode sofrer atraso de consistência; supõe-se que não haja esse atraso.
+10. CT005 depende de suposições que a User Story não especifica. Supõe-se que a API aceite como válidos `totalprice = 0`, `depositpaid = false`, check-in igual ao check-out e caracteres acentuados em UTF-8, devolvendo-os sem alteração. Nenhum limite ou regra de datas é declarado na User Story.
+11. Ausência de outros negativos (justificativa): a User Story não define o comportamento para corpo inválido ou incompleto, nem para filtros sem correspondência. Por isso, não foram criados casos negativos para CA01, CA02 e CA04, evitando inventar códigos de resposta. CA03 já é, por natureza, o caso negativo especificado.
+12. Timeout (inferido): todas as requisições usam timeout explícito de 30 segundos (`TIMEOUT`), considerando possível latência de inicialização do host.
+13. Compatibilidade: os detalhes acima foram deduzidos e podem exigir ajuste nas constantes antes da execução contra o sistema real. Código executável não garante compatibilidade comprovada.
+
+```python
+import uuid
+
+import pytest
+import requests
+
+# Valores inferidos que podem exigir ajuste
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 30
+HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+AUTH_CREDENTIALS = {"username": "admin", "password": "password123"}
+NONEXISTENT_BOOKING_ID = 99999999
+BOOKING_PATH = "/booking"
+AUTH_PATH = "/auth"
+
+
+def unique_suffix():
+    return uuid.uuid4().hex[:12]
+
+
+def build_booking(**overrides):
+    suffix = unique_suffix()
+    booking = {
+        "firstname": f"Nome{suffix}",
+        "lastname": f"Sobrenome{suffix}",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2026-12-01", "checkout": "2026-12-05"},
+        "additionalneeds": "Breakfast",
+    }
+    booking.update(overrides)
+    return booking
+
+
+def create_booking(payload):
+    return requests.post(f"{BASE_URL}{BOOKING_PATH}", json=payload, headers=HEADERS, timeout=TIMEOUT)
+
+
+def get_booking(booking_id):
+    return requests.get(f"{BASE_URL}{BOOKING_PATH}/{booking_id}", headers=HEADERS, timeout=TIMEOUT)
+
+
+def assert_valid_booking_id(booking_id):
+    assert isinstance(booking_id, int) and not isinstance(booking_id, bool), f"bookingid não é inteiro: {booking_id!r}"
+    assert booking_id > 0, f"bookingid não é positivo: {booking_id}"
+
+
+@pytest.fixture
+def created_ids():
+    ids = []
+    yield ids
+    if not ids:
+        return
+    auth = requests.post(f"{BASE_URL}{AUTH_PATH}", json=AUTH_CREDENTIALS, headers=HEADERS, timeout=TIMEOUT)
+    assert auth.status_code == 200, f"Falha na autenticação para limpeza: {auth.status_code} {auth.text}"
+    token = auth.json().get("token")
+    assert token, f"Token ausente na resposta de autenticação: {auth.text}"
+    for booking_id in ids:
+        resp = requests.delete(
+            f"{BASE_URL}{BOOKING_PATH}/{booking_id}",
+            headers={**HEADERS, "Cookie": f"token={token}"},
+            timeout=TIMEOUT,
+        )
+        assert resp.status_code == 201, f"Falha ao remover reserva {booking_id}: {resp.status_code} {resp.text}"
+
+
+@pytest.fixture
+def booking_factory(created_ids):
+    def _create(payload):
+        resp = create_booking(payload)
+        assert resp.status_code == 200, f"Criação falhou: {resp.status_code} {resp.text}"
+        body = resp.json()
+        booking_id = body["bookingid"]
+        assert_valid_booking_id(booking_id)
+        created_ids.append(booking_id)
+        return booking_id, body
+
+    return _create
+
+
+def test_CT001_criar_reserva_com_corpo_valido(created_ids):
+    payload = build_booking()
+
+    resp = create_booking(payload)
+
+    assert resp.status_code == 200, f"Status inesperado: {resp.status_code} {resp.text}"
+    body = resp.json()
+    assert "bookingid" in body, f"bookingid ausente: {body}"
+    assert_valid_booking_id(body["bookingid"])
+    created_ids.append(body["bookingid"])
+    assert body["booking"] == payload
+
+
+def test_CT002_consultar_reserva_criada_pelo_identificador(booking_factory):
+    payload = build_booking()
+    booking_id, _ = booking_factory(payload)
+
+    resp = get_booking(booking_id)
+
+    assert resp.status_code == 200, f"Status inesperado: {resp.status_code} {resp.text}"
+    assert resp.json() == payload
+
+
+def test_CT003_consultar_reserva_inexistente_retorna_404():
+    resp = get_booking(NONEXISTENT_BOOKING_ID)
+
+    assert resp.status_code == 404, f"Status inesperado: {resp.status_code} {resp.text}"
+
+
+def test_CT004_listar_reservas_filtrando_por_nome_e_sobrenome(booking_factory):
+    payload = build_booking()
+    booking_id, _ = booking_factory(payload)
+
+    resp = requests.get(
+        f"{BASE_URL}{BOOKING_PATH}",
+        params={"firstname": payload["firstname"], "lastname": payload["lastname"]},
+        headers=HEADERS,
+        timeout=TIMEOUT,
+    )
+
+    assert resp.status_code == 200, f"Status inesperado: {resp.status_code} {resp.text}"
+    results = resp.json()
+    assert isinstance(results, list), f"Resposta não é lista: {results!r}"
+    returned_ids = [item["bookingid"] for item in results]
+    assert booking_id in returned_ids, f"bookingid {booking_id} não encontrado em {returned_ids}"
+
+
+def test_CT005_criar_e_consultar_reserva_com_valores_limite_e_caracteres_especiais(booking_factory):
+    suffix = unique_suffix()
+    payload = build_booking(
+        firstname=f"José{suffix}",
+        lastname=f"Conceição-D'Ávila{suffix}",
+        totalprice=0,
+        depositpaid=False,
+        bookingdates={"checkin": "2026-12-10", "checkout": "2026-12-10"},
+        additionalneeds="Café da manhã & berço ç ã é",
+    )
+
+    booking_id, create_body = booking_factory(payload)
+    assert create_body["booking"] == payload
+
+    resp = get_booking(booking_id)
+
+    assert resp.status_code == 200, f"Status inesperado: {resp.status_code} {resp.text}"
+    assert resp.json() == payload
+```

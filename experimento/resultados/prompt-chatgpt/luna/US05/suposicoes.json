@@ -1,0 +1,9 @@
+[
+ "1. Os critérios não têm identificadores próprios. Foram nomeados CA01 a CA05 na ordem em que aparecem na User Story, correspondendo aos critérios 1 a 5, respectivamente.",
+ "2. A URL base explícita é `https://automationintesting.online/`. Presume-se que a tela de login seja `/admin`, que a lista de quartos seja `/admin/rooms` e que o formulário use campos acessíveis chamados “Username” e “Password”, além de um botão “Login”. Essas rotas e rótulos foram inferidos para a automação e podem exigir ajustes antes do uso no sistema real.",
+ "3. Presume-se que a mensagem de falha seja texto visível “Invalid credentials”, que a página inicial pública tenha o título “Shady Meadows B&B” e que o menu e a listagem exponham os textos mencionados no critério. Os seletores por papel/texto refletem essas suposições.",
+ "4. A conta de demonstração `admin` / `password` é explícita na User Story e é usada nos casos positivos. O caso CT002 usa `incorrect-password`, inferida como senha inválida.",
+ "5. CT005 usa o caminho `/admin/rooms`, inferido para acesso direto à lista. CT004 e CT005 dependem de que o logout encerre a sessão do navegador usado pelo teste.",
+ "6. Os casos negativos e de borda aplicáveis estão cobertos pelos envios de credenciais vazias, senha incorreta e acesso direto após logout. Não foram especificados limites numéricos ou entradas de fronteira adicionais.",
+ "7. A implementação usa a fixture `page` do pytest-playwright e `expect`, conforme o requisito técnico específico da User Story. O ambiente deve ter `pytest-playwright`, Playwright e Chromium instalados. O código é executável, mas as suposições de rotas, rótulos e textos não comprovam compatibilidade com o sistema real."
+]

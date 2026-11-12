@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes descritivos, constantes no topo",
+  "estrutura": "helpers (search, sort_by, visible_texts, parse_prices)",
+  "assercoes": "assercoes de negocio, mas leitura obsoleta e uma assercao de valor do campo errada",
+  "espera": "expect_response sem esperar a renderizacao: corrida; sem sleep",
+  "manutenibilidade": "role/label, constantes de textos e seletores"
+ }
+}

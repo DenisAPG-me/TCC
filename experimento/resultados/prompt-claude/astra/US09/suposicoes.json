@@ -1,0 +1,18 @@
+[
+ "A história trata de API REST; a tecnologia escolhida é Python + pytest + requests. Não há interface, seletores ou dependência de Playwright.",
+ "Os contratos abaixo são deduções, não informações verificadas. Não houve acesso à API nem execução dos testes.",
+ "A autenticação usa `POST /auth`, com JSON `{\"username\": \"admin\", \"password\": \"password123\"}`, retorna 200 e um objeto com o campo textual `token`, não vazio.",
+ "A criação usa `POST /booking`, retorna 200 e JSON com `bookingid`, um inteiro positivo. O corpo contém `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, e `additionalneeds`.",
+ "Os dados fictícios usam preço inteiro positivo, depósito pago, estadia de duas noites e pedido de café da manhã. As datas são calculadas a partir da data UTC atual, com entrada após 30 dias, para evitar datas vencidas.",
+ "Cada criação acrescenta um UUID ao primeiro nome. Supõe-se que esses nomes sejam aceitos e suficientemente únicos para isolar testes e execuções simultâneas.",
+ "A consulta usa `GET /booking/{id}`, retorna 200 com o objeto da reserva existente e 404 após a exclusão. O conteúdo consultado é estável durante cada teste.",
+ "A exclusão usa `DELETE /booking/{id}`. O token é enviado exclusivamente no cookie `token`; nenhuma autenticação alternativa é enviada.",
+ "Um token fictício fixo representa o token inválido. Requisições sem token não enviam cookies nem cabeçalhos de autenticação.",
+ "A listagem usa `GET /booking`, com parâmetros `firstname` e `lastname`, retorna 200 e um array de objetos contendo `bookingid`. Os filtros combinados identificam a reserva pelo nome único.",
+ "As alterações são imediatamente visíveis nas consultas seguintes. Não se presume consistência eventual nem se introduzem esperas ou tentativas adicionais.",
+ "A segunda exclusão aceita qualquer código de 400 a 499, conforme CA5. Não se deduz um código específico nem se verificam mensagens de resposta, pois a história não as define.",
+ "A proteção de outras reservas é verificada por duas reservas de controle criadas pelo próprio teste, comparando integralmente seus conteúdos. Essa amostra não demonstra ausência de alterações em toda a base.",
+ "Cada teste cria seus próprios dados. O token obtido para preparação e limpeza só é enviado quando solicitado explicitamente. A limpeza consulta e exclui apenas reservas criadas pelo próprio teste, aceitando que já estejam ausentes.",
+ "Todas as requisições usam timeout explícito, não seguem redirecionamentos e desabilitam autenticação implícita por configuração de ambiente. Supõe-se conectividade direta sem proxy obrigatório.",
+ "O arquivo pode ser salvo como `test_exclusao_reservas.py` e executado com `pytest test_exclusao_reservas.py`, com pytest e requests instalados."
+]

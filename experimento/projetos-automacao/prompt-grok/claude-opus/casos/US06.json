@@ -1,0 +1,82 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Admin autenticado vê contador numérico ao lado de Messages",
+  "tipo": "positivo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; logar com admin/password; localizar link \"Messages\" e ler o número",
+  "esperado": "Link \"Messages\" visível e contador interpretável como inteiro ≥ 0"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Visitante envia formulário de contato válido e vê confirmação",
+  "tipo": "positivo",
+  "criterio": "CA2",
+  "passos": "Acessar a home; preencher nome, e-mail, telefone, assunto e mensagem válidos; clicar em Submit",
+  "esperado": "Texto \"Thanks for getting in touch <nome>!\" visível"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Contador de Messages aumenta exatamente 1 após envio de visitante",
+  "tipo": "positivo",
+  "criterio": "CA1, CA3",
+  "passos": "Logar; anotar contador; logout; visitante envia mensagem válida; logar novamente; ler contador",
+  "esperado": "Contador = valor anotado + 1"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Mensagem recém-enviada aparece na caixa com nome e assunto",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Visitante envia mensagem com nome/assunto únicos; admin loga e abre a caixa de mensagens",
+  "esperado": "Lista exibe o nome do remetente e o assunto informados"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Após logout, acesso direto à caixa de mensagens exige login",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Logar; clicar em Logout; navegar diretamente para /admin/message",
+  "esperado": "Formulário de login exibido; link \"Messages\" não exibido"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Acesso direto à caixa de mensagens sem nunca ter logado exige login",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Em sessão limpa, navegar diretamente para /admin/message",
+  "esperado": "Formulário de login exibido; link \"Messages\" não exibido"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Envio do formulário de contato vazio não exibe confirmação",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a home; clicar em Submit sem preencher campos",
+  "esperado": "Mensagens de validação exibidas; confirmação não exibida"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Envio com e-mail inválido não incrementa o contador",
+  "tipo": "negativo",
+  "criterio": "CA2, CA3",
+  "passos": "Logar; anotar contador; logout; enviar formulário com e-mail inválido; logar novamente",
+  "esperado": "Erro de validação exibido; sem confirmação; contador igual ao anotado"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Login com senha inválida não dá acesso ao painel/contador",
+  "tipo": "negativo",
+  "criterio": "CA1, CA3",
+  "passos": "Acessar /admin; informar admin com senha errada; clicar em Login",
+  "esperado": "Permanece no formulário de login; link \"Messages\" não exibido"
+ },
+ {
+  "id": "TC10",
+  "titulo": "Confirmação reproduz fielmente nome com acentos e caracteres especiais",
+  "tipo": "borda",
+  "criterio": "CA2",
+  "passos": "Acessar a home; enviar formulário válido com nome \"José D'Ávila-Ção <id>\"",
+  "esperado": "Texto \"Thanks for getting in touch José D'Ávila-Ção <id>!\" visível"
+ }
+]

@@ -1,0 +1,131 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C05",
+  "US04-C06",
+  "US04-C08",
+  "US04-C09",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03"
+   ],
+   "nota": "limites 11 e 21"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C06",
+    "US04-C09"
+   ],
+   "nota": "limites min e max"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_empty_form_shows_required_field_messages",
+   "categoria": "seletor inexistente",
+   "nota": "strict mode: get_by_text(nome do campo) ambiguo"
+  },
+  {
+   "teste": "test_TC02_phone_below_minimum_shows_validation",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC03_subject_and_message_below_minimum_show_validation",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC04_malformed_email_shows_validation",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC05_valid_submission_shows_confirmation_and_subject",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC06_phone_length_boundaries_are_accepted[minimum-11]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC06_phone_length_boundaries_are_accepted[maximum-21]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC07_subject_and_message_length_boundaries_are_accepted[minimum-lengths]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  },
+  {
+   "teste": "test_TC07_subject_and_message_length_boundaries_are_accepted[maximum-lengths]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label inexistente (campos sem label)"
+  }
+ ]
+}

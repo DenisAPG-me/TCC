@@ -1,0 +1,21 @@
+[
+ "1. Correspondência dos critérios (inferida): os critérios numerados 1, 2, 3 e 4 da User Story foram mapeados para CA01, CA02, CA03 e CA04, respectivamente.",
+ "2. Escopo (explícito): a User Story trata apenas da API REST. Por isso, todos os testes usam pytest e requests. Os requisitos sobre pytest-playwright, `page` e `expect` valem apenas para testes de UI e não se aplicam. A opção `--base-url` pertence ao pytest-playwright e não é usada; a URL base fica na constante `BASE_URL`.",
+ "3. Endpoints e métodos (inferidos):",
+ "`POST /booking` cria a reserva.",
+ "`GET /booking/{id}` consulta uma reserva.",
+ "`GET /booking?firstname=X&lastname=Y` lista reservas filtradas.",
+ "`POST /auth` obtém um token.",
+ "`DELETE /booking/{id}` remove a reserva e exige o cookie `token`.",
+ "As requisições usam os cabeçalhos `Content-Type: application/json` e `Accept: application/json`.",
+ "4. Formato do corpo (inferido): os campos são `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` com `checkin` e `checkout` no formato `YYYY-MM-DD`, e `additionalneeds` (texto).",
+ "5. Resposta da criação (inferida): o retorno tem o formato `{\"bookingid\": <int>, \"booking\": {...}}`. A consulta por identificador retorna o objeto da reserva diretamente. A listagem retorna uma lista de objetos `{\"bookingid\": <int>}`.",
+ "6. Igualdade de dados (inferida): \"os mesmos dados enviados\" foi interpretado como igualdade exata entre o JSON enviado e o retornado, inclusive tipos e formato das datas.",
+ "7. Limpeza (inferida): a limpeza autentica com as credenciais de teste `admin` / `password123`, mantidas na constante `AUTH_CREDENTIALS`, e espera status 201 no DELETE. Falhas na limpeza aparecem como erro de teardown. Ela não faz parte dos critérios de aceitação.",
+ "8. Pré-condição externa (inferida): nenhuma reserva com o id 99999999 existe no ambiente (CT003).",
+ "9. Isolamento (inferido): nomes e sobrenomes recebem um sufixo UUID para garantir unicidade e independência entre os testes, conforme exige o CA04. O filtro pode sofrer atraso de consistência; supõe-se que não haja esse atraso.",
+ "10. CT005 depende de suposições que a User Story não especifica. Supõe-se que a API aceite como válidos `totalprice = 0`, `depositpaid = false`, check-in igual ao check-out e caracteres acentuados em UTF-8, devolvendo-os sem alteração. Nenhum limite ou regra de datas é declarado na User Story.",
+ "11. Ausência de outros negativos (justificativa): a User Story não define o comportamento para corpo inválido ou incompleto, nem para filtros sem correspondência. Por isso, não foram criados casos negativos para CA01, CA02 e CA04, evitando inventar códigos de resposta. CA03 já é, por natureza, o caso negativo especificado.",
+ "12. Timeout (inferido): todas as requisições usam timeout explícito de 30 segundos (`TIMEOUT`), considerando possível latência de inicialização do host.",
+ "13. Compatibilidade: os detalhes acima foram deduzidos e podem exigir ajuste nas constantes antes da execução contra o sistema real. Código executável não garante compatibilidade comprovada."
+]

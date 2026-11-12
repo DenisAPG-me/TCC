@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "Critério 1",
+  "passos": "Enviar POST para `/auth` com usuário `admin` e senha `password123`.",
+  "esperado": "Receber status 200 e um token não vazio."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Autenticação com credenciais inválidas",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "Enviar POST para `/auth` com usuário e senha inválidos.",
+  "esperado": "Resposta sem token e informando o motivo \"Bad credentials\"."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Atualização completa de reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "Criar ou obter reserva existente, autenticar, enviar PUT para `/booking/{id}` com novo nome e novo preço usando o token válido.",
+  "esperado": "Receber status 200 e os novos valores atualizados."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Atualização parcial de reserva (apenas sobrenome) com token válido",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "Obter reserva existente, autenticar, enviar PATCH para `/booking/{id}` contendo apenas o novo sobrenome usando o token válido.",
+  "esperado": "Receber status 200, sobrenome alterado e demais campos mantidos."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Tentativa de atualizar reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "Critério 5",
+  "passos": "Obter reserva existente, enviar PUT ou PATCH para `/booking/{id}` sem fornecer cabeçalho de autenticação ou token.",
+  "esperado": "Receber status 403."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Atualização completa de reserva com campos obrigatórios ausentes e token válido",
+  "tipo": "Negativo",
+  "criterio": "Critério 6",
+  "passos": "Obter reserva existente, autenticar, enviar PUT para `/booking/{id}` omitindo campos obrigatórios com o token válido.",
+  "esperado": "Receber status 400."
+ }
+]

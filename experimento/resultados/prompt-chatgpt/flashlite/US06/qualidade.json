@@ -1,0 +1,14 @@
+{
+ "legibilidade": 2,
+ "estrutura": 1,
+ "assercoes": 2,
+ "espera": 2,
+ "manutenibilidade": 1,
+ "justificativas": {
+  "legibilidade": "nomes ok, mas logica confusa com fallbacks",
+  "estrutura": "sem helpers, login repetido, requests misturado",
+  "assercoes": "asserts fracos (Messages visivel, sem contagem); CT008 sem assert",
+  "espera": "networkidle sem assert, if count>0 condicionais",
+  "manutenibilidade": "URL #/admin e endpoint /message/ errados, seletores adivinhados"
+ }
+}

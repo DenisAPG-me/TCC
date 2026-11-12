@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 12.17,
+ "tokens": {
+  "total": 6021
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "nse.status_code == 403\n\n\ndef test_ct06_atualizar_sem_campo_obrigatorio():\n    booking_id = _create_booking()\n    token = _get_token()\n    incomplete_booking = {\n        key: value\n        for key, value in INITIAL_BOOKING.items()\n        if key != \"firstname\"\n    }\n\n    response = requests.put(\n        f\"{BASE_URL}/booking/{booking_id}\",\n        json=incomplete_booking,\n        cookies={\"token\": token},\n        timeout=TIMEOUT,\n    )\n\n    assert response.status_code == 400\n```\ntokens used\n6,021\n"
+}

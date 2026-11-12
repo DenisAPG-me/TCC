@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Adicionar três unidades de produto disponível",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Abrir a loja com carrinho vazio; abrir Claw Hammer; definir quantidade 3; adicionar ao carrinho",
+  "esperado": "A confirmação Product added to shopping cart. fica visível e o indicador do carrinho mostra 3"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Conferir os totais de três unidades",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Abrir Claw Hammer em uma sessão nova; adicionar 3 unidades; abrir o carrinho; consultar o preço unitário",
+  "esperado": "A quantidade da linha é 3; o total da linha corresponde ao preço unitário multiplicado por 3; o total do carrinho corresponde ao total da linha"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Reduzir a quantidade de três para uma unidade",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Abrir Claw Hammer em uma sessão nova; adicionar 3 unidades; abrir o carrinho; alterar a quantidade para 1; confirmar a edição",
+  "esperado": "A quantidade permanece em 1 e o total do carrinho passa a ser igual ao preço unitário"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Rejeitar três unidades de Thor Hammer",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Abrir Thor Hammer com carrinho vazio; definir quantidade 3; tentar adicionar ao carrinho",
+  "esperado": "A mensagem You can only have one Thor Hammer in the cart. fica visível"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Aceitar uma unidade de Thor Hammer no limite permitido",
+  "tipo": "Borda",
+  "criterio": "CA4",
+  "passos": "Abrir Thor Hammer com carrinho vazio; definir quantidade 1; adicionar ao carrinho; abrir o carrinho",
+  "esperado": "A adição é confirmada; o indicador mostra 1 e a linha de Thor Hammer contém uma unidade"
+ }
+]

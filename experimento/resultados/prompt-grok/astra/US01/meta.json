@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 67.78,
+ "tokens": {
+  "total": 4214
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "hing_products(page, \"ham\")\n\n\ndef test_TC06_buscar_nome_completo(page: Page) -> None:\n    open_home(page)\n    search(page, \"hammer\")\n    check_matching_products(page, \"hammer\")\n\n    full_name = normalize_text(names(page).first.inner_text())\n\n    open_home(page)\n    search(page, full_name)\n    check_matching_products(page, full_name)\n\n    exact_name = names(page).filter(\n        has_text=normalized_literal_pattern(full_name)\n    )\n    expect(exact_name.first).to_be_visible()\n```\ntokens used\n4,214\n"
+}

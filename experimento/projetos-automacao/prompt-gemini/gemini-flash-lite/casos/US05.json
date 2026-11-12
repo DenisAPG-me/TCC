@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Tentativa de login com credenciais vazias",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "1. Acessar `/admin`<br>2. Deixar usuário e senha em branco<br>3. Clicar no botão de login",
+  "esperado": "Exibir mensagem \"Invalid credentials\" e permanecer na tela de login"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Tentativa de login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "1. Acessar `/admin`<br>2. Informar usuário \"admin\"<br>3. Informar senha incorreta<br>4. Clicar no botão de login",
+  "esperado": "Exibir mensagem \"Invalid credentials\" e permanecer na tela de login"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login bem-sucedido com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "1. Acessar `/admin`<br>2. Informar usuário \"admin\"<br>3. Informar senha \"password\"<br>4. Clicar no botão de login",
+  "esperado": "Redirecionar para a lista de quartos, exibir quarto 101 do tipo Single e menu com Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Logout a partir do painel administrativo",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Estar autenticado no painel<br>2. Clicar no botão Logout",
+  "esperado": "Retornar à página inicial pública da pousada"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Acesso direto restrito após logout",
+  "tipo": "Negativo",
+  "criterio": "Critério 5",
+  "passos": "1. Realizar logout<br>2. Acessar diretamente a rota do painel (`/admin` ou `/admin/#/room`)",
+  "esperado": "Redirecionar ou exibir novamente a tela de login"
+ }
+]

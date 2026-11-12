@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 52.07,
+ "tokens": {
+  "total": 3662
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "imeout=TIMEOUT_MS)\n    expect(page.get_by_test_id(\"cart-total\")).to_have_text(\n        padrao_monetario(preco_unitario), timeout=TIMEOUT_MS\n    )\n\n\ndef test_CT04_rejeitar_tres_unidades_de_thor_hammer(page: Page) -> None:\n    abrir_produto(page, PRODUTO_RESTRITO)\n\n    adicionar_quantidade(page, 3)\n\n    expect(\n        page.get_by_text(MENSAGEM_THOR, exact=True)\n    ).to_be_visible(timeout=TIMEOUT_MS)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__]))\n```\ntokens used\n3,662\n"
+}

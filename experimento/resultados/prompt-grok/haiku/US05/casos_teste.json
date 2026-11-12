@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Login com usuário e senha vazios exibe erro e permanece na tela de login",
+  "tipo": "negativo",
+  "criterio": "AC1",
+  "passos": "Abrir /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\"; continua na tela de login"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Login com usuário admin e senha incorreta exibe erro",
+  "tipo": "negativo",
+  "criterio": "AC2",
+  "passos": "Abrir /admin; informar admin e \"senha-incorreta\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\"; continua na tela de login"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Login com usuário vazio e senha válida exibe erro",
+  "tipo": "borda",
+  "criterio": "AC1, AC2",
+  "passos": "Abrir /admin; usuário vazio e senha \"password\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\"; continua na tela de login"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Login com usuário inexistente e senha válida exibe erro",
+  "tipo": "borda",
+  "criterio": "AC2",
+  "passos": "Abrir /admin; informar \"usuario-inexistente\" e \"password\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\"; continua na tela de login"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Login com usuário admin e senha vazia exibe erro",
+  "tipo": "borda",
+  "criterio": "AC1, AC2",
+  "passos": "Abrir /admin; usuário \"admin\" e senha vazia; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\"; continua na tela de login"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Login válido leva à lista de quartos com quarto 101 Single",
+  "tipo": "positivo",
+  "criterio": "AC3",
+  "passos": "Abrir /admin; informar admin e password; clicar em Login",
+  "esperado": "URL /admin/rooms; linha com quarto 101 e tipo Single visível"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Menu exibe Rooms, Report, Branding e Messages após login",
+  "tipo": "positivo",
+  "criterio": "AC3",
+  "passos": "Fazer login com admin e password; verificar menu",
+  "esperado": "Links Rooms, Report, Branding e Messages visíveis"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "AC4",
+  "passos": "Fazer login; clicar em Logout",
+  "esperado": "URL igual a https://automationintesting.online/"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Acesso direto à lista de quartos após logout exibe tela de login",
+  "tipo": "negativo",
+  "criterio": "AC5",
+  "passos": "Fazer login; clicar em Logout; acessar /admin/rooms diretamente",
+  "esperado": "Campo Username e botão Login visíveis"
+ }
+]

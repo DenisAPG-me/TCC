@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 50.27,
+ "tokens": {
+  "total": 5015
+ },
+ "n_casos_extraidos": 17,
+ "tem_codigo": true,
+ "stderr_tail": "d_token, \"bookingdates\", \"checkin\")\n\n\ndef test_CT16_sem_checkout(booking, valid_token):\n    assert_missing_field(booking, valid_token, \"bookingdates\", \"checkout\")\n\n\ndef test_CT17_payload_vazio(booking, valid_token):\n    response = api_request(\n        \"PUT\",\n        f\"/booking/{booking['id']}\",\n        token=valid_token,\n        payload={},\n    )\n    assert_status(response, 400)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, \"-v\", *sys.argv[1:]]))\n```\ntokens used\n5,015\n"
+}

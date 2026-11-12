@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; deixar usuário e senha vazios; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com usuário admin e senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"senha_incorreta\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com senha preenchida e usuário vazio",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; deixar usuário vazio; informar senha \"password\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com senha em caixa diferente",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"PASSWORD\"; clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Login com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar /admin; informar usuário \"admin\"; informar senha \"password\"; clicar em Login",
+  "esperado": "Redireciona para /admin/rooms; lista exibe o quarto 101 do tipo Single; menu exibe Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Logout retorna à home pública",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Autenticar com admin/password; clicar em Logout",
+  "esperado": "URL volta para https://automationintesting.online/ sem formulário de login"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Acesso direto à lista de quartos após logout",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Autenticar com admin/password; clicar em Logout; acessar /admin/rooms diretamente",
+  "esperado": "Exibe a tela de login; a lista de quartos não é exibida"
+ }
+]

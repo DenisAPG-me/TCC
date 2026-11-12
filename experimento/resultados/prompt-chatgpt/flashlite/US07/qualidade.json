@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 2,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Claro mas repetitivo",
+  "estrutura": "Só uma fixture; asserções duplicadas, sem helpers",
+  "assercoes": "Compara campo a campo status e dados",
+  "espera": "Timeout; sufixo por timestamp",
+  "manutenibilidade": "BASE_URL e TIMEOUT constantes, URLs montadas inline"
+ }
+}

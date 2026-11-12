@@ -1,0 +1,378 @@
+{
+ "created": 1793385600.5185409,
+ "duration": 36.26748824119568,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 7,
+  "failed": 3,
+  "total": 10,
+  "collected": 10
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT01_login_com_campos_vazios_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 25
+    },
+    {
+     "nodeid": "script.py::test_CT02_login_com_usuario_preenchido_e_senha_vazia_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 31
+    },
+    {
+     "nodeid": "script.py::test_CT03_login_com_usuario_vazio_e_senha_preenchida_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 37
+    },
+    {
+     "nodeid": "script.py::test_CT04_login_com_senha_incorreta_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 43
+    },
+    {
+     "nodeid": "script.py::test_CT05_login_com_usuario_inexistente_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 49
+    },
+    {
+     "nodeid": "script.py::test_CT06_login_com_senha_em_caixa_diferente_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 55
+    },
+    {
+     "nodeid": "script.py::test_CT07_login_com_senha_com_espaco_extra_exibe_erro[chromium]",
+     "type": "Function",
+     "lineno": 61
+    },
+    {
+     "nodeid": "script.py::test_CT08_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_CT09_logout_retorna_a_pagina_inicial_publica[chromium]",
+     "type": "Function",
+     "lineno": 77
+    },
+    {
+     "nodeid": "script.py::test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login[chromium]",
+     "type": "Function",
+     "lineno": 83
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT01_login_com_campos_vazios_exibe_erro[chromium]",
+   "lineno": 25,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT01_login_com_campos_vazios_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.46912270004395396,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0859675999963656,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014956600032746792,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT02_login_com_usuario_preenchido_e_senha_vazia_exibe_erro[chromium]",
+   "lineno": 31,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT02_login_com_usuario_preenchido_e_senha_vazia_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09449070005211979,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.6349127000430599,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013313999981619418,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT03_login_com_usuario_vazio_e_senha_preenchida_exibe_erro[chromium]",
+   "lineno": 37,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT03_login_com_usuario_vazio_e_senha_preenchida_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11481059994548559,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1282112000044435,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014098700019530952,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT04_login_com_senha_incorreta_exibe_erro[chromium]",
+   "lineno": 43,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT04_login_com_senha_incorreta_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1138859000056982,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.5316623999970034,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013721599942073226,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT05_login_com_usuario_inexistente_exibe_erro[chromium]",
+   "lineno": 49,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT05_login_com_usuario_inexistente_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12360569997690618,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.5225204000016674,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013428700040094554,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT06_login_com_senha_em_caixa_diferente_exibe_erro[chromium]",
+   "lineno": 55,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT06_login_com_senha_em_caixa_diferente_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12132799997925758,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.5244906999869272,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.017242499976418912,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT07_login_com_senha_com_espaco_extra_exibe_erro[chromium]",
+   "lineno": 61,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT07_login_com_senha_com_espaco_extra_exibe_erro[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11545449995901436,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.6801778000080958,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012775099952705204,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT08_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+   "lineno": 67,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT08_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11324949993286282,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 6.5167171000503,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+     "lineno": 73,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\n  - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+      "lineno": 73,
+      "message": "in test_CT08_login_valido_exibe_lista_de_quartos_e_menu"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py:73: in test_CT08_login_valido_exibe_lista_de_quartos_e_menu\n    ).to_be_visible()\n      ^^^^^^^^^^^^^^^\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\") with timeout 5000ms\nE     - waiting for get_by_role(\"row\").filter(has_text=\"101\").filter(has_text=\"Single\")\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.013301200000569224,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT09_logout_retorna_a_pagina_inicial_publica[chromium]",
+   "lineno": 77,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT09_logout_retorna_a_pagina_inicial_publica[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11373590002767742,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.750885099987499,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+     "lineno": 81,
+     "message": "AssertionError: Page URL expected to be 're.compile('^https://automationintesting\\\\.online/?$')'\nActual value: https://automationintesting.online/admin/rooms \nCall log:\n  - Expect \"to_have_url\" with timeout 5000ms\n    4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin\"\n    - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\"\n    6 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin/rooms\"\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+      "lineno": 81,
+      "message": "in test_CT09_logout_retorna_a_pagina_inicial_publica"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py:81: in test_CT09_logout_retorna_a_pagina_inicial_publica\n    expect(page).to_have_url(re.compile(rf\"^{re.escape(BASE_URL)}/?$\"))\nE   AssertionError: Page URL expected to be 're.compile('^https://automationintesting\\\\.online/?$')'\nE   Actual value: https://automationintesting.online/admin/rooms \nE   Call log:\nE     - Expect \"to_have_url\" with timeout 5000ms\nE       4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin\"\nE       - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\"\nE       6 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin/rooms\"\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.014409300056286156,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login[chromium]",
+   "lineno": 83,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12412260007113218,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 11.83828679996077,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+     "lineno": 87,
+     "message": "AssertionError: Page URL expected to be 're.compile('^https://automationintesting\\\\.online/?$')'\nActual value: https://automationintesting.online/admin/rooms \nCall log:\n  - Expect \"to_have_url\" with timeout 5000ms\n    4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin\"\n    - waiting for \"https://automationintesting.online/\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\"\n    9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin/rooms\"\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- paragraph: PW-Room\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"200\"\n- paragraph: TV, Wifi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py",
+      "lineno": 87,
+      "message": "in test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US05\\script.py:87: in test_CT10_acesso_direto_a_lista_de_quartos_apos_logout_exibe_login\n    expect(page).to_have_url(re.compile(rf\"^{re.escape(BASE_URL)}/?$\"))\nE   AssertionError: Page URL expected to be 're.compile('^https://automationintesting\\\\.online/?$')'\nE   Actual value: https://automationintesting.online/admin/rooms \nE   Call log:\nE     - Expect \"to_have_url\" with timeout 5000ms\nE       4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin\"\nE       - waiting for \"https://automationintesting.online/\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\"\nE       9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin/rooms\"\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - paragraph: PW-Room\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"200\"\nE   - paragraph: TV, Wifi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.3022935000481084,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

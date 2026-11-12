@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros, docstring de cabecalho",
+  "estrutura": "dataclass, helpers, dados unicos",
+  "assercoes": "contador exato, confirmacao, linha com nome e assunto",
+  "espera": "timeouts e dados unicos, mas goto logo apos Logout gera corrida",
+  "manutenibilidade": "role/label e constantes; label Message e helper sair frageis"
+ }
+}

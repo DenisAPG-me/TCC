@@ -1,0 +1,6 @@
+[
+ "Tecnologia escolhida: Interface web, utilizando Python + pytest + pytest-playwright (fixture `page`), conforme os requisitos técnicos obrigatórios.",
+ "Seletores de elementos deduzidos com base em IDs e rótulos padrão de formulários de contato em aplicações web: campo nome (`input[name='name']` ou `get_by_label('Name')`), campo e-mail (`input[name='email']` ou `get_by_label('Email')`), campo telefone (`input[name='phone']` ou `get_by_label('Phone')`), campo assunto (`input[name='subject']` ou `get_by_label('Subject')`), campo mensagem (`textarea[name='description']` ou `get_by_label('Message')`), botão de envio (`button#submitContact` ou `get_by_role('button', name='Submit')`).",
+ "Mensagens de erro e confirmação exibidas após o envio utilizando os textos exatos especificados nos critérios de aceitação.",
+ "Dados de teste válidos: Nome = \"John Doe\", E-mail = \"john.doe@example.com\", Telefone = \"11987654321\", Assunto = \"Dúvida sobre reserva\", Mensagem = \"Gostaria de saber se há disponibilidade de vaga para o próximo final de semana.\"."
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 5,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "Nomes e mensagens claros",
+  "estrutura": "Fixtures token/booking, helpers, deepcopy",
+  "assercoes": "Compara corpo completo e confirma que reserva ficou inalterada",
+  "espera": "Timeout 30, dados únicos, limpeza",
+  "manutenibilidade": "Constantes, cleanup, independência"
+ }
+}

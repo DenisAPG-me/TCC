@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Visualizar e anotar contador de mensagens no painel",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Acessar página de login do admin preencher credenciais válidas entrar no painel e ler o número exibido ao lado de Messages",
+  "esperado": "O número de mensagens pendentes é exibido e capturado com sucesso"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Envio de formulário de contato com dados válidos pelo visitante",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Acessar a página inicial preencher nome assunto email telefone e mensagem no formulário de contato e clicar no botão de envio",
+  "esperado": "É exibida a mensagem de confirmação Thanks for getting in touch Nome!"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Incrementar contador de mensagens após envio",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Anotar contador inicial fazer login como admin verificar que o contador aumentou em uma unidade",
+  "esperado": "O contador ao lado de Messages é exatamente uma unidade maior que o anterior"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Exibir mensagem recém enviada na caixa de mensagens",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Fazer login como admin abrir a caixa de mensagens e verificar a presença da mensagem recém enviada",
+  "esperado": "A mensagem aparece na lista contendo o nome do remetente e o assunto informados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Restrição de acesso à caixa de mensagens após logout",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Fazer login como admin realizar logout tentar acessar diretamente a URL do painel administrativo",
+  "esperado": "O usuário é redirecionado para a página de login ou solicitado a se autenticar"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Envio de formulário de contato com campos obrigatórios vazios",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Acessar a página inicial e tentar enviar o formulário de contato sem preencher os campos obrigatórios",
+  "esperado": "Erros de validação são exibidos e a mensagem de sucesso não aparece"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Tentativa de login no painel com credenciais inválidas",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Acessar a página de login do admin preencher usuário ou senha incorretos e submeter",
+  "esperado": "O acesso é negado e uma mensagem de erro de autenticação é exibida"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Limite de caracteres no campo de assunto do contato",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Preencher o formulário de contato com um assunto de comprimento máximo extremo e enviar",
+  "esperado": "O sistema lida corretamente com o comprimento limite exibindo confirmação ou erro apropriado"
+ }
+]

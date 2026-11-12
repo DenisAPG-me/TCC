@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "AC1",
+  "passos": "POST /auth com admin / password123",
+  "esperado": "Status 200 e campo `token` não vazio"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticação com senha inválida",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "POST /auth com admin e senha incorreta",
+  "esperado": "Sem `token` na resposta e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Autenticação com usuário inexistente",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "POST /auth com usuário desconhecido e senha qualquer",
+  "esperado": "Sem `token` na resposta e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "CT04",
+  "titulo": "Autenticação com credenciais vazias",
+  "tipo": "Borda",
+  "criterio": "AC2",
+  "passos": "POST /auth com username e password vazios",
+  "esperado": "Sem `token` na resposta e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "CT05",
+  "titulo": "Atualização completa com novo nome e novo preço",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "Criar reserva, PUT completo com novo `firstname` e `totalprice` e token válido",
+  "esperado": "Status 200 e valores novos refletidos na resposta"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualização parcial apenas do sobrenome",
+  "tipo": "Positivo",
+  "criterio": "AC4",
+  "passos": "Criar reserva, PATCH apenas com `lastname` e token válido",
+  "esperado": "Status 200, `lastname` alterado e demais campos iguais aos originais"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Atualização completa sem token",
+  "tipo": "Negativo",
+  "criterio": "AC5",
+  "passos": "PUT completo em reserva existente sem header de autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Atualização completa com campos obrigatórios ausentes",
+  "tipo": "Negativo",
+  "criterio": "AC6",
+  "passos": "PUT com payload sem `firstname` e token válido",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Atualização completa com token inválido",
+  "tipo": "Negativo",
+  "criterio": "AC5 (variação)",
+  "passos": "PUT completo com token inexistente",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Atualização parcial sem token",
+  "tipo": "Negativo",
+  "criterio": "AC5 (variação)",
+  "passos": "PATCH apenas com `lastname` sem autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Atualização completa com preço zero",
+  "tipo": "Borda",
+  "criterio": "AC3 (limite)",
+  "passos": "PUT completo com `totalprice` = 0 e token válido",
+  "esperado": "Status 200 e `totalprice` = 0"
+ }
+]

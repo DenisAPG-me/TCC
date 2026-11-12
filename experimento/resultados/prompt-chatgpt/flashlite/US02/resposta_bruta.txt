@@ -1,0 +1,80 @@
+CASOS DE TESTE
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Adicionar produto disponivel com quantidade especifica | positivo | CA01 | Acessar a pagina do produto Claw Hammer, definir a quantidade para 3 e clicar em adicionar ao carrinho | Exibe a confirmacao Product added to shopping cart e o indicador do carrinho mostra 3 |
+| CT002 | Verificar calculo do total da linha e total do carrinho | positivo | CA02 | Adicionar 3 unidades de um produto ao carrinho e abrir a pagina do carrinho | O total da linha e igual ao preco unitario multiplicado por 3 e o total do carrinho e igual ao total da linha |
+| CT003 | Alterar quantidade do produto no carrinho | positivo | CA03 | Com o carrinho contendo 3 unidades de um produto, alterar a quantidade para 1 | O total do carrinho passa a ser igual ao preco unitario |
+| CT004 | Tentar adicionar mais de uma unidade de produto com restricao | negativo | CA04 | Acessar a pagina do produto Thor Hammer, definir a quantidade para 3 e tentar adicionar ao carrinho | Exibe a mensagem You can only have one Thor Hammer in the cart |
+
+SUPOSIÇÕES
+1. A URL base é `https://practicesoftwaretesting.com/`, conforme informado na User Story, e os caminhos das páginas seguem o padrão da aplicação (ex.: página inicial, página de detalhe do produto via listagem ou busca, e página do carrinho em `/checkout`).
+2. Os critérios de aceitação foram enumerados sequencialmente como `CA01`, `CA02`, `CA03` e `CA04` na ordem de apresentação da User Story.
+3. Para o teste `CT001`, assume-se que o produto "Claw Hammer" pode ser encontrado na listagem inicial ou via busca, que existe um campo ou botão de incremento/entrada de quantidade (input type number ou similar) e um botão "Add to cart", e que o indicador do carrinho é um elemento visível no cabeçalho.
+4. Para o teste `CT002`, assume-se que após adicionar 3 unidades, o usuário navega para a página do carrinho (clicando no indicador do carrinho) e que a tabela do carrinho exibe colunas para preço unitário, quantidade, total da linha e total geral.
+5. Para o teste `CT003`, assume-se que na página do carrinho a quantidade de um item pode ser editada diretamente em um campo de entrada ou via controles de quantidade, atualizando os totais dinamicamente ou após um evento de atualização.
+6. Para o teste `CT004`, assume-se que o produto "Thor Hammer" possui uma restrição de estoque ou regra de negócio que permite apenas 1 unidade por carrinho, exibindo a mensagem exata informada.
+7. Não há cenários de borda aplicáveis que não estejam cobertos pelos testes positivos e negativos definidos, justificando a ausência de casos específicos do tipo borda.
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+def test_CT001_adicionar_produto_com_quantidade_especifica(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    expect(page.get_by_text("Product added to shopping cart.")).to_be_visible()
+    expect(page.locator("[data-test='nav-cart']")).to_contain_text("3")
+
+
+def test_CT002_verificar_total_da_linha_e_do_carrinho(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    page.get_by_label("Quantity").fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    page.locator("[data-test='nav-cart']").click()
+    
+    unit_price_text = page.locator("data-test='product-price'").inner_text()
+    unit_price = float(unit_price_text.replace("$", "").strip())
+    
+    line_total_text = page.locator("data-test='line-total'").inner_text()
+    line_total = float(line_total_text.replace("$", "").strip())
+    
+    cart_total_text = page.locator("data-test='cart-total'").inner_text()
+    cart_total = float(cart_total_text.replace("$", "").strip())
+    
+    assert line_total == unit_price * 3
+    assert cart_total == line_total
+
+
+def test_CT003_alterar_quantidade_no_carrinho_para_um(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    page.get_by_label("Quantity").fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    page.locator("[data-test='nav-cart']").click()
+    
+    unit_price_text = page.locator("data-test='product-price'").inner_text()
+    unit_price = float(unit_price_text.replace("$", "").strip())
+    
+    quantity_input = page.locator("data-test='product-quantity'")
+    quantity_input.fill("1")
+    
+    cart_total_text = page.locator("data-test='cart-total'").inner_text()
+    cart_total = float(cart_total_text.replace("$", "").strip())
+    
+    assert cart_total == unit_price
+
+
+def test_CT004_tentar_adicionar_mais_de_uma_unidade_thor_hammer(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_text("Thor Hammer").first.click()
+    page.get_by_label("Quantity").fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    expect(page.get_by_text("You can only have one Thor Hammer in the cart.")).to_be_visible()
+```

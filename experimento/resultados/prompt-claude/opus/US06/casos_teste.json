@@ -1,0 +1,90 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Painel autenticado exibe contador numérico ao lado de Messages",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar /admin; informar admin / password; clicar em Login; localizar o link Messages",
+  "esperado": "Link Messages visível com um número inteiro ao lado, que pode ser anotado"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Envio válido do formulário de contato exibe confirmação com o nome",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher nome, e-mail, telefone, assunto e mensagem válidos; clicar em Submit",
+  "esperado": "Exibida a mensagem \"Thanks for getting in touch <nome>!\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Contador de Messages aumenta exatamente uma unidade após envio de visitante",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA2, CA3",
+  "passos": "Fazer login no painel; anotar o número de Messages; fazer logout; como visitante enviar mensagem válida; fazer login novamente; ler o número de Messages",
+  "esperado": "Número exibido é igual ao anotado + 1"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Mensagem recém-enviada aparece na caixa com nome e assunto",
+  "tipo": "Positivo",
+  "criterio": "CA2, CA4",
+  "passos": "Como visitante enviar mensagem com nome e assunto únicos; fazer login no painel; clicar em Messages",
+  "esperado": "Lista contém uma linha com o nome do remetente e o assunto informados"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Após logout, acesso direto à caixa de mensagens solicita login",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Fazer login no painel; clicar em Logout; acessar diretamente /admin/message",
+  "esperado": "Formulário de login (Username, Password e botão Login) é exibido e a lista de mensagens não é exibida"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Envio do formulário de contato vazio é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; clicar em Submit sem preencher campos",
+  "esperado": "Mensagens de erro de validação exibidas e nenhuma confirmação \"Thanks for getting in touch\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Envio com e-mail inválido é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher campos válidos exceto e-mail \"email-invalido\"; clicar em Submit",
+  "esperado": "Mensagem de erro de e-mail exibida e nenhuma confirmação"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Envio com assunto de 5 caracteres e mensagem de 20 caracteres é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher assunto com 5 caracteres e mensagem com 20 caracteres e demais campos válidos; clicar em Submit",
+  "esperado": "Exibida a mensagem \"Thanks for getting in touch <nome>!\""
+ },
+ {
+  "id": "CT09",
+  "titulo": "Envio com assunto de 4 caracteres é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Acessar a página inicial; preencher assunto com 4 caracteres e demais campos válidos; clicar em Submit",
+  "esperado": "Mensagem de erro sobre tamanho do assunto exibida e nenhuma confirmação"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Login com senha inválida não dá acesso ao contador de Messages",
+  "tipo": "Negativo",
+  "criterio": "CA1, CA5",
+  "passos": "Acessar /admin; informar admin / senha-errada; clicar em Login",
+  "esperado": "Formulário de login permanece visível e o link Messages não é exibido"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Acesso direto à caixa de mensagens sem autenticação solicita login",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Em sessão nova sem login acessar diretamente /admin/message",
+  "esperado": "Formulário de login é exibido e a lista de mensagens não é exibida"
+ }
+]

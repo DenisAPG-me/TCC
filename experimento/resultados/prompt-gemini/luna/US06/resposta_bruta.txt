@@ -1,0 +1,164 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Acessar painel e anotar contador de mensagens | Positivo | 1 | Abrir `/admin`, autenticar com a conta de demonstração e localizar o contador de Messages. | O painel autenticado exibe Messages com um contador numérico legível. |
+| CT02 | Enviar mensagem válida pelo formulário de contato | Positivo | 2 | Abrir a página inicial, preencher nome, e-mail, telefone, assunto e mensagem, e enviar. | A página confirma o envio com `Thanks for getting in touch <nome>!`. |
+| CT03 | Contador aumenta exatamente uma unidade após envio | Positivo | 1, 2, 3 | Autenticar e anotar o contador; enviar uma mensagem válida; autenticar novamente e comparar o contador. | O contador após o envio é igual ao valor anterior mais um. |
+| CT04 | Mensagem enviada aparece na caixa de mensagens | Positivo | 2, 4 | Enviar uma mensagem válida; abrir `/admin`, autenticar e abrir Messages. | A lista contém o nome e o assunto enviados. |
+| CT05 | Acesso direto à caixa de mensagens após logout solicita login | Negativo | 5 | Autenticar, fazer logout e abrir diretamente `/admin/messages`. | O painel apresenta a tela de login ou redireciona para ela; as mensagens não ficam acessíveis. |
+| CT06 | Formulário incompleto não confirma envio | Negativo | 2 | Abrir a página inicial, deixar campos obrigatórios vazios e tentar enviar. | O envio é bloqueado por validação e a confirmação de sucesso não aparece. |
+
+## SUPOSIÇÕES
+
+- A aplicação é uma interface web e a URL base padrão é `https://automationintesting.online/`.
+- A conta de demonstração usa usuário `admin` e senha `password`.
+- O formulário da página inicial tem campos acessíveis por rótulos `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão `Submit`.
+- Os campos do formulário são obrigatórios; o e-mail deve ter formato válido. Essa validação é presumida para o caso negativo CT06.
+- A confirmação de envio contém o nome exatamente no formato `Thanks for getting in touch <nome>!`.
+- A rota do painel é `/admin`, a caixa de mensagens é `/admin/messages` e o logout está disponível por um botão ou link `Logout`.
+- O acesso ao painel usa campos `Username` e `Password` e um botão `Login`.
+- A navegação para Messages é um link cujo texto começa com `Messages`; o contador numérico aparece no texto desse link.
+- Os testes geram nomes e assuntos únicos para localizar as mensagens criadas na execução.
+- O código pressupõe que cada envio válido aceito cria exatamente uma mensagem e incrementa o contador em uma unidade.
+
+```python
+import re
+import uuid
+
+import pytest
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+
+
+def unique_contact():
+    suffix = uuid.uuid4().hex[:8]
+    return {
+        "name": f"Visitante {suffix}",
+        "email": f"visitante.{suffix}@example.com",
+        "phone": f"1198765{suffix[:4]}",
+        "subject": f"Assunto {suffix}",
+        "message": f"Mensagem de teste {suffix}",
+    }
+
+
+def fill_and_submit_contact(page: Page, contact):
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(contact["name"])
+    page.get_by_label("Email").fill(contact["email"])
+    page.get_by_label("Phone").fill(contact["phone"])
+    page.get_by_label("Subject").fill(contact["subject"])
+    page.get_by_label("Message").fill(contact["message"])
+    page.get_by_role("button", name=re.compile(r"submit", re.I)).click()
+
+
+def login_admin(page: Page):
+    page.goto(f"{BASE_URL.rstrip('/')}/admin")
+    page.get_by_label("Username").fill(ADMIN_USERNAME)
+    page.get_by_label("Password").fill(ADMIN_PASSWORD)
+    page.get_by_role("button", name=re.compile(r"login", re.I)).click()
+
+
+def messages_link(page: Page):
+    return page.get_by_role("link", name=re.compile(r"^Messages\b", re.I))
+
+
+def message_count(page: Page) -> int:
+    link = messages_link(page)
+    expect(link).to_be_visible()
+    match = re.search(r"\d+", link.inner_text())
+    assert match, "O link Messages não exibe um contador numérico."
+    return int(match.group())
+
+
+def open_messages(page: Page):
+    page.goto(f"{BASE_URL.rstrip('/')}/admin")
+    if page.get_by_label("Username").count():
+        page.get_by_label("Username").fill(ADMIN_USERNAME)
+        page.get_by_label("Password").fill(ADMIN_PASSWORD)
+        page.get_by_role("button", name=re.compile(r"login", re.I)).click()
+    messages_link(page).click()
+
+
+def test_CT01_admin_can_view_messages_counter(page: Page):
+    login_admin(page)
+
+    expect(messages_link(page)).to_be_visible()
+    assert message_count(page) >= 0
+
+
+def test_CT02_valid_contact_submission_shows_confirmation(page: Page):
+    contact = unique_contact()
+    fill_and_submit_contact(page, contact)
+
+    expect(
+        page.get_by_text(
+            f"Thanks for getting in touch {contact['name']}!",
+            exact=True,
+        )
+    ).to_be_visible()
+
+
+def test_CT03_message_counter_increases_by_one_after_submission(page: Page):
+    login_admin(page)
+    before = message_count(page)
+
+    contact = unique_contact()
+    fill_and_submit_contact(page, contact)
+    expect(
+        page.get_by_text(
+            f"Thanks for getting in touch {contact['name']}!",
+            exact=True,
+        )
+    ).to_be_visible()
+
+    login_admin(page)
+    after = message_count(page)
+    assert after == before + 1
+
+
+def test_CT04_submitted_message_is_listed_with_name_and_subject(page: Page):
+    contact = unique_contact()
+    fill_and_submit_contact(page, contact)
+    expect(
+        page.get_by_text(
+            f"Thanks for getting in touch {contact['name']}!",
+            exact=True,
+        )
+    ).to_be_visible()
+
+    login_admin(page)
+    messages_link(page).click()
+
+    expect(page.get_by_text(contact["name"], exact=True)).to_be_visible()
+    expect(page.get_by_text(contact["subject"], exact=True)).to_be_visible()
+
+
+def test_CT05_direct_messages_access_after_logout_requires_login(page: Page):
+    login_admin(page)
+
+    logout = page.get_by_role("link", name=re.compile(r"logout", re.I))
+    if logout.count() == 0:
+        logout = page.get_by_role("button", name=re.compile(r"logout", re.I))
+    expect(logout).to_be_visible()
+    logout.click()
+
+    page.goto(f"{BASE_URL.rstrip('/')}/admin/messages")
+
+    login_prompt = page.get_by_label("Username")
+    expect(login_prompt).to_be_visible()
+    expect(page.get_by_label("Password")).to_be_visible()
+
+
+def test_CT06_incomplete_contact_form_does_not_show_success(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_role("button", name=re.compile(r"submit", re.I)).click()
+
+    expect(
+        page.get_by_text(re.compile(r"Thanks for getting in touch", re.I))
+    ).to_have_count(0)
+```

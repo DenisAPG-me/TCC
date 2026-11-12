@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 17.29,
+ "tokens": {
+  "total": 5868
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "  expect(\n        page.get_by_text(\"must be a well-formed email address\", exact=False)\n    ).to_be_visible()\n\n\ndef test_ct05_enviar_mensagem_valida(page: Page) -> None:\n    abrir_pagina(page)\n    preencher_formulario(page)\n    enviar_formulario(page)\n\n    expect(\n        page.get_by_text(\n            f\"Thanks for getting in touch {NOME_VALIDO}!\",\n            exact=True,\n        )\n    ).to_be_visible()\n    expect(page.get_by_text(ASSUNTO_VALIDO, exact=True)).to_be_visible()\n```\ntokens used\n5,868\n"
+}

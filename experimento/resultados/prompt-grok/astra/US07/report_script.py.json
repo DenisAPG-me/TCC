@@ -1,0 +1,209 @@
+{
+ "created": 1793428874.5881722,
+ "duration": 4.3943986892700195,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\astra\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_criar_reserva_com_todos_os_campos_validos",
+     "type": "Function",
+     "lineno": 108
+    },
+    {
+     "nodeid": "script.py::test_TC02_consultar_reserva_criada_pelo_identificador",
+     "type": "Function",
+     "lineno": 113
+    },
+    {
+     "nodeid": "script.py::test_TC03_consultar_identificador_inexistente",
+     "type": "Function",
+     "lineno": 119
+    },
+    {
+     "nodeid": "script.py::test_TC04_filtrar_por_nome_e_sobrenome_unicos",
+     "type": "Function",
+     "lineno": 125
+    },
+    {
+     "nodeid": "script.py::test_TC05_criar_e_consultar_com_deposito_nao_pago",
+     "type": "Function",
+     "lineno": 157
+    },
+    {
+     "nodeid": "script.py::test_TC06_criar_e_consultar_na_mudanca_de_ano",
+     "type": "Function",
+     "lineno": 163
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_criar_reserva_com_todos_os_campos_validos",
+   "lineno": 108,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_criar_reserva_com_todos_os_campos_validos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003477999707683921,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6324714999645948,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0010395999997854233,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_consultar_reserva_criada_pelo_identificador",
+   "lineno": 113,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_consultar_reserva_criada_pelo_identificador",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024530000519007444,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7587341000325978,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0008054999634623528,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_consultar_identificador_inexistente",
+   "lineno": 119,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC03_consultar_identificador_inexistente",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00029120000544935465,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5973390999715775,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0009108999511227012,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_filtrar_por_nome_e_sobrenome_unicos",
+   "lineno": 125,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC04_filtrar_por_nome_e_sobrenome_unicos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00023680005688220263,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7399432000238448,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.001200399943627417,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_criar_e_consultar_com_deposito_nao_pago",
+   "lineno": 157,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC05_criar_e_consultar_com_deposito_nao_pago",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00036529998760670424,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.8003440999891609,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0009003999875858426,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_criar_e_consultar_na_mudanca_de_ano",
+   "lineno": 163,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_criar_e_consultar_na_mudanca_de_ano",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00032600003760308027,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7718276000814512,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0008518999675288796,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

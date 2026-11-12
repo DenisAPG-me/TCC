@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "helpers e constantes de URL, sem parametrizacao",
+  "assercoes": "URL, mensagens e menu verificados",
+  "espera": "expect com auto-wait, sem sleep",
+  "manutenibilidade": "label/role bons mas row/cell e button Logout inexistentes"
+ }
+}

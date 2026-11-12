@@ -1,0 +1,93 @@
+{
+ "validos": [],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "1": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "2": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "3": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "4": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "5": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "6": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "7": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "8": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "9": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "10": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "11": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "12": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "13": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  },
+  "14": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "item nao e caso de teste (artefato de parse do casos_teste.json)"
+  }
+ },
+ "falhas": []
+}

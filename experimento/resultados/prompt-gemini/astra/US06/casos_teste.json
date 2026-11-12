@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Registrar o contador de mensagens",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Autenticar; localizar Messages; registrar seu contador.",
+  "esperado": "Contador visível, inteiro e não negativo, disponível para comparação posterior."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Confirmar o envio de uma mensagem válida",
+  "tipo": "Positivo",
+  "criterio": "2",
+  "passos": "Preencher todos os campos de contato com dados válidos; enviar.",
+  "esperado": "Exibe exatamente “Thanks for getting in touch \\<nome\\>!”."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Incrementar o contador após um envio",
+  "tipo": "Positivo",
+  "criterio": "1 e 3",
+  "passos": "Autenticar; registrar contador; sair; enviar uma mensagem; autenticar novamente; comparar.",
+  "esperado": "Contador final igual ao inicial mais um."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Exibir remetente e assunto na mesma mensagem",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Enviar mensagem com dados exclusivos; autenticar; abrir Messages; localizar a mensagem.",
+  "esperado": "Uma mesma linha apresenta o nome e o assunto enviados."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Exigir autenticação no acesso direto após logout",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Autenticar; abrir Messages; registrar URL; sair; acessar diretamente a URL registrada.",
+  "esperado": "Formulário de login visível e caixa de mensagens indisponível."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Preservar nome com acentos e apóstrofo na confirmação",
+  "tipo": "Borda",
+  "criterio": "2",
+  "passos": "Enviar contato válido com nome contendo acentos e apóstrofo.",
+  "esperado": "Confirmação mantém integralmente o nome informado."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Incrementar uma unidade em cada envio consecutivo",
+  "tipo": "Borda",
+  "criterio": "1 e 3",
+  "passos": "Registrar contador; realizar dois ciclos consecutivos de logout, envio e login; comparar após cada ciclo.",
+  "esperado": "Primeiro ciclo resulta em inicial + 1; segundo, em inicial + 2."
+ }
+]

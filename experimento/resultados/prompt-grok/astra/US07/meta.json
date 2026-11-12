@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 44.41,
+ "tokens": {
+  "total": 4164
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "_TC05_criar_e_consultar_com_deposito_nao_pago(api):\n    dados = novos_dados(deposito_pago=False)\n    identificador = criar_e_validar(api, dados)\n    consultar_e_validar(api, identificador, dados)\n\n\ndef test_TC06_criar_e_consultar_na_mudanca_de_ano(api):\n    dados = novos_dados(virada_de_ano=True)\n    identificador = criar_e_validar(api, dados)\n    consultar_e_validar(api, identificador, dados)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, \"-v\"]))\n```\ntokens used\n4,164\n"
+}

@@ -1,0 +1,138 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Enviar `admin / password123` para autenticação.",
+  "esperado": "Status 200 e token não vazio."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticar com usuário incorreto",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Enviar usuário incorreto e senha válida.",
+  "esperado": "Sem chave `token`; motivo `Bad credentials`."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Autenticar com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Enviar usuário válido e senha incorreta.",
+  "esperado": "Sem chave `token`; motivo `Bad credentials`."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Autenticar com ambos os valores incorretos",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Enviar usuário e senha incorretos.",
+  "esperado": "Sem chave `token`; motivo `Bad credentials`."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Autenticar com credenciais vazias",
+  "tipo": "Borda",
+  "criterio": "2",
+  "passos": "Enviar usuário e senha como strings vazias.",
+  "esperado": "Sem chave `token`; motivo `Bad credentials`."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualizar completamente nome e preço",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Criar reserva; autenticar; enviar todos os campos, alterando nome e preço.",
+  "esperado": "Status 200 e novos valores na resposta."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Atualizar parcialmente apenas sobrenome",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Criar reserva; autenticar; enviar somente novo sobrenome.",
+  "esperado": "Status 200; sobrenome alterado; demais campos preservados."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Atualizar completamente sem token",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Criar reserva; enviar atualização completa sem autenticação.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Atualizar parcialmente sem token",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Criar reserva; enviar atualização parcial sem autenticação.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "CT10",
+  "titulo": "Atualização completa sem nome",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, enviar payload completo omitindo `firstname`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT11",
+  "titulo": "Atualização completa sem sobrenome",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, enviar payload completo omitindo `lastname`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT12",
+  "titulo": "Atualização completa sem preço",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, enviar payload completo omitindo `totalprice`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT13",
+  "titulo": "Atualização completa sem indicador de depósito",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, enviar payload completo omitindo `depositpaid`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT14",
+  "titulo": "Atualização completa sem datas",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, enviar payload completo omitindo `bookingdates`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT15",
+  "titulo": "Atualização completa sem data de entrada",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, omitir apenas `bookingdates.checkin`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT16",
+  "titulo": "Atualização completa sem data de saída",
+  "tipo": "Negativo",
+  "criterio": "6",
+  "passos": "Com token válido, omitir apenas `bookingdates.checkout`.",
+  "esperado": "Status 400."
+ },
+ {
+  "id": "CT17",
+  "titulo": "Atualização completa com objeto vazio",
+  "tipo": "Borda",
+  "criterio": "6",
+  "passos": "Com token válido, enviar `{}` para uma reserva existente.",
+  "esperado": "Status 400."
+ }
+]

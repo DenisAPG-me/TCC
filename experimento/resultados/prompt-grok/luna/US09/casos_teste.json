@@ -1,0 +1,42 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Excluir sem token",
+  "tipo": "negativo",
+  "criterio": "1",
+  "passos": "Criar reserva; tentar excluí-la sem cabeçalho de token; consultá-la pelo ID.",
+  "esperado": "Exclusão retorna 403; consulta retorna 200."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Excluir com token inválido",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Criar reserva; tentar excluí-la com token inválido; consultá-la pelo ID.",
+  "esperado": "Exclusão retorna 403; a reserva continua existindo."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Excluir com token válido",
+  "tipo": "positivo",
+  "criterio": "3, 4",
+  "passos": "Criar reserva; obter token autenticando como admin; excluir a reserva; consultá-la pelo ID.",
+  "esperado": "Exclusão retorna 201; consulta retorna 404."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Excluir a mesma reserva novamente",
+  "tipo": "borda",
+  "criterio": "5",
+  "passos": "Criar duas reservas; excluir uma com token válido; tentar excluí-la novamente; consultar a outra.",
+  "esperado": "Segunda exclusão retorna 4xx; a outra reserva permanece consultável com status 200."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Listar por nome após exclusão",
+  "tipo": "positivo",
+  "criterio": "6",
+  "passos": "Criar reserva com nome único; excluí-la com token válido; listar reservas filtrando pelo primeiro e último nome.",
+  "esperado": "Lista retornada está vazia."
+ }
+]

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 50.73,
+ "tokens": {
+  "total": 4055
+ },
+ "n_casos_extraidos": 7,
+ "tem_codigo": true,
+ "stderr_tail": "\n    # Extensão proposta: comportamento não explicitado na User Story.\n    open_login(page)\n    submit_credentials(page, \"\", VALID_PASSWORD)\n    assert_invalid_credentials(page)\n    assert_still_on_login(page)\n\n\ndef test_TC07_login_com_senha_vazia(page: Page) -> None:\n    # Extensão proposta: comportamento não explicitado na User Story.\n    open_login(page)\n    submit_credentials(page, VALID_USERNAME, \"\")\n    assert_invalid_credentials(page)\n    assert_still_on_login(page)\n```\ntokens used\n4,055\n"
+}

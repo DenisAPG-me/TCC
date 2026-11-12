@@ -1,0 +1,17 @@
+[
+ "A tecnologia escolhida é Python, pytest e Playwright síncrono. Conforme os requisitos técnicos finais, utiliza-se também o plugin oficial pytest-playwright, que fornece a fixture `page` e gerencia o encerramento dos recursos. Essa exigência prevalece sobre a proibição anterior de plugins e a exigência de fixtures próprias.",
+ "O ambiente deve ter pytest, playwright, pytest-playwright e o Chromium do Playwright instalados. Salvo configuração externa, o plugin executa Chromium em modo headless. O arquivo pode ser executado com `pytest test_contato.py`.",
+ "Não houve acesso ao sistema nem execução dos testes. Os seletores e os textos não especificados são hipóteses a validar na implementação real.",
+ "CA1 a CA5 correspondem, respectivamente, aos cinco critérios numerados da User Story.",
+ "O formulário está disponível diretamente em `https://automationintesting.online/`, sem autenticação, CAPTCHA ou outras etapas. As credenciais são representadas pela constante `CREDENTIALS = None`.",
+ "Os campos têm rótulos acessíveis únicos e exatos `Name`, `Email`, `Phone`, `Subject` e `Message`. O botão de envio tem papel `button` e nome acessível único e exato `Submit`.",
+ "Para CA1, foram deduzidas as mensagens exatas `Name may not be blank`, `Email may not be blank`, `Phone may not be blank`, `Subject may not be blank` e `Message may not be blank`. Todas aparecem após um único envio vazio; mensagens adicionais são permitidas.",
+ "Os textos de tamanho são verificados exatamente como fornecidos. A mensagem de e-mail é verificada por substring, permitindo um prefixo com o nome do campo.",
+ "O agradecimento é um cabeçalho com o texto exato `Thanks for getting in touch <nome>!`. O assunto aparece em um elemento de texto visível próprio na confirmação.",
+ "Os limites são inclusivos. Os limites máximos e suas rejeições foram deduzidos das mensagens de CA2 e CA3, embora seus passos descrevam apenas entradas abaixo do mínimo.",
+ "Os campos permitem inserir valores acima dos limites e e-mail malformado; a validação do sistema exibe os textos esperados após o envio, sem bloqueio prévio por validação nativa do navegador.",
+ "Os dados são sintéticos: nome `Ana Teste`, e-mail `ana.teste@example.com`, telefone numérico e textos em português. Para medir bordas sem ambiguidades, usam-se caracteres ASCII repetidos. Assume-se que esses dados são aceitos e que o telefone é validado pelo comprimento.",
+ "Cada teste recebe uma página e um contexto isolados do plugin, abre a página inicial e preenche os cinco campos. Envios válidos podem persistir mensagens; assume-se um ambiente de testes que permite repetições sem bloqueio por duplicidade ou limite de envio.",
+ "Nenhum endpoint ou payload de API é presumido ou utilizado: os testes interagem exclusivamente com a interface.",
+ "O prazo de espera das asserções é de 10 segundos, e o de navegação é de 30 segundos."
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Busca por \"hammer\" lista somente produtos com \"hammer\" no nome",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial; buscar \"hammer\"; verificar a indicação da busca e os nomes listados",
+  "esperado": "A página indica busca por \"hammer\"; todos os nomes listados contêm \"hammer\"; ao menos um produto é listado"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Busca por \"HAMMER\" retorna os mesmos produtos da busca por \"hammer\"",
+  "tipo": "borda",
+  "criterio": "CA01",
+  "passos": "Buscar \"hammer\" e registrar os nomes; buscar \"HAMMER\" e registrar os nomes; comparar as listas",
+  "esperado": "As duas listas são idênticas e não vazias"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Busca por termo inexistente exibe mensagem e nenhum produto",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; buscar \"zzzzxx\"; verificar a mensagem e a ausência de produtos",
+  "esperado": "A mensagem \"There are no products found.\" fica visível; nenhum produto é listado"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Ordenação por preço crescente ordena os preços da página",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Abrir a página inicial; selecionar \"Price (Low - High)\"; ler os preços",
+  "esperado": "Os preços da página estão em ordem crescente; há ao menos 2 produtos"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Ordenação por preço crescente aplicada aos resultados de busca",
+  "tipo": "borda",
+  "criterio": "CA01, CA03",
+  "passos": "Buscar \"hammer\"; selecionar \"Price (Low - High)\"; ler nomes e preços",
+  "esperado": "Somente produtos com \"hammer\" são listados; os preços estão em ordem crescente"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Ordenação por nome Z a A ordena os nomes em ordem decrescente",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Abrir a página inicial; selecionar \"Name (Z - A)\"; ler os nomes",
+  "esperado": "Os nomes da página estão em ordem alfabética decrescente; há ao menos 2 produtos"
+ }
+]

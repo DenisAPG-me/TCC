@@ -1,0 +1,8 @@
+[
+ "A URL base é `https://practicesoftwaretesting.com/`; cada teste navega diretamente para ela.",
+ "A interface está em inglês e disponibiliza uma caixa de busca com rótulo ou placeholder “Search”, um botão “Search” e um seletor de ordenação acessível por rótulo ou nome.",
+ "O seletor de ordenação contém opções equivalentes a “Price (Low to High)” e “Name (Z to A)”.",
+ "Produtos são identificáveis por links com nomes acessíveis; seus preços aparecem como texto contendo valores numéricos. O contêiner de produto pode ser localizado por um elemento com papel `article`.",
+ "A indicação da busca contém o termo pesquisado. A ausência de produtos é representada pela mensagem especificada e pela inexistência de elementos de produto.",
+ "Os nomes e preços disponíveis podem variar; as verificações de ordenação usam os produtos retornados na própria página. Testes de ordenação pressupõem que existam pelo menos dois produtos."
+]

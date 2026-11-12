@@ -1,0 +1,293 @@
+{
+ "created": 1793378531.528703,
+ "duration": 19.882258415222168,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US09",
+ "environment": {},
+ "summary": {
+  "passed": 9,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_delete_without_token_returns_403_and_booking_remains",
+     "type": "Function",
+     "lineno": 49
+    },
+    {
+     "nodeid": "script.py::test_TC02_delete_with_invalid_token_returns_403_and_booking_remains",
+     "type": "Function",
+     "lineno": 58
+    },
+    {
+     "nodeid": "script.py::test_TC03_delete_with_valid_token_returns_201",
+     "type": "Function",
+     "lineno": 67
+    },
+    {
+     "nodeid": "script.py::test_TC04_get_deleted_booking_returns_404",
+     "type": "Function",
+     "lineno": 76
+    },
+    {
+     "nodeid": "script.py::test_TC05_delete_already_deleted_booking_returns_4xx_and_other_booking_unaffected",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_TC06_list_by_unique_name_is_empty_after_delete",
+     "type": "Function",
+     "lineno": 101
+    },
+    {
+     "nodeid": "script.py::test_TC07_delete_with_empty_token_returns_403_and_booking_remains",
+     "type": "Function",
+     "lineno": 115
+    },
+    {
+     "nodeid": "script.py::test_TC08_delete_nonexistent_booking_returns_4xx",
+     "type": "Function",
+     "lineno": 124
+    },
+    {
+     "nodeid": "script.py::test_TC09_delete_after_invalid_credentials_returns_403_and_booking_remains",
+     "type": "Function",
+     "lineno": 132
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_delete_without_token_returns_403_and_booking_remains",
+   "lineno": 49,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_delete_without_token_returns_403_and_booking_remains",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003456000704318285,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.811657699989155,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00013239996042102575,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_delete_with_invalid_token_returns_403_and_booking_remains",
+   "lineno": 58,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_delete_with_invalid_token_returns_403_and_booking_remains",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020070001482963562,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8198513999814168,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001813999842852354,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_delete_with_valid_token_returns_201",
+   "lineno": 67,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC03_delete_with_valid_token_returns_201",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020030001178383827,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.848196899984032,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011200003791600466,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_get_deleted_booking_returns_404",
+   "lineno": 76,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC04_get_deleted_booking_returns_404",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00023100001271814108,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3222570000216365,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011040002573281527,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_delete_already_deleted_booking_returns_4xx_and_other_booking_unaffected",
+   "lineno": 86,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC05_delete_already_deleted_booking_returns_4xx_and_other_booking_unaffected",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002808000426739454,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.769855299964547,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011950009502470493,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_list_by_unique_name_is_empty_after_delete",
+   "lineno": 101,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_list_by_unique_name_is_empty_after_delete",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00019059993792325258,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.909118999959901,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011999998241662979,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC07_delete_with_empty_token_returns_403_and_booking_remains",
+   "lineno": 115,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC07_delete_with_empty_token_returns_403_and_booking_remains",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00019649998284876347,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.7579272999428213,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00010990002192556858,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC08_delete_nonexistent_booking_returns_4xx",
+   "lineno": 124,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC08_delete_nonexistent_booking_returns_4xx",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0001908999402076006,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1973798999097198,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00010740000288933516,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC09_delete_after_invalid_credentials_returns_403_and_booking_remains",
+   "lineno": 132,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC09_delete_after_invalid_credentials_returns_403_and_booking_remains",
+    "script.py",
+    "US09",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00019350007642060518,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3703379000071436,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00012660003267228603,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

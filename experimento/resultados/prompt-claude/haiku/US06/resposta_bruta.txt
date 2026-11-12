@@ -1,0 +1,170 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Contador de Messages exibe número após login | Positivo | CA1 | Acessar /admin; informar usuário admin e senha password; clicar em Login; localizar o link Messages | Link Messages visível com número inteiro não negativo ao lado |
+| CT02 | Formulário de contato válido exibe confirmação com nome | Positivo | CA2 | Acessar página inicial; preencher nome, email, telefone, assunto e mensagem válidos; clicar em Submit | Texto "Thanks for getting in touch <nome>!" visível |
+| CT03 | Contador aumenta em uma unidade após envio de visitante | Positivo | CA1, CA3 | Logar como admin e anotar contador; enviar contato válido como visitante em outro contexto; logar como admin em nova sessão e ler contador | Contador posterior igual ao anotado + 1 |
+| CT04 | Mensagem recém-enviada aparece na caixa com nome e assunto | Positivo | CA4 | Enviar contato válido como visitante com nome e assunto únicos; logar como admin; clicar em Messages; localizar linha com nome e assunto | Linha da mensagem visível contendo nome e assunto informados |
+| CT05 | Caixa de mensagens exige login após logout | Negativo | CA5 | Logar como admin; clicar em Logout; acessar diretamente /admin/messages | Formulário de login (campo Username) visível e caixa não exibida |
+| CT06 | Formulário vazio não exibe confirmação | Negativo | CA2 | Acessar página inicial; clicar em Submit sem preencher campos | Formulário permanece visível e texto de confirmação ausente |
+| CT07 | Nome com acentos aparece corretamente na confirmação | Borda | CA2 | Acessar página inicial; preencher nome "José Conceição" e demais campos válidos; clicar em Submit | Texto "Thanks for getting in touch José Conceição!" visível |
+| CT08 | E-mail inválido não incrementa o contador | Negativo | CA3 | Logar como admin e anotar contador; enviar contato com e-mail inválido como visitante; aguardar carregamento; logar como admin em nova sessão e ler contador | Confirmação ausente e contador igual ao anotado antes |
+
+## SUPOSIÇÕES
+
+- Tecnologia de UI: Python + pytest + pytest-playwright (plugin oficial), usando as fixtures `page` e `browser` do plugin e `expect` de `playwright.sync_api`. Navegador headless é o padrão do plugin, então não há fixture própria de browser.
+- URL base: `https://automationintesting.online/` em constante `BASE_URL`. Painel em `{BASE_URL}admin` e caixa de mensagens em `{BASE_URL}admin/messages`.
+- Credenciais: `admin` / `password` (fornecidas na User Story).
+- Formulário de contato na página inicial com labels exatos `Name`, `Email`, `Phone`, `Subject` e `Message`, e botão `Submit`.
+- Dados válidos: e-mail `visitante.teste@example.com`, telefone `01234567890` (11 dígitos), mensagem com mais de 20 caracteres. Nome e assunto são gerados com sufixo UUID para garantir unicidade e rastreabilidade na caixa.
+- E-mail inválido de teste: `email-invalido`. Assume-se que o sistema rejeita esse valor pela validação do formulário.
+- Confirmação exibida após envio válido: texto exato `Thanks for getting in touch <nome>!`.
+- Tela de login do painel: campos com labels `Username` e `Password` e botão `Login`.
+- Após login, o link `Messages` contém o número do contador (ex.: "Messages 3" ou "Messages (3)"). O número é extraído pela primeira sequência de dígitos do texto.
+- Logout: link com nome `Logout` na barra de navegação do painel.
+- Caixa de mensagens: lista em formato de linhas (`role=row`), cada uma contendo nome e assunto do remetente. Acessível pelo link Messages.
+- Acesso direto a `/admin/messages` sem sessão exibe o formulário de login.
+- Visitante e administrador usam contextos de navegador separados (`browser.new_context()`), para que a sessão do admin não interfira no envio do visitante e para que o login do admin seja realmente novo.
+- Os testes compartilham o mesmo banco do sistema, por isso cada teste gera seus próprios dados e lê o contador antes e depois de suas ações.
+- Sem `time.sleep`, `skip` ou `xfail`. Sincronização feita por `expect` e `wait_for_load_state("networkidle")`.
+
+## SCRIPT
+
+```python
+import re
+import uuid
+
+from playwright.sync_api import Browser, Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_USUARIO = "admin"
+ADMIN_SENHA = "password"
+EMAIL_VALIDO = "visitante.teste@example.com"
+EMAIL_INVALIDO = "email-invalido"
+TELEFONE_VALIDO = "01234567890"
+MENSAGEM_VALIDA = "Gostaria de saber a disponibilidade de quartos para o proximo fim de semana."
+CONFIRMACAO = "Thanks for getting in touch"
+
+
+def gerar_nome_e_assunto() -> tuple[str, str]:
+    sufixo = uuid.uuid4().hex[:8]
+    return f"Visitante {sufixo}", f"Assunto {sufixo}"
+
+
+def preencher_contato(
+    page: Page,
+    nome: str,
+    assunto: str,
+    email: str = EMAIL_VALIDO,
+    mensagem: str = MENSAGEM_VALIDA,
+) -> None:
+    page.goto(BASE_URL)
+    page.get_by_label("Name", exact=True).fill(nome)
+    page.get_by_label("Email", exact=True).fill(email)
+    page.get_by_label("Phone", exact=True).fill(TELEFONE_VALIDO)
+    page.get_by_label("Subject", exact=True).fill(assunto)
+    page.get_by_label("Message", exact=True).fill(mensagem)
+    page.get_by_role("button", name="Submit").click()
+
+
+def enviar_contato_visitante(browser: Browser, nome: str, assunto: str) -> None:
+    contexto = browser.new_context()
+    visitante = contexto.new_page()
+    preencher_contato(visitante, nome, assunto)
+    expect(visitante.get_by_text(f"{CONFIRMACAO} {nome}!")).to_be_visible()
+    contexto.close()
+
+
+def fazer_login_admin(page: Page) -> None:
+    page.goto(f"{BASE_URL}admin")
+    page.get_by_label("Username", exact=True).fill(ADMIN_USUARIO)
+    page.get_by_label("Password", exact=True).fill(ADMIN_SENHA)
+    page.get_by_role("button", name="Login").click()
+
+
+def ler_contador_mensagens(page: Page) -> int:
+    texto = page.get_by_role("link", name=re.compile("Messages")).inner_text()
+    return int(re.search(r"\d+", texto).group())
+
+
+def ler_contador_em_nova_sessao(browser: Browser) -> int:
+    contexto = browser.new_context()
+    admin = contexto.new_page()
+    fazer_login_admin(admin)
+    contador = ler_contador_mensagens(admin)
+    contexto.close()
+    return contador
+
+
+def abrir_caixa_mensagens(page: Page) -> None:
+    page.get_by_role("link", name=re.compile("Messages")).click()
+
+
+def test_ct01_contador_messages_exibe_numero_apos_login(page: Page) -> None:
+    fazer_login_admin(page)
+    expect(page.get_by_role("link", name=re.compile("Messages"))).to_be_visible()
+    assert ler_contador_mensagens(page) >= 0
+
+
+def test_ct02_formulario_valido_exibe_confirmacao(page: Page) -> None:
+    nome, assunto = gerar_nome_e_assunto()
+    preencher_contato(page, nome, assunto)
+    expect(page.get_by_text(f"{CONFIRMACAO} {nome}!")).to_be_visible()
+
+
+def test_ct03_contador_aumenta_uma_unidade_apos_envio(page: Page, browser: Browser) -> None:
+    fazer_login_admin(page)
+    contador_antes = ler_contador_mensagens(page)
+
+    nome, assunto = gerar_nome_e_assunto()
+    enviar_contato_visitante(browser, nome, assunto)
+
+    assert ler_contador_em_nova_sessao(browser) == contador_antes + 1
+
+
+def test_ct04_mensagem_recem_enviada_aparece_na_caixa(page: Page, browser: Browser) -> None:
+    nome, assunto = gerar_nome_e_assunto()
+    enviar_contato_visitante(browser, nome, assunto)
+
+    fazer_login_admin(page)
+    abrir_caixa_mensagens(page)
+    linha = page.get_by_role("row").filter(has_text=nome).filter(has_text=assunto)
+    expect(linha).to_be_visible()
+
+
+def test_ct05_apos_logout_caixa_exige_login(page: Page) -> None:
+    fazer_login_admin(page)
+    page.get_by_role("link", name="Logout").click()
+    page.goto(f"{BASE_URL}admin/messages")
+    expect(page.get_by_label("Username", exact=True)).to_be_visible()
+
+
+def test_ct06_formulario_vazio_nao_exibe_confirmacao(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("button", name="Submit").click()
+    expect(page.get_by_label("Name", exact=True)).to_be_visible()
+    expect(page.get_by_text(CONFIRMACAO)).to_have_count(0)
+
+
+def test_ct07_nome_com_acentos_aparece_na_confirmacao(page: Page) -> None:
+    nome = "José Conceição"
+    _, assunto = gerar_nome_e_assunto()
+    preencher_contato(page, nome, assunto)
+    expect(page.get_by_text(f"{CONFIRMACAO} {nome}!")).to_be_visible()
+
+
+def test_ct08_email_invalido_nao_incrementa_contador(page: Page, browser: Browser) -> None:
+    fazer_login_admin(page)
+    contador_antes = ler_contador_mensagens(page)
+
+    nome, assunto = gerar_nome_e_assunto()
+    contexto = browser.new_context()
+    visitante = contexto.new_page()
+    preencher_contato(visitante, nome, assunto, email=EMAIL_INVALIDO)
+    visitante.wait_for_load_state("networkidle")
+    expect(visitante.get_by_text(CONFIRMACAO)).to_have_count(0)
+    contexto.close()
+
+    assert ler_contador_em_nova_sessao(browser) == contador_antes
+```

@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US09",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 35.5,
+ "tokens": {
+  "total": 3889
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "ser um objeto\"\n    assert before[0].get(\"bookingid\") == booking_id, (\n        \"Listagem inicial deve identificar a reserva criada\"\n    )\n\n    token = authenticate()\n    delete_response = delete_booking(booking_id, token)\n    assert_status(delete_response, 201)\n\n    after_response = api_request(\"GET\", \"/booking\", params=filters)\n    assert_status(after_response, 200)\n    assert after_response.json() == [], (\n        \"Listagem filtrada deve ficar vazia após a exclusão\"\n    )\n```\ntokens used\n3,889\n"
+}

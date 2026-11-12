@@ -1,0 +1,209 @@
+{
+ "created": 1793429999.9668987,
+ "duration": 4.489879846572876,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_criar_reserva_valida",
+     "type": "Function",
+     "lineno": 154
+    },
+    {
+     "nodeid": "script.py::test_ct02_consultar_reserva_criada",
+     "type": "Function",
+     "lineno": 163
+    },
+    {
+     "nodeid": "script.py::test_ct03_consultar_identificador_inexistente",
+     "type": "Function",
+     "lineno": 173
+    },
+    {
+     "nodeid": "script.py::test_ct04_filtrar_por_nome_e_sobrenome",
+     "type": "Function",
+     "lineno": 179
+    },
+    {
+     "nodeid": "script.py::test_ct05_preservar_preco_zero_e_deposito_falso",
+     "type": "Function",
+     "lineno": 188
+    },
+    {
+     "nodeid": "script.py::test_ct06_preservar_acentos_e_necessidades_vazias",
+     "type": "Function",
+     "lineno": 202
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_criar_reserva_valida",
+   "lineno": 154,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_criar_reserva_valida",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0004002000205218792,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6483139999909326,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0009064999176189303,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_consultar_reserva_criada",
+   "lineno": 163,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_consultar_reserva_criada",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002466000150889158,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7489112999755889,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0008192000677809119,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_consultar_identificador_inexistente",
+   "lineno": 173,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_consultar_identificador_inexistente",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002758000046014786,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5926306999754161,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0008149000350385904,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_filtrar_por_nome_e_sobrenome",
+   "lineno": 179,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_filtrar_por_nome_e_sobrenome",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00022789998911321163,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7691193999489769,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0008733000140637159,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_preservar_preco_zero_e_deposito_falso",
+   "lineno": 188,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_preservar_preco_zero_e_deposito_falso",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00022799998987466097,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7440336999716237,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.001102200010791421,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_preservar_acentos_e_necessidades_vazias",
+   "lineno": 202,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_preservar_acentos_e_necessidades_vazias",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00029399991035461426,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.9072707999730483,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.000915899989195168,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

@@ -1,0 +1,316 @@
+{
+ "created": 1793382006.5736728,
+ "duration": 11.581294059753418,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05",
+ "environment": {},
+ "summary": {
+  "failed": 4,
+  "passed": 1,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_login_vazio[chromium]",
+     "type": "Function",
+     "lineno": 6
+    },
+    {
+     "nodeid": "script.py::test_CT002_login_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 15
+    },
+    {
+     "nodeid": "script.py::test_CT003_login_valido_e_painel[chromium]",
+     "type": "Function",
+     "lineno": 30
+    },
+    {
+     "nodeid": "script.py::test_CT004_logout[chromium]",
+     "type": "Function",
+     "lineno": 52
+    },
+    {
+     "nodeid": "script.py::test_CT005_acesso_direto_apos_logout[chromium]",
+     "type": "Function",
+     "lineno": 71
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_login_vazio[chromium]",
+   "lineno": 6,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT001_login_vazio[chromium]",
+    "playwright",
+    "pytestmark",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4618172999471426,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2002760000759736,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+     "lineno": 14,
+     "message": "AttributeError: 'PageAssertions' object has no attribute 'to_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+      "lineno": 14,
+      "message": "in test_CT001_login_vazio"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py:14: in test_CT001_login_vazio\n    expect(page).to_url(re.compile(r\"/admin\"))\n    ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'PageAssertions' object has no attribute 'to_url'"
+   },
+   "teardown": {
+    "duration": 0.014395499951206148,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_login_senha_incorreta[chromium]",
+   "lineno": 15,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_login_senha_incorreta[chromium]",
+    "playwright",
+    "pytestmark",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10029229999054223,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.7337127999635413,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013471200014464557,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_login_valido_e_painel[chromium]",
+   "lineno": 30,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT003_login_valido_e_painel[chromium]",
+    "playwright",
+    "pytestmark",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10900769999716431,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.596802700078115,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+     "lineno": 46,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_text(\"Single\") resolved to 2 elements:\n    1) <p id=\"typeSingle\">Single</p> aka locator(\"#typeSingle\")\n    2) <option value=\"Single\">Single</option> aka locator(\"#type\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_text(\"Single\") with timeout 5000ms\n  - waiting for get_by_text(\"Single\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+      "lineno": 46,
+      "message": "in test_CT003_login_valido_e_painel"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py:46: in test_CT003_login_valido_e_painel\n    expect(room_type).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_text(\"Single\") resolved to 2 elements:\nE       1) <p id=\"typeSingle\">Single</p> aka locator(\"#typeSingle\")\nE       2) <option value=\"Single\">Single</option> aka locator(\"#type\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(\"Single\") with timeout 5000ms\nE     - waiting for get_by_text(\"Single\")"
+   },
+   "teardown": {
+    "duration": 0.013637399999424815,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_logout[chromium]",
+   "lineno": 52,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT004_logout[chromium]",
+    "playwright",
+    "pytestmark",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11374429997522384,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.210573900025338,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+     "lineno": 70,
+     "message": "AttributeError: 'PageAssertions' object has no attribute 'to_url'"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+      "lineno": 70,
+      "message": "in test_CT004_logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py:70: in test_CT004_logout\n    expect(page).to_url(re.compile(r\"^https://automationintesting\\.online/(?:index\\.html)?$\"))\n    ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'PageAssertions' object has no attribute 'to_url'"
+   },
+   "teardown": {
+    "duration": 0.01313900004606694,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_acesso_direto_apos_logout[chromium]",
+   "lineno": 71,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT005_acesso_direto_apos_logout[chromium]",
+    "playwright",
+    "pytestmark",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10069690004456788,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4586833000648767,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Page.goto: net::ERR_ABORTED at https://automationintesting.online/admin\nCall log:\n  - navigating to \"https://automationintesting.online/admin\", waiting until \"load\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+      "lineno": 89,
+      "message": "in test_CT005_acesso_direto_apos_logout"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 9903,
+      "message": "in goto"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 562,
+      "message": "in goto"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 157,
+      "message": "in goto"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py:89: in test_CT005_acesso_direto_apos_logout\n    page.goto(BASE_URL + \"admin\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:9903: in goto\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:562: in goto\n    return await self._main_frame.goto(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:157: in goto\n    await self._channel.send(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Page.goto: net::ERR_ABORTED at https://automationintesting.online/admin\nE   Call log:\nE     - navigating to \"https://automationintesting.online/admin\", waiting until \"load\""
+   },
+   "teardown": {
+    "duration": 0.2277602000394836,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Unknown pytest.mark.playwright - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html",
+   "category": "PytestUnknownMarkWarning",
+   "when": "collect",
+   "filename": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+   "lineno": 7
+  },
+  {
+   "message": "Unknown pytest.mark.playwright - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html",
+   "category": "PytestUnknownMarkWarning",
+   "when": "collect",
+   "filename": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+   "lineno": 16
+  },
+  {
+   "message": "Unknown pytest.mark.playwright - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html",
+   "category": "PytestUnknownMarkWarning",
+   "when": "collect",
+   "filename": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+   "lineno": 31
+  },
+  {
+   "message": "Unknown pytest.mark.playwright - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html",
+   "category": "PytestUnknownMarkWarning",
+   "when": "collect",
+   "filename": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+   "lineno": 53
+  },
+  {
+   "message": "Unknown pytest.mark.playwright - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html",
+   "category": "PytestUnknownMarkWarning",
+   "when": "collect",
+   "filename": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\flashlite\\US05\\script.py",
+   "lineno": 72
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

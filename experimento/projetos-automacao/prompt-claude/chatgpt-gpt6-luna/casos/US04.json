@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; enviar o formulário sem preencher campos",
+  "esperado": "São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar telefone abaixo do mínimo",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; preencher todos os campos; informar telefone com 10 caracteres; enviar",
+  "esperado": "É exibida a mensagem \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Enviar assunto e mensagem abaixo do mínimo",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; preencher os campos com dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar",
+  "esperado": "São exibidas as mensagens \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT04",
+  "titulo": "Enviar e-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Abrir a página inicial; preencher todos os campos com dados válidos, exceto e-mail \"bad\"; enviar",
+  "esperado": "É exibida a mensagem \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT05",
+  "titulo": "Enviar mensagem válida",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Abrir a página inicial; preencher todos os campos com dados válidos; enviar",
+  "esperado": "A confirmação contém \"Thanks for getting in touch Ana Silva!\" e o assunto \"Dúvida sobre reservas\""
+ }
+]

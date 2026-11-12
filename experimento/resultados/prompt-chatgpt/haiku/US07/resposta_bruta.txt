@@ -1,0 +1,158 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Criar reserva com dados válidos | positivo | CA01 | Enviar POST /booking com corpo válido e verificar status, bookingid e dados retornados | Status 200, bookingid inteiro e booking igual ao corpo enviado |
+| CT002 | Consultar reserva pelo identificador criado | positivo | CA02 | Criar reserva e executar GET /booking/{id} com o bookingid retornado | Status 200 e corpo igual aos dados enviados |
+| CT003 | Consultar identificador inexistente | negativo | CA03 | Executar GET /booking/99999999 | Status 404 |
+| CT004 | Consultar identificador zero | borda | CA03 | Executar GET /booking/0 | Status 404 |
+| CT005 | Listar por nome e sobrenome únicos | positivo | CA04 | Criar reserva e executar GET /booking com firstname e lastname da reserva | Status 200 e lista contendo o bookingid criado |
+| CT006 | Listar por nome e sobrenome inexistentes | negativo | CA04 | Executar GET /booking com firstname e lastname aleatórios não cadastrados | Status 200 e lista vazia |
+| CT007 | Criar reserva com total zero e depósito não pago | borda | CA01 | Enviar POST /booking com totalprice 0 e depositpaid false | Status 200 e booking igual ao corpo enviado |
+
+SUPOSIÇÕES
+
+1. Explícito na User Story: a história trata somente de API REST. Não há critérios de interface web, então não há testes de UI e as regras de Playwright/pytest-playwright não se aplicam. O arquivo usa pytest e requests.
+2. Inferido: como os critérios não têm identificadores, foram numerados na ordem de apresentação como CA01 (criação), CA02 (consulta por id), CA03 (id inexistente) e CA04 (listagem por nome e sobrenome).
+3. Inferido: endpoints `POST /booking`, `GET /booking/{id}`, `GET /booking?firstname=&lastname=`, `DELETE /booking/{id}` e `POST /auth`. Os nomes das rotas seguem a convenção pública da API Restful Booker, mas não foram verificados no sistema real.
+4. Inferido: o corpo usa as chaves `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` com `checkin` e `checkout` no formato AAAA-MM-DD, e `additionalneeds` (texto). A User Story cita os campos em português, mas não os nomes das chaves.
+5. Inferido: a resposta de criação tem status 200 e corpo `{"bookingid": <inteiro>, "booking": {...}}`, com `booking` idêntico ao corpo enviado. CT001, CT002, CT005 e CT007 dependem disso.
+6. Inferido: `GET /booking/{id}` retorna o objeto de reserva com os mesmos campos enviados. CT002 depende disso.
+7. Inferido: id inexistente retorna 404 (explícito no CA03 para 99999999). O id 0 também é tratado como inexistente. CT004 depende dessa dedução.
+8. Inferido: a listagem filtrada retorna uma lista de objetos com `bookingid`, e um filtro sem correspondência retorna lista vazia. CT005 e CT006 dependem disso. Os filtros são tratados como sensíveis a maiúsculas e minúsculas, e os nomes gerados usam a mesma grafia.
+9. Inferido: nomes únicos são gerados com 10 letras minúsculas aleatórias, com a primeira em maiúscula. A chance de colisão é desprezível, mas não é garantida.
+10. Inferido: credenciais de teste públicas `admin` / `password123` para `POST /auth`, e token enviado no cabeçalho `Cookie: token=...` para o `DELETE`, que deve retornar 201. A limpeza das reservas criadas depende disso. Se a autenticação mudar, a falha aparece como erro de teardown.
+11. Borda não explícita: CT007 supõe que `totalprice` 0 e `depositpaid` false são aceitos. Se o sistema rejeitar esses valores, o teste falhará e indicará a divergência.
+12. Não coberto: cenários negativos de corpo inválido ou campos ausentes não foram incluídos, porque a User Story não define o comportamento esperado para eles. Também não há testes de atualização ou exclusão além da limpeza.
+13. Pré-condições externas: a API pública precisa estar disponível e aceitar requisições anônimas de criação e consulta. Reservas criadas por outros usuários não são controladas pelo arquivo.
+14. Timeout explícito de 15 segundos em todas as requisições. Não há pausas fixas.
+15. O código é executável, mas não foi verificado contra o sistema real. Pode ser necessário ajustar as chaves, rotas, credenciais ou valores inferidos antes da execução real.
+
+```python
+import random
+import string
+
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 15
+AUTH_CREDENTIALS = {"username": "admin", "password": "password123"}
+JSON_HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+INEXISTENT_BOOKING_ID = 99999999
+ZERO_BOOKING_ID = 0
+VALID_BOOKING_DATES = {"checkin": "2026-01-10", "checkout": "2026-01-15"}
+
+
+def random_word(size=10):
+    return "".join(random.choices(string.ascii_lowercase, k=size)).capitalize()
+
+
+def build_payload(totalprice=150, depositpaid=True):
+    return {
+        "firstname": random_word(),
+        "lastname": random_word(),
+        "totalprice": totalprice,
+        "depositpaid": depositpaid,
+        "bookingdates": dict(VALID_BOOKING_DATES),
+        "additionalneeds": "Breakfast",
+    }
+
+
+def create_booking(payload):
+    return requests.post(f"{BASE_URL}/booking", json=payload, headers=JSON_HEADERS, timeout=TIMEOUT)
+
+
+def create_tracked_booking(payload, created_ids):
+    response = create_booking(payload)
+    assert response.status_code == 200, response.text
+    booking_id = response.json()["bookingid"]
+    created_ids.append(booking_id)
+    return booking_id
+
+
+@pytest.fixture(scope="session")
+def auth_token():
+    response = requests.post(f"{BASE_URL}/auth", json=AUTH_CREDENTIALS, headers=JSON_HEADERS, timeout=TIMEOUT)
+    assert response.status_code == 200, response.text
+    token = response.json().get("token")
+    assert token, response.text
+    return token
+
+
+@pytest.fixture
+def created_ids(auth_token):
+    ids = []
+    yield ids
+    for booking_id in ids:
+        response = requests.delete(
+            f"{BASE_URL}/booking/{booking_id}",
+            headers={"Cookie": f"token={auth_token}"},
+            timeout=TIMEOUT,
+        )
+        assert response.status_code == 201, response.text
+
+
+def test_CT001_criar_reserva_com_dados_validos_retorna_200_e_dados_gravados(created_ids):
+    payload = build_payload()
+    response = create_booking(payload)
+    assert response.status_code == 200, response.text
+    body = response.json()
+    created_ids.append(body["bookingid"])
+    assert isinstance(body["bookingid"], int)
+    assert body["booking"] == payload
+
+
+def test_CT002_consultar_reserva_por_id_retorna_200_e_todos_os_campos(created_ids):
+    payload = build_payload()
+    booking_id = create_tracked_booking(payload, created_ids)
+    response = requests.get(f"{BASE_URL}/booking/{booking_id}", headers=JSON_HEADERS, timeout=TIMEOUT)
+    assert response.status_code == 200, response.text
+    assert response.json() == payload
+
+
+def test_CT003_consultar_identificador_inexistente_retorna_404():
+    response = requests.get(
+        f"{BASE_URL}/booking/{INEXISTENT_BOOKING_ID}", headers=JSON_HEADERS, timeout=TIMEOUT
+    )
+    assert response.status_code == 404
+
+
+def test_CT004_consultar_identificador_zero_retorna_404():
+    response = requests.get(f"{BASE_URL}/booking/{ZERO_BOOKING_ID}", headers=JSON_HEADERS, timeout=TIMEOUT)
+    assert response.status_code == 404
+
+
+def test_CT005_listar_por_nome_e_sobrenome_unicos_contem_id_criado(created_ids):
+    payload = build_payload()
+    booking_id = create_tracked_booking(payload, created_ids)
+    response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": payload["firstname"], "lastname": payload["lastname"]},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200, response.text
+    booking_ids = [item["bookingid"] for item in response.json()]
+    assert booking_id in booking_ids
+
+
+def test_CT006_listar_por_nome_e_sobrenome_inexistentes_retorna_lista_vazia():
+    response = requests.get(
+        f"{BASE_URL}/booking",
+        params={"firstname": random_word(), "lastname": random_word()},
+        headers=JSON_HEADERS,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200, response.text
+    assert response.json() == []
+
+
+def test_CT007_criar_reserva_com_total_zero_e_deposito_nao_pago_retorna_200_e_dados_gravados(created_ids):
+    payload = build_payload(totalprice=0, depositpaid=False)
+    response = create_booking(payload)
+    assert response.status_code == 200, response.text
+    body = response.json()
+    created_ids.append(body["bookingid"])
+    assert body["booking"] == payload
+```

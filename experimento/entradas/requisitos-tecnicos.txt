@@ -1,0 +1,9 @@
+
+REQUISITOS TÉCNICOS OBRIGATÓRIOS (em caso de conflito com instruções anteriores, estes requisitos prevalecem):
+- Testes de UI usam o plugin oficial pytest-playwright e recebem a fixture `page` (e, se precisarem, `context`/`browser`) do próprio plugin.
+- É proibido criar navegador com `sync_playwright()` e é proibido criar fixture própria de browser/page.
+- As asserções de UI usam `expect` de `playwright.sync_api`.
+- Dê preferência a locators recomendados: `get_by_role`, `get_by_label`, `get_by_text`, `get_by_test_id`.
+- Nada de `time.sleep`.
+- A base URL vem de uma constante no topo do arquivo ou da opção `--base-url`.
+- Testes de API usam pytest + requests, sem mudança.

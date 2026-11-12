@@ -1,0 +1,222 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Registrar o contador inicial | positivo | 1 | Fazer login; localizar o contador de Messages; registrar seu valor. | O contador está visível e contém um inteiro não negativo, disponível para comparação. |
+| TC02 | Confirmar envio válido | positivo | 2 | Abrir a página inicial; preencher o contato com dados válidos; enviar. | Aparece exatamente “Thanks for getting in touch \<nome\>!”. |
+| TC03 | Incrementar o contador após um envio | positivo | 1, 2 e 3 | Fazer login; registrar o contador; sair; enviar um contato; fazer login novamente; comparar. | O contador passa de N para N+1. |
+| TC04 | Exibir remetente e assunto na caixa de mensagens | positivo | 2 e 4 | Enviar contato com dados únicos; fazer login; abrir Messages; localizar a mensagem. | Uma mesma linha apresenta o nome e o assunto enviados. |
+| TC05 | Bloquear acesso direto após logout | negativo | 5 | Fazer login; abrir Messages; sair; navegar diretamente para a caixa. | O formulário de login é exibido. |
+| TC06 | Bloquear acesso direto sem autenticação prévia | negativo | 5 — extensão assumida | Em contexto sem autenticação, navegar diretamente para a caixa. | O formulário de login é exibido. |
+| TC07 | Preservar nome com acentos e espaços | borda | 2 e 4 | Enviar contato com nome composto acentuado; verificar confirmação; fazer login; localizar a mensagem. | A confirmação e a linha da mensagem preservam o nome informado, incluindo acentos e espaços. |
+
+SUPOSIÇÕES
+
+- Apenas a User Story foi utilizada. O código não foi executado nem validado contra o sistema; URLs adicionais, seletores e estrutura visual abaixo são hipóteses que precisarão ser ajustadas.
+- Por prevalência dos requisitos técnicos, são necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, além do navegador instalado pelo Playwright. O arquivo pode ser salvo como `test_messages.py` e executado com `pytest test_messages.py`.
+- A URL base está na constante `BASE_URL`. A página inicial fica em `/`, o painel em `/admin` e a caixa de mensagens, por suposição, em `/admin/messages`.
+- O login possui campos com labels acessíveis exatos `Username` e `Password` e botão `Login`. As credenciais são `admin` / `password`.
+- Após o login, existe um link cujo nome acessível começa com `Messages`. Seu contador é um elemento filho com `data-testid="message-count"`, contendo somente um inteiro não negativo, possivelmente cercado por espaços.
+- O logout usa um botão acessível chamado `Logout` e exibe o formulário de login. O acesso direto sem sessão também exibe esse formulário, sem exigir uma URL específica de redirecionamento.
+- O contato possui labels acessíveis exatos `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão `Submit`. E-mail, telefone e corpo são os “dados válidos” inferidos da história.
+- E-mails no domínio `example.com`, telefone `11987654321` e os textos gerados no código são aceitos. Não há CAPTCHA nem outra etapa de envio.
+- Nomes compostos com acentos são válidos e preservados. TC07 verifica essa borda de representação; limites mínimo e máximo de tamanho não foram especificados.
+- A confirmação é um elemento visível com o texto exato definido no critério 2.
+- A caixa utiliza linhas com papel acessível `row`; nome e assunto aparecem como textos exatos em elementos da mesma linha. A mensagem enviada fica disponível sem paginação, busca ou filtros adicionais.
+- O contador aumenta uma unidade por envio. Durante TC03, nenhum outro usuário envia, remove ou altera mensagens; o login não modifica o contador.
+- Atualizações de interface e persistência tornam-se visíveis em até 15 segundos, sem necessidade de recarregamento manual.
+- Cada teste recebe `page` do plugin em contexto isolado, sem autenticação previamente carregada, e cria seus próprios dados. Os testes devem ser executados sequencialmente em ambiente dedicado.
+- TC06 estende o critério 5 à ausência inicial de sessão. Não se presumem regras para senha inválida, campos obrigatórios ou limites de tamanho, pois a história não define seus resultados esperados.
+- Os testes deixam as mensagens criadas no ambiente: a história não fornece operação de exclusão ou limpeza.
+
+```python
+import re
+from uuid import uuid4
+
+import pytest
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://automationintesting.online"
+ADMIN_PATH = "/admin"
+MESSAGES_PATH = "/admin/messages"
+UI_TIMEOUT_MS = 15_000
+
+pytestmark = pytest.mark.browser_context_args(
+    storage_state={"cookies": [], "origins": []}
+)
+
+
+def open_path(page: Page, path: str) -> None:
+    page.goto(f"{BASE_URL.rstrip('/')}{path}")
+
+
+def messages_link(page: Page):
+    return page.get_by_role(
+        "link", name=re.compile(r"^Messages\b")
+    )
+
+
+def message_counter(page: Page):
+    return messages_link(page).get_by_test_id("message-count")
+
+
+def expect_login_form(page: Page) -> None:
+    expect(page.get_by_label("Username", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+    expect(page.get_by_label("Password", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+    expect(page.get_by_role("button", name="Login", exact=True)).to_be_visible(
+        timeout=UI_TIMEOUT_MS
+    )
+
+
+def login(page: Page) -> None:
+    open_path(page, ADMIN_PATH)
+    expect_login_form(page)
+    page.get_by_label("Username", exact=True).fill("admin")
+    page.get_by_label("Password", exact=True).fill("password")
+    page.get_by_role("button", name="Login", exact=True).click()
+    expect(messages_link(page)).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def logout(page: Page) -> None:
+    page.get_by_role("button", name="Logout", exact=True).click()
+    expect_login_form(page)
+
+
+def read_counter(page: Page) -> int:
+    counter = message_counter(page)
+    expect(counter).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(counter).to_have_text(
+        re.compile(r"^\s*[0-9]+\s*$"),
+        timeout=UI_TIMEOUT_MS,
+    )
+    return int(counter.inner_text().strip())
+
+
+def make_contact(case_id: str, accented: bool = False) -> dict:
+    token = uuid4().hex[:12]
+    name = (
+        f"João da Conceição {token}"
+        if accented
+        else f"Visitante Teste {token}"
+    )
+    return {
+        "name": name,
+        "email": f"visitante.{token}@example.com",
+        "phone": "11987654321",
+        "subject": f"Consulta {case_id} {token}",
+        "message": (
+            "Olá, gostaria de receber informações sobre a disponibilidade "
+            f"de quartos para duas pessoas. Referência {token}."
+        ),
+    }
+
+
+def submit_contact(page: Page, contact: dict) -> None:
+    open_path(page, "/")
+    page.get_by_label("Name", exact=True).fill(contact["name"])
+    page.get_by_label("Email", exact=True).fill(contact["email"])
+    page.get_by_label("Phone", exact=True).fill(contact["phone"])
+    page.get_by_label("Subject", exact=True).fill(contact["subject"])
+    page.get_by_label("Message", exact=True).fill(contact["message"])
+    page.get_by_role("button", name="Submit", exact=True).click()
+
+    expect(
+        page.get_by_text(
+            f"Thanks for getting in touch {contact['name']}!",
+            exact=True,
+        )
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def open_messages(page: Page) -> None:
+    messages_link(page).click()
+    expect(page).to_have_url(
+        re.compile(
+            rf"^{re.escape(BASE_URL.rstrip('/') + MESSAGES_PATH)}/?"
+            rf"(?:[?#].*)?$"
+        ),
+        timeout=UI_TIMEOUT_MS,
+    )
+
+
+def expect_contact_in_list(page: Page, contact: dict) -> None:
+    row = page.get_by_role("row").filter(
+        has=page.get_by_text(contact["subject"], exact=True)
+    )
+    expect(row).to_have_count(1, timeout=UI_TIMEOUT_MS)
+    expect(row).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        row.get_by_text(contact["name"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        row.get_by_text(contact["subject"], exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def test_TC01_registrar_contador_inicial(page: Page) -> None:
+    login(page)
+    initial_count = read_counter(page)
+
+    # Confirma que o valor registrado corresponde ao exibido.
+    expect(message_counter(page)).to_have_text(
+        re.compile(rf"^\s*{initial_count}\s*$"),
+        timeout=UI_TIMEOUT_MS,
+    )
+
+
+def test_TC02_confirmar_envio_valido(page: Page) -> None:
+    contact = make_contact("TC02")
+    submit_contact(page, contact)
+
+
+def test_TC03_incrementar_contador_apos_envio(page: Page) -> None:
+    login(page)
+    initial_count = read_counter(page)
+    logout(page)
+
+    contact = make_contact("TC03")
+    submit_contact(page, contact)
+
+    login(page)
+    expect(message_counter(page)).to_have_text(
+        re.compile(rf"^\s*{initial_count + 1}\s*$"),
+        timeout=UI_TIMEOUT_MS,
+    )
+
+
+def test_TC04_exibir_remetente_e_assunto(page: Page) -> None:
+    contact = make_contact("TC04")
+    submit_contact(page, contact)
+
+    login(page)
+    open_messages(page)
+    expect_contact_in_list(page, contact)
+
+
+def test_TC05_bloquear_acesso_direto_apos_logout(page: Page) -> None:
+    login(page)
+    open_messages(page)
+    logout(page)
+
+    open_path(page, MESSAGES_PATH)
+    expect_login_form(page)
+
+
+def test_TC06_bloquear_acesso_sem_autenticacao(page: Page) -> None:
+    open_path(page, MESSAGES_PATH)
+    expect_login_form(page)
+
+
+def test_TC07_preservar_nome_com_acentos_e_espacos(page: Page) -> None:
+    contact = make_contact("TC07", accented=True)
+    submit_contact(page, contact)
+
+    login(page)
+    open_messages(page)
+    expect_contact_in_list(page, contact)
+```

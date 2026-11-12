@@ -1,0 +1,118 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Novo caso valido"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Novo caso valido"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT006_endereco_campos_vazios_bloqueia_avanco",
+   "categoria": "outro",
+   "nota": "select_option(value=\"\") em opcao placeholder desabilitada"
+  },
+  {
+   "teste": "test_CT007_endereco_sem_cep_bloqueia_avanco",
+   "categoria": "dado de teste inventado",
+   "nota": "Pais \"Netherlands\" inexistente na lista"
+  },
+  {
+   "teste": "test_CT008_endereco_completo_permite_avancar",
+   "categoria": "dado de teste inventado",
+   "nota": "Pais \"Netherlands\" inexistente na lista"
+  },
+  {
+   "teste": "test_CT009_pagamento_cartao_credito_finaliza_pedido",
+   "categoria": "dado de teste inventado",
+   "nota": "Pais \"Netherlands\" inexistente na lista"
+  }
+ ]
+}

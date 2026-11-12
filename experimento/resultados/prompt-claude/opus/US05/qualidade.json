@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nota 4/5 conforme rubrica C",
+  "estrutura": "nota 4/5 conforme rubrica C",
+  "assercoes": "nota 5/5 conforme rubrica C",
+  "espera": "nota 4/5 conforme rubrica C",
+  "manutenibilidade": "nota 4/5 conforme rubrica C"
+ }
+}

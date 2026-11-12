@@ -1,0 +1,9 @@
+[
+ "A API de autenticação é `POST /auth`, com JSON contendo `username` e `password`; sucesso retorna `token` e falha retorna `reason`.",
+ "A criação de reservas é `POST /booking`; a resposta contém `bookingid`.",
+ "Atualização completa usa `PUT /booking/{bookingid}`; atualização parcial usa `PATCH /booking/{bookingid}`.",
+ "O token é enviado no cookie `token`.",
+ "O payload de reserva usa `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin` e `checkout`) e `additionalneeds`.",
+ "Para CT06, `bookingdates` é tratado como campo obrigatório e sua omissão deve produzir status 400.",
+ "Cada teste cria sua própria reserva para manter os dados isolados. O script não depende de seletores de UI, pois a história descreve uma API REST."
+]

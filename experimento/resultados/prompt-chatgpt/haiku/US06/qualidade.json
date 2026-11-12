@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes descritivos e tipagem",
+  "estrutura": "helpers e unique_text, sem fixtures",
+  "assercoes": "asserts de contagem, texto e ausencia",
+  "espera": "networkidle (instavel) e sem sleep fixo",
+  "manutenibilidade": "constantes, mas /admin/messages errado e label Message inexistente"
+ }
+}

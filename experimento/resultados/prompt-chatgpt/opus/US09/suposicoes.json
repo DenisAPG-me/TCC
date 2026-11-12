@@ -1,0 +1,15 @@
+[
+ "1. Explícito na User Story: URL base `https://restful-booker.herokuapp.com`, credenciais `admin` / `password123`, e os status 403, 200, 201, 404 e 4xx dos critérios. Os critérios não possuem identificadores; foram mapeados na ordem de apresentação: critério 1 = CA01, 2 = CA02, 3 = CA03, 4 = CA04, 5 = CA05, 6 = CA06.",
+ "2. Inferido: a autenticação é feita por `POST /auth` com JSON `{\"username\", \"password\"}`, retornando 200 e corpo `{\"token\": \"<valor>\"}`. Afeta CT004 a CT007 e a limpeza.",
+ "3. Inferido: o token é enviado no cabeçalho `Cookie: token=<valor>`. Nenhum cabeçalho `Authorization` é enviado nos testes. Afeta todos os casos.",
+ "4. Inferido: a criação usa `POST /booking` com JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout` em `AAAA-MM-DD`) e `additionalneeds`. A resposta é 200 com `{\"bookingid\": <int>, \"booking\": {...}}`. Afeta todos os casos.",
+ "5. Inferido: `GET /booking/{id}` retorna 200 e os mesmos campos enviados na criação. \"Continua consultável/existindo\" foi verificado como status 200 e corpo igual ao payload criado. Afeta CT001, CT002, CT003 e CT006.",
+ "6. Inferido: a exclusão usa `DELETE /booking/{id}`, e a listagem filtrada usa `GET /booking?firstname=...&lastname=...`, retornando uma lista JSON de objetos com `bookingid`. Afeta CT004 a CT007.",
+ "7. Explícito apenas como \"status de erro 4xx\": o status exato da segunda exclusão não é especificado. Por isso CT006 verifica somente a faixa 400 a 499. \"Nenhuma outra reserva é afetada\" foi interpretado como uma reserva de controle, criada no mesmo teste, que permanece com 200 e dados inalterados.",
+ "8. Inferido: CT003, com token vazio, é um caso de borda derivado de \"token inválido\" (CA02). O status 403 esperado decorre desse critério e não de regra adicional.",
+ "9. Inferido: o nome único de CT007 é obtido com sufixo `uuid4` em `firstname` e `lastname`. Assume-se que o filtro reflete a criação e a exclusão de forma imediata. Antes da exclusão, o teste confirma que o filtro encontra a reserva, para que a lista vazia não seja um falso positivo.",
+ "10. Ambiente: o sistema é um ambiente público de demonstração compartilhado. Requer acesso de rede e pode ser reiniciado por terceiros; essa é uma pré-condição externa inevitável. Cada teste cria seus próprios dados. Na limpeza, uma reserva ainda existente (GET 200) é excluída com token válido, e a limpeza exige 201.",
+ "11. Os critérios tratam apenas de API REST. Por isso não há testes de UI, e os requisitos de pytest-playwright, `page`, `expect` e locators não se aplicam; não há dependência de Playwright no arquivo. A URL base fica centralizada na constante `BASE_URL`.",
+ "12. Não há caso adicional de borda para CA01, CA03, CA04 e CA06, pois a User Story não define limites (formatos de id, tamanhos de nome etc.) que justifiquem variações sem inventar regras.",
+ "13. Os valores inferidos (rotas, cabeçalhos, payload, timeout de 30 s) estão centralizados em constantes no topo do arquivo e podem exigir ajuste no sistema real. O código ser executável não comprova compatibilidade com o sistema."
+]

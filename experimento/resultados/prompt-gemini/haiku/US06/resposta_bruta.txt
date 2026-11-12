@@ -1,0 +1,184 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Administrador visualiza o contador de Messages após login | Positivo | CA1 | 1. Fazer login no painel com admin/password. 2. Ler o número exibido ao lado de Messages. | O contador é exibido como número inteiro não negativo. |
+| CT02 | Visitante recebe confirmação ao enviar contato válido | Positivo | CA2 | 1. Abrir a home. 2. Preencher nome, e-mail, telefone, assunto e mensagem válidos. 3. Clicar em Submit. | Exibe "Thanks for getting in touch {nome}!". |
+| CT03 | Contador de Messages aumenta exatamente em uma unidade após novo envio | Positivo | CA1, CA3 | 1. Logar e anotar o contador. 2. Fazer logout. 3. Visitante envia contato válido. 4. Logar novamente e ler o contador. | Contador posterior é igual ao anotado + 1. |
+| CT04 | Mensagem recém-enviada aparece na caixa do administrador | Positivo | CA4 | 1. Visitante envia contato válido. 2. Logar no painel. 3. Abrir Messages. | A lista contém linha com o nome do remetente e o assunto enviados. |
+| CT05 | Acesso direto à caixa de mensagens após logout exige login | Positivo | CA5 | 1. Logar no painel. 2. Fazer logout. 3. Acessar /admin/messages diretamente. | Tela de login é exibida (campos Username/Password e botão Login visíveis). |
+| CT06 | Login com senha incorreta não libera o painel | Negativo | CA1 | 1. Acessar /admin. 2. Informar admin com senha inválida. 3. Clicar em Login. | Permanece na tela de login; link Messages não aparece. |
+| CT07 | Envio de contato sem nome é rejeitado | Negativo | CA2 | 1. Abrir a home. 2. Deixar Name vazio e preencher os demais campos válidos. 3. Clicar em Submit. | Exibe erro de validação do nome; confirmação "Thanks for getting in touch" não aparece. |
+| CT08 | Envio de contato com e-mail em formato inválido é rejeitado | Negativo | CA2 | 1. Abrir a home. 2. Informar e-mail "email-invalido" e demais campos válidos. 3. Clicar em Submit. | Exibe erro de formato de e-mail; confirmação não aparece. |
+| CT09 | Assunto com 4 caracteres (abaixo do mínimo) é rejeitado | Borda | CA2 | 1. Abrir a home. 2. Preencher assunto "Abcd" e demais campos válidos. 3. Clicar em Submit. | Exibe erro de tamanho do assunto; confirmação não aparece. |
+| CT10 | Assunto com 5 caracteres (mínimo) é aceito | Borda | CA2 | 1. Abrir a home. 2. Preencher assunto "Preco" e demais campos válidos. 3. Clicar em Submit. | Exibe "Thanks for getting in touch {nome}!". |
+| CT11 | Mensagem com 19 caracteres (abaixo do mínimo) é rejeitada | Borda | CA2 | 1. Abrir a home. 2. Preencher mensagem com 19 caracteres e demais campos válidos. 3. Clicar em Submit. | Exibe erro de tamanho da mensagem; confirmação não aparece. |
+
+## SUPOSIÇÕES
+
+- **Base URL:** `https://automationintesting.online/`, definida na constante `BASE_URL`.
+- **Login do administrador:** rota `/admin`; campos com labels `Username` e `Password`; botão com nome acessível `Login`; credenciais `admin` / `password`.
+- **Logout:** link com nome acessível `Logout` no painel.
+- **Contador de Messages:** link com nome acessível contendo "Messages". O número aparece no texto do link e é sempre exibido, inclusive `0`.
+- **Caixa de mensagens:** rota `/admin/messages`, acessada pelo link Messages. A lista é uma tabela em que cada mensagem é uma `row` contendo nome do remetente e assunto.
+- **Acesso sem login:** acessar `/admin/messages` sem sessão exibe a tela de login (campos Username e botão Login).
+- **Formulário de contato (home):** campos com labels `Name`, `Email`, `Phone`, `Subject` e `Message`; botão `Submit`.
+- **Confirmação:** texto exato "Thanks for getting in touch {nome}!", exibido após envio válido.
+- **Regras de validação assumidas:**
+  - Name: obrigatório, entre 3 e 18 caracteres. Mensagem de vazio: "Name may not be blank".
+  - Email: obrigatório, formato válido. Mensagem contendo "well-formed email".
+  - Phone: obrigatório, 11 a 21 caracteres. Os testes usam `01234567890` (11 caracteres).
+  - Subject: entre 5 e 100 caracteres. Mensagem contendo "Subject ... between 5 and 100 characters".
+  - Message: entre 20 e 2000 caracteres. Mensagem contendo "Message ... between 20 and 2000 characters".
+- **Dados únicos:** nomes, assuntos e e-mails recebem sufixo hexadecimal de 6 caracteres gerado com `uuid`, para isolar as mensagens entre execuções.
+- **Sessões:** cada teste recebe um `page` novo do plugin pytest-playwright. Em CT03 e CT04 o visitante e o administrador usam o mesmo `page`, em momentos distintos.
+- **Mensagens de erro:** o texto exato das mensagens de validação é uma suposição. Se o sistema usar outros textos, os `re.compile` de CT07, CT08, CT09 e CT11 precisam ser ajustados.
+
+```python
+import re
+import uuid
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+ADMIN_USER = "admin"
+ADMIN_PASSWORD = "password"
+TELEFONE_VALIDO = "01234567890"
+MENSAGEM_VALIDA = "Gostaria de saber sobre disponibilidade para o fim de semana."
+
+
+def sufixo() -> str:
+    return uuid.uuid4().hex[:6]
+
+
+def login_admin(page: Page, usuario: str = ADMIN_USER, senha: str = ADMIN_PASSWORD) -> None:
+    page.goto(BASE_URL + "admin")
+    page.get_by_label("Username").fill(usuario)
+    page.get_by_label("Password").fill(senha)
+    page.get_by_role("button", name="Login").click()
+
+
+def logout_admin(page: Page) -> None:
+    page.get_by_role("link", name="Logout").click()
+
+
+def contador_messages(page: Page) -> int:
+    texto = page.get_by_role("link", name=re.compile("Messages")).inner_text()
+    return int(re.search(r"\d+", texto).group())
+
+
+def enviar_contato(
+    page: Page,
+    nome: str,
+    email: str,
+    assunto: str,
+    mensagem: str,
+    telefone: str = TELEFONE_VALIDO,
+) -> None:
+    page.goto(BASE_URL)
+    page.get_by_label("Name").fill(nome)
+    page.get_by_label("Email").fill(email)
+    page.get_by_label("Phone").fill(telefone)
+    page.get_by_label("Subject").fill(assunto)
+    page.get_by_label("Message").fill(mensagem)
+    page.get_by_role("button", name="Submit").click()
+
+
+def test_CT01_admin_visualiza_contador_messages_apos_login(page: Page) -> None:
+    login_admin(page)
+    expect(page.get_by_role("link", name=re.compile("Messages"))).to_be_visible()
+    assert contador_messages(page) >= 0
+
+
+def test_CT02_visitante_recebe_confirmacao_ao_enviar_contato_valido(page: Page) -> None:
+    nome = f"Visitante{sufixo()}"
+    enviar_contato(
+        page,
+        nome,
+        f"{nome.lower()}@exemplo.com",
+        f"Reserva {sufixo()}",
+        MENSAGEM_VALIDA,
+    )
+    expect(page.get_by_text(f"Thanks for getting in touch {nome}!")).to_be_visible()
+
+
+def test_CT03_contador_messages_aumenta_em_uma_unidade_apos_envio(page: Page) -> None:
+    nome = f"Visitante{sufixo()}"
+    login_admin(page)
+    antes = contador_messages(page)
+    logout_admin(page)
+
+    enviar_contato(
+        page,
+        nome,
+        f"{nome.lower()}@exemplo.com",
+        f"Reserva {sufixo()}",
+        MENSAGEM_VALIDA,
+    )
+    expect(page.get_by_text(f"Thanks for getting in touch {nome}!")).to_be_visible()
+
+    login_admin(page)
+    depois = contador_messages(page)
+    assert depois == antes + 1
+
+
+def test_CT04_admin_ve_mensagem_recem_enviada_na_caixa(page: Page) -> None:
+    nome = f"Visitante{sufixo()}"
+    assunto = f"Reserva {sufixo()}"
+    enviar_contato(page, nome, f"{nome.lower()}@exemplo.com", assunto, MENSAGEM_VALIDA)
+    expect(page.get_by_text(f"Thanks for getting in touch {nome}!")).to_be_visible()
+
+    login_admin(page)
+    page.get_by_role("link", name=re.compile("Messages")).click()
+    linha = page.get_by_role("row").filter(has_text=nome).filter(has_text=assunto)
+    expect(linha).to_be_visible()
+
+
+def test_CT05_acesso_direto_a_messages_apos_logout_exige_login(page: Page) -> None:
+    login_admin(page)
+    logout_admin(page)
+    page.goto(BASE_URL + "admin/messages")
+    expect(page.get_by_label("Username")).to_be_visible()
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+
+
+def test_CT06_login_com_senha_incorreta_nao_libera_painel(page: Page) -> None:
+    login_admin(page, senha="senha-invalida")
+    expect(page.get_by_role("button", name="Login")).to_be_visible()
+    expect(page.get_by_role("link", name=re.compile("Messages"))).to_have_count(0)
+
+
+def test_CT07_envio_sem_nome_e_rejeitado(page: Page) -> None:
+    enviar_contato(page, "", f"{sufixo()}@exemplo.com", f"Reserva {sufixo()}", MENSAGEM_VALIDA)
+    expect(page.get_by_text("Name may not be blank")).to_be_visible()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch"))).to_have_count(0)
+
+
+def test_CT08_envio_com_email_invalido_e_rejeitado(page: Page) -> None:
+    enviar_contato(page, f"Visitante{sufixo()}", "email-invalido", f"Reserva {sufixo()}", MENSAGEM_VALIDA)
+    expect(page.get_by_text(re.compile("well-formed email"))).to_be_visible()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch"))).to_have_count(0)
+
+
+def test_CT09_assunto_com_quatro_caracteres_e_rejeitado(page: Page) -> None:
+    enviar_contato(page, f"Visitante{sufixo()}", f"{sufixo()}@exemplo.com", "Abcd", MENSAGEM_VALIDA)
+    expect(page.get_by_text(re.compile(r"Subject .*between 5 and 100 characters"))).to_be_visible()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch"))).to_have_count(0)
+
+
+def test_CT10_assunto_com_cinco_caracteres_e_aceito(page: Page) -> None:
+    nome = f"Visitante{sufixo()}"
+    enviar_contato(page, nome, f"{nome.lower()}@exemplo.com", "Preco", MENSAGEM_VALIDA)
+    expect(page.get_by_text(f"Thanks for getting in touch {nome}!")).to_be_visible()
+
+
+def test_CT11_mensagem_com_dezenove_caracteres_e_rejeitada(page: Page) -> None:
+    enviar_contato(page, f"Visitante{sufixo()}", f"{sufixo()}@exemplo.com", f"Reserva {sufixo()}", "x" * 19)
+    expect(page.get_by_text(re.compile(r"Message .*between 20 and 2000 characters"))).to_be_visible()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch"))).to_have_count(0)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))
+```

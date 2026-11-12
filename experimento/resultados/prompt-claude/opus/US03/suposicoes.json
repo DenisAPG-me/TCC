@@ -1,0 +1,17 @@
+[
+ "Foco da User Story é interface web; tecnologia escolhida: Python + pytest + Playwright síncrono.",
+ "Conforme os requisitos técnicos obrigatórios (que prevalecem sobre as instruções anteriores), o script usa o plugin oficial pytest-playwright com a fixture `page`, sem `sync_playwright()` e sem fixture própria de browser/page; Chromium headless é o padrão do plugin (`pytest arquivo.py` ou `pytest arquivo.py --browser chromium`).",
+ "A base URL vem da constante `BASE_URL` no topo do arquivo; as rotas são concatenadas a ela.",
+ "A aplicação usa o atributo `data-test` para identificar elementos; uma fixture autouse de sessão (que usa a fixture `playwright` do plugin, sem criar navegador) configura `get_by_test_id` para esse atributo.",
+ "Test IDs supostos: login `email`, `password`, `login-submit`, `email-error`, `password-error`, `login-error`; menu `nav-menu`, `nav-sign-in`; conta `page-title`; produto `product-name`, `add-to-cart`, `cart-quantity`; checkout `proceed-1`, `proceed-2`, `proceed-3`, `finish`; endereço `country`, `postal_code`, `house_number`, `street`, `city`, `state`; pagamento `payment-method`, `credit_card_number`, `expiration_date`, `cvv`, `card_holder_name`, `payment-success-message`.",
+ "Rotas supostas: login em `/auth/login`, conta em `/account`, carrinho/checkout em `/checkout`; o primeiro produto da home está em estoque.",
+ "O nome exibido no menu para a conta de demonstração é \"Jane Doe\".",
+ "Os campos de endereço são inputs de texto e podem vir pré-preenchidos com o endereço do cliente; por isso são limpos antes dos cenários negativos.",
+ "O botão de avançar do passo de endereço (`proceed-3`) fica desabilitado enquanto há campo obrigatório vazio.",
+ "A forma de pagamento é um `select` com a opção de rótulo \"Credit Card\"; o número do cartão segue o formato `0000-0000-0000-0000`, a validade `MM/YYYY` (data futura calculada em tempo de execução), CVV com 3 dígitos; com número em formato inválido o botão `finish` fica desabilitado.",
+ "No passo de pagamento, o primeiro clique em \"Confirm\" exibe \"Payment was successful\" e o segundo confirma o pedido exibindo \"Thanks for your order! Your invoice number is INV-<dígitos>\".",
+ "No checkout, após autenticar no passo 2, é exibida uma mensagem contendo \"already logged in\" e o botão `proceed-2`.",
+ "Dados de teste fictícios: senha incorreta \"senhaErrada123\", endereço em São Paulo/Brasil, cartão \"0000-0000-0000-0000\", titular \"Jane Doe\".",
+ "Timeout padrão das asserções `expect` ampliado para 15 s por se tratar de ambiente público remoto.",
+ "Cada teste recebe contexto de navegador novo do plugin (sessão e carrinho isolados), garantindo independência."
+]

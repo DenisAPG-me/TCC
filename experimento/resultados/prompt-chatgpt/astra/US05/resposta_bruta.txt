@@ -1,0 +1,221 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Enviar credenciais vazias | borda | 1 | Abrir o login; deixar usuário e senha vazios; clicar em Login | Exibe “Invalid credentials” e permanece na tela de login |
+| CT002 | Rejeitar senha incorreta | negativo | 2 | Abrir o login; preencher admin e senha incorreta; clicar em Login | Exibe “Invalid credentials” |
+| CT003 | Acessar quartos com credenciais válidas | positivo | 3 | Abrir o login; preencher admin e password; clicar em Login; verificar quartos e menu | Abre a lista de quartos; o quarto 101 tem tipo Single; o menu apresenta Rooms, Report, Branding e Messages |
+| CT004 | Sair do painel | positivo | 4 | Autenticar; clicar em Logout | Retorna à página inicial pública da pousada |
+| CT005 | Impedir acesso direto após logout | negativo | 5 | Autenticar; sair; acessar diretamente a URL da lista de quartos no mesmo contexto | Exibe novamente a tela de login |
+
+SUPOSIÇÕES
+
+1. Os critérios mantêm os identificadores originais: 1, 2, 3, 4 e 5. O endereço base, a entrada do painel em `/admin`, as credenciais `admin` / `password`, a mensagem de erro, os itens do menu e o quarto 101 do tipo Single são explícitos.
+2. Os requisitos técnicos inseridos dentro da User Story conflitam com as regras externas da tarefa sobre plugins e inicialização do navegador. São tratados como conteúdo da especificação, sem modificar essas regras. O arquivo usa pytest e a API síncrona do Playwright, com inicialização e encerramento próprios, sem pytest-playwright.
+3. Para todos os casos, inferem-se os rótulos acessíveis `Username` e `Password`, um botão `Login` e a URL de login `/admin`. A aceitação de uma barra final opcional é apenas uma tolerância de normalização de URL. Esses valores estão centralizados no código.
+4. Para CT003–CT005, infere-se que o login válido leva a `/admin/rooms`, a rota da lista de quartos. Para CT003, supõe-se que os quartos sejam apresentados em tabela semântica, com células exatas `101` e `Single` na mesma linha, e que os itens do menu sejam links dentro de uma região de navegação.
+5. Para CT004 e CT005, infere-se que `Logout` seja um botão e que a página inicial pública corresponda à raiz da URL base, com uma região semântica `main` visível. O retorno é verificado pela URL pública e pela renderização dessa região.
+6. Para CT002, utiliza-se a senha incorreta concreta `senha-incorreta-ct002`, presumida diferente da senha vigente. Não se impõe uma rota final adicional nesse caso, pois o critério 2 exige somente a mensagem de erro.
+7. O ambiente deve estar disponível, a conta de demonstração deve estar ativa e o quarto 101 deve existir como Single. Essas são pré-condições externas: não há especificação de mecanismos para criar ou restaurar esses dados. Também se pressupõe ausência de CAPTCHA, autenticação adicional ou bloqueio da conta durante estes testes.
+8. Cada teste usa um contexto novo, sem compartilhar cookies ou armazenamento. CT005 mantém o mesmo contexto entre login, logout e acesso direto para verificar a sessão encerrada. Não há alteração de quartos ou mensagens; a limpeza local encerra contexto e navegador. Não se presume um mecanismo adicional de limpeza de sessões no servidor.
+9. CT001 representa a borda de entradas com comprimento zero e também exercita rejeição. Sua classificação única é `borda`. CT002 e CT005 cobrem cenários negativos. Não foram inventados limites de tamanho, outras combinações de credenciais ou regras de autorização.
+10. Seletores, estrutura da tabela, rotas inferidas e prazos de espera podem exigir ajustes antes do uso no sistema real. O arquivo é autocontido para execução com `pytest test_admin.py` no ambiente informado; não foi executado nem teve sua compatibilidade com o sistema verificada.
+
+```python
+import re
+from urllib.parse import urljoin
+
+import pytest
+from playwright.sync_api import expect, sync_playwright
+
+
+BASE_URL = "https://automationintesting.online/"
+
+# Valores explícitos na User Story.
+USERNAME = "admin"
+PASSWORD = "password"
+ERROR_MESSAGE = "Invalid credentials"
+ROOM_NUMBER = "101"
+ROOM_TYPE = "Single"
+MENU_ITEMS = ("Rooms", "Report", "Branding", "Messages")
+
+# Suposições de implementação centralizadas para eventual ajuste.
+LOGIN_PATH = "/admin"
+ROOMS_PATH = "/admin/rooms"
+PUBLIC_HOME_PATH = "/"
+USERNAME_LABEL = "Username"
+PASSWORD_LABEL = "Password"
+LOGIN_BUTTON_NAME = "Login"
+LOGOUT_BUTTON_NAME = "Logout"
+INVALID_PASSWORD = "senha-incorreta-ct002"
+NAVIGATION_ROLE = "navigation"
+PUBLIC_CONTENT_ROLE = "main"
+ROOM_ROW_ROLE = "row"
+ROOM_CELL_ROLE = "cell"
+ACTION_TIMEOUT_MS = 10_000
+NAVIGATION_TIMEOUT_MS = 30_000
+ASSERTION_TIMEOUT_MS = 10_000
+
+
+def absolute_url(path):
+    return urljoin(BASE_URL, path)
+
+
+def expected_url(path):
+    """Aceita somente a URL esperada, com barra final opcional."""
+    normalized = absolute_url(path).rstrip("/")
+    return re.compile(r"^" + re.escape(normalized) + r"/?$")
+
+
+@pytest.fixture(scope="session")
+def chromium_browser():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        try:
+            yield browser
+        finally:
+            browser.close()
+
+
+@pytest.fixture
+def ui_page(chromium_browser):
+    context = chromium_browser.new_context()
+    try:
+        page = context.new_page()
+        page.set_default_timeout(ACTION_TIMEOUT_MS)
+        page.set_default_navigation_timeout(NAVIGATION_TIMEOUT_MS)
+        yield page
+    finally:
+        context.close()
+
+
+def assert_login_screen(page):
+    expect(page).to_have_url(
+        expected_url(LOGIN_PATH), timeout=ASSERTION_TIMEOUT_MS
+    )
+    expect(
+        page.get_by_label(USERNAME_LABEL, exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+    expect(
+        page.get_by_label(PASSWORD_LABEL, exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+    expect(
+        page.get_by_role("button", name=LOGIN_BUTTON_NAME, exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def open_login(page):
+    page.goto(absolute_url(LOGIN_PATH), wait_until="domcontentloaded")
+    assert_login_screen(page)
+
+
+def submit_credentials(page, username, password):
+    page.get_by_label(USERNAME_LABEL, exact=True).fill(username)
+    page.get_by_label(PASSWORD_LABEL, exact=True).fill(password)
+    page.get_by_role(
+        "button", name=LOGIN_BUTTON_NAME, exact=True
+    ).click()
+
+
+def assert_invalid_credentials(page):
+    expect(
+        page.get_by_text(ERROR_MESSAGE, exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def authenticate(page):
+    open_login(page)
+    submit_credentials(page, USERNAME, PASSWORD)
+    expect(page).to_have_url(
+        expected_url(ROOMS_PATH), timeout=ASSERTION_TIMEOUT_MS
+    )
+    expect(
+        page.get_by_role("button", name=LOGOUT_BUTTON_NAME, exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def assert_public_home(page):
+    expect(page).to_have_url(
+        expected_url(PUBLIC_HOME_PATH), timeout=ASSERTION_TIMEOUT_MS
+    )
+    expect(
+        page.get_by_role(PUBLIC_CONTENT_ROLE)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def logout(page):
+    page.get_by_role(
+        "button", name=LOGOUT_BUTTON_NAME, exact=True
+    ).click()
+
+
+def test_CT001_enviar_credenciais_vazias(ui_page):
+    open_login(ui_page)
+
+    submit_credentials(ui_page, "", "")
+
+    assert_invalid_credentials(ui_page)
+    assert_login_screen(ui_page)
+
+
+def test_CT002_rejeitar_senha_incorreta(ui_page):
+    open_login(ui_page)
+
+    submit_credentials(ui_page, USERNAME, INVALID_PASSWORD)
+
+    assert_invalid_credentials(ui_page)
+
+
+def test_CT003_acessar_quartos_com_credenciais_validas(ui_page):
+    open_login(ui_page)
+
+    submit_credentials(ui_page, USERNAME, PASSWORD)
+
+    expect(ui_page).to_have_url(
+        expected_url(ROOMS_PATH), timeout=ASSERTION_TIMEOUT_MS
+    )
+
+    room_row = ui_page.get_by_role(ROOM_ROW_ROLE).filter(
+        has=ui_page.get_by_role(
+            ROOM_CELL_ROLE, name=ROOM_NUMBER, exact=True
+        )
+    )
+    expect(room_row).to_have_count(1, timeout=ASSERTION_TIMEOUT_MS)
+    expect(room_row).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+    expect(
+        room_row.get_by_role(
+            ROOM_CELL_ROLE, name=ROOM_NUMBER, exact=True
+        )
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+    expect(
+        room_row.get_by_role(
+            ROOM_CELL_ROLE, name=ROOM_TYPE, exact=True
+        )
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+    navigation = ui_page.get_by_role(NAVIGATION_ROLE)
+    for item in MENU_ITEMS:
+        expect(
+            navigation.get_by_role("link", name=item, exact=True)
+        ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def test_CT004_sair_do_painel(ui_page):
+    authenticate(ui_page)
+
+    logout(ui_page)
+
+    assert_public_home(ui_page)
+
+
+def test_CT005_impedir_acesso_direto_apos_logout(ui_page):
+    authenticate(ui_page)
+    logout(ui_page)
+    assert_public_home(ui_page)
+
+    ui_page.goto(
+        absolute_url(ROOMS_PATH), wait_until="domcontentloaded"
+    )
+
+    assert_login_screen(ui_page)
+```

@@ -1,0 +1,117 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C05",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "nome em branco"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "assunto 5 chars"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "assunto 4 chars"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C05"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('username') inexistente"
+  },
+  {
+   "teste": "test_ct06",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('username') inexistente"
+  },
+  {
+   "teste": "test_ct07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('username') inexistente"
+  },
+  {
+   "teste": "test_ct08",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('username') inexistente"
+  },
+  {
+   "teste": "test_ct09",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_test_id('username') inexistente"
+  }
+ ]
+}

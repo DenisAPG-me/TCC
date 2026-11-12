@@ -1,0 +1,130 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Envio vazio exibe mensagens de campo em branco",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial, deixar os cinco campos vazios e clicar em Submit",
+  "esperado": "Mensagens com \"blank\" visíveis para Name, Email, Phone, Subject e Message"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Campos preenchidos só com espaços exibem mensagens de campo em branco",
+  "tipo": "borda",
+  "criterio": "CA01",
+  "passos": "Preencher os cinco campos apenas com espaços e clicar em Submit",
+  "esperado": "Mensagens de campo em branco visíveis para os cinco campos"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Telefone com 10 caracteres exibe erro de tamanho",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Preencher telefone com 10 dígitos, demais campos válidos, clicar em Submit",
+  "esperado": "\"Phone must be between 11 and 21 characters.\" visível e confirmação ausente"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Telefone com 11 caracteres é aceito",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Preencher telefone com 11 dígitos, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de telefone e confirmação \"Thanks for getting in touch Maria Teste!\" visível"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Telefone com 21 caracteres é aceito",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Preencher telefone com 21 dígitos, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de telefone e confirmação visível"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Telefone com 22 caracteres exibe erro de tamanho",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Preencher telefone com 22 dígitos, demais campos válidos, clicar em Submit",
+  "esperado": "\"Phone must be between 11 and 21 characters.\" visível"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Assunto com 4 e mensagem com 19 caracteres exibem erros de tamanho",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Preencher assunto com 4 caracteres e mensagem com 19, demais campos válidos, clicar em Submit",
+  "esperado": "\"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\" visíveis e confirmação ausente"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Assunto com 5 caracteres é aceito",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher assunto com 5 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de assunto e confirmação visível"
+ },
+ {
+  "id": "CT009",
+  "titulo": "Assunto com 100 caracteres é aceito",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher assunto com 100 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de assunto e confirmação visível"
+ },
+ {
+  "id": "CT010",
+  "titulo": "Assunto com 101 caracteres exibe erro de tamanho",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher assunto com 101 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "\"Subject must be between 5 and 100 characters.\" visível"
+ },
+ {
+  "id": "CT011",
+  "titulo": "Mensagem com 20 caracteres é aceita",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher mensagem com 20 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de mensagem e confirmação visível"
+ },
+ {
+  "id": "CT012",
+  "titulo": "Mensagem com 2000 caracteres é aceita",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher mensagem com 2000 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "Sem mensagem de mensagem e confirmação visível"
+ },
+ {
+  "id": "CT013",
+  "titulo": "Mensagem com 2001 caracteres exibe erro de tamanho",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher mensagem com 2001 caracteres, demais campos válidos, clicar em Submit",
+  "esperado": "\"Message must be between 20 and 2000 characters.\" visível"
+ },
+ {
+  "id": "CT014",
+  "titulo": "E-mail malformado exibe erro de formato",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Preencher e-mail \"bad\", demais campos válidos, clicar em Submit",
+  "esperado": "\"must be a well-formed email address\" visível e confirmação ausente"
+ },
+ {
+  "id": "CT015",
+  "titulo": "Dados válidos exibem confirmação com nome e assunto",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Preencher todos os campos com dados válidos e clicar em Submit",
+  "esperado": "\"Thanks for getting in touch Maria Teste!\" visível e assunto \"Dúvida sobre reserva\" visível na confirmação"
+ },
+ {
+  "id": "CT016",
+  "titulo": "Nome com acentuação aparece na confirmação",
+  "tipo": "borda",
+  "criterio": "CA05",
+  "passos": "Preencher nome \"João Ação\", demais campos válidos, clicar em Submit",
+  "esperado": "\"Thanks for getting in touch João Ação!\" visível"
+ }
+]

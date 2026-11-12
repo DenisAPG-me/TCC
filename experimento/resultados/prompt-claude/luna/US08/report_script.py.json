@@ -1,0 +1,209 @@
+{
+ "created": 1793430474.1358023,
+ "duration": 8.096781253814697,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US08",
+ "environment": {},
+ "summary": {
+  "passed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_autenticar_com_credenciais_validas",
+     "type": "Function",
+     "lineno": 52
+    },
+    {
+     "nodeid": "script.py::test_ct02_rejeitar_credenciais_invalidas",
+     "type": "Function",
+     "lineno": 61
+    },
+    {
+     "nodeid": "script.py::test_ct03_atualizar_reserva_completa",
+     "type": "Function",
+     "lineno": 70
+    },
+    {
+     "nodeid": "script.py::test_ct04_atualizar_parcialmente_o_sobrenome",
+     "type": "Function",
+     "lineno": 92
+    },
+    {
+     "nodeid": "script.py::test_ct05_atualizar_sem_token",
+     "type": "Function",
+     "lineno": 113
+    },
+    {
+     "nodeid": "script.py::test_ct06_atualizar_sem_campo_obrigatorio",
+     "type": "Function",
+     "lineno": 125
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_autenticar_com_credenciais_validas",
+   "lineno": 52,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_autenticar_com_credenciais_validas",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00039929989725351334,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.602489500073716,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001398000167682767,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_rejeitar_credenciais_invalidas",
+   "lineno": 61,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_rejeitar_credenciais_invalidas",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00024070008657872677,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5764120999956504,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011699995957314968,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_atualizar_reserva_completa",
+   "lineno": 70,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_atualizar_reserva_completa",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020960008259862661,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8473542999709025,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00014590006321668625,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_atualizar_parcialmente_o_sobrenome",
+   "lineno": 92,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_atualizar_parcialmente_o_sobrenome",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00025130005087703466,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8825069000013173,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00012850004713982344,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_atualizar_sem_token",
+   "lineno": 113,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_atualizar_sem_token",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002183000324293971,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2624930000165477,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00011250004172325134,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_atualizar_sem_campo_obrigatorio",
+   "lineno": 125,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_atualizar_sem_campo_obrigatorio",
+    "script.py",
+    "US08",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003063000040128827,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8599895000224933,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00016220007091760635,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

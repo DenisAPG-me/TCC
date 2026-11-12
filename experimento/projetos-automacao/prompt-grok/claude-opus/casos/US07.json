@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Criar reserva com corpo JSON válido",
+  "tipo": "positivo",
+  "criterio": "AC1",
+  "passos": "Enviar POST `/booking` com todos os campos válidos",
+  "esperado": "Status 200; `bookingid` numérico; `booking` igual ao corpo enviado"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "positivo",
+  "criterio": "AC2",
+  "passos": "Criar reserva; enviar GET `/booking/{id}`",
+  "esperado": "Status 200; todos os campos iguais aos enviados"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Consultar reserva com identificador inexistente (99999999)",
+  "tipo": "negativo",
+  "criterio": "AC3",
+  "passos": "Enviar GET `/booking/99999999`",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Listar reservas filtrando por nome e sobrenome únicos",
+  "tipo": "positivo",
+  "criterio": "AC4",
+  "passos": "Criar reserva com nome/sobrenome únicos; enviar GET `/booking?firstname=...&lastname=...`",
+  "esperado": "Status 200; lista contém o `bookingid` criado"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Criar reserva com depósito não pago e preço total zero",
+  "tipo": "borda",
+  "criterio": "AC1, AC2",
+  "passos": "Enviar POST com `depositpaid=false` e `totalprice=0`; consultar por id",
+  "esperado": "Status 200 em ambos; dados iguais aos enviados"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Criar reserva com check-in igual ao check-out",
+  "tipo": "borda",
+  "criterio": "AC1, AC2",
+  "passos": "Enviar POST com datas iguais; consultar por id",
+  "esperado": "Status 200 em ambos; dados iguais aos enviados"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Criar reserva com caracteres acentuados no nome e nas necessidades adicionais",
+  "tipo": "borda",
+  "criterio": "AC1, AC2",
+  "passos": "Enviar POST com nome/sobrenome/necessidades acentuados; consultar por id",
+  "esperado": "Status 200 em ambos; caracteres preservados"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Listar reservas filtrando por nome e sobrenome inexistentes",
+  "tipo": "negativo",
+  "criterio": "AC4",
+  "passos": "Enviar GET `/booking?firstname=<único>&lastname=<único>` sem criar reserva",
+  "esperado": "Status 200; lista vazia"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Consultar reserva com identificador zero",
+  "tipo": "borda",
+  "criterio": "AC3",
+  "passos": "Enviar GET `/booking/0`",
+  "esperado": "Status 404"
+ }
+]

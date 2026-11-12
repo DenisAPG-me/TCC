@@ -1,0 +1,115 @@
+CASOS DE TESTE
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+| CT001 | Validação de campos obrigatórios vazios no login | negativo | CA01 | Acessar URL de login deixar email e senha em branco e submeter formulário | Exibir mensagens Email is required e Password is required |
+| CT002 | Tentativa de login com senha incorreta | negativo | CA02 | Acessar URL de login preencher email válido e senha incorreta e submeter | Exibir mensagem Invalid email or password e permanecer sem sessão |
+| CT003 | Redirecionamento para login ao avançar checkout sem autenticação | positivo | CA03 | Adicionar produto ao carrinho sem estar logado e avançar para o checkout | Ser direcionado para a tela de login informando e-mail e senha |
+| CT004 | Visualização da página My account após autenticação bem-sucedida | positivo | CA04 | Realizar login com as credenciais da conta de demonstração | Visualizar a página My account com o nome do usuário no menu |
+| CT005 | Validação de campos obrigatórios de endereço no checkout | negativo | CA05 | Autenticar adicionar produto ir ao passo de endereço deixar campos vazios tentar avançar e depois preenchê-los | Bloquear avanço com campos vazios e permitir avançar ao preencher país CEP número rua cidade estado |
+| CT006 | Conclusão de compra com cartão de crédito com sucesso | positivo | CA06 | Estar autenticado com produto no carrinho preencher endereço escolher cartão de crédito dados válidos e confirmar | Visualizar Payment was successful e posteriormente Thanks for your order e número da fatura INV-... |
+
+SUPOSIÇÕES
+1. Os critérios de aceitação foram numerados de CA01 a CA06 na ordem de apresentação da User Story.
+2. A URL base utilizada é https://practicesoftwaretesting.com/.
+3. A rota da página de login é /auth/login.
+4. Os seletores de login utilizam campos com rótulos ou placeholders correspondentes a E-mail e Password, e botão de submissão com texto Login.
+5. As mensagens de erro esperadas são exatamente "Email is required", "Password is required" e "Invalid email or password", exibidas na tela de login.
+6. Para simular produto no carrinho e checkout, os testes utilizam navegação direta ou interações padrão da aplicação (adicionar produto genérico da página inicial, ir ao carrinho, prosseguir para checkout).
+7. Os campos obrigatórios do endereço no checkout são país (country), CEP (postcode/zip), número (number), rua (street), cidade (city) e estado (state).
+8. No passo de pagamento, a opção de cartão de crédito é selecionada por meio de rádio button ou select, preenchendo campos válidos fictícios (número do cartão, validade, CVV) e clicando em confirmar.
+9. As mensagens de sucesso no pagamento e pedido são "Payment was successful" e "Thanks for your order! Your invoice number is INV-...".
+
+```python
+import re
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+def test_CT001_validacao_campos_obrigatorios_login(page: Page):
+    page.goto(BASE_URL + "#/auth/login")
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_text("Email is required")).to_be_visible()
+    expect(page.get_by_text("Password is required")).to_be_visible()
+
+def test_CT002_tentativa_login_senha_incorreta(page: Page):
+    page.goto(BASE_URL + "#/auth/login")
+    page.get_by_label("E-mail Address").fill("customer@practicesoftwaretesting.com")
+    page.get_by_label("Password").fill("senhaerrada")
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_text("Invalid email or password")).to_be_visible()
+    expect(page).not_to_have_url(re.compile(r".*/account"))
+
+def test_CT003_checkout_sem_autenticacao(page: Page):
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name="Add to cart").click()
+    page.get_by_role("link", name=re.compile(r"Cart")).click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+    expect(page).to_have_url(re.compile(r".*/auth/login"))
+
+def test_CT004_visualizacao_my_account_apos_login(page: Page):
+    page.goto(BASE_URL + "#/auth/login")
+    page.get_by_label("E-mail Address").fill("customer@practicesoftwaretesting.com")
+    page.get_by_label("Password").fill("welcome01")
+    page.get_by_role("button", name="Login").click()
+    expect(page).to_have_url(re.compile(r".*/account"))
+    expect(page.get_by_role("navigation")).to_contain_text("Jane Doe")
+
+def test_CT005_validacao_campos_endereco_checkout(page: Page):
+    page.goto(BASE_URL + "#/auth/login")
+    page.get_by_label("E-mail Address").fill("customer@practicesoftwaretesting.com")
+    page.get_by_label("Password").fill("welcome01")
+    page.get_by_role("button", name="Login").click()
+    
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name="Add to cart").click()
+    page.get_by_role("link", name=re.compile(r"Cart")).click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+    
+    page.get_by_role("button", name="Proceed to checkout").click()
+    expect(page.get_by_text("Address is required")).to_be_visible()
+    
+    page.get_by_label("Country").fill("United States")
+    page.get_by_label("State").fill("California")
+    page.get_by_label("City").fill("Beverly Hills")
+    page.get_by_label("Street").fill("Rodeo Drive")
+    page.get_by_label("Postcode").fill("90210")
+    page.get_by_label("Number").fill("123")
+    
+    page.get_by_role("button", name="Proceed to checkout").click()
+    expect(page).not_to_have_url(re.compile(r".*/checkout.*address"))
+
+def test_CT006_conclusao_compra_cartao_credito(page: Page):
+    page.goto(BASE_URL + "#/auth/login")
+    page.get_by_label("E-mail Address").fill("customer@practicesoftwaretesting.com")
+    page.get_by_label("Password").fill("welcome01")
+    page.get_by_role("button", name="Login").click()
+    
+    page.goto(BASE_URL)
+    page.locator(".card").first.click()
+    page.get_by_role("button", name="Add to cart").click()
+    page.get_by_role("link", name=re.compile(r"Cart")).click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+    page.get_by_role("button", name="Proceed to checkout").click()
+    
+    page.get_by_label("Country").fill("United States")
+    page.get_by_label("State").fill("California")
+    page.get_by_label("City").fill("Beverly Hills")
+    page.get_by_label("Street").fill("Rodeo Drive")
+    page.get_by_label("Postcode").fill("90210")
+    page.get_by_label("Number").fill("123")
+    page.get_by_role("button", name="Proceed to checkout").click()
+    
+    page.get_by_label("Payment Method").select_option("Credit Card")
+    page.get_by_label("Credit Card Number").fill("4242424242424242")
+    page.get_by_label("Expiration Date").fill("12/28")
+    page.get_by_label("CVV").fill("123")
+    page.get_by_label("Card Holder Name").fill("Jane Doe")
+    
+    page.get_by_role("button", name="Confirm").click()
+    expect(page.get_by_text("Payment was successful")).to_be_visible()
+    
+    page.get_by_role("button", name="Confirm").click()
+    expect(page.get_by_text(re.compile(r"Thanks for your order! Your invoice number is INV-.*"))).to_be_visible()
+```

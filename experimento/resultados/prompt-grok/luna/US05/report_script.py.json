@@ -1,0 +1,291 @@
+{
+ "created": 1793429195.7800071,
+ "duration": 19.909353256225586,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 3,
+  "total": 7,
+  "collected": 7
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_empty_credentials_show_error[chromium]",
+     "type": "Function",
+     "lineno": 33
+    },
+    {
+     "nodeid": "script.py::test_TC02_wrong_password_shows_error[chromium]",
+     "type": "Function",
+     "lineno": 39
+    },
+    {
+     "nodeid": "script.py::test_TC03_valid_login_shows_rooms_and_menu[chromium]",
+     "type": "Function",
+     "lineno": 45
+    },
+    {
+     "nodeid": "script.py::test_TC04_logout_returns_to_public_home[chromium]",
+     "type": "Function",
+     "lineno": 55
+    },
+    {
+     "nodeid": "script.py::test_TC05_direct_room_list_after_logout_requires_login[chromium]",
+     "type": "Function",
+     "lineno": 64
+    },
+    {
+     "nodeid": "script.py::test_TC06_valid_username_empty_password_shows_error[chromium]",
+     "type": "Function",
+     "lineno": 74
+    },
+    {
+     "nodeid": "script.py::test_TC07_empty_username_valid_password_shows_error[chromium]",
+     "type": "Function",
+     "lineno": 80
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_empty_credentials_show_error[chromium]",
+   "lineno": 33,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC01_empty_credentials_show_error[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.43030110001564026,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.623890700051561,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011415499961003661,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_wrong_password_shows_error[chromium]",
+   "lineno": 39,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC02_wrong_password_shows_error[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09266769990790635,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0430215999949723,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012818100047297776,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_valid_login_shows_rooms_and_menu[chromium]",
+   "lineno": 45,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_valid_login_shows_rooms_and_menu[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11050309997517616,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.2610670999856666,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+     "lineno": 50,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: strict mode violation: get_by_text(\"Single\", exact=True) resolved to 2 elements:\n    1) <p id=\"typeSingle\">Single</p> aka locator(\"#typeSingle\")\n    2) <option value=\"Single\">Single</option> aka locator(\"#type\")\n \nCall log:\n  - Expect \"to_be_visible\" get_by_text(\"Single\", exact=True) with timeout 5000ms\n  - waiting for get_by_text(\"Single\", exact=True)"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+      "lineno": 50,
+      "message": "in test_TC03_valid_login_shows_rooms_and_menu"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py:50: in test_TC03_valid_login_shows_rooms_and_menu\n    expect(page.get_by_text(\"Single\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_text(\"Single\", exact=True) resolved to 2 elements:\nE       1) <p id=\"typeSingle\">Single</p> aka locator(\"#typeSingle\")\nE       2) <option value=\"Single\">Single</option> aka locator(\"#type\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(\"Single\", exact=True) with timeout 5000ms\nE     - waiting for get_by_text(\"Single\", exact=True)"
+   },
+   "teardown": {
+    "duration": 0.011567700072191656,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_logout_returns_to_public_home[chromium]",
+   "lineno": 55,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_logout_returns_to_public_home[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10191340011078864,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.792130800080486,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+     "lineno": 61,
+     "message": "AssertionError: Page URL expected to be 'https://automationintesting.online/'\nActual value: https://automationintesting.online/admin/rooms \nCall log:\n  - Expect \"to_have_url\" with timeout 5000ms\n    4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin\"\n    - waiting for \"https://automationintesting.online/\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\"\n    9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin/rooms\"\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+      "lineno": 61,
+      "message": "in test_TC04_logout_returns_to_public_home"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py:61: in test_TC04_logout_returns_to_public_home\n    expect(page).to_have_url(BASE_URL)\nE   AssertionError: Page URL expected to be 'https://automationintesting.online/'\nE   Actual value: https://automationintesting.online/admin/rooms \nE   Call log:\nE     - Expect \"to_have_url\" with timeout 5000ms\nE       4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin\"\nE       - waiting for \"https://automationintesting.online/\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\"\nE       9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin/rooms\"\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.01111510000191629,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_direct_room_list_after_logout_requires_login[chromium]",
+   "lineno": 64,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_direct_room_list_after_logout_requires_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10202180000487715,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.700276699964888,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+     "lineno": 68,
+     "message": "AssertionError: Page URL expected to be 'https://automationintesting.online/'\nActual value: https://automationintesting.online/admin/rooms \nCall log:\n  - Expect \"to_have_url\" with timeout 5000ms\n    4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin\"\n    - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\n    - navigated to \"https://automationintesting.online/admin/rooms\"\n    9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\n      - unexpected value \"https://automationintesting.online/admin/rooms\"\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 1\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py",
+      "lineno": 68,
+      "message": "in test_TC05_direct_room_list_after_logout_requires_login"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\luna\\US05\\script.py:68: in test_TC05_direct_room_list_after_logout_requires_login\n    expect(page).to_have_url(BASE_URL)\nE   AssertionError: Page URL expected to be 'https://automationintesting.online/'\nE   Actual value: https://automationintesting.online/admin/rooms \nE   Call log:\nE     - Expect \"to_have_url\" with timeout 5000ms\nE       4 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin\"\nE       - waiting for \"https://automationintesting.online/admin/rooms\" navigation to finish...\nE       - navigated to \"https://automationintesting.online/admin/rooms\"\nE       9 \u00d7 locator resolved to <html lang=\"en\" id=\"root\">\u2026</html>\nE         - unexpected value \"https://automationintesting.online/admin/rooms\"\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 1\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.012091099983081222,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_valid_username_empty_password_shows_error[chromium]",
+   "lineno": 74,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC06_valid_username_empty_password_shows_error[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10332240001298487,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0880854999413714,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011155999964103103,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC07_empty_username_valid_password_shows_error[chromium]",
+   "lineno": 80,
+   "outcome": "passed",
+   "keywords": [
+    "test_TC07_empty_username_valid_password_shows_error[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10109719994943589,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.977972500026226,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.21233419992495328,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+[
+ "**URL base:** `https://practicesoftwaretesting.com`, definida na constante `BASE_URL`.",
+ "**Carrinho inicial vazio:** o plugin pytest-playwright cria um contexto de navegador novo para cada teste.",
+ "**Home:** os produtos são links cujo nome acessível contém o nome do produto (ex.: `get_by_role(\"link\", name=\"Claw Hammer\")`).",
+ "**Página do produto:**",
+ "Título do produto como `heading` com o nome do produto.",
+ "Preço unitário no elemento `[data-test=\"unit-price\"]`.",
+ "Campo de quantidade com label \"Quantity\", valor padrão `1`, mínimo `1`.",
+ "Botão \"Add to cart\".",
+ "Mensagens de confirmação e de erro exibidas como texto visível.",
+ "**Cabeçalho:** link de navegação com nome contendo \"Cart\" para abrir o carrinho.",
+ "**Indicador do carrinho:** `[data-test=\"cart-quantity\"]`, com a soma das unidades.",
+ "**Página do carrinho:**",
+ "Preço da linha em `[data-test=\"line-price\"]`.",
+ "Total do carrinho em `[data-test=\"cart-total\"]`.",
+ "Campo de quantidade da linha com role `spinbutton`.",
+ "Botão \"Update\" para aplicar a alteração de quantidade.",
+ "**Formato monetário:** valores como `$12.34` (símbolo opcional, duas casas decimais, ponto como separador).",
+ "**Thor Hammer:** limite de 1 unidade por carrinho. A mensagem de erro é exatamente \"You can only have one Thor Hammer in the cart.\".",
+ "**Quantidade 0:** rejeitada pela aplicação, de modo que a confirmação não aparece (TC06).",
+ "**Seletores `data-test`:** usados com `locator` explícito, pois o atributo padrão do `get_by_test_id` é `data-testid`.",
+ "**Limite máximo de quantidade:** desconhecido, não testado."
+]

@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT-01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "POST /booking com payload válido e verificar status, bookingid e dados retornados",
+  "esperado": "Status 200, bookingid numérico inteiro e campos de `booking` iguais aos enviados"
+ },
+ {
+  "id": "CT-02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "Positivo",
+  "criterio": "2",
+  "passos": "Criar reserva, GET /booking/{bookingid}",
+  "esperado": "Status 200 e todos os campos iguais aos enviados"
+ },
+ {
+  "id": "CT-03",
+  "titulo": "Consultar identificador inexistente (99999999)",
+  "tipo": "Negativo",
+  "criterio": "3",
+  "passos": "GET /booking/99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT-04",
+  "titulo": "Listar reservas por nome e sobrenome contendo o identificador criado",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Criar reserva com nome/sobrenome únicos, GET /booking?firstname=&lastname=",
+  "esperado": "Status 200 e lista contendo `bookingid` criado"
+ },
+ {
+  "id": "CT-05",
+  "titulo": "Consultar identificador zero (limite inferior)",
+  "tipo": "Borda",
+  "criterio": "3",
+  "passos": "GET /booking/0",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT-06",
+  "titulo": "Listar reservas com nome e sobrenome sem correspondência",
+  "tipo": "Borda",
+  "criterio": "4",
+  "passos": "GET /booking?firstname=&lastname= com valores inexistentes",
+  "esperado": "Status 200 e lista vazia"
+ },
+ {
+  "id": "CT-07",
+  "titulo": "Criar reserva com preço zero e depósito não pago",
+  "tipo": "Borda",
+  "criterio": "1",
+  "passos": "POST /booking com totalprice 0 e depositpaid false",
+  "esperado": "Status 200 e campos retornados iguais aos enviados"
+ },
+ {
+  "id": "CT-08",
+  "titulo": "Criar reserva com caracteres especiais e acentuados",
+  "tipo": "Borda",
+  "criterio": "1",
+  "passos": "POST /booking com nome e necessidades contendo acentos, hífen e apóstrofo",
+  "esperado": "Status 200 e campos retornados iguais aos enviados, sem alteração de caracteres"
+ },
+ {
+  "id": "CT-09",
+  "titulo": "Criar reserva com corpo sem campos obrigatórios",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "POST /booking com corpo `{}`",
+  "esperado": "Status de erro (>= 400) e ausência de bookingid na resposta"
+ }
+]

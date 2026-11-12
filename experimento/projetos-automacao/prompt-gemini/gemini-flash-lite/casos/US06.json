@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Anotar contador de mensagens no painel admin",
+  "tipo": "Positivo",
+  "criterio": "Critério 1",
+  "passos": "1. Acessar `/admin`<br>2. Fazer login com `admin` / `password`<br>3. Localizar o contador ao lado de \"Messages\"<br>4. Ler e armazenar o valor numérico",
+  "esperado": "O número de mensagens pendentes é exibido corretamente e capturado."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Envio bem-sucedido de mensagem de contato pelo visitante",
+  "tipo": "Positivo",
+  "criterio": "Critério 2",
+  "passos": "1. Acessar a página inicial (`/`)<br>2. Preencher nome, e-mail, telefone, assunto e mensagem com dados válidos<br>3. Clicar no botão de envio",
+  "esperado": "Mensagem de confirmação \"Thanks for getting in touch <nome>!\" é exibida."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Verificar incremento no contador após envio de mensagem",
+  "tipo": "Positivo",
+  "criterio": "Critério 3",
+  "passos": "1. Anotar contador inicial em `/admin`<br>2. Enviar nova mensagem pela página inicial<br>3. Fazer login novamente no painel admin (`/admin`)",
+  "esperado": "O contador de \"Messages\" é exatamente uma unidade maior que o valor anterior."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Validar exibição da mensagem recém-enviada na caixa de mensagens",
+  "tipo": "Positivo",
+  "criterio": "Critério 4",
+  "passos": "1. Fazer login no painel admin<br>2. Abrir a caixa/seção de mensagens<br>3. Verificar a listagem",
+  "esperado": "A mensagem recém-enviada aparece na lista contendo o nome do remetente e o assunto informados."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Restrição de acesso à caixa de mensagens após logout",
+  "tipo": "Negativo",
+  "criterio": "Critério 5",
+  "passos": "1. Fazer login no painel admin<br>2. Realizar logout<br>3. Tentar acessar diretamente a rota de mensagens ou painel administrativo",
+  "esperado": "O usuário é redirecionado ou solicitado a fazer login (formulário de login visível)."
+ }
+]

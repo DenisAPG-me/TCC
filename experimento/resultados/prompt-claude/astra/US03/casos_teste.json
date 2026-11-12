@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar login vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Abrir login; Manter e-mail e senha vazios; Enviar formulário",
+  "esperado": "Exibe “Email is required” e “Password is required”"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar login sem e-mail",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Abrir login; Preencher somente a senha; Enviar formulário",
+  "esperado": "Exibe “Email is required”; Não exibe “Password is required”"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Enviar login sem senha",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Abrir login; Preencher somente o e-mail; Enviar formulário",
+  "esperado": "Exibe “Password is required”; Não exibe “Email is required”"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Rejeitar senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir login; Informar e-mail demonstrativo e senha incorreta; Enviar; Tentar acessar a conta",
+  "esperado": "Exibe “Invalid email or password”; Continua no login; Acesso à conta redireciona ao login"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Exigir login no checkout",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Sem autenticação, adicionar um produto ao carrinho; Abrir carrinho; Avançar ao checkout",
+  "esperado": "Exibe campos de e-mail e senha e botão para autenticação"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Autenticar conta demonstrativa",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Abrir login; Informar credenciais demonstrativas; Enviar formulário",
+  "esperado": "Exibe “My account” e nome do usuário no menu"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Bloquear endereço com obrigatórios vazios",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Autenticar; Adicionar produto; Acessar endereço; Limpar os seis campos obrigatórios; Tentar avançar",
+  "esperado": "Permanece no endereço; Campos continuam vazios; Etapa de pagamento permanece oculta"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Avançar após completar endereço",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Autenticar; Adicionar produto; Acessar endereço; Limpar obrigatórios e tentar avançar; Preencher país, CEP, número, rua, cidade e estado; Avançar",
+  "esperado": "Endereço vazio bloqueia avanço; Após preenchimento, exibe etapa e seleção de pagamento"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Finalizar compra com cartão",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Autenticar; Adicionar produto; Preencher endereço; Avançar; Selecionar cartão; Informar dados fictícios; Confirmar pagamento; Confirmar pedido",
+  "esperado": "Exibe “Payment was successful”; Depois exibe agradecimento com número de nota iniciado por “INV-”"
+ }
+]

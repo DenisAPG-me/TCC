@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 16.08,
+ "tokens": {
+  "total": 3242
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "es), f\"Preços fora de ordem crescente: {prices}\"\n\n\ndef test_CT04_ordenacao_por_nome_decrescente(page):\n    page.goto(BASE_URL)\n    choose_sort_option(page, r\"name.*(z.*a|descending)\", \"Name (Z to A)\")\n\n    names = product_names(page)\n    assert names, \"Não há nomes de produtos para verificar.\"\n    normalized = [name.casefold() for name in names]\n    assert normalized == sorted(normalized, reverse=True), (\n        f\"Nomes fora de ordem alfabética decrescente: {names}\"\n    )\n```\ntokens used\n3,242\n"
+}

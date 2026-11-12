@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 30.78,
+ "tokens": {
+  "total": 5056
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "o JSON; recebido: {item!r}\"\n        )\n        assert RESPONSE_ID_FIELD in item, (\n            f\"Resultado sem identificador: {item!r}\"\n        )\n        assert type(item[RESPONSE_ID_FIELD]) is int, (\n            f\"Identificador deve ser inteiro: {item!r}\"\n        )\n        returned_ids.append(item[RESPONSE_ID_FIELD])\n\n    assert booking_id in returned_ids, (\n        f\"A reserva {booking_id} não apareceu na listagem filtrada \"\n        \"pelo nome e sobrenome enviados.\"\n    )\n```\ntokens used\n5,056\n"
+}

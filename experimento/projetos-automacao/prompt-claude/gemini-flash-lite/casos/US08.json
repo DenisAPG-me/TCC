@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar requisição POST para o endpoint de autenticação com usuário admin e senha password123",
+  "esperado": "Receber status code 200 e um token de acesso não vazio na resposta"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticação com credenciais inválidas",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar requisição POST para o endpoint de autenticação com credenciais incorretas",
+  "esperado": "Receber resposta sem token de acesso e informando o motivo Bad credentials"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Atualização completa de reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Enviar requisição PUT para atualizar totalmente uma reserva existente enviando token válido, novo nome e novo preço",
+  "esperado": "Receber status code 200 e a confirmação com os novos valores atualizados"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Atualização parcial de reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Enviar requisição PATCH para atualizar parcialmente apenas o sobrenome de uma reserva existente com token válido",
+  "esperado": "Receber status code 200, com o sobrenome alterado e os demais campos preservados"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Tentar atualizar reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Enviar requisição PUT para atualizar uma reserva existente sem enviar o cabeçalho de token de autenticação",
+  "esperado": "Receber status code 403 Forbidden"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualização completa com campos obrigatórios ausentes",
+  "tipo": "Borda",
+  "criterio": "CA6",
+  "passos": "Enviar requisição PUT para atualizar uma reserva existente com token válido mas omitindo campos obrigatórios no payload",
+  "esperado": "Receber status code 400 Bad Request"
+ }
+]

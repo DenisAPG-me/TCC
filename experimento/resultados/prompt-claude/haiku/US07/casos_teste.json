@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar POST /booking com corpo JSON válido; verificar status e corpo da resposta",
+  "esperado": "Status 200; bookingid é inteiro; campo booking igual aos dados enviados"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Criar reserva via POST /booking; consultar GET /booking/{id} com o bookingid retornado; comparar corpo",
+  "esperado": "Status 200; todos os campos iguais aos enviados"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Consultar GET /booking/99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Listar reservas por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva com nome e sobrenome únicos; listar GET /booking com firstname e lastname; verificar lista",
+  "esperado": "Status 200; lista contém o bookingid criado"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Listar por nome e sobrenome sem reservas",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Listar GET /booking com firstname e lastname aleatórios não cadastrados; verificar lista",
+  "esperado": "Status 200; lista vazia"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Consultar reserva com caracteres especiais",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Criar reserva com acentos, hífen, apóstrofo e \"&\" nos campos; consultar por id; comparar corpo",
+  "esperado": "Status 200; todos os campos iguais aos enviados, incluindo acentos"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Consultar identificador zero",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Consultar GET /booking/0",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Criar reserva com preço zero e sem depósito",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Enviar POST /booking com totalprice 0 e depositpaid false; verificar status e corpo",
+  "esperado": "Status 200; bookingid inteiro; booking igual aos dados enviados"
+ }
+]

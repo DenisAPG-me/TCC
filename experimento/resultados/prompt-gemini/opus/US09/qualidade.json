@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "claro",
+  "estrutura": "factory fixture e helpers",
+  "assercoes": "compara corpos e lista antes/depois",
+  "espera": "timeout e uuid",
+  "manutenibilidade": "cleanup e constantes"
+ }
+}

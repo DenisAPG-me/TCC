@@ -1,0 +1,279 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Autenticação com credenciais válidas | positivo | CA1 | POST /auth com admin / password123 | Status 200 e campo `token` presente e não vazio |
+| TC02 | Autenticação com senha inválida | negativo | CA2 | POST /auth com admin / senha incorreta | Corpo sem `token` e `reason` = "Bad credentials" |
+| TC03 | Autenticação com usuário inexistente | negativo | CA2 | POST /auth com usuário inexistente / password123 | Corpo sem `token` e `reason` = "Bad credentials" |
+| TC04 | Autenticação com credenciais vazias | borda | CA2 | POST /auth com username e password vazios | Corpo sem `token` e `reason` = "Bad credentials" |
+| TC05 | Atualização completa com novo nome e novo preço | positivo | CA3 | Criar reserva; obter token; PUT /booking/{id} com payload completo alterando nome e preço | Status 200 e corpo com os novos valores |
+| TC06 | Atualização completa persiste os novos valores | positivo | CA3 | Criar reserva; PUT completo com token; GET /booking/{id} | GET retorna os novos nome e preço |
+| TC07 | Atualização parcial apenas do sobrenome | positivo | CA4 | Criar reserva; obter token; PATCH /booking/{id} com apenas `lastname` | Status 200, `lastname` alterado e demais campos iguais aos originais |
+| TC08 | Atualização parcial persiste e preserva demais campos | positivo | CA4 | Criar reserva; PATCH `lastname` com token; GET /booking/{id} | GET retorna novo `lastname` e demais campos inalterados |
+| TC09 | Atualização completa sem token | negativo | CA5 | Criar reserva; PUT /booking/{id} sem cookie de token | Status 403 |
+| TC10 | Atualização parcial sem token | negativo | CA5 | Criar reserva; PATCH /booking/{id} sem cookie de token | Status 403 |
+| TC11 | Atualização completa com token inválido | borda | CA5 | Criar reserva; PUT /booking/{id} com token inexistente | Status 403 |
+| TC12 | Atualização completa sem `firstname` | negativo | CA6 | Criar reserva; obter token; PUT com payload sem `firstname` | Status 400 |
+| TC13 | Atualização completa sem `bookingdates` | negativo | CA6 | Criar reserva; obter token; PUT com payload sem `bookingdates` | Status 400 |
+| TC14 | Atualização completa com corpo vazio | borda | CA6 | Criar reserva; obter token; PUT com corpo `{}` | Status 400 |
+
+SUPOSIÇÕES
+
+- A API é REST/JSON; utiliza-se Python + pytest + requests.
+- URL base definida na constante `BASE_URL` = `https://restful-booker.herokuapp.com`.
+- Endpoint de autenticação: `POST /auth` com corpo `{"username": ..., "password": ...}`; sucesso retorna `{"token": "<valor>"}`.
+- Em credenciais inválidas, o corpo retorna `{"reason": "Bad credentials"}`; o status HTTP não é verificado, pois o CA2 não o especifica.
+- O token é enviado no cabeçalho `Cookie: token=<token>`.
+- Reservas existentes são criadas como pré-condição via `POST /booking` (sem autenticação), que retorna status 200 e `{"bookingid": <id>, "booking": {...}}`.
+- A reserva criada é removida ao final via `DELETE /booking/{id}` com token; o resultado da limpeza não é verificado.
+- Atualização completa: `PUT /booking/{id}`; atualização parcial: `PATCH /booking/{id}`. Ambas retornam a reserva atualizada no corpo.
+- Esquema da reserva: `firstname` (str), `lastname` (str), `totalprice` (int), `depositpaid` (bool), `bookingdates` (`checkin`/`checkout` no formato `YYYY-MM-DD`), `additionalneeds` (str).
+- Campos obrigatórios no PUT: `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`. `additionalneeds` é considerado opcional.
+- Leitura da reserva: `GET /booking/{id}` retorna o objeto da reserva sem o `bookingid`.
+- As requisições usam os cabeçalhos `Content-Type: application/json` e `Accept: application/json`.
+- Um token inválido ou inexistente é tratado como ausência de autorização (403).
+- Requisições com timeout de 30 segundos. Cada teste cria a sua própria reserva para evitar dependência entre testes.
+
+```python
+import copy
+
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+TIMEOUT = 30
+
+VALID_USERNAME = "admin"
+VALID_PASSWORD = "password123"
+
+DEFAULT_HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+ORIGINAL_BOOKING = {
+    "firstname": "Maria",
+    "lastname": "Silva",
+    "totalprice": 150,
+    "depositpaid": True,
+    "bookingdates": {"checkin": "2026-11-10", "checkout": "2026-11-15"},
+    "additionalneeds": "Breakfast",
+}
+
+UPDATED_BOOKING = {
+    "firstname": "Joana",
+    "lastname": "Souza",
+    "totalprice": 320,
+    "depositpaid": True,
+    "bookingdates": {"checkin": "2026-11-10", "checkout": "2026-11-15"},
+    "additionalneeds": "Breakfast",
+}
+
+NEW_LASTNAME = "Oliveira"
+
+
+def authenticate(http, username, password):
+    return http.post(
+        f"{BASE_URL}/auth",
+        json={"username": username, "password": password},
+        timeout=TIMEOUT,
+    )
+
+
+def auth_headers(token):
+    return {"Cookie": f"token={token}"}
+
+
+def booking_url(booking_id):
+    return f"{BASE_URL}/booking/{booking_id}"
+
+
+@pytest.fixture
+def http():
+    session = requests.Session()
+    session.headers.update(DEFAULT_HEADERS)
+    yield session
+    session.close()
+
+
+@pytest.fixture
+def token(http):
+    response = authenticate(http, VALID_USERNAME, VALID_PASSWORD)
+    assert response.status_code == 200
+    value = response.json().get("token")
+    assert value
+    return value
+
+
+@pytest.fixture
+def booking_id(http, token):
+    response = http.post(f"{BASE_URL}/booking", json=ORIGINAL_BOOKING, timeout=TIMEOUT)
+    assert response.status_code == 200
+    created_id = response.json()["bookingid"]
+    yield created_id
+    http.delete(booking_url(created_id), headers=auth_headers(token), timeout=TIMEOUT)
+
+
+def test_TC01_autenticacao_com_credenciais_validas(http):
+    response = authenticate(http, VALID_USERNAME, VALID_PASSWORD)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert isinstance(body.get("token"), str)
+    assert body["token"].strip() != ""
+
+
+def test_TC02_autenticacao_com_senha_invalida(http):
+    response = authenticate(http, VALID_USERNAME, "senha_errada")
+
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_TC03_autenticacao_com_usuario_inexistente(http):
+    response = authenticate(http, "usuario_inexistente", VALID_PASSWORD)
+
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_TC04_autenticacao_com_credenciais_vazias(http):
+    response = authenticate(http, "", "")
+
+    body = response.json()
+    assert "token" not in body
+    assert body.get("reason") == "Bad credentials"
+
+
+def test_TC05_atualizacao_completa_com_novo_nome_e_preco(http, token, booking_id):
+    response = http.put(
+        booking_url(booking_id),
+        json=UPDATED_BOOKING,
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["firstname"] == UPDATED_BOOKING["firstname"]
+    assert body["lastname"] == UPDATED_BOOKING["lastname"]
+    assert body["totalprice"] == UPDATED_BOOKING["totalprice"]
+    assert body == UPDATED_BOOKING
+
+
+def test_TC06_atualizacao_completa_persiste_novos_valores(http, token, booking_id):
+    update = http.put(
+        booking_url(booking_id),
+        json=UPDATED_BOOKING,
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+    assert update.status_code == 200
+
+    response = http.get(booking_url(booking_id), timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["firstname"] == UPDATED_BOOKING["firstname"]
+    assert body["lastname"] == UPDATED_BOOKING["lastname"]
+    assert body["totalprice"] == UPDATED_BOOKING["totalprice"]
+
+
+def test_TC07_atualizacao_parcial_apenas_do_sobrenome(http, token, booking_id):
+    response = http.patch(
+        booking_url(booking_id),
+        json={"lastname": NEW_LASTNAME},
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 200
+    expected = copy.deepcopy(ORIGINAL_BOOKING)
+    expected["lastname"] = NEW_LASTNAME
+    assert response.json() == expected
+
+
+def test_TC08_atualizacao_parcial_persiste_e_preserva_demais_campos(http, token, booking_id):
+    update = http.patch(
+        booking_url(booking_id),
+        json={"lastname": NEW_LASTNAME},
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+    assert update.status_code == 200
+
+    response = http.get(booking_url(booking_id), timeout=TIMEOUT)
+
+    assert response.status_code == 200
+    expected = copy.deepcopy(ORIGINAL_BOOKING)
+    expected["lastname"] = NEW_LASTNAME
+    assert response.json() == expected
+
+
+def test_TC09_atualizacao_completa_sem_token(http, booking_id):
+    response = http.put(booking_url(booking_id), json=UPDATED_BOOKING, timeout=TIMEOUT)
+
+    assert response.status_code == 403
+
+
+def test_TC10_atualizacao_parcial_sem_token(http, booking_id):
+    response = http.patch(
+        booking_url(booking_id),
+        json={"lastname": NEW_LASTNAME},
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 403
+
+
+def test_TC11_atualizacao_completa_com_token_invalido(http, booking_id):
+    response = http.put(
+        booking_url(booking_id),
+        json=UPDATED_BOOKING,
+        headers=auth_headers("token_invalido_123"),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 403
+
+
+def test_TC12_atualizacao_completa_sem_firstname(http, token, booking_id):
+    payload = copy.deepcopy(UPDATED_BOOKING)
+    del payload["firstname"]
+
+    response = http.put(
+        booking_url(booking_id),
+        json=payload,
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 400
+
+
+def test_TC13_atualizacao_completa_sem_bookingdates(http, token, booking_id):
+    payload = copy.deepcopy(UPDATED_BOOKING)
+    del payload["bookingdates"]
+
+    response = http.put(
+        booking_url(booking_id),
+        json=payload,
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 400
+
+
+def test_TC14_atualizacao_completa_com_corpo_vazio(http, token, booking_id):
+    response = http.put(
+        booking_url(booking_id),
+        json={},
+        headers=auth_headers(token),
+        timeout=TIMEOUT,
+    )
+
+    assert response.status_code == 400
+```

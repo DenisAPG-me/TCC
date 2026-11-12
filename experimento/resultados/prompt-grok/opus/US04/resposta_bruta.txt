@@ -1,0 +1,156 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Envio do formulário totalmente vazio | negativo | CA1 | Abrir a página inicial; não preencher nenhum campo; clicar em "Submit" | Exibe mensagens de campo obrigatório para nome, e-mail, telefone, assunto e mensagem |
+| TC02 | Telefone com 10 caracteres (abaixo do mínimo) | negativo / borda | CA2 | Preencher os demais campos com dados válidos; telefone com 10 dígitos; enviar | Exibe "Phone must be between 11 and 21 characters." |
+| TC03 | Telefone com 11 caracteres (limite mínimo) | borda | CA2 | Telefone com 11 dígitos; assunto inválido (4 caracteres) para manter o formulário na tela; enviar | Exibe o erro de assunto; o erro de telefone não é exibido |
+| TC04 | Telefone com 21 caracteres (limite máximo) | borda | CA2 | Telefone com 21 dígitos; assunto inválido (4 caracteres); enviar | Exibe o erro de assunto; o erro de telefone não é exibido |
+| TC05 | Telefone com 22 caracteres (acima do máximo) | negativo / borda | CA2 | Preencher os demais campos válidos; telefone com 22 dígitos; enviar | Exibe "Phone must be between 11 and 21 characters." |
+| TC06 | Assunto com 4 e mensagem com 19 caracteres | negativo / borda | CA3 | Preencher nome, e-mail e telefone válidos; assunto com 4 e mensagem com 19 caracteres; enviar | Exibe "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." |
+| TC07 | Assunto com 5 e mensagem com 20 caracteres (limites mínimos) | borda | CA3 | Assunto com 5 e mensagem com 20 caracteres; telefone inválido (10 dígitos) para manter o formulário; enviar | Exibe o erro de telefone; os erros de assunto e mensagem não são exibidos |
+| TC08 | Assunto com 101 e mensagem com 2001 caracteres | negativo / borda | CA3 | Preencher nome, e-mail e telefone válidos; assunto com 101 e mensagem com 2001 caracteres; enviar | Exibe os erros de tamanho de assunto e de mensagem |
+| TC09 | E-mail malformado "bad" | negativo | CA4 | Preencher os demais campos válidos; e-mail "bad"; enviar | Exibe "must be a well-formed email address" |
+| TC10 | Envio com todos os campos válidos | positivo | CA5 | Preencher todos os campos com dados válidos; enviar | Exibe "Thanks for getting in touch <nome>!" e o assunto informado |
+| TC11 | Assunto com 100 e mensagem com 2000 caracteres (limites máximos) | borda / positivo | CA3, CA5 | Preencher nome, e-mail e telefone válidos; assunto com 100 e mensagem com 2000 caracteres; enviar | Exibe "Thanks for getting in touch <nome>!" e o assunto informado |
+
+SUPOSIÇÕES
+
+- O formulário de contato está na página inicial (`https://automationintesting.online/`), sem necessidade de login nem de navegação adicional.
+- Os campos do formulário possuem os `data-testid`: `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject` e `ContactDescription` (mensagem).
+- O botão de envio é um `button` com nome acessível "Submit".
+- As mensagens de campo em branco (CA1) estão em inglês: "Name may not be blank", "Email may not be blank", "Phone may not be blank", "Subject may not be blank" e "Message may not be blank". A User Story não traz o texto exato, apenas o conceito.
+- As validações são feitas no servidor e todas as mensagens de erro aparecem juntas na página após o envio. Os campos não usam validação HTML5 que bloqueie o envio.
+- O formulário vazio pode exibir também mensagens de tamanho, além das de campo em branco. O TC01 verifica apenas as de campo em branco.
+- As regras de tamanho são inclusivas: telefone de 11 a 21, assunto de 5 a 100 e mensagem de 20 a 2000 caracteres.
+- "Caracteres" refere-se ao comprimento da string. O telefone aceita apenas dígitos nos dados de teste.
+- Após o sucesso, o formulário é substituído por uma confirmação que contém "Thanks for getting in touch <nome>!" e o texto do assunto enviado.
+- Para verificar a ausência de um erro, o teste força outro erro conhecido. A presença desse outro erro confirma que a resposta de validação já foi renderizada.
+- Dados válidos padrão: nome "Maria Souza", e-mail "maria.souza@example.com", telefone "01234567890", assunto "Duvida sobre reserva" e uma mensagem com mais de 20 caracteres.
+- A base URL vem da constante `BASE_URL`, que pode ser sobrescrita pela opção `--base-url` do pytest-playwright.
+- Os testes são independentes. O envio de mensagens válidas cria registros no sistema, o que é aceitável no ambiente de demonstração.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+VALID_NAME = "Maria Souza"
+VALID_EMAIL = "maria.souza@example.com"
+VALID_PHONE = "01234567890"
+VALID_SUBJECT = "Duvida sobre reserva"
+VALID_MESSAGE = "Gostaria de saber se aceitam animais de estimacao."
+
+PHONE_ERROR = "Phone must be between 11 and 21 characters."
+SUBJECT_ERROR = "Subject must be between 5 and 100 characters."
+MESSAGE_ERROR = "Message must be between 20 and 2000 characters."
+EMAIL_ERROR = "must be a well-formed email address"
+
+
+@pytest.fixture
+def home_url(pytestconfig) -> str:
+    return pytestconfig.getoption("base_url", default=None) or BASE_URL
+
+
+def open_home(page: Page, url: str) -> None:
+    page.goto(url)
+    expect(page.get_by_test_id("ContactName")).to_be_visible()
+
+
+def submit_contact(
+    page: Page,
+    name: str = VALID_NAME,
+    email: str = VALID_EMAIL,
+    phone: str = VALID_PHONE,
+    subject: str = VALID_SUBJECT,
+    message: str = VALID_MESSAGE,
+) -> None:
+    page.get_by_test_id("ContactName").fill(name)
+    page.get_by_test_id("ContactEmail").fill(email)
+    page.get_by_test_id("ContactPhone").fill(phone)
+    page.get_by_test_id("ContactSubject").fill(subject)
+    page.get_by_test_id("ContactDescription").fill(message)
+    page.get_by_role("button", name="Submit").click()
+
+
+def test_TC01_empty_form_shows_blank_errors(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, name="", email="", phone="", subject="", message="")
+    for field in ["Name", "Email", "Phone", "Subject", "Message"]:
+        expect(
+            page.get_by_text(re.compile(rf"{field} may not be blank", re.IGNORECASE))
+        ).to_be_visible()
+
+
+def test_TC02_phone_with_10_chars_shows_error(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, phone="0123456789")
+    expect(page.get_by_text(PHONE_ERROR)).to_be_visible()
+
+
+def test_TC03_phone_with_11_chars_is_accepted(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, phone="0" * 11, subject="abcd")
+    expect(page.get_by_text(SUBJECT_ERROR)).to_be_visible()
+    expect(page.get_by_text(PHONE_ERROR)).to_have_count(0)
+
+
+def test_TC04_phone_with_21_chars_is_accepted(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, phone="0" * 21, subject="abcd")
+    expect(page.get_by_text(SUBJECT_ERROR)).to_be_visible()
+    expect(page.get_by_text(PHONE_ERROR)).to_have_count(0)
+
+
+def test_TC05_phone_with_22_chars_shows_error(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, phone="0" * 22)
+    expect(page.get_by_text(PHONE_ERROR)).to_be_visible()
+
+
+def test_TC06_short_subject_and_message_show_errors(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, subject="a" * 4, message="m" * 19)
+    expect(page.get_by_text(SUBJECT_ERROR)).to_be_visible()
+    expect(page.get_by_text(MESSAGE_ERROR)).to_be_visible()
+
+
+def test_TC07_min_subject_and_message_are_accepted(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, phone="0123456789", subject="a" * 5, message="m" * 20)
+    expect(page.get_by_text(PHONE_ERROR)).to_be_visible()
+    expect(page.get_by_text(SUBJECT_ERROR)).to_have_count(0)
+    expect(page.get_by_text(MESSAGE_ERROR)).to_have_count(0)
+
+
+def test_TC08_long_subject_and_message_show_errors(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, subject="a" * 101, message="m" * 2001)
+    expect(page.get_by_text(SUBJECT_ERROR)).to_be_visible()
+    expect(page.get_by_text(MESSAGE_ERROR)).to_be_visible()
+
+
+def test_TC09_malformed_email_shows_error(page: Page, home_url: str):
+    open_home(page, home_url)
+    submit_contact(page, email="bad")
+    expect(page.get_by_text(EMAIL_ERROR)).to_be_visible()
+
+
+def test_TC10_valid_submission_shows_confirmation(page: Page, home_url: str):
+    open_home(page, home_url)
+    subject = "Duvida sobre reserva TC10"
+    submit_contact(page, subject=subject)
+    expect(page.get_by_text(f"Thanks for getting in touch {VALID_NAME}!")).to_be_visible()
+    expect(page.get_by_text(subject)).to_be_visible()
+
+
+def test_TC11_max_subject_and_message_are_accepted(page: Page, home_url: str):
+    open_home(page, home_url)
+    subject = "S" * 100
+    submit_contact(page, subject=subject, message="m" * 2000)
+    expect(page.get_by_text(f"Thanks for getting in touch {VALID_NAME}!")).to_be_visible()
+    expect(page.get_by_text(subject)).to_be_visible()
+```

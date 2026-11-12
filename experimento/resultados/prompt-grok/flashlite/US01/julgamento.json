@@ -1,0 +1,70 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_buscar_palavra_chave_valida",
+   "categoria": "seletor inexistente",
+   "nota": ".card-title devolve texto vazio / nao e o nome do produto"
+  },
+  {
+   "teste": "test_TC03_ordenar_preco_crescente",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de opcao 'Price: Low to High' inexistente no select"
+  },
+  {
+   "teste": "test_TC04_ordenar_nome_z_a",
+   "categoria": "dado de teste inventado",
+   "nota": "rotulo de opcao 'Name: Z to A' inexistente no select"
+  }
+ ]
+}

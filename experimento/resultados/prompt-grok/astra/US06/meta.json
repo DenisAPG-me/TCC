@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 46.0,
+ "tokens": {
+  "total": 3855
+ },
+ "n_casos_extraidos": 7,
+ "tem_codigo": true,
+ "stderr_tail": "   open_messages(page)\n    logout(page)\n\n    open_path(page, MESSAGES_PATH)\n    expect_login_form(page)\n\n\ndef test_TC06_bloquear_acesso_sem_autenticacao(page: Page) -> None:\n    open_path(page, MESSAGES_PATH)\n    expect_login_form(page)\n\n\ndef test_TC07_preservar_nome_com_acentos_e_espacos(page: Page) -> None:\n    contact = make_contact(\"TC07\", accented=True)\n    submit_contact(page, contact)\n\n    login(page)\n    open_messages(page)\n    expect_contact_in_list(page, contact)\n```\ntokens used\n3,855\n"
+}

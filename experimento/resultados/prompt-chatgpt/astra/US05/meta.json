@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 33.66,
+ "tokens": {
+  "total": 4957
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "_by_role(\"link\", name=item, exact=True)\n        ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)\n\n\ndef test_CT004_sair_do_painel(ui_page):\n    authenticate(ui_page)\n\n    logout(ui_page)\n\n    assert_public_home(ui_page)\n\n\ndef test_CT005_impedir_acesso_direto_apos_logout(ui_page):\n    authenticate(ui_page)\n    logout(ui_page)\n    assert_public_home(ui_page)\n\n    ui_page.goto(\n        absolute_url(ROOMS_PATH), wait_until=\"domcontentloaded\"\n    )\n\n    assert_login_screen(ui_page)\n```\ntokens used\n4,957\n"
+}

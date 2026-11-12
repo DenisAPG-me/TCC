@@ -1,0 +1,114 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  6
+ ],
+ "alucinados": [
+  5
+ ],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C01",
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C01"
+   ],
+   "nota": "qtd padrao 1"
+  },
+  "5": {
+   "classe": "alucinado",
+   "oraculo": [],
+   "nota": "qtd 0 nao adiciona; o site exibe confirmacao e adiciona 1"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "Thor Hammer com 1 unidade e aceito"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role('link', name='Claw Hammer') casa 2 produtos (strict mode)"
+  },
+  {
+   "teste": "test_TC02",
+   "categoria": "seletor inexistente",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_TC03",
+   "categoria": "seletor inexistente",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_TC04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo"
+  },
+  {
+   "teste": "test_TC05",
+   "categoria": "seletor inexistente",
+   "nota": "link ambiguo"
+  },
+  {
+   "teste": "test_TC06",
+   "categoria": "seletor inexistente",
+   "nota": "link ambiguo"
+  },
+  {
+   "teste": "test_TC07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo"
+  }
+ ]
+}

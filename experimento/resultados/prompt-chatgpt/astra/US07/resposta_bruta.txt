@@ -1,0 +1,225 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Criar reserva com dados válidos | positivo | 1 | Enviar JSON com todos os campos e verificar a resposta | Status 200, identificador numérico e dados iguais aos enviados |
+| CT002 | Consultar reserva criada | positivo | 2 | Criar uma reserva independente e consultar o identificador retornado | Status 200 e todos os campos iguais aos enviados |
+| CT003 | Consultar identificador inexistente | negativo | 3 | Consultar o identificador 99999999 | Status 404 |
+| CT004 | Encontrar reserva pelo nome e sobrenome | positivo | 4 | Criar reserva com nome e sobrenome únicos e listar usando ambos como filtros | Lista de resultados contém o identificador criado |
+
+SUPOSIÇÕES
+
+1. Os identificadores **1, 2, 3 e 4** dos critérios foram preservados. A URL base, os status 200 de criação e consulta, o status 404 para identificador inexistente e a inclusão do identificador na listagem filtrada estão explícitos. A história exige somente API REST; portanto, o arquivo utiliza pytest e requests.
+2. **Rotas e métodos inferidos:** criação em `POST /booking` (CT001, CT002 e CT004), consulta em `GET /booking/{id}` (CT002 e CT003) e listagem em `GET /booking` com parâmetros `firstname` e `lastname` (CT004). Supõe-se acesso sem autenticação nessas operações.
+3. **Formato de entrada inferido:** `firstname` e `lastname` são strings, `totalprice` é número, `depositpaid` é booleano, `bookingdates` contém `checkin` e `checkout` no formato `AAAA-MM-DD`, e `additionalneeds` é string. CT001, CT002 e CT004 dependem desse contrato. O preço 150, depósito pago, necessidades adicionais “Breakfast” e estadia de uma noite com início 30 dias após a data UTC atual são dados de teste presumidos válidos, não limites de negócio.
+4. **Formato de resposta inferido:** criação retorna um objeto com `bookingid` inteiro e `booking` contendo exatamente os dados enviados; consulta retorna diretamente esses dados; listagem retorna status 200 e um array de objetos com `bookingid` inteiro. CT001, CT002 e CT004 dependem dessas suposições. O tipo inteiro é a interpretação adotada para o identificador numérico; booleanos não são aceitos como identificadores.
+5. **Unicidade e disponibilidade:** CT001, CT002 e CT004 geram nomes e sobrenomes com sufixos UUID, presumidos aceitos como strings. CT004 depende da ausência de colisões desses valores no ambiente. CT002 e CT004 pressupõem disponibilidade imediata dos dados após a criação, pois não há prazo de consistência informado.
+6. **Pré-condição externa de CT003:** `99999999` deve estar inexistente durante o teste. A história fornece esse valor como exemplo, mas não garante sua ausência no ambiente real. Se existir, o teste falhará; não haverá substituição silenciosa.
+7. Cada teste usa uma sessão HTTP própria; testes que precisam de reserva criam seus próprios dados. As sessões são encerradas ao final. Não foi inferida uma operação de exclusão, pois seu contrato e sua autenticação não constam da história. As reservas criadas permanecem no ambiente; é necessária uma base que permita esses registros e, quando necessário, limpeza externa.
+8. CT003 cobre o cenário negativo especificado. Não foram acrescentados testes de corpos inválidos ou de borda: a história não define validações, limites, campos opcionais ou respostas para esses casos. A estadia de uma noite é apenas uma entrada válida presumida, não um teste de limite mínimo.
+9. Timeout de conexão de 5 segundos e de leitura de 20 segundos, cabeçalhos JSON e ausência de seguimento automático de redirecionamentos são decisões de implementação centralizadas no arquivo. Falhas HTTP, de comunicação ou de contrato são expostas.
+10. O arquivo pode ser salvo como `test_reservas.py` e executado com `pytest test_reservas.py`. Não houve execução nem verificação do sistema real; as informações inferidas podem exigir ajustes antes de o código funcionar contra ele.
+
+```python
+from datetime import datetime, timedelta, timezone
+from uuid import uuid4
+
+import pytest
+import requests
+
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+
+# Contratos e valores inferidos que podem exigir ajuste.
+BOOKING_PATH = "/booking"
+BOOKING_ID_PATH = "/booking/{booking_id}"
+REQUEST_TIMEOUT = (5, 20)
+FOLLOW_REDIRECTS = False
+HTTP_HEADERS = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+FIELDS = {
+    "firstname": "firstname",
+    "lastname": "lastname",
+    "totalprice": "totalprice",
+    "depositpaid": "depositpaid",
+    "bookingdates": "bookingdates",
+    "checkin": "checkin",
+    "checkout": "checkout",
+    "additionalneeds": "additionalneeds",
+}
+RESPONSE_ID_FIELD = "bookingid"
+RESPONSE_BOOKING_FIELD = "booking"
+FILTER_FIRSTNAME = "firstname"
+FILTER_LASTNAME = "lastname"
+
+FIRSTNAME_PREFIX = "TesteNome"
+LASTNAME_PREFIX = "TesteSobrenome"
+TOTAL_PRICE = 150
+DEPOSIT_PAID = True
+ADDITIONAL_NEEDS = "Breakfast"
+CHECKIN_OFFSET_DAYS = 30
+STAY_DAYS = 1
+DATE_FORMAT = "%Y-%m-%d"
+NONEXISTENT_BOOKING_ID = 99999999
+
+CREATE_STATUS = 200
+READ_STATUS = 200
+LIST_STATUS = 200
+NOT_FOUND_STATUS = 404
+
+
+def endpoint(path):
+    return BASE_URL.rstrip("/") + "/" + path.lstrip("/")
+
+
+def booking_path(booking_id):
+    return BOOKING_ID_PATH.format(booking_id=booking_id)
+
+
+def send_request(session, method, path, **kwargs):
+    return session.request(
+        method=method,
+        url=endpoint(path),
+        timeout=REQUEST_TIMEOUT,
+        allow_redirects=FOLLOW_REDIRECTS,
+        **kwargs,
+    )
+
+
+def assert_status(response, expected):
+    assert response.status_code == expected, (
+        f"{response.request.method} {response.url}: "
+        f"esperado HTTP {expected}, recebido {response.status_code}. "
+        f"Corpo: {response.text[:1000]}"
+    )
+
+
+def assert_booking_data(actual, expected):
+    assert isinstance(actual, dict), (
+        f"Esperado objeto JSON para a reserva; recebido: {actual!r}"
+    )
+    assert set(actual) == set(expected), (
+        f"Campos divergentes: esperado {set(expected)}, recebido {set(actual)}"
+    )
+
+    for field, expected_value in expected.items():
+        actual_value = actual[field]
+        assert type(actual_value) is type(expected_value), (
+            f"Tipo divergente no campo {field}: "
+            f"esperado {type(expected_value).__name__}, "
+            f"recebido {type(actual_value).__name__}"
+        )
+        assert actual_value == expected_value, (
+            f"Campo {field}: esperado {expected_value!r}, "
+            f"recebido {actual_value!r}"
+        )
+
+
+def create_booking(session, payload):
+    response = send_request(session, "POST", BOOKING_PATH, json=payload)
+    assert_status(response, CREATE_STATUS)
+
+    body = response.json()
+    assert isinstance(body, dict), "A criação deve retornar um objeto JSON."
+    assert RESPONSE_ID_FIELD in body, "Identificador ausente na criação."
+    assert type(body[RESPONSE_ID_FIELD]) is int, (
+        "O identificador retornado deve ser inteiro."
+    )
+    assert RESPONSE_BOOKING_FIELD in body, "Dados da reserva ausentes."
+    assert_booking_data(body[RESPONSE_BOOKING_FIELD], payload)
+
+    return body[RESPONSE_ID_FIELD]
+
+
+@pytest.fixture
+def api_session():
+    with requests.Session() as session:
+        session.headers.update(HTTP_HEADERS)
+        yield session
+
+
+@pytest.fixture
+def booking_payload():
+    unique_suffix = uuid4().hex
+    checkin = (
+        datetime.now(timezone.utc).date()
+        + timedelta(days=CHECKIN_OFFSET_DAYS)
+    )
+    checkout = checkin + timedelta(days=STAY_DAYS)
+
+    return {
+        FIELDS["firstname"]: FIRSTNAME_PREFIX + unique_suffix,
+        FIELDS["lastname"]: LASTNAME_PREFIX + unique_suffix,
+        FIELDS["totalprice"]: TOTAL_PRICE,
+        FIELDS["depositpaid"]: DEPOSIT_PAID,
+        FIELDS["bookingdates"]: {
+            FIELDS["checkin"]: checkin.strftime(DATE_FORMAT),
+            FIELDS["checkout"]: checkout.strftime(DATE_FORMAT),
+        },
+        FIELDS["additionalneeds"]: ADDITIONAL_NEEDS,
+    }
+
+
+def test_CT001_criar_reserva_com_dados_validos(api_session, booking_payload):
+    # O helper verifica status, identificador e todos os dados retornados.
+    booking_id = create_booking(api_session, booking_payload)
+    assert type(booking_id) is int
+
+
+def test_CT002_consultar_reserva_criada(api_session, booking_payload):
+    booking_id = create_booking(api_session, booking_payload)
+
+    response = send_request(api_session, "GET", booking_path(booking_id))
+
+    assert_status(response, READ_STATUS)
+    assert_booking_data(response.json(), booking_payload)
+
+
+def test_CT003_consultar_identificador_inexistente(api_session):
+    response = send_request(
+        api_session,
+        "GET",
+        booking_path(NONEXISTENT_BOOKING_ID),
+    )
+
+    assert_status(response, NOT_FOUND_STATUS)
+
+
+def test_CT004_filtrar_por_nome_e_sobrenome(api_session, booking_payload):
+    booking_id = create_booking(api_session, booking_payload)
+
+    response = send_request(
+        api_session,
+        "GET",
+        BOOKING_PATH,
+        params={
+            FILTER_FIRSTNAME: booking_payload[FIELDS["firstname"]],
+            FILTER_LASTNAME: booking_payload[FIELDS["lastname"]],
+        },
+    )
+
+    assert_status(response, LIST_STATUS)
+    results = response.json()
+    assert isinstance(results, list), "A listagem deve retornar um array JSON."
+
+    returned_ids = []
+    for item in results:
+        assert isinstance(item, dict), (
+            f"Cada resultado deve ser um objeto JSON; recebido: {item!r}"
+        )
+        assert RESPONSE_ID_FIELD in item, (
+            f"Resultado sem identificador: {item!r}"
+        )
+        assert type(item[RESPONSE_ID_FIELD]) is int, (
+            f"Identificador deve ser inteiro: {item!r}"
+        )
+        returned_ids.append(item[RESPONSE_ID_FIELD])
+
+    assert booking_id in returned_ids, (
+        f"A reserva {booking_id} não apareceu na listagem filtrada "
+        "pelo nome e sobrenome enviados."
+    )
+```

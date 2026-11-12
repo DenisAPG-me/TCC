@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Excluir reserva sem token retorna 403 e reserva permanece consultável",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Criar reserva; DELETE sem header de token; GET pelo id",
+  "esperado": "DELETE retorna 403; GET retorna 200 com os dados da reserva"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Excluir reserva com token inválido retorna 403 e reserva permanece",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Criar reserva; DELETE com token inválido; GET pelo id",
+  "esperado": "DELETE retorna 403; GET retorna 200 com os dados da reserva"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Excluir reserva com token vazio retorna 403 e reserva permanece",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Criar reserva; DELETE com token vazio; GET pelo id",
+  "esperado": "DELETE retorna 403; GET retorna 200 com os dados da reserva"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Excluir reserva com token válido retorna 201",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Criar reserva; autenticar com admin; DELETE com token válido",
+  "esperado": "DELETE retorna 201"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Consultar reserva excluída retorna 404",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva; autenticar; DELETE com token válido; GET pelo id",
+  "esperado": "GET retorna 404"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Excluir novamente reserva já excluída retorna erro 4xx",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva; autenticar; DELETE válido; DELETE repetido com o mesmo token",
+  "esperado": "Segunda exclusão retorna status entre 400 e 499; GET da reserva retorna 404"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Exclusão repetida não afeta reserva vizinha",
+  "tipo": "borda",
+  "criterio": "CA05",
+  "passos": "Criar reserva alvo e vizinha; excluir alvo; excluir alvo novamente; GET da vizinha",
+  "esperado": "Vizinha continua retornando 200 com os mesmos dados"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Listar por nome único após exclusão retorna lista vazia",
+  "tipo": "positivo",
+  "criterio": "CA06",
+  "passos": "Criar reserva com nome único; listar pelo nome; autenticar; excluir; listar novamente pelo nome",
+  "esperado": "Antes da exclusão a lista contém apenas o id da reserva; depois da exclusão a lista está vazia"
+ }
+]

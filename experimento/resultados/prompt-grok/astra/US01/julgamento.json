@@ -1,0 +1,97 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "busca parcial 'ham'"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "busca por nome completo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_buscar_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  },
+  {
+   "teste": "test_TC02_buscar_termo_inexistente",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  },
+  {
+   "teste": "test_TC03_ordenar_precos_crescentes",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  },
+  {
+   "teste": "test_TC04_ordenar_nomes_de_z_a_a",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  },
+  {
+   "teste": "test_TC05_buscar_parte_da_palavra",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  },
+  {
+   "teste": "test_TC06_buscar_nome_completo",
+   "categoria": "seletor inexistente",
+   "nota": "atributos data-applied-*/test-ids hipoteticos inexistentes"
+  }
+ ]
+}

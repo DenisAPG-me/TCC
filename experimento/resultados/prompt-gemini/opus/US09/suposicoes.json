@@ -1,0 +1,20 @@
+[
+ "A User Story é de API REST, portanto o script usa `pytest` + `requests`. A URL base fica na constante `BASE_URL`, com valor `https://restful-booker.herokuapp.com`.",
+ "**Autenticação:** `POST /auth` com payload `{\"username\": \"admin\", \"password\": \"password123\"}`.",
+ "Com credenciais válidas, retorna 200 e `{\"token\": \"<valor>\"}`.",
+ "Com credenciais inválidas, não retorna a chave `token` (possivelmente retorna `{\"reason\": \"Bad credentials\"}` com status 200).",
+ "**Envio do token:** o token é enviado no header `Cookie: token=<valor>`. Um valor arbitrário ou vazio é tratado como inválido e resulta em 403.",
+ "**Criação:** `POST /booking` exige os headers `Content-Type: application/json` e `Accept: application/json`. O payload tem as chaves:",
+ "`firstname`, `lastname`, `totalprice`, `depositpaid`",
+ "`bookingdates.checkin`, `bookingdates.checkout` (formato `YYYY-MM-DD`)",
+ "`additionalneeds`",
+ "**Consulta:** `GET /booking/{id}` com `Accept: application/json`. Retorna 200 com o objeto da reserva (mesmas chaves do payload) ou 404 se a reserva não existir.",
+ "**Exclusão:** `DELETE /booking/{id}`.",
+ "Retorna 201 em caso de sucesso.",
+ "Retorna 403 sem token ou com token inválido.",
+ "Retorna um status 4xx qualquer (por exemplo, 404 ou 405) ao excluir uma reserva já excluída. Por isso a asserção aceita toda a faixa 400–499.",
+ "**Listagem filtrada:** `GET /booking?firstname=<x>&lastname=<y>` retorna 200 com uma lista de objetos `{\"bookingid\": <int>}`.",
+ "**Nomes únicos:** são gerados com `uuid4` para isolar os testes de dados de terceiros no ambiente público compartilhado.",
+ "**Limpeza:** cada reserva criada é excluída no teardown da fixture. Falhas nessa limpeza são ignoradas, pois a reserva pode já ter sido excluída pelo próprio teste.",
+ "**Timeout:** 30 segundos por requisição, devido à possível latência do ambiente Heroku."
+]

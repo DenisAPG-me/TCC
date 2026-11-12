@@ -1,0 +1,132 @@
+{
+ "validos": [
+  0,
+  2,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "alucinados": [
+  1
+ ],
+ "duplicados": [
+  3
+ ],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C02",
+  "US01-C03",
+  "US01-C05",
+  "US01-C06",
+  "US01-C09",
+  "US01-C10"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "alucinado",
+   "oraculo": [],
+   "nota": "espera valor 'hammer' no campo de busca; campo fica vazio e a legenda e 'Searched for: hammer'"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "duplicado",
+   "oraculo": [],
+   "nota": "mesma condicao do caso 2"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C02"
+   ],
+   "nota": "HAMMER igual a hammer"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C05"
+   ],
+   "nota": "espacos nas bordas retornam o mesmo (API confirma)"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C10"
+   ],
+   "nota": "busca + ordenacao"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "ordenar em busca sem resultado mantem a mensagem"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct02",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "campo de busca nao mantem o valor; a pagina indica a busca na legenda"
+  },
+  {
+   "teste": "test_ct05",
+   "categoria": "espera/timing",
+   "nota": "le precos logo apos a resposta, antes da re-renderizacao"
+  },
+  {
+   "teste": "test_ct06",
+   "categoria": "espera/timing",
+   "nota": "le nomes antes da re-renderizacao"
+  },
+  {
+   "teste": "test_ct07",
+   "categoria": "espera/timing",
+   "nota": "segunda busca lida antes de atualizar a lista"
+  },
+  {
+   "teste": "test_ct08",
+   "categoria": "espera/timing",
+   "nota": "segunda busca lida antes de atualizar a lista"
+  },
+  {
+   "teste": "test_ct09",
+   "categoria": "espera/timing",
+   "nota": "le nomes antes de a lista filtrada/ordenada renderizar"
+  }
+ ]
+}

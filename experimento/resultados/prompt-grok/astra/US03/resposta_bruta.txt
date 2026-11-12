@@ -1,0 +1,388 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Enviar login vazio | negativo | 1 | Abrir login; enviar sem preencher os campos. | Exibe “Email is required” e “Password is required”. |
+| TC02 | Enviar login somente com senha | borda | 1 | Preencher apenas a senha; enviar. | Exibe “Email is required”; permanece sem sessão. |
+| TC03 | Enviar login somente com e-mail | borda | 1 | Preencher apenas o e-mail; enviar. | Exibe “Password is required”; permanece sem sessão. |
+| TC04 | Informar senha incorreta | negativo | 2 | Informar o e-mail de demonstração e uma senha incorreta; enviar. | Exibe “Invalid email or password”; permanece sem sessão. |
+| TC05 | Iniciar checkout sem autenticação | negativo | 3 | Adicionar um produto ao carrinho; iniciar checkout sem sessão. | Solicita e-mail e senha. |
+| TC06 | Autenticar conta de demonstração | positivo | 4 | Enviar as credenciais fornecidas. | Exibe “My account” e um nome de usuário no menu. |
+| TC07 | Enviar endereço totalmente vazio | negativo | 5 | Autenticar; adicionar produto; chegar ao endereço; limpar todos os campos obrigatórios; avançar. | Identifica os campos inválidos e impede acesso ao pagamento. |
+| TC08 | Omitir somente país | borda | 5 | Preencher o endereço, exceto país; avançar. | Impede acesso ao pagamento; preencher país permite avançar. |
+| TC09 | Omitir somente CEP | borda | 5 | Preencher o endereço, exceto CEP; avançar. | Impede acesso ao pagamento; preencher CEP permite avançar. |
+| TC10 | Omitir somente número | borda | 5 | Preencher o endereço, exceto número; avançar. | Impede acesso ao pagamento; preencher número permite avançar. |
+| TC11 | Omitir somente rua | borda | 5 | Preencher o endereço, exceto rua; avançar. | Impede acesso ao pagamento; preencher rua permite avançar. |
+| TC12 | Omitir somente cidade | borda | 5 | Preencher o endereço, exceto cidade; avançar. | Impede acesso ao pagamento; preencher cidade permite avançar. |
+| TC13 | Omitir somente estado | borda | 5 | Preencher o endereço, exceto estado; avançar. | Impede acesso ao pagamento; preencher estado permite avançar. |
+| TC14 | Preencher endereço após rejeição do formulário vazio | positivo | 5 | Enviar endereço vazio; preencher todos os campos obrigatórios; avançar. | A validação é corrigida e o passo de pagamento aparece. |
+| TC15 | Pagar com cartão e confirmar pedido | positivo | 6 | Autenticar; adicionar produto; preencher endereço; selecionar cartão; preencher dados fictícios; pagar; confirmar pedido. | Exibe “Payment was successful” e confirmação com número de fatura iniciado por “INV-”. |
+
+SUPOSIÇÕES
+
+- Nenhum acesso ao sistema, internet, documentação ou código foi realizado. O arquivo é uma implementação baseada em contratos de interface **supostos**; sua execução contra o sistema real depende da confirmação e eventual adaptação desses contratos.
+- Por prevalência dos requisitos técnicos, são necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, além do navegador instalado pelo Playwright. Não há outras dependências externas. Execução sugerida: `pytest test_compra.py`.
+- A URL base fica em uma constante. Supõem-se as rotas relativas `/auth/login` para login e `/` para catálogo. As demais etapas são alcançadas pela interface.
+- Supõe-se que cada teste receba do plugin uma página em contexto novo, sem sessão, carrinho ou estado de armazenamento previamente carregado. A conta existe, está ativa e aceita as credenciais fornecidas.
+- A interface está em inglês. Todos os nomes acessíveis e `data-testid` usados no código são inventados, exceto os textos explicitamente fornecidos na User Story. Os seletores supostos estão centralizados no código.
+- No login, existem os rótulos `Email` e `Password` e o botão `Login`. Os erros são visíveis após o envio, inclusive quando somente um campo está vazio. Os campos não utilizam validação nativa que impeça a apresentação dessas mensagens.
+- Após autenticar, aparece um título `My account` e um elemento `data-testid="user-menu-name"` contendo exclusivamente um nome não vazio. O nome real não foi fornecido; verifica-se esse contrato sem inventar um valor específico.
+- A ausência de sessão é observada pela ausência do menu autenticado e, após navegar novamente ao login, pela presença do formulário. Não se presume acesso a cookies ou endpoints internos.
+- Supõe-se um catálogo com ao menos um produto disponível, representado por um link `data-testid="product-card"`. O primeiro produto aceita inclusão de uma unidade; o contador `cart-count` passa a `1`. Os controles `Add to cart`, `Cart` e `Proceed to checkout` têm nomes acessíveis conforme o código.
+- O checkout não autenticado apresenta o mesmo formulário de login. Não se presume redirecionamento para uma rota específica nesse cenário.
+- Para usuário autenticado, iniciar checkout leva diretamente ao formulário `address-step`. Valores eventualmente preenchidos previamente são substituídos pelos dados de cada teste.
+- País é um `<select>` rotulado `Country`, com opção vazia de valor `""` e opção `Brazil`. CEP, número, rua, cidade e estado são campos editáveis com os rótulos definidos no código.
+- Os seis campos de endereço são obrigatórios individualmente. Ao enviar um endereço incompleto pelo botão `Continue to payment`, cada campo vazio recebe `aria-invalid="true"`; o endereço permanece visível e `payment-step` não fica visível.
+- O endereço fictício brasileiro fornecido no código é aceito para entrega. Não há verificação externa de endereço, cálculo de frete ou campos obrigatórios adicionais.
+- Os casos de borda exercitam a ausência de exatamente um campo obrigatório. Não se deduzem limites de tamanho, faixas numéricas, regras de CEP ou rejeições de cartão, pois não foram especificados.
+- O passo `payment-step` contém um `<select>` `Payment method`, com opção `Credit Card`, campos `Card number`, `Expiration date`, `CVV`, `Cardholder name` e botão `Pay`.
+- O ambiente é de demonstração e aceita o cartão fictício `4111111111111111`, CVV `123`, titular `CLIENTE TESTE` e validade futura no formato `MM/YYYY`. A validade é calculada com dois anos de antecedência. Não há cobrança real, iframe, CAPTCHA ou autenticação adicional do cartão.
+- Após pagar, aparece a mensagem especificada. Um botão `Confirm order` confirma o pedido; o elemento `order-confirmation` contém a mensagem especificada com sufixo de fatura não vazio, formado por letras, números ou hífens.
+- Cada caso listado corresponde a exatamente uma função de teste, sem parametrização. Os auxiliares apenas reutilizam preparação e verificações. Nenhum teste depende da execução de outro.
+
+```python
+# Arquivo: test_compra.py
+# Dependências: pytest, playwright e pytest-playwright.
+# Preparação:
+#   python -m pip install pytest playwright pytest-playwright
+#   python -m playwright install chromium
+# Execução:
+#   pytest test_compra.py
+#
+# Todos os contratos de interface abaixo são suposições da User Story.
+# Não foram verificados no sistema real.
+
+import re
+from datetime import date
+
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+LOGIN_PATH = "auth/login"
+
+EMAIL = "customer@practicesoftwaretesting.com"
+PASSWORD = "welcome01"
+WRONG_PASSWORD = "SenhaIncorreta_TC04!"
+
+TIMEOUT_MS = 10_000
+
+TEST_IDS = {
+    "user_name": "user-menu-name",
+    "product": "product-card",
+    "cart_count": "cart-count",
+    "address": "address-step",
+    "payment": "payment-step",
+    "confirmation": "order-confirmation",
+}
+
+LABELS = {
+    "email": "Email",
+    "password": "Password",
+    "country": "Country",
+    "postal_code": "Postal code",
+    "number": "Number",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "payment_method": "Payment method",
+    "card_number": "Card number",
+    "expiration": "Expiration date",
+    "cvv": "CVV",
+    "cardholder": "Cardholder name",
+}
+
+BUTTONS = {
+    "login": "Login",
+    "add": "Add to cart",
+    "checkout": "Proceed to checkout",
+    "address_next": "Continue to payment",
+    "pay": "Pay",
+    "confirm": "Confirm order",
+}
+
+ADDRESS = {
+    "country": "Brazil",
+    "postal_code": "01310-100",
+    "number": "1000",
+    "street": "Avenida Paulista",
+    "city": "São Paulo",
+    "state": "São Paulo",
+}
+
+CARD_NUMBER = "4111111111111111"
+CARD_CVV = "123"
+CARDHOLDER = "CLIENTE TESTE"
+
+INVOICE_PATTERN = re.compile(
+    r"^Thanks for your order! Your invoice number is "
+    r"INV-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+)
+
+
+def open_login(page: Page) -> None:
+    page.goto(BASE_URL + LOGIN_PATH)
+    expect(page.get_by_label(LABELS["email"], exact=True)).to_be_visible(
+        timeout=TIMEOUT_MS
+    )
+    expect(page.get_by_label(LABELS["password"], exact=True)).to_be_visible()
+
+
+def submit_login(
+    page: Page, email: str = "", password: str = ""
+) -> None:
+    page.get_by_label(LABELS["email"], exact=True).fill(email)
+    page.get_by_label(LABELS["password"], exact=True).fill(password)
+    page.get_by_role(
+        "button", name=BUTTONS["login"], exact=True
+    ).click()
+
+
+def expect_no_session(page: Page) -> None:
+    expect(page.get_by_test_id(TEST_IDS["user_name"])).to_have_count(0)
+    # Navegação adicional verifica que o formulário continua acessível
+    # sem um estado autenticado observável.
+    open_login(page)
+    expect(
+        page.get_by_role("button", name=BUTTONS["login"], exact=True)
+    ).to_be_visible()
+    expect(page.get_by_test_id(TEST_IDS["user_name"])).to_have_count(0)
+
+
+def login_successfully(page: Page) -> None:
+    open_login(page)
+    submit_login(page, EMAIL, PASSWORD)
+    expect(
+        page.get_by_role("heading", name="My account", exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    user_name = page.get_by_test_id(TEST_IDS["user_name"])
+    expect(user_name).to_be_visible()
+    expect(user_name).to_have_text(re.compile(r"\S"))
+
+
+def add_product_and_start_checkout(page: Page) -> None:
+    page.goto(BASE_URL)
+    product = page.get_by_test_id(TEST_IDS["product"]).first
+    expect(product).to_be_visible(timeout=TIMEOUT_MS)
+    product.click()
+    page.get_by_role(
+        "button", name=BUTTONS["add"], exact=True
+    ).click()
+    expect(page.get_by_test_id(TEST_IDS["cart_count"])).to_have_text(
+        "1", timeout=TIMEOUT_MS
+    )
+    page.get_by_role("link", name="Cart", exact=True).click()
+    page.get_by_role(
+        "button", name=BUTTONS["checkout"], exact=True
+    ).click()
+
+
+def reach_address(page: Page) -> None:
+    login_successfully(page)
+    add_product_and_start_checkout(page)
+    expect(page.get_by_test_id(TEST_IDS["address"])).to_be_visible(
+        timeout=TIMEOUT_MS
+    )
+
+
+def set_address_field(page: Page, field: str, value: str) -> None:
+    step = page.get_by_test_id(TEST_IDS["address"])
+    locator = step.get_by_label(LABELS[field], exact=True)
+    if field == "country":
+        if value:
+            locator.select_option(label=value)
+        else:
+            locator.select_option(value="")
+    else:
+        locator.fill(value)
+
+
+def fill_address(page: Page, missing: str = "") -> None:
+    for field, value in ADDRESS.items():
+        set_address_field(page, field, "" if field == missing else value)
+
+
+def clear_address(page: Page) -> None:
+    for field in ADDRESS:
+        set_address_field(page, field, "")
+
+
+def submit_address(page: Page) -> None:
+    page.get_by_test_id(TEST_IDS["address"]).get_by_role(
+        "button", name=BUTTONS["address_next"], exact=True
+    ).click()
+
+
+def expect_address_rejected(page: Page, missing_fields) -> None:
+    step = page.get_by_test_id(TEST_IDS["address"])
+    # Espera a validação ocorrer antes de verificar o bloqueio da etapa.
+    for field in missing_fields:
+        expect(
+            step.get_by_label(LABELS[field], exact=True)
+        ).to_have_attribute("aria-invalid", "true", timeout=TIMEOUT_MS)
+    expect(step).to_be_visible()
+    expect(page.get_by_test_id(TEST_IDS["payment"])).to_be_hidden()
+
+
+def expect_payment_step(page: Page) -> None:
+    expect(page.get_by_test_id(TEST_IDS["payment"])).to_be_visible(
+        timeout=TIMEOUT_MS
+    )
+    expect(page.get_by_test_id(TEST_IDS["address"])).to_be_hidden()
+
+
+def check_single_missing_address_field(page: Page, field: str) -> None:
+    reach_address(page)
+    fill_address(page, missing=field)
+    submit_address(page)
+    expect_address_rejected(page, [field])
+
+    # Corrige somente o campo omitido para verificar que ele era
+    # a única informação obrigatória pendente.
+    set_address_field(page, field, ADDRESS[field])
+    submit_address(page)
+    expect_payment_step(page)
+
+
+def test_TC01_login_vazio(page: Page) -> None:
+    open_login(page)
+    submit_login(page)
+    expect(
+        page.get_by_text("Email is required", exact=True)
+    ).to_be_visible()
+    expect(
+        page.get_by_text("Password is required", exact=True)
+    ).to_be_visible()
+
+
+def test_TC02_login_sem_email(page: Page) -> None:
+    open_login(page)
+    submit_login(page, password=PASSWORD)
+    expect(
+        page.get_by_text("Email is required", exact=True)
+    ).to_be_visible()
+    expect_no_session(page)
+
+
+def test_TC03_login_sem_senha(page: Page) -> None:
+    open_login(page)
+    submit_login(page, email=EMAIL)
+    expect(
+        page.get_by_text("Password is required", exact=True)
+    ).to_be_visible()
+    expect_no_session(page)
+
+
+def test_TC04_senha_incorreta(page: Page) -> None:
+    open_login(page)
+    submit_login(page, EMAIL, WRONG_PASSWORD)
+    expect(
+        page.get_by_text("Invalid email or password", exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    expect_no_session(page)
+
+
+def test_TC05_checkout_exige_autenticacao(page: Page) -> None:
+    add_product_and_start_checkout(page)
+    expect(
+        page.get_by_label(LABELS["email"], exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+    expect(
+        page.get_by_label(LABELS["password"], exact=True)
+    ).to_be_visible()
+    expect(
+        page.get_by_role("button", name=BUTTONS["login"], exact=True)
+    ).to_be_visible()
+    expect(page.get_by_test_id(TEST_IDS["user_name"])).to_have_count(0)
+
+
+def test_TC06_login_com_sucesso(page: Page) -> None:
+    login_successfully(page)
+
+
+def test_TC07_endereco_totalmente_vazio(page: Page) -> None:
+    reach_address(page)
+    clear_address(page)
+    submit_address(page)
+    expect_address_rejected(page, ADDRESS.keys())
+
+
+def test_TC08_endereco_sem_pais(page: Page) -> None:
+    check_single_missing_address_field(page, "country")
+
+
+def test_TC09_endereco_sem_cep(page: Page) -> None:
+    check_single_missing_address_field(page, "postal_code")
+
+
+def test_TC10_endereco_sem_numero(page: Page) -> None:
+    check_single_missing_address_field(page, "number")
+
+
+def test_TC11_endereco_sem_rua(page: Page) -> None:
+    check_single_missing_address_field(page, "street")
+
+
+def test_TC12_endereco_sem_cidade(page: Page) -> None:
+    check_single_missing_address_field(page, "city")
+
+
+def test_TC13_endereco_sem_estado(page: Page) -> None:
+    check_single_missing_address_field(page, "state")
+
+
+def test_TC14_corrigir_endereco_vazio_e_avancar(page: Page) -> None:
+    reach_address(page)
+    clear_address(page)
+    submit_address(page)
+    expect_address_rejected(page, ADDRESS.keys())
+
+    fill_address(page)
+    submit_address(page)
+    expect_payment_step(page)
+
+
+def test_TC15_pagar_com_cartao_e_confirmar_pedido(page: Page) -> None:
+    reach_address(page)
+    fill_address(page)
+    submit_address(page)
+    expect_payment_step(page)
+
+    payment = page.get_by_test_id(TEST_IDS["payment"])
+    payment.get_by_label(
+        LABELS["payment_method"], exact=True
+    ).select_option(label="Credit Card")
+
+    today = date.today()
+    expiration = f"{today.month:02d}/{today.year + 2}"
+
+    payment.get_by_label(
+        LABELS["card_number"], exact=True
+    ).fill(CARD_NUMBER)
+    payment.get_by_label(
+        LABELS["expiration"], exact=True
+    ).fill(expiration)
+    payment.get_by_label(
+        LABELS["cvv"], exact=True
+    ).fill(CARD_CVV)
+    payment.get_by_label(
+        LABELS["cardholder"], exact=True
+    ).fill(CARDHOLDER)
+    payment.get_by_role(
+        "button", name=BUTTONS["pay"], exact=True
+    ).click()
+
+    expect(
+        page.get_by_text("Payment was successful", exact=True)
+    ).to_be_visible(timeout=TIMEOUT_MS)
+
+    page.get_by_role(
+        "button", name=BUTTONS["confirm"], exact=True
+    ).click()
+
+    confirmation = page.get_by_test_id(TEST_IDS["confirmation"])
+    expect(confirmation).to_be_visible(timeout=TIMEOUT_MS)
+    expect(confirmation).to_have_text(
+        INVOICE_PATTERN, timeout=TIMEOUT_MS
+    )
+```

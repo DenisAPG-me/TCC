@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 25.15,
+ "tokens": {
+  "total": 6160
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "om_espacos_nas_extremidades(page: Page) -> None:\n    _open_home(page)\n    _search(page, SEARCH_TERM_WITH_SPACES)\n\n    expect(page.get_by_text(re.compile(r\"hammer\", re.IGNORECASE))).to_be_visible()\n    names = _product_name_links(page).all_text_contents()\n    assert names, \"A busca com espaços deveria exibir produtos.\"\n    assert all(\"hammer\" in _normalize_text(name) for name in names), (\n        f\"Todos os nomes deveriam conter 'hammer'; nomes encontrados: {names!r}\"\n    )\n```\ntokens used\n6,160\n"
+}

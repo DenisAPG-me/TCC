@@ -1,0 +1,12 @@
+[
+ "A aplicação é web e os testes usam `pytest-playwright`, com a fixture `page` do plugin.",
+ "A URL base padrão é `https://practicesoftwaretesting.com/`; pode ser sobrescrita com `--base-url`.",
+ "Os produtos podem ser encontrados pela busca da página inicial, usando um campo com placeholder `Search`; os resultados podem ser abertos pelo nome do produto.",
+ "A página do produto apresenta um campo de quantidade `input[type=\"number\"]` e um botão acessível chamado `Add to cart`.",
+ "A confirmação de inclusão e a mensagem de restrição aparecem como texto visível na página.",
+ "O carrinho pode ser aberto por um link ou botão acessível cujo nome contenha “cart” ou “carrinho”. O indicador de quantidade pode estar em `[data-test=\"nav-cart\"]` ou no link/botão do carrinho.",
+ "No carrinho, cada linha contém o nome do produto, preço unitário, quantidade e total da linha; a quantidade pode ser editada em um campo numérico. O total geral pode ser identificado pelo texto “Total”.",
+ "Os valores monetários exibidos usam ponto ou vírgula como separador decimal. O preço unitário é extraído da linha do produto para comparar os totais.",
+ "Cada teste prepara seu próprio estado do carrinho, limpando-o quando houver controles de remoção disponíveis. Se a aplicação mantiver carrinho entre testes, a execução deve usar um contexto novo por teste.",
+ "O critério 4 é tratado como teste negativo. Não se presume comportamento adicional para quantidades zero, valores em branco ou limites não descritos na User Story."
+]

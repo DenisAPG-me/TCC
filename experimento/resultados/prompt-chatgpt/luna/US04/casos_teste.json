@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Envio vazio exibe validações dos campos obrigatórios",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial, enviar o formulário sem preencher campos",
+  "esperado": "São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Telefone abaixo do mínimo exibe validação",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Preencher o formulário e informar telefone com 10 caracteres; enviar",
+  "esperado": "É exibida a mensagem `Phone must be between 11 and 21 characters.`"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Assunto e mensagem abaixo dos mínimos exibem validações",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Preencher os demais campos validamente; informar assunto com 4 e mensagem com 19 caracteres; enviar",
+  "esperado": "São exibidas as mensagens `Subject must be between 5 and 100 characters.` e `Message must be between 20 and 2000 characters.`"
+ },
+ {
+  "id": "CT004",
+  "titulo": "E-mail malformado exibe validação",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Preencher o formulário com e-mail `bad` e demais campos válidos; enviar",
+  "esperado": "É exibida a mensagem `must be a well-formed email address`"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Formulário válido confirma o contato",
+  "tipo": "positivo",
+  "criterio": "CA05",
+  "passos": "Preencher todos os campos com dados válidos e enviar",
+  "esperado": "A confirmação exibe `Thanks for getting in touch Ana Silva!` e o assunto informado"
+ }
+]

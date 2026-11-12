@@ -1,0 +1,70 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_busca_hammer_lista_somente_produtos_com_hammer[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct02_pagina_indica_que_busca_foi_por_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "e=SEARCH_BOX)).to_have_value(\"hammer\")\nE   AssertionError: Locator expected to have Value 'hammer'\nE   Actual value:  \nE   Call log:\nE     - Expect \"to_have_value\" get_by_role(\"textbox\", name=\"Search\") with timeout 5000ms\nE     - waiting for get_by_role(\"textbox\", name=\"Search\")\nE       14 × locator resolved to <input type=\"text\" wfd-id=\"id0\" id=\"search-query\" placeholder=\"Search\" formcontrolname=\"query\" data-test=\"search-query\" _ngcontent-ng-c2621549667=\"\" class=\"form-control ng-untouched ng-pristine ng-invalid\"/>\nE          - unexpected value \"\"\nE   \nE   Aria snapshot:\nE   - textbox \"Search\""
+  },
+  {
+   "nodeid": "script.py::test_ct03_termo_inexistente_exibe_mensagem_nenhum_produto[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct04_termo_inexistente_nao_lista_produtos[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct05_ordena_por_preco_do_menor_para_o_maior[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:72: in test_ct05_ordena_por_preco_do_menor_para_o_maior\n    assert prices == sorted(prices)\nE   assert [14.15, 12.01...7, 13.41, ...] == [9.17, 11.14,...8, 13.41, ...]\nE     \nE     At index 0 diff: 14.15 != 9.17\nE     Use -v to get more diff"
+  },
+  {
+   "nodeid": "script.py::test_ct06_ordena_por_nome_de_z_a_a[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:79: in test_ct06_ordena_por_nome_de_z_a_a\n    assert names == sorted(names, key=str.lower, reverse=True)\nE   AssertionError: assert [' Combinatio...n Grip ', ...] == ['Thor Hammer...Pliers ', ...]\nE     \nE     At index 0 diff: ' Combination Pliers ' != 'Thor Hammer'\nE     Use -v to get more diff"
+  },
+  {
+   "nodeid": "script.py::test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:89: in test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas\n    assert lower_names == upper_names\nE   AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\nE     \nE     At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\nE     Right contains 3 more items, first extra item: 'Pliers'\nE     Use -v to get more diff"
+  },
+  {
+   "nodeid": "script.py::test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:99: in test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados\n    assert actual == expected\nE   AssertionError: assert ['Claw Hammer...'Thor Hammer'] == ['Bolt Cutter... Pliers', ...]\nE     \nE     At index 0 diff: 'Claw Hammer' != 'Bolt Cutters'\nE     Right contains 3 more items, first extra item: 'Pliers'\nE     Use -v to get more diff"
+  },
+  {
+   "nodeid": "script.py::test_ct09_ordenacao_por_preco_preserva_filtro_da_busca[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py:107: in test_ct09_ordenacao_por_preco_preserva_filtro_da_busca\n    assert all(\"hammer\" in name.lower() for name in names)\nE   assert False\nE    +  where False = all(<generator object test_ct09_ordenacao_por_preco_preserva_filtro_da_busca.<locals>.<genexpr> at 0x0000019BE9951000>)"
+  },
+  {
+   "nodeid": "script.py::test_ct10_ordenacao_em_busca_sem_resultados_nao_exibe_produtos[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct02_pagina_indica_que_busca_foi_por_hammer[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct05_ordena_por_preco_do_menor_para_o_maior[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct06_ordena_por_nome_de_z_a_a[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct07_busca_sem_diferenciar_maiusculas_e_minusculas[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct08_termo_com_espacos_nas_bordas_retorna_mesmos_resultados[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US01\\script.py::test_ct09_ordenacao_por_preco_preserva_filtro_da_busca[chromium]\n6 failed, 4 passed, 2 warnings in 29.64s\n",
+ "returncode": 1,
+ "duracao_s": 30.28
+}

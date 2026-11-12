@@ -1,0 +1,562 @@
+{
+ "created": 1793384665.1624348,
+ "duration": 21.037861108779907,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02",
+ "environment": {},
+ "summary": {
+  "failed": 7,
+  "total": 7,
+  "collected": 7
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge[chromium]",
+     "type": "Function",
+     "lineno": 48
+    },
+    {
+     "nodeid": "script.py::test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3[chromium]",
+     "type": "Function",
+     "lineno": 55
+    },
+    {
+     "nodeid": "script.py::test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario[chromium]",
+     "type": "Function",
+     "lineno": 66
+    },
+    {
+     "nodeid": "script.py::test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite[chromium]",
+     "type": "Function",
+     "lineno": 77
+    },
+    {
+     "nodeid": "script.py::test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar[chromium]",
+     "type": "Function",
+     "lineno": 83
+    },
+    {
+     "nodeid": "script.py::test_TC06_quantidade_zero_nao_adiciona_ao_carrinho[chromium]",
+     "type": "Function",
+     "lineno": 91
+    },
+    {
+     "nodeid": "script.py::test_TC07_thor_hammer_1_unidade_e_aceito[chromium]",
+     "type": "Function",
+     "lineno": 97
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge[chromium]",
+   "lineno": 48,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4730489000212401,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.465661399997771,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\n    1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\n    2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\n\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 50,
+      "message": "in test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 28,
+      "message": "in open_product"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:50: in test_TC01_adicionar_3_claw_hammer_exibe_confirmacao_e_badge\n    open_product(page, \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:28: in open_product\n    page.get_by_role(\"link\", name=name).click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+   },
+   "teardown": {
+    "duration": 0.014818800031207502,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3[chromium]",
+   "lineno": 55,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11715509998612106,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.4301374999340624,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\n    1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\n    2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\n\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 57,
+      "message": "in test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 28,
+      "message": "in open_product"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:57: in test_TC02_linha_e_total_do_carrinho_igual_preco_vezes_3\n    open_product(page, \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:28: in open_product\n    page.get_by_role(\"link\", name=name).click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+   },
+   "teardown": {
+    "duration": 0.013020799960941076,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario[chromium]",
+   "lineno": 66,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11472120007965714,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.3951067999005318,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\n    1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\n    2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\n\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 68,
+      "message": "in test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 28,
+      "message": "in open_product"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:68: in test_TC03_alterar_quantidade_para_1_total_igual_preco_unitario\n    open_product(page, \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:28: in open_product\n    page.get_by_role(\"link\", name=name).click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+   },
+   "teardown": {
+    "duration": 0.01350650005042553,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite[chromium]",
+   "lineno": 77,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12058929994236678,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.2731127000879496,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.fill: Error: strict mode violation: get_by_label(\"Quantity\") resolved to 3 elements:\n    1) <button class=\"btn btn-secondary\" id=\"btn-decrease-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"decrease-quantity\" aria-label=\"Decrease quantity\">\u2026</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\n    2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\n    3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">\u2026</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\n\nCall log:\n  - waiting for get_by_label(\"Quantity\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 80,
+      "message": "in test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 40,
+      "message": "in add_to_cart"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:80: in test_TC04_thor_hammer_3_unidades_exibe_mensagem_de_limite\n    add_to_cart(page, \"3\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:40: in add_to_cart\n    page.get_by_label(\"Quantity\").fill(quantity)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.fill: Error: strict mode violation: get_by_label(\"Quantity\") resolved to 3 elements:\nE       1) <button class=\"btn btn-secondary\" id=\"btn-decrease-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"decrease-quantity\" aria-label=\"Decrease quantity\">\u2026</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">\u2026</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+   },
+   "teardown": {
+    "duration": 0.017492400016635656,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar[chromium]",
+   "lineno": 83,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11798509990330786,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.33861259999685,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\n    1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\n    2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\n\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 85,
+      "message": "in test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 28,
+      "message": "in open_product"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:85: in test_TC05_quantidade_padrao_1_ao_adicionar_sem_alterar\n    open_product(page, \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:28: in open_product\n    page.get_by_role(\"link\", name=name).click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+   },
+   "teardown": {
+    "duration": 0.014453999930992723,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_quantidade_zero_nao_adiciona_ao_carrinho[chromium]",
+   "lineno": 91,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC06_quantidade_zero_nao_adiciona_ao_carrinho[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11613119998946786,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.335490299970843,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\n    1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\n    2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\n\nCall log:\n  - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 93,
+      "message": "in test_TC06_quantidade_zero_nao_adiciona_ao_carrinho"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 28,
+      "message": "in open_product"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18032,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 165,
+      "message": "in click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 594,
+      "message": "in _click"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:93: in test_TC06_quantidade_zero_nao_adiciona_ao_carrinho\n    open_product(page, \"Claw Hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:28: in open_product\n    page.get_by_role(\"link\", name=name).click()\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18032: in click\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:165: in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:594: in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.click: Error: strict mode violation: get_by_role(\"link\", name=\"Claw Hammer\") resolved to 2 elements:\nE       1) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQAXB91H4GYHCF2CRZ7E\" data-test=\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQAXB91H4GYHCF2CRZ7E\\\"]\")\nE       2) <a class=\"card\" _ngcontent-ng-c2621549667=\"\" href=\"/product/01M66ZGQB3VBTR98C6YDM2R0N4\" data-test=\"product-01M66ZGQB3VBTR98C6YDM2R0N4\">\u2026</a> aka locator(\"[data-test=\\\"product-01M66ZGQB3VBTR98C6YDM2R0N4\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Claw Hammer\")"
+   },
+   "teardown": {
+    "duration": 0.013354300055652857,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC07_thor_hammer_1_unidade_e_aceito[chromium]",
+   "lineno": 97,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC07_thor_hammer_1_unidade_e_aceito[chromium]",
+    "chromium",
+    "script.py",
+    "US02",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11559180007316172,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 3.2583955000154674,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.Error: Locator.fill: Error: strict mode violation: get_by_label(\"Quantity\") resolved to 3 elements:\n    1) <button class=\"btn btn-secondary\" id=\"btn-decrease-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"decrease-quantity\" aria-label=\"Decrease quantity\">\u2026</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\n    2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\n    3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">\u2026</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\n\nCall log:\n  - waiting for get_by_label(\"Quantity\")"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 100,
+      "message": "in test_TC07_thor_hammer_1_unidade_e_aceito"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py",
+      "lineno": 40,
+      "message": "in add_to_cart"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 18398,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 219,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 637,
+      "message": "in fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 649,
+      "message": "in _fill"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:100: in test_TC07_thor_hammer_1_unidade_e_aceito\n    add_to_cart(page, \"1\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\haiku\\US02\\script.py:40: in add_to_cart\n    page.get_by_label(\"Quantity\").fill(quantity)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:18398: in fill\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:219: in fill\n    return await self._frame.fill(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:637: in fill\n    await self._fill(**locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:649: in _fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.Error: Locator.fill: Error: strict mode violation: get_by_label(\"Quantity\") resolved to 3 elements:\nE       1) <button class=\"btn btn-secondary\" id=\"btn-decrease-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"decrease-quantity\" aria-label=\"Decrease quantity\">\u2026</button> aka locator(\"[data-test=\\\"decrease-quantity\\\"]\")\nE       2) <input min=\"1\" max=\"99\" type=\"number\" id=\"quantity-input\" data-test=\"quantity\" aria-labelledby=\"Quantity\" _ngcontent-ng-c2605822289=\"\" class=\"form-control ng-untouched ng-pristine ng-valid\"/> aka locator(\"[data-test=\\\"quantity\\\"]\")\nE       3) <button class=\"btn btn-secondary\" id=\"btn-increase-quantity\" _ngcontent-ng-c2605822289=\"\" data-test=\"increase-quantity\" aria-label=\"Increase quantity\">\u2026</button> aka locator(\"[data-test=\\\"increase-quantity\\\"]\")\nE   \nE   Call log:\nE     - waiting for get_by_label(\"Quantity\")"
+   },
+   "teardown": {
+    "duration": 0.2541633000364527,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

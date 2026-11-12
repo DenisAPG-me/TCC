@@ -1,0 +1,20 @@
+[
+ "A aplicação usa o atributo `data-test` para identificadores de teste. Por isso, o script configura `selectors.set_test_id_attribute(\"data-test\")` para que `get_by_test_id` funcione.",
+ "Campo de busca: `data-test=\"search-query\"`.",
+ "Botão de pesquisa: `data-test=\"search-submit\"`.",
+ "Indicação da busca: `data-test=\"search-caption\"`, com texto no formato \"Searched for: <termo>\".",
+ "Nome de cada produto no card: `data-test=\"product-name\"`.",
+ "Preço de cada produto no card: `data-test=\"product-price\"`, no formato `$14.15`.",
+ "Seletor de ordenação: elemento `<select>` com `data-test=\"sort\"`. As opções têm os rótulos \"Price (Low - High)\" e \"Name (Z - A)\".",
+ "Mensagem de busca sem resultado: texto exato \"There are no products found.\".",
+ "A listagem é carregada via API REST:",
+ "a busca chama uma URL que contém `/products/search`;",
+ "a ordenação chama uma URL de `/products` que contém o parâmetro `sort=`;",
+ "a resposta é um JSON com a lista de produtos na chave `data`, e cada item tem a chave `name`.",
+ "O script usa essas respostas para sincronizar a espera, sem `time.sleep`.",
+ "A busca não diferencia maiúsculas de minúsculas. O CA1 não diz isso explicitamente, então o CT02 depende dessa premissa.",
+ "A ordenação por nome é verificada sem diferenciar maiúsculas de minúsculas (`casefold`).",
+ "A verificação de ordenação considera apenas os produtos da página atual, conforme os critérios de aceitação (\"os preços/nomes da página\").",
+ "A URL base vem da opção `--base-url` do pytest-playwright. Se a opção não for informada, o script usa a constante `BASE_URL`.",
+ "Dependências: `pip install pytest pytest-playwright` e `playwright install`."
+]

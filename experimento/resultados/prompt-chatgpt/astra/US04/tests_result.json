@@ -1,0 +1,64 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_enviar_formulario_vazio",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT002_telefone_abaixo_do_minimo",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT003_assunto_mensagem_abaixo_dos_minimos",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT004_email_malformado",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT005_dados_validos_intermediarios",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT006_dados_nos_limites_minimos",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT007_dados_nos_limites_maximos",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT008_telefone_acima_do_maximo",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT009_assunto_mensagem_acima_dos_maximos",
+   "outcome": "error",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  }
+ ],
+ "stdout_tail": "= short test summary info ===========================\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT001_enviar_formulario_vazio\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT002_telefone_abaixo_do_minimo\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT003_assunto_mensagem_abaixo_dos_minimos\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT004_email_malformado\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT005_dados_validos_intermediarios\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT006_dados_nos_limites_minimos\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT007_dados_nos_limites_maximos\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT008_telefone_acima_do_maximo\nERROR <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US04\\script.py::test_CT009_assunto_mensagem_acima_dos_maximos\n1 warning, 9 errors in 145.70s (0:02:25)\n",
+ "returncode": 1,
+ "duracao_s": 146.26
+}

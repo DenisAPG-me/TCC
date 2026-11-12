@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Validação de campos obrigatórios no login vazios",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar a tela de login; Clicar no botão de envio sem preencher os campos",
+  "esperado": "Exibir as mensagens de erro Email is required e Password is required"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Tentativa de login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a tela de login; Preencher e-mail válido e senha incorreta; Enviar o formulário",
+  "esperado": "Exibir a mensagem Invalid email or password e permanecer na tela de login sem criar sessão"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Redirecionamento para login ao avançar para checkout sem autenticação",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Adicionar um produto ao carrinho sem estar logado; Clicar em avançar para o checkout",
+  "esperado": "Ser redirecionado para a tela de autenticação informando e-mail e senha"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Visualização da página My account após login bem-sucedido",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar a tela de login; Preencher credenciais da conta de demonstração; Enviar o formulário",
+  "esperado": "Visualizar a página My account exibindo o nome do usuário no menu"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Validação de campos obrigatórios do endereço no checkout",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Estar autenticado com produto no carrinho; Avançar até o passo de endereço; Deixar os campos obrigatórios vazios e tentar avançar; Preencher todos os campos obrigatórios",
+  "esperado": "Impedir o avanço com campos vazios e permitir avançar após o preenchimento de país CEP número rua cidade e estado"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Finalização bem-sucedida de compra com cartão de crédito",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Estar no passo de pagamento do checkout; Selecionar cartão de crédito; Informar dados fictícios válidos; Confirmar pagamento e pedido",
+  "esperado": "Exibir a mensagem Payment was successful e posteriormente a confirmação com o número da fatura Thanks for your order Your invoice number is INV-..."
+ }
+]

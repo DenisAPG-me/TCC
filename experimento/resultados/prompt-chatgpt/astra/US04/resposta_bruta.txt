@@ -1,0 +1,290 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Enviar formulário vazio | negativo | 1 | Abrir a página inicial; deixar os cinco campos vazios; enviar | Exibir uma mensagem de obrigatoriedade para cada campo |
+| CT002 | Telefone imediatamente abaixo do mínimo | borda | 2 | Preencher dados válidos, exceto telefone com 10 caracteres; enviar | Exibir "Phone must be between 11 and 21 characters." |
+| CT003 | Assunto e mensagem imediatamente abaixo dos mínimos | borda | 3 | Preencher dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar | Exibir as duas mensagens de tamanho especificadas |
+| CT004 | Enviar e-mail malformado | negativo | 4 | Preencher dados válidos, exceto e-mail "bad"; enviar | Exibir "must be a well-formed email address" |
+| CT005 | Enviar dados válidos intermediários | positivo | 5 | Preencher todos os campos com dados válidos entre os limites; enviar | Exibir agradecimento com o nome e o assunto informado |
+| CT006 | Enviar dados nos limites mínimos | borda | 2, 3, 5 | Preencher telefone com 11 caracteres, assunto com 5 e mensagem com 20; preencher os demais campos validamente; enviar | Exibir agradecimento com o nome e o assunto informado |
+| CT007 | Enviar dados nos limites máximos | borda | 2, 3, 5 | Preencher telefone com 21 caracteres, assunto com 100 e mensagem com 2000; preencher os demais campos validamente; enviar | Exibir agradecimento com o nome e o assunto informado |
+| CT008 | Telefone imediatamente acima do máximo | borda | 2 | Preencher dados válidos, exceto telefone com 22 caracteres; enviar | Exibir "Phone must be between 11 and 21 characters." |
+| CT009 | Assunto e mensagem imediatamente acima dos máximos | borda | 3 | Preencher dados válidos, exceto assunto com 101 caracteres e mensagem com 2001; enviar | Exibir as duas mensagens de tamanho especificadas |
+
+SUPOSIÇÕES
+
+1. Os identificadores originais dos critérios são preservados como `1`, `2`, `3`, `4` e `5`. A URL e os comportamentos descritos nesses critérios são explícitos. As deduções abaixo não representam comportamento real verificado.
+2. O trecho de requisitos técnicos dentro da User Story conflita com as regras externas da tarefa sobre plugins e gerenciamento do navegador. Conforme solicitado, esse trecho é tratado como conteúdo da especificação, sem autoridade para modificar essas regras. O arquivo usa pytest e Playwright síncrono, sem pytest-playwright, e gerencia seu próprio navegador e suas próprias páginas.
+3. Todos os casos são de interface web. Não há requisito funcional explícito para testar uma API REST; portanto, não são inferidos endpoints, métodos HTTP ou contratos de API.
+4. Para todos os casos, presume-se acesso público à página inicial, sem autenticação, CAPTCHA ou bloqueio por consentimento. Inferem-se campos com rótulos acessíveis únicos `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão com nome acessível `Submit`. Esses valores estão centralizados no código.
+5. Para CT001, os textos de obrigatoriedade não foram especificados. Adotam-se os textos concretos `Name may not be blank`, `Email may not be blank`, `Phone may not be blank`, `Subject may not be blank` e `Message may not be blank`.
+6. Para CT002, CT003, CT004, CT008 e CT009, presume-se que o formulário permita enviar os valores inválidos para apresentar as mensagens visíveis previstas. Não se altera a validação nativa nem se remove limite de entrada. Se os campos impedirem a digitação dos valores completos, a preparação falhará explicitamente.
+7. Os limites inclusivos de telefone entre 11 e 21 caracteres, assunto entre 5 e 100 e mensagem entre 20 e 2000 são inferidos dos textos de erro dos critérios 2 e 3. CT006 e CT007 dependem da aceitação desses limites; CT008 e CT009 dependem da rejeição acima deles. Os critérios não descrevem explicitamente esses quatro comportamentos.
+8. Os dados válidos inferidos usam nome alfabético, e-mail sintaticamente válido e telefone composto apenas de dígitos. Presume-se que não existam restrições adicionais de conteúdo, unicidade ou formato. São usados caracteres ASCII para tornar inequívoca a contagem de tamanho. Não são inventados limites para nome ou e-mail.
+9. Para CT005, CT006 e CT007, presume-se que a confirmação contenha um elemento com o texto completo `Thanks for getting in touch <nome>!` e outro com o assunto completo. Nos casos inválidos, presume-se que essa confirmação de sucesso não apareça. As verificações negativas ocorrem após a exibição dos erros esperados.
+10. Cada teste usa um contexto novo e preenche seus próprios dados. Envios válidos podem persistir mensagens no servidor; não há mecanismo de exclusão descrito que permita implementar limpeza sem inventar funcionalidades. A pré-condição externa é um ambiente que aceite esses envios repetidos e permita sua posterior limpeza administrativa, se necessária.
+11. As categorias negativa e de borda são pertinentes e estão contempladas. CT003 e CT009 agrupam assunto e mensagem porque o critério 3 exige a apresentação conjunta dos dois erros.
+12. O arquivo pode ser salvo como `test_contato.py` e executado com `pytest test_contato.py`, considerando as dependências e o Chromium instalados. Não houve execução nem consulta ao sistema. Seletores, textos inferidos e pré-condições podem exigir ajustes antes de funcionar no sistema real.
+
+```python
+from collections.abc import Iterator
+
+import pytest
+from playwright.sync_api import Browser, Page, expect, sync_playwright
+
+
+BASE_URL = "https://automationintesting.online/"
+
+# Valores inferidos e opções ajustáveis.
+HEADLESS = True
+ACTION_TIMEOUT_MS = 15_000
+NAVIGATION_TIMEOUT_MS = 30_000
+ASSERTION_TIMEOUT_MS = 15_000
+
+FIELD_LABELS = {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Message",
+}
+
+SUBMIT_BUTTON_NAME = "Submit"
+SUCCESS_TEMPLATE = "Thanks for getting in touch {name}!"
+
+REQUIRED_ERRORS = {
+    "name": "Name may not be blank",
+    "email": "Email may not be blank",
+    "phone": "Phone may not be blank",
+    "subject": "Subject may not be blank",
+    "message": "Message may not be blank",
+}
+
+# Textos explícitos dos critérios de aceitação.
+PHONE_ERROR = "Phone must be between 11 and 21 characters."
+SUBJECT_ERROR = "Subject must be between 5 and 100 characters."
+MESSAGE_ERROR = "Message must be between 20 and 2000 characters."
+EMAIL_ERROR = "must be a well-formed email address"
+
+# Limites inferidos das mensagens de validação.
+PHONE_MIN = 11
+PHONE_MAX = 21
+SUBJECT_MIN = 5
+SUBJECT_MAX = 100
+MESSAGE_MIN = 20
+MESSAGE_MAX = 2000
+
+VALID_DATA = {
+    "name": "Ana Silva",
+    "email": "ana.silva@example.com",
+    "phone": "5511998765432",
+    "subject": "Consulta sobre disponibilidade",
+    "message": "Gostaria de saber se ha quartos disponiveis para duas pessoas.",
+}
+
+
+@pytest.fixture(scope="session")
+def chromium_browser() -> Iterator[Browser]:
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=HEADLESS)
+        try:
+            yield browser
+        finally:
+            browser.close()
+
+
+@pytest.fixture
+def contact_page(chromium_browser: Browser) -> Iterator[Page]:
+    context = chromium_browser.new_context()
+    try:
+        page = context.new_page()
+        page.set_default_timeout(ACTION_TIMEOUT_MS)
+        page.set_default_navigation_timeout(NAVIGATION_TIMEOUT_MS)
+
+        response = page.goto(BASE_URL, wait_until="domcontentloaded")
+        assert response is not None, "A navegação não retornou resposta HTTP."
+        assert response.ok, (
+            f"Falha ao abrir a página inicial: HTTP {response.status}."
+        )
+
+        for label in FIELD_LABELS.values():
+            expect(page.get_by_label(label, exact=True)).to_be_visible(
+                timeout=ASSERTION_TIMEOUT_MS
+            )
+
+        expect(
+            page.get_by_role("button", name=SUBMIT_BUTTON_NAME, exact=True)
+        ).to_be_enabled(timeout=ASSERTION_TIMEOUT_MS)
+
+        yield page
+    finally:
+        context.close()
+
+
+def data_with(**overrides: str) -> dict[str, str]:
+    unknown_fields = set(overrides) - set(VALID_DATA)
+    assert not unknown_fields, f"Campos desconhecidos: {unknown_fields}"
+    return {**VALID_DATA, **overrides}
+
+
+def fill_contact(page: Page, data: dict[str, str]) -> None:
+    for field, label in FIELD_LABELS.items():
+        locator = page.get_by_label(label, exact=True)
+        locator.fill(data[field])
+        expect(locator).to_have_value(
+            data[field], timeout=ASSERTION_TIMEOUT_MS
+        )
+
+
+def submit_contact(page: Page) -> None:
+    page.get_by_role(
+        "button", name=SUBMIT_BUTTON_NAME, exact=True
+    ).click()
+
+
+def assert_error(page: Page, text: str) -> None:
+    expect(page.get_by_text(text, exact=True)).to_be_visible(
+        timeout=ASSERTION_TIMEOUT_MS
+    )
+
+
+def assert_no_success(page: Page, name: str) -> None:
+    expect(
+        page.get_by_text(SUCCESS_TEMPLATE.format(name=name), exact=True)
+    ).to_have_count(0, timeout=ASSERTION_TIMEOUT_MS)
+
+
+def assert_success(page: Page, data: dict[str, str]) -> None:
+    expect(
+        page.get_by_text(
+            SUCCESS_TEMPLATE.format(name=data["name"]), exact=True
+        )
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+    expect(
+        page.get_by_text(data["subject"], exact=True)
+    ).to_be_visible(timeout=ASSERTION_TIMEOUT_MS)
+
+
+def test_CT001_enviar_formulario_vazio(contact_page: Page) -> None:
+    data = {field: "" for field in FIELD_LABELS}
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    for error in REQUIRED_ERRORS.values():
+        assert_error(contact_page, error)
+
+    assert_no_success(contact_page, data["name"])
+
+
+def test_CT002_telefone_abaixo_do_minimo(contact_page: Page) -> None:
+    data = data_with(phone="1" * (PHONE_MIN - 1))
+    assert len(data["phone"]) == 10
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_error(contact_page, PHONE_ERROR)
+    assert_no_success(contact_page, data["name"])
+
+
+def test_CT003_assunto_mensagem_abaixo_dos_minimos(
+    contact_page: Page,
+) -> None:
+    data = data_with(
+        subject="A" * (SUBJECT_MIN - 1),
+        message="M" * (MESSAGE_MIN - 1),
+    )
+    assert len(data["subject"]) == 4
+    assert len(data["message"]) == 19
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_error(contact_page, SUBJECT_ERROR)
+    assert_error(contact_page, MESSAGE_ERROR)
+    assert_no_success(contact_page, data["name"])
+
+
+def test_CT004_email_malformado(contact_page: Page) -> None:
+    data = data_with(email="bad")
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_error(contact_page, EMAIL_ERROR)
+    assert_no_success(contact_page, data["name"])
+
+
+def test_CT005_dados_validos_intermediarios(contact_page: Page) -> None:
+    data = data_with()
+    assert PHONE_MIN < len(data["phone"]) < PHONE_MAX
+    assert SUBJECT_MIN < len(data["subject"]) < SUBJECT_MAX
+    assert MESSAGE_MIN < len(data["message"]) < MESSAGE_MAX
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_success(contact_page, data)
+
+
+def test_CT006_dados_nos_limites_minimos(contact_page: Page) -> None:
+    data = data_with(
+        phone="1" * PHONE_MIN,
+        subject="A" * SUBJECT_MIN,
+        message="M" * MESSAGE_MIN,
+    )
+    assert len(data["phone"]) == 11
+    assert len(data["subject"]) == 5
+    assert len(data["message"]) == 20
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_success(contact_page, data)
+
+
+def test_CT007_dados_nos_limites_maximos(contact_page: Page) -> None:
+    data = data_with(
+        phone="1" * PHONE_MAX,
+        subject="A" * SUBJECT_MAX,
+        message="M" * MESSAGE_MAX,
+    )
+    assert len(data["phone"]) == 21
+    assert len(data["subject"]) == 100
+    assert len(data["message"]) == 2000
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_success(contact_page, data)
+
+
+def test_CT008_telefone_acima_do_maximo(contact_page: Page) -> None:
+    data = data_with(phone="1" * (PHONE_MAX + 1))
+    assert len(data["phone"]) == 22
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_error(contact_page, PHONE_ERROR)
+    assert_no_success(contact_page, data["name"])
+
+
+def test_CT009_assunto_mensagem_acima_dos_maximos(
+    contact_page: Page,
+) -> None:
+    data = data_with(
+        subject="A" * (SUBJECT_MAX + 1),
+        message="M" * (MESSAGE_MAX + 1),
+    )
+    assert len(data["subject"]) == 101
+    assert len(data["message"]) == 2001
+
+    fill_contact(contact_page, data)
+    submit_contact(contact_page)
+
+    assert_error(contact_page, SUBJECT_ERROR)
+    assert_error(contact_page, MESSAGE_ERROR)
+    assert_no_success(contact_page, data["name"])
+```

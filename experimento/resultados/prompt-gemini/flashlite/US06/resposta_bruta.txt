@@ -1,0 +1,115 @@
+### CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| CT01 | Anotar contador de mensagens no painel admin | Positivo | Critério 1 | 1. Acessar `/admin`<br>2. Fazer login com `admin` / `password`<br>3. Localizar o contador ao lado de "Messages"<br>4. Ler e armazenar o valor numérico | O número de mensagens pendentes é exibido corretamente e capturado. |
+| CT02 | Envio bem-sucedido de mensagem de contato pelo visitante | Positivo | Critério 2 | 1. Acessar a página inicial (`/`)<br>2. Preencher nome, e-mail, telefone, assunto e mensagem com dados válidos<br>3. Clicar no botão de envio | Mensagem de confirmação "Thanks for getting in touch <nome>!" é exibida. |
+| CT03 | Verificar incremento no contador após envio de mensagem | Positivo | Critério 3 | 1. Anotar contador inicial em `/admin`<br>2. Enviar nova mensagem pela página inicial<br>3. Fazer login novamente no painel admin (`/admin`) | O contador de "Messages" é exatamente uma unidade maior que o valor anterior. |
+| CT04 | Validar exibição da mensagem recém-enviada na caixa de mensagens | Positivo | Critério 4 | 1. Fazer login no painel admin<br>2. Abrir a caixa/seção de mensagens<br>3. Verificar a listagem | A mensagem recém-enviada aparece na lista contendo o nome do remetente e o assunto informados. |
+| CT05 | Restrição de acesso à caixa de mensagens após logout | Negativo | Critério 5 | 1. Fazer login no painel admin<br>2. Realizar logout<br>3. Tentar acessar diretamente a rota de mensagens ou painel administrativo | O usuário é redirecionado ou solicitado a fazer login (formulário de login visível). |
+
+### SUPOSIÇÕES
+
+- **URL Base:** `https://automationintesting.online/`
+- **Credenciais Administrativas:** Usuário `admin`, Senha `password`
+- **Rotas:**
+  - Painel administrativo / Login: `https://automationintesting.online/#/admin` ou `/admin`
+  - Página inicial: `https://automationintesting.online/`
+- **Seletores e Elementos da Interface:**
+  - Campos de login admin: Input de usuário com `get_by_label("Username")` ou `data-testid="username"`; input de senha com `get_by_label("Password")` ou `data-testid="password"`; botão de login `get_by_role("button", { name: "Login" })` ou equivalente.
+  - Contador de mensagens: Elemento contendo o texto "Messages" ou badge/contador próximo com seletor robusto (ex: `id="messagesCount"` ou `get_by_text("Messages")`).
+  - Formulário de contato da página inicial: Inputs `name`, `email`, `phone`, `subject`, `description`/`message` e botão de envio `get_by_role("button", { name: "Submit" })`.
+  - Mensagem de confirmação: Texto contendo "Thanks for getting in touch".
+  - Seção de mensagens no admin: Aba ou link "Messages" no painel administrativo.
+  - Botão de logout: Botão com texto "Logout" ou "Log out".
+
+```python
+import re
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online"
+
+
+def login_admin(page: Page):
+    page.goto(f"{BASE_URL}/#/admin")
+    page.get_by_placeholder("Username").fill("admin")
+    page.get_by_placeholder("Password").fill("password")
+    page.get_by_role("button", { name: "Login" }).click()
+    expect(page.get_by_role("heading", { name: "B&B Details" })).to_be_visible()
+
+
+def test_CT01_anotar_contador_mensagens_admin(page: Page):
+    login_admin(page)
+    messages_link = page.get_by_role("link", { name: re.compile("Messages") })
+    expect(messages_link).to_be_visible()
+    count_text = messages_link.inner_text()
+    assert any(char.isdigit() for char in count_text), "O contador de mensagens deve conter um número."
+
+
+def test_CT02_envio_mensagem_visitante(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_placeholder("Name").fill("John Doe")
+    page.get_by_placeholder("Email").fill("johndoe@example.com")
+    page.get_by_placeholder("Phone").fill("01234567890")
+    page.get_by_placeholder("Subject").fill("Inquiry about booking")
+    page.get_by_placeholder("Message").fill("Hello, I would like to know more about room availability.")
+    page.get_by_role("button", { name: "Submit" }).click()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch John Doe!"))).to_be_visible()
+
+
+def test_CT03_verificar_incremento_contador(page: Page):
+    login_admin(page)
+    messages_link = page.get_by_role("link", { name: re.compile("Messages") })
+    initial_text = messages_link.inner_text()
+    initial_nums = re.findall(r'\d+', initial_text)
+    initial_count = int(initial_nums[0]) if initial_nums else 0
+
+    page.goto(BASE_URL)
+    page.get_by_placeholder("Name").fill("Visitor Test")
+    page.get_by_placeholder("Email").fill("visitor@example.com")
+    page.get_by_placeholder("Phone").fill("09876543210")
+    page.get_by_placeholder("Subject").fill("Test Subject")
+    page.get_by_placeholder("Message").fill("Testing message count increment.")
+    page.get_by_role("button", { name: "Submit" }).click()
+    expect(page.get_by_text(re.compile("Thanks for getting in touch Visitor Test!"))).to_be_visible()
+
+    login_admin(page)
+    updated_text = messages_link.inner_text()
+    updated_nums = re.findall(r'\d+', updated_text)
+    updated_count = int(updated_nums[0]) if updated_nums else (initial_count + 1)
+
+    assert updated_count == initial_count + 1
+
+
+def test_CT04_verificar_mensagem_na_lista_admin(page: Page):
+    subject_text = "Unique Subject Test 123"
+    sender_name = "Unique Visitor"
+
+    page.goto(BASE_URL)
+    page.get_by_placeholder("Name").fill(sender_name)
+    page.get_by_placeholder("Email").fill("unique@example.com")
+    page.get_by_placeholder("Phone").fill("11223344556")
+    page.get_by_placeholder("Subject").fill(subject_text)
+    page.get_by_placeholder("Message").fill("Checking message list visibility.")
+    page.get_by_role("button", { name: "Submit" }).click()
+    expect(page.get_by_text(re.compile(f"Thanks for getting in touch {sender_name}!"))).to_be_visible()
+
+    login_admin(page)
+    page.get_by_role("link", { name: re.compile("Messages") }).click()
+    expect(page.get_by_text(sender_name)).to_be_visible()
+    expect(page.get_by_text(subject_text)).to_be_visible()
+
+
+def test_CT05_restricao_acesso_apos_logout(page: Page):
+    login_admin(page)
+    logout_button = page.get_by_role("button", { name: re.compile("Logout|Log out", re.IGNORECASE) })
+    if logout_button.is_visible():
+        logout_button.click()
+    else:
+        page.goto(f"{BASE_URL}/#/admin")
+        page.get_by_role("button", { name: re.compile("Logout|Log out", re.IGNORECASE) }).click()
+
+    page.goto(f"{BASE_URL}/#/admin")
+    expect(page.get_by_placeholder("Username")).to_be_visible()
+    expect(page.get_by_placeholder("Password")).to_be_visible()
+```

@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Impedir exclusão sem token",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Criar reserva; consultar seus dados; excluir sem credenciais; consultar novamente.",
+  "esperado": "DELETE retorna 403; GET retorna 200 e dados inalterados."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Impedir exclusão com token inválido",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Criar reserva; consultar seus dados; excluir usando token inválido; consultar novamente.",
+  "esperado": "DELETE retorna 403; GET retorna 200 e dados inalterados."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Criar reserva; autenticar como administrador; excluir usando o token recebido.",
+  "esperado": "DELETE retorna 201."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Consultar reserva excluída",
+  "tipo": "Negativo",
+  "criterio": "4",
+  "passos": "Criar reserva; excluir com token válido; consultar pelo mesmo identificador.",
+  "esperado": "DELETE retorna 201; GET retorna 404."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Repetir exclusão sem afetar outra reserva",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Criar reserva alvo e reserva de controle; registrar os dados da reserva de controle; excluir a reserva alvo duas vezes com token válido; consultar ambas.",
+  "esperado": "Primeira exclusão retorna 201; segunda retorna 4xx; reserva alvo permanece ausente; reserva de controle retorna 200 com dados inalterados."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Filtrar pelo nome único da reserva excluída",
+  "tipo": "Positivo",
+  "criterio": "6",
+  "passos": "Criar reserva com nome único; confirmar sua presença no filtro; excluir com token válido; repetir o filtro.",
+  "esperado": "DELETE retorna 201; listagem retorna 200 e lista vazia."
+ }
+]

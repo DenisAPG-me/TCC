@@ -1,0 +1,262 @@
+{
+ "created": 1793383714.7181454,
+ "duration": 47.01806163787842,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 3,
+  "failed": 3,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_login_com_usuario_e_senha_vazios[chromium]",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_CT002_login_com_admin_e_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 96
+    },
+    {
+     "nodeid": "script.py::test_CT003_login_com_admin_e_senha_vazia[chromium]",
+     "type": "Function",
+     "lineno": 105
+    },
+    {
+     "nodeid": "script.py::test_CT004_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+     "type": "Function",
+     "lineno": 114
+    },
+    {
+     "nodeid": "script.py::test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+     "type": "Function",
+     "lineno": 125
+    },
+    {
+     "nodeid": "script.py::test_CT006_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+     "type": "Function",
+     "lineno": 133
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_login_com_usuario_e_senha_vazios[chromium]",
+   "lineno": 86,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_login_com_usuario_e_senha_vazios[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.47653599991463125,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 5.6708557000383735,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0135034000268206,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_login_com_admin_e_senha_incorreta[chromium]",
+   "lineno": 96,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT002_login_com_admin_e_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1175881999079138,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 11.487825300078839,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+     "lineno": 103,
+     "message": "AssertionError: Locator expected to have count '0'\nActual value: 1 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"button\", name=\"Logout\", exact=True)\n    23 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+      "lineno": 103,
+      "message": "in test_CT002_login_com_admin_e_senha_incorreta"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py:103: in test_CT002_login_com_admin_e_senha_incorreta\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\", exact=True)\nE       23 \u00d7 locator resolved to 1 element\nE          - unexpected value \"1\""
+   },
+   "teardown": {
+    "duration": 0.013894599978812039,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_login_com_admin_e_senha_vazia[chromium]",
+   "lineno": 105,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_login_com_admin_e_senha_vazia[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11850179999601096,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0560857000527903,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013165100011974573,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+   "lineno": 114,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT004_login_valido_exibe_lista_de_quartos_e_menu[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11492209997959435,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 12.38530270010233,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+     "lineno": 123,
+     "message": "AssertionError: Locator expected to be visible\nActual value: None\nError: element(s) not found \nCall log:\n  - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Messages\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"link\", name=\"Messages\", exact=True)\n\nAria snapshot:\n- navigation:\n  - link \"Restful Booker Platform Demo\":\n    - /url: /\n  - list:\n    - listitem:\n      - link \"Rooms\":\n        - /url: /admin/rooms\n    - listitem:\n      - link \"Report\":\n        - /url: /admin/report\n    - listitem:\n      - link \"Branding\":\n        - /url: /admin/branding\n    - listitem:\n      - link \"Messages 4\":\n        - /url: /admin/message\n  - list:\n    - listitem:\n      - link \"Front Page\":\n        - /url: /\n    - listitem:\n      - button \"Logout\"\n- paragraph: \"Room #\"\n- paragraph: Type\n- paragraph: Accessible\n- paragraph: Price\n- paragraph: Room details\n- paragraph: \"101\"\n- paragraph: Single\n- paragraph: \"true\"\n- paragraph: \"100\"\n- paragraph: TV, WiFi, Safe\n- text: \uf00d\n- paragraph: \"102\"\n- paragraph: Double\n- paragraph: \"true\"\n- paragraph: \"150\"\n- paragraph: TV, Radio, Safe\n- text: \uf00d\n- paragraph: \"103\"\n- paragraph: Suite\n- paragraph: \"true\"\n- paragraph: \"225\"\n- paragraph: Radio, WiFi, Safe\n- text: \uf00d\n- textbox\n- combobox:\n  - option \"Single\" [selected]\n  - option \"Twin\"\n  - option \"Double\"\n  - option \"Family\"\n  - option \"Suite\"\n- combobox:\n  - option \"false\" [selected]\n  - option \"true\"\n- textbox\n- checkbox \"WiFi\"\n- text: WiFi\n- checkbox \"TV\"\n- text: TV\n- checkbox \"Radio\"\n- text: Radio\n- checkbox \"Refreshments\"\n- text: Refreshments\n- checkbox \"Safe\"\n- text: Safe\n- checkbox \"Views\"\n- text: Views\n- button \"Create\"\n- alert"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+      "lineno": 123,
+      "message": "in test_CT004_login_valido_exibe_lista_de_quartos_e_menu"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py:123: in test_CT004_login_valido_exibe_lista_de_quartos_e_menu\n    expect(page.get_by_role(\"link\", name=link_name, exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: element(s) not found \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_role(\"link\", name=\"Messages\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"link\", name=\"Messages\", exact=True)\nE   \nE   Aria snapshot:\nE   - navigation:\nE     - link \"Restful Booker Platform Demo\":\nE       - /url: /\nE     - list:\nE       - listitem:\nE         - link \"Rooms\":\nE           - /url: /admin/rooms\nE       - listitem:\nE         - link \"Report\":\nE           - /url: /admin/report\nE       - listitem:\nE         - link \"Branding\":\nE           - /url: /admin/branding\nE       - listitem:\nE         - link \"Messages 4\":\nE           - /url: /admin/message\nE     - list:\nE       - listitem:\nE         - link \"Front Page\":\nE           - /url: /\nE       - listitem:\nE         - button \"Logout\"\nE   - paragraph: \"Room #\"\nE   - paragraph: Type\nE   - paragraph: Accessible\nE   - paragraph: Price\nE   - paragraph: Room details\nE   - paragraph: \"101\"\nE   - paragraph: Single\nE   - paragraph: \"true\"\nE   - paragraph: \"100\"\nE   - paragraph: TV, WiFi, Safe\nE   - text: \uf00d\nE   - paragraph: \"102\"\nE   - paragraph: Double\nE   - paragraph: \"true\"\nE   - paragraph: \"150\"\nE   - paragraph: TV, Radio, Safe\nE   - text: \uf00d\nE   - paragraph: \"103\"\nE   - paragraph: Suite\nE   - paragraph: \"true\"\nE   - paragraph: \"225\"\nE   - paragraph: Radio, WiFi, Safe\nE   - text: \uf00d\nE   - textbox\nE   - combobox:\nE     - option \"Single\" [selected]\nE     - option \"Twin\"\nE     - option \"Double\"\nE     - option \"Family\"\nE     - option \"Suite\"\nE   - combobox:\nE     - option \"false\" [selected]\nE     - option \"true\"\nE   - textbox\nE   - checkbox \"WiFi\"\nE   - text: WiFi\nE   - checkbox \"TV\"\nE   - text: TV\nE   - checkbox \"Radio\"\nE   - text: Radio\nE   - checkbox \"Refreshments\"\nE   - text: Refreshments\nE   - checkbox \"Safe\"\nE   - text: Safe\nE   - checkbox \"Views\"\nE   - text: Views\nE   - button \"Create\"\nE   - alert"
+   },
+   "teardown": {
+    "duration": 0.013858400052413344,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+   "lineno": 125,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT005_logout_retorna_a_pagina_inicial_publica[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1146916999714449,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.1013126999605447,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012934600003063679,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT006_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+   "lineno": 133,
+   "outcome": "failed",
+   "keywords": [
+    "test_CT006_acesso_direto_a_lista_de_quartos_apos_logout[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11645709990989417,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 12.840844899998046,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+     "lineno": 142,
+     "message": "AssertionError: Locator expected to have count '0'\nActual value: 1 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\", exact=True) with timeout 10000ms\n  - waiting for get_by_role(\"button\", name=\"Logout\", exact=True)\n    23 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py",
+      "lineno": 142,
+      "message": "in test_CT006_acesso_direto_a_lista_de_quartos_apos_logout"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US05\\script.py:142: in test_CT006_acesso_direto_a_lista_de_quartos_apos_logout\n    expect(logout_button(page)).to_have_count(0)\nE   AssertionError: Locator expected to have count '0'\nE   Actual value: 1 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"button\", name=\"Logout\", exact=True) with timeout 10000ms\nE     - waiting for get_by_role(\"button\", name=\"Logout\", exact=True)\nE       23 \u00d7 locator resolved to 1 element\nE          - unexpected value \"1\""
+   },
+   "teardown": {
+    "duration": 0.23459530004765838,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

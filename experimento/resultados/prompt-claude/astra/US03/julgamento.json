@@ -1,0 +1,146 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12",
+  "US03-C15"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so email vazio"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so senha vazia"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12",
+    "US03-C15"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_login_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct02_login_sem_email",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct03_login_sem_senha",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct04_senha_incorreta_sem_sessao",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct05_checkout_exige_login",
+   "categoria": "seletor inexistente",
+   "nota": "product-card via get_by_test_id nao encontrado (atributo data-test nao configurado)"
+  },
+  {
+   "teste": "test_ct06_login_com_credenciais_validas",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct07_endereco_vazio_bloqueia_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct08_endereco_preenchido_libera_pagamento",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  },
+  {
+   "teste": "test_ct09_compra_com_cartao_de_credito",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email', exact=True) nao encontrado na tela de login"
+  }
+ ]
+}

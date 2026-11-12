@@ -1,0 +1,139 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US08-C01",
+  "US08-C02",
+  "US08-C03",
+  "US08-C04",
+  "US08-C06",
+  "US08-C07",
+  "US08-C08",
+  "US08-C09",
+  "US08-C10",
+  "US08-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario inexistente, novo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C03"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C04"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C04",
+    "US08-C12"
+   ],
+   "nota": "persistencia via GET"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C06"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "PATCH persiste via GET, novo"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C07"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C09"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C08"
+   ],
+   "nota": ""
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C10"
+   ],
+   "nota": ""
+  },
+  "12": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C10"
+   ],
+   "nota": "sem bookingdates"
+  },
+  "13": {
+   "classe": "valido",
+   "oraculo": [
+    "US08-C10"
+   ],
+   "nota": "corpo vazio"
+  }
+ },
+ "falhas": []
+}

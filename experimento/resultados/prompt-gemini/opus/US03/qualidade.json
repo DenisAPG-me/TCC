@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 5,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "nomes claros, helpers curtos",
+  "estrutura": "fixtures, helpers e dicionarios de dados",
+  "assercoes": "assercoes de negocio, estado de botoes e URL",
+  "espera": "expect auto-wait, sem sleep",
+  "manutenibilidade": "get_by_test_id com data-test, constantes e dados com data dinamica"
+ }
+}

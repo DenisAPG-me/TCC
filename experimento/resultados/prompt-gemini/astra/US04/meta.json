@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 35.7,
+ "tokens": {
+  "total": 4306
+ },
+ "n_casos_extraidos": 16,
+ "tem_codigo": true,
+ "stderr_tail": ": Page) -> None:\n    data = submit_contact(page, message=\"M\" * 20)\n    expect_success(page, data)\n\n\ndef test_CT15_mensagem_2000_caracteres(page: Page) -> None:\n    data = submit_contact(page, message=\"M\" * 2000)\n    expect_success(page, data)\n\n\ndef test_CT16_mensagem_2001_caracteres(page: Page) -> None:\n    submit_contact(page, message=\"M\" * 2001)\n    expect_error(page, MESSAGE_ERROR)\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(pytest.main([__file__, *sys.argv[1:]]))\n```\ntokens used\n4,306\n"
+}

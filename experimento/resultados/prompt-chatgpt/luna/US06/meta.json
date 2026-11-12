@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 14.35,
+ "tokens": {
+  "total": 5908
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "EQUEST_TIMEOUT_MS)\n\n\ndef test_CT004_caixa_de_mensagens_solicita_login_apos_logout(page):\n    login_as_admin(page)\n\n    page.goto(f\"{BASE_URL.rstrip('/')}{LOGOUT_PATH}\")\n    page.goto(f\"{BASE_URL.rstrip('/')}{MESSAGES_PATH}\")\n\n    expect(page.get_by_label(re.compile(r\"username\", re.IGNORECASE))).to_be_visible(\n        timeout=REQUEST_TIMEOUT_MS\n    )\n    expect(page.get_by_label(re.compile(r\"password\", re.IGNORECASE))).to_be_visible(\n        timeout=REQUEST_TIMEOUT_MS\n    )\n```\ntokens used\n5,908\n"
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Login com usuário e senha vazios",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir a tela de login e enviar o formulário vazio.",
+  "esperado": "Exibe “Invalid credentials” e permanece na tela de login."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a tela de login, informar `admin` e uma senha incorreta e enviar.",
+  "esperado": "Exibe “Invalid credentials”."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Login válido e conteúdo do painel",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Entrar com `admin` e `password`.",
+  "esperado": "A lista de quartos inclui o quarto 101 do tipo Single e o menu mostra Rooms, Report, Branding e Messages."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "positivo",
+  "criterio": "CA03, CA04",
+  "passos": "Entrar com as credenciais válidas e clicar em Logout.",
+  "esperado": "Retorna à página inicial pública da pousada."
+ },
+ {
+  "id": "CT005",
+  "titulo": "Acesso à lista de quartos após logout",
+  "tipo": "positivo",
+  "criterio": "CA03, CA04, CA05",
+  "passos": "Entrar, sair e acessar diretamente a lista de quartos do painel.",
+  "esperado": "A tela de login é apresentada novamente."
+ }
+]

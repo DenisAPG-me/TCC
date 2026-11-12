@@ -1,0 +1,109 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08",
+    "US03-C09"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": "Coerente com a US e verificavel no alvo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_enviar_login_vazio",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  },
+  {
+   "teste": "test_CT002_rejeitar_senha_incorreta",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  },
+  {
+   "teste": "test_CT003_exigir_autenticacao_no_checkout",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  },
+  {
+   "teste": "test_CT004_entrar_com_conta_de_demonstracao",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  },
+  {
+   "teste": "test_CT005_validar_campos_obrigatorios_do_endereco",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  },
+  {
+   "teste": "test_CT006_pagar_com_cartao_e_confirmar_pedido",
+   "categoria": "seletor inexistente",
+   "nota": "Seletores/labels do login e checkout nao localizados"
+  }
+ ]
+}

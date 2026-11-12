@@ -1,0 +1,81 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Adicionar quantidade válida ao carrinho | Positivo | Critério 1 | 1. Acessar a página do produto "Claw Hammer"<br>2. Definir a quantidade como 3<br>3. Clicar em adicionar ao carrinho | Exibe a mensagem de confirmação "Product added to shopping cart." e o indicador do carrinho mostra 3 |
+| TC02 | Validar cálculo do total da linha e do carrinho | Positivo | Critério 2 | 1. Adicionar 3 unidades de "Claw Hammer" ao carrinho<br>2. Abrir a página do carrinho | O total da linha é igual ao preço unitário multiplicado por 3 e o total do carrinho é igual ao total da linha |
+| TC03 | Alterar quantidade no carrinho | Positivo | Critério 3 | 1. Ter 3 unidades de um produto no carrinho<br>2. Alterar a quantidade no carrinho para 1 | O total do carrinho passa a ser igual ao preço unitário |
+| TC04 | Tentar adicionar mais de uma unidade de Thor Hammer | Negativo | Critério 4 | 1. Acessar a página do produto "Thor Hammer"<br>2. Tentar definir a quantidade 3 e adicionar ao carrinho | Exibe a mensagem "You can only have one Thor Hammer in the cart." |
+
+SUPOSIÇÕES
+
+- A URL base padrão é https://practicesoftwaretesting.com/.
+- Os seletores baseiam-se em boas práticas do Playwright (`get_by_role`, `get_by_text`, `get_by_test_id`, etc.), assumindo a estrutura padrão da aplicação Practice Software Testing.
+- A página do produto "Claw Hammer" pode ser encontrada navegando a partir da página inicial ou buscando pelo nome/categoria.
+- O indicador do carrinho de compras é um elemento que exibe a quantidade atual de itens.
+- A restrição de quantidade para o "Thor Hammer" é validada via mensagem de erro na interface ao tentar adicionar mais de 1 unidade.
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+def test_TC01_adicionar_quantidade_valida_ao_carrinho(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name="Add to cart").click()
+    
+    expect(page.get_by_text("Product added to shopping cart.")).toBeVisible()
+    expect(page.locator("[data-test='nav-cart']")).to_contain_text("3")
+
+def test_TC02_validar_calculo_total_linha_e_carrinho(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    
+    page.get_by_test_id("nav-cart").click()
+    
+    unit_price = float(page.locator("data-test='product-price'").inner_text().replace("$", ""))
+    line_total = float(page.locator("data-test='line-price'").inner_text().replace("$", ""))
+    cart_total = float(page.locator("data-test='cart-total'").inner_text().replace("$", ""))
+    
+    assert line_total == unit_price * 3
+    assert cart_total == line_total
+
+def test_TC03_alterar_quantidade_no_carrinho(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Claw Hammer").first.click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    page.get_by_role("button", name="Add to cart").click()
+    
+    page.get_by_test_id("nav-cart").click()
+    
+    unit_price = float(page.locator("data-test='product-price'").inner_text().replace("$", ""))
+    
+    cart_quantity_input = page.get_by_role("spinbutton", name="Quantity")
+    cart_quantity_input.fill("1")
+    
+    cart_total = float(page.locator("data-test='cart-total'").inner_text().replace("$", ""))
+    assert cart_total == unit_price
+
+def test_TC04_tentar_adicionar_mais_de_uma_unidade_thor_hammer(page: Page):
+    page.goto(BASE_URL)
+    page.get_by_text("Thor Hammer").first.click()
+    
+    quantity_input = page.get_by_label("Quantity")
+    quantity_input.fill("3")
+    
+    page.get_by_role("button", name="Add to cart").click()
+    
+    expect(page.get_by_text("You can only have one Thor Hammer in the cart.")).toBeVisible()
+```

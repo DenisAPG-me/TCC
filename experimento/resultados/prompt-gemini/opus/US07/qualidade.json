@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "nomes claros",
+  "estrutura": "helpers e fixture, reuso em assert_create_and_retrieve",
+  "assercoes": "corpo completo e mensagens",
+  "espera": "timeout e dados unicos",
+  "manutenibilidade": "constantes, helpers por endpoint"
+ }
+}

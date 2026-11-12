@@ -1,0 +1,16 @@
+[
+ "A User Story descreve uma API REST; portanto, utiliza-se Python + pytest + requests.",
+ "URL base: `https://restful-booker.herokuapp.com` (constante `BASE_URL` no topo do arquivo).",
+ "Autenticação: `POST /auth` com corpo JSON `{\"username\": \"admin\", \"password\": \"password123\"}` retorna 200 e `{\"token\": \"<valor>\"}`.",
+ "Com credenciais incorretas, `/auth` não retorna o campo `token` no corpo (o status HTTP não é verificado por não constar na User Story).",
+ "Criação de reserva: `POST /booking` com corpo JSON contendo `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`/`checkout`) e `additionalneeds`; resposta 200 com `{\"bookingid\": <int>, \"booking\": {...}}`.",
+ "Consulta: `GET /booking/{id}` retorna 200 com o objeto da reserva quando ela existe e 404 quando não existe.",
+ "Listagem filtrada: `GET /booking?firstname=<x>&lastname=<y>` retorna 200 e uma lista de objetos `{\"bookingid\": <int>}`.",
+ "Exclusão: `DELETE /booking/{id}`; o token é enviado via cabeçalho `Cookie: token=<valor>`; sem token, ou com token inválido, a resposta é 403; com token válido, a resposta é 201.",
+ "Para exclusão repetida ou de id inexistente, a User Story exige apenas \"status 4xx\"; por isso o teste valida a faixa 400–499, e não um código específico.",
+ "Considera-se inexistente o id `999999999`.",
+ "Nomes únicos são gerados com `uuid4` para evitar colisão com dados de outros usuários do ambiente público.",
+ "As reservas criadas e não excluídas pelos testes são removidas no teardown da fixture (falhas na limpeza são ignoradas).",
+ "Cada teste é independente e cria seus próprios dados; o token válido é obtido uma única vez por sessão.",
+ "Timeout de 30 s por requisição, já que o ambiente de demonstração pode ter latência."
+]

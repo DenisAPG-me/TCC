@@ -1,0 +1,16 @@
+[
+ "A API é REST/JSON; utiliza-se Python + pytest + requests.",
+ "URL base definida na constante `BASE_URL` = `https://restful-booker.herokuapp.com`.",
+ "Endpoint de autenticação: `POST /auth` com corpo `{\"username\": ..., \"password\": ...}`; sucesso retorna `{\"token\": \"<valor>\"}`.",
+ "Em credenciais inválidas, o corpo retorna `{\"reason\": \"Bad credentials\"}`; o status HTTP não é verificado, pois o CA2 não o especifica.",
+ "O token é enviado no cabeçalho `Cookie: token=<token>`.",
+ "Reservas existentes são criadas como pré-condição via `POST /booking` (sem autenticação), que retorna status 200 e `{\"bookingid\": <id>, \"booking\": {...}}`.",
+ "A reserva criada é removida ao final via `DELETE /booking/{id}` com token; o resultado da limpeza não é verificado.",
+ "Atualização completa: `PUT /booking/{id}`; atualização parcial: `PATCH /booking/{id}`. Ambas retornam a reserva atualizada no corpo.",
+ "Esquema da reserva: `firstname` (str), `lastname` (str), `totalprice` (int), `depositpaid` (bool), `bookingdates` (`checkin`/`checkout` no formato `YYYY-MM-DD`), `additionalneeds` (str).",
+ "Campos obrigatórios no PUT: `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`. `additionalneeds` é considerado opcional.",
+ "Leitura da reserva: `GET /booking/{id}` retorna o objeto da reserva sem o `bookingid`.",
+ "As requisições usam os cabeçalhos `Content-Type: application/json` e `Accept: application/json`.",
+ "Um token inválido ou inexistente é tratado como ausência de autorização (403).",
+ "Requisições com timeout de 30 segundos. Cada teste cria a sua própria reserva para evitar dependência entre testes."
+]

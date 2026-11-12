@@ -1,0 +1,170 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT-01 | Adicionar 3 unidades de Claw Hammer | Positivo | 1 | Buscar Claw Hammer, abrir o produto, definir quantidade 3 e adicionar ao carrinho. | Exibir “Product added to shopping cart.” e o indicador do carrinho mostrar 3. |
+| CT-02 | Conferir totais com 3 unidades | Positivo | 2 | Preparar o carrinho com 3 unidades de Claw Hammer e abrir o carrinho. | O total da linha e o total do carrinho correspondem ao preço unitário multiplicado por 3. |
+| CT-03 | Alterar quantidade no carrinho para 1 | Positivo | 3 | Preparar o carrinho com 3 unidades, abrir o carrinho e alterar a quantidade para 1. | O total do carrinho corresponde ao preço unitário. |
+| CT-04 | Tentar adicionar 3 Thor Hammers | Negativo | 4 | Buscar Thor Hammer, abrir o produto, definir quantidade 3 e adicionar ao carrinho. | Exibir “You can only have one Thor Hammer in the cart.” |
+
+## SUPOSIÇÕES
+
+- A aplicação é web e os testes usam `pytest-playwright`, com a fixture `page` do plugin.
+- A URL base padrão é `https://practicesoftwaretesting.com/`; pode ser sobrescrita com `--base-url`.
+- Os produtos podem ser encontrados pela busca da página inicial, usando um campo com placeholder `Search`; os resultados podem ser abertos pelo nome do produto.
+- A página do produto apresenta um campo de quantidade `input[type="number"]` e um botão acessível chamado `Add to cart`.
+- A confirmação de inclusão e a mensagem de restrição aparecem como texto visível na página.
+- O carrinho pode ser aberto por um link ou botão acessível cujo nome contenha “cart” ou “carrinho”. O indicador de quantidade pode estar em `[data-test="nav-cart"]` ou no link/botão do carrinho.
+- No carrinho, cada linha contém o nome do produto, preço unitário, quantidade e total da linha; a quantidade pode ser editada em um campo numérico. O total geral pode ser identificado pelo texto “Total”.
+- Os valores monetários exibidos usam ponto ou vírgula como separador decimal. O preço unitário é extraído da linha do produto para comparar os totais.
+- Cada teste prepara seu próprio estado do carrinho, limpando-o quando houver controles de remoção disponíveis. Se a aplicação mantiver carrinho entre testes, a execução deve usar um contexto novo por teste.
+- O critério 4 é tratado como teste negativo. Não se presume comportamento adicional para quantidades zero, valores em branco ou limites não descritos na User Story.
+
+```python
+import re
+from decimal import Decimal
+
+import pytest
+from playwright.sync_api import expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+ADD_CONFIRMATION = "Product added to shopping cart."
+THOR_LIMIT_MESSAGE = "You can only have one Thor Hammer in the cart."
+
+
+def _find_product(page, product_name):
+    page.goto(BASE_URL)
+    search = page.get_by_placeholder("Search")
+    search.fill(product_name)
+    search.press("Enter")
+    product = page.get_by_text(product_name, exact=True).first
+    expect(product).to_be_visible()
+    product.click()
+    expect(page.get_by_role("button", name=re.compile("Add to cart", re.I))).to_be_visible()
+
+
+def _quantity_input(page):
+    field = page.locator('input[type="number"]').first
+    expect(field).to_be_visible()
+    return field
+
+
+def _add_product(page, product_name, quantity):
+    _find_product(page, product_name)
+    _quantity_input(page).fill(str(quantity))
+    page.get_by_role("button", name=re.compile("Add to cart", re.I)).click()
+
+
+def _open_cart(page):
+    cart_link = page.get_by_role(
+        "link", name=re.compile(r"cart|carrinho", re.I)
+    ).first
+    if cart_link.count() == 0:
+        cart_link = page.get_by_role(
+            "button", name=re.compile(r"cart|carrinho", re.I)
+        ).first
+    expect(cart_link).to_be_visible()
+    cart_link.click()
+
+
+def _cart_indicator(page):
+    test_id_indicator = page.locator('[data-test="nav-cart"]')
+    if test_id_indicator.count():
+        return test_id_indicator
+    return page.get_by_role(
+        "link", name=re.compile(r"cart|carrinho", re.I)
+    ).first
+
+
+def _number_from_text(value):
+    cleaned = re.sub(r"[^\d,.\-]", "", value).strip()
+    if "," in cleaned and "." in cleaned:
+        cleaned = cleaned.replace(".", "").replace(",", ".")
+    elif "," in cleaned:
+        cleaned = cleaned.replace(",", ".")
+    return Decimal(cleaned)
+
+
+def _product_row(page, product_name):
+    row = page.get_by_role("row").filter(has_text=product_name).first
+    if row.count() == 0:
+        row = page.locator("tr").filter(has_text=product_name).first
+    expect(row).to_be_visible()
+    return row
+
+
+def _price_from_row(row):
+    cells = row.get_by_role("cell")
+    if cells.count() == 0:
+        cells = row.locator("td")
+    # Suposição: a primeira célula monetária da linha contém o preço unitário.
+    for index in range(cells.count()):
+        value = cells.nth(index).inner_text()
+        if re.search(r"\d", value) and re.search(r"[$€£]|,\d{2}|\.\d{2}", value):
+            return _number_from_text(value)
+    raise AssertionError("Preço unitário não encontrado na linha do produto.")
+
+
+def _line_total_from_row(row):
+    cells = row.get_by_role("cell")
+    if cells.count() == 0:
+        cells = row.locator("td")
+    monetary_values = []
+    for index in range(cells.count()):
+        value = cells.nth(index).inner_text()
+        if re.search(r"\d", value) and re.search(r"[$€£]|,\d{2}|\.\d{2}", value):
+            monetary_values.append(_number_from_text(value))
+    if not monetary_values:
+        raise AssertionError("Total da linha não encontrado.")
+    return monetary_values[-1]
+
+
+def _cart_total(page):
+    total_text = page.get_by_text(re.compile(r"Total", re.I)).last
+    expect(total_text).to_be_visible()
+    return _number_from_text(total_text.inner_text())
+
+
+def test_CT_01_adicionar_tres_unidades_de_claw_hammer(page):
+    _add_product(page, "Claw Hammer", 3)
+
+    expect(page.get_by_text(ADD_CONFIRMATION, exact=True)).to_be_visible()
+    expect(_cart_indicator(page)).to_contain_text("3")
+
+
+def test_CT_02_totais_do_carrinho_com_tres_unidades(page):
+    _add_product(page, "Claw Hammer", 3)
+    _open_cart(page)
+
+    row = _product_row(page, "Claw Hammer")
+    unit_price = _price_from_row(row)
+    expected_total = unit_price * 3
+
+    expect(row).to_contain_text("3")
+    assert _line_total_from_row(row) == expected_total
+    assert _cart_total(page) == expected_total
+
+
+def test_CT_03_alterar_quantidade_no_carrinho_para_um(page):
+    _add_product(page, "Claw Hammer", 3)
+    _open_cart(page)
+
+    row = _product_row(page, "Claw Hammer")
+    unit_price = _price_from_row(row)
+    quantity = row.locator('input[type="number"]').first
+    expect(quantity).to_be_visible()
+    quantity.fill("1")
+    quantity.press("Enter")
+
+    expect(quantity).to_have_value("1")
+    assert _cart_total(page) == unit_price
+
+
+def test_CT_04_rejeitar_tres_unidades_de_thor_hammer(page):
+    _find_product(page, "Thor Hammer")
+    _quantity_input(page).fill("3")
+    page.get_by_role("button", name=re.compile("Add to cart", re.I)).click()
+
+    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()
+```

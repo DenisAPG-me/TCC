@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "helpers (_login, _fill_address, _fill_credit_card)",
+  "assercoes": "assercoes de negocio e negativas",
+  "espera": "auto-wait via expect, sem sleep",
+  "manutenibilidade": "constantes e labels, mas URL e labels chutados"
+ }
+}

@@ -1,0 +1,12 @@
+[
+ "A história descreve uma API REST; a automação usa pytest e requests, conforme o foco dos critérios.",
+ "O endpoint de autenticação é `POST /auth`, com JSON `{\"username\": \"...\", \"password\": \"...\"}`; o token retornado fica na propriedade `token`.",
+ "Credenciais inválidas devem retornar JSON com a propriedade `reason` igual a `Bad credentials`, sem propriedade `token`.",
+ "As reservas são criadas com `POST /booking` e consultadas com `GET /booking/{id}`. A criação não exige autenticação e retorna o identificador em `bookingid`.",
+ "A atualização completa usa `PUT /booking/{id}`; a parcial usa `PATCH /booking/{id}`. A autenticação da reserva é enviada no cookie `token`.",
+ "O payload da reserva contém `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.",
+ "Para CA3, “novo nome” significa novo `firstname`; o preço é atualizado em `totalprice`. Para CA4, somente `lastname` é enviado no PATCH.",
+ "`firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates` são tratados como obrigatórios no PUT; CA6 omite `firstname`.",
+ "Cada teste cria sua própria reserva para manter independência. Não há endpoint de limpeza pressuposto; as reservas criadas permanecem no ambiente.",
+ "Todas as requisições usam timeout; os valores de reserva são dados fictícios e datas fixas."
+]

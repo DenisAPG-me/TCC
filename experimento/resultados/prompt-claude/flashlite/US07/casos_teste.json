@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar requisição POST para /booking com payload JSON válido contendo firstname, lastname, totalprice, depositpaid, bookingdates (checkin, checkout) e additionalneeds",
+  "esperado": "Receber status 200 e um JSON contendo um identificador numérico bookingid e os dados enviados em booking"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva existente por identificador",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "Criar uma reserva para obter um identificador válido; Enviar requisição GET para /booking/{id} usando o identificador retornado",
+  "esperado": "Receber status 200 e todos os campos da reserva iguais aos enviados na criação"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar reserva com identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Enviar requisição GET para /booking/99999999",
+  "esperado": "Receber status 404 Not Found"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Listar reservas filtrando por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar uma reserva com firstname e lastname únicos; Enviar requisição GET para /booking com os parâmetros de consulta firstname e lastname",
+  "esperado": "Receber status 200 e uma lista contendo um objeto com o bookingid criado"
+ }
+]

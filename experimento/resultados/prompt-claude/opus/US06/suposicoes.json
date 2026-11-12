@@ -1,0 +1,15 @@
+[
+ "Tecnologia: a User Story é de interface web, portanto foi usado Python + pytest + Playwright síncrono, conforme os REQUISITOS TÉCNICOS OBRIGATÓRIOS (plugin pytest-playwright, fixture `page` do plugin, asserções com `expect`), que prevalecem sobre a instrução anterior de criar fixtures com `sync_playwright`. Execução: `pytest arquivo.py` (o plugin usa Chromium headless por padrão).",
+ "URL base `https://automationintesting.online` definida em constante no topo; os testes usam URLs absolutas montadas a partir dela.",
+ "Painel de login em `/admin` e caixa de mensagens em `/admin/message`.",
+ "Campos de login acessíveis por rótulo \"Username\" e \"Password\"; botão de login com papel `button` e nome \"Login\"; botão de saída com nome \"Logout\".",
+ "Formulário de contato da página inicial com `data-testid` `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject`, `ContactDescription` e botão \"Submit\".",
+ "Confirmação de envio: texto \"Thanks for getting in touch <nome>!\".",
+ "Regras de validação do formulário: todos os campos obrigatórios; e-mail em formato válido; telefone entre 11 e 21 caracteres; assunto entre 5 e 100 caracteres; mensagem entre 20 e 2000 caracteres. Erros exibidos em elemento com papel `alert`.",
+ "O link de navegação \"Messages\" contém um contador numérico (badge) sempre visível após o carregamento, inclusive quando o valor é 0; o número é extraído do texto do link.",
+ "O contador reflete as mensagens não lidas; uma nova mensagem incrementa-o em 1. Assume-se que nenhum outro usuário envie ou leia mensagens durante a execução do CT03 (o ambiente de demonstração é compartilhado).",
+ "Cada linha da caixa de mensagens possui `data-testid` no formato `message<N>` e exibe o nome do remetente e o assunto.",
+ "Após logout, a sessão é invalidada e o acesso direto a `/admin/message` exibe o formulário de login em vez da lista.",
+ "Dados de teste únicos (sufixo UUID) em nome, e-mail e assunto garantem independência entre os testes e identificação inequívoca da mensagem.",
+ "Telefone de teste \"01234567890\" (11 dígitos) e senha inválida \"senha-errada\"."
+]

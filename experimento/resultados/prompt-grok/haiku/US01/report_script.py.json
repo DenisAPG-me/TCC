@@ -1,0 +1,440 @@
+{
+ "created": 1793377693.325089,
+ "duration": 192.78842496871948,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01",
+ "environment": {},
+ "summary": {
+  "failed": 6,
+  "total": 6,
+  "collected": 6
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_TC01_busca_hammer_exibe_somente_produtos_com_hammer[chromium]",
+     "type": "Function",
+     "lineno": 36
+    },
+    {
+     "nodeid": "script.py::test_TC02_busca_nao_diferencia_maiusculas_de_minusculas[chromium]",
+     "type": "Function",
+     "lineno": 47
+    },
+    {
+     "nodeid": "script.py::test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+     "type": "Function",
+     "lineno": 57
+    },
+    {
+     "nodeid": "script.py::test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado[chromium]",
+     "type": "Function",
+     "lineno": 64
+    },
+    {
+     "nodeid": "script.py::test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes[chromium]",
+     "type": "Function",
+     "lineno": 74
+    },
+    {
+     "nodeid": "script.py::test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes[chromium]",
+     "type": "Function",
+     "lineno": 87
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_TC01_busca_hammer_exibe_somente_produtos_com_hammer[chromium]",
+   "lineno": 36,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC01_busca_hammer_exibe_somente_produtos_com_hammer[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.45857699995394796,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 32.19136149995029,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 38,
+      "message": "in test_TC01_busca_hammer_exibe_somente_produtos_com_hammer"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 25,
+      "message": "in abrir_home_e_buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:38: in test_TC01_busca_hammer_exibe_somente_produtos_com_hammer\n    abrir_home_e_buscar(page, \"hammer\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:25: in abrir_home_e_buscar\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.01413729996420443,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC02_busca_nao_diferencia_maiusculas_de_minusculas[chromium]",
+   "lineno": 47,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC02_busca_nao_diferencia_maiusculas_de_minusculas[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10130969993770123,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.302381499903277,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 49,
+      "message": "in test_TC02_busca_nao_diferencia_maiusculas_de_minusculas"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 25,
+      "message": "in abrir_home_e_buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:49: in test_TC02_busca_nao_diferencia_maiusculas_de_minusculas\n    abrir_home_e_buscar(page, \"HAMMER\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:25: in abrir_home_e_buscar\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.01305890001822263,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+   "lineno": 57,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10307970002759248,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.276667700032704,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 59,
+      "message": "in test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 25,
+      "message": "in abrir_home_e_buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:59: in test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos\n    abrir_home_e_buscar(page, \"zzzzxx\")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:25: in abrir_home_e_buscar\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.013288000016473234,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado[chromium]",
+   "lineno": 64,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0991093999473378,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.317468099994585,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 66,
+      "message": "in test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 25,
+      "message": "in abrir_home_e_buscar"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:66: in test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado\n    abrir_home_e_buscar(page, \"  hammer  \")\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:25: in abrir_home_e_buscar\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.013866099994629622,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes[chromium]",
+   "lineno": 74,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10277550003957003,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 32.38952550000977,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 80,
+      "message": "in test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:80: in test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.013059600023552775,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes[chromium]",
+   "lineno": 87,
+   "outcome": "failed",
+   "keywords": [
+    "test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09883060003630817,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 32.39891870005522,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+     "lineno": 327,
+     "message": "playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py",
+      "lineno": 93,
+      "message": "in test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 10008,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py",
+      "lineno": 582,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 299,
+      "message": "in wait_for_load_state"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 327,
+      "message": "in _wait_for_load_state_impl"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\haiku\\US01\\script.py:93: in test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes\n    page.wait_for_load_state(\"networkidle\")\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:10008: in wait_for_load_state\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_page.py:582: in wait_for_load_state\n    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:299: in wait_for_load_state\n    return await self._wait_for_load_state_impl(state, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:327: in _wait_for_load_state_impl\n    await waiter.result()\nE   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded."
+   },
+   "teardown": {
+    "duration": 0.2330923000117764,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

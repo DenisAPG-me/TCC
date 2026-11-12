@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Helpers com nomes ok, mas muitos ramos if/else",
+  "estrutura": "Helpers abrangentes, porem com fallbacks complexos",
+  "assercoes": "Verifica toast, badge, totais com Decimal",
+  "espera": "count() imediato e sem esperas explicitas",
+  "manutenibilidade": "Fallbacks por regex e CSS 'class*=badge' frageis"
+ }
+}

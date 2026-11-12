@@ -1,0 +1,114 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticação com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar POST /auth com username \"admin\" e password \"password123\"; Ler o corpo JSON da resposta",
+  "esperado": "Status 200 e campo \"token\" presente, do tipo string e não vazio"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Autenticação com senha inválida",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com username \"admin\" e password incorreta; Ler o corpo JSON da resposta",
+  "esperado": "Corpo sem o campo \"token\" e com \"reason\" igual a \"Bad credentials\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Autenticação com usuário inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com username inexistente e password \"password123\"; Ler o corpo JSON da resposta",
+  "esperado": "Corpo sem o campo \"token\" e com \"reason\" igual a \"Bad credentials\""
+ },
+ {
+  "id": "CT04",
+  "titulo": "Autenticação com credenciais vazias",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Enviar POST /auth com username \"\" e password \"\"; Ler o corpo JSON da resposta",
+  "esperado": "Corpo sem o campo \"token\" e com \"reason\" igual a \"Bad credentials\""
+ },
+ {
+  "id": "CT05",
+  "titulo": "Atualização completa com novo nome e novo preço",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva via POST /booking; Obter token via POST /auth; Enviar PUT /booking/{id} com payload completo contendo novo firstname e novo totalprice e cookie token; Ler o corpo da resposta",
+  "esperado": "Status 200 e corpo com o novo firstname, o novo totalprice e os demais campos iguais ao payload enviado"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualização completa persistida na consulta",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PUT /booking/{id} com novo firstname e novo totalprice; Consultar GET /booking/{id}",
+  "esperado": "PUT retorna 200 e GET retorna 200 com o novo firstname e o novo totalprice"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Atualização parcial apenas do sobrenome",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PATCH /booking/{id} apenas com novo lastname e cookie token; Ler o corpo da resposta",
+  "esperado": "Status 200, lastname igual ao novo valor e firstname, totalprice, depositpaid, bookingdates e additionalneeds iguais aos originais"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Atualização parcial persistida sem alterar demais campos",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PATCH /booking/{id} apenas com novo lastname; Consultar GET /booking/{id}",
+  "esperado": "GET retorna 200 com o novo lastname e todos os demais campos iguais aos originais"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Atualização completa sem token",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva via POST /booking; Enviar PUT /booking/{id} com payload completo sem cookie e sem header Authorization; Consultar GET /booking/{id}",
+  "esperado": "PUT retorna status 403 e a reserva permanece com os dados originais"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Atualização parcial sem token",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva via POST /booking; Enviar PATCH /booking/{id} com novo lastname sem cookie e sem header Authorization; Consultar GET /booking/{id}",
+  "esperado": "PATCH retorna status 403 e o lastname permanece o original"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Atualização completa com token inválido",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Criar reserva via POST /booking; Enviar PUT /booking/{id} com payload completo e cookie token com valor inválido",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT12",
+  "titulo": "Atualização completa sem o campo obrigatório firstname",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PUT /booking/{id} com payload completo sem o campo firstname e cookie token",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT13",
+  "titulo": "Atualização completa sem o campo obrigatório bookingdates",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PUT /booking/{id} com payload completo sem o campo bookingdates e cookie token",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT14",
+  "titulo": "Atualização completa com corpo vazio",
+  "tipo": "Borda",
+  "criterio": "CA6",
+  "passos": "Criar reserva via POST /booking; Obter token; Enviar PUT /booking/{id} com corpo JSON vazio {} e cookie token",
+  "esperado": "Status 400"
+ }
+]

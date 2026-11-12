@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US03",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 57.0,
+ "tokens": {
+  "total": 6128
+ },
+ "n_casos_extraidos": 9,
+ "tem_codigo": true,
+ "stderr_tail": "  payment_button = element(page, \"payment_confirm\")\n    expect(payment_button).to_be_enabled()\n    payment_button.click()\n\n    expect(\n        page.get_by_text(PAYMENT_SUCCESS, exact=True)\n    ).to_be_visible()\n\n    order_button = element(page, \"order_confirm\")\n    expect(order_button).to_be_enabled()\n    order_button.click()\n\n    confirmation = page.get_by_text(INVOICE_PATTERN)\n    expect(confirmation).to_be_visible()\n    expect(confirmation).to_have_text(INVOICE_PATTERN)\n```\ntokens used\n6,128\n"
+}

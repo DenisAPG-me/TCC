@@ -1,0 +1,14 @@
+[
+ "A história é de interface web; portanto, a automação usa Python, pytest e Playwright com API síncrona.",
+ "O requisito técnico final determina o uso do plugin oficial pytest-playwright e da fixture `page`, apesar da limitação anterior que proíbe plugins. A execução requer `pytest-playwright` instalado; ele não é declarado no script como dependência adicional.",
+ "A URL base é `https://practicesoftwaretesting.com/`; não são necessárias credenciais.",
+ "O campo de busca pode ser localizado por `get_by_role(\"textbox\", name=\"Search\")` e submetido com Enter.",
+ "O texto que identifica o termo pesquisado contém `hammer` após a busca bem-sucedida; busca com espaços é normalizada removendo espaços nas extremidades.",
+ "Os produtos são identificados por links que apontam para páginas de produto; o nome exibido no link é o nome do produto.",
+ "A ordenação pode ser selecionada em um controle de lista identificado pelo rótulo `Sort`; as opções são `Price (low to high)` e `Name (Z to A)`.",
+ "Os preços são apresentados em texto com símbolo de moeda e separadores locais; o script extrai o valor numérico ignorando símbolos e separadores de milhar.",
+ "Para os cenários de ordenação, a página inicial contém produtos e a lista de resultados apresenta todos os itens da página atual. A verificação se aplica somente aos itens exibidos.",
+ "A busca sem resultados exibe exatamente `There are no products found.` e não mantém cartões de produto na listagem.",
+ "Os nomes são comparados sem diferenciar maiúsculas de minúsculas; a ordenação alfabética considera a forma normalizada dos nomes.",
+ "Os seletores e rótulos são deduções razoáveis a partir da história e podem precisar de ajuste caso a interface real use identificadores diferentes."
+]

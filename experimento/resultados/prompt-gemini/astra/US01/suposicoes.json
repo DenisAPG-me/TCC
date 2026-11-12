@@ -1,0 +1,18 @@
+[
+ "O sistema e a internet não foram acessados. Todos os seletores, contratos de resposta e valores de ordenação abaixo são deduzidos e precisam ser confirmados no sistema real.",
+ "A página inicial é `https://practicesoftwaretesting.com/`. A constante `BASE_URL` centraliza esse endereço.",
+ "O ambiente possui `pytest`, `playwright`, o plugin oficial `pytest-playwright` e o navegador Chromium instalado. O plugin é a exceção explicitamente exigida aos limites anteriores de dependências.",
+ "O campo de busca possui papel `textbox` e nome acessível contendo `Search`; o botão possui papel `button` e nome acessível `Search`.",
+ "Existe apenas um elemento com papel `combobox` na página inicial: a ordenação. Seus valores são `price,asc` e `name,desc`.",
+ "Os cartões usam `data-test=\"product-ID\"`; seus nomes usam `data-test=\"product-name\"` e seus preços usam `data-test=\"product-price\"`. Cada cartão contém exatamente um nome e um preço.",
+ "A indicação da pesquisa usa `data-test=\"search-caption\"` e inclui o termo buscado. A mensagem vazia corresponde exatamente ao texto do critério 2.",
+ "Seletores CSS são usados para os atributos deduzidos `data-test`; campo, botão, ordenação e mensagem usam locators semânticos.",
+ "Carregar, pesquisar e ordenar gera uma requisição `GET` cujo caminho termina em `/products`. A pesquisa envia `q`; a ordenação envia `sort`. Outros parâmetros, como paginação, podem existir.",
+ "A resposta dessas requisições é um objeto JSON com `data`, uma lista dos produtos da página corrente. Cada produto possui `name` textual e `price` numérico ou textual.",
+ "Os dados da resposta são usados para construir expectativas que aguardam a atualização da interface. A verificação continua sendo feita sobre os elementos renderizados, com `expect`.",
+ "O catálogo inicial contém pelo menos dois produtos, pelo menos dois preços distintos e pelo menos dois nomes distintos. Há correspondências para “hammer” e nenhuma para “zzzzxx”. Violações dessas premissas falham explicitamente.",
+ "A comparação de “hammer” ignora diferenças entre maiúsculas e minúsculas. Os nomes são comparados alfabeticamente com `casefold()`, assumindo nomes sem particularidades de colação regional.",
+ "Os preços aparecem em dólares, com `$`, ponto decimal, duas casas decimais e sem separador de milhares.",
+ "O limite de zero resultados é coberto por CT04. Empates são aceitos nas ordenações, sem exigir desempate. Não são inventados comportamentos para busca vazia, espaços, caracteres especiais, outras páginas ou combinação de busca e ordenação, pois não estão especificados.",
+ "O arquivo pode ser executado com `pytest -q test_busca_ordenacao.py` ou diretamente com `python test_busca_ordenacao.py`."
+]

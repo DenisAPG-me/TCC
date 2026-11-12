@@ -1,0 +1,16 @@
+[
+ "URL base `https://automationintesting.online`, definida na constante `BASE_URL` (o plugin também aceita `--base-url`, mas o código usa a constante).",
+ "Painel em `/admin`; caixa de mensagens acessível diretamente em `/admin/message`.",
+ "Formulário de login com campos identificáveis por label ou placeholder \"Username\" e \"Password\" e botão com nome acessível \"Login\".",
+ "Após login, existe um link com nome acessível contendo \"Messages\", cujo texto inclui o contador (ex.: \"Messages 3\"); ausência de número é interpretada como 0.",
+ "O contador é carregado assincronamente; considera-se carregado após `networkidle`.",
+ "Logout é um botão ou link com nome acessível \"Logout\".",
+ "Formulário de contato da home com `data-testid`: `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject`, `ContactDescription`, e botão \"Submit\".",
+ "Dados válidos: nome não vazio, e-mail bem formado, telefone com 11 dígitos, assunto com 5–100 caracteres, mensagem com 20–2000 caracteres.",
+ "Erros de validação contêm termos como \"blank\", \"must\", \"between\", \"size\" ou \"well-formed\".",
+ "Confirmação exibida exatamente como \"Thanks for getting in touch <nome>!\".",
+ "Na caixa de mensagens, cada mensagem exibe nome do remetente e assunto como texto visível.",
+ "Ambiente de demonstração é compartilhado e pode ser reiniciado periodicamente; assume-se que nenhum outro visitante envia mensagens durante TC03/TC08 (caso contrário, podem ocorrer falsos negativos).",
+ "Nomes e assuntos recebem sufixo aleatório (uuid) para unicidade.",
+ "Requer `pytest`, `pytest-playwright` e navegadores instalados (`playwright install`)."
+]

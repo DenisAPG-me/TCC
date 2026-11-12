@@ -1,0 +1,14 @@
+[
+ "**Tecnologia escolhida:** Python + pytest + pytest-playwright (utilizando a fixture `page` fornecida pelo plugin, conforme requisitos técnicos obrigatórios).",
+ "**URL Base:** `https://automationintesting.online/` definida como constante no topo do arquivo.",
+ "**Credenciais:** Usuário `admin` e senha `password`, informados na User Story.",
+ "**Seletores e Elementos (baseados em padrões comuns da aplicação restful-booker-platform / automationintesting.online):**",
+ "Link de login na página inicial: `get_by_role(\"link\", name=\"Let me in!\")` ou `get_by_role(\"button\", name=\"Admin\")` ou seletor por texto. Vamos usar `get_by_role(\"link\", name=\"Admin\")` / `get_by_role(\"button\", name=\"Admin\")`.",
+ "Campos de login: input de username (`get_by_label(\"Username\")` ou `get_by_placeholder(\"Username\")`) e password (`get_by_label(\"Password\")` ou `get_by_placeholder(\"Password\")`), botão de login (`get_by_role(\"button\", name=\"Login\")`).",
+ "Contador de mensagens: elemento próximo ao texto \"Messages\" no painel, ex: seletor `#messageCount` ou elemento contendo o número próximo a `get_by_text(\"Messages\")`.",
+ "Formulário de contato da página inicial: inputs `name`, `email`, `phone`, `subject`, `description` (ou message), e botão `Submit` (`get_by_role(\"button\", name=\"Submit\")`).",
+ "Mensagem de confirmação: `get_by_text(\"Thanks for getting in touch\")`.",
+ "Caixa de mensagens / painel de admin: link para mensagens (`get_by_role(\"link\", name=\"Messages\")` ou similar no painel).",
+ "Logout: botão `Logout` (`get_by_role(\"link\", name=\"Logout\")` ou `get_by_role(\"button\", name=\"Logout\")`).",
+ "**Dados de teste:** Nome \"John Doe\", Assunto \"Booking Inquiry\", Mensagem \"Hello, I would like to book a room for the weekend.\", Email \"john.doe@example.com\", Telefone \"01234567890\"."
+]

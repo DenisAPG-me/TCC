@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 28.92,
+ "tokens": {
+  "total": 19325
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "by_role(\"spinbutton\")\n    quantity_input.fill(QUANTITY_TO_EDIT)\n    quantity_input.press(\"Enter\")\n\n    expect(quantity_input).to_have_value(\"1\")\n    expect.poll(lambda: cart_total_cents(page)).to_be(unit_price)\n\n\ndef test_ct04_impedir_tres_unidades_de_thor_hammer(page: Page) -> None:\n    open_product(page, THOR_HAMMER)\n    set_product_quantity(page, QUANTITY_TO_ADD)\n    add_product_to_cart(page)\n\n    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()\n```\ntokens used\n19,325\n"
+}

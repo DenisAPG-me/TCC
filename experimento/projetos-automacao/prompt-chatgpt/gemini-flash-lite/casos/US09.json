@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Exclusao sem token falha",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Criar reserva via API, tentar excluir sem enviar o cabeçalho de token de autenticação, e consultar a reserva criada.",
+  "esperado": "Retorna status 403 na exclusão e status 200 na consulta subsequente da reserva."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Exclusao com token invalido falha",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Criar reserva via API, tentar excluí-la enviando um token inválido no cabeçalho, e consultar a reserva.",
+  "esperado": "Retorna status 403 na exclusão e a reserva continua existindo (status 200 na consulta)."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Exclusao com token valido sucede",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Obter token válido autenticando como admin, criar reserva via API, e excluí-la enviando o token válido.",
+  "esperado": "Retorna status 201 ao excluir a reserva."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Consulta de reserva excluida retorna nao encontrada",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva, obter token válido, excluí-la, e tentar consultá-la pelo ID.",
+  "esperado": "Retorna status 404 ao consultar a reserva excluída."
+ },
+ {
+  "id": "CT005",
+  "titulo": "Exclusao repetida de reserva retorna erro 4xx",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva, obter token, excluir a reserva com sucesso, e tentar excluí-la novamente com o mesmo token válido.",
+  "esperado": "Retorna status de erro 4xx na segunda exclusão."
+ },
+ {
+  "id": "CT006",
+  "titulo": "Listagem por filtro apos exclusao retorna vazio",
+  "tipo": "borda",
+  "criterio": "CA06",
+  "passos": "Criar reserva com nome único específico, obter token, excluir a reserva, e listar/filtrar reservas pelo nome único.",
+  "esperado": "A lista retornada para o filtro do nome único está vazia."
+ }
+]

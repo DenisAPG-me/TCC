@@ -1,0 +1,84 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05",
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT003_acessar_quartos_com_credenciais_validas",
+   "categoria": "seletor inexistente",
+   "nota": "role row/cell nao existe na lista de quartos"
+  },
+  {
+   "teste": "test_CT004_sair_do_painel",
+   "categoria": "seletor inexistente",
+   "nota": "role main inexistente na home publica"
+  },
+  {
+   "teste": "test_CT005_impedir_acesso_direto_apos_logout",
+   "categoria": "seletor inexistente",
+   "nota": "role main inexistente na home publica"
+  }
+ ]
+}

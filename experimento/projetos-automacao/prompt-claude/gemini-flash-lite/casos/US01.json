@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produto por palavra-chave existente",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Acessar a pagina inicial; Digitar hammer no campo de busca; Acionar a busca",
+  "esperado": "A listagem exibe somente produtos cujo nome contem hammer e a pagina indica que a busca foi por hammer"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Buscar por termo inexistente",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar a pagina inicial; Digitar zzzzxx no campo de busca; Acionar a busca",
+  "esperado": "A pagina exibe a mensagem There are no products found. e nenhum produto e listado"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Ordenar produtos por preco do menor para o maior",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Acessar a pagina inicial com produtos listados; Selecionar a ordenacao preco do menor para o maior",
+  "esperado": "Os precos da pagina aparecem em ordem crescente"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Ordenar produtos por nome de Z a A",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar a pagina inicial com produtos listados; Selecionar a ordenacao nome de Z a A",
+  "esperado": "Os nomes da pagina aparecem em ordem alfabetica decrescente"
+ }
+]

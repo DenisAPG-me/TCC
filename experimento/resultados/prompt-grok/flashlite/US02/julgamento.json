@@ -1,0 +1,77 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_adicionar_quantidade_valida_ao_carrinho",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo (strict mode, 3 elementos)"
+  },
+  {
+   "teste": "test_TC02_validar_calculo_total_linha_e_carrinho",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo (strict mode, 3 elementos)"
+  },
+  {
+   "teste": "test_TC03_alterar_quantidade_no_carrinho",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo (strict mode, 3 elementos)"
+  },
+  {
+   "teste": "test_TC04_tentar_adicionar_mais_de_uma_unidade_thor_hammer",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Quantity') ambiguo (strict mode, 3 elementos)"
+  }
+ ]
+}

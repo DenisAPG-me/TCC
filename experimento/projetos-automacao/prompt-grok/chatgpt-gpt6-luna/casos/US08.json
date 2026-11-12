@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Enviar `admin` e `password123` ao endpoint de autenticação.",
+  "esperado": "Status 200 e token presente e não vazio."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Autenticar com credenciais inválidas",
+  "tipo": "negativo",
+  "criterio": "2",
+  "passos": "Enviar credenciais incorretas ao endpoint de autenticação.",
+  "esperado": "Resposta sem token e com motivo `Bad credentials`."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Atualizar reserva completa com token válido",
+  "tipo": "positivo",
+  "criterio": "3",
+  "passos": "Criar uma reserva, autenticar e atualizar seus dados com novo nome e preço.",
+  "esperado": "Status 200 e resposta contém os valores atualizados."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Atualizar parcialmente o sobrenome",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Criar uma reserva, autenticar e enviar apenas o sobrenome em uma atualização parcial.",
+  "esperado": "Status 200, sobrenome atualizado e demais campos preservados."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Atualizar sem token",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Criar uma reserva e tentar atualizá-la sem enviar token.",
+  "esperado": "Status 403."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Atualizar com campos obrigatórios ausentes",
+  "tipo": "negativo",
+  "criterio": "6",
+  "passos": "Criar uma reserva, autenticar e enviar atualização completa sem campos obrigatórios.",
+  "esperado": "Status 400."
+ }
+]

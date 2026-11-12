@@ -1,0 +1,187 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Enviar formulário de contato vazio | Negativo | CA1 | Acessar a página inicial; deixar nome, e-mail, telefone, assunto e mensagem vazios; clicar em Submit | Ver "Name may not be blank", "Email may not be blank", "Phone may not be blank", "Subject may not be blank" e "Message may not be blank" |
+| CT02 | Telefone com 10 caracteres é rejeitado | Negativo | CA2 | Acessar a página inicial; preencher todos os campos válidos com telefone de 10 caracteres; clicar em Submit | Ver "Phone must be between 11 and 21 characters." |
+| CT03 | Telefone com 11 caracteres (limite inferior) é aceito | Borda | CA2, CA5 | Acessar a página inicial; preencher todos os campos válidos com telefone de 11 caracteres; clicar em Submit | Ver "Thanks for getting in touch Maria Teste!" |
+| CT04 | Telefone com 21 caracteres (limite superior) é aceito | Borda | CA2, CA5 | Acessar a página inicial; preencher todos os campos válidos com telefone de 21 caracteres; clicar em Submit | Ver "Thanks for getting in touch Maria Teste!" |
+| CT05 | Telefone com 22 caracteres é rejeitado | Negativo | CA2 | Acessar a página inicial; preencher todos os campos válidos com telefone de 22 caracteres; clicar em Submit | Ver "Phone must be between 11 and 21 characters." |
+| CT06 | Assunto com 4 caracteres e mensagem com 19 caracteres são rejeitados | Negativo | CA3 | Acessar a página inicial; preencher campos válidos com assunto de 4 caracteres e mensagem de 19 caracteres; clicar em Submit | Ver "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." |
+| CT07 | Assunto com 5 caracteres e mensagem com 20 caracteres (limites inferiores) são aceitos | Borda | CA3, CA5 | Acessar a página inicial; preencher campos válidos com assunto de 5 caracteres e mensagem de 20 caracteres; clicar em Submit | Ver "Thanks for getting in touch Maria Teste!" |
+| CT08 | Assunto com 100 caracteres e mensagem com 2000 caracteres (limites superiores) são aceitos | Borda | CA3, CA5 | Acessar a página inicial; preencher campos válidos com assunto de 100 caracteres e mensagem de 2000 caracteres; clicar em Submit | Ver "Thanks for getting in touch Maria Teste!" |
+| CT09 | Assunto com 101 caracteres e mensagem com 2001 caracteres são rejeitados | Negativo | CA3 | Acessar a página inicial; preencher campos válidos com assunto de 101 caracteres e mensagem de 2001 caracteres; clicar em Submit | Ver "Subject must be between 5 and 100 characters." e "Message must be between 20 and 2000 characters." |
+| CT10 | E-mail malformado ("bad") é rejeitado | Negativo | CA4 | Acessar a página inicial; preencher campos válidos com e-mail "bad"; clicar em Submit | Ver "must be a well-formed email address" |
+| CT11 | Formulário com dados válidos gera confirmação com nome e assunto | Positivo | CA5 | Acessar a página inicial; preencher todos os campos com dados válidos; clicar em Submit | Ver "Thanks for getting in touch Maria Teste!" e o assunto "Dúvida sobre reserva" na confirmação |
+
+## SUPOSIÇÕES
+
+- Tecnologia: Python + pytest + Playwright, usando o plugin oficial pytest-playwright e a fixture `page`. A User Story é de interface web e o foco dos critérios é o formulário na página.
+- Navegador: Chromium em modo headless, conforme o padrão do plugin pytest-playwright.
+- Base URL: `https://automationintesting.online/`, definida na constante `BASE_URL`. O formulário de contato fica na página inicial.
+- Seletores: os campos são localizados por `get_by_label` com rótulos exatos "Name", "Email", "Phone", "Subject" e "Message". O botão é localizado por `get_by_role("button", name="Submit")`.
+- Mensagens de campo obrigatório: deduzidas no padrão "<Campo> may not be blank" ("Name", "Email", "Phone", "Subject", "Message"). A User Story não traz o texto exato.
+- Mensagens de validação: as strings de tamanho e de e-mail são as da User Story. A verificação de e-mail usa a substring "must be a well-formed email address", para aceitar qualquer prefixo de campo.
+- Sucesso: a confirmação exibe "Thanks for getting in touch <nome>!" e o assunto informado, na mesma página após o envio.
+- Dados de teste: nome "Maria Teste"; e-mail "maria.teste@example.com"; telefone válido "11999999999"; assunto válido "Dúvida sobre reserva"; mensagem válida de 52 caracteres.
+- Limites: telefone de 10, 11, 21 e 22 caracteres; assunto de 4, 5, 100 e 101 caracteres; mensagem de 19, 20, 2000 e 2001 caracteres. Os casos de borda válidos são confirmados pela mensagem de sucesso, que comprova também a ausência de erros.
+- Asserções de ausência: não são usadas, porque poderiam passar antes da renderização. A validação de ausência de erro é feita pela confirmação de sucesso.
+- Isolamento: cada teste recebe uma `page` nova do plugin e navega para `BASE_URL`. Não há dependência entre testes.
+- Espera: as asserções `expect` aguardam automaticamente. Não há `time.sleep`, `skip` ou `xfail`.
+- Execução: o script é executado com `pytest <arquivo>.py`. Para navegador visível, usar `--headed`.
+
+## SCRIPT
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+NOME_VALIDO = "Maria Teste"
+EMAIL_VALIDO = "maria.teste@example.com"
+TELEFONE_VALIDO = "11999999999"
+ASSUNTO_VALIDO = "Dúvida sobre reserva"
+MENSAGEM_VALIDA = "Gostaria de saber mais sobre a pousada e as tarifas."
+
+TELEFONE_10_CARACTERES = "1" * 10
+TELEFONE_11_CARACTERES = "1" * 11
+TELEFONE_21_CARACTERES = "1" * 21
+TELEFONE_22_CARACTERES = "1" * 22
+
+ASSUNTO_4_CARACTERES = "A" * 4
+ASSUNTO_5_CARACTERES = "A" * 5
+ASSUNTO_100_CARACTERES = "A" * 100
+ASSUNTO_101_CARACTERES = "A" * 101
+
+MENSAGEM_19_CARACTERES = "M" * 19
+MENSAGEM_20_CARACTERES = "M" * 20
+MENSAGEM_2000_CARACTERES = "M" * 2000
+MENSAGEM_2001_CARACTERES = "M" * 2001
+
+EMAIL_MALFORMADO = "bad"
+
+MSG_NOME_OBRIGATORIO = "Name may not be blank"
+MSG_EMAIL_OBRIGATORIO = "Email may not be blank"
+MSG_TELEFONE_OBRIGATORIO = "Phone may not be blank"
+MSG_ASSUNTO_OBRIGATORIO = "Subject may not be blank"
+MSG_MENSAGEM_OBRIGATORIA = "Message may not be blank"
+MSG_TELEFONE_TAMANHO = "Phone must be between 11 and 21 characters."
+MSG_ASSUNTO_TAMANHO = "Subject must be between 5 and 100 characters."
+MSG_MENSAGEM_TAMANHO = "Message must be between 20 and 2000 characters."
+MSG_EMAIL_INVALIDO = "must be a well-formed email address"
+MSG_AGRADECIMENTO = f"Thanks for getting in touch {NOME_VALIDO}!"
+
+
+def preencher_formulario(
+    page: Page,
+    nome: str = NOME_VALIDO,
+    email: str = EMAIL_VALIDO,
+    telefone: str = TELEFONE_VALIDO,
+    assunto: str = ASSUNTO_VALIDO,
+    mensagem: str = MENSAGEM_VALIDA,
+) -> None:
+    page.get_by_label("Name", exact=True).fill(nome)
+    page.get_by_label("Email", exact=True).fill(email)
+    page.get_by_label("Phone", exact=True).fill(telefone)
+    page.get_by_label("Subject", exact=True).fill(assunto)
+    page.get_by_label("Message", exact=True).fill(mensagem)
+
+
+def enviar_formulario(page: Page) -> None:
+    page.get_by_role("button", name="Submit", exact=True).click()
+
+
+def test_ct01_formulario_vazio_exibe_mensagens_de_campos_obrigatorios(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, "", "", "", "", "")
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_NOME_OBRIGATORIO)).to_be_visible()
+    expect(page.get_by_text(MSG_EMAIL_OBRIGATORIO)).to_be_visible()
+    expect(page.get_by_text(MSG_TELEFONE_OBRIGATORIO)).to_be_visible()
+    expect(page.get_by_text(MSG_ASSUNTO_OBRIGATORIO)).to_be_visible()
+    expect(page.get_by_text(MSG_MENSAGEM_OBRIGATORIA)).to_be_visible()
+
+
+def test_ct02_telefone_com_10_caracteres_e_rejeitado(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, telefone=TELEFONE_10_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_TELEFONE_TAMANHO)).to_be_visible()
+
+
+def test_ct03_telefone_com_11_caracteres_limite_inferior_e_aceito(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, telefone=TELEFONE_11_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_AGRADECIMENTO)).to_be_visible()
+
+
+def test_ct04_telefone_com_21_caracteres_limite_superior_e_aceito(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, telefone=TELEFONE_21_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_AGRADECIMENTO)).to_be_visible()
+
+
+def test_ct05_telefone_com_22_caracteres_e_rejeitado(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, telefone=TELEFONE_22_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_TELEFONE_TAMANHO)).to_be_visible()
+
+
+def test_ct06_assunto_com_4_e_mensagem_com_19_caracteres_sao_rejeitados(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, assunto=ASSUNTO_4_CARACTERES, mensagem=MENSAGEM_19_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_ASSUNTO_TAMANHO)).to_be_visible()
+    expect(page.get_by_text(MSG_MENSAGEM_TAMANHO)).to_be_visible()
+
+
+def test_ct07_assunto_com_5_e_mensagem_com_20_caracteres_limites_inferiores_sao_aceitos(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, assunto=ASSUNTO_5_CARACTERES, mensagem=MENSAGEM_20_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_AGRADECIMENTO)).to_be_visible()
+
+
+def test_ct08_assunto_com_100_e_mensagem_com_2000_caracteres_limites_superiores_sao_aceitos(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, assunto=ASSUNTO_100_CARACTERES, mensagem=MENSAGEM_2000_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_AGRADECIMENTO)).to_be_visible()
+
+
+def test_ct09_assunto_com_101_e_mensagem_com_2001_caracteres_sao_rejeitados(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, assunto=ASSUNTO_101_CARACTERES, mensagem=MENSAGEM_2001_CARACTERES)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_ASSUNTO_TAMANHO)).to_be_visible()
+    expect(page.get_by_text(MSG_MENSAGEM_TAMANHO)).to_be_visible()
+
+
+def test_ct10_email_malformado_e_rejeitado(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page, email=EMAIL_MALFORMADO)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_EMAIL_INVALIDO)).to_be_visible()
+
+
+def test_ct11_dados_validos_geram_confirmacao_com_nome_e_assunto(page: Page) -> None:
+    page.goto(BASE_URL)
+    preencher_formulario(page)
+    enviar_formulario(page)
+
+    expect(page.get_by_text(MSG_AGRADECIMENTO)).to_be_visible()
+    expect(page.get_by_text(ASSUNTO_VALIDO)).to_be_visible()
+```

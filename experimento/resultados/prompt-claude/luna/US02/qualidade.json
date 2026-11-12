@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Legivel, com ressalvas de nomes/idioma/duplicacao.",
+  "estrutura": "Helpers/fixtures e pouca duplicacao.",
+  "assercoes": "Assercoes de negocio claras sobre texto/valores.",
+  "espera": "Esperas fragilizadas (networkidle, leitura imediata ou API incorreta).",
+  "manutenibilidade": "Seletores frageis/CSS e sem constantes."
+ }
+}

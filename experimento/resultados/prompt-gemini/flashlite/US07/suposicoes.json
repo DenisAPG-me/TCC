@@ -1,0 +1,5 @@
+[
+ "URL base da API: `https://restful-booker.herokuapp.com`",
+ "Endpoint de criação e consulta: `/booking`",
+ "Formato de payload aceito para POST `/booking`:"
+]

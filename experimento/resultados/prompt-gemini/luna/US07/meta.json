@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 13.13,
+ "tokens": {
+  "total": 4561
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "_response.json().get(\"bookingid\")\n    assert isinstance(booking_id, int)\n\n    response = requests.get(\n        f\"{BASE_URL}/booking\",\n        params={\"firstname\": nome, \"lastname\": sobrenome},\n        timeout=REQUEST_TIMEOUT,\n    )\n\n    assert response.status_code == 200, response.text\n    bookings = response.json()\n    assert isinstance(bookings, list)\n    assert any(\n        isinstance(item, dict) and item.get(\"bookingid\") == booking_id\n        for item in bookings\n    )\n```\ntokens used\n4,561\n"
+}

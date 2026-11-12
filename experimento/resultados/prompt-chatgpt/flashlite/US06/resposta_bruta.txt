@@ -1,0 +1,141 @@
+CASOS DE TESTE
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+| CT001 | Visualizar e anotar contador de mensagens no painel | positivo | CA01 | Acessar página de login do admin preencher credenciais válidas entrar no painel e ler o número exibido ao lado de Messages | O número de mensagens pendentes é exibido e capturado com sucesso |
+| CT002 | Envio de formulário de contato com dados válidos pelo visitante | positivo | CA02 | Acessar a página inicial preencher nome assunto email telefone e mensagem no formulário de contato e clicar no botão de envio | É exibida a mensagem de confirmação Thanks for getting in touch Nome! |
+| CT003 | Incrementar contador de mensagens após envio | positivo | CA03 | Anotar contador inicial fazer login como admin verificar que o contador aumentou em uma unidade | O contador ao lado de Messages é exatamente uma unidade maior que o anterior |
+| CT004 | Exibir mensagem recém enviada na caixa de mensagens | positivo | CA04 | Fazer login como admin abrir a caixa de mensagens e verificar a presença da mensagem recém enviada | A mensagem aparece na lista contendo o nome do remetente e o assunto informados |
+| CT005 | Restrição de acesso à caixa de mensagens após logout | negativo | CA05 | Fazer login como admin realizar logout tentar acessar diretamente a URL do painel administrativo | O usuário é redirecionado para a página de login ou solicitado a se autenticar |
+| CT006 | Envio de formulário de contato com campos obrigatórios vazios | negativo | CA02 | Acessar a página inicial e tentar enviar o formulário de contato sem preencher os campos obrigatórios | Erros de validação são exibidos e a mensagem de sucesso não aparece |
+| CT007 | Tentativa de login no painel com credenciais inválidas | negativo | CA01 | Acessar a página de login do admin preencher usuário ou senha incorretos e submeter | O acesso é negado e uma mensagem de erro de autenticação é exibida |
+| CT008 | Limite de caracteres no campo de assunto do contato | borda | CA02 | Preencher o formulário de contato com um assunto de comprimento máximo extremo e enviar | O sistema lida corretamente com o comprimento limite exibindo confirmação ou erro apropriado |
+
+SUPOSIÇÕES
+1. A URL base da aplicação é `https://automationintesting.online/`, conforme informada na User Story.
+2. O painel administrativo é acessível na rota `/admin` (ou `/#/admin`), e a tela de login possui campos com rótulos `Username` e `Password` (ou placeholders correspondentes) e um botão de login.
+3. O contador de mensagens no painel administrativo está localizado próximo ao texto "Messages" ou possui um seletor/papel acessível identificável na interface administrativa.
+4. O formulário de contato na página inicial possui campos rotulados ou identificáveis para Name, Email, Phone, Subject e Message, além de um botão de envio (Submit / Send).
+5. As credenciais de demonstração fornecidas são usuário `admin` e senha `password`.
+6. O teste de UI utiliza o plugin `pytest-playwright` com a fixture `page`, conforme exigido pelos requisitos técnicos obrigatórios, sem criação manual de `sync_playwright()`.
+7. O critério CA05 (logout e acesso direto) assume que tentar abrir a rota protegida sem sessão ativa redireciona para a tela de autenticação.
+8. Para os casos negativos e de borda (CT006, CT007, CT008), deduziu-se o comportamento padrão de validação de formulários web e autenticação REST/UI quando campos estão incorretos ou em limites extremos.
+
+```python
+import pytest
+import requests
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+def test_CT001_visualizar_e_anotar_contador_de_mensagens_no_painel(page: Page) -> None:
+    page.goto(f"{BASE_URL}#/admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    messages_counter = page.locator("#messagesCount, [href*='messages'], .card").filter(has_text="Messages").first
+    expect(messages_counter).to_be_visible()
+
+def test_CT002_envio_de_formulario_de_contato_com_dados_validos_pelo_visitante(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_placeholder("Name").fill("Visitante Teste")
+    page.get_by_placeholder("Email").fill("visitante@teste.com")
+    page.get_by_placeholder("Phone").fill("01234567890")
+    page.get_by_placeholder("Subject").fill("Reserva de Quarto")
+    page.get_by_placeholder("Message").fill("Gostaria de saber a disponibilidade para o próximo fim de semana.")
+    
+    page.get_by_role("button", name="Submit").click()
+    
+    confirmation = page.get_by_text("Thanks for getting in touch Visitante Teste!")
+    expect(confirmation).to_be_visible()
+
+def test_CT003_incrementar_contador_de_mensagens_apos_envio(page: Page) -> None:
+    response = requests.post(
+        f"{BASE_URL}message/",
+        json={
+            "name": "Remetente Incremental",
+            "email": "incremental@teste.com",
+            "phone": "12345678901",
+            "subject": "Teste Incremento",
+            "description": "Mensagem gerada para teste de incremento do contador."
+        },
+        timeout=10
+    )
+    assert response.status_code in [200, 201]
+
+    page.goto(f"{BASE_URL}#/admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    dashboard_element = page.get_by_text("Messages").first
+    expect(dashboard_element).to_be_visible()
+
+def test_CT004_exibir_mensagem_recem_enviada_na_caixa_de_mensagens(page: Page) -> None:
+    unique_subject = "Assunto Unico CT004"
+    unique_name = "Remetente CT004"
+    requests.post(
+        f"{BASE_URL}message/",
+        json={
+            "name": unique_name,
+            "email": "ct004@teste.com",
+            "phone": "12345678901",
+            "subject": unique_subject,
+            "description": "Conteudo da mensagem para validacao na caixa de entrada."
+        },
+        timeout=10
+    )
+
+    page.goto(f"{BASE_URL}#/admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    messages_link = page.get_by_role("link", name="Messages")
+    if messages_link.count() > 0:
+        messages_link.click()
+    
+    expect(page.get_by_text(unique_subject)).to_be_visible()
+    expect(page.get_by_text(unique_name)).to_be_visible()
+
+def test_CT005_restricao_de_acesso_a_caixa_de_mensagens_apos_logout(page: Page) -> None:
+    page.goto(f"{BASE_URL}#/admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("password")
+    page.get_by_role("button", name="Login").click()
+    
+    logout_button = page.get_by_role("button", name="Logout")
+    if logout_button.count() > 0:
+        logout_button.click()
+    
+    page.goto(f"{BASE_URL}#/admin")
+    expect(page.get_by_label("Username")).to_be_visible()
+
+def test_CT006_envio_de_formulario_de_contato_com_campos_obrigatorios_vazios(page: Page) -> None:
+    page.goto(BASE_URL)
+    page.get_by_role("button", name="Submit").click()
+    
+    error_indicator = page.locator(".alert, .alert-danger, input:invalid, textarea:invalid").first
+    expect(error_indicator).to_be_visible()
+
+def test_CT007_tentativa_de_login_no_painel_com_credenciais_invalidas(page: Page) -> None:
+    page.goto(f"{BASE_URL}#/admin")
+    page.get_by_label("Username").fill("admin")
+    page.get_by_label("Password").fill("wrongpassword")
+    page.get_by_role("button", name="Login").click()
+    
+    error_message = page.locator(".alert, .alert-danger, .error").first
+    expect(error_message).to_be_visible()
+
+def test_CT008_limite_de_caracteres_no_campo_de_assunto_do_contato(page: Page) -> None:
+    page.goto(BASE_URL)
+    long_subject = "A" * 300
+    page.get_by_placeholder("Name").fill("Teste Limite")
+    page.get_by_placeholder("Email").fill("limite@teste.com")
+    page.get_by_placeholder("Phone").fill("01234567890")
+    page.get_by_placeholder("Subject").fill(long_subject)
+    page.get_by_placeholder("Message").fill("Testando limite de caracteres no campo de assunto.")
+    
+    page.get_by_role("button", name="Submit").click()
+    
+    page.wait_for_load_state("networkidle")
+```

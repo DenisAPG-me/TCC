@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 1,
+ "assercoes": 1,
+ "espera": 3,
+ "manutenibilidade": 1,
+ "justificativas": {
+  "legibilidade": "Legivel, helper de login",
+  "estrutura": "Um helper, resto duplicado",
+  "assercoes": "TC01/TC03 so checam visibilidade, nao leem nem comparam contador",
+  "espera": "expect auto-wait, logout condicional",
+  "manutenibilidade": "Dados fixos, dependencia de ordem entre testes"
+ }
+}

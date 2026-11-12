@@ -1,0 +1,40 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_enviar_credenciais_vazias",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT002_rejeitar_senha_incorreta",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT003_acessar_quartos_com_credenciais_validas",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "ents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US05\\script.py:159: in test_CT003_acessar_quartos_com_credenciais_validas\n    expect(room_row).to_have_count(1, timeout=ASSERTION_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 0 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True)) with timeout 10000ms\nE     - waiting for get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True))\nE       24 × locator resolved to 0 elements\nE          - unexpected value \"0\""
+  },
+  {
+   "nodeid": "script.py::test_CT004_sair_do_painel",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  },
+  {
+   "nodeid": "script.py::test_CT005_impedir_acesso_direto_apos_logout",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": " - listitem:\nE         - link \"Rooms\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Booking\":\nE           - /url: \"#\"\nE       - listitem:\nE         - link \"Contact\":\nE           - /url: \"#\"\nE     - separator\nE     - text: restful-booker-platform v2.2 Created by\nE     - link \"Mark Winteringham\":\nE       - /url: http://www.mwtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert"
+  }
+ ],
+ "stdout_tail": "wtestconsultancy.co.uk\nE     - text: \"- © 2019-26\"\nE     - link \"Cookie-Policy\":\nE       - /url: /cookie\nE     - text: \"-\"\nE     - link \"Privacy-Policy\":\nE       - /url: /privacy\nE     - text: \"-\"\nE     - link \"Admin panel\":\nE       - /url: /admin\nE   - alert\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US05\\script.py::test_CT003_acessar_quartos_com_credenciais_validas\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US05\\script.py::test_CT004_sair_do_painel\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\astra\\US05\\script.py::test_CT005_impedir_acesso_direto_apos_logout\n3 failed, 2 passed, 1 warning in 36.78s\n",
+ "returncode": 1,
+ "duracao_s": 37.37
+}

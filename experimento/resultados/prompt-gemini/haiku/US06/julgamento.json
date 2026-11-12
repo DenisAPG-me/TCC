@@ -1,0 +1,146 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login com senha incorreta"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio sem nome"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "email invalido"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "assunto 4 chars"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "assunto 5 chars"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "mensagem 19 chars"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "seletor inexistente",
+   "nota": "role link Logout inexistente (e botao)"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT05",
+   "categoria": "seletor inexistente",
+   "nota": "role link Logout inexistente (e botao)"
+  },
+  {
+   "teste": "test_CT07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT08",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT09",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT10",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  },
+  {
+   "teste": "test_CT11",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve"
+  }
+ ]
+}

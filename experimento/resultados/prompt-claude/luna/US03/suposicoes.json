@@ -1,0 +1,12 @@
+[
+ "A história descreve uma interface web; a automação usa Python, pytest, Playwright síncrono e a fixture `page` do plugin oficial `pytest-playwright`. O plugin precisa estar instalado além de pytest e Playwright.",
+ "A URL de login é `/auth/login`; os caminhos de carrinho e checkout são acessados pelos controles da própria interface.",
+ "A loja disponibiliza pelo menos um produto na página inicial ou na listagem, e cada produto pode ser adicionado por um botão “Add to cart”.",
+ "Os controles principais podem ser identificados por nomes acessíveis como “Sign in”, “Login”, “Add to cart”, “Proceed to checkout”, “Continue” e “Confirm”.",
+ "Os campos de login são identificáveis por rótulos ou placeholders relacionados a “Email” e “Password”. Mensagens e textos de interface aparecem em inglês conforme os critérios.",
+ "A senha incorreta de CT02 é `wrong-password`; a validação de e-mail malformado de CT08 é uma expectativa de borda deduzida.",
+ "Os campos de endereço incluem país, CEP, número, rua, cidade e estado. Para CT05, tentar avançar sem valores obrigatórios deve manter o usuário na etapa de endereço.",
+ "Para CT06 e CT07, serão usados dados fictícios: país “United States”, CEP “10001”, número “123”, rua “Main Street”, cidade “New York”, estado “NY”, cartão “4111111111111111”, validade “12/2030” e CVV “123”.",
+ "A finalização do fluxo é feita em duas etapas: confirmação do pagamento, seguida da confirmação do pedido. CT06 e CT07 repetem o fluxo para que cada teste seja independente.",
+ "Os localizadores usam nomes acessíveis e textos visíveis; caso a aplicação não exponha esses nomes, os seletores precisarão ser ajustados à implementação real."
+]

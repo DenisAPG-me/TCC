@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Enviar admin e password123 ao endpoint de autenticação; validar status e token",
+  "esperado": "Status 200 e token presente, não vazio e em formato de texto"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Rejeitar credenciais inválidas",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Enviar credenciais inválidas ao endpoint de autenticação; validar o corpo da resposta",
+  "esperado": "Resposta sem token e com motivo Bad credentials"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Atualizar reserva completa",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Criar reserva de teste; autenticar; atualizar a reserva com payload completo, novo nome e novo preço",
+  "esperado": "Status 200 e resposta contém os novos valores"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Atualizar parcialmente o sobrenome",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Criar reserva de teste; autenticar; enviar PATCH somente com novo sobrenome",
+  "esperado": "Status 200; sobrenome atualizado e demais campos iguais aos valores originais"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Atualizar sem token",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Criar reserva de teste; enviar atualização sem cookie de autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Atualizar sem campos obrigatórios",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Criar reserva de teste; autenticar; enviar PUT sem um campo obrigatório",
+  "esperado": "Status 400"
+ }
+]

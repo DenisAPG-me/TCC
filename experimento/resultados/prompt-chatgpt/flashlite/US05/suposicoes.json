@@ -1,0 +1,12 @@
+[
+ "1. A URL base da aplicação é https://automationintesting.online/, conforme informado na User Story.",
+ "2. Os critérios de aceitação foram numerados de CA01 a CA05 na ordem de apresentação do texto da User Story, visto que não possuíam identificadores explícitos.",
+ "3. Para o teste de UI, utiliza-se a fixture `page` injetada pelo plugin `pytest-playwright`, conforme os requisitos técnicos obrigatórios.",
+ "4. Os seletores de interface foram deduzidos a partir da estrutura padrão da aplicação Restful Booker Platform: a tela de login possui campos de entrada identificados por rótulos ou placeholders/IDs como `username` e `password` (ou obtidos via `page.get_by_label` / `page.get_by_role`), e um botão de login (`page.get_by_role(\"button\", name=re.compile(\"Login\", re.IGNORECASE))`).",
+ "5. A mensagem de erro esperada para credenciais inválidas ou vazias é exatamente \"Invalid credentials\", exibida na tela de login.",
+ "6. Após o login bem-sucedido, o painel administrativo exibe a lista de quartos contendo \"101\" e \"Single\", além de elementos de menu contendo os textos \"Rooms\", \"Report\", \"Branding\" e \"Messages\".",
+ "7. O botão de logout é localizado por texto ou papel (ex: `page.get_by_text(\"Logout\")` ou `page.get_by_role(\"link\", name=re.compile(\"Logout\", re.IGNORECASE))`).",
+ "8. A página inicial pública da pousada é a raiz da URL base (`https://automationintesting.online/`), contendo elementos característicos da página pública (como formulário de contato ou título da pousada).",
+ "9. O acesso direto à lista de quartos do painel após o logout redireciona para a rota `/admin` ou exibe novamente o formulário de login.",
+ "10. Não há casos de borda específicos aplicáveis além dos cenários negativos (campos vazios, senha incorreta) e fluxos principais de sucesso e segurança (login, logout, acesso restrito), portanto nenhuma categoria de teste foi omitida sem justificativa."
+]

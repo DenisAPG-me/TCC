@@ -1,0 +1,82 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Busca por \"hammer\" lista somente produtos com \"hammer\" no nome",
+  "tipo": "Positivo",
+  "criterio": "AC1",
+  "passos": "Abrir home; buscar \"hammer\"; coletar nomes da listagem",
+  "esperado": "Lista não vazia; todos os nomes contêm \"hammer\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Página indica que a busca foi por \"hammer\"",
+  "tipo": "Positivo",
+  "criterio": "AC1",
+  "passos": "Abrir home; buscar \"hammer\"; verificar campo de busca",
+  "esperado": "Campo de busca exibe o valor \"hammer\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Termo inexistente exibe mensagem de nenhum produto",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "Abrir home; buscar \"zzzzxx\"",
+  "esperado": "Mensagem \"There are no products found.\" visível"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Termo inexistente não lista produtos",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "Abrir home; buscar \"zzzzxx\"; contar cards de produto",
+  "esperado": "Nenhum card de produto na página"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Ordenação por preço do menor para o maior",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "Abrir home; selecionar \"Price (Low - High)\"; coletar preços",
+  "esperado": "Preços da página em ordem crescente"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Ordenação por nome de Z a A",
+  "tipo": "Positivo",
+  "criterio": "AC4",
+  "passos": "Abrir home; selecionar \"Name (Z - A)\"; coletar nomes",
+  "esperado": "Nomes da página em ordem alfabética decrescente"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Busca sem diferença entre maiúsculas e minúsculas",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "Buscar \"hammer\"; buscar \"HAMMER\"; comparar listas",
+  "esperado": "Mesmos produtos nos dois resultados"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Termo com espaços nas bordas retorna mesmos resultados",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "Buscar \"  hammer  \"; comparar com busca \"hammer\"",
+  "esperado": "Mesmos produtos nos dois resultados"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Ordenação por preço preserva o filtro da busca",
+  "tipo": "Borda",
+  "criterio": "AC1, AC3",
+  "passos": "Buscar \"hammer\"; selecionar \"Price (Low - High)\"; coletar nomes e preços",
+  "esperado": "Somente produtos com \"hammer\"; preços em ordem crescente"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Ordenação em busca sem resultados não exibe produtos",
+  "tipo": "Borda",
+  "criterio": "AC2, AC3",
+  "passos": "Buscar \"zzzzxx\"; selecionar \"Price (Low - High)\"",
+  "esperado": "Mensagem \"There are no products found.\" permanece; nenhum produto listado"
+ }
+]

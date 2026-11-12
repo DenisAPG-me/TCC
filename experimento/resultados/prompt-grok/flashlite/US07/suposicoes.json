@@ -1,0 +1,7 @@
+[
+ "A URL base utilizada é `https://restful-booker.herokuapp.com`.",
+ "O endpoint para criar e listar reservas é `/booking` e para consultar uma reserva específica é `/booking/{id}`.",
+ "O formato do corpo JSON para criação de reservas segue a estrutura padrão da API Restful Booker: `{\"firstname\": \"...\", \"lastname\": \"...\", \"totalprice\": 100, \"depositpaid\": true, \"bookingdates\": {\"checkin\": \"2026-01-01\", \"checkout\": \"2026-01-02\"}, \"additionalneeds\": \"Breakfast\"}`.",
+ "O filtro por nome e sobrenome na listagem é feito através dos parâmetros de consulta `firstname` e `lastname` na URL `/booking`.",
+ "O identificador numérico retornado na criação da reserva está presente na propriedade `bookingid` da resposta JSON."
+]

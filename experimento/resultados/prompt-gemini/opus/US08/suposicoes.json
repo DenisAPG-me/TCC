@@ -1,0 +1,21 @@
+[
+ "Trata-se de uma User Story de **API REST**; portanto, utiliza-se `pytest` + `requests`.",
+ "URL base: `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL` no topo do arquivo.",
+ "Endpoints:",
+ "Autenticação: `POST /auth`, com corpo `{\"username\": ..., \"password\": ...}` e resposta `{\"token\": \"...\"}`.",
+ "Criação de reserva (pré-condição): `POST /booking`, com resposta `{\"bookingid\": <int>, \"booking\": {...}}`.",
+ "Consulta: `GET /booking/{id}`.",
+ "Atualização completa: `PUT /booking/{id}`.",
+ "Atualização parcial: `PATCH /booking/{id}`.",
+ "Limpeza: `DELETE /booking/{id}`, com token.",
+ "O token é enviado no header `Cookie: token=<valor>`.",
+ "Headers `Content-Type: application/json` e `Accept: application/json` são enviados em todas as requisições com corpo.",
+ "Chaves do payload de reserva: `firstname`, `lastname`, `totalprice` (int), `depositpaid` (bool), `bookingdates.checkin`, `bookingdates.checkout` (formato `YYYY-MM-DD`) e `additionalneeds`.",
+ "A resposta do PUT/PATCH retorna o objeto da reserva diretamente, sem o wrapper `booking`.",
+ "Credenciais inválidas retornam o corpo `{\"reason\": \"Bad credentials\"}`. O status HTTP não é verificado, pois o CA2 não o especifica.",
+ "Um token inválido é tratado como ausência de autorização, com status 403.",
+ "PUT com campos obrigatórios ausentes ou com corpo vazio retorna 400 e não altera a reserva.",
+ "\"Reserva existente\" é garantida pela criação de uma reserva nova a cada teste via fixture. A reserva é removida ao final.",
+ "O token válido é obtido uma única vez por sessão (fixture `scope=\"session\"`).",
+ "`TIMEOUT` de 30 segundos por requisição, considerando a latência do ambiente Heroku."
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes claros",
+  "estrutura": "Helpers e constantes",
+  "assercoes": "Asserts de erro, URL e menu",
+  "espera": "expect auto-wait",
+  "manutenibilidade": "Constantes, mas alguns seletores errados"
+ }
+}

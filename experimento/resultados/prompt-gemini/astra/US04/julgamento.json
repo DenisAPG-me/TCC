@@ -1,0 +1,237 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US04-C01",
+  "US04-C02",
+  "US04-C03",
+  "US04-C04",
+  "US04-C05",
+  "US04-C06",
+  "US04-C07",
+  "US04-C08",
+  "US04-C09",
+  "US04-C10",
+  "US04-C11",
+  "US04-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05",
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C11"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C12"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C03"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "21 aceito"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C04"
+   ],
+   "nota": "22 rejeitado"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C05"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C06"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "100 aceito"
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C07"
+   ],
+   "nota": ""
+  },
+  "12": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C08"
+   ],
+   "nota": ""
+  },
+  "13": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C09"
+   ],
+   "nota": ""
+  },
+  "14": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "2000 aceito"
+  },
+  "15": {
+   "classe": "valido",
+   "oraculo": [
+    "US04-C10"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT01",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label sobre campos do formulario nao resolve"
+  },
+  {
+   "teste": "test_CT02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT05",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT06",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT08",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT09",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT10",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT11",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT12",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT13",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT14",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT15",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  },
+  {
+   "teste": "test_CT16",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Message') nao resolve (textarea sem label associado)"
+  }
+ ]
+}

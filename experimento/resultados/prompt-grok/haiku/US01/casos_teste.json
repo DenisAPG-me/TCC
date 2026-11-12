@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Buscar \"hammer\" exibe somente produtos com \"hammer\" no nome",
+  "tipo": "positivo",
+  "criterio": "CA1",
+  "passos": "Abrir a home; digitar \"hammer\" no campo de busca; clicar em buscar; ler nomes da listagem e o valor do campo de busca",
+  "esperado": "Todos os nomes contêm \"hammer\"; campo de busca mantém \"hammer\""
+ },
+ {
+  "id": "TC02",
+  "titulo": "Busca não diferencia maiúsculas de minúsculas",
+  "tipo": "borda",
+  "criterio": "CA1",
+  "passos": "Abrir a home; buscar \"HAMMER\"; ler nomes da listagem",
+  "esperado": "Todos os nomes contêm \"hammer\" (sem distinção de caixa) e a lista não está vazia"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Termo inexistente exibe mensagem e nenhum produto",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a home; buscar \"zzzzxx\"; verificar mensagem e contar produtos",
+  "esperado": "Mensagem \"There are no products found.\" visível; nenhum produto listado"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Espaços nas extremidades do termo não alteram o resultado",
+  "tipo": "borda",
+  "criterio": "CA1",
+  "passos": "Abrir a home; buscar \"  hammer  \"; ler nomes da listagem",
+  "esperado": "Lista não vazia e todos os nomes contêm \"hammer\""
+ },
+ {
+  "id": "TC05",
+  "titulo": "Ordenar por preço do menor para o maior",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Abrir a home; selecionar \"Price (Low - High)\"; ler preços da página",
+  "esperado": "Preços da página em ordem crescente (não decrescente)"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Ordenar por nome de Z a A",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Abrir a home; selecionar \"Name (Z - A)\"; ler nomes da página",
+  "esperado": "Nomes da página em ordem alfabética decrescente (sem distinção de caixa)"
+ }
+]

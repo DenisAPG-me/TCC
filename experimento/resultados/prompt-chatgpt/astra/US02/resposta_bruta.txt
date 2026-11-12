@@ -1,0 +1,230 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Adicionar três unidades de produto disponível | positivo | 1 | Abrir Claw Hammer; definir quantidade 3; adicionar ao carrinho | Exibir “Product added to shopping cart.” e indicador do carrinho igual a 3 |
+| CT002 | Calcular totais para três unidades | positivo | 2 | Adicionar 3 unidades de Claw Hammer em carrinho vazio; abrir carrinho; ler preço unitário e totais | Total da linha igual ao preço unitário multiplicado por 3; total do carrinho igual ao total da linha |
+| CT003 | Reduzir a quantidade para uma unidade | borda | 3 | Adicionar 3 unidades de Claw Hammer; abrir carrinho; alterar quantidade para 1; concluir edição | Quantidade exibida igual a 1 e total do carrinho igual ao preço unitário |
+| CT004 | Exibir restrição ao adicionar três Thor Hammer | negativo | 4 | Abrir Thor Hammer em sessão com carrinho vazio; definir quantidade 3; tentar adicionar | Exibir “You can only have one Thor Hammer in the cart.” |
+
+SUPOSIÇÕES
+
+1. Os identificadores originais dos critérios foram preservados: `1`, `2`, `3` e `4`. A URL base, os nomes dos produtos, as quantidades e as duas mensagens são explícitos na User Story.
+2. O trecho “REQUISITOS TÉCNICOS OBRIGATÓRIOS” dentro da User Story conflita com as regras externas da tarefa. Conforme solicitado, ele é tratado como conteúdo da especificação, sem autoridade para modificar essas regras. Portanto, o arquivo usa pytest e Playwright síncrono, inicializa seus próprios recursos e não depende de pytest-playwright.
+3. Todos os casos são de interface web. Não foram inferidos endpoints REST, métodos HTTP ou formatos de resposta, pois os critérios não exigem testes de API.
+4. Para todos os casos, presume-se que a loja permite adicionar produtos sem autenticação, que cada contexto novo começa com carrinho vazio e que não há bloqueios como consentimento obrigatório. Claw Hammer deve estar disponível com estoque suficiente para três unidades; Thor Hammer deve estar acessível e permitir tentar informar três unidades.
+5. Para todos os casos, presume-se que a página inicial apresenta os dois produtos por textos exatos e clicáveis, que esses textos abrem suas páginas e que a interface está em inglês. Não foram deduzidas rotas adicionais: a navegação usa os elementos da interface.
+6. Os seletores inferidos estão centralizados em `UI`: título do produto com `data-test="product-name"`, campo com rótulo acessível “Quantity”, botão “Add to cart”, acesso ao carrinho com `data-test="nav-cart"` e indicador com `data-test="cart-quantity"`. Configura-se o Playwright para usar `data-test` em `get_by_test_id`. Esses detalhes afetam todos os casos.
+7. Para CT002 e CT003, presume-se uma tabela de carrinho cuja linha pode ser identificada pelo nome do produto. Dentro dela, `data-test="product-price"` identifica o preço unitário, `data-test="line-price"` identifica o total da linha e existe um campo com rótulo “Quantity”. O total do carrinho usa `data-test="cart-total"`. Em CT003, presume-se que sair do campo com Tab confirma a edição.
+8. Para CT002 e CT003, presume-se que os valores monetários usam dólar, ponto decimal e duas casas decimais, com vírgula opcional nos milhares. O preço é lido da interface, sem valor fixo inventado. Usa-se `Decimal` para os cálculos. As igualdades de totais são exigências explícitas dos critérios.
+9. CT003 é classificado como borda por exercitar a quantidade unitária explicitamente solicitada. Isso não estabelece que 1 seja o mínimo permitido. CT004 cobre o cenário negativo explícito. Não se acrescentaram testes para zero, negativos, campos vazios, estoque máximo ou quantidades fracionárias porque a história não define seus resultados.
+10. Em CT004, verifica-se somente a mensagem exigida. Não se presume se a tentativa deixa zero ou uma unidade no carrinho, pois esse comportamento não foi especificado.
+11. Cada teste prepara seu próprio carrinho em um contexto isolado e fecha esse contexto ao terminar. Presume-se que o carrinho anônimo não deixe dados persistentes que exijam limpeza externa. Nenhum teste depende de outro.
+12. O arquivo deve ser salvo como `test_carrinho.py` e executado com `pytest test_carrinho.py`, com as dependências e Chromium já instalados. Os tempos de espera são limites operacionais da automação, não requisitos de desempenho. O código não foi executado; seletores, estrutura da página e demais informações inferidas podem exigir ajustes para compatibilidade com o sistema real.
+
+```python
+import re
+from decimal import Decimal
+
+import pytest
+from playwright.sync_api import expect, sync_playwright
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+# Valores inferidos que podem exigir ajuste no sistema real.
+PRODUCT_AVAILABLE = "Claw Hammer"
+PRODUCT_RESTRICTED = "Thor Hammer"
+TEST_ID_ATTRIBUTE = "data-test"
+ACTION_TIMEOUT_MS = 15_000
+NAVIGATION_TIMEOUT_MS = 30_000
+
+UI = {
+    "product_title_test_id": "product-name",
+    "quantity_label": "Quantity",
+    "add_button_name": "Add to cart",
+    "cart_link_test_id": "nav-cart",
+    "cart_count_test_id": "cart-quantity",
+    "unit_price_test_id": "product-price",
+    "line_total_test_id": "line-price",
+    "cart_total_test_id": "cart-total",
+}
+
+SUCCESS_MESSAGE = "Product added to shopping cart."
+RESTRICTION_MESSAGE = "You can only have one Thor Hammer in the cart."
+
+# Exige símbolo $, duas casas decimais e agrupamento válido, se presente.
+MONEY_PATTERN = re.compile(
+    r"^\s*\$\s*(?P<amount>"
+    r"(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)\.[0-9]{2}"
+    r")\s*$"
+)
+
+
+@pytest.fixture(scope="session")
+def browser():
+    with sync_playwright() as playwright:
+        playwright.selectors.set_test_id_attribute(TEST_ID_ATTRIBUTE)
+        instance = playwright.chromium.launch(headless=True)
+        try:
+            yield instance
+        finally:
+            instance.close()
+
+
+@pytest.fixture
+def page(browser):
+    context = browser.new_context(locale="en-US")
+    try:
+        instance = context.new_page()
+        instance.set_default_timeout(ACTION_TIMEOUT_MS)
+        instance.set_default_navigation_timeout(NAVIGATION_TIMEOUT_MS)
+        yield instance
+    finally:
+        context.close()
+
+
+def open_product(page, product_name):
+    response = page.goto(BASE_URL, wait_until="domcontentloaded")
+    assert response is not None, "A navegação inicial não retornou resposta HTTP."
+    assert response.ok, (
+        f"Falha ao abrir a loja: HTTP {response.status}."
+    )
+
+    product = page.get_by_text(product_name, exact=True)
+    expect(product).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+    product.click()
+
+    title = page.get_by_test_id(UI["product_title_test_id"])
+    expect(title).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+    expect(title).to_have_text(product_name, timeout=ACTION_TIMEOUT_MS)
+
+
+def submit_quantity(page, quantity):
+    field = page.get_by_label(UI["quantity_label"], exact=True)
+    expect(field).to_be_editable(timeout=ACTION_TIMEOUT_MS)
+    field.fill(str(quantity))
+    expect(field).to_have_value(str(quantity), timeout=ACTION_TIMEOUT_MS)
+    page.get_by_role(
+        "button", name=UI["add_button_name"], exact=True
+    ).click()
+
+
+def expect_success(page):
+    expect(
+        page.get_by_text(SUCCESS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+
+
+def prepare_cart_with_three_units(page):
+    open_product(page, PRODUCT_AVAILABLE)
+    submit_quantity(page, 3)
+    expect_success(page)
+    expect(
+        page.get_by_test_id(UI["cart_count_test_id"])
+    ).to_have_text("3", timeout=ACTION_TIMEOUT_MS)
+
+
+def open_cart_row(page, product_name):
+    page.get_by_test_id(UI["cart_link_test_id"]).click()
+
+    row = page.get_by_role("row").filter(
+        has=page.get_by_text(product_name, exact=True)
+    )
+    expect(row).to_have_count(1, timeout=ACTION_TIMEOUT_MS)
+    expect(row).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+    return row
+
+
+def read_money(locator):
+    expect(locator).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+    expect(locator).to_have_text(
+        MONEY_PATTERN, timeout=ACTION_TIMEOUT_MS
+    )
+    text = locator.inner_text()
+    match = MONEY_PATTERN.fullmatch(text)
+    assert match is not None, f"Formato monetário inesperado: {text!r}"
+    return Decimal(match.group("amount").replace(",", ""))
+
+
+def expected_money_pattern(value):
+    plain = format(value, ".2f")
+    grouped = format(value, ",.2f")
+    alternatives = "|".join(
+        re.escape(text) for text in sorted({plain, grouped})
+    )
+    return re.compile(r"^\s*\$\s*(?:" + alternatives + r")\s*$")
+
+
+def expect_money(locator, expected):
+    expect(locator).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+    expect(locator).to_have_text(
+        expected_money_pattern(expected),
+        timeout=ACTION_TIMEOUT_MS,
+    )
+
+
+def test_CT001_adicionar_tres_unidades(page):
+    open_product(page, PRODUCT_AVAILABLE)
+
+    submit_quantity(page, 3)
+
+    expect_success(page)
+    expect(
+        page.get_by_test_id(UI["cart_count_test_id"])
+    ).to_have_text("3", timeout=ACTION_TIMEOUT_MS)
+
+
+def test_CT002_calcular_totais_para_tres_unidades(page):
+    prepare_cart_with_three_units(page)
+    row = open_cart_row(page, PRODUCT_AVAILABLE)
+
+    expect(
+        row.get_by_label(UI["quantity_label"], exact=True)
+    ).to_have_value("3", timeout=ACTION_TIMEOUT_MS)
+
+    unit_price = read_money(
+        row.get_by_test_id(UI["unit_price_test_id"])
+    )
+    expected_total = unit_price * Decimal("3")
+
+    line_total_locator = row.get_by_test_id(UI["line_total_test_id"])
+    expect_money(line_total_locator, expected_total)
+    line_total = read_money(line_total_locator)
+    assert line_total == expected_total
+
+    cart_total_locator = page.get_by_test_id(UI["cart_total_test_id"])
+    expect_money(cart_total_locator, line_total)
+    assert read_money(cart_total_locator) == line_total
+
+
+def test_CT003_reduzir_quantidade_para_uma_unidade(page):
+    prepare_cart_with_three_units(page)
+    row = open_cart_row(page, PRODUCT_AVAILABLE)
+
+    quantity = row.get_by_label(UI["quantity_label"], exact=True)
+    expect(quantity).to_have_value("3", timeout=ACTION_TIMEOUT_MS)
+
+    unit_price = read_money(
+        row.get_by_test_id(UI["unit_price_test_id"])
+    )
+    cart_total = page.get_by_test_id(UI["cart_total_test_id"])
+    expect_money(cart_total, unit_price * Decimal("3"))
+
+    quantity.fill("1")
+    quantity.press("Tab")
+
+    expect(quantity).to_have_value("1", timeout=ACTION_TIMEOUT_MS)
+    expect_money(cart_total, unit_price)
+    assert read_money(cart_total) == unit_price
+
+
+def test_CT004_restringir_tres_unidades_de_thor_hammer(page):
+    open_product(page, PRODUCT_RESTRICTED)
+
+    submit_quantity(page, 3)
+
+    expect(
+        page.get_by_text(RESTRICTION_MESSAGE, exact=True)
+    ).to_be_visible(timeout=ACTION_TIMEOUT_MS)
+```

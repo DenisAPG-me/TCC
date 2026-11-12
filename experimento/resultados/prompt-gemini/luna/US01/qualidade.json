@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "razoavel, mas ramos de fallback poluem",
+  "estrutura": "helpers existem, porem cheios de if/else de fallback",
+  "assercoes": "assercoes de ordem/termo adequadas",
+  "espera": "count() imediato e ramificacao sem espera",
+  "manutenibilidade": "chute de role article e fallback; seletores fragéis"
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_adicionar_tres_unidades[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "isa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 × locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 × locator resolved to 2 elements\nE          - unexpected value \"2\""
+  },
+  {
+   "nodeid": "script.py::test_ct02_conferir_totais_de_tres_unidades[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "isa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 × locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 × locator resolved to 2 elements\nE          - unexpected value \"2\""
+  },
+  {
+   "nodeid": "script.py::test_ct03_reduzir_quantidade_para_uma_unidade[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "isa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py:46: in open_product\n    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 2 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE)) with timeout 15000ms\nE     - waiting for get_by_role(\"link\", name=re.compile(r\"Claw\\ Hammer\", re.IGNORECASE))\nE       6 × locator resolved to 0 elements\nE         - unexpected value \"0\"\nE       27 × locator resolved to 2 elements\nE          - unexpected value \"2\""
+  },
+  {
+   "nodeid": "script.py::test_ct04_rejeitar_tres_unidades_de_thor_hammer[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct05_aceitar_uma_unidade_de_thor_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "urce code, issues and contributions\":\nE       - /url: https://github.com/testsmith-io/practice-software-testing\nE     - text: This is a DEMO application, used for software testing training purpose. |\nE     - link \"Privacy Policy\":\nE       - /url: /privacy\nE     - text: \"| Banner photo by\"\nE     - link \"Barn Images\":\nE       - /url: https://unsplash.com/@barnimages\nE     - text: \"on\"\nE     - link \"Unsplash\":\nE       - /url: https://unsplash.com/photos/t5YUoHW6zRo\nE     - text: . v2.5 | Built 2026-10-11 | Angular 20.0.5\nE   - button \"Open chat\":\nE     - img\nE   - button \"Show live shop activity\""
+  }
+ ],
+ "stdout_tail": "um]\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py:1392: PytestRemovedIn10Warning: Session-scoped fixtures defined as instance methods are deprecated.\n  Instance attributes set in the 'base_url' fixture will NOT be visible to test methods,\n  as each test gets a new instance while the fixture runs only once per class.\n  Use a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py::test_ct01_adicionar_tres_unidades[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py::test_ct02_conferir_totais_de_tres_unidades[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py::test_ct03_reduzir_quantidade_para_uma_unidade[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US02\\script.py::test_ct05_aceitar_uma_unidade_de_thor_hammer[chromium]\n4 failed, 1 passed, 2 warnings in 73.23s (0:01:13)\n",
+ "returncode": 1,
+ "duracao_s": 73.83
+}

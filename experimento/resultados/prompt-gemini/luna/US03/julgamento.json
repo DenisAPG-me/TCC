@@ -1,0 +1,104 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09",
+    "US03-C11",
+    "US03-C12"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT_02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') casa 2 (strict mode)"
+  },
+  {
+   "teste": "test_CT_03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role button 'Add to cart' inexistente na home"
+  },
+  {
+   "teste": "test_CT_04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') casa 2"
+  },
+  {
+   "teste": "test_CT_05",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') casa 2"
+  },
+  {
+   "teste": "test_CT_06",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Password') casa 2"
+  }
+ ]
+}

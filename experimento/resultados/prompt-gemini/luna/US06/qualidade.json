@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros, ingles consistente",
+  "estrutura": "helpers, mas fallbacks condicionais",
+  "assercoes": "contador >=0 e confirmacao ausente fracos; resto de negocio",
+  "espera": "count() imediato para decidir fluxo, sem espera",
+  "manutenibilidade": "label/role e constantes; rota errada"
+ }
+}

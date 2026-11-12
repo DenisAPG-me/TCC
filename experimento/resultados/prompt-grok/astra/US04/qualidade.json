@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Nomes claros, constantes e helpers",
+  "estrutura": "Helpers e constantes, sem parametrizacao",
+  "assercoes": "Verifica mensagens exatas e confirmacao com nome/assunto",
+  "espera": "expect com auto-wait, sem sleep",
+  "manutenibilidade": "Constantes boas, mas seletores por label quebram todos os testes"
+ }
+}

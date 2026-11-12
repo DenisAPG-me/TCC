@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 28.15,
+ "tokens": {
+  "total": 6508
+ },
+ "n_casos_extraidos": 11,
+ "tem_codigo": true,
+ "stderr_tail": "pect_success(page, VALID_NAME, subject)\n\n\ndef test_CT11_assunto_e_mensagem_acima_dos_maximos(page):\n    open_home(page)\n    fill_contact_form(page, subject=\"A\" * 101, message=\"A\" * 2001)\n    submit_contact_form(page)\n\n    expect(page.get_by_text(\n        \"Subject must be between 5 and 100 characters.\",\n        exact=True,\n    )).to_be_visible()\n    expect(page.get_by_text(\n        \"Message must be between 20 and 2000 characters.\",\n        exact=True,\n    )).to_be_visible()\n```\ntokens used\n6,508\n"
+}

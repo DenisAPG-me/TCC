@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 5,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes claros e dados em constantes",
+  "estrutura": "Fixtures, helpers de passo e dicionarios de dados",
+  "assercoes": "Mensagens, URL, estado do botao e invoice verificados",
+  "espera": "expect auto-wait; fixtures de sessao; sem sleep",
+  "manutenibilidade": "test-ids data-test e constantes centralizadas"
+ }
+}

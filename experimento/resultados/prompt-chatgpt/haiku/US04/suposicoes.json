@@ -1,0 +1,17 @@
+[
+ "1. Mapeamento dos critérios: a User Story não traz identificadores, então os critérios foram numerados na ordem de apresentação como CA01 (campos em branco), CA02 (telefone), CA03 (assunto e mensagem), CA04 (e-mail) e CA05 (confirmação de envio).",
+ "2. Explícito na User Story: URL base `https://automationintesting.online/`, o formulário de contato é usado a partir da página inicial, os limites de 11 a 21 caracteres para telefone, 5 a 100 para assunto e 20 a 2000 para mensagem, as mensagens textuais citadas e o texto de confirmação \"Thanks for getting in touch <nome>!\".",
+ "3. Inferido: o formulário fica visível na página inicial, sem login, CAPTCHA ou etapas extras.",
+ "4. Inferido: os campos têm rótulos acessíveis exatamente \"Name\", \"Email\", \"Phone\", \"Subject\" e \"Message\", sem sufixos como asterisco, e o botão de envio se chama \"Submit\". Todos os casos dependem disso.",
+ "5. Inferido: a mensagem de campo em branco aparece uma vez por campo, em inglês, começa com o nome do campo e contém \"blank\" (ex.: \"Name may not be blank\"). CT001 e CT002 dependem disso.",
+ "6. Inferido: espaços em branco são tratados como campo em branco. Somente CT002 depende disso.",
+ "7. Inferido: os tamanhos são contados em caracteres da string enviada e o telefone aceita dígitos. CT003 a CT013 dependem disso.",
+ "8. Inferido: nenhuma regra adicional é aplicada aos dados válidos usados (ex.: domínio do e-mail ou formato do telefone). O e-mail \"maria.teste@example.com\" é considerado válido. CT014 e CT015 dependem disso.",
+ "9. Inferido: a confirmação aparece na mesma página, sem navegação, e contém o texto de agradecimento e o assunto como trechos de texto. Os casos de sucesso e os casos negativos que verificam ausência de confirmação dependem disso. Nos negativos, a ausência só é verificada após a mensagem de erro aparecer, para reduzir falso positivo por tempo.",
+ "10. Inferido: ao testar um limite, os demais campos recebem valores válidos padrão: nome \"Maria Teste\", e-mail \"maria.teste@example.com\", telefone \"11987654321\", assunto \"Dúvida sobre reserva\" e mensagem \"Gostaria de saber sobre a disponibilidade de quartos.\".",
+ "11. Pré-condição externa: o site público precisa estar disponível, aceitar envios sem autenticação e não exigir CAPTCHA. Cada teste envia seus próprios dados e não depende de outro. As mensagens criadas não são removidas, pois a User Story não define mecanismo de limpeza.",
+ "12. Categorias: o tipo positivo aparece só em CT015, porque a User Story define um único cenário de sucesso. CA01 não tem caso positivo separado, pois CT015 já verifica o envio sem mensagens de erro. CA04 não tem caso de borda próprio, porque a User Story não define limites de formato de e-mail além do malformado. CA05 não tem caso negativo próprio, porque falhas de envio já são cobertas por CA02 a CA04.",
+ "13. Não especificado e não verificado: a User Story não define se o envio é persistido, se há e-mail de notificação ou área administrativa. Esses pontos não são testados.",
+ "14. Ferramentas: testes de interface usam o plugin pytest-playwright com a fixture `page` e `expect` da API síncrona, sem pausas fixas. Os testes usam o navegador padrão do plugin (Chromium) e a constante `BASE_URL` no topo do arquivo.",
+ "15. Ressalva: o código foi escrito a partir das suposições acima e não foi executado contra o sistema real. Rótulos, textos de erro, botão e comportamento de confirmação podem exigir ajuste antes de os testes passarem."
+]

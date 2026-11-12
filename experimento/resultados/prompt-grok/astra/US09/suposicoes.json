@@ -1,0 +1,18 @@
+[
+ "A única fonte utilizada é a User Story. O script não foi executado contra o sistema; os contratos não especificados abaixo são hipóteses que precisam ser confirmadas.",
+ "Trata-se de API REST; não há seletores de interface. São usados Python, pytest, requests e módulos da biblioteca padrão.",
+ "A constante `BASE_URL` contém a URL fornecida. Supõem-se os endpoints `POST /auth`, `POST /booking`, `GET /booking/{id}`, `DELETE /booking/{id}` e `GET /booking`.",
+ "A autenticação recebe JSON `{\"username\": \"admin\", \"password\": \"password123\"}`, retorna status 200 e um objeto JSON com `token` como string não vazia.",
+ "O token é enviado exclusivamente pelo cabeçalho `Cookie: token=<valor>`. Não se utiliza autenticação Basic ou qualquer alternativa. Cada chamada usa uma requisição independente, sem sessão compartilhada que possa reaproveitar cookies.",
+ "A criação recebe os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` e `additionalneeds`, retorna status 200 e um `bookingid` inteiro positivo.",
+ "Os dados sintéticos usam nomes com UUID, preço 150, depósito pago, estadia de duas noites iniciada 30 dias após a data de execução e preferência por café da manhã. Supõe-se que esses valores sejam aceitos.",
+ "Uma consulta de reserva existente retorna status 200 e objeto JSON estável. A comparação integral desse objeto é usada para detectar alterações após exclusões proibidas e na reserva de controle.",
+ "O token inválido é uma string sintética com UUID, nunca obtida por autenticação; assume-se que seja rejeitada com 403.",
+ "A listagem aceita os parâmetros `firstname` e `lastname`, combinados por igualdade, retorna status 200 e uma lista JSON de objetos com `bookingid`, sem paginação que oculte resultados.",
+ "A unicidade dos nomes gerados evita coincidências com reservas externas. Os efeitos da exclusão são imediatamente observáveis; não são previstas esperas ou novas tentativas.",
+ "Na segunda exclusão, qualquer status de 400 a 499 satisfaz o critério 5; não se pressupõe um código específico ou corpo de erro.",
+ "A reserva de controle verifica ausência de efeito colateral sobre outra reserva conhecida. Essa amostra não demonstra, isoladamente, que todas as demais reservas do sistema permaneceram intactas.",
+ "Cada teste cria suas próprias reservas. A limpeza usa autenticação válida e atua somente sobre os IDs criados pelo próprio teste; falhas de limpeza são reportadas.",
+ "As chamadas têm timeout de conexão de 5 segundos e leitura de 20 segundos, e não seguem redirecionamentos, para validar o status do endpoint solicitado.",
+ "Salve o arquivo como `test_exclusao_reservas.py` e execute `pytest -v test_exclusao_reservas.py` em um ambiente com pytest e requests instalados."
+]

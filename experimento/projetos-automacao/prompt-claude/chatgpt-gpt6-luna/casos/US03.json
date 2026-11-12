@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a página de login; enviar o formulário sem preencher campos",
+  "esperado": "São exibidas as mensagens “Email is required” e “Password is required”."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página de login; informar o e-mail da conta de demonstração e uma senha incorreta; enviar o formulário",
+  "esperado": "É exibida a mensagem “Invalid email or password”; o usuário não fica autenticado."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Checkout sem autenticação",
+  "tipo": "Negativo",
+  "criterio": "CA3",
+  "passos": "Adicionar um produto ao carrinho; abrir o carrinho; avançar para o checkout",
+  "esperado": "O fluxo solicita e-mail e senha antes de prosseguir."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com conta de demonstração",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Abrir a página de login; informar as credenciais de demonstração; enviar o formulário",
+  "esperado": "A página “My account” é exibida e o menu mostra o nome do usuário."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Endereço obrigatório incompleto",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Autenticar; adicionar um produto ao carrinho; iniciar checkout; deixar os campos de endereço vazios; tentar avançar",
+  "esperado": "O checkout permanece no passo de endereço e impede o avanço ao pagamento."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Endereço completo e pagamento com cartão",
+  "tipo": "Positivo",
+  "criterio": "CA5, CA6",
+  "passos": "Autenticar; adicionar um produto ao carrinho; preencher país, CEP, número, rua, cidade e estado; avançar; selecionar cartão; preencher dados fictícios válidos; confirmar o pagamento",
+  "esperado": "É exibida a mensagem “Payment was successful”."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Confirmação do pedido e fatura",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Concluir o pagamento com cartão; confirmar o pedido",
+  "esperado": "É exibida a mensagem “Thanks for your order!” e um número de fatura iniciado por “INV-”."
+ },
+ {
+  "id": "CT08",
+  "titulo": "E-mail malformado no login",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Abrir a página de login; informar um e-mail em formato inválido e uma senha; enviar o formulário",
+  "esperado": "O formulário impede o login e apresenta validação de formato do e-mail."
+ }
+]

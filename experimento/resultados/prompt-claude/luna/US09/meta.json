@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US09",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 12.6,
+ "tokens": {
+  "total": 6004
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "def test_ct05_listar_filtrando_nome_apos_exclusao():\n    booking_id, firstname = create_booking()\n    token = get_token()\n\n    delete_response = delete_booking(booking_id, token)\n    assert delete_response.status_code == 201\n\n    list_response = requests.get(\n        f\"{BASE_URL}/booking\",\n        params={\"firstname\": firstname, \"lastname\": \"Automacao\"},\n        timeout=REQUEST_TIMEOUT,\n    )\n    assert list_response.status_code == 200\n    assert list_response.json() == []\n```\ntokens used\n6,004\n"
+}

@@ -1,0 +1,181 @@
+{
+ "created": 1793383773.6656063,
+ "duration": 9.712571382522583,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\opus\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 5,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_CT001_criar_reserva_com_corpo_valido",
+     "type": "Function",
+     "lineno": 79
+    },
+    {
+     "nodeid": "script.py::test_CT002_consultar_reserva_criada_pelo_identificador",
+     "type": "Function",
+     "lineno": 92
+    },
+    {
+     "nodeid": "script.py::test_CT003_consultar_reserva_inexistente_retorna_404",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_CT004_listar_reservas_filtrando_por_nome_e_sobrenome",
+     "type": "Function",
+     "lineno": 108
+    },
+    {
+     "nodeid": "script.py::test_CT005_criar_e_consultar_reserva_com_valores_limite_e_caracteres_especiais",
+     "type": "Function",
+     "lineno": 126
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_criar_reserva_com_corpo_valido",
+   "lineno": 79,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT001_criar_reserva_com_corpo_valido",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003295999485999346,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6682927999645472,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.1931645000586286,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT002_consultar_reserva_criada_pelo_identificador",
+   "lineno": 92,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT002_consultar_reserva_criada_pelo_identificador",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00026709993835538626,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2096772999502718,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.2260436000069603,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT003_consultar_reserva_inexistente_retorna_404",
+   "lineno": 102,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT003_consultar_reserva_inexistente_retorna_404",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00022869999520480633,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5953364999732003,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00010379997547715902,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT004_listar_reservas_filtrando_por_nome_e_sobrenome",
+   "lineno": 108,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT004_listar_reservas_filtrando_por_nome_e_sobrenome",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00030590000096708536,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2087819000007585,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.1789977999869734,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_CT005_criar_e_consultar_reserva_com_valores_limite_e_caracteres_especiais",
+   "lineno": 126,
+   "outcome": "passed",
+   "keywords": [
+    "test_CT005_criar_e_consultar_reserva_com_valores_limite_e_caracteres_especiais",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00026809994596987963,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1703855000669137,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 1.19179129996337,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

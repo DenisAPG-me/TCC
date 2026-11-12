@@ -1,0 +1,306 @@
+{
+ "created": 1793381109.6242497,
+ "duration": 68.45463061332703,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01",
+ "environment": {},
+ "summary": {
+  "failed": 4,
+  "passed": 1,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_buscar_produtos_por_palavra_chave[chromium]",
+     "type": "Function",
+     "lineno": 59
+    },
+    {
+     "nodeid": "script.py::test_ct02_buscar_termo_sem_resultados[chromium]",
+     "type": "Function",
+     "lineno": 71
+    },
+    {
+     "nodeid": "script.py::test_ct03_ordenar_precos_em_ordem_crescente[chromium]",
+     "type": "Function",
+     "lineno": 79
+    },
+    {
+     "nodeid": "script.py::test_ct04_ordenar_nomes_em_ordem_decrescente[chromium]",
+     "type": "Function",
+     "lineno": 89
+    },
+    {
+     "nodeid": "script.py::test_ct05_buscar_termo_com_espacos_nas_extremidades[chromium]",
+     "type": "Function",
+     "lineno": 99
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_buscar_produtos_por_palavra_chave[chromium]",
+   "lineno": 59,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct01_buscar_produtos_por_palavra_chave[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4660005000187084,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.953760400065221,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+     "lineno": 66,
+     "message": "AssertionError: A busca por hammer deveria exibir produtos.\nassert []"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 66,
+      "message": "in test_ct01_buscar_produtos_por_palavra_chave"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:66: in test_ct01_buscar_produtos_por_palavra_chave\n    assert names, \"A busca por hammer deveria exibir produtos.\"\nE   AssertionError: A busca por hammer deveria exibir produtos.\nE   assert []"
+   },
+   "teardown": {
+    "duration": 0.015550100011751056,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_buscar_termo_sem_resultados[chromium]",
+   "lineno": 71,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_buscar_termo_sem_resultados[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09913139999844134,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8660861999960616,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.01535550004336983,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_ordenar_precos_em_ordem_crescente[chromium]",
+   "lineno": 79,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_ordenar_precos_em_ordem_crescente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1166892999317497,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 30.675383399939165,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.select_option: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Sort\")\n    - locator resolved to <select data-test=\"sort\" aria-label=\"sort\" class=\"form-select\" _ngcontent-ng-c2621549667=\"\">\u2026</select>\n  - attempting select option action\n    2 \u00d7 waiting for element to be visible and enabled\n      - did not find some options\n    - retrying select option action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible and enabled\n      - did not find some options\n    - retrying select option action\n      - waiting 100ms\n    59 \u00d7 waiting for element to be visible and enabled\n       - did not find some options\n     - retrying select option action\n       - waiting 500ms"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 82,
+      "message": "in test_ct03_ordenar_precos_em_ordem_crescente"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 57,
+      "message": "in _select_sort"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 20226,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 637,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 815,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:82: in test_ct03_ordenar_precos_em_ordem_crescente\n    _select_sort(page, SORT_PRICE_ASCENDING)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:57: in _select_sort\n    page.get_by_label(SORT_CONTROL_NAME).select_option(label=option)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:20226: in select_option\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:637: in select_option\n    return await self._frame.select_option(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:815: in select_option\n    return await self._channel.send(\"selectOption\", self._timeout, params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.select_option: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Sort\")\nE       - locator resolved to <select data-test=\"sort\" aria-label=\"sort\" class=\"form-select\" _ngcontent-ng-c2621549667=\"\">\u2026</select>\nE     - attempting select option action\nE       2 \u00d7 waiting for element to be visible and enabled\nE         - did not find some options\nE       - retrying select option action\nE       - waiting 20ms\nE       2 \u00d7 waiting for element to be visible and enabled\nE         - did not find some options\nE       - retrying select option action\nE         - waiting 100ms\nE       59 \u00d7 waiting for element to be visible and enabled\nE          - did not find some options\nE        - retrying select option action\nE          - waiting 500ms"
+   },
+   "teardown": {
+    "duration": 0.015298599959351122,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_ordenar_nomes_em_ordem_decrescente[chromium]",
+   "lineno": 89,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct04_ordenar_nomes_em_ordem_decrescente[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11685200000647455,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 31.073565699975006,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+     "lineno": 632,
+     "message": "playwright._impl._errors.TimeoutError: Locator.select_option: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_label(\"Sort\")\n    - locator resolved to <select data-test=\"sort\" aria-label=\"sort\" class=\"form-select\" _ngcontent-ng-c2621549667=\"\">\u2026</select>\n  - attempting select option action\n    2 \u00d7 waiting for element to be visible and enabled\n      - did not find some options\n    - retrying select option action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible and enabled\n      - did not find some options\n    - retrying select option action\n      - waiting 100ms\n    59 \u00d7 waiting for element to be visible and enabled\n       - did not find some options\n     - retrying select option action\n       - waiting 500ms"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 92,
+      "message": "in test_ct04_ordenar_nomes_em_ordem_decrescente"
+     },
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 57,
+      "message": "in _select_sort"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py",
+      "lineno": 20226,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py",
+      "lineno": 637,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py",
+      "lineno": 815,
+      "message": "in select_option"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 76,
+      "message": "in send"
+     },
+     {
+      "path": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py",
+      "lineno": 632,
+      "message": "in wrap_api_call"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:92: in test_ct04_ordenar_nomes_em_ordem_decrescente\n    _select_sort(page, SORT_NAME_DESCENDING)\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:57: in _select_sort\n    page.get_by_label(SORT_CONTROL_NAME).select_option(label=option)\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\sync_api\\_generated.py:20226: in select_option\n    self._sync(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_locator.py:637: in select_option\n    return await self._frame.select_option(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_frame.py:815: in select_option\n    return await self._channel.send(\"selectOption\", self._timeout, params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.select_option: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Sort\")\nE       - locator resolved to <select data-test=\"sort\" aria-label=\"sort\" class=\"form-select\" _ngcontent-ng-c2621549667=\"\">\u2026</select>\nE     - attempting select option action\nE       2 \u00d7 waiting for element to be visible and enabled\nE         - did not find some options\nE       - retrying select option action\nE       - waiting 20ms\nE       2 \u00d7 waiting for element to be visible and enabled\nE         - did not find some options\nE       - retrying select option action\nE         - waiting 100ms\nE       59 \u00d7 waiting for element to be visible and enabled\nE          - did not find some options\nE        - retrying select option action\nE          - waiting 500ms"
+   },
+   "teardown": {
+    "duration": 0.016340299975126982,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_buscar_termo_com_espacos_nas_extremidades[chromium]",
+   "lineno": 99,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct05_buscar_termo_com_espacos_nas_extremidades[chromium]",
+    "chromium",
+    "script.py",
+    "US01",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11958279996179044,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3081755999010056,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+     "lineno": 106,
+     "message": "AssertionError: A busca com espa\u00e7os deveria exibir produtos.\nassert []"
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py",
+      "lineno": 106,
+      "message": "in test_ct05_buscar_termo_com_espacos_nas_extremidades"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US01\\script.py:106: in test_ct05_buscar_termo_com_espacos_nas_extremidades\n    assert names, \"A busca com espa\u00e7os deveria exibir produtos.\"\nE   AssertionError: A busca com espa\u00e7os deveria exibir produtos.\nE   assert []"
+   },
+   "teardown": {
+    "duration": 0.2613722999813035,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+[
+ "Tecnologia escolhida: API REST utilizando `Python + pytest + requests`, conforme estabelecido nos requisitos para User Stories de API REST.",
+ "Endpoints assumidos baseados no padrão da Restful-Booker API: `/auth` para autenticação (POST), `/booking` para criação/listagem (POST/GET) e `/booking/{id}` para atualização completa (PUT) e parcial (PATCH).",
+ "Payload de autenticação assumido: `{\"username\": \"admin\", \"password\": \"password123\"}` para credenciais válidas e `{\"username\": \"invalid\", \"password\": \"wrong\"}` para credenciais inválidas.",
+ "Resposta de autenticação bem-sucedida assumida: JSON contendo a chave `token`.",
+ "Resposta de autenticação falha assumida: JSON contendo a chave `reason` com o valor `\"Bad credentials\"`.",
+ "Dados de teste dinâmicos: O script criará uma reserva prévia via POST em `/booking` antes de executar os testes de atualização (CT03, CT04, CT05, CT06) para garantir que exista uma reserva válida e ID conhecido.",
+ "Payload de atualização completa assumido: `{\"firstname\": \"James\", \"lastname\": \"Brown\", \"totalprice\": 111, \"depositpaid\": true, \"bookingdates\": {\"checkin\": \"2018-01-01\", \"checkout\": \"2019-01-01\"}, \"additionalneeds\": \"Breakfast\"}` com novos valores de nome e preço.",
+ "Payload de atualização parcial assumido: `{\"lastname\": \"Smith\"}` para alterar apenas o sobrenome.",
+ "Payload com campos obrigatórios ausentes assumido: objeto vazio `{}` ou payload incompleto faltando campos mandatórios como `firstname` ou `totalprice`.",
+ "Timeout padrão configurado em 10 segundos para todas as requisições `requests`."
+]

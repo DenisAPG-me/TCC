@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 31.18,
+ "tokens": {
+  "total": 7253
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "e_booking(UNICODE_OVERRIDES)\n    booking_id = create_booking(api, payload)\n\n    response = fetch_booking(api, booking_id)\n\n    assert_status(response, 200)\n    body = read_json(response)\n    assert_same_data(body, payload)\n    assert body[\"firstname\"] == payload[\"firstname\"]\n    assert body[\"lastname\"] == payload[\"lastname\"]\n    assert body[\"additionalneeds\"] == \"\"\n\n    filtered_response = list_bookings(api, payload)\n\n    assert_list_contains(filtered_response, booking_id)\n```\ntokens used\n7,253\n"
+}

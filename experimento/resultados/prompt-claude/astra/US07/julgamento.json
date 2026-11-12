@@ -1,0 +1,75 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US07-C01",
+  "US07-C02",
+  "US07-C03",
+  "US07-C05",
+  "US07-C08",
+  "US07-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C01",
+    "US07-C03"
+   ],
+   "nota": "casa com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C02",
+    "US07-C03"
+   ],
+   "nota": "casa com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C08"
+   ],
+   "nota": "casa com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C05"
+   ],
+   "nota": "casa com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C12",
+    "US07-C03"
+   ],
+   "nota": "casa com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US07-C05"
+   ],
+   "nota": "casa com oraculo"
+  }
+ },
+ "falhas": []
+}

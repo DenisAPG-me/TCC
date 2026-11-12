@@ -1,0 +1,10 @@
+[
+ "A URL base é `https://automationintesting.online/`; o formulário está disponível na página inicial, sem autenticação ou navegação adicional.",
+ "Os campos podem ser localizados por rótulos acessíveis “Name”, “Email”, “Phone”, “Subject” e “Message”, e o botão de envio por papel de botão e nome “Submit”.",
+ "A aplicação exibe as mensagens de validação como texto visível na página após o envio.",
+ "A confirmação de sucesso mostra o texto de agradecimento e o assunto informado em elementos visíveis na página.",
+ "Para os critérios de tamanho, os limites são inclusivos. Para as verificações de borda, cada envio inicia com uma página recarregada e dados válidos nos demais campos.",
+ "Os testes usam valores fictícios: nome “Ana Silva”, e-mail “ana@example.com”, telefone numérico e assunto/mensagem com conteúdo de teste.",
+ "A disponibilidade da página e o comportamento real dos seletores não podem ser confirmados apenas com a User Story; os seletores propostos são hipóteses a ajustar caso a interface use nomes acessíveis diferentes.",
+ "Execução: instalar `pytest`, `playwright` e o plugin `pytest-playwright`; instalar os navegadores Playwright conforme necessário. A URL pode ser alterada com `--base-url`."
+]

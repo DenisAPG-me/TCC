@@ -1,0 +1,85 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C02",
+  "US01-C03",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "ordenacao mantem quantidade de produtos"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct04",
+   "categoria": "URL/endpoint errado",
+   "nota": "expect_response exige 'sort=' na URL; evento nunca casa"
+  },
+  {
+   "teste": "test_ct05",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem, predicado de URL sem correspondencia"
+  },
+  {
+   "teste": "test_ct06",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  }
+ ]
+}

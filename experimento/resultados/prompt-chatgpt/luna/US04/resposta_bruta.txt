@@ -1,0 +1,121 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Envio vazio exibe validações dos campos obrigatórios | negativo | CA01 | Abrir a página inicial, enviar o formulário sem preencher campos | São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco |
+| CT002 | Telefone abaixo do mínimo exibe validação | borda | CA02 | Preencher o formulário e informar telefone com 10 caracteres; enviar | É exibida a mensagem `Phone must be between 11 and 21 characters.` |
+| CT003 | Assunto e mensagem abaixo dos mínimos exibem validações | borda | CA03 | Preencher os demais campos validamente; informar assunto com 4 e mensagem com 19 caracteres; enviar | São exibidas as mensagens `Subject must be between 5 and 100 characters.` e `Message must be between 20 and 2000 characters.` |
+| CT004 | E-mail malformado exibe validação | negativo | CA04 | Preencher o formulário com e-mail `bad` e demais campos válidos; enviar | É exibida a mensagem `must be a well-formed email address` |
+| CT005 | Formulário válido confirma o contato | positivo | CA05 | Preencher todos os campos com dados válidos e enviar | A confirmação exibe `Thanks for getting in touch Ana Silva!` e o assunto informado |
+
+SUPOSIÇÕES
+
+1. Os critérios numerados da User Story são identificados como CA01 a CA05, na mesma ordem de apresentação.
+2. A URL da página de contato é a própria URL base informada. O formulário está disponível na página inicial.
+3. Como não foram especificados seletores nem rótulos, o código deduz campos acessíveis pelos nomes `Name`, `Email`, `Phone`, `Subject` e `Message`, além de um botão com papel `button` e nome `Submit`. Esses elementos podem precisar de ajuste para corresponder à implementação real.
+4. As mensagens de campos obrigatórios não foram transcritas integralmente. Para CA01, o código verifica que há mensagens visíveis contendo o nome de cada campo e uma indicação de obrigatoriedade, inferindo termos como `required` ou `cannot be empty`.
+5. Para os cenários inválidos, o código preenche com valores válidos os campos não relacionados àquela validação. Usa telefone `12345678901`, assunto `Consulta` e mensagem de 20 caracteres, exceto quando o critério testa seus limites.
+6. O telefone de 10 caracteres em CT002 e assunto de 4 caracteres e mensagem de 19 caracteres em CT003 exercitam os limites imediatamente inferiores indicados pelos critérios. O limite mínimo válido inferido é 11 para telefone, 5 para assunto e 20 para mensagem.
+7. Para CA05, assume-se que `Ana Silva`, `ana.silva@example.com`, `12345678901`, `Consulta sobre reserva` e uma mensagem de pelo menos 20 caracteres são dados aceitos. A confirmação deve exibir a saudação especificada e o assunto enviado.
+8. Cada teste parte de uma nova navegação à página inicial; não depende de dados criados por outros testes. Não há casos de API, pois os critérios descrevem apenas o formulário e resultados visíveis na interface.
+9. O requisito técnico final exige `pytest-playwright` e a fixture `page`, embora uma regra anterior proíba plugins adicionais. Os requisitos técnicos explícitos da User Story prevalecem neste conflito; portanto, o arquivo usa `page` e `expect` do Playwright síncrono.
+10. O código é uma implementação executável sob as dependências indicadas, mas os rótulos, botão, mensagens de obrigatoriedade e estrutura da confirmação foram inferidos e não comprovados contra o sistema real.
+
+```python
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+FIELD_LABELS = {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Message",
+}
+SUBMIT_BUTTON_NAME = "Submit"
+
+VALID_DATA = {
+    "name": "Ana Silva",
+    "email": "ana.silva@example.com",
+    "phone": "12345678901",
+    "subject": "Consulta sobre reserva",
+    "message": "Gostaria de saber mais sobre disponibilidade.",
+}
+
+
+def open_contact_form(page: Page) -> None:
+    page.goto(BASE_URL)
+    for label in FIELD_LABELS.values():
+        expect(page.get_by_label(label)).to_be_visible()
+
+
+def fill_form(page: Page, values: dict[str, str]) -> None:
+    for field, value in values.items():
+        page.get_by_label(FIELD_LABELS[field]).fill(value)
+
+
+def submit_form(page: Page) -> None:
+    page.get_by_role("button", name=SUBMIT_BUTTON_NAME).click()
+
+
+def required_error_for(page: Page, field_label: str) -> None:
+    # A mensagem exata não consta da especificação; procura texto visível
+    # relacionado ao campo e à obrigatoriedade.
+    message = page.get_by_text(
+        __import__("re").compile(
+            rf"(?=.*{__import__('re').escape(field_label)})(?=.*(required|cannot be empty|must not be empty))",
+            __import__("re").IGNORECASE,
+        )
+    )
+    expect(message).to_be_visible()
+
+
+def test_CT001_envio_vazio_exibe_validacoes_dos_campos_obrigatorios(page: Page) -> None:
+    open_contact_form(page)
+    submit_form(page)
+
+    for label in FIELD_LABELS.values():
+        required_error_for(page, label)
+
+
+def test_CT002_telefone_abaixo_do_minimo_exibe_validacao(page: Page) -> None:
+    open_contact_form(page)
+    values = dict(VALID_DATA)
+    values["phone"] = "1234567890"
+    fill_form(page, values)
+    submit_form(page)
+
+    expect(page.get_by_text("Phone must be between 11 and 21 characters.", exact=True)).to_be_visible()
+
+
+def test_CT003_assunto_e_mensagem_abaixo_dos_minimos_exibem_validacoes(page: Page) -> None:
+    open_contact_form(page)
+    values = dict(VALID_DATA)
+    values["subject"] = "abcd"
+    values["message"] = "1234567890123456789"
+    fill_form(page, values)
+    submit_form(page)
+
+    expect(page.get_by_text("Subject must be between 5 and 100 characters.", exact=True)).to_be_visible()
+    expect(page.get_by_text("Message must be between 20 and 2000 characters.", exact=True)).to_be_visible()
+
+
+def test_CT004_email_malformado_exibe_validacao(page: Page) -> None:
+    open_contact_form(page)
+    values = dict(VALID_DATA)
+    values["email"] = "bad"
+    fill_form(page, values)
+    submit_form(page)
+
+    expect(page.get_by_text("must be a well-formed email address", exact=False)).to_be_visible()
+
+
+def test_CT005_formulario_valido_confirma_o_contato(page: Page) -> None:
+    open_contact_form(page)
+    fill_form(page, VALID_DATA)
+    submit_form(page)
+
+    expect(page.get_by_text("Thanks for getting in touch Ana Silva!", exact=True)).to_be_visible()
+    expect(page.get_by_text(VALID_DATA["subject"], exact=True)).to_be_visible()
+```

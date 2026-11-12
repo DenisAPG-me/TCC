@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 68.86,
+ "tokens": {
+  "total": 4965
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "ALUE\n    )\n    verify_name_descending(page)\n\n\ndef test_ct05_buscar_hammer_apos_resultado_vazio(page: Page) -> None:\n    open_store(page)\n    search(page, MISSING_TERM)\n    verify_no_results(page)\n    search(page, SEARCH_TERM)\n    verify_hammer_results(page)\n\n\ndef test_ct06_buscar_inexistente_apos_resultado_valido(page: Page) -> None:\n    open_store(page)\n    search(page, SEARCH_TERM)\n    verify_hammer_results(page)\n    search(page, MISSING_TERM)\n    verify_no_results(page)\n```\ntokens used\n4,965\n"
+}

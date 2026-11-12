@@ -1,0 +1,10 @@
+[
+ "**URL Base:** `https://practicesoftwaretesting.com/`",
+ "**Rotas e Seletores (deduzidos com base no padrão da aplicação Practice Software Testing / Angular):**",
+ "Página de Login: URL `/auth/login` (ou acessível via menu \"Sign in\"). Botão de submit do formulário de login utiliza role `button` com nome \"Login\" ou \"Sign in\".",
+ "Campos de Login: Inputs associados aos labels \"E-mail\" / \"Email\" e \"Password\".",
+ "Mensagens de erro de login: Textos \"Email is required\", \"Password is required\", \"Invalid email or password\".",
+ "Carrinho e Checkout: Adição de produto via botão \"Add to cart\" em catálogo de produto. Botão de checkout/carrinho no header. Processo de checkout possui etapas: Login (se deslogado), Endereço (Address) com campos (Country, Postcode, State, City, Street, Number/Line 1), Pagamento (Payment) com opção de selecionar método de pagamento \"Credit Card\" e campos preenchidos com dados fictícios válidos (número do cartão, expiração, CVV, titular), seguidos de botões de confirmação (\"Proceed to checkout\", \"Confirm\").",
+ "Confirmação de pagamento/pedido: Textos \"Payment was successful\" e regex correspondente a \"Thanks for your order! Your invoice number is INV-.*\".",
+ "Nome do usuário na página \"My account\": Exibido no menu de navegação após login (ex: \"Jane Doe\" ou elemento com test-id/role adequado)."
+]

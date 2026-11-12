@@ -1,0 +1,104 @@
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+def _search_box(page):
+    """Localiza a busca por rótulo ou placeholder, conforme a interface disponível."""
+    by_label = page.get_by_role("textbox", name=re.compile("search", re.I))
+    if by_label.count():
+        return by_label
+    return page.get_by_placeholder(re.compile("search", re.I))
+
+
+def _submit_search(page, term):
+    _search_box(page).fill(term)
+    page.get_by_role("button", name=re.compile("search", re.I)).click()
+
+
+def _product_cards(page):
+    return page.get_by_role("article")
+
+
+def _product_names(page):
+    cards = _product_cards(page)
+    return [
+        (cards.nth(i).get_by_role("link").first.inner_text()).strip()
+        for i in range(cards.count())
+    ]
+
+
+def _sort_select(page, option_pattern):
+    """Seleciona a opção indicada no primeiro seletor de ordenação."""
+    selects = page.locator("select")
+    for i in range(selects.count()):
+        select = selects.nth(i)
+        options = select.locator("option")
+        for j in range(options.count()):
+            label = options.nth(j).inner_text().strip()
+            if option_pattern.search(label):
+                select.select_option(label=label)
+                return
+    raise AssertionError(f"Nenhuma opção de ordenação corresponde a {option_pattern.pattern!r}")
+
+
+def _prices(page):
+    cards = _product_cards(page)
+    values = []
+    for i in range(cards.count()):
+        text = cards.nth(i).inner_text()
+        match = re.search(r"[-+]?\d[\d.,]*", text)
+        assert match, f"Não foi possível identificar preço no produto: {text!r}"
+        # Assume que preços usam ponto decimal ou vírgula decimal e não separador de milhar.
+        values.append(float(match.group(0).replace(",", ".")))
+    return values
+
+
+def test_TC01_busca_hammer_exibe_apenas_nomes_correspondentes(page):
+    page.goto(BASE_URL)
+    _submit_search(page, "hammer")
+
+    expect(page.get_by_text(re.compile(r"hammer", re.I))).to_be_visible()
+    cards = _product_cards(page)
+    expect(cards.first).to_be_visible()
+    for name in _product_names(page):
+        assert "hammer" in name.lower(), f"Produto não corresponde à busca: {name!r}"
+
+
+def test_TC02_busca_sem_resultados_exibe_mensagem(page):
+    page.goto(BASE_URL)
+    _submit_search(page, "zzzzxx")
+
+    expect(page.get_by_text("There are no products found.", exact=True)).to_be_visible()
+    expect(_product_cards(page)).to_have_count(0)
+
+
+def test_TC03_ordena_precos_do_menor_para_o_maior(page):
+    page.goto(BASE_URL)
+    expect(_product_cards(page).first).to_be_visible()
+
+    _sort_select(page, re.compile(r"price.*(low|asc|ascending)", re.I))
+    page.wait_for_load_state("networkidle")
+
+    values = _prices(page)
+    assert len(values) >= 2, "Esperados ao menos dois produtos para verificar a ordenação."
+    assert values == sorted(values), f"Preços fora de ordem crescente: {values}"
+
+
+def test_TC04_ordena_nomes_de_z_a(page):
+    page.goto(BASE_URL)
+    expect(_product_cards(page).first).to_be_visible()
+
+    _sort_select(page, re.compile(r"name.*(z.*a|desc|descending)", re.I))
+    page.wait_for_load_state("networkidle")
+
+    names = _product_names(page)
+    assert len(names) >= 2, "Esperados ao menos dois produtos para verificar a ordenação."
+    normalized = [name.casefold() for name in names]
+    assert normalized == sorted(normalized, reverse=True), (
+        f"Nomes fora de ordem alfabética decrescente: {names}"
+    )

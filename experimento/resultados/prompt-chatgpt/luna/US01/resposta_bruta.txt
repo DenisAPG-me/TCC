@@ -1,0 +1,122 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Buscar produtos por “hammer” | positivo | CA01 | Abrir a página inicial, buscar “hammer” e enviar a busca. | Todos os produtos exibidos têm “hammer” no nome, sem distinção entre maiúsculas e minúsculas, e a página indica que a busca foi por “hammer”. |
+| CT002 | Buscar termo sem resultados | negativo | CA02 | Abrir a página inicial e buscar “zzzzxx”. | A mensagem “There are no products found.” é exibida e nenhum produto aparece. |
+| CT003 | Ordenar preços em ordem crescente | positivo | CA03 | Abrir a página inicial com produtos e escolher a ordenação de preço crescente. | Os preços dos produtos exibidos estão em ordem crescente. |
+| CT004 | Ordenar nomes de Z a A | positivo | CA04 | Abrir a página inicial com produtos e escolher a ordenação por nome decrescente. | Os nomes exibidos estão em ordem alfabética decrescente, sem distinção entre maiúsculas e minúsculas. |
+
+SUPOSIÇÕES
+
+1. Os critérios não têm identificadores próprios. A correspondência na ordem apresentada é: CA01 = critério 1, CA02 = critério 2, CA03 = critério 3 e CA04 = critério 4.
+2. A User Story especifica a interface web e a URL base, mas não define seletores, rótulos ou opções de ordenação visíveis. O código deduz um campo de busca acessível pelo rótulo “Search” ou placeholder “Search”, um botão “Search” e um seletor de ordenação identificado por “Sort”. As opções deduzidas são “Price (Low - High)” e “Name (Z - A)”. Esses detalhes podem precisar de ajuste para corresponder à interface real.
+3. A busca é enviada pelo botão “Search”. O indicador de busca é verificado procurando o termo “hammer” no texto visível da página, e os nomes são verificados sem distinção entre maiúsculas e minúsculas. Isso operacionaliza os resultados descritos, sem pressupor uma frase exata para o indicador.
+4. Os produtos são deduzidos como elementos acessíveis com o papel `link`, contendo o nome do produto; os preços são extraídos do texto desses elementos. A ordenação é avaliada sobre os produtos exibidos na página inicial. Se a interface usar outra estrutura ou formatação, os seletores e a extração podem precisar de ajuste.
+5. CT003 e CT004 pressupõem que a página inicial carregue produtos e disponibilize as opções de ordenação deduzidas. A existência de produtos e dessas opções é pré-condição externa implícita para verificar os critérios; o arquivo não cria dados de teste.
+6. Casos negativos e de borda: CT002 cobre a busca sem resultados, o cenário negativo explícito. Não foi especificado um limite de tamanho, comportamento para entradas vazias, paginação ou regra especial de comparação; por isso não se inferem casos de borda adicionais.
+7. O código usa a fixture `page` e `expect` do `pytest-playwright`, conforme os requisitos técnicos da User Story. A URL base está centralizada em constante. O arquivo é executável com `pytest nome_do_arquivo.py` se as dependências e o navegador Chromium estiverem instalados; isso não comprova compatibilidade dos seletores com o sistema real.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+SEARCH_LABEL = "Search"
+SEARCH_PLACEHOLDER = "Search"
+SEARCH_BUTTON_NAME = "Search"
+SORT_LABEL = "Sort"
+SORT_PRICE_ASCENDING = "Price (Low - High)"
+SORT_NAME_DESCENDING = "Name (Z - A)"
+NO_PRODUCTS_MESSAGE = "There are no products found."
+
+
+def open_home(page):
+    page.goto(BASE_URL)
+    expect(page).to_have_url(re.compile(r"practicesoftware\.testing\.com/?$"))
+
+
+def search_input(page):
+    by_label = page.get_by_label(SEARCH_LABEL, exact=True)
+    if by_label.count():
+        return by_label
+    return page.get_by_placeholder(SEARCH_PLACEHOLDER, exact=True)
+
+
+def visible_product_links(page):
+    return page.get_by_role("link").filter(has=page.locator("img"))
+
+
+def product_names(page):
+    links = visible_product_links(page)
+    return [link.inner_text().strip() for link in links.all() if link.is_visible()]
+
+
+def extract_prices(text):
+    matches = re.findall(r"(?:[$€£]\s*)?\d[\d,]*(?:\.\d{1,2})?", text)
+    return [float(match.replace(",", "")) for match in matches]
+
+
+def product_prices(page):
+    links = visible_product_links(page)
+    prices = []
+    for link in links.all():
+        if link.is_visible():
+            prices.extend(extract_prices(link.inner_text()))
+    return prices
+
+
+def submit_search(page, term):
+    field = search_input(page)
+    expect(field).to_be_visible()
+    field.fill(term)
+    page.get_by_role("button", name=SEARCH_BUTTON_NAME, exact=True).click()
+
+
+def choose_sort(page, option_name):
+    sort = page.get_by_label(SORT_LABEL, exact=True)
+    expect(sort).to_be_visible()
+    sort.select_option(label=option_name)
+
+
+def test_CT001_buscar_produtos_por_hammer(page):
+    open_home(page)
+    submit_search(page, "hammer")
+
+    expect(page.get_by_text(re.compile("hammer", re.IGNORECASE))).to_be_visible()
+    names = product_names(page)
+    assert names, "A busca por hammer deveria exibir produtos."
+    assert all("hammer" in name.casefold() for name in names)
+
+
+def test_CT002_buscar_termo_sem_resultados(page):
+    open_home(page)
+    submit_search(page, "zzzzxx")
+
+    expect(page.get_by_text(NO_PRODUCTS_MESSAGE, exact=True)).to_be_visible()
+    assert product_names(page) == []
+
+
+def test_CT003_ordenar_precos_crescente(page):
+    open_home(page)
+    choose_sort(page, SORT_PRICE_ASCENDING)
+
+    prices = product_prices(page)
+    assert prices, "A página deveria exibir produtos com preços identificáveis."
+    assert prices == sorted(prices), f"Preços fora de ordem crescente: {prices}"
+
+
+def test_CT004_ordenar_nomes_decrescente(page):
+    open_home(page)
+    choose_sort(page, SORT_NAME_DESCENDING)
+
+    names = product_names(page)
+    assert names, "A página deveria exibir produtos."
+    normalized_names = [name.casefold() for name in names]
+    assert normalized_names == sorted(normalized_names, reverse=True), (
+        f"Nomes fora de ordem alfabética decrescente: {names}"
+    )
+```

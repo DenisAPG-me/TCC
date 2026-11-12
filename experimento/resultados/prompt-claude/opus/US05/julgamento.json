@@ -1,0 +1,140 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08",
+  "US05-C11"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C11"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C06"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_login_com_usuario_e_senha_vazios",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct02_login_com_senha_incorreta",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct03_login_com_senha_vazia",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct04_login_com_senha_em_caixa_alta",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct05_login_com_senha_com_espaco_final",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct09_acesso_direto_aos_quartos_apos_logout_exige_login",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  },
+  {
+   "teste": "test_ct10_acesso_direto_aos_quartos_sem_login_exige_login",
+   "categoria": "asserção incorreta por interpretação da US",
+   "nota": "assume que Logout nao existe na tela de login, mas o botao existe"
+  }
+ ]
+}

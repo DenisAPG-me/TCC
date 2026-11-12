@@ -1,0 +1,106 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Envio vazio exibe obrigatoriedade de todos os campos",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; enviar o formulário sem preencher nenhum campo",
+  "esperado": "Mensagens \"... may not be blank\" visíveis para Name, Email, Phone, Subject e Message"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone com 10 caracteres é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos com telefone de 10 caracteres; enviar",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Telefone com 11 caracteres é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos com telefone de 11 caracteres; enviar",
+  "esperado": "Exibe confirmação \"Thanks for getting in touch Maria Silva!\" e o assunto"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Telefone com 21 caracteres é aceito",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos com telefone de 21 caracteres; enviar",
+  "esperado": "Exibe confirmação \"Thanks for getting in touch Maria Silva!\" e o assunto"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Telefone com 22 caracteres é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos com telefone de 22 caracteres; enviar",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "CT06",
+  "titulo": "Assunto com 4 caracteres é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com assunto \"Dica\"; enviar",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\""
+ },
+ {
+  "id": "CT07",
+  "titulo": "Assunto com 5 caracteres é aceito",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com assunto \"Preço\"; enviar",
+  "esperado": "Exibe confirmação com o nome e o assunto \"Preço\""
+ },
+ {
+  "id": "CT08",
+  "titulo": "Assunto com 101 caracteres é rejeitado",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com assunto de 101 caracteres; enviar",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\""
+ },
+ {
+  "id": "CT09",
+  "titulo": "Mensagem com 19 caracteres é rejeitada",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com mensagem de 19 caracteres; enviar",
+  "esperado": "Exibe \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT10",
+  "titulo": "Mensagem com 20 caracteres é aceita",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com mensagem de 20 caracteres; enviar",
+  "esperado": "Exibe confirmação com o nome e o assunto padrão"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Mensagem com 2001 caracteres é rejeitada",
+  "tipo": "Borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos com mensagem de 2001 caracteres; enviar",
+  "esperado": "Exibe \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "CT12",
+  "titulo": "E-mail malformado é rejeitado",
+  "tipo": "Negativo",
+  "criterio": "CA4",
+  "passos": "Preencher demais campos válidos com e-mail \"bad\"; enviar",
+  "esperado": "Exibe \"must be a well-formed email address\""
+ },
+ {
+  "id": "CT13",
+  "titulo": "Dados válidos em todos os campos enviam a mensagem",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Preencher todos os campos com dados válidos; enviar",
+  "esperado": "Exibe \"Thanks for getting in touch Maria Silva!\" e o assunto informado"
+ }
+]

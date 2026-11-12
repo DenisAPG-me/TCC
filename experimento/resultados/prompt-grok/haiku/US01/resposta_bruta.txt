@@ -1,0 +1,131 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Buscar "hammer" exibe somente produtos com "hammer" no nome | positivo | CA1 | Abrir a home; digitar "hammer" no campo de busca; clicar em buscar; ler nomes da listagem e o valor do campo de busca | Todos os nomes contêm "hammer"; campo de busca mantém "hammer" |
+| TC02 | Busca não diferencia maiúsculas de minúsculas | borda | CA1 | Abrir a home; buscar "HAMMER"; ler nomes da listagem | Todos os nomes contêm "hammer" (sem distinção de caixa) e a lista não está vazia |
+| TC03 | Termo inexistente exibe mensagem e nenhum produto | negativo | CA2 | Abrir a home; buscar "zzzzxx"; verificar mensagem e contar produtos | Mensagem "There are no products found." visível; nenhum produto listado |
+| TC04 | Espaços nas extremidades do termo não alteram o resultado | borda | CA1 | Abrir a home; buscar "  hammer  "; ler nomes da listagem | Lista não vazia e todos os nomes contêm "hammer" |
+| TC05 | Ordenar por preço do menor para o maior | positivo | CA3 | Abrir a home; selecionar "Price (Low - High)"; ler preços da página | Preços da página em ordem crescente (não decrescente) |
+| TC06 | Ordenar por nome de Z a A | positivo | CA4 | Abrir a home; selecionar "Name (Z - A)"; ler nomes da página | Nomes da página em ordem alfabética decrescente (sem distinção de caixa) |
+
+SUPOSIÇÕES
+
+- URL base: `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`. A home é acessada com `page.goto(BASE_URL)`.
+- A página inicial lista produtos por padrão (ao menos um produto visível sem busca).
+- Seletores de teste (`data-test`), assumidos a partir da aplicação, são configurados via `playwright.selectors.set_test_id_attribute("data-test")` em um fixture autouse:
+  - Campo de busca: `search-query`.
+  - Botão de buscar: `search-submit`.
+  - Nome do produto: `product-name`.
+  - Preço do produto: `product-price`.
+  - Seletor de ordenação (`<select>`): `sort`.
+- As opções de ordenação aparecem com os rótulos "Price (Low - High)" e "Name (Z - A)".
+- Preços exibidos contêm símbolo de moeda e separador decimal ponto (ex.: "$12.50"). O script extrai apenas dígitos e ponto.
+- Após buscar ou ordenar, a listagem é atualizada e `wait_for_load_state("networkidle")` basta para estabilizá-la.
+- "Página indica que a busca foi por X" é verificado pelo valor do campo de busca, que mantém o termo pesquisado.
+- A comparação de "contém" e de ordem alfabética ignora maiúsculas e minúsculas (`str.lower`).
+- Assume-se que a aplicação remove espaços nas extremidades do termo (TC04). Se não remover, a substring "hammer" ainda deve aparecer nos nomes, então o teste continua válido.
+- A mensagem "There are no products found." aparece como texto visível na página (TC03).
+- Nenhum `time.sleep` é usado; a sincronização é feita por auto-espera do Playwright e `expect`.
+- Os testes usam a fixture `page` do pytest-playwright, sem criação própria de navegador.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+TEST_ID_ATTR = "data-test"
+
+SEARCH_INPUT = "search-query"
+SEARCH_BUTTON = "search-submit"
+PRODUCT_NAME = "product-name"
+PRODUCT_PRICE = "product-price"
+SORT_SELECT = "sort"
+
+
+@pytest.fixture(autouse=True)
+def _configurar_test_id(playwright):
+    playwright.selectors.set_test_id_attribute(TEST_ID_ATTR)
+
+
+def abrir_home_e_buscar(page: Page, termo: str) -> None:
+    page.goto(BASE_URL)
+    page.get_by_test_id(SEARCH_INPUT).fill(termo)
+    page.get_by_test_id(SEARCH_BUTTON).click()
+    page.wait_for_load_state("networkidle")
+
+
+def nomes_da_pagina(page: Page) -> list[str]:
+    return page.get_by_test_id(PRODUCT_NAME).all_inner_texts()
+
+
+def precos_da_pagina(page: Page) -> list[float]:
+    textos = page.get_by_test_id(PRODUCT_PRICE).all_inner_texts()
+    return [float(re.sub(r"[^\d.]", "", texto)) for texto in textos]
+
+
+def test_TC01_busca_hammer_exibe_somente_produtos_com_hammer(page: Page):
+    abrir_home_e_buscar(page, "hammer")
+
+    expect(page.get_by_test_id(PRODUCT_NAME).first).to_be_visible()
+    expect(page.get_by_test_id(SEARCH_INPUT)).to_have_value("hammer")
+
+    nomes = nomes_da_pagina(page)
+    assert len(nomes) > 0
+    assert all("hammer" in nome.lower() for nome in nomes)
+
+
+def test_TC02_busca_nao_diferencia_maiusculas_de_minusculas(page: Page):
+    abrir_home_e_buscar(page, "HAMMER")
+
+    expect(page.get_by_test_id(PRODUCT_NAME).first).to_be_visible()
+
+    nomes = nomes_da_pagina(page)
+    assert len(nomes) > 0
+    assert all("hammer" in nome.lower() for nome in nomes)
+
+
+def test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos(page: Page):
+    abrir_home_e_buscar(page, "zzzzxx")
+
+    expect(page.get_by_text("There are no products found.")).to_be_visible()
+    expect(page.get_by_test_id(PRODUCT_NAME)).to_have_count(0)
+
+
+def test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado(page: Page):
+    abrir_home_e_buscar(page, "  hammer  ")
+
+    expect(page.get_by_test_id(PRODUCT_NAME).first).to_be_visible()
+
+    nomes = nomes_da_pagina(page)
+    assert len(nomes) > 0
+    assert all("hammer" in nome.lower() for nome in nomes)
+
+
+def test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes(page: Page):
+    page.goto(BASE_URL)
+    expect(page.get_by_test_id(PRODUCT_PRICE).first).to_be_visible()
+
+    page.get_by_test_id(SORT_SELECT).select_option(label="Price (Low - High)")
+    page.wait_for_load_state("networkidle")
+    expect(page.get_by_test_id(PRODUCT_PRICE).first).to_be_visible()
+
+    precos = precos_da_pagina(page)
+    assert len(precos) > 0
+    assert precos == sorted(precos)
+
+
+def test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes(page: Page):
+    page.goto(BASE_URL)
+    expect(page.get_by_test_id(PRODUCT_NAME).first).to_be_visible()
+
+    page.get_by_test_id(SORT_SELECT).select_option(label="Name (Z - A)")
+    page.wait_for_load_state("networkidle")
+    expect(page.get_by_test_id(PRODUCT_NAME).first).to_be_visible()
+
+    nomes = nomes_da_pagina(page)
+    assert len(nomes) > 0
+    assert nomes == sorted(nomes, key=str.lower, reverse=True)
+```

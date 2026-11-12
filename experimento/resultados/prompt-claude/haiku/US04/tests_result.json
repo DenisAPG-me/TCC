@@ -1,0 +1,76 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_formulario_vazio_exibe_mensagens_de_campos_obrigatorios[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct02_telefone_com_10_caracteres_e_rejeitado[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct03_telefone_com_11_caracteres_limite_inferior_e_aceito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct04_telefone_com_21_caracteres_limite_superior_e_aceito[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct05_telefone_com_22_caracteres_e_rejeitado[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct06_assunto_com_4_e_mensagem_com_19_caracteres_sao_rejeitados[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct07_assunto_com_5_e_mensagem_com_20_caracteres_limites_inferiores_sao_aceitos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct08_assunto_com_100_e_mensagem_com_2000_caracteres_limites_superiores_sao_aceitos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct09_assunto_com_101_e_mensagem_com_2001_caracteres_sao_rejeitados[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct10_email_malformado_e_rejeitado[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct11_dados_validos_geram_confirmacao_com_nome_e_assunto[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "_fill\n    await self._channel.send(\"fill\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_label(\"Message\", exact=True)"
+  }
+ ],
+ "stdout_tail": "laude\\haiku\\US04\\script.py::test_ct04_telefone_com_21_caracteres_limite_superior_e_aceito[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct05_telefone_com_22_caracteres_e_rejeitado[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct06_assunto_com_4_e_mensagem_com_19_caracteres_sao_rejeitados[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct07_assunto_com_5_e_mensagem_com_20_caracteres_limites_inferiores_sao_aceitos[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct08_assunto_com_100_e_mensagem_com_2000_caracteres_limites_superiores_sao_aceitos[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct09_assunto_com_101_e_mensagem_com_2001_caracteres_sao_rejeitados[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct10_email_malformado_e_rejeitado[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\haiku\\US04\\script.py::test_ct11_dados_validos_geram_confirmacao_com_nome_e_assunto[chromium]\n11 failed, 2 warnings in 350.23s (0:05:50)\n",
+ "returncode": 1,
+ "duracao_s": 350.89
+}

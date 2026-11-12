@@ -1,0 +1,15 @@
+[
+ "URL base: `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL`. Os endpoints são relativos a ela: `POST /auth`, `POST /booking`, `GET /booking/{id}`, `GET /booking?firstname=&lastname=`, `DELETE /booking/{id}`.",
+ "Autenticação: `POST /auth` com JSON `{\"username\": \"admin\", \"password\": \"password123\"}` retorna `{\"token\": \"...\"}` em caso de sucesso. Com credencial inválida, a resposta não contém `token` (assume-se HTTP 200 com `reason`; o teste só verifica a ausência de `token`).",
+ "Autorização do DELETE: o token é enviado no header `Cookie: token=<valor>`. Sem token ou com token inválido/vazio, a API retorna 403.",
+ "Exclusão bem-sucedida retorna HTTP 201.",
+ "Consulta a reserva inexistente ou excluída retorna HTTP 404.",
+ "Exclusão de reserva inexistente ou já excluída retorna qualquer status 4xx (não se assume um código específico, como 405).",
+ "Criação de reserva via `POST /booking` retorna 200 com `{\"bookingid\": int, \"booking\": {...}}`. O corpo usa os campos `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`/`checkout`) e `additionalneeds`.",
+ "Nomes únicos são gerados com UUID (`Tester<hex>` e `Silva<hex>`), para isolar o filtro de listagem de dados de outros testes.",
+ "O filtro `GET /booking` com `firstname` e `lastname` retorna uma lista de objetos `{\"bookingid\": n}`. Quando não há correspondências, retorna lista vazia.",
+ "Cada teste cria as próprias reservas e não depende de estado de outros testes. Não há limpeza (teardown) porque o ambiente é compartilhado e as reservas são de teste.",
+ "A API está disponível e o ambiente é público de demonstração, sem limites de taxa relevantes. Não há uso de `time.sleep`.",
+ "Timeout de 30 s em todas as requisições, para evitar travamentos.",
+ "Dependências: somente `pytest` e `requests`. O arquivo é autocontido e pode ser executado com `pytest <arquivo>.py`."
+]

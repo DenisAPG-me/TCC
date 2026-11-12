@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT001_busca_por_hammer_lista_somente_produtos_com_hammer[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT002_busca_com_termo_em_maiusculas_retorna_mesmos_produtos[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT003_busca_por_termo_inexistente_exibe_mensagem_sem_produtos[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT004_ordenar_por_preco_crescente_ordena_precos_da_pagina[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca[chromium]",
+   "outcome": "failed",
+   "falha_seletor": false,
+   "msg": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py:141: in test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca\n    assert prices == sorted(prices), f\"Preços fora de ordem crescente: {prices}\"\nE   AssertionError: Preços fora de ordem crescente: [13.41, 12.58, 11.48, 11.14, 20.14, 18.63]\nE   assert [13.41, 12.58... 20.14, 18.63] == [11.14, 11.48... 18.63, 20.14]\nE     \nE     At index 0 diff: 13.41 != 11.14\nE     Use -v to get more diff"
+  },
+  {
+   "nodeid": "script.py::test_CT006_ordenar_por_nome_z_a_ordena_nomes_em_ordem_decrescente[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  }
+ ],
+ "stdout_tail": "sca[chromium] _\n<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py:141: in test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca\n    assert prices == sorted(prices), f\"Preços fora de ordem crescente: {prices}\"\nE   AssertionError: Preços fora de ordem crescente: [13.41, 12.58, 11.48, 11.14, 20.14, 18.63]\nE   assert [13.41, 12.58... 20.14, 18.63] == [11.14, 11.48... 18.63, 20.14]\nE     \nE     At index 0 diff: 13.41 != 11.14\nE     Use -v to get more diff\n============================== warnings summary ===============================\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.\n  The CallSpec2 alias will be removed in pytest 10.\n  Update imports to use CallSpec instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-chatgpt\\haiku\\US01\\script.py::test_CT005_ordenacao_por_preco_crescente_aplicada_aos_resultados_de_busca[chromium]\n1 failed, 5 passed, 1 warning in 23.81s\n",
+ "returncode": 1,
+ "duracao_s": 24.5
+}

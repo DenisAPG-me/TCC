@@ -1,0 +1,18 @@
+[
+ "A User Story é de **API REST**; portanto, são usados `pytest` + `requests`.",
+ "URL base: `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL` no topo do arquivo.",
+ "Endpoints deduzidos:",
+ "Criação: `POST /booking`",
+ "Consulta por ID: `GET /booking/{id}`",
+ "Listagem com filtro: `GET /booking?firstname={nome}&lastname={sobrenome}`",
+ "Cabeçalhos obrigatórios em todas as requisições: `Content-Type: application/json` e `Accept: application/json`.",
+ "Chaves do payload de criação: `firstname` (string), `lastname` (string), `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`), `additionalneeds` (string).",
+ "Resposta da criação: `{\"bookingid\": <int>, \"booking\": {<mesmos campos enviados>}}`.",
+ "Resposta da consulta por ID: objeto com os mesmos campos do payload, sem `bookingid`.",
+ "Resposta da listagem: lista de objetos `{\"bookingid\": <int>}`; uma lista vazia é retornada com status 200 quando não há correspondência.",
+ "O identificador `99999999` não existe no ambiente.",
+ "Unicidade de nome e sobrenome garantida por sufixo `uuid4`.",
+ "Criação e consulta não exigem autenticação. As reservas criadas não são removidas, pois `DELETE` exige token e não faz parte da User Story.",
+ "Valores de borda considerados aceitos pela API: `totalprice=0`, `checkin` igual a `checkout`, `depositpaid=false` e texto UTF-8 com acentos.",
+ "O ambiente é público e compartilhado; a consistência entre criação e listagem é imediata, sem necessidade de espera."
+]

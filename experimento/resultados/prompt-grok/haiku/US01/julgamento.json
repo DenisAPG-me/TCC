@@ -1,0 +1,103 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US01-C01",
+  "US01-C02",
+  "US01-C03",
+  "US01-C05",
+  "US01-C06",
+  "US01-C09"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C03"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C05"
+   ],
+   "nota": "espacos nas extremidades"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US01-C09"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC01_busca_hammer_exibe_somente_produtos_com_hammer",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  },
+  {
+   "teste": "test_TC02_busca_nao_diferencia_maiusculas_de_minusculas",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  },
+  {
+   "teste": "test_TC03_busca_termo_inexistente_exibe_mensagem_sem_produtos",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  },
+  {
+   "teste": "test_TC04_busca_com_espacos_nas_extremidades_retorna_mesmo_resultado",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  },
+  {
+   "teste": "test_TC05_ordenar_por_preco_menor_para_maior_retorna_precos_crescentes",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  },
+  {
+   "teste": "test_TC06_ordenar_por_nome_z_a_retorna_nomes_decrescentes",
+   "categoria": "espera/timing",
+   "nota": "wait_for_load_state('networkidle') estoura 30s (pagina nunca fica ociosa)"
+  }
+ ]
+}

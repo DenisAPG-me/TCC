@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US02",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 30.22,
+ "tokens": {
+  "total": 18568
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "er\"]').first\n    expect(quantity).to_be_visible()\n    quantity.fill(\"1\")\n    quantity.press(\"Enter\")\n\n    expect(quantity).to_have_value(\"1\")\n    assert _cart_total(page) == unit_price\n\n\ndef test_CT_04_rejeitar_tres_unidades_de_thor_hammer(page):\n    _find_product(page, \"Thor Hammer\")\n    _quantity_input(page).fill(\"3\")\n    page.get_by_role(\"button\", name=re.compile(\"Add to cart\", re.I)).click()\n\n    expect(page.get_by_text(THOR_LIMIT_MESSAGE, exact=True)).to_be_visible()\n```\ntokens used\n18,568\n"
+}

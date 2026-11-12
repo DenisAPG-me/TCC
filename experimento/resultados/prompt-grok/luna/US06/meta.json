@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US06",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 17.61,
+ "tokens": {
+  "total": 3644
+ },
+ "n_casos_extraidos": 8,
+ "tem_codigo": true,
+ "stderr_tail": "al {unique_suffix()}\"\n    fill_contact_form(page, name, subject)\n\n    normalized_name = name.strip()\n    expect(\n        page.get_by_text(\n            f\"Thanks for getting in touch {normalized_name}!\",\n            exact=True,\n        )\n    ).to_be_visible()\n\n    login_as_admin(page)\n    page.get_by_role(\"link\", name=\"Messages\").click()\n    expect(page.get_by_text(normalized_name, exact=True)).to_be_visible()\n    expect(page.get_by_text(subject, exact=True)).to_be_visible()\n```\ntokens used\n3,644\n"
+}

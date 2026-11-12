@@ -1,0 +1,50 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Criar reserva com todos os campos válidos",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Enviar JSON completo para criação.",
+  "esperado": "Status 200, identificador numérico inteiro e dados iguais aos enviados."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Consultar reserva criada pelo identificador",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Criar reserva; consultar usando o identificador retornado.",
+  "esperado": "Status 200 e todos os campos iguais aos enviados, incluindo tipos e datas."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "negativo",
+  "criterio": "3",
+  "passos": "Consultar o identificador 99999999.",
+  "esperado": "Status 404."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Filtrar reservas por nome e sobrenome únicos",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Criar reserva com nomes exclusivos; listar informando ambos os filtros.",
+  "esperado": "Lista contém o identificador criado."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Criar e consultar reserva com depósito não pago",
+  "tipo": "borda",
+  "criterio": "1 e 2",
+  "passos": "Criar reserva com depósito pago igual a `false`; consultar pelo identificador.",
+  "esperado": "Ambas as operações retornam 200 e preservam todos os dados, incluindo o booleano `false`."
+ },
+ {
+  "id": "TC06",
+  "titulo": "Criar e consultar reserva que atravessa a mudança de ano",
+  "tipo": "borda",
+  "criterio": "1 e 2",
+  "passos": "Criar reserva com check-in em 31/12 e check-out em 01/01 do ano seguinte; consultar.",
+  "esperado": "Ambas as operações retornam 200 e preservam todos os dados e as datas enviadas."
+ }
+]

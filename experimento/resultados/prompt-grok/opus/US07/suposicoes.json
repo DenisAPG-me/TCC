@@ -1,0 +1,17 @@
+[
+ "A User Story é de API REST; portanto são usados pytest + requests.",
+ "Endpoint de criação: `POST {BASE_URL}/booking`; consulta: `GET {BASE_URL}/booking/{id}`; listagem: `GET {BASE_URL}/booking` com query params `firstname` e `lastname`.",
+ "Nenhuma autenticação é necessária para criar, consultar ou listar reservas.",
+ "Requisições enviam os cabeçalhos `Content-Type: application/json` e `Accept: application/json`.",
+ "Nomes dos campos JSON: `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`), `additionalneeds` (string).",
+ "Resposta da criação: `{\"bookingid\": <int>, \"booking\": {<mesmos campos enviados>}}`.",
+ "Resposta da consulta por id: objeto da reserva diretamente na raiz, com os mesmos campos enviados.",
+ "Resposta da listagem: array de objetos no formato `{\"bookingid\": <int>}`.",
+ "Filtro por nome/sobrenome sem correspondência retorna status 200 com lista vazia.",
+ "O identificador `0` não corresponde a nenhuma reserva e retorna 404 (mesmo comportamento do AC3).",
+ "`totalprice=0`, `depositpaid=false`, check-in igual a check-out e caracteres UTF-8 acentuados são aceitos e persistidos sem alteração.",
+ "Nomes únicos são gerados com `uuid4` para evitar colisão com dados de outros usuários do ambiente compartilhado.",
+ "A listagem por filtro reflete imediatamente a reserva recém-criada (sem atraso de indexação).",
+ "As reservas criadas não são removidas ao final (exclusão não faz parte da User Story).",
+ "Timeout de 30 segundos por requisição."
+]

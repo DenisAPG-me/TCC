@@ -1,0 +1,207 @@
+{
+ "created": 1793429870.0126336,
+ "duration": 24.835111618041992,
+ "exitcode": 1,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 4,
+  "failed": 1,
+  "total": 5,
+  "collected": 5
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_enviar_credenciais_vazias[chromium]",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_ct02_enviar_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 115
+    },
+    {
+     "nodeid": "script.py::test_ct03_entrar_com_credenciais_validas[chromium]",
+     "type": "Function",
+     "lineno": 125
+    },
+    {
+     "nodeid": "script.py::test_ct04_sair_do_painel_administrativo[chromium]",
+     "type": "Function",
+     "lineno": 150
+    },
+    {
+     "nodeid": "script.py::test_ct05_acessar_quartos_apos_logout[chromium]",
+     "type": "Function",
+     "lineno": 162
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_enviar_credenciais_vazias[chromium]",
+   "lineno": 102,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_enviar_credenciais_vazias[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.4241599999368191,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1399607000639662,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011210199911147356,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_enviar_senha_incorreta[chromium]",
+   "lineno": 115,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_enviar_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0929685999872163,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0095293999183923,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.010361900087445974,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_entrar_com_credenciais_validas[chromium]",
+   "lineno": 125,
+   "outcome": "failed",
+   "keywords": [
+    "test_ct03_entrar_com_credenciais_validas[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.08543890004511923,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 16.518863500095904,
+    "outcome": "failed",
+    "crash": {
+     "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US05\\script.py",
+     "lineno": 134,
+     "message": "AssertionError: Locator expected to have count '1'\nActual value: 0 \nCall log:\n  - Expect \"to_have_count\" get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True)) with timeout 15000ms\n  - waiting for get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True))\n    33 \u00d7 locator resolved to 0 elements\n       - unexpected value \"0\""
+    },
+    "traceback": [
+     {
+      "path": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US05\\script.py",
+      "lineno": 134,
+      "message": "in test_ct03_entrar_com_credenciais_validas"
+     }
+    ],
+    "longrepr": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\astra\\US05\\script.py:134: in test_ct03_entrar_com_credenciais_validas\n    expect(row).to_have_count(1, timeout=EXPECT_TIMEOUT_MS)\nE   AssertionError: Locator expected to have count '1'\nE   Actual value: 0 \nE   Call log:\nE     - Expect \"to_have_count\" get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True)) with timeout 15000ms\nE     - waiting for get_by_role(\"row\").filter(has=get_by_role(\"cell\", name=\"101\", exact=True))\nE       33 \u00d7 locator resolved to 0 elements\nE          - unexpected value \"0\""
+   },
+   "teardown": {
+    "duration": 0.012524299905635417,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_sair_do_painel_administrativo[chromium]",
+   "lineno": 150,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_sair_do_painel_administrativo[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.09495010005775839,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.0670912000350654,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011046399944461882,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_acessar_quartos_apos_logout[chromium]",
+   "lineno": 162,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_acessar_quartos_apos_logout[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10021019994746894,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.954587700078264,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.20745950005948544,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

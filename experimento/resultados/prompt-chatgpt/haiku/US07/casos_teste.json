@@ -1,0 +1,58 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar POST /booking com corpo válido e verificar status, bookingid e dados retornados",
+  "esperado": "Status 200, bookingid inteiro e booking igual ao corpo enviado"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Consultar reserva pelo identificador criado",
+  "tipo": "positivo",
+  "criterio": "CA02",
+  "passos": "Criar reserva e executar GET /booking/{id} com o bookingid retornado",
+  "esperado": "Status 200 e corpo igual aos dados enviados"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Executar GET /booking/99999999",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Consultar identificador zero",
+  "tipo": "borda",
+  "criterio": "CA03",
+  "passos": "Executar GET /booking/0",
+  "esperado": "Status 404"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Listar por nome e sobrenome únicos",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva e executar GET /booking com firstname e lastname da reserva",
+  "esperado": "Status 200 e lista contendo o bookingid criado"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Listar por nome e sobrenome inexistentes",
+  "tipo": "negativo",
+  "criterio": "CA04",
+  "passos": "Executar GET /booking com firstname e lastname aleatórios não cadastrados",
+  "esperado": "Status 200 e lista vazia"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Criar reserva com total zero e depósito não pago",
+  "tipo": "borda",
+  "criterio": "CA01",
+  "passos": "Enviar POST /booking com totalprice 0 e depositpaid false",
+  "esperado": "Status 200 e booking igual ao corpo enviado"
+ }
+]

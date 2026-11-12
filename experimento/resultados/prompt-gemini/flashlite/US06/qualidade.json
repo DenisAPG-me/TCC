@@ -1,0 +1,14 @@
+{
+ "legibilidade": 2,
+ "estrutura": 2,
+ "assercoes": 2,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "sintaxe de dict JS { name: ... } invalida em Python",
+  "estrutura": "login/formulario duplicados, helper unico",
+  "assercoes": "contador via regex com fallback que mascara; checagem de digito fraca",
+  "espera": "dados fixos nao unicos, is_visible imediato",
+  "manutenibilidade": "placeholders, rota /#/admin e dados hardcoded"
+ }
+}

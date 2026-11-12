@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US04",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 12.82,
+ "tokens": {
+  "total": 6432
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "l_form(page, values)\n    submit_form(page)\n\n    expect(page.get_by_text(\"must be a well-formed email address\", exact=False)).to_be_visible()\n\n\ndef test_CT005_formulario_valido_confirma_o_contato(page: Page) -> None:\n    open_contact_form(page)\n    fill_form(page, VALID_DATA)\n    submit_form(page)\n\n    expect(page.get_by_text(\"Thanks for getting in touch Ana Silva!\", exact=True)).to_be_visible()\n    expect(page.get_by_text(VALID_DATA[\"subject\"], exact=True)).to_be_visible()\n```\ntokens used\n6,432\n"
+}

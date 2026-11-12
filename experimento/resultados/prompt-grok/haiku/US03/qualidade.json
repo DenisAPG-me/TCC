@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes descritivos e constantes",
+  "estrutura": "Helpers go_to_*_step, fill_address(skip), constantes de dados",
+  "assercoes": "Mensagens, ausencia de mensagens e passo de pagamento verificados",
+  "espera": "expect auto-wait, sem sleep, sem espera por transicoes de checkout",
+  "manutenibilidade": "Rotulos centralizados em dicts, mas .card CSS e labels ambiguos"
+ }
+}

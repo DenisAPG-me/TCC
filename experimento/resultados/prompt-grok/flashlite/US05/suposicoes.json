@@ -1,0 +1,10 @@
+[
+ "A URL base padrão é https://automationintesting.online/ e a tela de login do painel administrativo é acessada em /admin.",
+ "Os campos de login possuem os rótulos \"Username\" e \"Password\" ou podem ser localizados por placeholder/role.",
+ "O botão de envio do formulário de login possui o texto ou papel de \"Login\" ou \"Submit\".",
+ "A mensagem de erro \"Invalid credentials\" aparece visível na tela após uma tentativa de login falha.",
+ "A lista de quartos exibe elementos contendo o número \"101\" e o tipo \"Single\".",
+ "O menu de navegação contém links ou textos correspondentes a \"Rooms\", \"Report\", \"Branding\" e \"Messages\".",
+ "O botão de Logout pode ser localizado pelo texto \"Logout\".",
+ "O redirecionamento após o logout leva à página inicial pública (URL base / ou raiz)."
+]

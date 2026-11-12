@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros",
+  "estrutura": "helpers simples, URL repetida",
+  "assercoes": "asserts de negocio mas menu via get_by_text generico",
+  "espera": "goto logo apos click de logout sem esperar URL (corrida)",
+  "manutenibilidade": "label/role, constante de URL"
+ }
+}

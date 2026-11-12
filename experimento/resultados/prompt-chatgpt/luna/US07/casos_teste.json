@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Criar reserva com dados válidos",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Enviar uma reserva válida para criação.",
+  "esperado": "HTTP 200; resposta contém identificador numérico e os mesmos dados enviados."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Consultar reserva criada",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Criar uma reserva e consultar pelo identificador retornado.",
+  "esperado": "HTTP 200; todos os campos da reserva correspondem aos dados enviados."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "negativo",
+  "criterio": "3",
+  "passos": "Consultar a reserva com identificador 99999999.",
+  "esperado": "HTTP 404."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Filtrar reservas pelo nome e sobrenome",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Criar reserva com nome e sobrenome únicos e listar usando ambos os filtros.",
+  "esperado": "A lista contém o identificador da reserva criada."
+ }
+]

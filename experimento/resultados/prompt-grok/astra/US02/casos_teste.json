@@ -1,0 +1,42 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Adicionar 3 unidades de produto disponível",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Abrir Claw Hammer; definir quantidade 3; adicionar ao carrinho.",
+  "esperado": "Exibe “Product added to shopping cart.” e indicador do carrinho igual a 3."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Calcular os totais para 3 unidades",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Adicionar 3 Claw Hammer; abrir carrinho; verificar quantidade, preço unitário e totais.",
+  "esperado": "Total da linha igual ao preço unitário × 3; total do carrinho igual ao total da linha."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Reduzir quantidade de 3 para 1",
+  "tipo": "borda",
+  "criterio": "3",
+  "passos": "Adicionar 3 Claw Hammer; abrir carrinho; alterar quantidade para 1.",
+  "esperado": "Quantidade permanece 1 e total do carrinho passa a ser igual ao preço unitário."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Rejeitar 3 unidades de Thor Hammer",
+  "tipo": "negativo",
+  "criterio": "4",
+  "passos": "Abrir Thor Hammer; definir quantidade 3; tentar adicionar ao carrinho.",
+  "esperado": "Exibe “You can only have one Thor Hammer in the cart.”."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Aceitar 1 unidade de Thor Hammer",
+  "tipo": "borda",
+  "criterio": "4 — limite inferido",
+  "passos": "Abrir Thor Hammer; definir quantidade 1; adicionar; abrir carrinho.",
+  "esperado": "Carrinho contém 1 unidade de Thor Hammer, conforme suposição de que o limite permitido é inclusivo."
+ }
+]

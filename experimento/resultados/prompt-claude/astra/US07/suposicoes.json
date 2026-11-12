@@ -1,0 +1,18 @@
+[
+ "A tecnologia escolhida é Python + pytest + requests, pois os critérios tratam exclusivamente de uma API REST. Não há seletores, navegador ou dependências de UI.",
+ "O contrato foi deduzido exclusivamente da User Story, sem acesso ao sistema, à documentação ou à internet. O script não foi executado contra a API.",
+ "Os endpoints presumidos são `POST /booking` para criação, `GET /booking/{bookingid}` para consulta e `GET /booking` para listagem. Os filtros presumidos são os parâmetros de consulta `firstname` e `lastname`, enviados juntos.",
+ "O payload presumido contém `firstname` e `lastname` como strings, `totalprice` como inteiro, `depositpaid` como booleano, `bookingdates` como objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`, e `additionalneeds` como string.",
+ "A criação retorna um objeto JSON com `bookingid` inteiro positivo e `booking` contendo os dados enviados. A consulta retorna diretamente o objeto da reserva. A listagem retorna uma lista de objetos contendo `bookingid`.",
+ "A comparação dos dados exige os mesmos campos, valores e tipos no objeto da reserva, incluindo as datas aninhadas. A ordem das propriedades JSON é irrelevante. Campos extras no envelope de criação e nos itens da listagem são permitidos.",
+ "Criação, consulta e listagem não exigem autenticação. A constante de credenciais usa `None`, e as requisições solicitam respostas JSON.",
+ "Os dados são sintéticos, com datas fixas de 10 a 12 de novembro de 2030. Supõe-se que esse intervalo seja válido no ambiente de execução; as constantes devem ser atualizadas se necessário.",
+ "Preço zero, depósito não pago, nomes com acentos e necessidades adicionais vazias são considerados válidos para os cenários de borda. Essa validade é uma dedução, não uma regra explicitamente estabelecida pela User Story.",
+ "Um sufixo UUID hexadecimal é acrescentado a nome e sobrenome em cada criação. Supõe-se que esses caracteres e comprimentos sejam aceitos e que colisões sejam desprezíveis.",
+ "O identificador `99999999` é considerado inexistente, conforme o exemplo fornecido. Se existir no ambiente, CT03 falhará; não haverá exclusão de reservas para forçar essa condição.",
+ "A reserva fica disponível imediatamente após a criação, inclusive nos filtros. Supõe-se que a listagem filtrada não exija paginação adicional para encontrar o registro criado.",
+ "O corpo e a mensagem da resposta 404 não são validados, pois não foram especificados. Não se presumem códigos para payloads inválidos, limites de tamanho ou datas invertidas.",
+ "Cada teste cria seus próprios pré-requisitos. Não há exclusão posterior, pois o contrato de exclusão e suas permissões não foram fornecidos; as reservas sintéticas permanecerão no ambiente.",
+ "Todas as requisições usam timeout de conexão de 5 segundos e de leitura de 20 segundos, sem repetição automática ou espera artificial. Redirecionamentos não são seguidos, permitindo validar o status do endpoint original.",
+ "O arquivo pode ser salvo como `test_reservas.py` e executado com `pytest test_reservas.py`, em um ambiente com pytest e requests instalados e acesso à URL informada."
+]

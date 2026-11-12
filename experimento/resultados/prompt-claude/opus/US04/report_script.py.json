@@ -1,0 +1,280 @@
+{
+ "created": 1793381371.8381498,
+ "duration": 19.294252157211304,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US04",
+ "environment": {},
+ "summary": {
+  "passed": 8,
+  "total": 8,
+  "collected": 8
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_envio_formulario_vazio[chromium]",
+     "type": "Function",
+     "lineno": 58
+    },
+    {
+     "nodeid": "script.py::test_ct02_telefone_com_10_caracteres[chromium]",
+     "type": "Function",
+     "lineno": 65
+    },
+    {
+     "nodeid": "script.py::test_ct03_telefone_com_11_caracteres[chromium]",
+     "type": "Function",
+     "lineno": 71
+    },
+    {
+     "nodeid": "script.py::test_ct04_telefone_com_22_caracteres[chromium]",
+     "type": "Function",
+     "lineno": 78
+    },
+    {
+     "nodeid": "script.py::test_ct05_assunto_e_mensagem_abaixo_do_minimo[chromium]",
+     "type": "Function",
+     "lineno": 84
+    },
+    {
+     "nodeid": "script.py::test_ct06_assunto_e_mensagem_no_limite_minimo[chromium]",
+     "type": "Function",
+     "lineno": 91
+    },
+    {
+     "nodeid": "script.py::test_ct07_email_malformado[chromium]",
+     "type": "Function",
+     "lineno": 99
+    },
+    {
+     "nodeid": "script.py::test_ct08_envio_com_dados_validos[chromium]",
+     "type": "Function",
+     "lineno": 105
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_envio_formulario_vazio[chromium]",
+   "lineno": 58,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_envio_formulario_vazio[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.763061499921605,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.721962200012058,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.022006900049746037,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_telefone_com_10_caracteres[chromium]",
+   "lineno": 65,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_telefone_com_10_caracteres[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2982248000334948,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.7089935999829322,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.022110300022177398,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_telefone_com_11_caracteres[chromium]",
+   "lineno": 71,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_telefone_com_11_caracteres[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2930028000846505,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.3449468999169767,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014787000021897256,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_telefone_com_22_caracteres[chromium]",
+   "lineno": 78,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_telefone_com_22_caracteres[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.1744513999437913,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.709568899939768,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.015865499968640506,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_assunto_e_mensagem_abaixo_do_minimo[chromium]",
+   "lineno": 84,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_assunto_e_mensagem_abaixo_do_minimo[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2691537999780849,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.4384635000023991,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014909300021827221,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_assunto_e_mensagem_no_limite_minimo[chromium]",
+   "lineno": 91,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_assunto_e_mensagem_no_limite_minimo[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2214897000230849,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.7144792000763118,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.016130700008943677,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_email_malformado[chromium]",
+   "lineno": 99,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_email_malformado[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.0922961999895051,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.4351878999732435,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014691199990920722,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_envio_com_dados_validos[chromium]",
+   "lineno": 105,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_envio_com_dados_validos[chromium]",
+    "chromium",
+    "script.py",
+    "US04",
+    ""
+   ],
+   "setup": {
+    "duration": 1.2557676000287756,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.43589730001986027,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.2706746000330895,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

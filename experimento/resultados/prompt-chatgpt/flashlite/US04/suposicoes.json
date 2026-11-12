@@ -1,0 +1,8 @@
+[
+ "1. Os critérios de aceitação foram numerados sequencialmente de 1 a 5, correspondendo exatamente aos critérios CA01 a CA05 apresentados na User Story.",
+ "2. Não há critérios negativos ou de borda pendentes não cobertos, portanto nenhuma categoria foi omitida sem justificativa.",
+ "3. A aplicação utiliza seletores baseados em rótulos (`get_by_label`), placeholders ou texto visível para os campos do formulário de contato (\"Name\", \"Email\", \"Phone\", \"Subject\", \"Message\") e o botão de envio (\"Submit\").",
+ "4. A URL base é `https://automationintesting.online/` e a pagina inicial possui o formulário diretamente acessível (eventualmente rolando a página se necessário, embora os seletores do Playwright encontrem elementos visíveis).",
+ "5. As mensagens de erro e de sucesso aparecem na interface após a submissão do formulário e são validadas com o uso de `expect(page.locator(...)).toHaveText(...)` ou `expect(page.get_by_text(...)).toBeVisible()`.",
+ "6. Os dados válidos de teste utilizados no CT005 e como base nos demais casos são: Nome = \"Joao Silva\", Email = \"joao.silva@example.com\", Telefone = \"11987654321\", Assunto = \"Reserva para o fim de semana\", Mensagem = \"Gostaria de saber a disponibilidade de quartos para o proximo final de semana.\"."
+]

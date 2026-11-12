@@ -1,0 +1,98 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário vazio exibe erros de obrigatoriedade",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Acessar tela de login; clicar em Login sem preencher e-mail e senha",
+  "esperado": "Mensagens \"Email is required\" e \"Password is required\" visíveis"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com senha incorreta não cria sessão",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Acessar login; informar e-mail demo e senha incorreta; clicar em Login",
+  "esperado": "\"Invalid email or password\" visível; usuário permanece na tela de login; \"My account\" não exibido"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com e-mail preenchido e senha vazia exibe apenas erro de senha",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar login; informar e-mail demo; deixar senha vazia; clicar em Login",
+  "esperado": "\"Password is required\" visível; \"Email is required\" não exibido"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com senha preenchida e e-mail vazio exibe apenas erro de e-mail",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Acessar login; deixar e-mail vazio; informar senha demo; clicar em Login",
+  "esperado": "\"Email is required\" visível; \"Password is required\" não exibido"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Checkout sem autenticação redireciona para login",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Adicionar produto ao carrinho; abrir carrinho; clicar em Proceed to checkout sem estar logado",
+  "esperado": "URL contém /auth/login; formulário de e-mail e senha visível"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login com conta demo exibe My account e nome do usuário no menu",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Acessar login; informar e-mail e senha demo; clicar em Login",
+  "esperado": "Página \"My account\" visível; nome do usuário visível no menu de navegação"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Endereço com campos obrigatórios vazios não avança para pagamento",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "Logar; adicionar produto; ir ao checkout; deixar país, CEP, número, rua, cidade e estado vazios; clicar em Proceed to checkout",
+  "esperado": "Campo \"Payment method\" não exibido (permanece no passo de endereço)"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Endereço com campos obrigatórios preenchidos avança para pagamento",
+  "tipo": "Positivo",
+  "criterio": "CA5",
+  "passos": "Logar; adicionar produto; ir ao checkout; preencher país, CEP, número, rua, cidade e estado; clicar em Proceed to checkout",
+  "esperado": "Campo \"Payment method\" visível (passo de pagamento)"
+ },
+ {
+  "id": "CT09",
+  "titulo": "CEP vazio impede avanço para pagamento com demais campos preenchidos",
+  "tipo": "Borda",
+  "criterio": "CA5",
+  "passos": "Logar; ir ao checkout; preencher todos os campos do endereço exceto CEP; clicar em Proceed to checkout",
+  "esperado": "Campo \"Payment method\" não exibido; permanece no passo de endereço"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Pagamento com cartão de crédito válido exibe Payment was successful",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Logar; completar endereço; selecionar Credit Card; preencher número, validade, CVV e titular fictícios; clicar em Confirm",
+  "esperado": "Mensagem \"Payment was successful\" visível"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Confirmação do pedido exibe número da fatura INV",
+  "tipo": "Positivo",
+  "criterio": "CA6",
+  "passos": "Executar fluxo de CT10 até a confirmação do pedido",
+  "esperado": "Mensagem \"Thanks for your order! Your invoice number is INV-\" visível"
+ },
+ {
+  "id": "CT12",
+  "titulo": "Pagamento com dados de cartão vazios não é confirmado",
+  "tipo": "Negativo",
+  "criterio": "CA6",
+  "passos": "Logar; completar endereço; selecionar Credit Card; deixar dados do cartão vazios; clicar em Confirm",
+  "esperado": "\"Payment was successful\" não exibido"
+ }
+]

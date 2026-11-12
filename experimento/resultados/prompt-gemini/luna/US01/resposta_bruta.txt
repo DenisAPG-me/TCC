@@ -1,0 +1,127 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Buscar produtos por “hammer” | Positivo | 1 | Abrir a página inicial; preencher a busca com `hammer`; submeter a busca. | A indicação da busca mostra `hammer`; todos os produtos listados têm `hammer` no nome, sem distinção entre maiúsculas e minúsculas. |
+| CT02 | Buscar termo sem resultados | Negativo | 2 | Abrir a página inicial; buscar `zzzzxx`. | A mensagem `There are no products found.` aparece e nenhum produto é listado. |
+| CT03 | Ordenar preços do menor para o maior | Positivo | 3 | Abrir a página inicial; selecionar a ordenação de preço crescente. | Os preços dos produtos listados estão em ordem não decrescente. |
+| CT04 | Ordenar nomes de Z a A | Positivo | 4 | Abrir a página inicial; selecionar a ordenação por nome decrescente. | Os nomes dos produtos listados estão em ordem alfabética decrescente, sem distinção entre maiúsculas e minúsculas. |
+
+## SUPOSIÇÕES
+
+- A aplicação é acessada pela URL base `https://practicesoftwaretesting.com/`; os testes navegam diretamente para ela.
+- A página inicial exibe um campo de busca acessível com rótulo ou placeholder contendo “search” e um botão acessível chamado “Search”. O teste também tenta submeter com Enter se o botão não estiver disponível.
+- A busca atualiza a página sem navegar para outra rota ou, caso navegue, o resultado continua na página exibida após a submissão.
+- A indicação do termo buscado contém o texto `hammer`.
+- Os cartões de produto podem ser localizados pelo papel `article` ou pelo seletor deduzido `[data-test="product"]`; nomes e preços estão dentro desses cartões.
+- Os nomes são encontrados como headings nos cartões, com fallback para `[data-test="product-name"]`; os preços usam `[data-test="product-price"]`.
+- O seletor de ordenação tem rótulo ou placeholder contendo “sort”. As opções incluem texto equivalente a preço crescente e nome decrescente (por exemplo, “Price (Low to High)” e “Name (Z to A)”).
+- As opções de ordenação e os seletores de produto são deduções razoáveis, pois não há acesso ao sistema para inspecionar o DOM.
+- Casos de borda cobertos: a busca não diferencia maiúsculas de minúsculas para validar os nomes, a ordenação permite preços ou nomes iguais, e a comparação de nomes ignora diferenças de maiúsculas/minúsculas.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+
+def product_cards(page):
+    cards = page.get_by_role("article")
+    if cards.count() == 0:
+        cards = page.locator('[data-test="product"]')
+    return cards
+
+
+def product_names(page):
+    cards = product_cards(page)
+    names = []
+    for index in range(cards.count()):
+        card = cards.nth(index)
+        heading = card.get_by_role("heading")
+        if heading.count():
+            names.append(heading.first.inner_text().strip())
+        else:
+            names.append(card.locator('[data-test="product-name"]').inner_text().strip())
+    return names
+
+
+def product_prices(page):
+    cards = product_cards(page)
+    prices = []
+    for index in range(cards.count()):
+        card = cards.nth(index)
+        price_locator = card.locator('[data-test="product-price"]')
+        raw_price = price_locator.inner_text().strip()
+        match = re.search(r"-?\d+(?:[.,]\d+)?", raw_price.replace(",", ""))
+        assert match, f"Não foi possível interpretar o preço: {raw_price!r}"
+        prices.append(float(match.group(0).replace(",", ".")))
+    return prices
+
+
+def search_products(page, term):
+    search = page.get_by_role("textbox", name=re.compile("search", re.I))
+    if search.count() == 0:
+        search = page.get_by_placeholder(re.compile("search", re.I))
+    search.fill(term)
+
+    button = page.get_by_role("button", name=re.compile("search", re.I))
+    if button.count():
+        button.first.click()
+    else:
+        search.press("Enter")
+
+
+def choose_sort_option(page, pattern, fallback_text):
+    sort_control = page.get_by_label(re.compile("sort", re.I))
+    if sort_control.count() == 0:
+        sort_control = page.get_by_role("combobox")
+    if sort_control.count():
+        sort_control.first.select_option(label=re.compile(pattern, re.I))
+    else:
+        page.get_by_text(re.compile(pattern, re.I)).click()
+
+
+def test_CT01_busca_hammer_exibe_apenas_produtos_correspondentes(page):
+    page.goto(BASE_URL)
+    search_products(page, "hammer")
+
+    expect(page.get_by_text(re.compile("hammer", re.I))).to_be_visible()
+
+    cards = product_cards(page)
+    expect(cards.first).to_be_visible()
+    for name in product_names(page):
+        assert "hammer" in name.casefold(), f"Produto inesperado na busca: {name!r}"
+
+
+def test_CT02_busca_sem_resultados_exibe_mensagem_e_lista_vazia(page):
+    page.goto(BASE_URL)
+    search_products(page, "zzzzxx")
+
+    expect(page.get_by_text("There are no products found.", exact=True)).to_be_visible()
+    expect(product_cards(page)).to_have_count(0)
+
+
+def test_CT03_ordenacao_por_preco_crescente(page):
+    page.goto(BASE_URL)
+    choose_sort_option(page, r"price.*(low|ascending|lowest)", "Price (Low to High)")
+
+    prices = product_prices(page)
+    assert prices, "Não há preços de produtos para verificar."
+    assert prices == sorted(prices), f"Preços fora de ordem crescente: {prices}"
+
+
+def test_CT04_ordenacao_por_nome_decrescente(page):
+    page.goto(BASE_URL)
+    choose_sort_option(page, r"name.*(z.*a|descending)", "Name (Z to A)")
+
+    names = product_names(page)
+    assert names, "Não há nomes de produtos para verificar."
+    normalized = [name.casefold() for name in names]
+    assert normalized == sorted(normalized, reverse=True), (
+        f"Nomes fora de ordem alfabética decrescente: {names}"
+    )
+```

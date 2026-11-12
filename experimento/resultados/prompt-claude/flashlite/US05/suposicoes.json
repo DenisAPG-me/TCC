@@ -1,0 +1,12 @@
+[
+ "Tecnologia escolhida: Interface web utilizando Python + pytest + pytest-playwright (utilizando a fixture `page` fornecida pelo plugin).",
+ "URL base: `https://automationintesting.online/`",
+ "Credenciais e dados de teste: Usuário `admin`, senha `password`, quarto `101`, tipo de quarto `Single`.",
+ "Seletores e elementos da UI deduzidos com base em padrões comuns de aplicações Restful-Booker-Platform:",
+ "Tela de login: acessada em `/admin` ou via link de login, contendo campos de input para username/login e password, e um botão de submit/login.",
+ "Mensagem de erro de credenciais inválidas: texto visível \"Invalid credentials\" na página de login.",
+ "Painel administrativo / Lista de quartos: URL contendo `/admin/room` ou painel protegido, exibindo tabela ou lista de quartos com o quarto \"101\" e tipo \"Single\".",
+ "Menu de navegação do painel: contendo links/textos \"Rooms\", \"Report\", \"Branding\" e \"Messages\".",
+ "Botão de logout: elemento com texto \"Logout\" ou botão visível no menu administrativo.",
+ "Página inicial pública: URL base `https://automationintesting.online/` ou raiz contendo elementos públicos da pousada."
+]

@@ -1,0 +1,221 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C04",
+  "US03-C05",
+  "US03-C06",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12",
+  "US03-C13",
+  "US03-C15"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so senha"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so e-mail"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C04"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C06"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "CEP vazio isolado"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11"
+   ],
+   "nota": ""
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C12"
+   ],
+   "nota": ""
+  },
+  "12": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C13"
+   ],
+   "nota": "numero invalido"
+  },
+  "13": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C13"
+   ],
+   "nota": "validade expirada"
+  },
+  "14": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C15"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT01",
+   "categoria": "URL/endpoint errado",
+   "nota": "LOGIN_URL com hash (/#/auth/login) nao existe"
+  },
+  {
+   "teste": "test_CT02",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT05",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT06",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT07",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email address') casa 2 (login e e-mail convidado)"
+  },
+  {
+   "teste": "test_CT08",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT09",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT10",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT11",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT12",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT13",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT14",
+   "categoria": "URL/endpoint errado",
+   "nota": "idem"
+  },
+  {
+   "teste": "test_CT15",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Email address') casa 2"
+  }
+ ]
+}

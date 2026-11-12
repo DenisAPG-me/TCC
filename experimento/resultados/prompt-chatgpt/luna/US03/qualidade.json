@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 4,
+ "assercoes": 3,
+ "espera": 3,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Nomes e organizacao dos testes",
+  "estrutura": "Uso de fixtures/helpers e duplicacao",
+  "assercoes": "Verificacao de resultado de negocio",
+  "espera": "Auto-wait/expect vs esperas fragilis",
+  "manutenibilidade": "Robustez de seletores e constantes"
+ }
+}

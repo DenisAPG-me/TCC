@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Envio do login vazio",
+  "tipo": "negativo",
+  "criterio": "CA01",
+  "passos": "Abrir login e enviar o formulário sem preencher campos.",
+  "esperado": "São exibidas as mensagens “Email is required” e “Password is required”."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Login com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir login, informar o e-mail de demonstração e uma senha incorreta, e enviar.",
+  "esperado": "É exibida “Invalid email or password” e o usuário permanece sem sessão."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Checkout sem autenticação",
+  "tipo": "negativo",
+  "criterio": "CA03",
+  "passos": "Adicionar um produto ao carrinho sem autenticar e avançar para o checkout.",
+  "esperado": "A tela solicita e-mail e senha."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Login bem-sucedido",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Autenticar com a conta de demonstração.",
+  "esperado": "A página “My account” é exibida e o nome do usuário aparece no menu."
+ },
+ {
+  "id": "CT005",
+  "titulo": "Validação e preenchimento do endereço",
+  "tipo": "negativo e positivo",
+  "criterio": "CA05",
+  "passos": "Autenticar, adicionar um produto, avançar ao checkout e tentar prosseguir com o endereço vazio; depois preencher os campos obrigatórios e prosseguir.",
+  "esperado": "Com campos vazios, não avança; com país, CEP, número, rua, cidade e estado preenchidos, avança ao pagamento."
+ },
+ {
+  "id": "CT006",
+  "titulo": "Pagamento e confirmação do pedido",
+  "tipo": "positivo",
+  "criterio": "CA06",
+  "passos": "Autenticar, adicionar um produto, preencher o endereço, selecionar cartão, informar dados fictícios e confirmar o pagamento e o pedido.",
+  "esperado": "São exibidas “Payment was successful” e “Thanks for your order!”, com número de nota no formato `INV-...`."
+ }
+]

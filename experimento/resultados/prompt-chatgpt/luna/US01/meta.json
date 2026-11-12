@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US01",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 16.03,
+ "tokens": {
+  "total": 3548
+ },
+ "n_casos_extraidos": 4,
+ "tem_codigo": true,
+ "stderr_tail": "ssert prices == sorted(prices), f\"Preços fora de ordem crescente: {prices}\"\n\n\ndef test_CT004_ordenar_nomes_decrescente(page):\n    open_home(page)\n    choose_sort(page, SORT_NAME_DESCENDING)\n\n    names = product_names(page)\n    assert names, \"A página deveria exibir produtos.\"\n    normalized_names = [name.casefold() for name in names]\n    assert normalized_names == sorted(normalized_names, reverse=True), (\n        f\"Nomes fora de ordem alfabética decrescente: {names}\"\n    )\n```\ntokens used\n3,548\n"
+}

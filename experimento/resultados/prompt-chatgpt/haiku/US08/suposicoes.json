@@ -1,0 +1,19 @@
+[
+ "1. Explícito: a User Story não possui identificadores de critérios. Foram atribuídos CA01 a CA06 na ordem de apresentação, correspondendo aos critérios 1 a 6.",
+ "2. Explícito: a história descreve apenas API REST. Não há descrição de interface web, portanto não foram criados testes de UI. O bloco \"REQUISITOS TÉCNICOS OBRIGATÓRIOS\" presente na User Story foi tratado como conteúdo da especificação e não alterou as regras de ferramentas deste trabalho. Por isso, o arquivo usa somente pytest e requests.",
+ "3. Explícito: a URL base é https://restful-booker.herokuapp.com, centralizada na constante BASE_URL.",
+ "4. Inferido: a autenticação ocorre por POST /auth com corpo JSON contendo username e password, e o token retorna no campo \"token\".",
+ "5. Inferido: a autenticação das operações de alteração ocorre pelo header Cookie no formato token=<valor>.",
+ "6. Explícito: credenciais inválidas não retornam token e informam o motivo \"Bad credentials\". Inferido: o motivo é retornado no campo \"reason\" do corpo JSON. O status HTTP dessa resposta não é especificado, portanto CT002 e CT003 não o verificam. CT002 e CT003 dependem desta suposição.",
+ "7. Inferido: reservas possuem os campos firstname, lastname, totalprice, depositpaid, bookingdates com checkin e checkout, além de additionalneeds opcional. As datas usadas são 2026-11-01 e 2026-11-05.",
+ "8. Inferido: os campos obrigatórios da atualização completa são firstname, lastname, totalprice, depositpaid e bookingdates. CT007 e CT008 dependem desta suposição, e a ausência de bookingdates em CT008 é o caso de borda.",
+ "9. Explícito: atualização completa sem token retorna status 403.",
+ "10. Inferido: a atualização completa com campos obrigatórios ausentes retorna status 400. O mecanismo de validação é desconhecido.",
+ "11. Inferido: POST /booking não exige autenticação e retorna JSON com bookingid e booking. GET /booking/{id} retorna a reserva diretamente. PUT e PATCH retornam a reserva atualizada no corpo da resposta.",
+ "12. Inferido: DELETE /booking/{id} com token é usado para limpeza e retorna status 201, constante DELETE_SUCCESS_STATUS. Se o status real for diferente, esse valor deve ser ajustado.",
+ "13. Pré-condição externa: a instância pública deve estar disponível e aceitar criação e remoção de reservas. Como é uma instância compartilhada, os dados de terceiros não são controlados pelo arquivo.",
+ "14. Não foram criados casos de token inválido, limites de preço, tamanhos de nomes, formatos de data ou sensibilidade de maiúsculas em usuário, porque a User Story não define esses comportamentos.",
+ "15. Não foi criado caso de verificação de persistência por GET após a atualização, porque o critério exige apenas a resposta da operação.",
+ "16. Timeout explícito de 15 segundos em todas as requisições REST, definido em REQUEST_TIMEOUT.",
+ "17. O código foi escrito sem acesso ao sistema real. Endpoints, headers, campos obrigatórios e status de limpeza precisam ser confirmados antes de a execução ser considerada compatível com o ambiente."
+]

@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 2,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "Nomes e helpers claros",
+  "estrutura": "Helpers de locator, dados unicos, constantes",
+  "assercoes": "Contador +1 por regex, nome e assunto na lista",
+  "espera": "networkidle nunca estabiliza no site",
+  "manutenibilidade": "Test-ids, constantes, dados unicos"
+ }
+}

@@ -1,0 +1,309 @@
+{
+ "created": 1793386932.473862,
+ "duration": 16.620543956756592,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\opus\\US05",
+ "environment": {},
+ "summary": {
+  "passed": 9,
+  "total": 9,
+  "collected": 9
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_login_com_usuario_e_senha_vazios[chromium]",
+     "type": "Function",
+     "lineno": 44
+    },
+    {
+     "nodeid": "script.py::test_ct02_login_com_senha_incorreta[chromium]",
+     "type": "Function",
+     "lineno": 53
+    },
+    {
+     "nodeid": "script.py::test_ct03_login_com_senha_em_caixa_diferente[chromium]",
+     "type": "Function",
+     "lineno": 61
+    },
+    {
+     "nodeid": "script.py::test_ct04_login_com_usuario_admin_e_senha_vazia[chromium]",
+     "type": "Function",
+     "lineno": 69
+    },
+    {
+     "nodeid": "script.py::test_ct05_login_valido_exibe_quarto_101_single[chromium]",
+     "type": "Function",
+     "lineno": 78
+    },
+    {
+     "nodeid": "script.py::test_ct06_login_valido_exibe_menu_do_painel[chromium]",
+     "type": "Function",
+     "lineno": 86
+    },
+    {
+     "nodeid": "script.py::test_ct07_logout_retorna_a_pagina_inicial[chromium]",
+     "type": "Function",
+     "lineno": 94
+    },
+    {
+     "nodeid": "script.py::test_ct08_acesso_direto_a_quartos_apos_logout_exige_login[chromium]",
+     "type": "Function",
+     "lineno": 102
+    },
+    {
+     "nodeid": "script.py::test_ct09_acesso_direto_a_quartos_sem_autenticacao_exige_login[chromium]",
+     "type": "Function",
+     "lineno": 113
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_com_usuario_e_senha_vazios[chromium]",
+   "lineno": 44,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_login_com_usuario_e_senha_vazios[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.47420679999049753,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.1437673000618815,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013451099977828562,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_com_senha_incorreta[chromium]",
+   "lineno": 53,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_login_com_senha_incorreta[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.17683589993976057,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0308164999587461,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.011788800009526312,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_com_senha_em_caixa_diferente[chromium]",
+   "lineno": 61,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_login_com_senha_em_caixa_diferente[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.10024359996896237,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.5141145999077708,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013264200068078935,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_login_com_usuario_admin_e_senha_vazia[chromium]",
+   "lineno": 69,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_login_com_usuario_admin_e_senha_vazia[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11241250007878989,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.0934198000468314,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012566099991090596,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_login_valido_exibe_quarto_101_single[chromium]",
+   "lineno": 78,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_login_valido_exibe_quarto_101_single[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11470120004378259,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.339400599943474,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.013657999923452735,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_login_valido_exibe_menu_do_painel[chromium]",
+   "lineno": 86,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_login_valido_exibe_menu_do_painel[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12643760000355542,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.8773291000397876,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.015059500001370907,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_logout_retorna_a_pagina_inicial[chromium]",
+   "lineno": 94,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_logout_retorna_a_pagina_inicial[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.1276645000325516,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.092551299952902,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.012875000014901161,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_acesso_direto_a_quartos_apos_logout_exige_login[chromium]",
+   "lineno": 102,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_acesso_direto_a_quartos_apos_logout_exige_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.11263579991646111,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 2.755391599959694,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.014843899989500642,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct09_acesso_direto_a_quartos_sem_autenticacao_exige_login[chromium]",
+   "lineno": 113,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct09_acesso_direto_a_quartos_sem_autenticacao_exige_login[chromium]",
+    "chromium",
+    "script.py",
+    "US05",
+    ""
+   ],
+   "setup": {
+    "duration": 0.12239170004613698,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.9464704999700189,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.22809850005432963,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  },
+  {
+   "message": "Session-scoped fixtures defined as instance methods are deprecated.\nInstance attributes set in the 'base_url' fixture will NOT be visible to test methods,\nas each test gets a new instance while the fixture runs only once per class.\nUse a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method",
+   "category": "PytestRemovedIn10Warning",
+   "when": "runtest",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py",
+   "lineno": 1392
+  }
+ ]
+}

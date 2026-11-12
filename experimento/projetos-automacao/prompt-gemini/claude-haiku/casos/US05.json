@@ -1,0 +1,82 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com usuário e senha vazios exibe erro",
+  "tipo": "Negativo",
+  "criterio": "AC1",
+  "passos": "1) Acessar /admin; 2) Deixar usuário e senha vazios; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login com usuário preenchido e senha vazia exibe erro",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "1) Acessar /admin; 2) Informar \"admin\" e deixar senha vazia; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login com usuário vazio e senha preenchida exibe erro",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "1) Acessar /admin; 2) Deixar usuário vazio e informar \"password\"; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com usuário \"admin\" e senha incorreta exibe erro",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "1) Acessar /admin; 2) Informar \"admin\" e \"senha-incorreta\"; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Login com usuário inexistente e senha correta exibe erro",
+  "tipo": "Negativo",
+  "criterio": "AC2 (extensão da regra de credenciais)",
+  "passos": "1) Acessar /admin; 2) Informar \"usuario-inexistente\" e \"password\"; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login com senha em caixa diferente exibe erro",
+  "tipo": "Borda",
+  "criterio": "AC2",
+  "passos": "1) Acessar /admin; 2) Informar \"admin\" e \"Password\"; 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Login com senha contendo espaço extra exibe erro",
+  "tipo": "Borda",
+  "criterio": "AC2",
+  "passos": "1) Acessar /admin; 2) Informar \"admin\" e \"password \" (com espaço final); 3) Clicar em Login",
+  "esperado": "Exibe \"Invalid credentials\" e permanece na tela de login"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Login válido leva à lista de quartos com quarto 101 Single e menu completo",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "1) Acessar /admin; 2) Informar \"admin\" e \"password\"; 3) Clicar em Login; 4) Verificar lista de quartos e menu",
+  "esperado": "URL da lista de quartos; linha do quarto 101 com tipo Single visível; menu exibe Rooms, Report, Branding e Messages"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Logout retorna à página inicial pública",
+  "tipo": "Positivo",
+  "criterio": "AC4",
+  "passos": "1) Realizar login válido; 2) Clicar em Logout",
+  "esperado": "URL é a página inicial pública da pousada (raiz do site)"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Acesso direto à lista de quartos após logout exibe tela de login",
+  "tipo": "Positivo",
+  "criterio": "AC5",
+  "passos": "1) Realizar login válido; 2) Clicar em Logout; 3) Acessar diretamente /admin/rooms",
+  "esperado": "Tela de login é exibida (campos Username/Password e botão Login visíveis)"
+ }
+]

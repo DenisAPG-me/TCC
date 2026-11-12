@@ -1,0 +1,14 @@
+{
+ "legibilidade": 3,
+ "estrutura": 3,
+ "assercoes": 3,
+ "espera": 2,
+ "manutenibilidade": 2,
+ "justificativas": {
+  "legibilidade": "Helpers claros, mensagens de assert uteis",
+  "estrutura": "Helpers razoaveis, mas heuristicas de busca de select complexas",
+  "assercoes": "Verifica nomes/precos/ordem com mensagens",
+  "espera": "networkidle e leituras imediatas; sem espera por resultado",
+  "manutenibilidade": "Seletores genericos (role article, select por loop) e regex de preco fragil"
+ }
+}

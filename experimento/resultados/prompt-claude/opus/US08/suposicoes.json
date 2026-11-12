@@ -1,0 +1,16 @@
+[
+ "A User Story é de API REST; a tecnologia escolhida é Python + pytest + requests. Os requisitos de Playwright não se aplicam.",
+ "Autenticação via `POST /auth` com corpo JSON `{\"username\": ..., \"password\": ...}`; sucesso retorna `{\"token\": \"<string>\"}`.",
+ "Credenciais inválidas retornam um corpo JSON `{\"reason\": \"Bad credentials\"}` sem o campo `token`; o status HTTP desse caso não é especificado no CA2, por isso não é verificado.",
+ "O token é enviado no header `Cookie: token=<valor>`.",
+ "Criação de reserva via `POST /booking` (sem autenticação), com retorno `{\"bookingid\": <int>, \"booking\": {...}}`; usada apenas como pré-condição de cada teste.",
+ "Consulta via `GET /booking/{id}` (sem autenticação), com retorno do objeto da reserva.",
+ "Atualização completa via `PUT /booking/{id}` e parcial via `PATCH /booking/{id}`, ambas retornando o objeto da reserva atualizado com status 200.",
+ "Exclusão via `DELETE /booking/{id}` com token, usada na limpeza após cada teste, sem asserção.",
+ "Payload da reserva: `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (`checkin`/`checkout` no formato `YYYY-MM-DD`) e `additionalneeds`.",
+ "Os campos obrigatórios no PUT incluem ao menos `firstname` e `bookingdates`; a ausência de qualquer um deles, ou o corpo vazio, retorna 400.",
+ "Token inválido é tratado como não autorizado e retorna 403, como a ausência de token.",
+ "As requisições usam os headers `Content-Type: application/json` e `Accept: application/json`.",
+ "Cada teste cria sua própria reserva e obtém seu próprio token, para garantir a independência entre os testes.",
+ "O timeout de todas as requisições é de 30 segundos."
+]

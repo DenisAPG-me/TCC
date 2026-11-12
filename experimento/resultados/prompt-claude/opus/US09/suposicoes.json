@@ -1,0 +1,15 @@
+[
+ "A User Story é de API REST; a tecnologia escolhida é Python + pytest + requests, e os requisitos técnicos de Playwright não se aplicam.",
+ "Autenticação via `POST /auth` com corpo JSON `{\"username\": \"admin\", \"password\": \"password123\"}`, retornando 200 e `{\"token\": \"<valor>\"}`.",
+ "Com credenciais inválidas, `POST /auth` retorna 200 com `{\"reason\": \"Bad credentials\"}` e sem o campo `token`.",
+ "O token é enviado no cabeçalho `Cookie: token=<valor>`.",
+ "Criação de reserva via `POST /booking` com cabeçalhos `Content-Type: application/json` e `Accept: application/json`, corpo com `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`. A resposta tem o formato `{\"bookingid\": <id>, \"booking\": {...}}`.",
+ "Consulta via `GET /booking/{id}`: retorna 200 quando a reserva existe e 404 após a exclusão.",
+ "Exclusão via `DELETE /booking/{id}`: retorna 201 com token válido e 403 sem token, com token inválido ou com token vazio.",
+ "Uma segunda exclusão ou a exclusão de um id inexistente retorna um status 4xx (no sistema real, provavelmente 405). Por isso o teste valida apenas a faixa 400–499.",
+ "O id `999999999` é tratado como inexistente.",
+ "Listagem filtrada via `GET /booking?firstname=<x>&lastname=<y>`, retornando 200 e uma lista de objetos `{\"bookingid\": <id>}`.",
+ "Os nomes únicos são gerados com `uuid4` (prefixos \"QA\" e \"Del\") para isolar os testes de dados de terceiros na API pública.",
+ "Cada teste cria as próprias reservas por meio de uma fixture fábrica. No teardown, as reservas ainda existentes são excluídas e erros são ignorados.",
+ "O timeout é de 15 segundos em todas as requisições."
+]

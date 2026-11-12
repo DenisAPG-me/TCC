@@ -1,0 +1,9 @@
+[
+ "1. A URL base é `https://practicesoftwaretesting.com/`, conforme informado na User Story, e os caminhos das páginas seguem o padrão da aplicação (ex.: página inicial, página de detalhe do produto via listagem ou busca, e página do carrinho em `/checkout`).",
+ "2. Os critérios de aceitação foram enumerados sequencialmente como `CA01`, `CA02`, `CA03` e `CA04` na ordem de apresentação da User Story.",
+ "3. Para o teste `CT001`, assume-se que o produto \"Claw Hammer\" pode ser encontrado na listagem inicial ou via busca, que existe um campo ou botão de incremento/entrada de quantidade (input type number ou similar) e um botão \"Add to cart\", e que o indicador do carrinho é um elemento visível no cabeçalho.",
+ "4. Para o teste `CT002`, assume-se que após adicionar 3 unidades, o usuário navega para a página do carrinho (clicando no indicador do carrinho) e que a tabela do carrinho exibe colunas para preço unitário, quantidade, total da linha e total geral.",
+ "5. Para o teste `CT003`, assume-se que na página do carrinho a quantidade de um item pode ser editada diretamente em um campo de entrada ou via controles de quantidade, atualizando os totais dinamicamente ou após um evento de atualização.",
+ "6. Para o teste `CT004`, assume-se que o produto \"Thor Hammer\" possui uma restrição de estoque ou regra de negócio que permite apenas 1 unidade por carrinho, exibindo a mensagem exata informada.",
+ "7. Não há cenários de borda aplicáveis que não estejam cobertos pelos testes positivos e negativos definidos, justificando a ausência de casos específicos do tipo borda."
+]

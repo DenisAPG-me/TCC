@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "Nomes claros",
+  "estrutura": "Helpers, contexto isolado do visitante, dados unicos",
+  "assercoes": "Contador comparado, linha com nome; TC01 so assert>=0",
+  "espera": "Sem sleep, mas corrida no logout",
+  "manutenibilidade": "Dados unicos e constantes, label/URL fragil"
+ }
+}

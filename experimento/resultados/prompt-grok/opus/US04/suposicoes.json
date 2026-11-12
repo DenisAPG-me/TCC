@@ -1,0 +1,15 @@
+[
+ "O formulário de contato está na página inicial (`https://automationintesting.online/`), sem necessidade de login nem de navegação adicional.",
+ "Os campos do formulário possuem os `data-testid`: `ContactName`, `ContactEmail`, `ContactPhone`, `ContactSubject` e `ContactDescription` (mensagem).",
+ "O botão de envio é um `button` com nome acessível \"Submit\".",
+ "As mensagens de campo em branco (CA1) estão em inglês: \"Name may not be blank\", \"Email may not be blank\", \"Phone may not be blank\", \"Subject may not be blank\" e \"Message may not be blank\". A User Story não traz o texto exato, apenas o conceito.",
+ "As validações são feitas no servidor e todas as mensagens de erro aparecem juntas na página após o envio. Os campos não usam validação HTML5 que bloqueie o envio.",
+ "O formulário vazio pode exibir também mensagens de tamanho, além das de campo em branco. O TC01 verifica apenas as de campo em branco.",
+ "As regras de tamanho são inclusivas: telefone de 11 a 21, assunto de 5 a 100 e mensagem de 20 a 2000 caracteres.",
+ "\"Caracteres\" refere-se ao comprimento da string. O telefone aceita apenas dígitos nos dados de teste.",
+ "Após o sucesso, o formulário é substituído por uma confirmação que contém \"Thanks for getting in touch <nome>!\" e o texto do assunto enviado.",
+ "Para verificar a ausência de um erro, o teste força outro erro conhecido. A presença desse outro erro confirma que a resposta de validação já foi renderizada.",
+ "Dados válidos padrão: nome \"Maria Souza\", e-mail \"maria.souza@example.com\", telefone \"01234567890\", assunto \"Duvida sobre reserva\" e uma mensagem com mais de 20 caracteres.",
+ "A base URL vem da constante `BASE_URL`, que pode ser sobrescrita pela opção `--base-url` do pytest-playwright.",
+ "Os testes são independentes. O envio de mensagens válidas cria registros no sistema, o que é aceitável no ambiente de demonstração."
+]

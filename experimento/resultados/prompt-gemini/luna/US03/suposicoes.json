@@ -1,0 +1,12 @@
+[
+ "A aplicação é uma interface web e o script usa `pytest-playwright`, a fixture `page` e `expect` de `playwright.sync_api`.",
+ "A URL base é `https://practicesoftwaretesting.com/`; a rota de login é `/auth/login`. As rotas posteriores ao checkout são alcançadas pela interface.",
+ "A página inicial lista produtos e oferece um botão acessível “Add to cart”; o carrinho é acessível pelo link “Cart”.",
+ "Os botões para avançar e confirmar são acessíveis como “Proceed to checkout”, “Proceed to payment”, “Confirm” e “Confirm order”. Os rótulos podem variar conforme a interface.",
+ "Os campos de login são identificáveis por “Email” e “Password”; o envio do formulário é pelo botão “Login”.",
+ "Os campos de endereço e pagamento são identificáveis pelos rótulos indicados no script. O campo “Number” representa o número do endereço; o campo “Address” representa a rua.",
+ "O país “United States”, CEP “12345”, número “123”, rua “Main Street”, cidade “Austin” e estado “Texas” são dados fictícios usados para preencher o endereço.",
+ "Os dados de cartão são fictícios. Supõe-se que o ambiente de demonstração os aceite: cartão `4111111111111111`, titular `Test Customer`, validade `12/30` e CVV `123`.",
+ "A confirmação do pagamento exibe “Payment was successful”; a confirmação seguinte exibe “Thanks for your order!” e um identificador iniciado por `INV-`.",
+ "O caso de checkout não autenticado pressupõe que a aplicação mantenha o produto no carrinho ao redirecionar para o login."
+]

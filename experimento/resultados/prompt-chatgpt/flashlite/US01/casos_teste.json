@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Buscar produto existente por palavra-chave",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Acessar a URL base, preencher o campo de busca com \"hammer\", acionar a busca e aguardar os resultados.",
+  "esperado": "A listagem exibe somente produtos cujo nome contém \"hammer\" e a página indica a busca por \"hammer\"."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Buscar termo inexistente na loja",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Acessar a URL base, preencher o campo de busca com \"zzzzxx\", e acionar a busca.",
+  "esperado": "Exibe a mensagem \"There are no products found.\" e nenhum produto é listado."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Ordenar produtos por preço crescente",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Acessar a URL base, aguardar o carregamento dos produtos, selecionar a opção de ordenação por preço do menor para o maior.",
+  "esperado": "Os preços dos produtos listados aparecem em ordem crescente."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Ordenar produtos por nome de Z a A",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Acessar a URL base, aguardar o carregamento dos produtos, selecionar a opção de ordenação por nome de Z a A.",
+  "esperado": "Os nomes dos produtos listados aparecem em ordem alfabética decrescente."
+ }
+]

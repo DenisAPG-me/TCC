@@ -1,0 +1,7 @@
+[
+ "A URL base padrão é https://practicesoftwaretesting.com/.",
+ "Os seletores baseiam-se em boas práticas do Playwright (`get_by_role`, `get_by_text`, `get_by_test_id`, etc.), assumindo a estrutura padrão da aplicação Practice Software Testing.",
+ "A página do produto \"Claw Hammer\" pode ser encontrada navegando a partir da página inicial ou buscando pelo nome/categoria.",
+ "O indicador do carrinho de compras é um elemento que exibe a quantidade atual de itens.",
+ "A restrição de quantidade para o \"Thor Hammer\" é validada via mensagem de erro na interface ao tentar adicionar mais de 1 unidade."
+]

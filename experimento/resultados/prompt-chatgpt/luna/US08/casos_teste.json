@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar usuário e senha de demonstração ao endpoint de autenticação.",
+  "esperado": "HTTP 200 e token não vazio."
+ },
+ {
+  "id": "CT002",
+  "titulo": "Rejeitar credenciais inválidas",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Solicitar autenticação com senha incorreta.",
+  "esperado": "Resposta sem token e com motivo `Bad credentials`."
+ },
+ {
+  "id": "CT003",
+  "titulo": "Atualizar todos os dados da reserva",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Criar uma reserva; autenticá-la; enviar atualização completa com nome e preço novos; consultar a reserva.",
+  "esperado": "HTTP 200 e resposta com os novos valores."
+ },
+ {
+  "id": "CT004",
+  "titulo": "Atualizar apenas o sobrenome",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar uma reserva; guardar os campos atuais; enviar PATCH somente com sobrenome novo; consultar a reserva.",
+  "esperado": "HTTP 200, sobrenome alterado e demais campos preservados."
+ },
+ {
+  "id": "CT005",
+  "titulo": "Recusar atualização sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar uma reserva e enviar atualização completa sem autenticação.",
+  "esperado": "HTTP 403."
+ },
+ {
+  "id": "CT006",
+  "titulo": "Recusar atualização completa sem campos obrigatórios",
+  "tipo": "negativo",
+  "criterio": "CA06",
+  "passos": "Criar uma reserva; autenticá-la; enviar PUT sem o campo `firstname`.",
+  "esperado": "HTTP 400."
+ }
+]

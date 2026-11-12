@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Administrador autenticado visualiza o contador de Messages",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "1. Acessar `/admin`. 2. Fazer login com admin/password. 3. Ler o número ao lado de \"Messages\".",
+  "esperado": "O link \"Messages\" é exibido e o contador é legível: um inteiro ≥ 0, sendo ausência de badge igual a 0."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Visitante envia formulário de contato válido",
+  "tipo": "Positivo",
+  "criterio": "CA2",
+  "passos": "1. Acessar a página inicial. 2. Preencher nome, e-mail, telefone, assunto e mensagem válidos. 3. Clicar em \"Submit\".",
+  "esperado": "É exibida a mensagem \"Thanks for getting in touch <nome>!\"."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Envio do formulário com nome em branco",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "1. Acessar a página inicial. 2. Preencher todos os campos válidos, exceto o nome. 3. Clicar em \"Submit\".",
+  "esperado": "É exibido o erro \"Name may not be blank\" e nenhuma confirmação aparece."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Envio com assunto no tamanho mínimo (5 caracteres)",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Acessar a página inicial. 2. Preencher dados válidos com assunto de 5 caracteres. 3. Clicar em \"Submit\".",
+  "esperado": "É exibida a mensagem \"Thanks for getting in touch <nome>!\"."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Envio com assunto abaixo do mínimo (4 caracteres)",
+  "tipo": "Borda",
+  "criterio": "CA2",
+  "passos": "1. Acessar a página inicial. 2. Preencher dados válidos com assunto de 4 caracteres. 3. Clicar em \"Submit\".",
+  "esperado": "É exibido o erro \"Subject must be between 5 and 100 characters.\" e nenhuma confirmação aparece."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Contador de Messages incrementa em 1 após envio do visitante",
+  "tipo": "Positivo",
+  "criterio": "CA1, CA3",
+  "passos": "1. Fazer login e anotar o contador. 2. Em outra sessão, o visitante envia mensagem válida. 3. Fazer logout e login novamente. 4. Ler o contador.",
+  "esperado": "O contador é exatamente uma unidade maior que o valor anotado."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Envio inválido não altera o contador de Messages",
+  "tipo": "Negativo",
+  "criterio": "CA1, CA3",
+  "passos": "1. Fazer login e anotar o contador. 2. Em outra sessão, o visitante tenta enviar com nome em branco. 3. Recarregar o painel. 4. Ler o contador.",
+  "esperado": "O contador permanece igual ao valor anotado."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Mensagem recém-enviada aparece na caixa de mensagens",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "1. O visitante envia mensagem com nome e assunto únicos. 2. O administrador faz login. 3. Clicar em \"Messages\".",
+  "esperado": "A lista contém um item com o nome do remetente e o assunto informados."
+ },
+ {
+  "id": "CT09",
+  "titulo": "Acesso direto à caixa de mensagens após logout exige login",
+  "tipo": "Negativo",
+  "criterio": "CA5",
+  "passos": "1. Fazer login. 2. Clicar em \"Logout\". 3. Navegar diretamente para `/admin/message`.",
+  "esperado": "É exibido o formulário de login e o link \"Messages\" não está disponível."
+ }
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Login com formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "AC1",
+  "passos": "Abrir login; clicar em Login sem preencher",
+  "esperado": "Exibe \"Email is required\" e \"Password is required\""
+ },
+ {
+  "id": "CT02",
+  "titulo": "Login somente com senha preenchida",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "Preencher senha; enviar sem e-mail",
+  "esperado": "Exibe \"Email is required\"; não exibe \"Password is required\""
+ },
+ {
+  "id": "CT03",
+  "titulo": "Login somente com e-mail preenchido",
+  "tipo": "Borda",
+  "criterio": "AC1",
+  "passos": "Preencher e-mail; enviar sem senha",
+  "esperado": "Exibe \"Password is required\"; não exibe \"Email is required\""
+ },
+ {
+  "id": "CT04",
+  "titulo": "Login com senha incorreta",
+  "tipo": "Negativo",
+  "criterio": "AC2",
+  "passos": "Informar e-mail demo e senha errada; enviar",
+  "esperado": "Exibe \"Invalid email or password\"; permanece na tela de login"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Login com e-mail não cadastrado",
+  "tipo": "Borda",
+  "criterio": "AC2",
+  "passos": "Informar e-mail inexistente e senha qualquer; enviar",
+  "esperado": "Exibe \"Invalid email or password\"; permanece sem sessão"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Login válido exibe My account",
+  "tipo": "Positivo",
+  "criterio": "AC4",
+  "passos": "Logar com conta demo; abrir menu do usuário; clicar em My account",
+  "esperado": "Nome do usuário no menu e página \"My account\" exibidos"
+ },
+ {
+  "id": "CT07",
+  "titulo": "Checkout sem autenticação exige login",
+  "tipo": "Positivo",
+  "criterio": "AC3",
+  "passos": "Adicionar produto ao carrinho; ir ao checkout sem login",
+  "esperado": "Formulário de e-mail e senha exibido"
+ },
+ {
+  "id": "CT08",
+  "titulo": "Endereço com campos obrigatórios vazios bloqueia avanço",
+  "tipo": "Negativo",
+  "criterio": "AC5",
+  "passos": "Logar; carrinho; checkout; limpar campos obrigatórios; avançar",
+  "esperado": "Passo de pagamento não exibido"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Endereço completo permite avançar",
+  "tipo": "Positivo",
+  "criterio": "AC5",
+  "passos": "Logar; checkout; preencher todos os campos; avançar",
+  "esperado": "Passo de pagamento exibido"
+ },
+ {
+  "id": "CT10",
+  "titulo": "CEP vazio isolado bloqueia avanço",
+  "tipo": "Borda",
+  "criterio": "AC5",
+  "passos": "Preencher todos os campos exceto CEP; avançar",
+  "esperado": "Passo de pagamento não exibido"
+ },
+ {
+  "id": "CT11",
+  "titulo": "Pagamento com cartão válido",
+  "tipo": "Positivo",
+  "criterio": "AC6",
+  "passos": "Chegar ao pagamento; preencher cartão fictício válido; confirmar",
+  "esperado": "Exibe \"Payment was successful\""
+ },
+ {
+  "id": "CT12",
+  "titulo": "Confirmação do pedido gera número de fatura",
+  "tipo": "Positivo",
+  "criterio": "AC6",
+  "passos": "Concluir pagamento; confirmar pedido",
+  "esperado": "Exibe \"Thanks for your order! Your invoice number is INV-...\""
+ },
+ {
+  "id": "CT13",
+  "titulo": "Cartão com número inválido não é aprovado",
+  "tipo": "Negativo",
+  "criterio": "AC6",
+  "passos": "Chegar ao pagamento; informar número 1234567890123456; confirmar",
+  "esperado": "Não exibe \"Payment was successful\"; permanece no pagamento"
+ },
+ {
+  "id": "CT14",
+  "titulo": "Cartão com validade expirada não é aprovado",
+  "tipo": "Borda",
+  "criterio": "AC6",
+  "passos": "Chegar ao pagamento; informar validade 01/2020; confirmar",
+  "esperado": "Não exibe \"Payment was successful\""
+ },
+ {
+  "id": "CT15",
+  "titulo": "Fluxo ponta a ponta de compra com cartão",
+  "tipo": "Positivo",
+  "criterio": "AC3, AC4, AC5, AC6",
+  "passos": "Adicionar produto sem login; ir ao checkout; logar; preencher endereço e cartão; confirmar pagamento e pedido",
+  "esperado": "Exibe \"Thanks for your order! Your invoice number is INV-...\""
+ }
+]

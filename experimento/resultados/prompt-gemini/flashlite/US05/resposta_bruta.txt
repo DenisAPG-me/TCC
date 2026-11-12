@@ -1,0 +1,120 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| CT01 | Tentativa de login com credenciais vazias | Negativo | Critério 1 | 1. Acessar `/admin`<br>2. Deixar usuário e senha em branco<br>3. Clicar no botão de login | Exibir mensagem "Invalid credentials" e permanecer na tela de login |
+| CT02 | Tentativa de login com senha incorreta | Negativo | Critério 2 | 1. Acessar `/admin`<br>2. Informar usuário "admin"<br>3. Informar senha incorreta<br>4. Clicar no botão de login | Exibir mensagem "Invalid credentials" e permanecer na tela de login |
+| CT03 | Login bem-sucedido com credenciais válidas | Positivo | Critério 3 | 1. Acessar `/admin`<br>2. Informar usuário "admin"<br>3. Informar senha "password"<br>4. Clicar no botão de login | Redirecionar para a lista de quartos, exibir quarto 101 do tipo Single e menu com Rooms, Report, Branding e Messages |
+| CT04 | Logout a partir do painel administrativo | Positivo | Critério 4 | 1. Estar autenticado no painel<br>2. Clicar no botão Logout | Retornar à página inicial pública da pousada |
+| CT05 | Acesso direto restrito após logout | Negativo | Critério 5 | 1. Realizar logout<br>2. Acessar diretamente a rota do painel (`/admin` ou `/admin/#/room`) | Redirecionar ou exibir novamente a tela de login |
+
+SUPOSIÇÕES
+
+- **URL Base:** `https://automationintesting.online/`
+- **Rota de Login:** `/admin`
+- **Seletores de UI:**
+  - Campo de Usuário: input com label ou placeholder correspondente a "Username" / `get_by_label("Username")` ou `get_by_placeholder("Username")` (também testado com `input[name="username"]`).
+  - Campo de Senha: input com label ou placeholder correspondente a "Password" / `get_by_label("Password")` ou `get_by_placeholder("Password")` (também testado com `input[name="password"]`).
+  - Botão de Login: botão com texto "Login" / `get_by_role("button", name="Login")`.
+  - Mensagem de Erro: elemento contendo "Invalid credentials" / `get_by_text("Invalid credentials")`.
+  - Menu de Navegação: links/elementos contendo "Rooms", "Report", "Branding", "Messages".
+  - Quarto 101 / Tipo Single: texto contendo "101" e "Single".
+  - Botão de Logout: botão ou link contendo "Logout" / `get_by_role("button", name="Logout")` ou `get_by_text("Logout")`.
+
+```python
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online"
+
+def test_ct01_login_empty_credentials(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    username_input = page.get_by_placeholder("Username")
+    password_input = page.get_by_placeholder("Password")
+    login_button = page.get_by_role("button", name="Login")
+    
+    username_input.fill("")
+    password_input.fill("")
+    login_button.click()
+    
+    expect(page.get_by_text("Invalid credentials")).toBeVisible()
+    expect(page).to_have_url(f"{BASE_URL}/admin")
+
+def test_ct02_login_incorrect_password(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    username_input = page.get_by_placeholder("Username")
+    password_input = page.get_by_placeholder("Password")
+    login_button = page.get_by_role("button", name="Login")
+    
+    username_input.fill("admin")
+    password_input.fill("wrongpassword")
+    login_button.click()
+    
+    expect(page.get_by_text("Invalid credentials")).toBeVisible()
+    expect(page).to_have_url(f"{BASE_URL}/admin")
+
+def test_ct03_login_success(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    username_input = page.get_by_placeholder("Username")
+    password_input = page.get_by_placeholder("Password")
+    login_button = page.get_by_role("button", name="Login")
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    login_button.click()
+    
+    expect(page.get_by_text("Rooms")).toBeVisible()
+    expect(page.get_by_text("Report")).toBeVisible()
+    expect(page.get_by_text("Branding")).toBeVisible()
+    expect(page.get_by_text("Messages")).toBeVisible()
+    
+    expect(page.get_by_text("101")).toBeVisible()
+    expect(page.get_by_text("Single")).toBeVisible()
+
+def test_ct04_logout(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    username_input = page.get_by_placeholder("Username")
+    password_input = page.get_by_placeholder("Password")
+    login_button = page.get_by_role("button", name="Login")
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    login_button.click()
+    
+    expect(page.get_by_text("Rooms")).toBeVisible()
+    
+    logout_button = page.get_by_role("button", name="Logout")
+    if logout_button.count() == 0:
+        logout_button = page.get_by_text("Logout")
+    logout_button.click()
+    
+    expect(page).to_have_url(f"{BASE_URL}/")
+
+def test_ct05_direct_access_after_logout(page: Page):
+    page.goto(f"{BASE_URL}/admin")
+    
+    username_input = page.get_by_placeholder("Username")
+    password_input = page.get_by_placeholder("Password")
+    login_button = page.get_by_role("button", name="Login")
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    login_button.click()
+    
+    expect(page.get_by_text("Rooms")).toBeVisible()
+    
+    logout_button = page.get_by_role("button", name="Logout")
+    if logout_button.count() == 0:
+        logout_button = page.get_by_text("Logout")
+    logout_button.click()
+    
+    expect(page).to_have_url(f"{BASE_URL}/")
+    
+    page.goto(f"{BASE_URL}/admin")
+    expect(page.get_by_placeholder("Username")).toBeVisible()
+    expect(page.get_by_placeholder("Password")).toBeVisible()
+```

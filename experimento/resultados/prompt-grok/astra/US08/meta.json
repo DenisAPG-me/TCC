@@ -1,0 +1,17 @@
+{
+ "model": "astra",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-astra -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 43.65,
+ "tokens": {
+  "total": 4468
+ },
+ "n_casos_extraidos": 9,
+ "tem_codigo": true,
+ "stderr_tail": "       failures.append(\n                f\"Sem {'.'.join(field_path)}: esperado 400, \"\n                f\"recebido {response.status_code}\"\n            )\n\n    assert not failures, \"\\n\".join(failures)\n\n\ndef test_TC09_atualizacao_com_objeto_vazio(booking_factory, valid_token):\n    booking_id, _, _ = booking_factory()\n\n    response = api_request(\n        \"PUT\",\n        f\"/booking/{booking_id}\",\n        payload={},\n        token=valid_token,\n    )\n    assert_status(response, 400)\n```\ntokens used\n4,468\n"
+}

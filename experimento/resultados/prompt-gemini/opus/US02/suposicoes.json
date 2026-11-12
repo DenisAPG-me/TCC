@@ -1,0 +1,22 @@
+[
+ "A URL base é `https://practicesoftwaretesting.com/`. Ela pode ser sobrescrita com `--base-url`.",
+ "A aplicação usa o atributo `data-test` como test id. Por isso, ele é configurado via `playwright.selectors.set_test_id_attribute(\"data-test\")`.",
+ "Cada teste recebe um contexto novo do pytest-playwright e, portanto, começa com o carrinho vazio.",
+ "Seletores na home:",
+ "busca: `data-test=\"search-query\"`",
+ "botão de busca: `data-test=\"search-submit\"`",
+ "título do card: heading com o nome exato do produto",
+ "Seletores na página do produto:",
+ "nome: `data-test=\"product-name\"`",
+ "preço unitário: `data-test=\"unit-price\"`, texto numérico, possivelmente com `$`",
+ "quantidade: `data-test=\"quantity\"`, input numérico com padrão 1",
+ "adicionar: botão com nome \"Add to cart\"",
+ "O indicador do carrinho no menu é `data-test=\"cart-quantity\"` e o link do carrinho é `data-test=\"nav-cart\"`.",
+ "Seletores no carrinho (rota `/checkout`):",
+ "quantidade da linha: `data-test=\"product-quantity\"`, atualizada no evento `change` (disparado com Tab)",
+ "total da linha: `data-test=\"line-price\"`",
+ "total do carrinho: `data-test=\"cart-total\"`",
+ "Os valores monetários usam duas casas decimais e ponto como separador, com prefixo `$` opcional.",
+ "As mensagens de confirmação e erro aparecem como toast com o texto exato dos critérios.",
+ "No CT05, deduz-se do texto do CA4 (\"only one\") que 1 unidade de \"Thor Hammer\" é permitida."
+]

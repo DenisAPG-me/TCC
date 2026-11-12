@@ -1,0 +1,164 @@
+CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|----|--------|------|-----------------------------------|------------------|--------------------|
+| TC01 | Buscar por "hammer" exibe só produtos com "hammer" e indica o termo buscado | positivo | CA1 | Abrir a página inicial; digitar "hammer" no campo de busca; acionar a busca | Pelo menos um produto listado; todo nome listado contém "hammer" (case-insensitive); a legenda da busca mostra "hammer" |
+| TC02 | Buscar por "HAMMER" (maiúsculas) retorna os mesmos tipos de produto | borda | CA1 | Abrir a página inicial; buscar "HAMMER" | Pelo menos um produto listado; todo nome contém "hammer" ignorando maiúsculas/minúsculas; a legenda mostra "HAMMER" |
+| TC03 | Buscar termo inexistente "zzzzxx" exibe mensagem de nenhum produto | negativo | CA2 | Abrir a página inicial; buscar "zzzzxx" | Mensagem "There are no products found." visível; nenhum produto listado |
+| TC04 | Buscar termo só com caracteres especiais "@#$%" não lista produtos | negativo | CA2 | Abrir a página inicial; buscar "@#$%" | Mensagem "There are no products found." visível; nenhum produto listado |
+| TC05 | Ordenar por preço do menor para o maior | positivo | CA3 | Abrir a página inicial com produtos; selecionar "Price (Low - High)" no seletor de ordenação | Os preços exibidos na página estão em ordem crescente |
+| TC06 | Ordenar por nome de Z a A | positivo | CA4 | Abrir a página inicial com produtos; selecionar "Name (Z - A)" no seletor de ordenação | Os nomes exibidos na página estão em ordem alfabética decrescente |
+| TC07 | Buscar "hammer" e depois ordenar por preço crescente mantém o filtro | borda | CA1, CA3 | Abrir a página inicial; buscar "hammer"; selecionar "Price (Low - High)" | Todos os nomes continuam contendo "hammer" e os preços estão em ordem crescente |
+
+SUPOSIÇÕES
+
+- A aplicação expõe atributos `data-test`; por isso o atributo de test id do Playwright é configurado para `data-test` via `playwright.selectors.set_test_id_attribute`.
+- Campo de busca: `data-test="search-query"`; botão de busca: `data-test="search-submit"`.
+- Legenda da busca: `data-test="search-caption"`, contendo o termo pesquisado (ex.: "Searched for: hammer").
+- Cada card de produto exibe o nome em `data-test="product-name"` e o preço em `data-test="product-price"`, no formato "$14.15".
+- Seletor de ordenação: `<select data-test="sort">`, com as opções de rótulo "Price (Low - High)" e "Name (Z - A)".
+- A mensagem de busca sem resultados é exatamente "There are no products found.".
+- A busca é feita no front-end por chamada a um endpoint cuja URL contém `/products/search`; a ordenação dispara uma requisição cuja URL contém `sort=`.
+- A busca não diferencia maiúsculas de minúsculas (TC02).
+- Ao ordenar após uma busca, o filtro da busca é mantido (TC07).
+- A ordenação por nome é validada em ordem decrescente sem diferenciar maiúsculas de minúsculas. A comparação é feita apenas entre os itens da página exibida (não há paginação na verificação).
+- A URL base é `https://practicesoftwaretesting.com/`. Ela pode ser sobrescrita com `--base-url`, usando a fixture `base_url` do pytest-base-url, que é instalado junto com o pytest-playwright.
+- Execução: `pip install pytest pytest-playwright && playwright install`, depois `pytest test_busca_ordenacao.py`.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+
+SEARCH_TERM = "hammer"
+NONEXISTENT_TERM = "zzzzxx"
+SPECIAL_CHARS_TERM = "@#$%"
+NO_PRODUCTS_MESSAGE = "There are no products found."
+SORT_PRICE_ASC = "Price (Low - High)"
+SORT_NAME_DESC = "Name (Z - A)"
+
+PRICE_SELECTOR = '[data-test="product-price"]'
+NAME_SELECTOR = '[data-test="product-name"]'
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id_attribute(playwright):
+    playwright.selectors.set_test_id_attribute("data-test")
+
+
+def open_home(page: Page, base_url):
+    page.goto(base_url or BASE_URL)
+    expect(page.get_by_test_id("product-name").first).to_be_visible()
+
+
+def search(page: Page, term: str):
+    page.get_by_test_id("search-query").fill(term)
+    with page.expect_response(lambda r: "/products/search" in r.url):
+        page.get_by_test_id("search-submit").click()
+    expect(page.get_by_test_id("search-caption")).to_contain_text(term)
+
+
+def sort_by(page: Page, label: str):
+    with page.expect_response(lambda r: "sort=" in r.url):
+        page.get_by_test_id("sort").select_option(label=label)
+
+
+def parse_price(text: str) -> float:
+    return float(re.sub(r"[^0-9.]", "", text))
+
+
+def wait_prices_ascending(page: Page):
+    page.wait_for_function(
+        """selector => {
+            const v = [...document.querySelectorAll(selector)]
+                .map(e => parseFloat(e.textContent.replace(/[^0-9.]/g, '')));
+            return v.length > 0 && v.every((x, i) => i === 0 || v[i - 1] <= x);
+        }""",
+        arg=PRICE_SELECTOR,
+    )
+
+
+def wait_names_descending(page: Page):
+    page.wait_for_function(
+        """selector => {
+            const v = [...document.querySelectorAll(selector)]
+                .map(e => e.textContent.trim().toLowerCase());
+            return v.length > 0 && v.every((x, i) => i === 0 || v[i - 1] >= x);
+        }""",
+        arg=NAME_SELECTOR,
+    )
+
+
+def assert_all_names_contain(page: Page, term: str):
+    names = page.get_by_test_id("product-name")
+    expect(names.first).to_be_visible()
+    pattern = re.compile(re.escape(term), re.IGNORECASE)
+    for i in range(names.count()):
+        expect(names.nth(i)).to_have_text(pattern)
+
+
+def assert_prices_ascending(page: Page):
+    prices = page.get_by_test_id("product-price")
+    texts = prices.all_text_contents()
+    expected = sorted(texts, key=parse_price)
+    expect(prices).to_have_text(expected)
+
+
+def assert_no_products(page: Page):
+    expect(page.get_by_text(NO_PRODUCTS_MESSAGE)).to_be_visible()
+    expect(page.get_by_test_id("product-name")).to_have_count(0)
+
+
+def test_TC01_busca_hammer_exibe_somente_produtos_com_hammer(page: Page, base_url):
+    open_home(page, base_url)
+    search(page, SEARCH_TERM)
+    expect(page.get_by_test_id("search-caption")).to_contain_text(SEARCH_TERM)
+    assert_all_names_contain(page, SEARCH_TERM)
+
+
+def test_TC02_busca_hammer_maiusculo_ignora_caixa(page: Page, base_url):
+    open_home(page, base_url)
+    search(page, SEARCH_TERM.upper())
+    assert_all_names_contain(page, SEARCH_TERM)
+
+
+def test_TC03_busca_termo_inexistente_exibe_mensagem(page: Page, base_url):
+    open_home(page, base_url)
+    search(page, NONEXISTENT_TERM)
+    assert_no_products(page)
+
+
+def test_TC04_busca_caracteres_especiais_nao_lista_produtos(page: Page, base_url):
+    open_home(page, base_url)
+    search(page, SPECIAL_CHARS_TERM)
+    assert_no_products(page)
+
+
+def test_TC05_ordenar_preco_crescente(page: Page, base_url):
+    open_home(page, base_url)
+    sort_by(page, SORT_PRICE_ASC)
+    wait_prices_ascending(page)
+    assert_prices_ascending(page)
+
+
+def test_TC06_ordenar_nome_z_a(page: Page, base_url):
+    open_home(page, base_url)
+    sort_by(page, SORT_NAME_DESC)
+    wait_names_descending(page)
+    names = page.get_by_test_id("product-name")
+    texts = [t.strip() for t in names.all_text_contents()]
+    expected = sorted(texts, key=str.lower, reverse=True)
+    expect(names).to_have_text(expected)
+
+
+def test_TC07_busca_hammer_e_ordena_preco_crescente_mantem_filtro(page: Page, base_url):
+    open_home(page, base_url)
+    search(page, SEARCH_TERM)
+    sort_by(page, SORT_PRICE_ASC)
+    wait_prices_ascending(page)
+    assert_all_names_contain(page, SEARCH_TERM)
+    assert_prices_ascending(page)
+```

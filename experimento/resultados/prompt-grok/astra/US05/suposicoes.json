@@ -1,0 +1,16 @@
+[
+ "Nenhum sistema, documentação, código ou seletor real foi consultado. O código é executável, mas não foi validado contra a aplicação; URLs e locators inferidos precisam ser confirmados.",
+ "Trata-se de uma interface web. São necessários `pytest`, `playwright` e o plugin oficial `pytest-playwright`, exigido pelos requisitos técnicos, além do navegador instalado pelo Playwright. Não há dependências adicionais.",
+ "O arquivo pode ser salvo como `test_admin.py` e executado com `pytest test_admin.py`. A URL base está na constante `BASE_URL`.",
+ "`/admin` é a tela de login informada. Supõe-se que `/admin/rooms` seja a rota da lista de quartos e `/` seja a página inicial pública. As verificações de URL aceitam barra final opcional, mas não parâmetros ou fragmentos.",
+ "Os campos têm rótulos acessíveis exatos `Username` e `Password`. O envio usa um botão com nome acessível exato `Login`.",
+ "Rooms, Report, Branding, Messages e Logout são links com esses nomes acessíveis exatos, únicos e visíveis quando pertinentes.",
+ "A lista de quartos possui semântica de tabela: uma linha com uma célula de texto exato `101` e, na mesma linha, outra célula de texto exato `Single`. O quarto está disponível sem paginação ou filtros adicionais.",
+ "A mensagem de erro possui texto exato `Invalid credentials` e é identificável por um único elemento visível.",
+ "O formulário permite enviar campos vazios, sem bloqueio pela validação nativa do navegador, conforme necessário para observar o resultado do critério 1.",
+ "`wrong-password` é uma senha inválida para `admin`. Nos casos com apenas um campo vazio, supõe-se o mesmo erro e permanência no login; esses comportamentos são extensões propostas, não exigências explícitas da história.",
+ "A conta de demonstração permanece válida durante todos os testes, sem CAPTCHA, autenticação adicional ou bloqueio causado pelas tentativas inválidas.",
+ "Após logout, a URL pública e a ausência do link Logout são usadas como evidências do retorno público. Não se presume nenhum título ou conteúdo público não descrito.",
+ "Cada teste recebe a fixture `page` do plugin, com contexto isolado e sem autenticação previamente carregada. Os testes não dependem da ordem de execução.",
+ "As navegações devem concluir em até 30 segundos; as condições verificadas por `expect`, em até 10 segundos. Esses limites são escolhas técnicas, não requisitos de desempenho."
+]

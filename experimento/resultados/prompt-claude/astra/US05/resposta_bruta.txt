@@ -1,0 +1,208 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Enviar credenciais vazias | Borda | CA1 | Acessar /admin; Manter usuário e senha vazios; Clicar em Login | Exibe Invalid credentials; Permanece em /admin com formulário de login visível |
+| CT02 | Enviar senha incorreta | Negativo | CA2 | Acessar /admin; Informar admin e senha_incorreta; Clicar em Login | Exibe Invalid credentials; Formulário de login permanece visível |
+| CT03 | Entrar com credenciais válidas | Positivo | CA3 | Acessar /admin; Informar admin e password; Clicar em Login; Conferir quartos e menu | Acessa /admin/rooms; Exibe uma linha com quarto 101 e tipo Single; Menu exibe Rooms, Report, Branding e Messages |
+| CT04 | Sair do painel administrativo | Positivo | CA4 | Acessar /admin; Autenticar com admin e password; Clicar em Logout | Retorna à URL inicial pública; Formulário de login não está visível |
+| CT05 | Acessar quartos diretamente após logout | Negativo | CA5 | Acessar /admin; Autenticar com admin e password; Clicar em Logout; Acessar diretamente /admin/rooms na mesma sessão | Redireciona para /admin; Exibe novamente o formulário de login; Lista de quartos não está visível |
+
+## SUPOSIÇÕES
+
+- Os critérios fornecidos correspondem, na ordem, a CA1 até CA5. Os cinco casos cobrem os comportamentos definidos, incluindo a borda de ambos os campos vazios.
+- A tecnologia escolhida é Python com pytest e Playwright síncrono. Conforme os requisitos técnicos finais, que prevalecem sobre a proibição anterior de plugins, o script usa o plugin oficial pytest-playwright e sua fixture `page`, sem criar navegador ou fixtures próprias.
+- O ambiente deve ter pytest, playwright e pytest-playwright instalados, além do Chromium instalado pelo Playwright. A execução é `pytest test_admin.py`, utilizando os padrões do plugin: Chromium headless e contexto isolado por teste. O plugin gerencia o encerramento dos recursos.
+- Não houve acesso ao sistema nem execução dos testes. Rotas complementares, seletores e estrutura de página abaixo são deduções que precisam ser confirmadas no ambiente real.
+- A tela de login fica em `/admin`, a lista protegida fica em `/admin/rooms` e a página pública inicial fica em `/`. As verificações de URL aceitam barra final opcional, query string e fragmento.
+- Os campos possuem rótulos acessíveis exatos `Username` e `Password`. O envio usa um botão com nome acessível exato `Login`.
+- O formulário permite enviar campos vazios, sem bloqueio pela validação nativa do navegador. A mensagem exibida é exatamente `Invalid credentials`.
+- As credenciais válidas são `admin` e `password`. A senha `senha_incorreta` é considerada inválida.
+- A lista de quartos usa uma tabela acessível com linhas e células. Existe uma única linha contendo uma célula com texto exato `101` e outra com texto exato `Single`. Esse dado deve estar disponível durante a execução.
+- Existe um único elemento de navegação, contendo links com nomes acessíveis exatos `Rooms`, `Report`, `Branding` e `Messages`. `Logout` é um botão visível.
+- O logout redireciona para a página pública inicial e encerra a autenticação. O acesso posterior à rota protegida, no mesmo contexto do navegador, redireciona para `/admin`.
+- A página pública não exibe os campos de login administrativo. A tela de login não exibe a linha do quarto 101.
+- Não são presumidos endpoints REST nem payloads: a autenticação e o logout são realizados exclusivamente pela interface.
+
+## SCRIPT
+
+```python
+import re
+
+from playwright.sync_api import Page, expect
+
+
+BASE_URL = "https://automationintesting.online"
+LOGIN_PATH = "/admin"
+ROOMS_PATH = "/admin/rooms"
+HOME_PATH = "/"
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+INVALID_PASSWORD = "senha_incorreta"
+EMPTY_VALUE = ""
+
+INVALID_CREDENTIALS_MESSAGE = "Invalid credentials"
+ROOM_NUMBER = "101"
+ROOM_TYPE = "Single"
+MENU_ITEMS = ("Rooms", "Report", "Branding", "Messages")
+
+USERNAME_LABEL = "Username"
+PASSWORD_LABEL = "Password"
+LOGIN_BUTTON_NAME = "Login"
+LOGOUT_BUTTON_NAME = "Logout"
+
+EXPECT_TIMEOUT_MS = 15_000
+NAVIGATION_TIMEOUT_MS = 30_000
+
+
+def absolute_url(path: str) -> str:
+    return f"{BASE_URL.rstrip('/')}/{path.lstrip('/')}"
+
+
+def url_pattern(path: str) -> re.Pattern:
+    canonical_url = absolute_url(path).rstrip("/")
+    return re.compile(
+        rf"^{re.escape(canonical_url)}/?(?:\?[^#]*)?(?:#.*)?$"
+    )
+
+
+def username_field(page: Page):
+    return page.get_by_label(USERNAME_LABEL, exact=True)
+
+
+def password_field(page: Page):
+    return page.get_by_label(PASSWORD_LABEL, exact=True)
+
+
+def login_button(page: Page):
+    return page.get_by_role("button", name=LOGIN_BUTTON_NAME, exact=True)
+
+
+def room_row(page: Page):
+    return page.get_by_role("row").filter(
+        has=page.get_by_role("cell", name=ROOM_NUMBER, exact=True)
+    )
+
+
+def assert_login_form_visible(page: Page) -> None:
+    expect(username_field(page)).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    expect(password_field(page)).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    expect(login_button(page)).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+
+
+def open_login(page: Page) -> None:
+    page.goto(
+        absolute_url(LOGIN_PATH),
+        wait_until="domcontentloaded",
+        timeout=NAVIGATION_TIMEOUT_MS,
+    )
+    expect(page).to_have_url(
+        url_pattern(LOGIN_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+    assert_login_form_visible(page)
+
+
+def submit_credentials(page: Page, username: str, password: str) -> None:
+    username_field(page).fill(username)
+    password_field(page).fill(password)
+    login_button(page).click()
+
+
+def login_successfully(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, ADMIN_USERNAME, ADMIN_PASSWORD)
+    expect(page).to_have_url(
+        url_pattern(ROOMS_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+    expect(
+        page.get_by_role("button", name=LOGOUT_BUTTON_NAME, exact=True)
+    ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+
+
+def logout(page: Page) -> None:
+    page.get_by_role(
+        "button", name=LOGOUT_BUTTON_NAME, exact=True
+    ).click()
+    expect(page).to_have_url(
+        url_pattern(HOME_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+
+
+def test_ct01_enviar_credenciais_vazias(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, EMPTY_VALUE, EMPTY_VALUE)
+
+    expect(
+        page.get_by_text(INVALID_CREDENTIALS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    expect(page).to_have_url(
+        url_pattern(LOGIN_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+    assert_login_form_visible(page)
+
+
+def test_ct02_enviar_senha_incorreta(page: Page) -> None:
+    open_login(page)
+    submit_credentials(page, ADMIN_USERNAME, INVALID_PASSWORD)
+
+    expect(
+        page.get_by_text(INVALID_CREDENTIALS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    assert_login_form_visible(page)
+
+
+def test_ct03_entrar_com_credenciais_validas(page: Page) -> None:
+    login_successfully(page)
+
+    expect(page).to_have_url(
+        url_pattern(ROOMS_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+
+    row = room_row(page)
+    expect(row).to_have_count(1, timeout=EXPECT_TIMEOUT_MS)
+    expect(row).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    expect(
+        row.get_by_role("cell", name=ROOM_NUMBER, exact=True)
+    ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    expect(
+        row.get_by_role("cell", name=ROOM_TYPE, exact=True)
+    ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+
+    navigation = page.get_by_role("navigation")
+    expect(navigation).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+    for item in MENU_ITEMS:
+        expect(
+            navigation.get_by_role("link", name=item, exact=True)
+        ).to_be_visible(timeout=EXPECT_TIMEOUT_MS)
+
+
+def test_ct04_sair_do_painel_administrativo(page: Page) -> None:
+    login_successfully(page)
+    logout(page)
+
+    expect(page).to_have_url(
+        url_pattern(HOME_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+    expect(username_field(page)).to_be_hidden(timeout=EXPECT_TIMEOUT_MS)
+    expect(password_field(page)).to_be_hidden(timeout=EXPECT_TIMEOUT_MS)
+    expect(login_button(page)).to_be_hidden(timeout=EXPECT_TIMEOUT_MS)
+
+
+def test_ct05_acessar_quartos_apos_logout(page: Page) -> None:
+    login_successfully(page)
+    logout(page)
+
+    # Preserva o mesmo contexto para verificar a sessão após o logout.
+    page.goto(
+        absolute_url(ROOMS_PATH),
+        wait_until="domcontentloaded",
+        timeout=NAVIGATION_TIMEOUT_MS,
+    )
+
+    expect(page).to_have_url(
+        url_pattern(LOGIN_PATH), timeout=EXPECT_TIMEOUT_MS
+    )
+    assert_login_form_visible(page)
+    expect(room_row(page)).to_be_hidden(timeout=EXPECT_TIMEOUT_MS)
+```

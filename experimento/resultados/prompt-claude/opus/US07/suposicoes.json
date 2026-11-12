@@ -1,0 +1,15 @@
+[
+ "User Story de API REST: tecnologia escolhida Python + pytest + requests; os requisitos técnicos de UI (pytest-playwright, `expect`, locators) não se aplicam.",
+ "Endpoints: `POST /booking` para criação, `GET /booking/{id}` para consulta e `GET /booking?firstname=...&lastname=...` para listagem filtrada; nenhum deles exige autenticação, portanto não há credenciais.",
+ "Payload em JSON com os campos `firstname`, `lastname`, `totalprice` (inteiro), `depositpaid` (booleano), `bookingdates` (objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`) e `additionalneeds` (texto).",
+ "A resposta de criação tem o formato `{\"bookingid\": <int>, \"booking\": {<dados enviados>}}`.",
+ "A consulta por id retorna diretamente o objeto da reserva, com os mesmos campos do payload.",
+ "A listagem retorna uma lista de objetos no formato `{\"bookingid\": <int>}`, e a filtragem por nome e sobrenome é exata.",
+ "Os cabeçalhos `Content-Type: application/json` e `Accept: application/json` são enviados em todas as requisições, pois a API pode responder em outro formato ou com erro sem o `Accept`.",
+ "Um identificador não numérico (`abc`) é tratado como inexistente e retorna 404.",
+ "Uma listagem filtrada sem correspondência retorna status 200 com lista vazia.",
+ "`totalprice` 0, `depositpaid` false, check-in igual ao check-out e caracteres acentuados são aceitos e persistidos sem alteração.",
+ "Nomes únicos são gerados com `uuid4` para garantir isolamento entre execuções, já que o ambiente é público e compartilhado.",
+ "Cada teste cria seus próprios dados, para que os testes sejam independentes entre si.",
+ "Timeout de 30 segundos por requisição, considerando possível latência de inicialização do servidor."
+]

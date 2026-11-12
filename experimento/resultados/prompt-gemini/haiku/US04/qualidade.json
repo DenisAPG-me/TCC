@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 3,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes descritivos e constantes",
+  "estrutura": "helpers enviar_formulario/verificar_confirmacao com defaults",
+  "assercoes": "mensagens exatas e confirmacao com nome e assunto",
+  "espera": "auto-wait, sem sleep nem timeouts explicitos",
+  "manutenibilidade": "get_by_label falha no alvo; constantes parciais"
+ }
+}

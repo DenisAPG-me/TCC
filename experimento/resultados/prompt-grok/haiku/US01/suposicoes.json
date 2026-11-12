@@ -1,0 +1,19 @@
+[
+ "URL base: `https://practicesoftwaretesting.com/`, definida na constante `BASE_URL`. A home é acessada com `page.goto(BASE_URL)`.",
+ "A página inicial lista produtos por padrão (ao menos um produto visível sem busca).",
+ "Seletores de teste (`data-test`), assumidos a partir da aplicação, são configurados via `playwright.selectors.set_test_id_attribute(\"data-test\")` em um fixture autouse:",
+ "Campo de busca: `search-query`.",
+ "Botão de buscar: `search-submit`.",
+ "Nome do produto: `product-name`.",
+ "Preço do produto: `product-price`.",
+ "Seletor de ordenação (`<select>`): `sort`.",
+ "As opções de ordenação aparecem com os rótulos \"Price (Low - High)\" e \"Name (Z - A)\".",
+ "Preços exibidos contêm símbolo de moeda e separador decimal ponto (ex.: \"$12.50\"). O script extrai apenas dígitos e ponto.",
+ "Após buscar ou ordenar, a listagem é atualizada e `wait_for_load_state(\"networkidle\")` basta para estabilizá-la.",
+ "\"Página indica que a busca foi por X\" é verificado pelo valor do campo de busca, que mantém o termo pesquisado.",
+ "A comparação de \"contém\" e de ordem alfabética ignora maiúsculas e minúsculas (`str.lower`).",
+ "Assume-se que a aplicação remove espaços nas extremidades do termo (TC04). Se não remover, a substring \"hammer\" ainda deve aparecer nos nomes, então o teste continua válido.",
+ "A mensagem \"There are no products found.\" aparece como texto visível na página (TC03).",
+ "Nenhum `time.sleep` é usado; a sincronização é feita por auto-espera do Playwright e `expect`.",
+ "Os testes usam a fixture `page` do pytest-playwright, sem criação própria de navegador."
+]

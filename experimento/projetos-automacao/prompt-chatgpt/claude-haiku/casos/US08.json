@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Autenticação com credenciais válidas retorna token",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "POST /auth com admin e password123",
+  "esperado": "Status 200 e campo token é string não vazia"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Autenticação com senha incorreta não retorna token",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "POST /auth com usuário admin e senha incorreta",
+  "esperado": "Sem campo token e reason igual a Bad credentials"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Autenticação com campos vazios não retorna token",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "POST /auth com username e password vazios",
+  "esperado": "Sem campo token e reason igual a Bad credentials"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Atualização completa altera nome e preço",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Criar reserva; PUT com novo firstname e novo totalprice usando token; remover reserva",
+  "esperado": "Status 200 com firstname e totalprice iguais aos enviados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Atualização parcial altera somente o sobrenome",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva; GET inicial; PATCH apenas com lastname usando token; remover reserva",
+  "esperado": "Status 200, lastname novo e demais campos iguais aos originais"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Atualização completa sem token é recusada",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva; PUT completo sem header Cookie; remover reserva",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Atualização completa com corpo vazio é recusada",
+  "tipo": "negativo",
+  "criterio": "CA06",
+  "passos": "Criar reserva; PUT com corpo vazio e token; remover reserva",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Atualização completa sem bookingdates é recusada",
+  "tipo": "borda",
+  "criterio": "CA06",
+  "passos": "Criar reserva; PUT com todos os campos exceto bookingdates e token; remover reserva",
+  "esperado": "Status 400"
+ }
+]

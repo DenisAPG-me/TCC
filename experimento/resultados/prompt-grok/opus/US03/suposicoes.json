@@ -1,0 +1,16 @@
+[
+ "URL base `https://practicesoftwaretesting.com/` (constante `BASE_URL`), sobrescrevível via `--base-url`; tela de login em `/auth/login`.",
+ "A aplicação expõe atributos `data-test` nos elementos; o atributo de test id do Playwright é configurado para `data-test`, permitindo `get_by_test_id`.",
+ "Test ids assumidos: login (`email`, `password`, `login-submit`), menu (`nav-sign-in`, `nav-menu`, `nav-cart`), produto (`add-to-cart`, `cart-quantity`), checkout (`proceed-1`, `proceed-2`, `proceed-3`, `finish`), endereço (`country`, `postal_code`, `house_number`, `street`, `city`, `state`), pagamento (`payment-method`, `credit_card_number`, `expiration_date`, `cvv`, `card_holder_name`).",
+ "Os cards de produto da página inicial possuem `data-test` iniciado por `product-`; clicar no primeiro abre a página de detalhes com o botão \"Add to cart\".",
+ "O carrinho fica no armazenamento do navegador; cada teste usa um contexto novo, logo começa com carrinho vazio e sem sessão.",
+ "Checkout em etapas: carrinho (`proceed-1`) → login/\"já autenticado\" (`proceed-2`) → endereço (`proceed-3`) → pagamento (`finish`).",
+ "O endereço pode vir pré-preenchido pelo perfil; por isso os testes limpam/preenchem os campos explicitamente. O país pode ser `<select>` ou `<input>`; o helper trata os dois casos.",
+ "Botões de avançar (`proceed-3`) e confirmar (`finish`) ficam desabilitados enquanto o formulário é inválido.",
+ "O método de pagamento é um `<select>` com a opção de rótulo \"Credit Card\".",
+ "Dados fictícios de cartão aceitos: número `0000-0000-0000-0000`, validade `MM/AAAA` futura (`12/2030`), CVV `123`, titular `Jane Doe`.",
+ "Endereço fictício: Netherlands, `1234 AB`, `10`, `Test Street`, `Amsterdam`, `Noord-Holland`.",
+ "Após \"Payment was successful\", um novo clique em `finish` confirma o pedido e exibe a mensagem com o número da fatura.",
+ "O nome do usuário de demonstração não consta na User Story; valida-se que o menu do usuário está visível com texto não vazio e que o link \"Sign in\" sumiu.",
+ "Senha incorreta usada: `wrongPassword123`."
+]

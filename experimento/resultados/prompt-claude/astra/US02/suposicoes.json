@@ -1,0 +1,19 @@
+[
+ "Os critérios fornecidos correspondem, na ordem, a CA1, CA2, CA3 e CA4.",
+ "O foco é interface web. A automação usa Python, pytest, Playwright síncrono e o plugin oficial pytest-playwright. Os requisitos técnicos finais prevalecem sobre a proibição anterior de plugins e a solicitação de fixtures próprias.",
+ "O ambiente possui essas dependências e o Chromium do Playwright instalados. A execução é `pytest test_carrinho.py`; o plugin usa Chromium headless por padrão, fornece uma página e um contexto isolados para cada teste e encerra os recursos automaticamente.",
+ "Não houve acesso ao sistema ou à internet. Os seletores e comportamentos não explicitados são hipóteses que precisam ser conferidas no sistema real; o script não foi validado contra a aplicação.",
+ "A compra pode ser iniciada sem autenticação. Não são necessárias credenciais; essa ausência está representada por constantes no script.",
+ "Claw Hammer e Thor Hammer estão disponíveis, com estoque suficiente para os cenários. Ambos aparecem na página inicial como links cujos nomes acessíveis contêm o nome do produto.",
+ "O sistema está em inglês. O campo da quantidade na página do produto tem rótulo acessível Quantity, e o botão de adição tem nome acessível Add to cart.",
+ "O atributo usado por `get_by_test_id` é o padrão `data-testid`. Os identificadores deduzidos são `cart-link`, `cart-quantity`, `cart-table`, `quantity`, `unit-price`, `line-total` e `cart-total`. Os três identificadores referentes à linha são procurados dentro da linha do produto.",
+ "O carrinho usa uma tabela com linhas acessíveis pelo papel `row`, e existe uma única linha contendo o nome de cada produto.",
+ "O indicador do carrinho representa unidades, e cada teste começa com carrinho vazio graças ao contexto isolado.",
+ "Alterar a quantidade no carrinho e retirar o foco com Tab confirma a edição e atualiza os totais automaticamente.",
+ "Os preços são positivos, usam dólar, ponto decimal e duas casas decimais, sem separador de milhares. O preço unitário é lido da interface; não se inventa um valor fixo. Os cálculos usam `Decimal`.",
+ "Nos cenários apresentados não há frete, impostos, descontos ou outras parcelas: o total do carrinho equivale ao total da única linha, conforme CA2 e CA3.",
+ "As mensagens de sucesso e de restrição são exatamente as fornecidas na história e ficam visíveis por tempo suficiente para as esperas do Playwright.",
+ "CT05 interpreta a restrição de CA4 como permissão para adicionar uma unidade de Thor Hammer. Essa interpretação é uma suposição adicional de borda, não um resultado expressamente exigido pelo critério.",
+ "CT04 verifica somente a mensagem exigida: a história não define se a tentativa inválida mantém o carrinho vazio ou limita a adição a uma unidade.",
+ "Não são deduzidos endpoints nem payloads, pois os testes interagem exclusivamente pela interface. Também não são inventadas regras para zero, negativos, frações ou quantidade máxima de produtos comuns."
+]

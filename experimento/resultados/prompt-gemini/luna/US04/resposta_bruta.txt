@@ -1,0 +1,189 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo (Positivo/Negativo/Borda) | Critério de Aceitação Relacionado | Passos Resumidos | Resultado Esperado |
+|---|---|---|---|---|---|
+| CT01 | Envio com todos os campos vazios | Negativo | CA1 | Abrir a página inicial e enviar o formulário sem preencher campos. | São exibidas mensagens indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco. |
+| CT02 | Telefone abaixo do mínimo | Negativo | CA2 | Preencher os campos com dados válidos, exceto telefone com 10 caracteres; enviar. | Exibe `Phone must be between 11 and 21 characters.` |
+| CT03 | Assunto e mensagem abaixo do mínimo | Negativo | CA3 | Preencher os campos com dados válidos, exceto assunto com 4 caracteres e mensagem com 19; enviar. | Exibe `Subject must be between 5 and 100 characters.` e `Message must be between 20 and 2000 characters.` |
+| CT04 | E-mail malformado | Negativo | CA4 | Preencher os campos com dados válidos, exceto e-mail `bad`; enviar. | Exibe `must be a well-formed email address`. |
+| CT05 | Envio com todos os dados válidos | Positivo | CA5 | Preencher todos os campos com dados válidos e enviar. | Exibe `Thanks for getting in touch <nome>!` e o assunto informado. |
+| CT06 | Telefone no limite mínimo | Borda | CA2 | Preencher dados válidos, usando telefone com 11 caracteres; enviar. | O telefone é aceito e o envio é confirmado. |
+| CT07 | Telefone no limite máximo | Borda | CA2 | Preencher dados válidos, usando telefone com 21 caracteres; enviar. | O telefone é aceito e o envio é confirmado. |
+| CT08 | Telefone acima do máximo | Borda | CA2 | Preencher dados válidos, exceto telefone com 22 caracteres; enviar. | Exibe `Phone must be between 11 and 21 characters.` |
+| CT09 | Assunto e mensagem nos limites mínimos | Borda | CA3 | Usar assunto com 5 caracteres e mensagem com 20; preencher os demais campos validamente e enviar. | Os campos são aceitos e o envio é confirmado. |
+| CT10 | Assunto e mensagem nos limites máximos | Borda | CA3 | Usar assunto com 100 caracteres e mensagem com 2000; preencher os demais campos validamente e enviar. | Os campos são aceitos e o envio é confirmado. |
+| CT11 | Assunto e mensagem acima dos máximos | Borda | CA3 | Usar assunto com 101 caracteres e mensagem com 2001; preencher os demais campos validamente e enviar. | Exibe as mensagens de tamanho inválido para assunto e mensagem. |
+
+## SUPOSIÇÕES
+
+- A URL base é `https://automationintesting.online/`; o formulário de contato está acessível na página inicial.
+- Os campos podem ser localizados pelos rótulos acessíveis `Name`, `Email`, `Phone`, `Subject` e `Message`; o botão de envio tem o nome acessível `Submit`.
+- As mensagens de validação são texto visível na página. Para campos vazios, como o critério não fornece o texto literal, os testes procuram mensagens que contenham o nome do campo e indiquem que não pode ficar em branco.
+- Os limites de tamanho são inclusivos, conforme a expressão “between” e os valores dos critérios: telefone de 11 a 21, assunto de 5 a 100 e mensagem de 20 a 2000 caracteres.
+- Os dados válidos de exemplo são nome `Ana Silva`, e-mail `ana@example.com`, telefone `11987654321`, assunto `Dúvida` e mensagem com pelo menos 20 caracteres.
+- Cada caso de borda de envio bem-sucedido também verifica a confirmação com o nome e o assunto usados naquele caso.
+- Os casos de tamanho máximo pressupõem que o formulário permita inserir os valores completos nos campos.
+
+```python
+import re
+
+import pytest
+from playwright.sync_api import expect
+
+
+BASE_URL = "https://automationintesting.online/"
+
+VALID_NAME = "Ana Silva"
+VALID_EMAIL = "ana@example.com"
+VALID_PHONE = "11987654321"
+VALID_SUBJECT = "Dúvida"
+VALID_MESSAGE = "Gostaria de saber mais sobre as acomodações."
+
+
+def open_home(page):
+    page.goto(BASE_URL)
+
+
+def fill_contact_form(
+    page,
+    *,
+    name=VALID_NAME,
+    email=VALID_EMAIL,
+    phone=VALID_PHONE,
+    subject=VALID_SUBJECT,
+    message=VALID_MESSAGE,
+):
+    page.get_by_label("Name").fill(name)
+    page.get_by_label("Email").fill(email)
+    page.get_by_label("Phone").fill(phone)
+    page.get_by_label("Subject").fill(subject)
+    page.get_by_label("Message").fill(message)
+
+
+def submit_contact_form(page):
+    page.get_by_role("button", name="Submit").click()
+
+
+def expect_success(page, name, subject):
+    expect(page.get_by_text(f"Thanks for getting in touch {name}!", exact=True)).to_be_visible()
+    expect(page.get_by_text(subject, exact=True)).to_be_visible()
+
+
+def test_CT01_envio_com_todos_os_campos_vazios(page):
+    open_home(page)
+    submit_contact_form(page)
+
+    for field_name in ("Name", "Email", "Phone", "Subject", "Message"):
+        matching_messages = page.get_by_text(
+            re.compile(rf"(?=.*{re.escape(field_name)})(?=.*blank)", re.IGNORECASE)
+        )
+        expect(matching_messages.first).to_be_visible()
+
+
+def test_CT02_telefone_abaixo_do_minimo(page):
+    open_home(page)
+    fill_contact_form(page, phone="1" * 10)
+    submit_contact_form(page)
+
+    expect(page.get_by_text(
+        "Phone must be between 11 and 21 characters.",
+        exact=True,
+    )).to_be_visible()
+
+
+def test_CT03_assunto_e_mensagem_abaixo_do_minimo(page):
+    open_home(page)
+    fill_contact_form(page, subject="Dúvi", message="A" * 19)
+    submit_contact_form(page)
+
+    expect(page.get_by_text(
+        "Subject must be between 5 and 100 characters.",
+        exact=True,
+    )).to_be_visible()
+    expect(page.get_by_text(
+        "Message must be between 20 and 2000 characters.",
+        exact=True,
+    )).to_be_visible()
+
+
+def test_CT04_email_malformado(page):
+    open_home(page)
+    fill_contact_form(page, email="bad")
+    submit_contact_form(page)
+
+    expect(page.get_by_text(
+        re.compile(r"must be a well-formed email address", re.IGNORECASE)
+    )).to_be_visible()
+
+
+def test_CT05_envio_com_todos_os_dados_validos(page):
+    open_home(page)
+    fill_contact_form(page)
+    submit_contact_form(page)
+
+    expect_success(page, VALID_NAME, VALID_SUBJECT)
+
+
+def test_CT06_telefone_no_limite_minimo(page):
+    open_home(page)
+    fill_contact_form(page, phone="1" * 11)
+    submit_contact_form(page)
+
+    expect_success(page, VALID_NAME, VALID_SUBJECT)
+
+
+def test_CT07_telefone_no_limite_maximo(page):
+    open_home(page)
+    fill_contact_form(page, phone="1" * 21)
+    submit_contact_form(page)
+
+    expect_success(page, VALID_NAME, VALID_SUBJECT)
+
+
+def test_CT08_telefone_acima_do_maximo(page):
+    open_home(page)
+    fill_contact_form(page, phone="1" * 22)
+    submit_contact_form(page)
+
+    expect(page.get_by_text(
+        "Phone must be between 11 and 21 characters.",
+        exact=True,
+    )).to_be_visible()
+
+
+def test_CT09_assunto_e_mensagem_nos_limites_minimos(page):
+    subject = "A" * 5
+    message = "A" * 20
+
+    open_home(page)
+    fill_contact_form(page, subject=subject, message=message)
+    submit_contact_form(page)
+
+    expect_success(page, VALID_NAME, subject)
+
+
+def test_CT10_assunto_e_mensagem_nos_limites_maximos(page):
+    subject = "A" * 100
+    message = "A" * 2000
+
+    open_home(page)
+    fill_contact_form(page, subject=subject, message=message)
+    submit_contact_form(page)
+
+    expect_success(page, VALID_NAME, subject)
+
+
+def test_CT11_assunto_e_mensagem_acima_dos_maximos(page):
+    open_home(page)
+    fill_contact_form(page, subject="A" * 101, message="A" * 2001)
+    submit_contact_form(page)
+
+    expect(page.get_by_text(
+        "Subject must be between 5 and 100 characters.",
+        exact=True,
+    )).to_be_visible()
+    expect(page.get_by_text(
+        "Message must be between 20 and 2000 characters.",
+        exact=True,
+    )).to_be_visible()
+```

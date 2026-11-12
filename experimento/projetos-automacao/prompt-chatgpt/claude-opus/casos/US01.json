@@ -1,0 +1,34 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Busca por \"hammer\" lista apenas produtos com \"hammer\" no nome e indica o termo buscado",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Abrir a página inicial; digitar \"hammer\" no campo de busca; acionar o botão de busca; aguardar a listagem ser atualizada",
+  "esperado": "Pelo menos um produto é listado; todos os nomes exibidos contêm \"hammer\" (sem diferenciar maiúsculas e minúsculas); a legenda \"Searched for: hammer\" é exibida"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Busca por termo inexistente exibe mensagem de ausência de produtos",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Abrir a página inicial; digitar \"zzzzxx\" no campo de busca; acionar o botão de busca; aguardar a resposta da busca",
+  "esperado": "A mensagem \"There are no products found.\" é exibida e nenhum card de produto é listado"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Ordenação por preço do menor para o maior exibe preços em ordem crescente",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Abrir a página inicial com produtos listados; selecionar a ordenação \"Price (Low - High)\"; aguardar a listagem ser atualizada; ler os preços exibidos",
+  "esperado": "Os preços exibidos na página estão em ordem crescente (não decrescente)"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Ordenação por nome de Z a A exibe nomes em ordem alfabética decrescente",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Abrir a página inicial com produtos listados; selecionar a ordenação \"Name (Z - A)\"; aguardar a listagem ser atualizada; ler os nomes exibidos",
+  "esperado": "Os nomes exibidos na página estão em ordem alfabética decrescente"
+ }
+]

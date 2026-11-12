@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Impedir exclusão sem token",
+  "tipo": "Negativo",
+  "criterio": "CA1",
+  "passos": "Criar reserva e consultar seu conteúdo; excluir sem autenticação; consultar novamente",
+  "esperado": "DELETE retorna 403; GET retorna 200 e mantém o conteúdo original"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Impedir exclusão com token inválido",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Criar reserva e consultar seu conteúdo; excluir usando token inválido; consultar novamente",
+  "esperado": "DELETE retorna 403; GET retorna 200 e mantém o conteúdo original"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Autenticar com as credenciais fornecidas; criar reserva; excluir com o token recebido",
+  "esperado": "Autenticação fornece token não vazio; DELETE retorna 201"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Consultar reserva excluída",
+  "tipo": "Positivo",
+  "criterio": "CA3, CA4",
+  "passos": "Autenticar; criar reserva; excluir com token válido; consultar o mesmo identificador",
+  "esperado": "DELETE retorna 201; GET posterior retorna 404"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Repetir exclusão sem afetar outras reservas",
+  "tipo": "Borda",
+  "criterio": "CA3, CA5",
+  "passos": "Autenticar; criar reserva alvo e duas reservas de controle; registrar conteúdo dos controles; excluir alvo; repetir exclusão; consultar alvo e controles",
+  "esperado": "Primeira exclusão retorna 201; segunda retorna 4xx; alvo permanece com GET 404; ambos os controles retornam 200 e conteúdo inalterado"
+ },
+ {
+  "id": "CT06",
+  "titulo": "Remover reserva da listagem filtrada",
+  "tipo": "Positivo",
+  "criterio": "CA3, CA6",
+  "passos": "Autenticar; criar reserva com nome único; confirmar presença na listagem filtrada; excluir; repetir a mesma listagem",
+  "esperado": "Listagem inicial retorna 200 e apenas o identificador criado; DELETE retorna 201; listagem posterior retorna 200 e lista vazia"
+ }
+]

@@ -1,0 +1,7 @@
+{
+ "arquivo": "script.py",
+ "compila": 0,
+ "coletou": 0,
+ "tests": [],
+ "erro": "  File \"<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-grok\\flashlite\\US09\\script.py\", line 7\n    f_auth_token():\n    ^^^^^^^^^^^^\nSyntaxError: invalid syntax\n"
+}

@@ -1,0 +1,117 @@
+CASOS DE TESTE
+
+| ID | título | tipo | critério de aceitação relacionado | passos resumidos | resultado esperado |
+|---|---|---|---|---|---|
+| CT001 | Login com usuario e senha vazios | negativo | CA01 | Acessar /admin, deixar usuario e senha vazios e clicar no botao de login | Exibir mensagem Invalid credentials e permanecer na tela de login |
+| CT002 | Login com usuario correto e senha incorreta | negativo | CA02 | Acessar /admin, preencher usuario admin e senha incorreta errada e clicar em login | Exibir mensagem Invalid credentials |
+| CT003 | Login com credenciais validas e validacao do painel | positivo | CA03 | Acessar /admin, preencher usuario admin e senha password, clicar em login | Redirecionar para a lista de quartos, exibir quarto 101 do tipo Single e menu com Rooms, Report, Branding e Messages |
+| CT004 | Logout a partir do painel administrativo | positivo | CA04 | Efetuar login com credenciais validas em /admin e clicar no botao de Logout | Retornar a pagina inicial publica da pousada |
+| CT005 | Acesso direto ao painel apos logout | negativo | CA05 | Efetuar logout apos login valido e tentar acessar diretamente a URL do painel administrativo | Redirecionar ou exibir novamente a tela de login |
+
+SUPOSIÇÕES
+
+1. A URL base da aplicação é https://automationintesting.online/, conforme informado na User Story.
+2. Os critérios de aceitação foram numerados de CA01 a CA05 na ordem de apresentação do texto da User Story, visto que não possuíam identificadores explícitos.
+3. Para o teste de UI, utiliza-se a fixture `page` injetada pelo plugin `pytest-playwright`, conforme os requisitos técnicos obrigatórios.
+4. Os seletores de interface foram deduzidos a partir da estrutura padrão da aplicação Restful Booker Platform: a tela de login possui campos de entrada identificados por rótulos ou placeholders/IDs como `username` e `password` (ou obtidos via `page.get_by_label` / `page.get_by_role`), e um botão de login (`page.get_by_role("button", name=re.compile("Login", re.IGNORECASE))`).
+5. A mensagem de erro esperada para credenciais inválidas ou vazias é exatamente "Invalid credentials", exibida na tela de login.
+6. Após o login bem-sucedido, o painel administrativo exibe a lista de quartos contendo "101" e "Single", além de elementos de menu contendo os textos "Rooms", "Report", "Branding" e "Messages".
+7. O botão de logout é localizado por texto ou papel (ex: `page.get_by_text("Logout")` ou `page.get_by_role("link", name=re.compile("Logout", re.IGNORECASE))`).
+8. A página inicial pública da pousada é a raiz da URL base (`https://automationintesting.online/`), contendo elementos característicos da página pública (como formulário de contato ou título da pousada).
+9. O acesso direto à lista de quartos do painel após o logout redireciona para a rota `/admin` ou exibe novamente o formulário de login.
+10. Não há casos de borda específicos aplicáveis além dos cenários negativos (campos vazios, senha incorreta) e fluxos principais de sucesso e segurança (login, logout, acesso restrito), portanto nenhuma categoria de teste foi omitida sem justificativa.
+
+```python
+import re
+import pytest
+from playwright.sync_api import Page, expect
+
+BASE_URL = "https://automationintesting.online/"
+
+@pytest.mark.playwright
+def test_CT001_login_vazio(page: Page):
+    page.goto(BASE_URL + "admin")
+    login_button = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    login_button.click()
+    error_message = page.get_by_text("Invalid credentials")
+    expect(error_message).to_be_visible()
+    expect(page).to_url(re.compile(r"/admin"))
+
+@pytest.mark.playwright
+def test_CT002_login_senha_incorreta(page: Page):
+    page.goto(BASE_URL + "admin")
+    username_input = page.get_by_label(re.compile("username", re.IGNORECASE)).or_(page.locator("#username"))
+    password_input = page.get_by_label(re.compile("password", re.IGNORECASE)).or_(page.locator("#password"))
+    
+    username_input.fill("admin")
+    password_input.fill("senha_errada")
+    
+    login_button = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    login_button.click()
+    
+    error_message = page.get_by_text("Invalid credentials")
+    expect(error_message).to_be_visible()
+
+@pytest.mark.playwright
+def test_CT003_login_valido_e_painel(page: Page):
+    page.goto(BASE_URL + "admin")
+    username_input = page.get_by_label(re.compile("username", re.IGNORECASE)).or_(page.locator("#username"))
+    password_input = page.get_by_label(re.compile("password", re.IGNORECASE)).or_(page.locator("#password"))
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    
+    login_button = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    login_button.click()
+    
+    room_number = page.get_by_text("101")
+    room_type = page.get_by_text("Single")
+    expect(room_number).to_be_visible()
+    expect(room_type).to_be_visible()
+    
+    expect(page.get_by_text("Rooms")).to_be_visible()
+    expect(page.get_by_text("Report")).to_be_visible()
+    expect(page.get_by_text("Branding")).to_be_visible()
+    expect(page.get_by_text("Messages")).to_be_visible()
+
+@pytest.mark.playwright
+def test_CT004_logout(page: Page):
+    page.goto(BASE_URL + "admin")
+    username_input = page.get_by_label(re.compile("username", re.IGNORECASE)).or_(page.locator("#username"))
+    password_input = page.get_by_label(re.compile("password", re.IGNORECASE)).or_(page.locator("#password"))
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    
+    login_button = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    login_button.click()
+    
+    expect(page.get_by_text("Rooms")).to_be_visible()
+    
+    logout_element = page.get_by_role("link", name=re.compile("Logout", re.IGNORECASE)).or_(page.get_by_text("Logout"))
+    logout_element.click()
+    
+    expect(page).to_url(re.compile(r"^https://automationintesting\.online/(?:index\.html)?$"))
+
+@pytest.mark.playwright
+def test_CT005_acesso_direto_apos_logout(page: Page):
+    page.goto(BASE_URL + "admin")
+    username_input = page.get_by_label(re.compile("username", re.IGNORECASE)).or_(page.locator("#username"))
+    password_input = page.get_by_label(re.compile("password", re.IGNORECASE)).or_(page.locator("#password"))
+    
+    username_input.fill("admin")
+    password_input.fill("password")
+    
+    login_button = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    login_button.click()
+    
+    expect(page.get_by_text("Rooms")).to_be_visible()
+    
+    logout_element = page.get_by_role("link", name=re.compile("Logout", re.IGNORECASE)).or_(page.get_by_text("Logout"))
+    logout_element.click()
+    
+    page.goto(BASE_URL + "admin")
+    
+    login_btn_visible = page.get_by_role("button", name=re.compile("Login|Log In", re.IGNORECASE))
+    expect(login_btn_visible).to_be_visible()
+```

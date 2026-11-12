@@ -1,0 +1,10 @@
+[
+ "1. A API sob teste é a Restful Booker pública (https://restful-booker.herokuapp.com), cujos endpoints padrão são `/auth` para obtenção de token, `/booking` para criação e listagem de reservas, e `/booking/{id}` para consulta, atualização e exclusão.",
+ "2. A autenticação é realizada enviando uma requisição POST para `{BASE_URL}/auth` com o JSON contendo as credenciais de demonstração `{\"username\": \"admin\", \"password\": \"password123\"}`, retornando um objeto JSON com o token no formato `{\"token\": \"...\"}`.",
+ "3. A exclusão de uma reserva é feita por meio de uma requisição DELETE para `{BASE_URL}/booking/{id}`, exigindo o cabeçalho `Cookie: token={token}` (conforme o padrão da API Restful Booker).",
+ "4. A ausência de token ou o envio de um token inválido na exclusão é simulada enviando o método DELETE sem o cabeçalho de cookie ou com um token fictício (ex: `token=invalidtoken123`), resultando no código HTTP 403 Forbidden especificado nos critérios CA01 e CA02.",
+ "5. Conforme o critério CA03, a resposta esperada para exclusão bem-sucedida é o status HTTP 201 Created (conforme especificado explicitamente na User Story).",
+ "6. A criação de uma reserva prévia para os testes é realizada via requisição POST em `{BASE_URL}/booking` enviando um payload JSON válido com dados de exemplo (ex: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates`, `additionalneeds`), garantindo um nome único para o teste de listagem (CT006).",
+ "7. O filtro por nome único no endpoint de listagem (CA06) é realizado utilizando o parâmetro de query string `firstname` (ex: `{BASE_URL}/booking?firstname=UniqueName...`), onde a API retorna uma lista de IDs de reservas correspondentes. Após a exclusão, essa lista deve ser vazia ou não conter o ID excluído.",
+ "8. Como a User Story exige exclusivamente testes de API REST (conforme demonstrado pelos critérios baseados em endpoints, tokens, status HTTP e rotas), não há requisitos de testes de interface web (UI / Playwright), justificando a ausência de testes de UI e cumprindo a regra de cobrir todos os critérios de aceitação."
+]

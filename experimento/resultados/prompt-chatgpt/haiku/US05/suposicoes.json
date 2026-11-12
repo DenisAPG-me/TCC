@@ -1,0 +1,17 @@
+[
+ "1. Os critérios não possuem identificadores no texto. Foram atribuídos na ordem de apresentação: CA01 (login vazio), CA02 (senha incorreta), CA03 (login válido, lista de quartos e menu), CA04 (logout) e CA05 (acesso direto após logout).",
+ "2. Explícito na User Story: URL base https://automationintesting.online/; painel em /admin; conta admin/password; mensagem \"Invalid credentials\"; quarto 101 do tipo Single; menu com Rooms, Report, Branding e Messages; item Logout; retorno à página inicial pública após logout; exibição da tela de login ao acessar o painel sem sessão.",
+ "3. Inferido: os campos são rotulados como \"Username\" e \"Password\" e são localizáveis por `get_by_label`. O botão de envio é um button com nome \"Login\".",
+ "4. Inferido: a lista de quartos é uma tabela, e número e tipo do quarto aparecem na mesma linha (role `row`).",
+ "5. Inferido: os itens do menu e o Logout são links ou botões com nome exato igual ao texto da User Story. A busca usa `exact=True`.",
+ "6. Inferido: a mensagem de erro é exibida como texto visível contendo \"Invalid credentials\" e permanece na tela de login.",
+ "7. Inferido: a tela de login e a lista de quartos compartilham a rota /admin. Nenhum teste depende da URL após o login, exceto CT005 e CT006, que dependem da rota /admin para acesso direto.",
+ "8. Inferido: o formulário não possui validação nativa `required` que impeça o envio com campos vazios. CT001 e CT008 dependem dessa suposição. Se houver validação nativa, esses casos exigirão ajuste.",
+ "9. Inferido: a página inicial pública corresponde à URL base, com ou sem barra final ou fragmento de hash. O retorno é verificado pela URL e pela ausência do item Logout. CT005 depende dessa suposição.",
+ "10. Inferido: CT007 (senha em caixa alta) e CT008 (senha vazia com usuário preenchido) são casos de borda derivados dos critérios CA02 e CA01. Dependem de a autenticação diferenciar maiúsculas de minúsculas e de a senha vazia ser rejeitada com \"Invalid credentials\".",
+ "11. Não incluí casos de limite de tamanho de campo, bloqueio após tentativas, expiração de sessão ou caracteres especiais, porque a User Story não especifica esses comportamentos.",
+ "12. Cada teste abre uma página nova, fornecida pelo plugin pytest-playwright, com contexto isolado. Os testes fazem login e logout por conta própria e não criam dados. Não é necessária limpeza.",
+ "13. Pré-condições externas: o site estar acessível e a conta admin/password estar ativa e com o quarto 101 do tipo Single cadastrado.",
+ "14. A base URL é a constante BASE_URL no topo do arquivo. Os testes de interface usam o plugin pytest-playwright, conforme os requisitos técnicos obrigatórios, sem criar navegador próprio.",
+ "15. O código é executável em termos de sintaxe e estrutura, mas a compatibilidade com o sistema real não foi verificada. Os seletores e textos foram inferidos e podem exigir ajuste."
+]

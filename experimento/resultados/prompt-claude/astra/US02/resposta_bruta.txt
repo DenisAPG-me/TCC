@@ -1,0 +1,220 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Adicionar três unidades de produto disponível | Positivo | CA1 | Abrir a loja com carrinho vazio; abrir Claw Hammer; definir quantidade 3; adicionar ao carrinho | A confirmação Product added to shopping cart. fica visível e o indicador do carrinho mostra 3 |
+| CT02 | Conferir os totais de três unidades | Positivo | CA2 | Abrir Claw Hammer em uma sessão nova; adicionar 3 unidades; abrir o carrinho; consultar o preço unitário | A quantidade da linha é 3; o total da linha corresponde ao preço unitário multiplicado por 3; o total do carrinho corresponde ao total da linha |
+| CT03 | Reduzir a quantidade de três para uma unidade | Positivo | CA3 | Abrir Claw Hammer em uma sessão nova; adicionar 3 unidades; abrir o carrinho; alterar a quantidade para 1; confirmar a edição | A quantidade permanece em 1 e o total do carrinho passa a ser igual ao preço unitário |
+| CT04 | Rejeitar três unidades de Thor Hammer | Negativo | CA4 | Abrir Thor Hammer com carrinho vazio; definir quantidade 3; tentar adicionar ao carrinho | A mensagem You can only have one Thor Hammer in the cart. fica visível |
+| CT05 | Aceitar uma unidade de Thor Hammer no limite permitido | Borda | CA4 | Abrir Thor Hammer com carrinho vazio; definir quantidade 1; adicionar ao carrinho; abrir o carrinho | A adição é confirmada; o indicador mostra 1 e a linha de Thor Hammer contém uma unidade |
+
+## SUPOSIÇÕES
+
+- Os critérios fornecidos correspondem, na ordem, a CA1, CA2, CA3 e CA4.
+- O foco é interface web. A automação usa Python, pytest, Playwright síncrono e o plugin oficial pytest-playwright. Os requisitos técnicos finais prevalecem sobre a proibição anterior de plugins e a solicitação de fixtures próprias.
+- O ambiente possui essas dependências e o Chromium do Playwright instalados. A execução é `pytest test_carrinho.py`; o plugin usa Chromium headless por padrão, fornece uma página e um contexto isolados para cada teste e encerra os recursos automaticamente.
+- Não houve acesso ao sistema ou à internet. Os seletores e comportamentos não explicitados são hipóteses que precisam ser conferidas no sistema real; o script não foi validado contra a aplicação.
+- A compra pode ser iniciada sem autenticação. Não são necessárias credenciais; essa ausência está representada por constantes no script.
+- Claw Hammer e Thor Hammer estão disponíveis, com estoque suficiente para os cenários. Ambos aparecem na página inicial como links cujos nomes acessíveis contêm o nome do produto.
+- O sistema está em inglês. O campo da quantidade na página do produto tem rótulo acessível Quantity, e o botão de adição tem nome acessível Add to cart.
+- O atributo usado por `get_by_test_id` é o padrão `data-testid`. Os identificadores deduzidos são `cart-link`, `cart-quantity`, `cart-table`, `quantity`, `unit-price`, `line-total` e `cart-total`. Os três identificadores referentes à linha são procurados dentro da linha do produto.
+- O carrinho usa uma tabela com linhas acessíveis pelo papel `row`, e existe uma única linha contendo o nome de cada produto.
+- O indicador do carrinho representa unidades, e cada teste começa com carrinho vazio graças ao contexto isolado.
+- Alterar a quantidade no carrinho e retirar o foco com Tab confirma a edição e atualiza os totais automaticamente.
+- Os preços são positivos, usam dólar, ponto decimal e duas casas decimais, sem separador de milhares. O preço unitário é lido da interface; não se inventa um valor fixo. Os cálculos usam `Decimal`.
+- Nos cenários apresentados não há frete, impostos, descontos ou outras parcelas: o total do carrinho equivale ao total da única linha, conforme CA2 e CA3.
+- As mensagens de sucesso e de restrição são exatamente as fornecidas na história e ficam visíveis por tempo suficiente para as esperas do Playwright.
+- CT05 interpreta a restrição de CA4 como permissão para adicionar uma unidade de Thor Hammer. Essa interpretação é uma suposição adicional de borda, não um resultado expressamente exigido pelo critério.
+- CT04 verifica somente a mensagem exigida: a história não define se a tentativa inválida mantém o carrinho vazio ou limita a adição a uma unidade.
+- Não são deduzidos endpoints nem payloads, pois os testes interagem exclusivamente pela interface. Também não são inventadas regras para zero, negativos, frações ou quantidade máxima de produtos comuns.
+
+## SCRIPT
+
+```python
+import re
+from decimal import Decimal
+
+from playwright.sync_api import Page, Locator, expect
+
+
+BASE_URL = "https://practicesoftwaretesting.com/"
+USERNAME = None
+PASSWORD = None
+
+REGULAR_PRODUCT = "Claw Hammer"
+RESTRICTED_PRODUCT = "Thor Hammer"
+INITIAL_QUANTITY = 3
+MINIMUM_QUANTITY = 1
+
+SUCCESS_MESSAGE = "Product added to shopping cart."
+RESTRICTION_MESSAGE = "You can only have one Thor Hammer in the cart."
+
+QUANTITY_LABEL = "Quantity"
+ADD_BUTTON_NAME = "Add to cart"
+
+CART_LINK_ID = "cart-link"
+CART_BADGE_ID = "cart-quantity"
+CART_TABLE_ID = "cart-table"
+ROW_QUANTITY_ID = "quantity"
+UNIT_PRICE_ID = "unit-price"
+LINE_TOTAL_ID = "line-total"
+CART_TOTAL_ID = "cart-total"
+
+UI_TIMEOUT_MS = 15_000
+NAVIGATION_TIMEOUT_MS = 30_000
+
+# Aceita "$12.34" ou "$ 12.34", incluindo espaços nas extremidades.
+MONEY_PATTERN = re.compile(r"^\s*\$\s*(\d+\.\d{2})\s*$")
+
+
+def open_product(page: Page, product_name: str) -> None:
+    page.set_default_timeout(UI_TIMEOUT_MS)
+    page.set_default_navigation_timeout(NAVIGATION_TIMEOUT_MS)
+
+    page.goto(BASE_URL, wait_until="domcontentloaded")
+    product_link = page.get_by_role(
+        "link",
+        name=re.compile(re.escape(product_name), re.IGNORECASE),
+    )
+    expect(product_link).to_have_count(1, timeout=UI_TIMEOUT_MS)
+    product_link.click()
+
+    expect(
+        page.get_by_label(QUANTITY_LABEL, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def submit_quantity(page: Page, quantity: int) -> None:
+    quantity_input = page.get_by_label(QUANTITY_LABEL, exact=True)
+    quantity_input.fill(str(quantity))
+    expect(quantity_input).to_have_value(str(quantity))
+
+    page.get_by_role(
+        "button", name=ADD_BUTTON_NAME, exact=True
+    ).click()
+
+
+def expect_addition_success(page: Page, quantity: int) -> None:
+    expect(
+        page.get_by_text(SUCCESS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+    expect(
+        page.get_by_test_id(CART_BADGE_ID)
+    ).to_have_text(str(quantity), timeout=UI_TIMEOUT_MS)
+
+
+def open_cart_row(page: Page, product_name: str) -> Locator:
+    page.get_by_test_id(CART_LINK_ID).click()
+
+    cart_table = page.get_by_test_id(CART_TABLE_ID)
+    expect(cart_table).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+    row = cart_table.get_by_role("row").filter(
+        has_text=re.compile(re.escape(product_name))
+    )
+    expect(row).to_have_count(1, timeout=UI_TIMEOUT_MS)
+    expect(row).to_be_visible(timeout=UI_TIMEOUT_MS)
+    return row
+
+
+def prepare_cart(page: Page, product_name: str, quantity: int) -> Locator:
+    open_product(page, product_name)
+    submit_quantity(page, quantity)
+    expect_addition_success(page, quantity)
+    return open_cart_row(page, product_name)
+
+
+def read_money(locator: Locator) -> Decimal:
+    expect(locator).to_have_text(MONEY_PATTERN, timeout=UI_TIMEOUT_MS)
+    text = locator.inner_text()
+    match = MONEY_PATTERN.fullmatch(text)
+
+    if match is None:
+        raise ValueError(f"Formato monetário inesperado: {text!r}")
+
+    return Decimal(match.group(1))
+
+
+def expect_money(locator: Locator, amount: Decimal) -> None:
+    formatted_amount = format(amount, ".2f")
+    expected_pattern = re.compile(
+        r"^\s*\$\s*" + re.escape(formatted_amount) + r"\s*$"
+    )
+    expect(locator).to_have_text(
+        expected_pattern, timeout=UI_TIMEOUT_MS
+    )
+
+
+def test_ct01_adicionar_tres_unidades(page: Page) -> None:
+    open_product(page, REGULAR_PRODUCT)
+    submit_quantity(page, INITIAL_QUANTITY)
+
+    expect(
+        page.get_by_text(SUCCESS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        page.get_by_test_id(CART_BADGE_ID)
+    ).to_have_text(str(INITIAL_QUANTITY), timeout=UI_TIMEOUT_MS)
+
+
+def test_ct02_conferir_totais_de_tres_unidades(page: Page) -> None:
+    row = prepare_cart(page, REGULAR_PRODUCT, INITIAL_QUANTITY)
+
+    expect(
+        row.get_by_test_id(ROW_QUANTITY_ID)
+    ).to_have_value(str(INITIAL_QUANTITY), timeout=UI_TIMEOUT_MS)
+
+    unit_price = read_money(row.get_by_test_id(UNIT_PRICE_ID))
+    expected_total = unit_price * Decimal(INITIAL_QUANTITY)
+
+    expect_money(row.get_by_test_id(LINE_TOTAL_ID), expected_total)
+    expect_money(page.get_by_test_id(CART_TOTAL_ID), expected_total)
+
+
+def test_ct03_reduzir_quantidade_para_uma_unidade(page: Page) -> None:
+    row = prepare_cart(page, REGULAR_PRODUCT, INITIAL_QUANTITY)
+    quantity_input = row.get_by_test_id(ROW_QUANTITY_ID)
+    unit_price = read_money(row.get_by_test_id(UNIT_PRICE_ID))
+
+    # Confirma o estado anterior para verificar uma alteração real.
+    expect(quantity_input).to_have_value(str(INITIAL_QUANTITY))
+    expect_money(
+        page.get_by_test_id(CART_TOTAL_ID),
+        unit_price * Decimal(INITIAL_QUANTITY),
+    )
+
+    quantity_input.fill(str(MINIMUM_QUANTITY))
+    quantity_input.press("Tab")
+
+    expect(quantity_input).to_have_value(
+        str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS
+    )
+    expect_money(page.get_by_test_id(CART_TOTAL_ID), unit_price)
+
+
+def test_ct04_rejeitar_tres_unidades_de_thor_hammer(page: Page) -> None:
+    open_product(page, RESTRICTED_PRODUCT)
+    submit_quantity(page, INITIAL_QUANTITY)
+
+    expect(
+        page.get_by_text(RESTRICTION_MESSAGE, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+
+
+def test_ct05_aceitar_uma_unidade_de_thor_hammer(page: Page) -> None:
+    open_product(page, RESTRICTED_PRODUCT)
+    submit_quantity(page, MINIMUM_QUANTITY)
+
+    expect(
+        page.get_by_text(SUCCESS_MESSAGE, exact=True)
+    ).to_be_visible(timeout=UI_TIMEOUT_MS)
+    expect(
+        page.get_by_test_id(CART_BADGE_ID)
+    ).to_have_text(str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS)
+
+    row = open_cart_row(page, RESTRICTED_PRODUCT)
+    expect(
+        row.get_by_test_id(ROW_QUANTITY_ID)
+    ).to_have_value(str(MINIMUM_QUANTITY), timeout=UI_TIMEOUT_MS)
+```

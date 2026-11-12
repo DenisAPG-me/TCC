@@ -1,0 +1,17 @@
+[
+ "Não houve consulta à internet nem execução contra o sistema. Rotas e seletores abaixo são hipóteses que precisam ser confirmadas antes da execução.",
+ "A aplicação é uma interface web. A URL base é `https://automationintesting.online/`, definida em uma constante no início do arquivo.",
+ "`/admin` apresenta a tela de login; `/admin/rooms` apresenta a lista protegida de quartos; `/` corresponde à página inicial pública. As verificações de URL aceitam uma barra final opcional.",
+ "O acesso não autenticado a `/admin/rooms` redireciona para `/admin`.",
+ "Os campos possuem rótulos acessíveis `Username` e `Password`. Login e Logout são botões com esses nomes acessíveis.",
+ "O formulário permite enviar ambos os campos vazios, sem bloqueio pela validação nativa do navegador.",
+ "A mensagem de erro visível contém exatamente `Invalid credentials`.",
+ "O menu possui uma região de navegação acessível única, com links chamados `Rooms`, `Report`, `Branding` e `Messages`.",
+ "A lista de quartos é uma tabela acessível. O quarto 101 ocupa uma única linha, com células de texto exato `101` e `Single`.",
+ "A conta `admin` / `password` está disponível, e o quarto 101 do tipo Single existe no ambiente. `senha-incorreta` é uma senha inválida para essa conta.",
+ "A página pública possui um elemento `main` visível. Seu retorno é verificado pela URL raiz e pela presença desse elemento.",
+ "Cada teste recebe a fixture `page` do plugin oficial `pytest-playwright`, com contexto isolado. No CT05, login, logout e acesso direto usam a mesma página e o mesmo contexto.",
+ "O envio vazio representa o limite explicitamente previsto. Não foram adicionadas expectativas para usuário inexistente, apenas um campo vazio, espaços ou limites de tamanho, pois a história não define esses comportamentos.",
+ "São necessários `pytest`, `playwright`, o plugin obrigatório `pytest-playwright` e o Chromium instalado pelo Playwright. O plugin é incluído conforme o requisito técnico prioritário.",
+ "Salve o arquivo como `test_admin.py`. Instalação: `python -m pip install pytest playwright pytest-playwright`, seguida de `python -m playwright install chromium`. Execução: `python -m pytest test_admin.py` ou `python test_admin.py`."
+]

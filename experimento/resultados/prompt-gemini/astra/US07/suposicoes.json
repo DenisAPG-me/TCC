@@ -1,0 +1,16 @@
+[
+ "A análise é exclusivamente dedutiva; não houve acesso ao sistema, à documentação ou à internet.",
+ "A URL base é `https://restful-booker.herokuapp.com`, definida em uma constante.",
+ "As rotas presumidas são `POST /booking`, `GET /booking/{id}` e `GET /booking?firstname=...&lastname=...`. Não existem seletores de interface neste escopo.",
+ "O JSON enviado contém `firstname` e `lastname` como strings, `totalprice` como número inteiro, `depositpaid` como booleano, `bookingdates` como objeto com `checkin` e `checkout` no formato `YYYY-MM-DD`, e `additionalneeds` como string.",
+ "A criação retorna `{\"bookingid\": inteiro, \"booking\": {...}}`. Embora o critério mencione identificador numérico, assume-se um inteiro, excluindo booleanos.",
+ "A consulta retorna diretamente o objeto da reserva. A listagem retorna status 200 e um array de objetos com a chave `bookingid`.",
+ "As operações não exigem autenticação. O conteúdo criado está imediatamente disponível para consulta e filtragem.",
+ "O identificador `99999999` não existe no ambiente. Uma resposta diferente de 404 representa falha do teste, sem tentar excluir eventual reserva existente.",
+ "Os dados escolhidos são válidos. Os dois valores booleanos de depósito são aceitos, assim como uma estadia de uma noite atravessando o ano. CT05 cobre o extremo alternativo do domínio booleano; CT06 cobre a transição do calendário.",
+ "Nomes com sufixos UUID são aceitos e considerados suficientemente únicos. O filtro combina nome e sobrenome; não se exige que a lista contenha exclusivamente a reserva criada.",
+ "A igualdade exige presença, valor e tipo dos campos enviados, inclusive campos aninhados. Campos extras na resposta são tolerados.",
+ "Não se deduzem regras para campos ausentes, JSON inválido, preços negativos ou zero, tamanhos máximos, datas invertidas ou outras entradas sem resultado definido nos critérios.",
+ "Cada teste cria seus próprios dados quando necessário. Não há limpeza automática, pois exclusão e suas condições não foram especificadas.",
+ "Salve como `test_reservas.py`. Com `pytest` e `requests` instalados, execute `pytest -v test_reservas.py` ou `python test_reservas.py`."
+]

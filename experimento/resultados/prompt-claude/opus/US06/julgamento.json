@@ -1,0 +1,118 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "coerente com oraculo"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "novo valido"
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": "coerente com oraculo"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct04_mensagem_aparece_na_caixa_com_nome_e_assunto",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct07_envio_com_email_invalido_rejeitado",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  },
+  {
+   "teste": "test_ct09_envio_com_assunto_curto_rejeitado",
+   "categoria": "seletor inexistente",
+   "nota": "locator nao resolve no alvo real"
+  }
+ ]
+}

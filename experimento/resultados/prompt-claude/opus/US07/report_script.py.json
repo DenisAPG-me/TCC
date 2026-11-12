@@ -1,0 +1,265 @@
+{
+ "created": 1793381508.9426851,
+ "duration": 7.965421199798584,
+ "exitcode": 0,
+ "root": "<HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\opus\\US07",
+ "environment": {},
+ "summary": {
+  "passed": 8,
+  "total": 8,
+  "collected": 8
+ },
+ "collectors": [
+  {
+   "nodeid": "",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py",
+     "type": "Module"
+    }
+   ]
+  },
+  {
+   "nodeid": "script.py",
+   "outcome": "passed",
+   "result": [
+    {
+     "nodeid": "script.py::test_ct01_criar_reserva_com_corpo_valido",
+     "type": "Function",
+     "lineno": 75
+    },
+    {
+     "nodeid": "script.py::test_ct02_consultar_reserva_criada_pelo_id",
+     "type": "Function",
+     "lineno": 88
+    },
+    {
+     "nodeid": "script.py::test_ct03_consultar_reserva_id_inexistente",
+     "type": "Function",
+     "lineno": 98
+    },
+    {
+     "nodeid": "script.py::test_ct04_consultar_reserva_id_nao_numerico",
+     "type": "Function",
+     "lineno": 104
+    },
+    {
+     "nodeid": "script.py::test_ct05_listar_reservas_por_nome_e_sobrenome_unicos",
+     "type": "Function",
+     "lineno": 110
+    },
+    {
+     "nodeid": "script.py::test_ct06_listar_reservas_nome_e_sobrenome_inexistentes",
+     "type": "Function",
+     "lineno": 122
+    },
+    {
+     "nodeid": "script.py::test_ct07_criar_e_consultar_reserva_com_valores_limite",
+     "type": "Function",
+     "lineno": 132
+    },
+    {
+     "nodeid": "script.py::test_ct08_criar_e_consultar_reserva_com_caracteres_acentuados",
+     "type": "Function",
+     "lineno": 148
+    }
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_criar_reserva_com_corpo_valido",
+   "lineno": 75,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct01_criar_reserva_com_corpo_valido",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0003326000878587365,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.7643150000367314,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001365999924018979,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct02_consultar_reserva_criada_pelo_id",
+   "lineno": 88,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct02_consultar_reserva_criada_pelo_id",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00020299991592764854,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2151572000002488,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00013449997641146183,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct03_consultar_reserva_id_inexistente",
+   "lineno": 98,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct03_consultar_reserva_id_inexistente",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002093999646604061,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.5847355000441894,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00017849996220320463,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct04_consultar_reserva_id_nao_numerico",
+   "lineno": 104,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct04_consultar_reserva_id_nao_numerico",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002911000046879053,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.637794200098142,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.0001436000457033515,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct05_listar_reservas_por_nome_e_sobrenome_unicos",
+   "lineno": 110,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct05_listar_reservas_por_nome_e_sobrenome_unicos",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00048779998905956745,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3358999999472871,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00018069997895509005,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct06_listar_reservas_nome_e_sobrenome_inexistentes",
+   "lineno": 122,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct06_listar_reservas_nome_e_sobrenome_inexistentes",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.0002707999665290117,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 0.6815736000426114,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00014500005636364222,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct07_criar_e_consultar_reserva_com_valores_limite",
+   "lineno": 132,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct07_criar_e_consultar_reserva_com_valores_limite",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00025580008514225483,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.2951784000033513,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00015470001380890608,
+    "outcome": "passed"
+   }
+  },
+  {
+   "nodeid": "script.py::test_ct08_criar_e_consultar_reserva_com_caracteres_acentuados",
+   "lineno": 148,
+   "outcome": "passed",
+   "keywords": [
+    "test_ct08_criar_e_consultar_reserva_com_caracteres_acentuados",
+    "script.py",
+    "US07",
+    ""
+   ],
+   "setup": {
+    "duration": 0.00025969999842345715,
+    "outcome": "passed"
+   },
+   "call": {
+    "duration": 1.3724284999771044,
+    "outcome": "passed"
+   },
+   "teardown": {
+    "duration": 0.00014889996964484453,
+    "outcome": "passed"
+   }
+  }
+ ],
+ "warnings": [
+  {
+   "message": "_pytest.python.CallSpec2 has been renamed to CallSpec.\nThe CallSpec2 alias will be removed in pytest 10.\nUpdate imports to use CallSpec instead.\nSee https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed",
+   "category": "PytestRemovedIn10Warning",
+   "when": "config",
+   "filename": "<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\anyio\\pytest_plugin.py",
+   "lineno": 14
+  }
+ ]
+}

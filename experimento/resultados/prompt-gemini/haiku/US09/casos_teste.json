@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT-01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Criar reserva; executar DELETE sem header de autenticação; consultar GET da reserva",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "CT-02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Criar reserva; executar DELETE com token inválido; consultar GET da reserva",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "CT-03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "Positivo",
+  "criterio": "3",
+  "passos": "Obter token via /auth; criar reserva; executar DELETE com token válido",
+  "esperado": "DELETE retorna 201"
+ },
+ {
+  "id": "CT-04",
+  "titulo": "Consultar reserva após exclusão",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Criar e excluir reserva com token válido; executar GET pelo mesmo ID",
+  "esperado": "GET retorna 404"
+ },
+ {
+  "id": "CT-05",
+  "titulo": "Excluir novamente com token válido e preservar demais reservas",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Criar duas reservas; excluir a primeira; excluí-la novamente com token válido; consultar a segunda",
+  "esperado": "Segunda exclusão retorna status 4xx; segunda reserva continua com GET 200"
+ },
+ {
+  "id": "CT-06",
+  "titulo": "Listar por nome único após exclusão",
+  "tipo": "Positivo",
+  "criterio": "6",
+  "passos": "Criar reserva com nome único; excluí-la; GET /booking filtrando por firstname",
+  "esperado": "Status 200 e lista vazia"
+ },
+ {
+  "id": "CT-07",
+  "titulo": "Excluir reserva inexistente com token válido",
+  "tipo": "Borda",
+  "criterio": "5",
+  "passos": "Obter token; executar DELETE em ID inexistente",
+  "esperado": "Status 4xx"
+ },
+ {
+  "id": "CT-08",
+  "titulo": "Excluir com token vazio",
+  "tipo": "Borda",
+  "criterio": "1 e 2",
+  "passos": "Criar reserva; executar DELETE com token vazio; consultar GET da reserva",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ }
+]

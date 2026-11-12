@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US03",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 24.09,
+ "tokens": {
+  "total": 6499
+ },
+ "n_casos_extraidos": 8,
+ "tem_codigo": true,
+ "stderr_tail": "def test_ct08_login_com_email_malformado(page):\n    open_login(page)\n    page.get_by_label(re.compile(\"email\", re.I)).fill(\"email-invalido\")\n    page.get_by_label(re.compile(\"password\", re.I)).fill(DEMO_PASSWORD)\n    page.get_by_role(\"button\", name=re.compile(\"login|sign in\", re.I)).click()\n\n    expect(page.get_by_text(re.compile(\"valid email|invalid email\", re.I))).to_be_visible()\n    expect(page.get_by_role(\"link\", name=re.compile(\"sign in|login\", re.I))).to_be_visible()\n```\ntokens used\n6,499\n"
+}

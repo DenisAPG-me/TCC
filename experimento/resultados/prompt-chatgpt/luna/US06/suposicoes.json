@@ -1,0 +1,9 @@
+[
+ "1. Os critérios numerados na User Story não têm identificadores no formato CA. Para referência, foram mapeados em ordem: critério 1 → CA01, 2 → CA02, 3 → CA03, 4 → CA04 e 5 → CA05.",
+ "2. A URL base explícita é `https://automationintesting.online/`; a rota de login do painel é `/admin`, conforme a história. A rota de mensagens foi inferida como `/admin/messages`, e logout como `/admin/logout`. Os seletores e rotas inferidos podem precisar de ajuste antes do uso no sistema real.",
+ "3. O formulário inicial foi inferido como contendo campos acessíveis de nome, e-mail, telefone, assunto e mensagem, com botão de envio. Os nomes e assuntos são únicos por execução; o e-mail e telefone usados são valores plausíveis para dados válidos. O envio é considerado bem-sucedido quando aparece o texto de confirmação especificado.",
+ "4. O login foi inferido como um formulário com campos acessíveis `Username` e `Password`, credenciais explícitas na história (`admin` / `password`) e botão `Login`. O contador foi inferido como texto numérico visível junto ao item `Messages`; a extração lê o primeiro número associado ao item.",
+ "5. CT002 depende de que a aplicação persista mensagens entre sessões e de que não haja envios concorrentes que alterem o contador entre as leituras. CT003 depende de que a mensagem enviada permaneça disponível na caixa. CT004 depende de que `/admin/messages` exija sessão autenticada e que o logout invalide a sessão.",
+ "6. CT001–CT004 usam nomes e assuntos únicos para manter cada caso independente. O teste não tenta excluir mensagens, pois a história não descreve mecanismo de limpeza.",
+ "7. Não foi incluído caso negativo de formulário inválido: a história não especifica validações nem o resultado esperado para dados inválidos. Não foi incluído caso de borda, pois não há limites ou condições de fronteira definidos nos critérios."
+]

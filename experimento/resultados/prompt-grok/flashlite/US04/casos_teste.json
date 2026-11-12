@@ -1,0 +1,42 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Enviar formulário de contato vazio",
+  "tipo": "Negativo",
+  "criterio": "Critério 1",
+  "passos": "1. Acessar a página inicial.<br>2. Clicar no botão de enviar contato sem preencher nenhum campo.",
+  "esperado": "Exibir mensagens de erro indicando que nome, e-mail, telefone, assunto e mensagem não podem ficar em branco."
+ },
+ {
+  "id": "TC02",
+  "titulo": "Preencher telefone com menos de 11 caracteres",
+  "tipo": "Negativo",
+  "criterio": "Critério 2",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher os campos válidos exceto o telefone com 10 caracteres.<br>3. Enviar o formulário.",
+  "esperado": "Exibir a mensagem \"Phone must be between 11 and 21 characters.\"."
+ },
+ {
+  "id": "TC03",
+  "titulo": "Preencher assunto curto e mensagem curta",
+  "tipo": "Negativo",
+  "criterio": "Critério 3",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher assunto com menos de 5 caracteres e mensagem com menos de 20 caracteres.<br>3. Enviar o formulário.",
+  "esperado": "Exibir as mensagens \"Subject must be between 5 and 100 characters.\" e \"Message must be between 20 and 2000 characters.\"."
+ },
+ {
+  "id": "TC04",
+  "titulo": "Preencher e-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "Critério 4",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher o campo de e-mail com \"bad\".<br>3. Enviar o formulário.",
+  "esperado": "Exibir a mensagem \"must be a well-formed email address\"."
+ },
+ {
+  "id": "TC05",
+  "titulo": "Enviar formulário com todos os dados válidos",
+  "tipo": "Positivo",
+  "criterio": "Critério 5",
+  "passos": "1. Acessar a página inicial.<br>2. Preencher nome, e-mail válido, telefone com 11+ caracteres, assunto válido (>=5 chars) e mensagem válida (>=20 chars).<br>3. Enviar o formulário.",
+  "esperado": "Exibir a mensagem \"Thanks for getting in touch <nome>!\" contendo o nome informado e o assunto na confirmação."
+ }
+]

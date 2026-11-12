@@ -1,0 +1,19 @@
+[
+ "Nenhuma consulta ao sistema, à internet, à documentação ou ao código-fonte foi realizada. O script não foi executado. Todos os contratos abaixo não explicitados na User Story são hipóteses a validar.",
+ "A aplicação é uma API REST; serão utilizados Python, `pytest`, `requests` e módulos da biblioteca padrão. Não existem seletores de interface.",
+ "A URL base é a informada na User Story, definida na constante `BASE_URL`.",
+ "Presume-se autenticação por `POST /auth`, com JSON `{\"username\": \"...\", \"password\": \"...\"}`. O sucesso retorna um objeto JSON com `token` textual. A falha retorna um objeto JSON sem a chave `token`, com `reason` igual a `Bad credentials`.",
+ "O status HTTP da autenticação inválida não foi especificado e não será validado. Credenciais vazias são consideradas inválidas, por hipótese.",
+ "Presumem-se `PUT /booking/{id}` para atualização completa, `PATCH /booking/{id}` para atualização parcial e `GET /booking/{id}` para consulta. Atualizações bem-sucedidas e consultas retornam diretamente o objeto JSON da reserva.",
+ "Presume-se que o token seja enviado no cabeçalho `Cookie: token=<token>`. Não será utilizada autenticação alternativa.",
+ "Presume-se que a reserva tenha os campos obrigatórios `firstname`, `lastname`, `totalprice`, `depositpaid` e `bookingdates`; dentro de `bookingdates`, `checkin` e `checkout` também são obrigatórios. `additionalneeds` é considerado opcional. Essa definição de obrigatoriedade não consta da User Story.",
+ "“Novo nome” é interpretado como alteração de `firstname`; “novo preço”, como alteração de `totalprice`; “sobrenome”, como `lastname`.",
+ "Os dados sintéticos usam nomes textuais, preço inteiro positivo, pagamento como booleano e datas ISO `YYYY-MM-DD`. As datas são calculadas para 30 e 33 dias após a execução, presumindo-se que esse intervalo seja aceito.",
+ "Para garantir independência, presume-se criação sem autenticação por `POST /booking`, com status 200 e JSON contendo `bookingid` inteiro positivo. Cada teste de atualização cria sua própria reserva; TC08 cria uma reserva para cada omissão.",
+ "Presume-se exclusão por `DELETE /booking/{id}` com token para limpeza. São aceitos os status 200, 201 ou 204; falhas de limpeza são reportadas como avisos para preservar o resultado das verificações funcionais.",
+ "Presume-se persistência imediatamente consultável após atualizações bem-sucedidas, sem espera ou novas tentativas.",
+ "O critério 5 é aplicado tanto a PUT quanto a PATCH. O status 400 do critério 6 é aplicado à omissão de qualquer campo obrigatório presumido, inclusive datas internas, e ao objeto vazio.",
+ "TC08 é um único caso com várias verificações de omissão, implementado por uma única função, sem parametrização. Cada um dos nove casos possui exatamente uma função de teste.",
+ "Todas as chamadas têm timeout de conexão de 5 segundos e de leitura de 20 segundos. Redirecionamentos não são seguidos. Falhas de infraestrutura não são convertidas em sucesso nem em testes ignorados.",
+ "Para executar, salve como `test_reservas.py`, instale `pytest` e `requests` e execute `pytest -v test_reservas.py`."
+]

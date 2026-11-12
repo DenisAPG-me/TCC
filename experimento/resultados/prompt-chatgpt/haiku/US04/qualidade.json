@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 4,
+ "justificativas": {
+  "legibilidade": "nomes descritivos e constantes",
+  "estrutura": "helper _submeter e constantes, sem parametrizar",
+  "assercoes": "asserts de mensagem e ausencia de confirmacao",
+  "espera": "expect auto-wait, sem sleep",
+  "manutenibilidade": "constantes, mas get_by_label inexistente"
+ }
+}

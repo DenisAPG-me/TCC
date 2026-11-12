@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Criar reserva com todos os campos válidos",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Enviar um JSON completo com depósito pago.",
+  "esperado": "Status 200, identificador numérico e dados iguais aos enviados."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Consultar reserva criada",
+  "tipo": "Positivo",
+  "criterio": "2",
+  "passos": "Criar reserva; consultar pelo identificador retornado.",
+  "esperado": "Status 200 e todos os campos iguais aos enviados."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Consultar identificador inexistente",
+  "tipo": "Negativo",
+  "criterio": "3",
+  "passos": "Consultar o identificador `99999999`.",
+  "esperado": "Status 404."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Filtrar reservas por nome e sobrenome únicos",
+  "tipo": "Positivo",
+  "criterio": "4",
+  "passos": "Criar reserva com nomes únicos; listar usando ambos os filtros.",
+  "esperado": "A lista contém o identificador criado."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Preservar depósito não pago",
+  "tipo": "Borda",
+  "criterio": "1 e 2",
+  "passos": "Criar reserva com `depositpaid=false`; consultar pelo identificador.",
+  "esperado": "Ambas as respostas têm status 200 e preservam todos os dados, incluindo o booleano `false`."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Preservar datas na virada do ano",
+  "tipo": "Borda",
+  "criterio": "1 e 2",
+  "passos": "Criar reserva de `2028-12-31` a `2029-01-01`; consultar pelo identificador.",
+  "esperado": "Ambas as respostas têm status 200 e preservam todos os dados, incluindo as datas."
+ }
+]

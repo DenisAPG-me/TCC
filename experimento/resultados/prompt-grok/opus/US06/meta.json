@@ -1,0 +1,24 @@
+{
+ "model": "opus",
+ "us": "US06",
+ "cmd": [
+  "claude",
+  "-p",
+  "--model",
+  "opus",
+  "--tools",
+  "",
+  "--output-format",
+  "json"
+ ],
+ "returncode": 0,
+ "tempo_s": 63.67,
+ "tokens": {
+  "input": 7195,
+  "output": 6955,
+  "cost_usd": 0.17864960000000002
+ },
+ "n_casos_extraidos": 10,
+ "tem_codigo": true,
+ "stderr_tail": ""
+}

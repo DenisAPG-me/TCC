@@ -1,0 +1,40 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_ct01_login_com_campos_vazios[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct02_login_com_senha_incorreta[chromium]",
+   "outcome": "passed",
+   "falha_seletor": false,
+   "msg": ""
+  },
+  {
+   "nodeid": "script.py::test_ct03_login_com_credenciais_validas[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "de\\luna\\US05\\script.py:43: in test_ct03_login_com_credenciais_validas\n    expect(page.get_by_text(\"Single\", exact=True)).to_be_visible()\nE   AssertionError: Locator expected to be visible\nE   Actual value: None\nE   Error: strict mode violation: get_by_text(\"Single\", exact=True) resolved to 2 elements:\nE       1) <p id=\"typeSingle\">Single</p> aka locator(\"#typeSingle\")\nE       2) <option value=\"Single\">Single</option> aka locator(\"#type\")\nE    \nE   Call log:\nE     - Expect \"to_be_visible\" get_by_text(\"Single\", exact=True) with timeout 5000ms\nE     - waiting for get_by_text(\"Single\", exact=True)"
+  },
+  {
+   "nodeid": "script.py::test_ct04_logout_retorna_a_pagina_publica[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "lick\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Logout\")"
+  },
+  {
+   "nodeid": "script.py::test_ct05_acesso_direto_apos_logout_exige_login[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "lick\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:76: in send\n    return await self._connection.wrap_api_call(\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_connection.py:632: in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nE   Call log:\nE     - waiting for get_by_role(\"link\", name=\"Logout\")"
+  }
+ ],
+ "stdout_tail": "  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed\n    from _pytest.python import CallSpec2\n\nscript.py::test_ct01_login_com_campos_vazios[chromium]\n  <HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pytest\\fixtures.py:1392: PytestRemovedIn10Warning: Session-scoped fixtures defined as instance methods are deprecated.\n  Instance attributes set in the 'base_url' fixture will NOT be visible to test methods,\n  as each test gets a new instance while the fixture runs only once per class.\n  Use a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US05\\script.py::test_ct03_login_com_credenciais_validas[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US05\\script.py::test_ct04_logout_retorna_a_pagina_publica[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-claude\\luna\\US05\\script.py::test_ct05_acesso_direto_apos_logout_exige_login[chromium]\n3 failed, 2 passed, 2 warnings in 75.05s (0:01:15)\n",
+ "returncode": 1,
+ "duracao_s": 75.67
+}

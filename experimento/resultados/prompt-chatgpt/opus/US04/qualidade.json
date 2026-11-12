@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 5,
+ "espera": 5,
+ "manutenibilidade": 5,
+ "justificativas": {
+  "legibilidade": "nomes claros, constantes",
+  "estrutura": "helpers e dict de test ids, sem parametrizacao",
+  "assercoes": "asserts de negocio incl. ausencia de sucesso",
+  "espera": "expect auto-wait, sem sleep",
+  "manutenibilidade": "test ids, constantes, base_url"
+ }
+}

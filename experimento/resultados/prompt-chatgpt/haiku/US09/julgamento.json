@@ -1,0 +1,91 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US09-C01",
+  "US09-C02",
+  "US09-C03",
+  "US09-C04",
+  "US09-C06",
+  "US09-C07",
+  "US09-C09",
+  "US09-C10"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C01",
+    "US09-C02"
+   ],
+   "nota": "sem token 403 e GET 200"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C03"
+   ],
+   "nota": "token invalido"
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "token vazio 403, novo valido"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C04"
+   ],
+   "nota": "201"
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C06"
+   ],
+   "nota": "404 apos exclusao"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C07"
+   ],
+   "nota": "4xx repetido"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C10"
+   ],
+   "nota": "vizinha preservada"
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US09-C09"
+   ],
+   "nota": "lista vazia"
+  }
+ },
+ "falhas": []
+}

@@ -1,0 +1,175 @@
+## CASOS DE TESTE
+
+| ID | Título | Tipo | Critério de Aceitação | Passos | Resultado Esperado |
+|----|--------|------|-----------------------|--------|--------------------|
+| CT01 | Autenticação com credenciais válidas | Positivo | CA1 | Enviar requisição POST para o endpoint de autenticação com usuário admin e senha password123 | Receber status code 200 e um token de acesso não vazio na resposta |
+| CT02 | Autenticação com credenciais inválidas | Negativo | CA2 | Enviar requisição POST para o endpoint de autenticação com credenciais incorretas | Receber resposta sem token de acesso e informando o motivo Bad credentials |
+| CT03 | Atualização completa de reserva com token válido | Positivo | CA3 | Enviar requisição PUT para atualizar totalmente uma reserva existente enviando token válido, novo nome e novo preço | Receber status code 200 e a confirmação com os novos valores atualizados |
+| CT04 | Atualização parcial de reserva com token válido | Positivo | CA4 | Enviar requisição PATCH para atualizar parcialmente apenas o sobrenome de uma reserva existente com token válido | Receber status code 200, com o sobrenome alterado e os demais campos preservados |
+| CT05 | Tentar atualizar reserva sem token | Negativo | CA5 | Enviar requisição PUT para atualizar uma reserva existente sem enviar o cabeçalho de token de autenticação | Receber status code 403 Forbidden |
+| CT06 | Atualização completa com campos obrigatórios ausentes | Borda | CA6 | Enviar requisição PUT para atualizar uma reserva existente com token válido mas omitindo campos obrigatórios no payload | Receber status code 400 Bad Request |
+
+## SUPOSIÇÕES
+
+- Tecnologia escolhida: API REST utilizando `Python + pytest + requests`, conforme estabelecido nos requisitos para User Stories de API REST.
+- Endpoints assumidos baseados no padrão da Restful-Booker API: `/auth` para autenticação (POST), `/booking` para criação/listagem (POST/GET) e `/booking/{id}` para atualização completa (PUT) e parcial (PATCH).
+- Payload de autenticação assumido: `{"username": "admin", "password": "password123"}` para credenciais válidas e `{"username": "invalid", "password": "wrong"}` para credenciais inválidas.
+- Resposta de autenticação bem-sucedida assumida: JSON contendo a chave `token`.
+- Resposta de autenticação falha assumida: JSON contendo a chave `reason` com o valor `"Bad credentials"`.
+- Dados de teste dinâmicos: O script criará uma reserva prévia via POST em `/booking` antes de executar os testes de atualização (CT03, CT04, CT05, CT06) para garantir que exista uma reserva válida e ID conhecido.
+- Payload de atualização completa assumido: `{"firstname": "James", "lastname": "Brown", "totalprice": 111, "depositpaid": true, "bookingdates": {"checkin": "2018-01-01", "checkout": "2019-01-01"}, "additionalneeds": "Breakfast"}` com novos valores de nome e preço.
+- Payload de atualização parcial assumido: `{"lastname": "Smith"}` para alterar apenas o sobrenome.
+- Payload com campos obrigatórios ausentes assumido: objeto vazio `{}` ou payload incompleto faltando campos mandatórios como `firstname` ou `totalprice`.
+- Timeout padrão configurado em 10 segundos para todas as requisições `requests`.
+
+## SCRIPT
+
+```python
+import pytest
+import requests
+
+BASE_URL = "https://restful-booker.herokuapp.com"
+ADMIN_USER = "admin"
+ADMIN_PASS = "password123"
+INVALID_USER = "invalid"
+INVALID_PASS = "wrong"
+TIMEOUT = 10
+
+
+@pytest.fixture
+def auth_token():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": ADMIN_USER, "password": ADMIN_PASS},
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    data = response.json()
+    token = data.get("token")
+    assert token is not None
+    assert len(str(token)) > 0
+    return token
+
+
+@pytest.fixture
+def existing_booking_id(auth_token):
+    payload = {
+        "firstname": "John",
+        "lastname": "Doe",
+        "totalprice": 100,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2023-01-01", "checkout": "2023-01-10"},
+        "additionalneeds": "SuperBowl",
+    }
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    response = requests.post(f"{BASE_URL}/booking", json=payload, headers=headers, timeout=TIMEOUT)
+    assert response.status_code == 200
+    booking_id = response.json().get("bookingid")
+    assert booking_id is not None
+    return booking_id
+
+
+def test_ct01_login_com_credenciais_validas():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": ADMIN_USER, "password": ADMIN_PASS},
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    data = response.json()
+    token = data.get("token")
+    assert token is not None
+    assert len(str(token)) > 0
+
+
+def test_ct02_login_com_credenciais_invalidas():
+    response = requests.post(
+        f"{BASE_URL}/auth",
+        json={"username": INVALID_USER, "password": INVALID_PASS},
+        timeout=TIMEOUT,
+    )
+    data = response.json()
+    assert "token" not in data
+    assert data.get("reason") == "Bad credentials"
+
+
+def test_ct03_atualizacao_completa_reserva_token_valido(auth_token, existing_booking_id):
+    updated_payload = {
+        "firstname": "James",
+        "lastname": "Brown",
+        "totalprice": 250,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2023-01-01", "checkout": "2023-01-10"},
+        "additionalneeds": "Breakfast",
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Cookie": f"token={auth_token}",
+    }
+    response = requests.put(
+        f"{BASE_URL}/booking/{existing_booking_id}",
+        json=updated_payload,
+        headers=headers,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data.get("firstname") == "James"
+    assert data.get("totalprice") == 250
+
+
+def test_ct04_atualizacao_parcial_sobrenome_token_valido(auth_token, existing_booking_id):
+    partial_payload = {"lastname": "Smith"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Cookie": f"token={auth_token}",
+    }
+    response = requests.patch(
+        f"{BASE_URL}/booking/{existing_booking_id}",
+        json=partial_payload,
+        headers=headers,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data.get("lastname") == "Smith"
+    assert data.get("firstname") == "John"
+    assert data.get("totalprice") == 100
+
+
+def test_ct05_tentar_atualizar_reserva_sem_token(existing_booking_id):
+    updated_payload = {
+        "firstname": "James",
+        "lastname": "Brown",
+        "totalprice": 250,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2023-01-01", "checkout": "2023-01-10"},
+        "additionalneeds": "Breakfast",
+    }
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    response = requests.put(
+        f"{BASE_URL}/booking/{existing_booking_id}",
+        json=updated_payload,
+        headers=headers,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 403
+
+
+def test_ct06_atualizacao_completa_campos_obrigatorios_ausentes(auth_token, existing_booking_id):
+    invalid_payload = {"additionalneeds": "Dinner"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Cookie": f"token={auth_token}",
+    }
+    response = requests.put(
+        f"{BASE_URL}/booking/{existing_booking_id}",
+        json=invalid_payload,
+        headers=headers,
+        timeout=TIMEOUT,
+    )
+    assert response.status_code == 400
+```

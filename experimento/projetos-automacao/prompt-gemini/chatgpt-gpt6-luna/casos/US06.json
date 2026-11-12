@@ -1,0 +1,50 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Acessar painel e anotar contador de mensagens",
+  "tipo": "Positivo",
+  "criterio": "1",
+  "passos": "Abrir `/admin`, autenticar com a conta de demonstração e localizar o contador de Messages.",
+  "esperado": "O painel autenticado exibe Messages com um contador numérico legível."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Enviar mensagem válida pelo formulário de contato",
+  "tipo": "Positivo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial, preencher nome, e-mail, telefone, assunto e mensagem, e enviar.",
+  "esperado": "A página confirma o envio com `Thanks for getting in touch <nome>!`."
+ },
+ {
+  "id": "CT03",
+  "titulo": "Contador aumenta exatamente uma unidade após envio",
+  "tipo": "Positivo",
+  "criterio": "1, 2, 3",
+  "passos": "Autenticar e anotar o contador; enviar uma mensagem válida; autenticar novamente e comparar o contador.",
+  "esperado": "O contador após o envio é igual ao valor anterior mais um."
+ },
+ {
+  "id": "CT04",
+  "titulo": "Mensagem enviada aparece na caixa de mensagens",
+  "tipo": "Positivo",
+  "criterio": "2, 4",
+  "passos": "Enviar uma mensagem válida; abrir `/admin`, autenticar e abrir Messages.",
+  "esperado": "A lista contém o nome e o assunto enviados."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Acesso direto à caixa de mensagens após logout solicita login",
+  "tipo": "Negativo",
+  "criterio": "5",
+  "passos": "Autenticar, fazer logout e abrir diretamente `/admin/messages`.",
+  "esperado": "O painel apresenta a tela de login ou redireciona para ela; as mensagens não ficam acessíveis."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Formulário incompleto não confirma envio",
+  "tipo": "Negativo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial, deixar campos obrigatórios vazios e tentar enviar.",
+  "esperado": "O envio é bloqueado por validação e a confirmação de sucesso não aparece."
+ }
+]

@@ -1,0 +1,11 @@
+[
+ "A API usa `POST /auth` com JSON `{\"username\": ..., \"password\": ...}` e retorna o token em `token`.",
+ "A resposta de credenciais inválidas usa status 200 e inclui `reason: \"Bad credentials\"`; o critério não especifica o status.",
+ "Reservas podem ser criadas por `POST /booking`, sem autenticação, e a resposta contém `bookingid`.",
+ "Os dados de reserva seguem o formato usual inferido: `firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` (`checkin`, `checkout`) e `additionalneeds`.",
+ "A atualização completa usa `PUT /booking/{id}`, a parcial usa `PATCH /booking/{id}`, e a autenticação da reserva usa o cabeçalho `Cookie: token=<token>`.",
+ "Reserva criada por cada teste é dado de preparação; não há endpoint ou regra de limpeza especificada, então os testes não tentam excluí-la.",
+ "O caso de campos obrigatórios ausentes omite `firstname` e espera que a API rejeite o corpo com status 400.",
+ "O teste de atualização sem token omite o cabeçalho de autenticação; nenhum outro mecanismo de autenticação é usado.",
+ "Os testes usam a URL base fornecida e fazem chamadas HTTP reais; não há seletores de interface envolvidos."
+]

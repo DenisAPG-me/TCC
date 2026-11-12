@@ -1,0 +1,7 @@
+[
+ "Endpoint base URL: `https://restful-booker.herokuapp.com`",
+ "Endpoint de autenticação: `/auth` (método POST, payload `{\"username\": \"...\", \"password\": \"...\"}`)",
+ "Endpoint de reservas: `/booking` (GET para listar, POST para criar, PUT/PATCH para atualizar)",
+ "Cabeçalho de autorização para atualizações: `Cookie: token=<token>` ou `Authorization: Basic ...` dependendo da implementação, mas o padrão do Restful-Booker utiliza cookie `token=<token>` ou cabeçalho conforme documentação padrão do Restful-Booker (`Cookie: token=...`).",
+ "Cabeçalhos padrão exigidos: `Content-Type: application/json`, `Accept: application/json`."
+]

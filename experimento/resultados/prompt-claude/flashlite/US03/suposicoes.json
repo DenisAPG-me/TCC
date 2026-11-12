@@ -1,0 +1,13 @@
+[
+ "**Tecnologia Escolhida:** Python + pytest + plugin `pytest-playwright` com asserções `expect` da API síncrona do Playwright, conforme os requisitos técnicos obrigatórios de interface web.",
+ "**URL Base:** `https://practicesoftwaretesting.com/` definida em constante no topo do arquivo.",
+ "**Credenciais de Demonstração:** E-mail `customer@practicesoftwaretesting.com` e senha `welcome01` definidos em constantes.",
+ "**Seletores e Interações (UI):**",
+ "O link/botão para acessar a tela de login é encontrado por texto (`Sign in`) ou seletor de navegação.",
+ "O formulário de login possui campos de e-mail e senha identificados por rótulos (`Email` / `Password`) ou atributos de teste (`data-test=\"email\"`, `data-test=\"password\"`), com botão de submissão `Login` ou `Submit`.",
+ "As mensagens de erro no login aparecem associadas aos campos ou na página com os textos exatos `\"Email is required\"`, `\"Password is required\"` e `\"Invalid email or password\"`.",
+ "Produtos podem ser adicionados à partir da página inicial ou de listagem clicando em um produto e em `\"Add to cart\"`.",
+ "O fluxo de checkout possui etapas navegáveis: carrinho -> login/autenticação (se não logado) -> endereço (com campos obrigatórios: país, CEP, número, rua, cidade, estado) -> pagamento (seleção de cartão de crédito e preenchimento de dados fictícios válidos) -> confirmação.",
+ "Mensagem de sucesso de pagamento: `\"Payment was successful\"`.",
+ "Mensagem final do pedido: texto contendo `\"Thanks for your order! Your invoice number is INV-\"`."
+]

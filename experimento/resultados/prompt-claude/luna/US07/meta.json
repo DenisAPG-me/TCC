@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US07",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 14.38,
+ "tokens": {
+  "total": 5650
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "d item.get(\"bookingid\") == booking_id\n        for item in results\n    )\n\n\ndef test_ct05_filtrar_sem_reservas_correspondentes():\n    unique_suffix = uuid.uuid4().hex\n    response = requests.get(\n        f\"{BASE_URL}/booking\",\n        params={\n            \"firstname\": f\"Inexistente{unique_suffix}\",\n            \"lastname\": f\"NaoEncontrado{unique_suffix}\",\n        },\n        timeout=REQUEST_TIMEOUT,\n    )\n\n    assert response.status_code == 200\n    assert response.json() == []\n```\ntokens used\n5,650\n"
+}

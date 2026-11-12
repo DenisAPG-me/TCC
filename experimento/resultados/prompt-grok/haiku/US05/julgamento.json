@@ -1,0 +1,107 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US05-C01",
+  "US05-C02",
+  "US05-C03",
+  "US05-C04",
+  "US05-C05",
+  "US05-C06",
+  "US05-C07",
+  "US05-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "usuario vazio"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C03"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "senha vazia"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C04",
+    "US05-C05"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C06"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C07"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [
+    "US05-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_TC06_login_valido_lista_quarto_101_single",
+   "categoria": "seletor inexistente",
+   "nota": "role row com regex nao casa"
+  },
+  {
+   "teste": "test_TC09_acesso_direto_lista_quartos_apos_logout_exibe_login",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_label('Username') nao existe na tela de login"
+  }
+ ]
+}

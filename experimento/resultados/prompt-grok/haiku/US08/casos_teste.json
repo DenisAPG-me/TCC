@@ -1,0 +1,82 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "AC1",
+  "passos": "POST /auth com `admin` / `password123`",
+  "esperado": "Status 200 e campo `token` não vazio"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Autenticar com senha inválida",
+  "tipo": "negativo",
+  "criterio": "AC2",
+  "passos": "POST /auth com `admin` / senha errada",
+  "esperado": "Sem campo `token` e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "TC03",
+  "titulo": "Senha com caixa diferente não autentica",
+  "tipo": "borda",
+  "criterio": "AC2",
+  "passos": "POST /auth com `admin` / `PASSWORD123`",
+  "esperado": "Sem campo `token` e `reason` = \"Bad credentials\""
+ },
+ {
+  "id": "TC04",
+  "titulo": "Atualização completa com novo nome e preço",
+  "tipo": "positivo",
+  "criterio": "AC3",
+  "passos": "Criar reserva; PUT /booking/{id} com cookie `token`, novo `firstname`, `lastname` e `totalprice`",
+  "esperado": "Status 200 e corpo com os novos valores"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Atualização parcial altera apenas o sobrenome",
+  "tipo": "positivo",
+  "criterio": "AC4",
+  "passos": "Criar reserva; PATCH /booking/{id} com `{\"lastname\": \"Pereira\"}` e cookie `token`",
+  "esperado": "Status 200; `lastname` = \"Pereira\"; demais campos inalterados"
+ },
+ {
+  "id": "TC06",
+  "titulo": "PUT sem token é rejeitado",
+  "tipo": "negativo",
+  "criterio": "AC5",
+  "passos": "Criar reserva; PUT /booking/{id} sem cookie de autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC07",
+  "titulo": "PATCH sem token é rejeitado",
+  "tipo": "negativo",
+  "criterio": "AC5",
+  "passos": "Criar reserva; PATCH /booking/{id} sem cookie de autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC08",
+  "titulo": "PUT com token inválido é rejeitado",
+  "tipo": "borda",
+  "criterio": "AC5",
+  "passos": "Criar reserva; PUT /booking/{id} com cookie `token=invalido`",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "TC09",
+  "titulo": "PUT com campo obrigatório ausente",
+  "tipo": "negativo",
+  "criterio": "AC6",
+  "passos": "Criar reserva; PUT /booking/{id} com token válido e payload sem `firstname`",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "TC10",
+  "titulo": "PATCH com corpo vazio não altera a reserva",
+  "tipo": "borda",
+  "criterio": "AC4",
+  "passos": "Criar reserva; PATCH /booking/{id} com `{}` e token válido",
+  "esperado": "Status 200; todos os campos iguais aos originais"
+ }
+]

@@ -1,0 +1,13 @@
+[
+ "A URL base é `https://restful-booker.herokuapp.com`, definida na constante `BASE_URL`. Os caminhos são `/auth`, `/booking` e `/booking/{id}`.",
+ "Autenticação: o `token` é obtido em `POST /auth` e enviado no header `Cookie: token=<valor>`. A User Story não define o mecanismo; adotei o usado pela API Restful Booker.",
+ "Credenciais inválidas retornam o corpo `{\"reason\": \"Bad credentials\"}` sem `token`. O status HTTP não é especificado na story, então o teste TC02/TC03 não o valida.",
+ "A senha é sensível a maiúsculas e minúsculas.",
+ "Reservas de teste são criadas via `POST /booking` (sem autenticação) pela fixture `booking_id`, com o payload padrão: `firstname` \"Ana\", `lastname` \"Silva\", `totalprice` 100, `depositpaid` true, `bookingdates` (checkin 2026-01-10, checkout 2026-01-15) e `additionalneeds` \"Breakfast\". O ID é lido da chave `bookingid`.",
+ "As reservas criadas não são removidas ao final dos testes (dados de demonstração).",
+ "`PUT /booking/{id}` exige todos os campos obrigatórios (`firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates`); a ausência de qualquer um resulta em 400. Isso é suposto para TC09.",
+ "Sem token válido ou sem cookie, `PUT` e `PATCH` retornam 403.",
+ "`PATCH` com corpo `{}` retorna 200 e mantém a reserva inalterada (TC10).",
+ "A conexão com o host de demonstração está disponível e não há limite de requisições bloqueando a execução.",
+ "Os testes são independentes entre si: cada teste que altera dados cria a própria reserva."
+]

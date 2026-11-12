@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes e constantes claros",
+  "estrutura": "helpers (open_product, add_to_cart, money)",
+  "assercoes": "valida mensagem, badge, linha e total",
+  "espera": "auto-wait via expect, sem sleep",
+  "manutenibilidade": "role/label ambiguos e botao Update inexistente"
+ }
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Buscar produtos por palavra-chave",
+  "tipo": "Positivo",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; buscar por `hammer`; submeter a busca; verificar o termo indicado e os nomes listados",
+  "esperado": "A página indica a busca por `hammer`; todos os produtos exibidos têm `hammer` no nome, sem diferenciar maiúsculas de minúsculas"
+ },
+ {
+  "id": "CT02",
+  "titulo": "Buscar termo sem resultados",
+  "tipo": "Negativo",
+  "criterio": "CA2",
+  "passos": "Abrir a página inicial; buscar por `zzzzxx`; submeter a busca; verificar a mensagem e a listagem",
+  "esperado": "É exibida a mensagem `There are no products found.` e nenhum produto é listado"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Ordenar preços em ordem crescente",
+  "tipo": "Positivo",
+  "criterio": "CA3",
+  "passos": "Abrir a página inicial; selecionar ordenação por preço crescente; ler os preços exibidos",
+  "esperado": "Os preços exibidos na página estão em ordem crescente"
+ },
+ {
+  "id": "CT04",
+  "titulo": "Ordenar nomes em ordem decrescente",
+  "tipo": "Positivo",
+  "criterio": "CA4",
+  "passos": "Abrir a página inicial; selecionar ordenação por nome decrescente; ler os nomes exibidos",
+  "esperado": "Os nomes exibidos na página estão em ordem alfabética decrescente, sem diferenciar maiúsculas de minúsculas"
+ },
+ {
+  "id": "CT05",
+  "titulo": "Buscar termo com espaços nas extremidades",
+  "tipo": "Borda",
+  "criterio": "CA1",
+  "passos": "Abrir a página inicial; buscar por ` hammer `; submeter a busca; verificar termo indicado e nomes listados",
+  "esperado": "O termo é tratado como `hammer`; a página indica essa busca e todos os produtos exibidos contêm `hammer` no nome"
+ }
+]

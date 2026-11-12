@@ -1,0 +1,138 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Enviar formulário com todos os campos vazios",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Abrir a home; deixar nome, e-mail, telefone, assunto e mensagem vazios; clicar em Submit",
+  "esperado": "Cinco mensagens indicando que os campos não podem ficar em branco"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Enviar com apenas o e-mail vazio",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Preencher os demais campos com dados válidos; deixar e-mail vazio; clicar em Submit",
+  "esperado": "Uma mensagem de campo em branco"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Telefone com 10 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos; telefone com 10 dígitos; clicar em Submit",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "TC04",
+  "titulo": "Telefone com 11 caracteres (limite inferior)",
+  "tipo": "positivo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos; telefone com 11 dígitos; clicar em Submit",
+  "esperado": "Confirmação de sucesso exibida"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Telefone com 21 caracteres (limite superior)",
+  "tipo": "positivo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos; telefone com 21 dígitos; clicar em Submit",
+  "esperado": "Confirmação de sucesso exibida"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Telefone com 22 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA2",
+  "passos": "Preencher demais campos válidos; telefone com 22 dígitos; clicar em Submit",
+  "esperado": "Exibe \"Phone must be between 11 and 21 characters.\""
+ },
+ {
+  "id": "TC07",
+  "titulo": "Assunto com 4 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; assunto com 4 caracteres; clicar em Submit",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\""
+ },
+ {
+  "id": "TC08",
+  "titulo": "Assunto com 5 e mensagem com 20 caracteres (limites inferiores)",
+  "tipo": "positivo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; assunto com 5 caracteres; mensagem com 20 caracteres; clicar em Submit",
+  "esperado": "Confirmação de sucesso exibida"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Assunto com 101 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; assunto com 101 caracteres; clicar em Submit",
+  "esperado": "Exibe \"Subject must be between 5 and 100 characters.\""
+ },
+ {
+  "id": "TC10",
+  "titulo": "Mensagem com 19 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; mensagem com 19 caracteres; clicar em Submit",
+  "esperado": "Exibe \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "TC11",
+  "titulo": "Mensagem com 2001 caracteres",
+  "tipo": "negativo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; mensagem com 2001 caracteres; clicar em Submit",
+  "esperado": "Exibe \"Message must be between 20 and 2000 characters.\""
+ },
+ {
+  "id": "TC12",
+  "titulo": "Mensagem com 2000 caracteres (limite superior)",
+  "tipo": "positivo / borda",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; mensagem com 2000 caracteres; clicar em Submit",
+  "esperado": "Confirmação de sucesso exibida"
+ },
+ {
+  "id": "TC13",
+  "titulo": "Assunto com 4 e mensagem com 19 caracteres",
+  "tipo": "negativo",
+  "criterio": "CA3",
+  "passos": "Preencher demais campos válidos; assunto com 4 caracteres; mensagem com 19 caracteres; clicar em Submit",
+  "esperado": "Exibe as duas mensagens: assunto e mensagem"
+ },
+ {
+  "id": "TC14",
+  "titulo": "E-mail malformado \"bad\"",
+  "tipo": "negativo",
+  "criterio": "CA4",
+  "passos": "Preencher demais campos válidos; e-mail \"bad\"; clicar em Submit",
+  "esperado": "Exibe \"must be a well-formed email address\""
+ },
+ {
+  "id": "TC15",
+  "titulo": "E-mail sem \"@\"",
+  "tipo": "negativo",
+  "criterio": "CA4",
+  "passos": "Preencher demais campos válidos; e-mail \"usuario.exemplo.com\"; clicar em Submit",
+  "esperado": "Exibe \"must be a well-formed email address\""
+ },
+ {
+  "id": "TC16",
+  "titulo": "Envio com todos os dados válidos",
+  "tipo": "positivo",
+  "criterio": "CA5",
+  "passos": "Preencher todos os campos com dados válidos; clicar em Submit",
+  "esperado": "Exibe \"Thanks for getting in touch Maria Silva!\" e o assunto informado"
+ },
+ {
+  "id": "TC17",
+  "titulo": "Nome com acentos e espaços na confirmação",
+  "tipo": "positivo / borda",
+  "criterio": "CA5",
+  "passos": "Preencher nome \"José da Silva Ação\" e demais campos válidos; clicar em Submit",
+  "esperado": "Exibe \"Thanks for getting in touch José da Silva Ação!\""
+ }
+]

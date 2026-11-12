@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US08",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 11.72,
+ "tokens": {
+  "total": 4929
+ },
+ "n_casos_extraidos": 6,
+ "tem_codigo": true,
+ "stderr_tail": "_payload = {\n        \"lastname\": \"Incomplete\",\n        \"totalprice\": 200,\n        \"depositpaid\": True,\n        \"bookingdates\": {\n            \"checkin\": \"2026-12-10\",\n            \"checkout\": \"2026-12-15\",\n        },\n        \"additionalneeds\": \"None\",\n    }\n    response = requests.put(\n        f\"{BASE_URL}/booking/{booking_id}\",\n        json=incomplete_payload,\n        headers={\"Cookie\": f\"token={token}\"},\n        timeout=TIMEOUT,\n    )\n    assert response.status_code == 400\n```\ntokens used\n4,929\n"
+}

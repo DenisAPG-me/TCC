@@ -1,0 +1,175 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "alucinados": [
+  4
+ ],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US03-C01",
+  "US03-C02",
+  "US03-C05",
+  "US03-C08",
+  "US03-C09",
+  "US03-C11",
+  "US03-C12"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C01"
+   ],
+   "nota": ""
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so senha vazia"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "so email vazio"
+  },
+  "4": {
+   "classe": "alucinado",
+   "oraculo": [],
+   "nota": "asserta URL /auth/login; real permanece em /checkout com form de login"
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C05"
+   ],
+   "nota": ""
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C08"
+   ],
+   "nota": ""
+  },
+  "7": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C09"
+   ],
+   "nota": ""
+  },
+  "8": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "CEP vazio impede avanco"
+  },
+  "9": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C11"
+   ],
+   "nota": ""
+  },
+  "10": {
+   "classe": "valido",
+   "oraculo": [
+    "US03-C12"
+   ],
+   "nota": ""
+  },
+  "11": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "cartao vazio nao confirma"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_ct01_login_com_formulario_vazio_exibe_erros",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente (roteamento por path)"
+  },
+  {
+   "teste": "test_ct02_login_com_senha_incorreta_nao_cria_sessao",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct03_login_com_email_e_senha_vazia_exibe_erro_de_senha",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct04_login_com_email_vazio_exibe_erro_de_email",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct05_checkout_sem_autenticacao_redireciona_para_login",
+   "categoria": "espera/timing",
+   "nota": "page.goto expirou (30s) aguardando load"
+  },
+  {
+   "teste": "test_ct06_login_com_conta_demo_exibe_my_account",
+   "categoria": "espera/timing",
+   "nota": "page.goto expirou (30s) aguardando load"
+  },
+  {
+   "teste": "test_ct07_endereco_com_campos_obrigatorios_vazios_nao_avanca",
+   "categoria": "espera/timing",
+   "nota": "page.goto expirou (30s) aguardando load"
+  },
+  {
+   "teste": "test_ct08_endereco_com_campos_obrigatorios_preenchidos_avanca",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct09_cep_vazio_impede_avanco_para_pagamento",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct10_pagamento_com_cartao_valido_exibe_sucesso",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct11_confirmacao_do_pedido_exibe_numero_da_fatura",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  },
+  {
+   "teste": "test_ct12_pagamento_com_dados_de_cartao_vazios_nao_confirma",
+   "categoria": "URL/endpoint errado",
+   "nota": "rota '#/auth/login' inexistente"
+  }
+ ]
+}

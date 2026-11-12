@@ -1,0 +1,14 @@
+[
+ "A aplicação expõe atributos `data-test`; por isso o atributo de test id do Playwright é configurado para `data-test` via `playwright.selectors.set_test_id_attribute`.",
+ "Campo de busca: `data-test=\"search-query\"`; botão de busca: `data-test=\"search-submit\"`.",
+ "Legenda da busca: `data-test=\"search-caption\"`, contendo o termo pesquisado (ex.: \"Searched for: hammer\").",
+ "Cada card de produto exibe o nome em `data-test=\"product-name\"` e o preço em `data-test=\"product-price\"`, no formato \"$14.15\".",
+ "Seletor de ordenação: `<select data-test=\"sort\">`, com as opções de rótulo \"Price (Low - High)\" e \"Name (Z - A)\".",
+ "A mensagem de busca sem resultados é exatamente \"There are no products found.\".",
+ "A busca é feita no front-end por chamada a um endpoint cuja URL contém `/products/search`; a ordenação dispara uma requisição cuja URL contém `sort=`.",
+ "A busca não diferencia maiúsculas de minúsculas (TC02).",
+ "Ao ordenar após uma busca, o filtro da busca é mantido (TC07).",
+ "A ordenação por nome é validada em ordem decrescente sem diferenciar maiúsculas de minúsculas. A comparação é feita apenas entre os itens da página exibida (não há paginação na verificação).",
+ "A URL base é `https://practicesoftwaretesting.com/`. Ela pode ser sobrescrita com `--base-url`, usando a fixture `base_url` do pytest-base-url, que é instalado junto com o pytest-playwright.",
+ "Execução: `pip install pytest pytest-playwright && playwright install`, depois `pytest test_busca_ordenacao.py`."
+]

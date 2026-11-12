@@ -1,0 +1,9 @@
+[
+ "1. A API sob teste é o Restful Booker público em `https://restful-booker.herokuapp.com`.",
+ "2. O endpoint de autenticação é `POST /auth`, aceitando JSON `{ \"username\": \"...\", \"password\": \"...\" }` e retornando `{ \"token\": \"...\" }` no sucesso ou `{ \"reason\": \"Bad credentials\" }` no erro.",
+ "3. O token de autenticação é fornecido nas requisições protegidas (`PUT` e `PATCH`) através do cabeçalho `Cookie: token=<valor_do_token>`.",
+ "4. Os Critérios de Aceitação CA01 a CA06 mapeiam diretamente para os 6 casos de teste listados. Como a User Story menciona apenas a API de reservas e autenticação, nenhum teste de interface web (Playwright) é aplicável ou necessário, utilizando-se exclusivamente `requests` e `pytest` para testes de API REST.",
+ "5. Para os testes que exigem uma reserva existente (`CT003`, `CT004`, `CT005`, `CT006`), cada teste cria dinamicamente sua própria reserva via `POST /booking` na fase de preparação (setup) para garantir independência entre os testes.",
+ "6. A atualização completa (`PUT /booking/{id}`) requer o envio de todos os campos obrigatórios da estrutura de reserva (`firstname`, `lastname`, `totalprice`, `depositpaid`, `bookingdates` com `checkin` e `checkout`, `additionalneeds`). A ausência de campos obrigatórios no `CA06` é simulada enviando um objeto JSON vazio `{}` ou faltando campos principais como `firstname`.",
+ "7. O tempo limite (`timeout`) padrão para todas as requisições HTTP é de 10 segundos."
+]

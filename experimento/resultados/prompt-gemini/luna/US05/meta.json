@@ -1,0 +1,17 @@
+{
+ "model": "luna",
+ "us": "US05",
+ "cmd": [
+  "cmd.exe",
+  "/c",
+  "codex exec --skip-git-repo-check -m gpt-6-luna -s read-only -"
+ ],
+ "returncode": 0,
+ "tempo_s": 16.58,
+ "tokens": {
+  "total": 5444
+ },
+ "n_casos_extraidos": 5,
+ "tem_codigo": true,
+ "stderr_tail": "ible()\n\n    page.get_by_role(\"button\", name=\"Logout\").click()\n\n    expect(page).to_have_url(re.compile(r\"^https://automationintesting\\.online/?$\"))\n\n\ndef test_CT_05_lista_de_quartos_requer_login_apos_logout(page: Page) -> None:\n    open_login(page)\n    login(page)\n    page.get_by_role(\"button\", name=\"Logout\").click()\n\n    page.goto(f\"{BASE_URL}/admin/rooms\")\n\n    expect(page.get_by_label(\"Username\")).to_be_visible()\n    expect(page.get_by_label(\"Password\")).to_be_visible()\n```\ntokens used\n5,444\n"
+}

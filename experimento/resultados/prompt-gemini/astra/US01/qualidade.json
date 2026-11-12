@@ -1,0 +1,14 @@
+{
+ "legibilidade": 4,
+ "estrutura": 4,
+ "assercoes": 4,
+ "espera": 4,
+ "manutenibilidade": 3,
+ "justificativas": {
+  "legibilidade": "nomes claros, helpers curtos",
+  "estrutura": "helpers e fixtures de leitura, sem parametrizacao",
+  "assercoes": "compara DOM com resposta da API e ordem esperada; guards pytest.fail em excesso",
+  "espera": "expect com timeout e expect_response, sem sleep; espera acoplada ao formato da API",
+  "manutenibilidade": "constantes e data-test, mas acoplado ao formato JSON da API"
+ }
+}

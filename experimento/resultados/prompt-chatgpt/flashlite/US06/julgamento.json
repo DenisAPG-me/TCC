@@ -1,0 +1,115 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US06-C01",
+  "US06-C02",
+  "US06-C03",
+  "US06-C04",
+  "US06-C06"
+ ],
+ "criterios_cobertos": [
+  2,
+  4,
+  5
+ ],
+ "dado_inventado": 1,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C01"
+   ],
+   "nota": "contador apenas visivel"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C02"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C03"
+   ],
+   "nota": "verificacao apenas por API e texto Messages"
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C04"
+   ],
+   "nota": ""
+  },
+  "4": {
+   "classe": "valido",
+   "oraculo": [
+    "US06-C06"
+   ],
+   "nota": ""
+  },
+  "5": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "envio vazio nao confirma (novo)"
+  },
+  "6": {
+   "classe": "valido",
+   "oraculo": [],
+   "nota": "login invalido nega acesso (novo)"
+  },
+  "7": {
+   "classe": "invalido",
+   "oraculo": [],
+   "nota": "vago: sem resultado esperado definido"
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT001_visualizar_e_anotar_contador_de_mensagens_no_painel[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT002_envio_de_formulario_de_contato_com_dados_validos_pelo_visitante[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_placeholder inexistente"
+  },
+  {
+   "teste": "test_CT003_incrementar_contador_de_mensagens_apos_envio[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": "POST em BASE_URL/message/ retorna 404 (real /api/message)"
+  },
+  {
+   "teste": "test_CT004_exibir_mensagem_recem_enviada_na_caixa_de_mensagens[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT005_restricao_de_acesso_a_caixa_de_mensagens_apos_logout[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT007_tentativa_de_login_no_painel_com_credenciais_invalidas[chromium]",
+   "categoria": "URL/endpoint errado",
+   "nota": ""
+  },
+  {
+   "teste": "test_CT008_limite_de_caracteres_no_campo_de_assunto_do_contato[chromium]",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_placeholder inexistente"
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+[
+ {
+  "id": "CT01",
+  "titulo": "Enviar formulário vazio",
+  "tipo": "Negativo",
+  "criterio": "1",
+  "passos": "Abrir a página inicial e enviar sem preencher campos.",
+  "esperado": "Mensagens de obrigatoriedade para nome, e-mail, telefone, assunto e mensagem."
+ },
+ {
+  "id": "CT02",
+  "titulo": "Telefone com 10 caracteres",
+  "tipo": "Borda",
+  "criterio": "2",
+  "passos": "Preencher telefone com 10 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Phone must be between 11 and 21 characters.”"
+ },
+ {
+  "id": "CT03",
+  "titulo": "Assunto e mensagem abaixo dos mínimos simultaneamente",
+  "tipo": "Negativo",
+  "criterio": "3",
+  "passos": "Preencher assunto com 4 caracteres, mensagem com 19 e demais campos válidos; enviar.",
+  "esperado": "“Subject must be between 5 and 100 characters.” e “Message must be between 20 and 2000 characters.”"
+ },
+ {
+  "id": "CT04",
+  "titulo": "E-mail malformado",
+  "tipo": "Negativo",
+  "criterio": "4",
+  "passos": "Preencher e-mail com `bad` e demais campos válidos; enviar.",
+  "esperado": "“must be a well-formed email address”."
+ },
+ {
+  "id": "CT05",
+  "titulo": "Enviar todos os campos válidos",
+  "tipo": "Positivo",
+  "criterio": "5",
+  "passos": "Preencher todos os campos com dados válidos dentro dos limites; enviar.",
+  "esperado": "“Thanks for getting in touch Ana Silva!” e assunto informado."
+ },
+ {
+  "id": "CT06",
+  "titulo": "Telefone no mínimo de 11 caracteres",
+  "tipo": "Borda",
+  "criterio": "2 e 5",
+  "passos": "Preencher telefone com 11 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT07",
+  "titulo": "Telefone no máximo de 21 caracteres",
+  "tipo": "Borda",
+  "criterio": "2 e 5",
+  "passos": "Preencher telefone com 21 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT08",
+  "titulo": "Telefone com 22 caracteres",
+  "tipo": "Borda",
+  "criterio": "2",
+  "passos": "Preencher telefone com 22 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Phone must be between 11 and 21 characters.”"
+ },
+ {
+  "id": "CT09",
+  "titulo": "Assunto com 4 caracteres, isoladamente",
+  "tipo": "Borda",
+  "criterio": "3",
+  "passos": "Preencher assunto com 4 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Subject must be between 5 and 100 characters.”"
+ },
+ {
+  "id": "CT10",
+  "titulo": "Assunto no mínimo de 5 caracteres",
+  "tipo": "Borda",
+  "criterio": "3 e 5",
+  "passos": "Preencher assunto com 5 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT11",
+  "titulo": "Assunto no máximo de 100 caracteres",
+  "tipo": "Borda",
+  "criterio": "3 e 5",
+  "passos": "Preencher assunto com 100 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT12",
+  "titulo": "Assunto com 101 caracteres",
+  "tipo": "Borda",
+  "criterio": "3",
+  "passos": "Preencher assunto com 101 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Subject must be between 5 and 100 characters.”"
+ },
+ {
+  "id": "CT13",
+  "titulo": "Mensagem com 19 caracteres, isoladamente",
+  "tipo": "Borda",
+  "criterio": "3",
+  "passos": "Preencher mensagem com 19 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Message must be between 20 and 2000 characters.”"
+ },
+ {
+  "id": "CT14",
+  "titulo": "Mensagem no mínimo de 20 caracteres",
+  "tipo": "Borda",
+  "criterio": "3 e 5",
+  "passos": "Preencher mensagem com 20 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT15",
+  "titulo": "Mensagem no máximo de 2000 caracteres",
+  "tipo": "Borda",
+  "criterio": "3 e 5",
+  "passos": "Preencher mensagem com 2000 caracteres e demais campos válidos; enviar.",
+  "esperado": "Confirmação com nome e assunto informado."
+ },
+ {
+  "id": "CT16",
+  "titulo": "Mensagem com 2001 caracteres",
+  "tipo": "Borda",
+  "criterio": "3",
+  "passos": "Preencher mensagem com 2001 caracteres e demais campos válidos; enviar.",
+  "esperado": "“Message must be between 20 and 2000 characters.”"
+ }
+]

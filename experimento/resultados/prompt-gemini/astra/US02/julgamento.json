@@ -1,0 +1,77 @@
+{
+ "validos": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "alucinados": [],
+ "duplicados": [],
+ "casos_oraculo_cobertos": [
+  "US02-C02",
+  "US02-C03",
+  "US02-C04",
+  "US02-C05",
+  "US02-C08"
+ ],
+ "criterios_cobertos": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "dado_inventado": 0,
+ "mapa_casos": {
+  "0": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C02"
+   ],
+   "nota": "3 unidades toast+badge"
+  },
+  "1": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C03",
+    "US02-C04"
+   ],
+   "nota": ""
+  },
+  "2": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C05"
+   ],
+   "nota": ""
+  },
+  "3": {
+   "classe": "valido",
+   "oraculo": [
+    "US02-C08"
+   ],
+   "nota": ""
+  }
+ },
+ "falhas": [
+  {
+   "teste": "test_CT01",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role('link', name=produto, exact=True) nao encontra o cartao"
+  },
+  {
+   "teste": "test_CT02",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role('link', name=produto, exact=True) nao encontra o cartao"
+  },
+  {
+   "teste": "test_CT03",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role('link', name=produto, exact=True) nao encontra o cartao"
+  },
+  {
+   "teste": "test_CT04",
+   "categoria": "seletor inexistente",
+   "nota": "get_by_role('link', name=produto, exact=True) nao encontra o cartao"
+  }
+ ]
+}

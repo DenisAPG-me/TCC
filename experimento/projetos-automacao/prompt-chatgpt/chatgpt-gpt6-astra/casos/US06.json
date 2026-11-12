@@ -1,0 +1,42 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Registrar o contador de mensagens",
+  "tipo": "positivo",
+  "criterio": "1",
+  "passos": "Autenticar no painel; localizar Messages; ler e armazenar o contador",
+  "esperado": "O contador está visível e apresenta um inteiro não negativo que pode ser registrado"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Confirmar o envio do visitante",
+  "tipo": "positivo",
+  "criterio": "2",
+  "passos": "Abrir a página inicial; preencher todos os dados válidos; enviar",
+  "esperado": "É exibida a confirmação “Thanks for getting in touch \\<nome\\>!” com o nome informado"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Incrementar o contador após envio",
+  "tipo": "positivo",
+  "criterio": "1, 3",
+  "passos": "Autenticar; registrar contador; sair; enviar uma mensagem como visitante em outro contexto; autenticar novamente",
+  "esperado": "O contador passa a apresentar exatamente o valor anterior mais uma unidade"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Localizar a mensagem enviada na caixa",
+  "tipo": "positivo",
+  "criterio": "4",
+  "passos": "Enviar mensagem com nome e assunto únicos; autenticar como administrador; abrir Messages",
+  "esperado": "Uma mesma linha da lista apresenta exatamente o nome e o assunto enviados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Exigir autenticação após logout",
+  "tipo": "negativo",
+  "criterio": "5",
+  "passos": "Autenticar; abrir Messages; sair; navegar diretamente para a caixa no mesmo contexto",
+  "esperado": "O formulário de login é exibido, solicitando autenticação"
+ }
+]

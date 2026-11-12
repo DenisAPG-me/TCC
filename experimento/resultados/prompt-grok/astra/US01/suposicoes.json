@@ -1,0 +1,20 @@
+[
+ "Nenhuma informação externa foi consultada. O código é uma implementação hipotética, não executada nem validada contra o sistema real.",
+ "A interface é web. Utilizam-se Python, pytest, Playwright síncrono e o plugin oficial `pytest-playwright`, exigido pelos requisitos técnicos, além da biblioteca padrão do Python.",
+ "Salvar como `test_busca_ordenacao.py`. Preparação: `pip install pytest playwright pytest-playwright` e `playwright install chromium`. Execução: `pytest test_busca_ordenacao.py`.",
+ "A página inicial está em `/`, relativa à constante `BASE_URL`. Não são necessários login, consentimento ou outra preparação.",
+ "Cada teste recebe uma página isolada pela fixture oficial `page`.",
+ "Todos os seletores são suposições centralizadas no código: campo com rótulo acessível `Search`, botão `Search`, seletor HTML nativo com rótulo `Sort`, contêiner `data-testid=\"product-list\"`, cartões `product-card`, nomes `product-name`, preços `product-price`, indicação da busca `search-term` e mensagem vazia `empty-state`.",
+ "As opções de ordenação possuem valores `price,asc` e `name,desc`.",
+ "Para sincronizar atualizações, assume-se que o contêiner persiste mesmo vazio, possui `aria-busy=\"false\"` quando pronto e registra `data-applied-search` e `data-applied-sort` **somente quando os resultados correspondentes foram integralmente renderizados**. Esses atributos são contratos hipotéticos que precisam ser adaptados à interface real.",
+ "Na carga inicial, `data-applied-search=\"\"` e `data-applied-sort=\"default\"`. A ordenação padrão difere das opções testadas.",
+ "O indicador `search-term` contém exclusivamente o termo pesquisado. A mensagem vazia usa exatamente o texto do critério 2.",
+ "O catálogo contém pelo menos um produto com “hammer” no nome e pelo menos dois produtos na página inicial. “zzzzxx” não corresponde a nenhum produto.",
+ "A busca corresponde a substrings do nome, sem diferenciar maiúsculas de minúsculas. Buscar “ham” e buscar um nome completo são extensões assumidas do comportamento por palavra-chave; esses detalhes não estão explicitamente definidos na User Story.",
+ "O catálogo permanece estável durante cada teste. TC06 obtém seu dado dinamicamente e não exige nomes únicos.",
+ "Cada cartão contém exatamente um nome não vazio e um preço não negativo, em dólares, no formato `$12.34` ou `$1,234.56`. Os preços são comparados numericamente com `Decimal`.",
+ "A ordenação alfabética usa comparação de nomes sem distinção de caixa, após normalizar espaços. Assume-se que não existem regras especiais de idioma que alterem essa comparação.",
+ "Empates são válidos; não se exige um critério secundário de ordenação.",
+ "As verificações abrangem somente os cartões da página atual. Não se presume comportamento entre páginas, quantidade exata de resultados ou preservação de paginação.",
+ "Entrada vazia, espaços, acentos, caracteres especiais e combinação de busca com ordenação não possuem resultado definido nos critérios e não são tratados como requisitos adicionais."
+]

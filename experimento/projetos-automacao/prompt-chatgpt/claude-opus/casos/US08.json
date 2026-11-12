@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar POST /auth com admin / password123",
+  "esperado": "Status 200 e campo token presente, string e não vazio"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Autenticar com senha incorreta",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Enviar POST /auth com admin e senha inválida",
+  "esperado": "Corpo sem campo token e reason igual a \"Bad credentials\""
+ },
+ {
+  "id": "CT003",
+  "titulo": "Autenticar com usuário e senha vazios",
+  "tipo": "borda",
+  "criterio": "CA02",
+  "passos": "Enviar POST /auth com username e password como strings vazias",
+  "esperado": "Corpo sem campo token e reason igual a \"Bad credentials\""
+ },
+ {
+  "id": "CT004",
+  "titulo": "Atualização completa com novo nome e novo preço",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Criar reserva, obter token, enviar PUT /booking/{id} com payload completo alterando firstname, lastname e totalprice",
+  "esperado": "Status 200 e corpo com novo firstname, novo lastname, novo totalprice e demais campos enviados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Atualização parcial apenas do sobrenome",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva, obter token, enviar PATCH /booking/{id} apenas com lastname",
+  "esperado": "Status 200, lastname alterado e todos os demais campos iguais aos da reserva original"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Atualização completa sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva, enviar PUT /booking/{id} sem Cookie ou Authorization",
+  "esperado": "Status 403 e reserva inalterada na consulta GET posterior"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Atualização parcial sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva, enviar PATCH /booking/{id} sem Cookie ou Authorization",
+  "esperado": "Status 403 e reserva inalterada na consulta GET posterior"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Atualização completa sem firstname e totalprice",
+  "tipo": "negativo",
+  "criterio": "CA06",
+  "passos": "Criar reserva, obter token, enviar PUT /booking/{id} omitindo firstname e totalprice",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT009",
+  "titulo": "Atualização completa com corpo vazio",
+  "tipo": "borda",
+  "criterio": "CA06",
+  "passos": "Criar reserva, obter token, enviar PUT /booking/{id} com objeto JSON vazio",
+  "esperado": "Status 400"
+ }
+]

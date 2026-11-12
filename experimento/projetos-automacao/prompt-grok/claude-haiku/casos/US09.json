@@ -1,0 +1,74 @@
+[
+ {
+  "id": "TC01",
+  "titulo": "Excluir reserva sem token",
+  "tipo": "negativo",
+  "criterio": "CA1",
+  "passos": "Criar reserva; DELETE sem header de token; GET da reserva",
+  "esperado": "DELETE retorna 403; GET retorna 200"
+ },
+ {
+  "id": "TC02",
+  "titulo": "Excluir reserva com token inválido",
+  "tipo": "negativo",
+  "criterio": "CA2",
+  "passos": "Criar reserva; DELETE com token inválido; GET da reserva",
+  "esperado": "DELETE retorna 403; reserva continua existindo (GET 200)"
+ },
+ {
+  "id": "TC03",
+  "titulo": "Excluir reserva com token válido",
+  "tipo": "positivo",
+  "criterio": "CA3",
+  "passos": "Obter token com admin/password123; criar reserva; DELETE com token",
+  "esperado": "DELETE retorna 201"
+ },
+ {
+  "id": "TC04",
+  "titulo": "Consultar reserva excluída",
+  "tipo": "positivo",
+  "criterio": "CA4",
+  "passos": "Criar e excluir reserva com token válido; GET pelo mesmo ID",
+  "esperado": "GET retorna 404"
+ },
+ {
+  "id": "TC05",
+  "titulo": "Excluir reserva já excluída e isolamento de outra reserva",
+  "tipo": "negativo",
+  "criterio": "CA5",
+  "passos": "Criar reservas A e B; excluir A; excluir A novamente com token; GET de B",
+  "esperado": "Segunda exclusão retorna 4xx; reserva B permanece com 200 e dados íntegros"
+ },
+ {
+  "id": "TC06",
+  "titulo": "Listar por nome único após exclusão",
+  "tipo": "positivo",
+  "criterio": "CA6",
+  "passos": "Criar reserva com nome único; confirmar presença no filtro; excluir; filtrar por firstname/lastname",
+  "esperado": "Lista antes contém o ID; lista após exclusão é vazia"
+ },
+ {
+  "id": "TC07",
+  "titulo": "Excluir com token vazio",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "Criar reserva; DELETE com `token=` vazio; GET da reserva",
+  "esperado": "DELETE retorna 403; reserva continua existindo"
+ },
+ {
+  "id": "TC08",
+  "titulo": "Excluir reserva com ID inexistente",
+  "tipo": "borda",
+  "criterio": "CA5",
+  "passos": "Obter token válido; DELETE de ID 999999999",
+  "esperado": "Retorna status 4xx"
+ },
+ {
+  "id": "TC09",
+  "titulo": "Excluir após autenticação com credencial inválida",
+  "tipo": "borda",
+  "criterio": "CA1, CA2",
+  "passos": "POST /auth com senha errada; verificar ausência de token; DELETE sem token válido; GET da reserva",
+  "esperado": "Auth não retorna token; DELETE retorna 403; reserva continua existindo"
+ }
+]

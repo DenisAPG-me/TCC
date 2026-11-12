@@ -1,0 +1,46 @@
+{
+ "arquivo": "script.py",
+ "compila": 1,
+ "coletou": 1,
+ "tests": [
+  {
+   "nodeid": "script.py::test_CT01_busca_exibe_somente_nomes_com_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_CT02_pagina_indica_busca_por_hammer[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_CT03_termo_inexistente_exibe_mensagem[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_CT04_busca_sem_correspondencias_tem_zero_produtos[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_CT05_ordenacao_por_preco_crescente[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  },
+  {
+   "nodeid": "script.py::test_CT06_ordenacao_por_nome_de_z_a_a[chromium]",
+   "outcome": "failed",
+   "falha_seletor": true,
+   "msg": "rimento\\resultados_prompt-gemini\\astra\\US01\\script.py:77: in open_home\n    with page.expect_response(is_products_response, timeout=TIMEOUT_MS) as pending:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:85: in __exit__\n    self._event.value\n<HOME>\\AppData\\Roaming\\Python\\Python314\\site-packages\\playwright\\_impl\\_sync_base.py:59: in value\n    raise exception\nE   playwright._impl._errors.TimeoutError: Timeout 15000ms exceeded while waiting for event \"response\""
+  }
+ ],
+ "stdout_tail": "ns only once per class.\n  Use a @classmethod decorator below @pytest.fixture and set attributes on cls instead.\n  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method\n    fixturefunc = resolve_fixture_function(fixturedef, request)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT01_busca_exibe_somente_nomes_com_hammer[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT02_pagina_indica_busca_por_hammer[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT03_termo_inexistente_exibe_mensagem[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT04_busca_sem_correspondencias_tem_zero_produtos[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT05_ordenacao_por_preco_crescente[chromium]\nFAILED <HOME>\\Documents\\TCC 2 2026\\pesquisa\\experimento\\resultados_prompt-gemini\\astra\\US01\\script.py::test_CT06_ordenacao_por_nome_de_z_a_a[chromium]\n6 failed, 2 warnings in 91.46s (0:01:31)\n",
+ "returncode": 1,
+ "duracao_s": 92.13
+}

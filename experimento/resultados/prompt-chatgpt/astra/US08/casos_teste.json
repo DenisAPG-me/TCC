@@ -1,0 +1,66 @@
+[
+ {
+  "id": "CT001",
+  "titulo": "Autenticar com credenciais válidas",
+  "tipo": "positivo",
+  "criterio": "CA01",
+  "passos": "Enviar as credenciais admin / password123 à autenticação",
+  "esperado": "Status 200 e token textual não vazio"
+ },
+ {
+  "id": "CT002",
+  "titulo": "Rejeitar credenciais inválidas",
+  "tipo": "negativo",
+  "criterio": "CA02",
+  "passos": "Enviar usuário admin com senha incorreta",
+  "esperado": "Resposta sem a chave token e com motivo exatamente Bad credentials"
+ },
+ {
+  "id": "CT003",
+  "titulo": "Atualizar completamente uma reserva",
+  "tipo": "positivo",
+  "criterio": "CA03",
+  "passos": "Criar reserva; autenticar; enviar todos os campos com novo nome e preço; consultar reserva",
+  "esperado": "Status 200; resposta e consulta apresentam os dados atualizados"
+ },
+ {
+  "id": "CT004",
+  "titulo": "Atualizar somente o sobrenome",
+  "tipo": "positivo",
+  "criterio": "CA04",
+  "passos": "Criar reserva; autenticar; enviar somente lastname; consultar reserva",
+  "esperado": "Status 200; sobrenome atualizado e todos os demais campos preservados"
+ },
+ {
+  "id": "CT005",
+  "titulo": "Rejeitar atualização completa sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva; enviar atualização completa sem autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT006",
+  "titulo": "Rejeitar atualização parcial sem token",
+  "tipo": "negativo",
+  "criterio": "CA05",
+  "passos": "Criar reserva; enviar atualização apenas do sobrenome sem autenticação",
+  "esperado": "Status 403"
+ },
+ {
+  "id": "CT007",
+  "titulo": "Rejeitar atualização completa sem campos obrigatórios",
+  "tipo": "negativo",
+  "criterio": "CA06",
+  "passos": "Criar reserva; autenticar; enviar atualização completa omitindo firstname e totalprice",
+  "esperado": "Status 400"
+ },
+ {
+  "id": "CT008",
+  "titulo": "Rejeitar atualização completa com objeto vazio",
+  "tipo": "borda",
+  "criterio": "CA06",
+  "passos": "Criar reserva; autenticar; enviar objeto JSON vazio como atualização completa",
+  "esperado": "Status 400"
+ }
+]
