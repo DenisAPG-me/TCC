@@ -12,7 +12,7 @@ Quadro 4 – Rubrica de avaliação: métricas do grupo A
 | A2 | Nº de testes | Testes coletados pelo pytest. Automático |
 | A3 | % de testes que passam no alvo real | passed / coletados, execução real (Edge headless para UI; requests para API), script ORIGINAL, sem correção. Automático |
 | A4 | Falhas por seletor ou dado inventado | Contagem de testes que falham por (i) timeout/locator não encontrado/strict mode violation (automático, heurística na mensagem) ou (ii) valor/mensagem/endpoint/credencial que não existe no alvo [M] (campo dado_inventado em julgamento.json) |
-| A5 | Nº de critérios de aceitação cobertos | Critério coberto = existe ao menos um teste que o exercita E o verifica com asserção. Estimativa automática por palavras-chave dos critérios no script; valor final [M] (criterios_cobertos em julgamento.json) |
+| A5 | Nº de critérios de aceitação cobertos, em dois níveis | **A5a, identificado no código:** existe ao menos um teste que exercita o critério e o verifica com asserção (julgamento por resposta, `criterios_cobertos` em julgamento.json; estimativa automática por palavras-chave quando não há julgamento). **A5b, verificado na execução:** critérios de A5a em um script que o pytest coletou e executou; scripts não coletados recebem 0. A nota final usa A5b |
 | A6 | Correções manuais mínimas | Nº de linhas alteradas (adicionadas+removidas, difflib) entre script.py e script_corrigido.py, onde o corrigido é a menor edição que faz o script executar sem erro de import/sintaxe/infra (não conserta asserções nem lógica de negócio). Sem arquivo corrigido = 0. Medido por score.py |
 | A7 | Tempo de geração (s) | Relógio de parede da chamada da CLI |
 | A8 | Tokens (se disponíveis) | Claude: usage do JSON (input+cache+output); Codex: "tokens used" no stderr; Gemini: normalmente indisponível (NA) |
@@ -64,7 +64,7 @@ Componentes normalizados em [0,1]:
 
 - s = 1 – (A4 / max(A2,1)), mínimo 0
 
-- c = A5 / nº de critérios da US
+- c = A5b / nº de critérios da US (critérios verificados na execução)
 
 - m = max(0, 1 – A6/50)
 

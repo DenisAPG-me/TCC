@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Uso: python3 score.py [--root resultados] [--out scores.csv]. Aplica a rubrica.md ao que for automatizável;
+"""Uso: python3 experimento/harness/score.py [--root experimento/resultados] [--out experimento/analise/scores.csv]. Aplica a rubrica.md ao que for automatizável;
 julgamento.json / qualidade.json por resposta completam os itens [M]."""
 import argparse, csv, difflib, json, re
 from pathlib import Path
@@ -14,7 +14,18 @@ def jac(a, b):
 def load(p, default=None):
     p = Path(p); return json.loads(p.read_text(encoding="utf-8")) if p.exists() else default
 
-def score_dir(d, us, oracle):
+A4_CAUSAS = ("seletor inventado", "seletor ambíguo (strict mode)", "dado inventado (URL/rota)")
+
+def a4_da_taxonomia(path):
+    """A4 por resposta a partir da classificação das falhas (uma linha por teste que falhou ou errou)."""
+    cont = {}
+    if Path(path).exists():
+        for r in csv.DictReader(open(path, encoding="utf-8")):
+            if r["causa"] in A4_CAUSAS:
+                k = (r["autor_prompt"], r["modelo"], r["us"]); cont[k] = cont.get(k, 0) + 1
+    return cont
+
+def score_dir(d, us, oracle, a4=None):
     meta = load(d / "meta.json", {}); tr = load(d / "tests_result.json", {"tests": [], "compila": 0})
     casos = load(d / "casos_teste.json", []); jul = load(d / "julgamento.json"); qual = load(d / "qualidade.json")
     code = (d / "script.py").read_text(encoding="utf-8") if (d / "script.py").exists() else ""
@@ -25,7 +36,9 @@ def score_dir(d, us, oracle):
                      if l[:1] in "+-" and l[:3] not in ("+++", "---"))
     tests = tr.get("tests", []); n = len(tests); ok = sum(t["outcome"] == "passed" for t in tests)
     executa = int(tr.get("compila") == 1 and tr.get("coletou") == 1)
-    sel = sum(t["falha_seletor"] for t in tests if t["outcome"] != "passed") + (jul or {}).get("dado_inventado", 0)
+    chave = (d.parent.parent.name.removeprefix("prompt-"), d.parent.name, d.name)
+    if a4 is not None: sel = a4.get(chave, 0)
+    else: sel = sum(t["falha_seletor"] for t in tests if t["outcome"] != "passed") + (jul or {}).get("dado_inventado", 0)
     # critérios cobertos: manual se houver, senão heurística (strings entre aspas dos critérios presentes no script)
     if jul and "criterios_cobertos" in jul: cc, cc_src = len(jul["criterios_cobertos"]), "manual"
     else:
@@ -51,15 +64,16 @@ def score_dir(d, us, oracle):
     if qual:
         dims = [qual.get(x) for x in ("legibilidade", "estrutura", "assercoes", "espera", "manutenibilidade")]
         k = sum(dims) / 5 if None not in dims else None
-    comp = dict(e=executa, p=ok / n if n else 0, s=max(0, 1 - sel / max(n, 1)), c=cc / len(us["criterios"]),
+    cv = cc if executa else 0  # critérios verificados na execução: identificados no código de um script coletado e executado
+    comp = dict(e=executa, p=ok / n if n else 0, s=max(0, 1 - sel / max(n, 1)), c=cv / len(us["criterios"]),
                 m=max(0, 1 - linhas / 50) if (executa or fixed.exists()) else 0, r=recall, q=prec,
                 h=1 - alu / max(n_c, 1), k=(k / 5 if k is not None else None), t=max(0, 1 - (meta.get("tempo_s") or 0) / 300))
     parcial = k is None or src == "auto" or cc_src == "auto"
     nota = 100 * sum(W[x] * (comp[x] or 0) for x in W)
     tk = meta.get("tokens") or {}
     conf = int(not re.search(r"sync_playwright", code)) if us["tipo"] == "ui" else int(not re.search(r"playwright", code))
-    return dict(modelo=d.parent.name, conformidade_padrao=conf, us=d.name, tipo=us["tipo"], complexidade=us["complexidade"], executa=executa,
-                n_testes=n, pct_passam=round(comp["p"] * 100, 1), falhas_seletor_dado=sel, criterios_cobertos=cc,
+    return dict(autor_prompt=d.parent.parent.name.removeprefix("prompt-"), modelo=d.parent.name, conformidade_padrao=conf, us=d.name, tipo=us["tipo"], complexidade=us["complexidade"], executa=executa,
+                n_testes=n, pct_passam=round(comp["p"] * 100, 1), falhas_seletor_dado=sel, criterios_cobertos=cc, criterios_verificados=cv,
                 criterios_total=len(us["criterios"]), criterios_fonte=cc_src, linhas_corrigidas=linhas,
                 tempo_s=meta.get("tempo_s"), tokens=tk.get("total") or ((tk.get("input") or 0) + (tk.get("output") or 0)) or "",
                 casos_total=n_c, casos_validos=valid, recall=round(recall, 3), precisao=round(prec, 3), casos_novos=novos,
@@ -68,11 +82,13 @@ def score_dir(d, us, oracle):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", default=str(BASE / "resultados")); ap.add_argument("--out", default=str(BASE / "scores.csv"))
+    ap.add_argument("--root", default=str(BASE / "resultados")); ap.add_argument("--out", default=str(BASE / "analise" / "scores.csv"))
+    ap.add_argument("--falhas", default=str(BASE / "analise" / "classificacao_falhas_v3.csv"))
     a = ap.parse_args()
-    stories = {u["id"]: u for u in json.load(open(BASE / "user-stories.json", encoding="utf-8"))}
-    oracle = json.load(open(BASE / "oraculo-casos.json", encoding="utf-8"))
-    rows = [score_dir(d, stories[d.name], oracle[d.name]["casos"]) for d in sorted(Path(a.root).glob("[a-z]*/US*")) if d.name in stories]
+    a4 = a4_da_taxonomia(a.falhas) or None
+    stories = {u["id"]: u for u in json.load(open(BASE / "entradas" / "user-stories.json", encoding="utf-8"))}
+    oracle = json.load(open(BASE / "entradas" / "oraculo-casos.json", encoding="utf-8"))
+    rows = [score_dir(d, stories[d.name], oracle[d.name]["casos"], a4) for d in sorted(Path(a.root).glob("prompt-*/*/US*")) if d.name in stories]
     if rows:
         with open(a.out, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)

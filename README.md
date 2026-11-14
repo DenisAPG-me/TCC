@@ -11,7 +11,7 @@ Material complementar do Trabalho de Conclusão de Curso (Sistemas de Informaç�
 | `experimento/harness/` | Scripts de geração (`run_model.py`), execução (`run_tests.py`, `run_tests_all.py`) e cálculo da nota (`score.py`) |
 | `experimento/resultados/prompt-<autor>/<modelo>/<US>/` | Para cada uma das 180 respostas: resposta bruta, casos de teste, script, resultado da execução, julgamento dos casos e notas de qualidade |
 | `experimento/projetos-automacao/` | Os scripts gerados organizados como projetos pytest prontos para executar |
-| `experimento/analise/` | Notas por resposta (`scores_v3.csv`), resultados por US, estatística, classificação de falhas, custo por resposta e gráficos |
+| `experimento/analise/` | Notas por resposta (`scores.csv`), resultados por US, estatística (`estatistica.py`), classificação de falhas, custo por resposta e gráficos (`graficos.py`) |
 | `avaliacao-independente/` | Questionário do avaliador externo (planilha), guia de preenchimento e scripts de sorteio da amostra e de análise de concordância |
 
 ## Desenho do experimento
@@ -20,11 +20,26 @@ Material complementar do Trabalho de Conclusão de Curso (Sistemas de Informaç�
 - Nota final (0 a 100): `100 × (0,05e + 0,20p + 0,10s + 0,15c + 0,05m + 0,10r + 0,10q + 0,05h + 0,15k + 0,05t)`; ver `material-complementar/03-rubrica.md`.
 
 ## Executar os scripts gerados
+Requer Python 3.14 (testado com 3.14.4) e Microsoft Edge; os comandos são executados na raiz do repositório.
 ```
-pip install pytest pytest-playwright requests
+pip install pytest==9.2.0 pytest-playwright==0.10.0 requests==2.34.2
 playwright install
 cd experimento/projetos-automacao/prompt-<autor>/<configuração>
 pytest --browser chromium --browser-channel msedge
 ```
+`<autor>` é `grok`, `claude`, `chatgpt` ou `gemini`; `<configuração>` é `haiku`, `opus`, `luna`, `astra` ou `flashlite`. Os sistemas-alvo são públicos e podem ter mudado desde outubro de 2026, então o resultado pode diferir do registrado em `tests_result.json`.
+
+## Recalcular as notas e a estatística a partir dos registros
+```
+python experimento/harness/score.py
+pip install numpy==2.5.2 scipy==1.18.1 matplotlib==3.11.2
+python experimento/analise/estatistica.py
+python experimento/analise/atualiza_tabelas.py
+python experimento/analise/graficos.py
+```
+- `score.py` percorre `experimento/resultados/prompt-<autor>/<modelo>/<US>/`, lê as entradas em `experimento/entradas/` e a taxonomia de falhas (`experimento/analise/classificacao_falhas_v3.csv`, usada na métrica A4) e grava as 180 linhas em `experimento/analise/scores.csv`.
+- `estatistica.py` gera `estatistica.csv` (Wilcoxon, Friedman por permutação, Holm, tamanhos de efeito e IC 95% por bootstrap, com a User Story como unidade de inferência).
+- `atualiza_tabelas.py` atualiza `resultados_por_us.csv` e `tabelas_descritivas.csv`; `graficos.py` gera as figuras em `experimento/analise/graficos/`.
+- `scores_v3.csv` é a versão anterior das notas: difere de `scores.csv` só nos dois scripts do Flash-Lite que o pytest não coletou, que passaram a ter 0 critério verificado na execução (A5b).
 
 Caminhos locais nos registros de execução foram substituídos por `<HOME>`. As respostas individuais da avaliação independente não são publicadas, para preservar o anonimato dos avaliadores.

@@ -1,6 +1,8 @@
 # Resultados descritivos e estatística
 
-Os dados por resposta (180 linhas) estão nas planilhas resultados_por_us.csv e scores_v3.csv do experimento.
+Os dados por resposta (180 linhas) estão nas planilhas `experimento/analise/resultados_por_us.csv` e `experimento/analise/scores.csv`, geradas por `experimento/harness/score.py`; a estatística é gerada por `experimento/analise/estatistica.py` (`estatistica.csv`). A versão anterior das notas (`scores_v3.csv`) é mantida para comparação: as duas diferem apenas nos dois scripts do Flash-Lite que o pytest não coletou (grok/US09 e claude/US05), cuja cobertura de critérios verificada na execução passou a ser 0.
+
+Unidade de inferência: como os 36 pares de cada comparação (9 US × 4 autores de prompt) repetem as mesmas User Stories, as comparações entre modelos usam a média dos quatro autores em cada US e as 9 diferenças pareadas resultantes; os 36 pares aparecem só como descrição.
 
 Resultados por modelo e autor do prompt (9 respostas cada):
 
@@ -24,8 +26,8 @@ Quadro 16 – Resultados por modelo e autor do prompt
 | astra / claude | 78,6 ± 13,4 | 71,1 | 23,0 | 46,0 ± 47,3 | 40,6% (26/64) | 0,59 | 1,00 | 83,4 | 4,31 | 81,3 ± 102,3 |
 | astra / chatgpt | 75,6 ± 13,0 | 74,8 | 25,5 | 44,3 ± 41,9 | 43,1% (22/51) | 0,56 | 1,00 | 82,2 | 4,09 | 78,0 ± 104,3 |
 | astra / gemini | 76,3 ± 13,4 | 71,3 | 24,7 | 39,4 ± 47,2 | 39,5% (32/81) | 0,56 | 0,98 | 81,6 | 4,13 | 48,6 ± 16,8 |
-| flashlite / grok | 68,7 ± 10,9 | 64,8 | 7,6 | 38,0 ± 40,5 | 43,6% (17/39) | 0,47 | 1,00 | 78,9 | 2,33 | 8,8 ± 1,4 |
-| flashlite / claude | 71,2 ± 12,5 | 65,1 | 22,0 | 40,2 ± 45,8 | 47,5% (19/40) | 0,47 | 1,00 | 78,9 | 2,49 | 8,8 ± 1,2 |
+| flashlite / grok | 67,1 ± 12,9 | 64,8 | 9,7 | 38,0 ± 40,5 | 43,6% (17/39) | 0,47 | 1,00 | 78,9 | 2,33 | 8,8 ± 1,4 |
+| flashlite / claude | 69,5 ± 14,6 | 65,1 | 22,0 | 40,2 ± 45,8 | 47,5% (19/40) | 0,47 | 1,00 | 78,9 | 2,49 | 8,8 ± 1,2 |
 | flashlite / chatgpt | 70,9 ± 13,0 | 69,2 | 26,0 | 42,5 ± 45,8 | 41,7% (20/48) | 0,47 | 0,99 | 78,4 | 2,38 | 10,3 ± 1,9 |
 | flashlite / gemini | 69,3 ± 12,9 | 66,8 | 28,3 | 33,3 ± 50,0 | 35,6% (16/45) | 0,47 | 1,00 | 78,6 | 2,38 | 11,1 ± 5,1 |
 
@@ -37,63 +39,63 @@ Quadro 17 – Resultados por autor do prompt
 
 | Grupo | Nota final (média ± DP) | Mediana | IQR | % passam (média das proporções) | % passam agregado (aprov./coletados) | Recall | Precisão | Nota casos (0–100) | Qualidade (0–5) | Tempo (s) média ± DP |
 |---|---|---|---|---|---|---|---|---|---|---|
-| grok | 76,2 ± 14,2 | 79,1 | 25,4 | 49,3 ± 43,0 | 50,3% (170/338) | 0,57 | 0,99 | 82,6 | 3,45 | 40,0 ± 58,0 |
-| claude | 77,4 ± 12,9 | 72,7 | 24,1 | 48,3 ± 44,8 | 51,6% (163/316) | 0,56 | 0,99 | 81,9 | 3,60 | 42,3 ± 51,8 |
+| grok | 75,9 ± 14,7 | 79,1 | 25,4 | 49,3 ± 43,0 | 50,3% (170/338) | 0,57 | 0,99 | 82,6 | 3,45 | 40,0 ± 58,0 |
+| claude | 77,1 ± 13,5 | 72,7 | 24,1 | 48,3 ± 44,8 | 51,6% (163/316) | 0,56 | 0,99 | 81,9 | 3,60 | 42,3 ± 51,8 |
 | chatgpt | 76,1 ± 13,3 | 76,4 | 27,9 | 48,1 ± 43,6 | 47,3% (134/283) | 0,53 | 0,99 | 80,8 | 3,61 | 49,7 ± 55,7 |
 | gemini | 77,3 ± 13,3 | 75,8 | 24,7 | 49,2 ± 44,9 | 50,1% (177/353) | 0,56 | 0,99 | 81,9 | 3,56 | 36,2 ± 21,7 |
 
 Fonte: Elaborado pelo autor.
 
-Efeito do autor do prompt (Friedman por modelo, valor-p por permutação e Holm entre os cinco modelos):
+Efeito do autor do prompt (Friedman por modelo, 9 blocos = US, valor-p por permutação com 10.000 reamostras e Holm entre os cinco modelos):
 
 Quadro 18 – Friedman por modelo para o efeito do autor do prompt
 
 | Modelo | χ² Friedman (gl=3) | p assintótico | p permutação (10.000) | Kendall W | p Holm (perm., 5 modelos) |
 |---|---|---|---|---|---|
 | haiku | 0,10 | 0,992 | 0,996 | 0,004 | 1,000 |
-| opus | 2,83 | 0,419 | 0,433 | 0,105 | 1,000 |
-| luna | 3,88 | 0,275 | 0,291 | 0,144 | 1,000 |
-| astra | 5,09 | 0,165 | 0,167 | 0,189 | 0,835 |
-| flashlite | 2,28 | 0,516 | 0,538 | 0,085 | 1,000 |
+| opus | 2,83 | 0,419 | 0,437 | 0,105 | 1,000 |
+| luna | 3,88 | 0,275 | 0,287 | 0,144 | 1,000 |
+| astra | 5,09 | 0,165 | 0,164 | 0,189 | 0,821 |
+| flashlite | 2,28 | 0,516 | 0,534 | 0,085 | 1,000 |
 
 Fonte: Elaborado pelo autor.
 
-Comparações pareadas entre autores (Wilcoxon; Holm dentro de cada modelo):
+Comparações pareadas entre autores (Wilcoxon exato; Holm dentro de cada modelo):
 
 Quadro 19 – Comparações entre autores do prompt por modelo
 
-| Modelo | Par | Δ médio nota [IC95% bootstrap] | W (SciPy) | p SciPy exato | p permutação exata | p Holm (6) | r rank-biserial |
-|---|---|---|---|---|---|---|---|
-| haiku | grok − claude | +0,9 [-0,7; +3,1] | 19,0 | 0,734 | 0,734 | 1,000 | +0,16 |
-| haiku | grok − chatgpt | +0,1 [-4,9; +4,0] | 18,0 | 0,652 | 0,652 | 1,000 | +0,20 |
-| haiku | grok − gemini | -0,2 [-2,7; +2,4] | 17,0 | 0,945 | 0,945 | 1,000 | -0,06 |
-| haiku | claude − chatgpt | -0,9 [-4,8; +1,8] | 20,0 | 0,820 | 0,820 | 1,000 | +0,11 |
-| haiku | claude − gemini | -1,1 [-3,2; +1,2] | 14,0 | 0,359 | 0,344 | 1,000 | -0,38 |
-| haiku | chatgpt − gemini | -0,2 [-2,8; +2,7] | 18,0 | 0,652 | 0,652 | 1,000 | -0,20 |
-| opus | grok − claude | +1,3 [-1,5; +4,3] | 16,0 | 0,496 | 0,477 | 1,000 | +0,29 |
-| opus | grok − chatgpt | +1,8 [-1,0; +5,6] | 10,0 | 0,312 | 0,312 | 1,000 | +0,44 |
-| opus | grok − gemini | +0,3 [-3,6; +3,7] | 14,0 | 0,641 | 0,641 | 1,000 | +0,22 |
-| opus | claude − chatgpt | +0,6 [-0,4; +1,6] | 14,5 | 0,426 | 0,375 | 1,000 | +0,36 |
-| opus | claude − gemini | -1,0 [-5,8; +3,4] | 19,5 | 0,820 | 0,762 | 1,000 | -0,13 |
-| opus | chatgpt − gemini | -1,5 [-6,1; +2,6] | 16,0 | 0,844 | 0,844 | 1,000 | -0,11 |
-| luna | grok − claude | -0,6 [-3,1; +2,1] | 15,0 | 0,426 | 0,406 | 1,000 | -0,33 |
-| luna | grok − chatgpt | +3,0 [-0,4; +6,8] | 10,0 | 0,312 | 0,312 | 1,000 | +0,44 |
-| luna | grok − gemini | -2,2 [-6,0; +1,3] | 15,0 | 0,426 | 0,430 | 1,000 | -0,33 |
-| luna | claude − chatgpt | +3,6 [-0,2; +7,8] | 16,0 | 0,496 | 0,477 | 1,000 | +0,29 |
-| luna | claude − gemini | -1,6 [-5,4; +2,3] | 15,5 | 0,496 | 0,441 | 1,000 | -0,31 |
-| luna | chatgpt − gemini | -5,2 [-8,4; -2,2] | 3,0 | 0,020 | 0,020 | 0,117 | -0,87 |
-| astra | grok − claude | -5,0 [-8,1; -2,0] | 3,0 | 0,020 | 0,020 | 0,117 | -0,87 |
-| astra | grok − chatgpt | -2,0 [-6,8; +2,0] | 19,0 | 0,734 | 0,734 | 1,000 | -0,16 |
-| astra | grok − gemini | -2,7 [-6,7; +0,7] | 10,0 | 0,312 | 0,312 | 0,938 | -0,44 |
-| astra | claude − chatgpt | +3,0 [-0,5; +6,4] | 8,0 | 0,098 | 0,090 | 0,449 | +0,64 |
-| astra | claude − gemini | +2,3 [-1,3; +5,8] | 8,0 | 0,098 | 0,098 | 0,449 | +0,64 |
-| astra | chatgpt − gemini | -0,7 [-4,8; +4,3] | 21,0 | 0,910 | 0,883 | 1,000 | -0,07 |
-| flashlite | grok − claude | -2,5 [-9,1; +2,2] | 15,0 | 0,426 | 0,410 | 1,000 | -0,33 |
-| flashlite | grok − chatgpt | -2,1 [-8,0; +1,6] | 18,0 | 1,000 | 1,000 | 1,000 | +0,00 |
-| flashlite | grok − gemini | -0,6 [-7,4; +5,3] | 20,0 | 0,820 | 0,820 | 1,000 | +0,11 |
-| flashlite | claude − chatgpt | +0,3 [-2,9; +3,3] | 20,0 | 0,820 | 0,820 | 1,000 | +0,11 |
-| flashlite | claude − gemini | +1,9 [-0,9; +4,9] | 13,0 | 0,301 | 0,301 | 1,000 | +0,42 |
-| flashlite | chatgpt − gemini | +1,6 [-2,5; +6,6] | 14,0 | 0,641 | 0,641 | 1,000 | +0,22 |
+| Modelo | Par | Δ médio nota [IC95% bootstrap] | p exato | p permutação | p Holm (6) | r rank-biserial |
+|---|---|---|---|---|---|---|
+| haiku | grok − claude | +0,9 [-0,8; +3,1] | 0,734 | 0,733 | 1,000 | +0,16 |
+| haiku | grok − chatgpt | +0,1 [-4,8; +4,0] | 0,652 | 0,657 | 1,000 | +0,20 |
+| haiku | grok − gemini | -0,2 [-2,7; +2,4] | 0,945 | 0,949 | 1,000 | -0,06 |
+| haiku | claude − chatgpt | -0,9 [-4,8; +1,8] | 0,820 | 0,827 | 1,000 | +0,11 |
+| haiku | claude − gemini | -1,1 [-3,2; +1,2] | 0,359 | 0,348 | 1,000 | -0,38 |
+| haiku | chatgpt − gemini | -0,2 [-2,8; +2,8] | 0,652 | 0,650 | 1,000 | -0,20 |
+| opus | grok − claude | +1,3 [-1,5; +4,4] | 0,496 | 0,478 | 1,000 | +0,29 |
+| opus | grok − chatgpt | +1,8 [-1,1; +5,6] | 0,312 | 0,314 | 1,000 | +0,44 |
+| opus | grok − gemini | +0,3 [-3,7; +3,7] | 0,641 | 0,638 | 1,000 | +0,22 |
+| opus | claude − chatgpt | +0,6 [-0,4; +1,6] | 0,426 | 0,382 | 1,000 | +0,36 |
+| opus | claude − gemini | -1,0 [-5,7; +3,4] | 0,820 | 0,770 | 1,000 | -0,13 |
+| opus | chatgpt − gemini | -1,5 [-6,2; +2,7] | 0,844 | 0,843 | 1,000 | -0,11 |
+| luna | grok − claude | -0,6 [-3,0; +2,1] | 0,426 | 0,412 | 1,000 | -0,33 |
+| luna | grok − chatgpt | +3,0 [-0,6; +6,7] | 0,312 | 0,316 | 1,000 | +0,44 |
+| luna | grok − gemini | -2,2 [-6,0; +1,3] | 0,426 | 0,431 | 1,000 | -0,33 |
+| luna | claude − chatgpt | +3,6 [-0,2; +7,8] | 0,496 | 0,477 | 1,000 | +0,29 |
+| luna | claude − gemini | -1,6 [-5,4; +2,3] | 0,496 | 0,444 | 1,000 | -0,31 |
+| luna | chatgpt − gemini | -5,2 [-8,4; -2,1] | 0,020 | 0,020 | 0,117 | -0,87 |
+| astra | grok − claude | -5,0 [-8,0; -2,0] | 0,020 | 0,020 | 0,117 | -0,87 |
+| astra | grok − chatgpt | -2,0 [-6,9; +2,1] | 0,734 | 0,741 | 1,000 | -0,16 |
+| astra | grok − gemini | -2,7 [-6,6; +0,7] | 0,312 | 0,314 | 0,938 | -0,44 |
+| astra | claude − chatgpt | +3,0 [-0,5; +6,4] | 0,098 | 0,095 | 0,488 | +0,64 |
+| astra | claude − gemini | +2,3 [-1,2; +5,8] | 0,098 | 0,099 | 0,488 | +0,64 |
+| astra | chatgpt − gemini | -0,7 [-4,8; +4,3] | 0,910 | 0,885 | 1,000 | -0,07 |
+| flashlite | grok − claude | -2,5 [-13,7; +6,6] | 0,426 | 0,416 | 1,000 | -0,33 |
+| flashlite | grok − chatgpt | -3,8 [-12,9; +1,6] | 1,000 | 1,000 | 1,000 | 0,00 |
+| flashlite | grok − gemini | -2,2 [-12,3; +5,3] | 0,820 | 0,823 | 1,000 | +0,11 |
+| flashlite | claude − chatgpt | -1,3 [-7,1; +3,2] | 0,910 | 0,915 | 1,000 | +0,07 |
+| flashlite | claude − gemini | +0,2 [-5,7; +4,7] | 0,426 | 0,432 | 1,000 | +0,33 |
+| flashlite | chatgpt − gemini | +1,6 [-2,6; +6,6] | 0,641 | 0,643 | 1,000 | +0,22 |
 
 Fonte: Elaborado pelo autor.
 
@@ -114,34 +116,51 @@ Quadro 20 – Básico × avançado por autor do prompt
 
 Fonte: Elaborado pelo autor.
 
-Básico × avançado agregado (n = 36 pares não independentes):
+Básico × avançado (inferência com as 9 diferenças médias por US; os 36 pares só como descrição):
 
-Quadro 21 – Básico × avançado agregado
+Quadro 21 – Básico × avançado com a User Story como unidade
 
-| Família | Par | Δ médio [IC95%] | p SciPy (auto) | p permutação (MC 100k) | p Holm (2) | r rank-biserial | melhor/pior |
+| Família | Par | Métrica | Δ médio [IC95% bootstrap] | p exato (n = 9) | p permutação | r rank-biserial | Descrição dos 36 pares |
 |---|---|---|---|---|---|---|---|
-| Claude | haiku → opus | +11,3 [+7,2; +15,5] | 0,0000 | 0,0000 | 0,0000 | +0,88 | 33/3 |
-| GPT (Codex) | luna → astra | +3,5 [+1,7; +5,2] | 0,0003 | 0,0002 | 0,0002 | +0,67 | 28/8 |
+| Claude | haiku → opus | nota final | +11,3 [+4,4; +19,6] | 0,004 | 0,003 | +1,00 | avançado melhor em 33 de 36 pares; empates 0 |
+| GPT (Codex) | luna → astra | nota final | +3,5 [+2,6; +4,3] | 0,004 | 0,003 | +1,00 | avançado melhor em 28 de 36 pares; empates 0 |
+| Claude | haiku → opus | % passam | +31,2 [+8,5; +58,7] | 0,156 | 0,154 | +0,71 | avançado melhor em 19 de 36 pares; empates 14 |
+| GPT (Codex) | luna → astra | % passam | +3,0 [-1,7; +8,4] | 0,578 | 0,584 | +0,29 | avançado melhor em 6 de 36 pares; empates 25 |
+| Claude | haiku → opus | recall | -0,029 [-0,063; +0,007] | 0,195 | 0,195 | -0,56 | avançado melhor em 9 de 36 pares; empates 11 |
+| GPT (Codex) | luna → astra | recall | +0,056 [+0,003; +0,121] | 0,219 | 0,219 | +0,57 | avançado melhor em 13 de 36 pares; empates 20 |
 
 Fonte: Elaborado pelo autor.
 
-Efeito da mesma família (Holm entre os cinco modelos); agregado: Δ = −1,39 (IC 95% de −2,79 a +0,04), p = 0,0552, r = −0,33:
+Três versões básicas (Friedman com 9 blocos = US e valor = média dos 4 autores; pós-teste de Wilcoxon exato com Holm):
 
-Quadro 22 – Efeito do prompt da mesma família
+Quadro 22 – Comparação entre as versões básicas
 
-| Modelo | Família do prompt | Δ nota (próprio − outros) [IC95%] | p SciPy exato | p permutação exata | p Holm (5) | r rank-biserial |
-|---|---|---|---|---|---|---|
-| haiku | claude | -1,0 [-2,8; +0,7] | 0,570 | 0,570 | 1,000 | -0,24 |
-| opus | claude | -0,6 [-2,8; +1,6] | 0,652 | 0,652 | 1,000 | -0,20 |
-| luna | chatgpt | -3,9 [-7,1; -1,1] | 0,020 | 0,020 | 0,098 | -0,87 |
-| astra | chatgpt | -0,5 [-3,8; +3,5] | 0,426 | 0,426 | 1,000 | -0,33 |
-| flashlite | gemini | -1,0 [-5,2; +2,7] | 0,910 | 0,910 | 1,000 | -0,07 |
+| Teste | Δ médio ou χ² | p exato ou assintótico | p permutação | p Holm (3) | r ou W |
+|---|---|---|---|---|---|
+| Friedman (haiku, luna, flashlite) | 11,56 | 0,003 | 0,001 | – | 0,64 |
+| haiku − luna | 4,33 | 0,039 | 0,041 | 0,078 | 0,78 |
+| haiku − flashlite | 7,72 | 0,004 | 0,003 | 0,012 | 1,00 |
+| luna − flashlite | 3,39 | 0,250 | 0,251 | 0,250 | 0,47 |
+
+Fonte: Elaborado pelo autor.
+
+Efeito do prompt da própria família (Holm entre os cinco modelos). Agregado com a US como unidade (média dos cinco modelos em cada US, n = 9): Δ = -1,17 (IC 95% de -2,78 a +0,10), p = 0,129, r = -0,60:
+
+Quadro 23 – Efeito do prompt da mesma família
+
+| Modelo | Δ nota (próprio − outros) [IC95%] | p exato | p permutação | p Holm (5) | r rank-biserial |
+|---|---|---|---|---|---|
+| haiku | -1,0 [-2,8; +0,7] | 0,570 | 0,572 | 1,000 | -0,24 |
+| opus | -0,6 [-2,9; +1,6] | 0,652 | 0,661 | 1,000 | -0,20 |
+| luna | -3,9 [-7,1; -1,2] | 0,020 | 0,020 | 0,098 | -0,87 |
+| astra | -0,5 [-3,8; +3,5] | 0,426 | 0,432 | 1,000 | -0,33 |
+| flashlite | +0,1 [-4,8; +4,7] | 1,000 | 1,000 | 1,000 | +0,02 |
 
 Fonte: Elaborado pelo autor.
 
 Causas das falhas por autor do prompt:
 
-Quadro 23 – Causas das falhas por autor do prompt
+Quadro 24 – Causas das falhas por autor do prompt
 
 | Causa | grok | claude | chatgpt | gemini | Total |
 |---|---|---|---|---|---|
@@ -158,7 +177,7 @@ Fonte: Elaborado pelo autor.
 
 Manifestação imediata × causa identificada:
 
-Quadro 24 – Manifestação imediata e causa das falhas
+Quadro 25 – Manifestação imediata e causa das falhas
 
 | Manifestação imediata | seletor inventado | indeterminada | seletor ambíguo (strict mode) | divergência do alvo | uso incorreto da API do Playwright | espera/sincronização | dado inventado (URL/rota) | erro de sintaxe do código gerado |
 |---|---|---|---|---|---|---|---|---|
