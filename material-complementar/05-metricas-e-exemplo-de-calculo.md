@@ -43,7 +43,7 @@ Quadro 14 – Dimensões de qualidade do código por modelo
 
 Fonte: Elaborado pelo autor.
 
-Exemplo completo de cálculo (autor Grok, modelo Opus, US01: 7 testes coletados, 4 aprovados, 4 de 4 critérios cobertos, recall 0,538, qualidade 4,20, tempo 52,61 s). Nota final = 100 × Σ(peso × componente) = 83,52:
+Exemplo completo de cálculo (autor Grok, modelo Opus, US01: 7 testes coletados, 4 aprovados, 4 de 4 critérios verificados na execução, recall 0,538, qualidade 4,20, tempo 52,61 s). Nota final = 100 × Σ(peso × componente) = 83,52:
 
 Quadro 15 – Exemplo de cálculo da nota final de uma resposta
 
@@ -52,7 +52,7 @@ Quadro 15 – Exemplo de cálculo da nota final de uma resposta
 | e | A1 executa | 1,0000 | 0,05 | 5,00 |
 | p | A3 aprovados/coletados | 0,5710 | 0,2 | 11,42 |
 | s | 1 − A4/n | 1,0000 | 0,1 | 10,00 |
-| c | critérios cobertos/total | 1,0000 | 0,15 | 15,00 |
+| c | critérios verificados na execução/total | 1,0000 | 0,15 | 15,00 |
 | m | max(0, 1 − A6/50) | 1,0000 | 0,05 | 5,00 |
 | r | recall B3 | 0,5380 | 0,1 | 5,38 |
 | q | precisão B4 | 1,0000 | 0,1 | 10,00 |

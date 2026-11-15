@@ -2,7 +2,7 @@
 
 Preços oficiais por milhão de tokens, consultados em 31/10/2026; os agentes foram usados por assinatura ou cota gratuita, e os valores representam o custo equivalente de API.
 
-Quadro 25 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
+Quadro 26 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
 
 | Modelo | Entrada | Saída | Cache escrita | Cache leitura | Nível | Fonte |
 |---|---|---|---|---|---|---|
@@ -14,14 +14,14 @@ Quadro 25 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
 
 Fonte: Elaborado pelo autor.
 
-Quadro 26 – Custo médio por resposta e por ponto de nota
+Quadro 27 – Custo médio por resposta e por ponto de nota
 
-| Modelo | Nota média (v3) | Custo por resposta (média ± DP) | Origem | Custo por ponto de nota |
+| Modelo | Nota média | Custo por resposta (média ± DP) | Origem | Custo por ponto de nota |
 |---|---|---|---|---|
-| Haiku 5.5 | 76,91 | US$ 0,00781 ± 0,00309 | real (CLI) | 0,000101 |
-| Opus 5.5 | 88,18 | US$ 0,17431 ± 0,03751 | real (CLI) | 0,001977 |
+| Haiku 5.5 | 76,91 | US$ 0,00781 ± 0,00309 | valor reportado pelo Claude Code | 0,000101 |
+| Opus 5.5 | 88,18 | US$ 0,17431 ± 0,03751 | valor reportado pelo Claude Code | 0,001977 |
 | GPT-6-Luna | 72,58 | US$ 0,00150 ± 0,00042 | tabela + divisão real | 0,0000206 |
 | GPT-6-Astra | 76,05 | US$ 0,19068 ± 0,05227 | tabela + divisão real | 0,002507 |
-| Gemini 3.5 Flash-Lite | 70,02 | US$ 0,01093 ± 0,00126 | tabela Paid Standard (execução gratuita) | 0,000156 |
+| Gemini 3.5 Flash-Lite | 69,19 | US$ 0,01093 ± 0,00126 | tabela Paid Standard (execução gratuita) | 0,000158 |
 
 Fonte: Elaborado pelo autor.
