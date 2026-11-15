@@ -55,8 +55,9 @@ def rotulos(ax, med, y):
             yy = min(t[1] for t in pts); dy = -34
         else:
             yy = max(t[1] for t in pts); dy = 22
-        x = sum(t[0] for t in pts) / len(pts)
-        ax.annotate(nome, (x, yy), xytext=(0, dy), textcoords="offset points", ha="center", fontsize=14, fontweight="bold")
+        x, ha = sum(t[0] for t in pts) / len(pts), "center"
+        if m == "flashlite": x, ha = 1, "left"  # junto ao eixo, para não encostar nos pontos do Luna
+        ax.annotate(nome, (x, yy), xytext=(0, dy), textcoords="offset points", ha=ha, fontsize=14, fontweight="bold")
 
 
 def grafico(med, y, ylabel, titulo, arquivo, tamanho=False):
@@ -64,7 +65,8 @@ def grafico(med, y, ylabel, titulo, arquivo, tamanho=False):
     for (m, a), v in med.items():
         ax.scatter(v[0], v[y], s=tam(v[2]) if tamanho else 140, marker=AUTORES[a][1], color=MODELOS[m][1],
                    edgecolors="black", linewidths=1.6 if not tamanho else 1.0, alpha=0.88 if tamanho else 1, zorder=3)
-    ys = [v[y] for v in med.values()]; ax.set_ylim(min(ys) - 5, max(ys) + 4)
+    ys = [v[y] for v in med.values()]; amp = max(ys) - min(ys)
+    ax.set_ylim(min(ys) - 0.16 * amp, max(ys) + 0.12 * amp); ax.set_xlim(0, max(v[0] for v in med.values()) + 6)
     rotulos(ax, med, y); eixo(ax, ylabel, titulo); legendas(ax, tamanho)
     fig.subplots_adjust(left=0.09, right=0.76, top=0.93, bottom=0.11); fig.savefig(arquivo); plt.close(fig)
 
