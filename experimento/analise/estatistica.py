@@ -69,7 +69,7 @@ def main():
     media_us = lambda tab, m, u: np.mean([tab[(au, m, u)] for au in AUTORES])
     out = []
 
-    # F2: básico x avançado em cada família (inferência com as 9 médias por US)
+    # F2: básico x avançado em cada família (inferência com as 9 médias por US; Holm entre as 6 comparações)
     for col in ("nota_final", "pct_passam", "recall"):
         tab = val(col)
         for b, av in (("haiku", "opus"), ("luna", "astra")):
@@ -79,6 +79,8 @@ def main():
             out.append(dict(familia="F2-por-US", alvo=f"{b}-{av}", metrica=col, n=9, delta=np.mean(d9), ic95_inf=lo, ic95_sup=hi,
                             p_exato=p, p_permutacao=pp, efeito_r_ou_W=rank_biserial(d9),
                             descricao=f"avançado melhor em {sum(x > 0 for x in d36)} de 36 pares; empates {sum(x == 0 for x in d36)}"))
+    f2 = [r for r in out if r["familia"] == "F2-por-US"]
+    for r, ph in zip(f2, holm(np.array([r["p_exato"] for r in f2]))): r["p_holm"] = ph
 
     # F4: três versões básicas (Friedman com 9 blocos = US, valor = média dos 4 prompts) e pós-teste de Wilcoxon com Holm
     basicos = ["haiku", "luna", "flashlite"]

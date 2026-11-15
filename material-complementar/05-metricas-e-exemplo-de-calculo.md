@@ -2,7 +2,7 @@
 
 Contagem de testes por modelo (A1 = compila e foi coletado pelo pytest; A3 = aprovados/coletados):
 
-Quadro 12 – Respostas e testes por modelo
+Quadro MC4 – Respostas e testes por modelo
 
 | Escopo | Respostas | Compilam | Coletaram (A1=1) | Testes coletados | Aprovados | Falhos | Erros | Outros |
 |---|---|---|---|---|---|---|---|---|
@@ -17,7 +17,7 @@ Fonte: Elaborado pelo autor.
 
 Casos de teste listados, válidos, duplicados, alucinados e novos válidos:
 
-Quadro 13 – Classificação dos casos de teste por modelo
+Quadro MC5 – Classificação dos casos de teste por modelo
 
 | Modelo | Casos listados | Válidos | Duplicados | Alucinados | Novos válidos (soma) | Inválidos por outro motivo (soma) |
 |---|---|---|---|---|---|---|
@@ -31,7 +31,7 @@ Fonte: Elaborado pelo autor.
 
 Médias das cinco dimensões de qualidade do código (qualidade = média aritmética de C1 a C5):
 
-Quadro 14 – Dimensões de qualidade do código por modelo
+Quadro MC6 – Dimensões de qualidade do código por modelo
 
 | Modelo | C1 | C2 | C3 | C4 | C5 | Média (C) |
 |---|---|---|---|---|---|---|
@@ -45,7 +45,7 @@ Fonte: Elaborado pelo autor.
 
 Exemplo completo de cálculo (autor Grok, modelo Opus, US01: 7 testes coletados, 4 aprovados, 4 de 4 critérios verificados na execução, recall 0,538, qualidade 4,20, tempo 52,61 s). Nota final = 100 × Σ(peso × componente) = 83,52:
 
-Quadro 15 – Exemplo de cálculo da nota final de uma resposta
+Quadro MC7 – Exemplo de cálculo da nota final de uma resposta
 
 | Comp. | Fórmula | Valor | Peso | Contribuição (pontos) |
 |---|---|---|---|---|

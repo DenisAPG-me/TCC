@@ -2,7 +2,7 @@
 
 O oráculo reúne 114 casos (55 positivos, 37 negativos e 22 de borda), dos quais 77 derivam diretamente dos critérios de aceitação e 37 são complementares. A coluna Critérios indica os critérios de aceitação da User Story a que cada caso se refere.
 
-Quadro 6 – Oráculo de casos de teste (114 casos)
+Quadro MC3 – Oráculo de casos de teste (114 casos)
 
 | Id | Tipo | Descrição | Critérios |
 |---|---|---|---|

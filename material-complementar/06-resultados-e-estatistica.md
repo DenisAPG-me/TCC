@@ -6,7 +6,7 @@ Unidade de inferência: como os 36 pares de cada comparação (9 US × 4 autores
 
 Resultados por modelo e autor do prompt (9 respostas cada):
 
-Quadro 16 – Resultados por modelo e autor do prompt
+Quadro MC8 – Resultados por modelo e autor do prompt
 
 | Grupo | Nota final (média ± DP) | Mediana | IQR | % passam (média das proporções) | % passam agregado (aprov./coletados) | Recall | Precisão | Nota casos (0–100) | Qualidade (0–5) | Tempo (s) média ± DP |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -35,7 +35,7 @@ Fonte: Elaborado pelo autor.
 
 Resultados por autor do prompt (45 respostas cada):
 
-Quadro 17 – Resultados por autor do prompt
+Quadro MC9 – Resultados por autor do prompt
 
 | Grupo | Nota final (média ± DP) | Mediana | IQR | % passam (média das proporções) | % passam agregado (aprov./coletados) | Recall | Precisão | Nota casos (0–100) | Qualidade (0–5) | Tempo (s) média ± DP |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -48,7 +48,7 @@ Fonte: Elaborado pelo autor.
 
 Efeito do autor do prompt (Friedman por modelo, 9 blocos = US, valor-p por permutação com 10.000 reamostras e Holm entre os cinco modelos):
 
-Quadro 18 – Friedman por modelo para o efeito do autor do prompt
+Quadro MC10 – Friedman por modelo para o efeito do autor do prompt
 
 | Modelo | χ² Friedman (gl=3) | p assintótico | p permutação (10.000) | Kendall W | p Holm (perm., 5 modelos) |
 |---|---|---|---|---|---|
@@ -62,7 +62,7 @@ Fonte: Elaborado pelo autor.
 
 Comparações pareadas entre autores (Wilcoxon exato; Holm dentro de cada modelo):
 
-Quadro 19 – Comparações entre autores do prompt por modelo
+Quadro MC11 – Comparações entre autores do prompt por modelo
 
 | Modelo | Par | Δ médio nota [IC95% bootstrap] | p exato | p permutação | p Holm (6) | r rank-biserial |
 |---|---|---|---|---|---|---|
@@ -101,7 +101,7 @@ Fonte: Elaborado pelo autor.
 
 Básico × avançado por autor (Holm entre as 8 comparações):
 
-Quadro 20 – Básico × avançado por autor do prompt
+Quadro MC12 – Básico × avançado por autor do prompt
 
 | Autor | Família | Par | Δ médio [IC95%] | W | p SciPy exato | p permutação exata | p Holm (8) | r rank-biserial | US melhor/pior |
 |---|---|---|---|---|---|---|---|---|---|
@@ -116,24 +116,24 @@ Quadro 20 – Básico × avançado por autor do prompt
 
 Fonte: Elaborado pelo autor.
 
-Básico × avançado (inferência com as 9 diferenças médias por US; os 36 pares só como descrição):
+Básico × avançado (inferência com as 9 diferenças médias por US e Holm entre as 6 comparações; os 36 pares só como descrição):
 
-Quadro 21 – Básico × avançado com a User Story como unidade
+Quadro MC13 – Básico × avançado com a User Story como unidade
 
-| Família | Par | Métrica | Δ médio [IC95% bootstrap] | p exato (n = 9) | p permutação | r rank-biserial | Descrição dos 36 pares |
-|---|---|---|---|---|---|---|---|
-| Claude | haiku → opus | nota final | +11,3 [+4,4; +19,6] | 0,004 | 0,003 | +1,00 | avançado melhor em 33 de 36 pares; empates 0 |
-| GPT (Codex) | luna → astra | nota final | +3,5 [+2,6; +4,3] | 0,004 | 0,003 | +1,00 | avançado melhor em 28 de 36 pares; empates 0 |
-| Claude | haiku → opus | % passam | +31,2 [+8,5; +58,7] | 0,156 | 0,154 | +0,71 | avançado melhor em 19 de 36 pares; empates 14 |
-| GPT (Codex) | luna → astra | % passam | +3,0 [-1,7; +8,4] | 0,578 | 0,584 | +0,29 | avançado melhor em 6 de 36 pares; empates 25 |
-| Claude | haiku → opus | recall | -0,029 [-0,063; +0,007] | 0,195 | 0,195 | -0,56 | avançado melhor em 9 de 36 pares; empates 11 |
-| GPT (Codex) | luna → astra | recall | +0,056 [+0,003; +0,121] | 0,219 | 0,219 | +0,57 | avançado melhor em 13 de 36 pares; empates 20 |
+| Família | Par | Métrica | Δ médio [IC95% bootstrap] | p exato (n = 9) | p permutação | p Holm (6) | r rank-biserial | Descrição dos 36 pares |
+|---|---|---|---|---|---|---|---|---|
+| Claude | haiku → opus | nota final | +11,3 [+4,4; +19,6] | 0,004 | 0,003 | 0,023 | +1,00 | avançado melhor em 33 de 36 pares; empates 0 |
+| GPT (Codex) | luna → astra | nota final | +3,5 [+2,6; +4,3] | 0,004 | 0,003 | 0,023 | +1,00 | avançado melhor em 28 de 36 pares; empates 0 |
+| Claude | haiku → opus | % passam | +31,2 [+8,5; +58,7] | 0,156 | 0,154 | 0,625 | +0,71 | avançado melhor em 19 de 36 pares; empates 14 |
+| GPT (Codex) | luna → astra | % passam | +3,0 [-1,7; +8,4] | 0,578 | 0,584 | 0,625 | +0,29 | avançado melhor em 6 de 36 pares; empates 25 |
+| Claude | haiku → opus | recall | -0,029 [-0,063; +0,007] | 0,195 | 0,195 | 0,625 | -0,56 | avançado melhor em 9 de 36 pares; empates 11 |
+| GPT (Codex) | luna → astra | recall | +0,056 [+0,003; +0,121] | 0,219 | 0,219 | 0,625 | +0,57 | avançado melhor em 13 de 36 pares; empates 20 |
 
 Fonte: Elaborado pelo autor.
 
 Três versões básicas (Friedman com 9 blocos = US e valor = média dos 4 autores; pós-teste de Wilcoxon exato com Holm):
 
-Quadro 22 – Comparação entre as versões básicas
+Quadro MC14 – Comparação entre as versões básicas
 
 | Teste | Δ médio ou χ² | p exato ou assintótico | p permutação | p Holm (3) | r ou W |
 |---|---|---|---|---|---|
@@ -146,7 +146,7 @@ Fonte: Elaborado pelo autor.
 
 Efeito do prompt da própria família (Holm entre os cinco modelos). Agregado com a US como unidade (média dos cinco modelos em cada US, n = 9): Δ = -1,17 (IC 95% de -2,78 a +0,10), p = 0,129, r = -0,60:
 
-Quadro 23 – Efeito do prompt da mesma família
+Quadro MC15 – Efeito do prompt da mesma família
 
 | Modelo | Δ nota (próprio − outros) [IC95%] | p exato | p permutação | p Holm (5) | r rank-biserial |
 |---|---|---|---|---|---|
@@ -160,7 +160,7 @@ Fonte: Elaborado pelo autor.
 
 Causas das falhas por autor do prompt:
 
-Quadro 24 – Causas das falhas por autor do prompt
+Quadro MC16 – Causas das falhas por autor do prompt
 
 | Causa | grok | claude | chatgpt | gemini | Total |
 |---|---|---|---|---|---|
@@ -177,7 +177,7 @@ Fonte: Elaborado pelo autor.
 
 Manifestação imediata × causa identificada:
 
-Quadro 25 – Manifestação imediata e causa das falhas
+Quadro MC17 – Manifestação imediata e causa das falhas
 
 | Manifestação imediata | seletor inventado | indeterminada | seletor ambíguo (strict mode) | divergência do alvo | uso incorreto da API do Playwright | espera/sincronização | dado inventado (URL/rota) | erro de sintaxe do código gerado |
 |---|---|---|---|---|---|---|---|---|

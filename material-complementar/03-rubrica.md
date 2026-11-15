@@ -4,7 +4,7 @@ Unidade de análise: uma resposta (configuração x US). 4 autores de prompt × 
 
 A. Métricas quantitativas do script
 
-Quadro 4 – Rubrica de avaliação: métricas do grupo A
+Quadro MC1 – Rubrica de avaliação: métricas do grupo A
 
 | Id | Métrica | Como medir |
 |---|---|---|
@@ -25,7 +25,7 @@ B. Métricas dos casos de teste identificados
 
 Oráculo: oraculo-casos.json (por US, casos positivos/negativos/borda de um testador experiente, com campo criterios ligando a critérios da US).
 
-Quadro 5 – Rubrica de avaliação: métricas do grupo B
+Quadro MC2 – Rubrica de avaliação: métricas do grupo B
 
 | Id | Métrica | Definição |
 |---|---|---|

@@ -1,10 +1,10 @@
 familia,alvo,metrica,n,delta,ic95_inf,ic95_sup,p_exato,p_permutacao,p_holm,efeito_r_ou_W,descricao
-F2-por-US,haiku-opus,nota_final,9,11.2694,4.35278,19.6197,0.00390625,0.00269973,,1,avançado melhor em 33 de 36 pares; empates 0
-F2-por-US,luna-astra,nota_final,9,3.475,2.6416,4.31111,0.00390625,0.00269973,,1,avançado melhor em 28 de 36 pares; empates 0
-F2-por-US,haiku-opus,pct_passam,9,31.1528,8.52778,58.6981,0.15625,0.153685,,0.714286,avançado melhor em 19 de 36 pares; empates 14
-F2-por-US,luna-astra,pct_passam,9,3.04167,-1.65285,8.35833,0.578125,0.583742,,0.285714,avançado melhor em 6 de 36 pares; empates 25
-F2-por-US,haiku-opus,recall,9,-0.02925,-0.0629167,0.00677847,0.195312,0.19528,,-0.555556,avançado melhor em 9 de 36 pares; empates 11
-F2-por-US,luna-astra,recall,9,0.0556389,0.00316667,0.121003,0.21875,0.219078,,0.571429,avançado melhor em 13 de 36 pares; empates 20
+F2-por-US,haiku-opus,nota_final,9,11.2694,4.35278,19.6197,0.00390625,0.00269973,0.0234375,1,avançado melhor em 33 de 36 pares; empates 0
+F2-por-US,luna-astra,nota_final,9,3.475,2.6416,4.31111,0.00390625,0.00269973,0.0234375,1,avançado melhor em 28 de 36 pares; empates 0
+F2-por-US,haiku-opus,pct_passam,9,31.1528,8.52778,58.6981,0.15625,0.153685,0.625,0.714286,avançado melhor em 19 de 36 pares; empates 14
+F2-por-US,luna-astra,pct_passam,9,3.04167,-1.65285,8.35833,0.578125,0.583742,0.625,0.285714,avançado melhor em 6 de 36 pares; empates 25
+F2-por-US,haiku-opus,recall,9,-0.02925,-0.0629167,0.00677847,0.195312,0.19528,0.625,-0.555556,avançado melhor em 9 de 36 pares; empates 11
+F2-por-US,luna-astra,recall,9,0.0556389,0.00316667,0.121003,0.21875,0.219078,0.625,0.571429,avançado melhor em 13 de 36 pares; empates 20
 F4-Friedman,basicos,nota_final,9,11.5556,,,0.00309559,0.00109989,,0.641975,
 F4-posthoc,haiku-luna,nota_final,9,4.33056,,,0.0390625,0.0410959,0.078125,0.777778,
 F4-posthoc,haiku-flashlite,nota_final,9,7.72222,,,0.00390625,0.00269973,0.0117188,1,

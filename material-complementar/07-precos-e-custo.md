@@ -2,7 +2,7 @@
 
 Preços oficiais por milhão de tokens, consultados em 31/10/2026; os agentes foram usados por assinatura ou cota gratuita, e os valores representam o custo equivalente de API.
 
-Quadro 26 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
+Quadro MC18 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
 
 | Modelo | Entrada | Saída | Cache escrita | Cache leitura | Nível | Fonte |
 |---|---|---|---|---|---|---|
@@ -14,7 +14,7 @@ Quadro 26 – Preços de tabela por modelo (US$ por 1 milhão de tokens)
 
 Fonte: Elaborado pelo autor.
 
-Quadro 27 – Custo médio por resposta e por ponto de nota
+Quadro MC19 – Custo médio por resposta e por ponto de nota
 
 | Modelo | Nota média | Custo por resposta (média ± DP) | Origem | Custo por ponto de nota |
 |---|---|---|---|---|

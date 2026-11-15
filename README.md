@@ -27,7 +27,7 @@ playwright install
 cd experimento/projetos-automacao/prompt-<autor>/<configuração>
 pytest --browser chromium --browser-channel msedge
 ```
-`<autor>` é `grok`, `claude`, `chatgpt` ou `gemini`; `<configuração>` é `haiku`, `opus`, `luna`, `astra` ou `flashlite`. Os sistemas-alvo são públicos e podem ter mudado desde outubro de 2026, então o resultado pode diferir do registrado em `tests_result.json`.
+`<autor>` é `grok`, `claude`, `chatgpt` ou `gemini`; `<configuração>` é `claude-haiku`, `claude-opus`, `chatgpt-gpt6-luna`, `chatgpt-gpt6-astra` ou `gemini-flash-lite`. Os sistemas-alvo são públicos e podem ter mudado desde outubro de 2026, então o resultado pode diferir do registrado em `tests_result.json`.
 
 ## Recalcular as notas e a estatística a partir dos registros
 ```
