@@ -2,7 +2,7 @@
 
 Os quatro prompts são reproduzidos sem alteração; em cada execução, o marcador {{USER_STORY}} foi substituído pelo texto da User Story, pela URL base e pelos critérios de aceitação, e o bloco de requisitos técnicos foi anexado ao final.
 
-Prompt escrito pelo Grok:
+Prompt escrito pelo Grok 4.5 (xAI), na versão gratuita em grok.com, em 30/10/2026:
 
 Você é um engenheiro de qualidade especializado em automação de testes. Sua única fonte de informação é a User Story fornecida abaixo. Você NÃO tem acesso ao sistema real, à internet, a documentação externa, a código-fonte nem a seletores reais. Deve deduzir seletores, dados de teste e fluxos de forma razoável e declarar explicitamente todas as suposições.
 

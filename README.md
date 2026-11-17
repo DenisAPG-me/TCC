@@ -15,7 +15,7 @@ Material complementar do Trabalho de Conclusão de Curso (Sistemas de Informaç�
 | `avaliacao-independente/` | Questionário do avaliador externo (planilha), guia de preenchimento e scripts de sorteio da amostra e de análise de concordância |
 
 ## Desenho do experimento
-- 4 autores de prompt × 5 configurações (Claude Haiku 5.5, Claude Opus 5.5, GPT-6-Luna, GPT-6-Astra, Gemini 3.5 Flash-Lite) × 9 User Stories = 180 respostas.
+- 4 autores de prompt (Grok 4.5, Claude Opus 5.5, GPT-6-Astra e Gemini 3.5 Flash-Lite) × 5 configurações (Claude Haiku 5.5, Claude Opus 5.5, GPT-6-Luna, GPT-6-Astra, Gemini 3.5 Flash-Lite) × 9 User Stories = 180 respostas.
 - Sistemas-alvo públicos: Toolshop (https://practicesoftwaretesting.com/), B&B (https://automationintesting.online/) e Restful Booker (https://restful-booker.herokuapp.com).
 - Nota final (0 a 100): `100 × (0,05e + 0,20p + 0,10s + 0,15c + 0,05m + 0,10r + 0,10q + 0,05h + 0,15k + 0,05t)`; ver `material-complementar/03-rubrica.md`.
 
